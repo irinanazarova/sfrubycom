@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const speakers = [
+  {
+    name: 'Andrew Kane',
+    title: 'Creator of ActiveAgent',
+    company: 'Independent',
+    bio: 'Andrew is the creator of ActiveAgent and several popular Ruby gems. He focuses on integrating AI capabilities into the Ruby ecosystem.',
+    image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/andrewkane',
+      github: 'https://github.com/ankane',
+      linkedin: 'https://linkedin.com/in/andrewkane'
+    },
+    featured: true
+  },
+  {
+    name: 'Sarah Chen',
+    title: 'Ruby Core Contributor',
+    company: 'Shopify',
+    bio: 'Sarah is a Ruby Core contributor and engineer at Shopify. She specializes in performance optimization and language design.',
+    image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/sarahchen',
+      github: 'https://github.com/sarahchen',
+      linkedin: 'https://linkedin.com/in/sarahchen'
+    },
+    featured: true
+  },
+  {
+    name: 'Miguel Rodriguez',
+    title: 'Author of "Scaling Ruby"',
+    company: 'Stripe',
+    bio: 'Miguel works on scaling Ruby applications at Stripe and is the author of the popular book "Scaling Ruby: From Startup to Enterprise".',
+    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/miguelrodriguez',
+      github: 'https://github.com/mrodriguez',
+      linkedin: 'https://linkedin.com/in/mrodriguez'
+    },
+    featured: true
+  },
+  {
+    name: 'Aisha Johnson',
+    title: 'AI & Ruby Expert',
+    company: 'RubyLLM',
+    bio: 'Aisha is the lead developer of RubyLLM, bringing large language model capabilities to Ruby applications.',
+    image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/aishajohnson',
+      github: 'https://github.com/aishaj',
+      linkedin: 'https://linkedin.com/in/aishajohnson'
+    },
+    featured: true
+  },
+  {
+    name: 'Emma Thompson',
+    title: 'Ruby Language Team',
+    company: 'GitHub',
+    bio: 'Emma works on the future of Ruby at GitHub and has been a core contributor to Ruby 3.0 and 4.0.',
+    image: 'https://images.pexels.com/photos/3754438/pexels-photo-3754438.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/emmathompson',
+      github: 'https://github.com/emmat',
+      linkedin: 'https://linkedin.com/in/emmathompson'
+    },
+    featured: false
+  },
+  {
+    name: 'James Wilson',
+    title: 'Ruby Infrastructure Lead',
+    company: 'Airbnb',
+    bio: 'James leads Ruby infrastructure efforts at Airbnb, focusing on scalability and performance.',
+    image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/jameswilson',
+      github: 'https://github.com/jwilson',
+      linkedin: 'https://linkedin.com/in/jameswilson'
+    },
+    featured: false
+  },
+  {
+    name: 'David Park',
+    title: 'Performance Engineer',
+    company: 'Heroku',
+    bio: 'David specializes in optimizing Ruby application performance at Heroku.',
+    image: 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/davidpark',
+      github: 'https://github.com/dpark',
+      linkedin: 'https://linkedin.com/in/davidpark'
+    },
+    featured: false
+  },
+  {
+    name: 'Olivia Martinez',
+    title: 'Open Source Maintainer',
+    company: 'RubyGems',
+    bio: 'Olivia maintains several critical gems in the Ruby ecosystem and works on the RubyGems team.',
+    image: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=800',
+    social: {
+      twitter: 'https://twitter.com/oliviamartinez',
+      github: 'https://github.com/oliviam',
+      linkedin: 'https://linkedin.com/in/oliviamartinez'
+    },
+    featured: false
+  }
+];
+
+// Featured speakers for the top row
+const featuredSpeakers = speakers.filter(speaker => speaker.featured);
+// All other speakers
+const regularSpeakers = speakers.filter(speaker => !speaker.featured);
+---
+
+<Layout title="Speakers - San Francisco Ruby Conference 2025">
+  <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-center">Our Speakers</h1>
+      <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
+        Meet the industry leaders and experts who will be sharing their knowledge
+      </p>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Featured speakers section -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">Keynote Speakers</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {featuredSpeakers.map((speaker) => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+            <div class="aspect-w-1 aspect-h-1 bg-dark-200">
+              <img 
+                src={speaker.image} 
+                alt={speaker.name} 
+                class="w-full h-full object-cover" 
+                loading="lazy" 
+              />
+            </div>
+            
+            <div class="p-6">
+              <h3 class="font-bold text-xl text-dark-900">{speaker.name}</h3>
+              <p class="text-ruby-500 font-medium">{speaker.title}</p>
+              <p class="text-dark-500 text-sm mb-4">{speaker.company}</p>
+              
+              <p class="text-dark-600 text-sm mb-4">{speaker.bio}</p>
+              
+              <div class="flex space-x-4">
+                {Object.entries(speaker.social).map(([platform, url]) => (
+                  <a 
+                    href={url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="text-dark-400 hover:text-ruby-500 transition-colors duration-200"
+                    aria-label={`${speaker.name}'s ${platform}`}
+                  >
+                    <!-- Social icon placeholders -->
+                    <span class="sr-only">{platform}</span>
+                    <div class="h-6 w-6 flex items-center justify-center">
+                      {platform.charAt(0).toUpperCase()}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Regular speakers section -->
+    <div>
+      <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">Speakers</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {regularSpeakers.map((speaker) => (
+          <div class="flex space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+            <img 
+              src={speaker.image} 
+              alt={speaker.name} 
+              class="h-16 w-16 rounded-full object-cover flex-shrink-0" 
+              loading="lazy"
+            />
+            
+            <div>
+              <h3 class="font-bold text-dark-900">{speaker.name}</h3>
+              <p class="text-ruby-500 text-sm">{speaker.title}</p>
+              <p class="text-dark-500 text-xs">{speaker.company}</p>
+              
+              <div class="flex space-x-2 mt-2">
+                {Object.entries(speaker.social).map(([platform, url]) => (
+                  <a 
+                    href={url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="text-dark-400 hover:text-ruby-500 transition-colors duration-200"
+                    aria-label={`${speaker.name}'s ${platform}`}
+                  >
+                    <!-- Minimal social icon placeholders -->
+                    <span class="sr-only">{platform}</span>
+                    <div class="h-5 w-5 flex items-center justify-center text-xs">
+                      {platform.charAt(0).toUpperCase()}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Call for speakers banner -->
+    <div class="mt-16 bg-dark-50 rounded-lg p-8 text-center">
+      <h3 class="text-xl font-bold text-dark-900 mb-2">Interested in Speaking?</h3>
+      <p class="text-dark-600 mb-4">
+        Limited speaking slots are still available. Submit your proposal by September 1, 2025.
+      </p>
+      <a 
+        href="/call-for-speakers" 
+        class="inline-block px-6 py-3 bg-ruby-500 text-white font-medium rounded-md hover:bg-ruby-600 transition-colors duration-200"
+      >
+        Submit a Talk
+      </a>
+    </div>
+  </div>
+</Layout>

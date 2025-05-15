@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+---
+
+<section class="relative bg-gradient-to-b from-dark-900 via-dark-800 to-ruby-950 text-white overflow-hidden">
+  <!-- Abstract background pattern -->
+  <div class="absolute inset-0 overflow-hidden opacity-20">
+    <div class="absolute -inset-[10px] z-0" aria-hidden="true">
+      <!-- Simple pattern using CSS grid -->
+      <div class="h-full w-full grid grid-cols-12 gap-1">
+        {Array(48).fill(0).map((_, i) => (
+          <div class={`h-8 w-full rounded-md bg-ruby-${Math.floor(Math.random() * 3) * 200 + 100}`}></div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
+    <div class="flex flex-col items-center text-center">
+      <!-- Animated logo would go here -->
+      <div class="w-32 h-32 md:w-40 md:h-40 mb-8 animate-float">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+          <path d="M50 0L97.5528 25V75L50 100L2.44717 75V25L50 0Z" fill="#E0115F"/>
+          <path d="M50 20L79.3893 35V65L50 80L20.6107 65V35L50 20Z" fill="#FF385C"/>
+          <path d="M50 40L64.6447 47.5V62.5L50 70L35.3553 62.5V47.5L50 40Z" fill="#FF6B81"/>
+        </svg>
+      </div>
+      
+      <h1 class="font-display font-bold text-4xl md:text-5xl lg:text-6xl max-w-4xl leading-tight mb-4">
+        San Francisco Ruby Conference 2025
+      </h1>
+      
+      <p class="text-xl md:text-2xl font-medium text-dark-100 mb-6">
+        Building the Future with Ruby
+      </p>
+      
+      <p class="text-lg md:text-xl text-dark-200 mb-8">
+        November 19-20, 2025 • Fort Mason, San Francisco
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+        <a 
+          href="/register" 
+          class="px-8 py-3 bg-ruby-500 hover:bg-ruby-600 text-white font-medium rounded-md transition-colors duration-200 text-lg shadow-lg hover:shadow-xl"
+        >
+          Register Now
+        </a>
+        
+        <a 
+          href="#newsletter" 
+          class="px-8 py-3 bg-transparent border border-ruby-400 hover:border-ruby-300 text-white font-medium rounded-md transition-colors duration-200 text-lg"
+        >
+          Sign up for updates
+        </a>
+      </div>
+      
+      <!-- Countdown timer -->
+      <div class="mt-12 inline-flex items-center px-4 py-2 bg-dark-800/50 backdrop-blur-sm rounded-full text-dark-100">
+        <span class="mr-2 text-ruby-400 font-medium">Early Bird Pricing Ends:</span>
+        <span id="countdown" class="font-mono">99 days, 23:59:59</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Decorative wave divider -->
+  <div class="absolute bottom-0 left-0 right-0 h-16 bg-white text-white overflow-hidden">
+    <svg 
+      preserveAspectRatio="none" 
+      viewBox="0 0 1200 120" 
+      xmlns="http://www.w3.org/2000/svg" 
+      class="absolute bottom-0 w-full h-full"
+    >
+      <path 
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+        fill="currentColor"
+      ></path>
+    </svg>
+  </div>
+</section>
+
+<script>
+  // Simple countdown timer
+  function updateCountdown() {
+    const targetDate = new Date('2025-10-01T23:59:59');
+    const now = new Date();
+    const difference = targetDate.getTime() - now.getTime();
+    
+    if (difference <= 0) {
+      document.getElementById('countdown')!.textContent = 'Early bird pricing has ended';
+      return;
+    }
+    
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    
+    document.getElementById('countdown')!.textContent = 
+      `${days} days, ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+  
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>

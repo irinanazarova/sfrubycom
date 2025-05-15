@@ -1,0 +1,76 @@
+---
+const tiers = [
+  {
+    name: 'Picaxe',
+    sponsors: [
+      { name: 'Chime', logo: 'https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800', url: 'https://www.chime.com' }
+    ]
+  },
+  {
+    name: 'Ruby',
+    sponsors: [
+      { name: 'Gusto', logo: 'https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=800', url: 'https://www.gusto.com' }
+    ]
+  },
+  {
+    name: 'Emerald',
+    sponsors: [
+      { name: 'Your company here', logo: null, url: '/sponsors' }
+    ]
+  }
+];
+---
+
+<section id="sponsors" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Our Sponsors</h2>
+      <p class="mt-4 text-xl text-dark-600 max-w-3xl mx-auto">
+        These amazing companies help make SF Ruby Conference possible
+      </p>
+    </div>
+    
+    <div class="space-y-16">
+      {tiers.map((tier) => (
+        <div>
+          <h3 class="text-center text-2xl font-bold text-dark-800 mb-8 font-display">
+            {tier.name} <span class="text-ruby-500">Sponsors</span>
+          </h3>
+          
+          <div class="flex flex-wrap justify-center gap-8 items-center">
+            {tier.sponsors.map((sponsor) => (
+              <a 
+                href={sponsor.url} 
+                class={`block p-6 border rounded-lg transition-all duration-300 ${sponsor.logo ? 'bg-white hover:shadow-lg' : 'border-dashed border-dark-300 hover:border-ruby-500'}`}
+                target={sponsor.logo ? "_blank" : "_self"}
+                rel={sponsor.logo ? "noopener noreferrer" : ""}
+              >
+                {sponsor.logo ? (
+                  <img 
+                    src={sponsor.logo} 
+                    alt={sponsor.name} 
+                    class={`h-12 md:h-16 w-auto ${tier.name === 'Picaxe' ? 'md:h-20' : ''}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="flex items-center justify-center h-16 w-48 text-dark-500 font-medium">
+                    {sponsor.name}
+                  </div>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-16 text-center">
+      <a 
+        href="/sponsors" 
+        class="inline-flex items-center justify-center px-6 py-3 bg-gold-500 text-dark-900 rounded-md font-medium hover:bg-gold-400 transition-colors duration-200 shadow-md"
+      >
+        Become a Sponsor
+      </a>
+    </div>
+  </div>
+</section>

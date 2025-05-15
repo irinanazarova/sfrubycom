@@ -1,0 +1,70 @@
+---
+const themes = [
+  {
+    title: 'Startup Demos',
+    description: 'Fast-paced 10-minute showcases from the hottest Ruby startups.',
+    icon: 'rocket',
+    link: '/startup-demos'
+  },
+  {
+    title: 'Open Source & AI Tooling',
+    description: 'Explore cutting-edge tools like ActiveAgent, RubyLLM, and more.',
+    icon: 'code',
+    link: '/open-source'
+  },
+  {
+    title: 'Scaling Ruby',
+    description: 'Learn how to scale Ruby apps with Sorbet, Packwerk, and real-world case studies.',
+    icon: 'scale',
+    link: '/scaling'
+  },
+  {
+    title: 'VC Insights',
+    description: 'Venture capital perspectives from YC, Accel, and Heavybit.',
+    icon: 'chart',
+    link: '/vc-insights'
+  }
+];
+---
+
+<section id="themes" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Key Conference Themes</h2>
+      <p class="mt-4 text-xl text-dark-600 max-w-3xl mx-auto">
+        Explore the exciting topics and sessions that make SF Ruby Conference a must-attend event
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {themes.map((theme, index) => (
+        <div 
+          class="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden relative border border-dark-100"
+          style={`animation-delay: ${index * 100}ms`}
+        >
+          <div class="absolute inset-0 bg-gradient-to-br from-ruby-500/0 via-ruby-500/0 to-ruby-500/0 group-hover:from-ruby-500/5 group-hover:via-ruby-500/10 group-hover:to-ruby-500/20 transition-all duration-300"></div>
+          
+          <div class="p-6 h-full flex flex-col">
+            <div class="w-12 h-12 rounded-full bg-ruby-100 flex items-center justify-center mb-4">
+              <!-- Simple icon placeholder - would be replaced with actual icons -->
+              <span class="text-ruby-500 font-bold">{theme.icon.charAt(0).toUpperCase()}</span>
+            </div>
+            
+            <h3 class="text-xl font-bold text-dark-900 mb-2">{theme.title}</h3>
+            <p class="text-dark-600 mb-4 flex-grow">{theme.description}</p>
+            
+            <a 
+              href={theme.link} 
+              class="text-ruby-500 hover:text-ruby-600 font-medium inline-flex items-center group-hover:translate-x-1 transition-transform duration-200"
+            >
+              Learn more
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

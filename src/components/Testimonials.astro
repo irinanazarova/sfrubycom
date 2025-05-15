@@ -1,0 +1,62 @@
+---
+const testimonials = [
+  {
+    quote: "SF RubyConf is where the Ruby community's future gets built. The connections I made there have been invaluable to our success.",
+    author: "Jordan Harris",
+    role: "CTO at RailsCart",
+    image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    quote: "This conference strikes a perfect balance between practical applications and cutting-edge innovation. It's a must-attend for any serious Ruby developer.",
+    author: "Elena Patel",
+    role: "Senior Engineer at Shopify",
+    image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    quote: "The quality of talks and the opportunity to connect with the brightest minds in the Ruby community makes this conference exceptional.",
+    author: "Michael Chen",
+    role: "Lead Developer at GitReview",
+    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
+  }
+];
+---
+
+<section class="py-20 bg-dark-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">What Past Attendees Say</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col h-full">
+          <div class="mb-4 text-ruby-500">
+            <!-- Quote icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8 opacity-50">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+          </div>
+          
+          <blockquote class="flex-grow mb-6">
+            <p class="text-dark-700 italic">"{testimonial.quote}"</p>
+          </blockquote>
+          
+          <div class="flex items-center">
+            <div class="flex-shrink-0 mr-3">
+              <img 
+                src={testimonial.image} 
+                alt={testimonial.author} 
+                class="h-10 w-10 rounded-full object-cover" 
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <div class="font-medium text-dark-900">{testimonial.author}</div>
+              <div class="text-sm text-dark-500">{testimonial.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

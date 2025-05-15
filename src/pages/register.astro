@@ -1,0 +1,252 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const ticketTiers = [
+  {
+    name: 'Early Bird',
+    price: 499,
+    description: 'Limited availability. Get the best price for the full conference experience.',
+    features: [
+      'Full access to all sessions',
+      'Conference swag',
+      'Lunch and refreshments',
+      'Evening reception',
+      'Priority access to workshops'
+    ],
+    featured: true,
+    available: true
+  },
+  {
+    name: 'Regular',
+    price: 699,
+    description: 'Standard conference ticket with all the essentials.',
+    features: [
+      'Full access to all sessions',
+      'Conference swag',
+      'Lunch and refreshments',
+      'Evening reception'
+    ],
+    featured: false,
+    available: false
+  },
+  {
+    name: 'Student',
+    price: 249,
+    description: 'Discounted rate for full-time students. ID required.',
+    features: [
+      'Full access to all sessions',
+      'Conference swag',
+      'Lunch and refreshments'
+    ],
+    featured: false,
+    available: true
+  }
+];
+---
+
+<Layout title="Register - San Francisco Ruby Conference 2025">
+  <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-center">Register Now</h1>
+      <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
+        Secure your spot at the San Francisco Ruby Conference 2025
+      </p>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Countdown and promotional message -->
+    <div class="max-w-3xl mx-auto bg-dark-50 rounded-lg p-6 mb-12 text-center">
+      <p class="font-medium text-dark-800 mb-2">Early Bird Registration Ends In</p>
+      <div id="countdown" class="text-3xl font-mono font-bold text-ruby-500 mb-2">99 days, 23:59:59</div>
+      <p class="text-dark-600">Don't miss out on our best pricing - register today!</p>
+    </div>
+    
+    <!-- Ticket tiers -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {ticketTiers.map((tier) => (
+        <div class={`border rounded-lg overflow-hidden transition-all duration-300 ${tier.featured ? 'transform md:-translate-y-4 border-ruby-500 shadow-lg' : 'border-dark-200'}`}>
+          <div class={`p-6 ${tier.featured ? 'bg-gradient-to-r from-ruby-500 to-ruby-600 text-white' : 'bg-white text-dark-900'}`}>
+            <h3 class="text-xl font-bold">{tier.name}</h3>
+            <div class="mt-2">
+              <span class="text-3xl font-bold">${tier.price}</span>
+              <span> / person</span>
+            </div>
+            <p class={`mt-2 ${tier.featured ? 'text-white/90' : 'text-dark-600'}`}>
+              {tier.description}
+            </p>
+          </div>
+          
+          <div class="p-6 bg-white">
+            <ul class="space-y-3">
+              {tier.features.map((feature) => (
+                <li class="flex items-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class={`w-5 h-5 mr-2 flex-shrink-0 ${tier.featured ? 'text-ruby-500' : 'text-dark-400'}`}>
+                    <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-dark-700">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            
+            <div class="mt-6">
+              <button 
+                class={`w-full py-2 rounded-md font-medium transition-colors duration-200 ${
+                  tier.available 
+                    ? tier.featured 
+                      ? 'bg-ruby-500 hover:bg-ruby-600 text-white' 
+                      : 'bg-dark-800 hover:bg-dark-900 text-white'
+                    : 'bg-dark-100 text-dark-400 cursor-not-allowed'
+                }`}
+                disabled={!tier.available}
+              >
+                {tier.available ? 'Register Now' : 'Coming Soon'}
+              </button>
+              
+              {tier.featured && tier.available && (
+                <p class="text-center text-sm text-dark-500 mt-2">
+                  Limited tickets available at this price
+                </p>
+              )}
+              
+              {!tier.available && (
+                <p class="text-center text-sm text-dark-500 mt-2">
+                  Available starting October 1, 2025
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Group discounts -->
+    <div class="mt-16 bg-dark-50 rounded-lg p-8">
+      <h3 class="text-2xl font-display font-bold text-dark-900 mb-4">Group Discounts</h3>
+      <p class="text-dark-600 mb-6">
+        Bringing your team? Groups of 5+ receive a 15% discount on all ticket tiers.
+        Contact us at <a href="mailto:groups@sfrubconf.com" class="text-ruby-500 hover:underline">groups@sfrubconf.com</a> for more details.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+        <div class="bg-white p-4 rounded-md">
+          <div class="text-2xl font-bold text-ruby-500">15%</div>
+          <div class="text-dark-600">5-9 people</div>
+        </div>
+        <div class="bg-white p-4 rounded-md">
+          <div class="text-2xl font-bold text-ruby-500">20%</div>
+          <div class="text-dark-600">10-19 people</div>
+        </div>
+        <div class="bg-white p-4 rounded-md">
+          <div class="text-2xl font-bold text-ruby-500">25%</div>
+          <div class="text-dark-600">20+ people</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- FAQ -->
+    <div class="mt-16">
+      <h3 class="text-2xl font-display font-bold text-dark-900 mb-6">Frequently Asked Questions</h3>
+      
+      <div class="space-y-4">
+        <div class="border border-dark-200 rounded-md">
+          <button 
+            class="flex justify-between items-center w-full px-4 py-3 text-left font-medium text-dark-900 focus:outline-none"
+            aria-expanded="false"
+            aria-controls="faq-1"
+          >
+            <span>What's included in the registration?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-dark-400">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+          <div id="faq-1" class="px-4 pb-3 hidden">
+            <p class="text-dark-600">
+              All tickets include access to conference sessions, workshops (space permitting), conference materials, and refreshments during breaks. Early Bird and Regular tickets also include evening reception access.
+            </p>
+          </div>
+        </div>
+        
+        <div class="border border-dark-200 rounded-md">
+          <button 
+            class="flex justify-between items-center w-full px-4 py-3 text-left font-medium text-dark-900 focus:outline-none"
+            aria-expanded="false"
+            aria-controls="faq-2"
+          >
+            <span>What is the refund policy?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-dark-400">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+          <div id="faq-2" class="px-4 pb-3 hidden">
+            <p class="text-dark-600">
+              Tickets are refundable up to 30 days before the event with a 15% processing fee. Within 30 days, tickets are non-refundable but can be transferred to another attendee.
+            </p>
+          </div>
+        </div>
+        
+        <div class="border border-dark-200 rounded-md">
+          <button 
+            class="flex justify-between items-center w-full px-4 py-3 text-left font-medium text-dark-900 focus:outline-none"
+            aria-expanded="false"
+            aria-controls="faq-3"
+          >
+            <span>Is there a virtual attendance option?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-dark-400">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+          <div id="faq-3" class="px-4 pb-3 hidden">
+            <p class="text-dark-600">
+              Yes! Virtual tickets will be available starting September 1, 2025. Sign up for our newsletter to be notified when they become available.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Handle FAQ accordion
+  document.querySelectorAll('[aria-controls]').forEach(button => {
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', (!expanded).toString());
+      
+      const content = document.getElementById(button.getAttribute('aria-controls')!);
+      content!.classList.toggle('hidden');
+      
+      // Update icon
+      const icon = button.querySelector('svg');
+      if (expanded) {
+        icon!.classList.remove('transform', 'rotate-180');
+      } else {
+        icon!.classList.add('transform', 'rotate-180');
+      }
+    });
+  });
+  
+  // Countdown timer
+  function updateCountdown() {
+    const targetDate = new Date('2025-10-01T23:59:59');
+    const now = new Date();
+    const difference = targetDate.getTime() - now.getTime();
+    
+    if (difference <= 0) {
+      document.getElementById('countdown')!.textContent = 'Early bird pricing has ended';
+      return;
+    }
+    
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    
+    document.getElementById('countdown')!.textContent = 
+      `${days} days, ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+  
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
