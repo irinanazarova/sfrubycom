@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 ---
 
-<section class="relative bg-gradient-to-b from-dark-900 via-dark-800 to-ruby-950 text-white overflow-hidden min-h-screen flex items-center">
+<section class="relative bg-gradient-to-b from-sky-500 via-sky-600 to-sky-700 text-white overflow-hidden min-h-screen flex items-center">
   <!-- Animated background pattern -->
   <div class="absolute inset-0 overflow-hidden opacity-10">
     <div class="absolute -inset-[10px] z-0" aria-hidden="true">
@@ -21,44 +21,44 @@ import { Image } from 'astro:assets';
         </div>
       </div>
       
-      <h1 class="font-display font-bold text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 split-text">
+      <h1 class="font-display font-bold text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 split-text text-cloud-500">
         San Francisco Ruby Conference 2025
       </h1>
       
-      <p class="text-xl md:text-2xl font-medium text-dark-100 mb-6 split-text">
+      <p class="text-xl md:text-2xl font-medium text-cloud-300 mb-6 split-text">
         Building the Future with Ruby
       </p>
       
-      <p class="text-lg md:text-xl text-dark-200 mb-8 split-text">
+      <p class="text-lg md:text-xl text-cloud-200 mb-8 split-text">
         November 19-20, 2025 • Fort Mason, San Francisco
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
         <a 
           href="/register" 
-          class="register-btn px-8 py-3 bg-ruby-500 text-white font-medium rounded-md transition-all duration-300 transform hover:scale-105 hover:shadow-glow"
+          class="register-btn px-8 py-3 bg-ruby-500 text-cloud-500 font-medium rounded-md transition-all duration-300 transform hover:scale-105 hover:shadow-glow"
         >
           Register Now
         </a>
         
         <a 
           href="#newsletter" 
-          class="px-8 py-3 bg-transparent border border-ruby-400 text-white font-medium rounded-md transition-all duration-300 transform hover:scale-105 hover:border-ruby-300"
+          class="px-8 py-3 bg-transparent border border-cloud-300 text-cloud-500 font-medium rounded-md transition-all duration-300 transform hover:scale-105 hover:border-cloud-200"
         >
           Sign up for updates
         </a>
       </div>
       
       <!-- Countdown timer -->
-      <div class="mt-12 inline-flex items-center px-6 py-3 bg-dark-800/50 backdrop-blur-sm rounded-full text-dark-100">
-        <span class="mr-3 text-ruby-400 font-medium">Early Bird Pricing Ends:</span>
+      <div class="mt-12 inline-flex items-center px-6 py-3 bg-sky-600/50 backdrop-blur-sm rounded-full text-cloud-200">
+        <span class="mr-3 text-ruby-300 font-medium">Early Bird Pricing Ends:</span>
         <span id="countdown" class="font-mono countdown"></span>
       </div>
     </div>
   </div>
   
   <!-- Decorative wave divider -->
-  <div class="absolute bottom-0 left-0 right-0 h-16 bg-white text-white overflow-hidden">
+  <div class="absolute bottom-0 left-0 right-0 h-16 bg-cloud-500 text-cloud-500 overflow-hidden">
     <svg 
       preserveAspectRatio="none" 
       viewBox="0 0 1200 120" 
@@ -87,7 +87,7 @@ import { Image } from 'astro:assets';
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(45deg, rgba(224, 17, 95, 0.2), transparent);
+    background: linear-gradient(45deg, rgba(255, 31, 87, 0.2), transparent);
     animation: pulse 4s ease-in-out infinite;
   }
 
@@ -99,7 +99,7 @@ import { Image } from 'astro:assets';
   .ruby-face {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #e0115f 0%, #ff385c 50%, #ff6b81 100%);
+    background: linear-gradient(135deg, #ff1f57 0%, #ff4d6d 50%, #ff7b8b 100%);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     position: relative;
   }
@@ -115,7 +115,7 @@ import { Image } from 'astro:assets';
   .ruby-glow {
     position: absolute;
     inset: -20px;
-    background: radial-gradient(circle at center, rgba(224, 17, 95, 0.4), transparent 70%);
+    background: radial-gradient(circle at center, rgba(255, 31, 87, 0.4), transparent 70%);
     filter: blur(20px);
   }
 
@@ -130,7 +130,7 @@ import { Image } from 'astro:assets';
   }
 
   .shadow-glow {
-    box-shadow: 0 0 20px rgba(224, 17, 95, 0.5);
+    box-shadow: 0 0 20px rgba(255, 31, 87, 0.5);
   }
 
   .countdown {
