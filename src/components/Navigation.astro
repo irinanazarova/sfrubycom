@@ -11,8 +11,17 @@ const navItems = [
 <header class="fixed w-full z-50 transition-all duration-300 bg-transparent">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center py-4">
-      <a href="/" class="flex items-center space-x-2 text-ruby-500">
-        <span class="font-display font-bold text-xl md:text-2xl">SF Ruby Conf</span>
+      <a href="/" class="flex items-center space-x-2">
+        <!-- Ruby logo -->
+        <div class="w-10 h-10">
+          <div class="w-full h-full relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-ruby-500 to-ruby-600 transform rotate-45 rounded-lg"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-6 h-6 bg-cloud-500 rounded-full transform -translate-y-1"></div>
+            </div>
+          </div>
+        </div>
+        <span class="font-display font-bold text-xl md:text-2xl text-ruby-500">SF Ruby Conf</span>
       </a>
       
       <!-- Desktop navigation -->
@@ -20,21 +29,21 @@ const navItems = [
         {navItems.map((item) => (
           <a 
             href={item.href} 
-            class="font-medium text-dark-600 hover:text-ruby-500 transition-colors duration-200"
+            class="font-medium text-sky-800 hover:text-ruby-500 transition-colors duration-200"
           >
             {item.name}
           </a>
         ))}
         <a 
           href="/register" 
-          class="px-4 py-2 rounded-md bg-ruby-500 text-white font-medium hover:bg-ruby-600 transition-colors duration-200"
+          class="px-4 py-2 rounded-md bg-ruby-500 text-cloud-500 font-medium hover:bg-ruby-600 transition-colors duration-200"
         >
           Register
         </a>
       </nav>
       
       <!-- Mobile menu button -->
-      <button id="mobile-menu-button" class="md:hidden flex items-center">
+      <button id="mobile-menu-button" class="md:hidden flex items-center text-sky-800">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
@@ -43,19 +52,19 @@ const navItems = [
   </div>
   
   <!-- Mobile navigation -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+  <div id="mobile-menu" class="hidden md:hidden bg-cloud-500 shadow-lg absolute w-full">
     <div class="px-2 pt-2 pb-3 space-y-1">
       {navItems.map((item) => (
         <a 
           href={item.href} 
-          class="block px-3 py-2 rounded-md text-base font-medium text-dark-600 hover:bg-dark-100 hover:text-ruby-500"
+          class="block px-3 py-2 rounded-md text-base font-medium text-sky-800 hover:bg-sky-50 hover:text-ruby-500"
         >
           {item.name}
         </a>
       ))}
       <a 
         href="/register" 
-        class="block px-3 py-2 rounded-md text-base font-medium bg-ruby-500 text-white hover:bg-ruby-600"
+        class="block px-3 py-2 rounded-md text-base font-medium bg-ruby-500 text-cloud-500 hover:bg-ruby-600"
       >
         Register
       </a>
@@ -79,6 +88,18 @@ const navItems = [
         mobileMenuButton && !mobileMenuButton.contains(target) && 
         !mobileMenu.contains(target)) {
       mobileMenu.classList.add('hidden');
+    }
+  });
+
+  // Header background on scroll
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.remove('bg-transparent');
+      header?.classList.add('bg-cloud-500/95', 'backdrop-blur-sm', 'shadow-md');
+    } else {
+      header?.classList.add('bg-transparent');
+      header?.classList.remove('bg-cloud-500/95', 'backdrop-blur-sm', 'shadow-md');
     }
   });
 </script>

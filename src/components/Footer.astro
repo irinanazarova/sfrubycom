@@ -38,13 +38,24 @@ const socialLinks = [
 ];
 ---
 
-<footer class="bg-dark-800 text-white">
+<footer class="bg-sky-900 text-cloud-500">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <!-- Logo and description -->
       <div class="col-span-1">
-        <div class="font-display font-bold text-2xl text-ruby-500">SF Ruby Conf</div>
-        <p class="mt-2 text-dark-300 text-sm">
+        <div class="flex items-center space-x-2 mb-4">
+          <!-- Ruby logo -->
+          <div class="w-10 h-10">
+            <div class="w-full h-full relative">
+              <div class="absolute inset-0 bg-gradient-to-br from-ruby-500 to-ruby-600 transform rotate-45 rounded-lg"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-6 h-6 bg-cloud-500 rounded-full transform -translate-y-1"></div>
+              </div>
+            </div>
+          </div>
+          <div class="font-display font-bold text-2xl text-ruby-500">SF Ruby Conf</div>
+        </div>
+        <p class="mt-2 text-sky-300 text-sm">
           Join us for the biggest Ruby conference in San Francisco. November 19-20, 2025 at Fort Mason.
         </p>
       </div>
@@ -52,13 +63,13 @@ const socialLinks = [
       <!-- Links -->
       {footerLinks.map((section) => (
         <div>
-          <h3 class="font-medium text-white mb-4">{section.title}</h3>
+          <h3 class="font-medium text-cloud-500 mb-4">{section.title}</h3>
           <ul class="space-y-2">
             {section.links.map((link) => (
               <li>
                 <a 
                   href={link.href} 
-                  class="text-dark-300 hover:text-ruby-400 transition-colors duration-200 text-sm"
+                  class="text-sky-300 hover:text-ruby-400 transition-colors duration-200 text-sm"
                 >
                   {link.name}
                 </a>
@@ -70,26 +81,25 @@ const socialLinks = [
     </div>
     
     <!-- Social links and copyright -->
-    <div class="mt-12 pt-8 border-t border-dark-700 flex flex-col md:flex-row justify-between items-center">
+    <div class="mt-12 pt-8 border-t border-sky-800 flex flex-col md:flex-row justify-between items-center">
       <div class="flex space-x-6 mb-4 md:mb-0">
         {socialLinks.map((link) => (
           <a 
             href={link.href} 
             target="_blank" 
             rel="noopener noreferrer"
-            class="text-dark-300 hover:text-ruby-400 transition-colors duration-200"
+            class="text-sky-300 hover:text-ruby-400 transition-colors duration-200"
             aria-label={link.name}
           >
-            <!-- Social icon placeholders - would replace with actual icons in a real implementation -->
             <span class="sr-only">{link.name}</span>
-            <div class="h-6 w-6 flex items-center justify-center rounded-full border border-dark-600">
+            <div class="h-6 w-6 flex items-center justify-center rounded-full border border-sky-700">
               {link.icon.charAt(0).toUpperCase()}
             </div>
           </a>
         ))}
       </div>
       
-      <div class="text-dark-400 text-sm">
+      <div class="text-sky-400 text-sm">
         &copy; {currentYear} San Francisco Ruby Conference. All rights reserved.
       </div>
     </div>
