@@ -2,62 +2,57 @@
 import { Image } from 'astro:assets';
 ---
 
-<section class="relative bg-gradient-to-b from-dark-900 via-dark-800 to-ruby-950 text-white overflow-hidden">
-  <!-- Abstract background pattern -->
-  <div class="absolute inset-0 overflow-hidden opacity-20">
+<section class="relative bg-gradient-to-b from-dark-900 via-dark-800 to-ruby-950 text-white overflow-hidden min-h-screen flex items-center">
+  <!-- Animated background pattern -->
+  <div class="absolute inset-0 overflow-hidden opacity-10">
     <div class="absolute -inset-[10px] z-0" aria-hidden="true">
-      <!-- Simple pattern using CSS grid -->
-      <div class="h-full w-full grid grid-cols-12 gap-1">
-        {Array(48).fill(0).map((_, i) => (
-          <div class={`h-8 w-full rounded-md bg-ruby-${Math.floor(Math.random() * 3) * 200 + 100}`}></div>
-        ))}
-      </div>
+      <div class="ruby-grid"></div>
     </div>
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
     <div class="flex flex-col items-center text-center">
-      <!-- Animated logo would go here -->
-      <div class="w-32 h-32 md:w-40 md:h-40 mb-8 animate-float">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-          <path d="M50 0L97.5528 25V75L50 100L2.44717 75V25L50 0Z" fill="#E0115F"/>
-          <path d="M50 20L79.3893 35V65L50 80L20.6107 65V35L50 20Z" fill="#FF385C"/>
-          <path d="M50 40L64.6447 47.5V62.5L50 70L35.3553 62.5V47.5L50 40Z" fill="#FF6B81"/>
-        </svg>
+      <!-- Animated logo -->
+      <div class="w-40 h-40 md:w-48 md:h-48 mb-12 relative ruby-logo">
+        <div class="ruby absolute inset-0">
+          <div class="ruby-face"></div>
+          <div class="ruby-shadow"></div>
+          <div class="ruby-glow"></div>
+        </div>
       </div>
       
-      <h1 class="font-display font-bold text-4xl md:text-5xl lg:text-6xl max-w-4xl leading-tight mb-4">
+      <h1 class="font-display font-bold text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 split-text">
         San Francisco Ruby Conference 2025
       </h1>
       
-      <p class="text-xl md:text-2xl font-medium text-dark-100 mb-6">
+      <p class="text-xl md:text-2xl font-medium text-dark-100 mb-6 split-text">
         Building the Future with Ruby
       </p>
       
-      <p class="text-lg md:text-xl text-dark-200 mb-8">
+      <p class="text-lg md:text-xl text-dark-200 mb-8 split-text">
         November 19-20, 2025 • Fort Mason, San Francisco
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
         <a 
           href="/register" 
-          class="px-8 py-3 bg-ruby-500 hover:bg-ruby-600 text-white font-medium rounded-md transition-colors duration-200 text-lg shadow-lg hover:shadow-xl"
+          class="register-btn px-8 py-3 bg-ruby-500 text-white font-medium rounded-md transition-all duration-300 transform hover:scale-105 hover:shadow-glow"
         >
           Register Now
         </a>
         
         <a 
           href="#newsletter" 
-          class="px-8 py-3 bg-transparent border border-ruby-400 hover:border-ruby-300 text-white font-medium rounded-md transition-colors duration-200 text-lg"
+          class="px-8 py-3 bg-transparent border border-ruby-400 text-white font-medium rounded-md transition-all duration-300 transform hover:scale-105 hover:border-ruby-300"
         >
           Sign up for updates
         </a>
       </div>
       
       <!-- Countdown timer -->
-      <div class="mt-12 inline-flex items-center px-4 py-2 bg-dark-800/50 backdrop-blur-sm rounded-full text-dark-100">
-        <span class="mr-2 text-ruby-400 font-medium">Early Bird Pricing Ends:</span>
-        <span id="countdown" class="font-mono">99 days, 23:59:59</span>
+      <div class="mt-12 inline-flex items-center px-6 py-3 bg-dark-800/50 backdrop-blur-sm rounded-full text-dark-100">
+        <span class="mr-3 text-ruby-400 font-medium">Early Bird Pricing Ends:</span>
+        <span id="countdown" class="font-mono countdown"></span>
       </div>
     </div>
   </div>
@@ -78,15 +73,136 @@ import { Image } from 'astro:assets';
   </div>
 </section>
 
+<style>
+  .ruby-grid {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1px;
+    opacity: 0.5;
+  }
+
+  .ruby-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, rgba(224, 17, 95, 0.2), transparent);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  .ruby {
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .ruby-face {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0115f 0%, #ff385c 50%, #ff6b81 100%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    position: relative;
+  }
+
+  .ruby-shadow {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transform: translateY(4px);
+  }
+
+  .ruby-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at center, rgba(224, 17, 95, 0.4), transparent 70%);
+    filter: blur(20px);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(224, 17, 95, 0.5);
+  }
+
+  .countdown {
+    font-feature-settings: "tnum";
+    letter-spacing: 0.05em;
+  }
+</style>
+
 <script>
-  // Simple countdown timer
+  import anime from 'animejs';
+
+  // Initialize animations
+  function initializeAnimations() {
+    // Split text animation
+    document.querySelectorAll('.split-text').forEach(element => {
+      const text = element.textContent;
+      element.textContent = '';
+      text.split('').forEach((char, i) => {
+        const span = document.createElement('span');
+        span.textContent = char;
+        span.style.opacity = '0';
+        span.style.transform = 'translateY(20px)';
+        span.style.display = 'inline-block';
+        element.appendChild(span);
+      });
+    });
+
+    // Animate text
+    anime.timeline({
+      easing: 'easeOutExpo',
+    })
+    .add({
+      targets: '.ruby-logo',
+      scale: [0, 1],
+      opacity: [0, 1],
+      duration: 1000,
+    })
+    .add({
+      targets: '.split-text span',
+      opacity: [0, 1],
+      translateY: [20, 0],
+      duration: 800,
+      delay: anime.stagger(20),
+    }, '-=400')
+    .add({
+      targets: '.register-btn',
+      scale: [0.9, 1],
+      opacity: [0, 1],
+      duration: 600,
+    }, '-=400');
+
+    // Ruby grid animation
+    anime({
+      targets: '.ruby-grid div',
+      scale: [
+        {value: 0.1, duration: 500, easing: 'easeOutSine'},
+        {value: 1, duration: 1000, easing: 'easeInOutQuad'}
+      ],
+      delay: anime.stagger(200, {grid: [12, 12], from: 'center'}),
+      loop: true,
+      direction: 'alternate',
+    });
+  }
+
+  // Countdown timer
   function updateCountdown() {
     const targetDate = new Date('2025-10-01T23:59:59');
     const now = new Date();
     const difference = targetDate.getTime() - now.getTime();
     
     if (difference <= 0) {
-      document.getElementById('countdown')!.textContent = 'Early bird pricing has ended';
+      document.getElementById('countdown').textContent = 'Early bird pricing has ended';
       return;
     }
     
@@ -95,10 +211,14 @@ import { Image } from 'astro:assets';
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
     
-    document.getElementById('countdown')!.textContent = 
-      `${days} days, ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('countdown').textContent = 
+      `${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
   }
-  
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+
+  // Initialize everything when the page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeAnimations();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
 </script>
