@@ -237,7 +237,7 @@ const currentSponsors = [
                   <div class="text-sm text-dark-600 line-clamp-2">{tier.description}</div>
                   <button 
                     class="text-ruby-500 hover:text-ruby-600 text-sm mt-1"
-                    onclick={`showBenefits('${tier.name}')`}
+                    onclick={`window.showBenefits('${tier.name}')`}
                   >
                     View benefits
                   </button>
@@ -336,7 +336,7 @@ const currentSponsors = [
       <div class="p-6">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-xl font-bold text-dark-900" id="modalTitle"></h3>
-          <button onclick="closeBenefitsModal()" class="text-dark-400 hover:text-dark-600">
+          <button onclick="window.closeBenefitsModal()" class="text-dark-400 hover:text-dark-600">
             ✕
           </button>
         </div>
@@ -446,4 +446,8 @@ const currentSponsors = [
       closeBenefitsModal();
     }
   });
+
+  // Make functions globally accessible
+  window.showBenefits = showBenefits;
+  window.closeBenefitsModal = closeBenefitsModal;
 </script>
