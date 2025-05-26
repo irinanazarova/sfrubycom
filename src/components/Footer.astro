@@ -2,39 +2,39 @@
 const currentYear = new Date().getFullYear();
 
 const footerLinks = [
-  {
+  /*{
     title: 'Event',
     links: [
-      { name: 'About', href: '/about' },
-      { name: 'Schedule', href: '/schedule' },
-      { name: 'Speakers', href: '/speakers' },
-      { name: 'Register', href: '/register' },
+    //  { name: 'About', href: '/about' },
+    // { name: 'Schedule', href: '/schedule' },
+    //  { name: 'Speakers', href: '/speakers' },
+    //  { name: 'Register', href: '/register' },
     ]
   },
   {
     title: 'Information',
     links: [
-      { name: 'Venue', href: '/venue' },
-      { name: 'Travel', href: '/travel' },
-      { name: 'Hotels', href: '/hotels' },
-      { name: 'FAQ', href: '/faq' },
+    //  { name: 'Venue', href: '/venue' },
+    //  { name: 'Travel', href: '/travel' },
+    //  { name: 'Hotels', href: '/hotels' },
+    //  { name: 'FAQ', href: '/faq' },
     ]
   },
   {
     title: 'Get Involved',
     links: [
-      { name: 'Sponsors', href: '/sponsors' },
-      { name: 'Startup Demos', href: '/startup-demos' },
-      { name: 'Code of Conduct', href: '/code-of-conduct' },
+    //  { name: 'Sponsors', href: '/sponsors' },
+    //  { name: 'Startup Demos', href: '/startup-demos' },
+    //  { name: 'Code of Conduct', href: '/code-of-conduct' },
       { name: 'Contact', href: '/contact' },
     ]
-  }
+  }*/
 ];
 
 const socialLinks = [
-  { name: 'Twitter', href: 'https://twitter.com/sfrubconf', icon: 'twitter' },
-  { name: 'GitHub', href: 'https://github.com/sfrubconf', icon: 'github' },
-  { name: 'LinkedIn', href: 'https://linkedin.com/company/sfrubconf', icon: 'linkedin' }
+ // { name: 'Twitter', href: 'https://twitter.com/sfrubconf', icon: 'twitter' },
+ // { name: 'GitHub', href: 'https://github.com/sfrubconf', icon: 'github' },
+ // { name: 'LinkedIn', href: 'https://linkedin.com/company/sfrubconf', icon: 'linkedin' }
 ];
 ---
 
@@ -45,18 +45,17 @@ const socialLinks = [
       <div class="col-span-1">
         <div class="flex items-center space-x-2 mb-4">
           <!-- Ruby logo -->
-          <div class="w-10 h-10">
-            <div class="w-full h-full relative">
-              <div class="absolute inset-0 bg-gradient-to-br from-ruby-500 to-ruby-600 transform rotate-45 rounded-lg"></div>
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-6 h-6 bg-cloud-500 rounded-full transform -translate-y-1"></div>
-              </div>
-            </div>
+          <div class="w-20 h-20">
+            <img
+              src="/sfruby_logo_h.png"
+              alt="Logo"
+              class="object-contain w-full h-full"
+              loading="lazy"
+            />
           </div>
-          <div class="font-display font-bold text-2xl text-ruby-500">SF Ruby Conf</div>
         </div>
         <p class="mt-2 text-sky-300 text-sm">
-          Join us for the biggest Ruby conference in San Francisco. November 19-20, 2025 at Fort Mason.
+          Join us for the largest Ruby event in San Francisco. November 19-20, 2025 at Fort Mason.
         </p>
       </div>
       
@@ -100,7 +99,7 @@ const socialLinks = [
       </div>
       
       <div class="text-sky-400 text-sm">
-        &copy; {currentYear} San Francisco Ruby Conference. All rights reserved.
+        &copy; {currentYear} Evil Martians Inc. for San Francisco Ruby Conference.  All rights reserved.
       </div>
     </div>
   </div>

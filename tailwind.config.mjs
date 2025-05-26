@@ -18,17 +18,17 @@ export default {
           950: 'oklch(15% 0.05 25)',
         },
         sky: {
-          50: 'oklch(97% 0.02 250)',
-          100: 'oklch(95% 0.04 250)',
-          200: 'oklch(90% 0.08 250)',
-          300: 'oklch(85% 0.12 250)',
-          400: 'oklch(75% 0.16 250)',
-          500: 'oklch(65% 0.25 250)', // Bright blue
+          50: 'oklch(97% 0.17 250)',
+          100: 'oklch(95% 0.17 250)',
+          200: 'oklch(90% 0.17 250)',
+          300: 'oklch(85% 0.17 250)',
+          400: 'oklch(75% 0.17 250)',
+          500: 'oklch(68% 0.17 250)', // Bright blue
           600: 'oklch(55% 0.25 250)',
-          700: 'oklch(45% 0.20 250)',
-          800: 'oklch(35% 0.15 250)',
-          900: 'oklch(25% 0.10 250)',
-          950: 'oklch(15% 0.05 250)',
+          700: 'oklch(45% 0.17 250)',
+          800: 'oklch(35% 0.17 250)',
+          900: 'oklch(25% 0.17 250)',
+          950: 'oklch(15% 0.17 250)',
         },
         cloud: {
           50: 'oklch(100% 0 0)',
@@ -45,8 +45,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter var', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Manrope', 'Inter var', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Martian Mono', 'sans-serif'],
+        display: ['Martian Grotesk', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

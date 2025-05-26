@@ -13,33 +13,34 @@ import { Image } from 'astro:assets';
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
     <div class="flex flex-col items-center text-center">
       <!-- Animated logo -->
-      <div class="w-40 h-40 md:w-48 md:h-48 mb-12 relative ruby-logo">
-        <div class="ruby absolute inset-0">
-          <div class="ruby-face"></div>
-          <div class="ruby-shadow"></div>
-          <div class="ruby-glow"></div>
-        </div>
+      <div class="w-40 h-40 md:w-full md:h-48 relative flex items-center justify-center">
+        <img
+          src="/sfruby_logo_h.png"
+          alt="SF Ruby Logo"
+          class="object-contain w-full h-full"
+          loading="lazy"
+        />
       </div>
       
-      <h1 class="font-display font-bold text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 split-text text-cloud-500">
+      <h1 class="font-display font-regular text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 font-stretch-extra-expanded split-text text-cloud-500">
         San Francisco Ruby Conference 2025
       </h1>
       
-      <p class="text-xl md:text-2xl font-medium text-cloud-300 mb-6 split-text">
+      <p class="text-xl md:text-2xl font-medium split-text text-cloud-300 mb-6">
         Building the Future with Ruby
       </p>
       
-      <p class="text-lg md:text-xl text-cloud-200 mb-8 split-text">
+      <p class="text-lg md:text-xl split-text text-cloud-200 mb-8">
         November 19-20, 2025 • Fort Mason, San Francisco
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
-        <a 
+        <!-- <a 
           href="/register" 
           class="register-btn px-8 py-3 bg-ruby-500 text-cloud-500 font-medium rounded-md transition-all duration-300 transform hover:scale-105 hover:shadow-glow"
         >
           Register Now
-        </a>
+        </a>-->
         
         <a 
           href="#newsletter" 
@@ -51,7 +52,7 @@ import { Image } from 'astro:assets';
       
       <!-- Countdown timer -->
       <div class="mt-12 inline-flex items-center px-6 py-3 bg-sky-600/50 backdrop-blur-sm rounded-full text-cloud-200">
-        <span class="mr-3 text-ruby-300 font-medium">Early Bird Pricing Ends:</span>
+        <span class="mr-3 text-ruby-300 font-medium">Early Bird Tickets Live In:</span>
         <span id="countdown" class="font-mono countdown"></span>
       </div>
     </div>
@@ -73,71 +74,6 @@ import { Image } from 'astro:assets';
   </div>
 </section>
 
-<style>
-  .ruby-grid {
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 1px;
-    opacity: 0.5;
-  }
-
-  .ruby-grid::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, rgba(255, 31, 87, 0.2), transparent);
-    animation: pulse 4s ease-in-out infinite;
-  }
-
-  .ruby {
-    transform-style: preserve-3d;
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .ruby-face {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ff1f57 0%, #ff4d6d 50%, #ff7b8b 100%);
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    position: relative;
-  }
-
-  .ruby-shadow {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    transform: translateY(4px);
-  }
-
-  .ruby-glow {
-    position: absolute;
-    inset: -20px;
-    background: radial-gradient(circle at center, rgba(255, 31, 87, 0.4), transparent 70%);
-    filter: blur(20px);
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.4; }
-  }
-
-  .shadow-glow {
-    box-shadow: 0 0 20px rgba(255, 31, 87, 0.5);
-  }
-
-  .countdown {
-    font-feature-settings: "tnum";
-    letter-spacing: 0.05em;
-  }
-</style>
 
 <script>
   import anime from 'animejs';
@@ -146,15 +82,39 @@ import { Image } from 'astro:assets';
   function initializeAnimations() {
     // Split text animation
     document.querySelectorAll('.split-text').forEach(element => {
-      const text = element.textContent;
+      const text = element.textContent || '';
       element.textContent = '';
-      text.split('').forEach((char, i) => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.style.opacity = '0';
-        span.style.transform = 'translateY(20px)';
-        span.style.display = 'inline-block';
-        element.appendChild(span);
+      
+      // Split text into words
+      const words = text.split(' ');
+      
+      words.forEach((word, wordIndex) => {
+        // Create a container for the word
+        const wordContainer = document.createElement('span');
+        wordContainer.className = 'word';
+        wordContainer.style.display = 'inline-block';
+        
+        // Split word into characters
+        word.split('').forEach(char => {
+          const charSpan = document.createElement('span');
+          charSpan.className = 'char';
+          charSpan.textContent = char;
+          charSpan.style.opacity = '0';
+          charSpan.style.transform = 'translateY(20px)';
+          charSpan.style.display = 'inline-block';
+          wordContainer.appendChild(charSpan);
+        });
+        
+        element.appendChild(wordContainer);
+        
+        // Add space after word (except last word)
+        if (wordIndex < words.length - 1) {
+          const spaceSpan = document.createElement('span');
+          spaceSpan.className = 'space';
+          spaceSpan.innerHTML = '&nbsp;';
+          spaceSpan.style.display = 'inline-block';
+          element.appendChild(spaceSpan);
+        }
       });
     });
 
@@ -169,7 +129,7 @@ import { Image } from 'astro:assets';
       duration: 1000,
     })
     .add({
-      targets: '.split-text span',
+      targets: '.split-text .char',
       opacity: [0, 1],
       translateY: [20, 0],
       duration: 800,
@@ -197,7 +157,7 @@ import { Image } from 'astro:assets';
 
   // Countdown timer
   function updateCountdown() {
-    const targetDate = new Date('2025-10-01T23:59:59');
+    const targetDate = new Date('2025-07-03T07:59:59');
     const now = new Date();
     const difference = targetDate.getTime() - now.getTime();
     

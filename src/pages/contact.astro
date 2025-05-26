@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const contactMethods = [
+  {
+    title: 'General Inquiries',
+    email: 'sfruby@evilmartians.com',
+    description: 'For general questions about the conference'
+  },
+  {
+    title: 'Sponsorship',
+    email: 'inazarova@evilmartians.com',
+    description: 'For sponsorship opportunities and inquiries'
+  }
+];
+
+const faqs = [
+  {
+    question: 'How quickly do you respond to emails?',
+    answer: 'We aim to respond to all inquiries within 24-48 business hours.'
+  },
+  {
+    question: 'Can I get a refund for my ticket?',
+    answer: 'Tickets are non-refundable but can be transferred to another attendee.'
+  },
+  {
+    question: 'I want to volunteer at the conference. Who should I contact?',
+    answer: 'Please email sfruby@evilmartians.com with your information and availability.'
+  }
+];
+---
+
+<Layout title="Contact Us - San Francisco Ruby Conference 2025">
+  <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-center">Contact Us</h1>
+      <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
+        Get in touch with the SF Ruby Conference team
+      </p>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      {contactMethods.map((method) => (
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-xl font-bold text-dark-900 mb-2">{method.title}</h2>
+          <p class="text-dark-600 mb-4">{method.description}</p>
+          <a 
+            href={`mailto:${method.email}`}
+            class="inline-flex items-center text-ruby-500 hover:text-ruby-600 font-medium"
+          >
+            {method.email}
+          </a>
+        </div>
+      ))}
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="bg-dark-50 rounded-lg p-8">
+      <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Frequently Asked Questions</h2>
+      
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="font-bold text-dark-900 mb-2">{faq.question}</h3>
+            <p class="text-dark-600">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Location -->
+    <div class="mt-16 text-center">
+      <h2 class="text-2xl font-display font-bold text-dark-900 mb-4">Conference Venue</h2>
+      <p class="text-dark-600 mb-2">Fort Mason Center</p>
+      <p class="text-dark-600">2 Marina Blvd, San Francisco, CA 94123</p>
+    </div>
+  </div>
+</Layout>

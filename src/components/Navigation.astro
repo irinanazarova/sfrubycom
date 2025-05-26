@@ -1,31 +1,20 @@
 ---
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Schedule', href: '/schedule' },
-  { name: 'Speakers', href: '/speakers' },
+ // { name: 'Home', href: '/' },
+ // { name: 'Schedule', href: '/schedule' },
+ // { name: 'Speakers', href: '/speakers' },
   { name: 'Sponsors', href: '/sponsors' },
-  { name: 'Venue', href: '/venue' },
+//  { name: 'Venue', href: '/venue' },
 ];
 ---
 
 <header class="fixed w-full z-50 transition-all duration-300 bg-transparent">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center py-4">
-      <a href="/" class="flex items-center space-x-2">
-        <!-- Ruby logo -->
-        <div class="w-10 h-10">
-          <div class="w-full h-full relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-ruby-500 to-ruby-600 transform rotate-45 rounded-lg"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-6 h-6 bg-cloud-500 rounded-full transform -translate-y-1"></div>
-            </div>
-          </div>
-        </div>
-        <span class="font-display font-bold text-xl md:text-2xl text-ruby-500">SF Ruby Conf</span>
-      </a>
+    <div class="flex justify-between items-center h-16">
+      <a href="/" class="font-display font-bold text-xl md:text-2xl text-ruby-500">SF Ruby</a>
       
       <!-- Desktop navigation -->
-      <nav class="hidden md:flex space-x-8">
+      <nav class="hidden md:flex items-center space-x-8">
         {navItems.map((item) => (
           <a 
             href={item.href} 
@@ -34,12 +23,12 @@ const navItems = [
             {item.name}
           </a>
         ))}
-        <a 
-          href="/register" 
+        <!-- <a 
+          href="#newsletter" 
           class="px-4 py-2 rounded-md bg-ruby-500 text-cloud-500 font-medium hover:bg-ruby-600 transition-colors duration-200"
         >
-          Register
-        </a>
+          Sign up
+        </a>-->
       </nav>
       
       <!-- Mobile menu button -->
@@ -62,12 +51,12 @@ const navItems = [
           {item.name}
         </a>
       ))}
-      <a 
-        href="/register" 
+      <!--<a 
+        href="/#newsletter" 
         class="block px-3 py-2 rounded-md text-base font-medium bg-ruby-500 text-cloud-500 hover:bg-ruby-600"
       >
-        Register
-      </a>
+        Sign up
+      </a>-->
     </div>
   </div>
 </header>
