@@ -149,33 +149,35 @@ import { Image } from 'astro:assets';
       const text = element.textContent || '';
       element.textContent = '';
       
-      // Split text into words first
+      // Split text into words
       const words = text.split(' ');
       
       words.forEach((word, wordIndex) => {
-        // Create a word container
-        const wordSpan = document.createElement('span');
-        wordSpan.style.display = 'inline-block';
+        // Create a container for the word
+        const wordContainer = document.createElement('span');
+        wordContainer.className = 'word';
+        wordContainer.style.display = 'inline-block';
         
-        // Split each word into characters
-        word.split('').forEach((char) => {
-          const span = document.createElement('span');
-          span.textContent = char;
-          span.style.opacity = '0';
-          span.style.transform = 'translateY(20px)';
-          span.style.display = 'inline-block';
-          wordSpan.appendChild(span);
+        // Split word into characters
+        word.split('').forEach(char => {
+          const charSpan = document.createElement('span');
+          charSpan.className = 'char';
+          charSpan.textContent = char;
+          charSpan.style.opacity = '0';
+          charSpan.style.transform = 'translateY(20px)';
+          charSpan.style.display = 'inline-block';
+          wordContainer.appendChild(charSpan);
         });
         
-        // Add the word to the element
-        element.appendChild(wordSpan);
+        element.appendChild(wordContainer);
         
-        // Add space after word (except for last word)
+        // Add space after word (except last word)
         if (wordIndex < words.length - 1) {
-          const space = document.createElement('span');
-          space.textContent = ' ';
-          space.style.display = 'inline-block';
-          element.appendChild(space);
+          const spaceSpan = document.createElement('span');
+          spaceSpan.className = 'space';
+          spaceSpan.innerHTML = '&nbsp;';
+          spaceSpan.style.display = 'inline-block';
+          element.appendChild(spaceSpan);
         }
       });
     });
@@ -191,7 +193,7 @@ import { Image } from 'astro:assets';
       duration: 1000,
     })
     .add({
-      targets: '.split-text span span',
+      targets: '.split-text .char',
       opacity: [0, 1],
       translateY: [20, 0],
       duration: 800,
