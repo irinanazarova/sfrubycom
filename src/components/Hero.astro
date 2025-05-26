@@ -146,15 +146,37 @@ import { Image } from 'astro:assets';
   function initializeAnimations() {
     // Split text animation
     document.querySelectorAll('.split-text').forEach(element => {
-      const text = element.textContent;
+      const text = element.textContent || '';
       element.textContent = '';
-      text.split('').forEach((char, i) => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.style.opacity = '0';
-        span.style.transform = 'translateY(20px)';
-        span.style.display = 'inline-block';
-        element.appendChild(span);
+      
+      // Split text into words first
+      const words = text.split(' ');
+      
+      words.forEach((word, wordIndex) => {
+        // Create a word container
+        const wordSpan = document.createElement('span');
+        wordSpan.style.display = 'inline-block';
+        
+        // Split each word into characters
+        word.split('').forEach((char) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.style.opacity = '0';
+          span.style.transform = 'translateY(20px)';
+          span.style.display = 'inline-block';
+          wordSpan.appendChild(span);
+        });
+        
+        // Add the word to the element
+        element.appendChild(wordSpan);
+        
+        // Add space after word (except for last word)
+        if (wordIndex < words.length - 1) {
+          const space = document.createElement('span');
+          space.textContent = ' ';
+          space.style.display = 'inline-block';
+          element.appendChild(space);
+        }
       });
     });
 
@@ -169,7 +191,7 @@ import { Image } from 'astro:assets';
       duration: 1000,
     })
     .add({
-      targets: '.split-text span',
+      targets: '.split-text span span',
       opacity: [0, 1],
       translateY: [20, 0],
       duration: 800,
