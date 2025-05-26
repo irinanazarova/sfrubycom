@@ -235,7 +235,12 @@ const currentSponsors = [
                 <td class="px-4 py-4 whitespace-nowrap text-dark-900">{tier.price}</td>
                 <td class="px-4 py-4">
                   <div class="text-sm text-dark-600 line-clamp-2">{tier.description}</div>
-                  <button class="text-ruby-500 hover:text-ruby-600 text-sm mt-1">View benefits</button>
+                  <button 
+                    class="text-ruby-500 hover:text-ruby-600 text-sm mt-1"
+                    onclick={`showBenefits('${tier.name}')`}
+                  >
+                    View benefits
+                  </button>
                 </td>
                 <td class="px-4 py-4 whitespace-nowrap">
                   <div class="text-sm text-dark-600">
@@ -265,7 +270,7 @@ const currentSponsors = [
     <div class="mb-16">
       <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">Special Sponsorship Opportunities</h2>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {specialOpportunities.map((opportunity) => (
           <div class="bg-white border border-dark-200 rounded-lg overflow-hidden">
             <div class="p-6">
@@ -324,4 +329,121 @@ const currentSponsors = [
       </div>
     </div>
   </div>
+
+  <!-- Benefits Modal -->
+  <div id="benefitsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg max-w-lg w-full mx-4 overflow-hidden">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-dark-900" id="modalTitle"></h3>
+          <button onclick="closeBenefitsModal()" class="text-dark-400 hover:text-dark-600">
+            ✕
+          </button>
+        </div>
+        <ul class="space-y-2" id="benefitsList"></ul>
+      </div>
+      <div class="bg-dark-50 px-6 py-4">
+        <a href="/contact" class="inline-block w-full px-4 py-2 bg-ruby-500 text-white text-center font-medium rounded-md hover:bg-ruby-600 transition-colors duration-200">
+          Contact Us About This Tier
+        </a>
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<script>
+  // Store tier data for the modal
+  const tiers = {
+    sponsorTiers: [
+      {
+        name: 'Picaxe',
+        benefits: [
+          'Prominent logo placement on all materials',
+          '10-minute keynote opportunity',
+          'Premium 10x10 booth in main area',
+          '5 conference passes',
+          'Full-page ad in conference guide',
+          'Sponsored email to attendees',
+          'Social media promotion (5 dedicated posts)',
+          'Access to opt-in attendee list'
+        ]
+      },
+      {
+        name: 'Ruby',
+        benefits: [
+          'Logo placement on website and materials',
+          '8x8 booth in prime location',
+          '3 conference passes',
+          'Half-page ad in conference guide',
+          'Social media promotion (3 dedicated posts)',
+          'Company description on conference website',
+          'Access to opt-in attendee list'
+        ]
+      },
+      {
+        name: 'Emerald',
+        benefits: [
+          'Logo on website and conference materials',
+          '6x6 booth',
+          '2 conference passes',
+          'Quarter-page ad in conference guide',
+          'Social media mention (1 dedicated post)',
+          'Company listing on conference website'
+        ]
+      },
+      {
+        name: 'Sapphire',
+        benefits: [
+          'Logo on website',
+          'Shared table space',
+          '1 conference pass',
+          'Company name in conference guide',
+          'Company listing on conference website'
+        ]
+      }
+    ]
+  };
+
+  function showBenefits(tierName) {
+    const modal = document.getElementById('benefitsModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const benefitsList = document.getElementById('benefitsList');
+    
+    const tier = tiers.sponsorTiers.find(t => t.name === tierName);
+    
+    if (tier) {
+      modalTitle.textContent = `${tier.name} Tier Benefits`;
+      benefitsList.innerHTML = tier.benefits
+        .map(benefit => `<li class="flex items-start">
+          <span class="text-ruby-500 mr-2">✓</span>
+          <span>${benefit}</span>
+        </li>`)
+        .join('');
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeBenefitsModal() {
+    const modal = document.getElementById('benefitsModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal when clicking outside
+  document.getElementById('benefitsModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      closeBenefitsModal();
+    }
+  });
+
+  // Close modal on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeBenefitsModal();
+    }
+  });
+</script>
