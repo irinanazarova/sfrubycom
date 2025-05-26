@@ -10,22 +10,9 @@ const navItems = [
 
 <header class="fixed w-full z-50 transition-all duration-300 bg-transparent">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center py-4">
-      <a href="/" class="flex items-center space-x-2">
-        <!-- Ruby logo -->
-        <div class="w-10 h-10">
-          <div class="w-full h-full relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-ruby-500 to-ruby-600 transform rotate-45 rounded-lg"></div>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-6 h-6 bg-cloud-500 rounded-full transform -translate-y-1"></div>
-            </div>
-          </div>
-        </div>
-        <span class="font-display font-bold text-xl md:text-2xl text-ruby-500">SF Ruby Conf</span>
-      </a>
-      
+    <div class="flex justify-between items-center h-16">
       <!-- Desktop navigation -->
-      <nav class="hidden md:flex space-x-8">
+      <nav class="hidden md:flex items-center space-x-8">
         {navItems.map((item) => (
           <a 
             href={item.href} 
