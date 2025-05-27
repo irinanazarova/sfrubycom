@@ -42,7 +42,7 @@ const tiers = [
             {tier.sponsors.map((sponsor) => (
               <a 
                 href={sponsor.url} 
-                class={`block p-6 border rounded-lg transition-all duration-300 ${sponsor.logo ? 'bg-white hover:shadow-lg' : 'border-dashed border-dark-300 hover:border-ruby-500'}`}
+                class={`block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 ${sponsor.logo ? 'bg-white hover:shadow-lg' : 'border-dashed border-dark-300 hover:border-ruby-500'}`}
                 target={sponsor.logo ? "_blank" : "_self"}
                 rel={sponsor.logo ? "noopener noreferrer" : ""}
               >
@@ -68,7 +68,7 @@ const tiers = [
     <div class="mt-16 text-center">
       <a 
         href="/sponsors" 
-        class="inline-flex items-center justify-center px-6 py-3 bg-gold-500 text-dark-900 rounded-md font-medium hover:bg-gold-400 transition-colors duration-200 shadow-md"
+        class="inline-flex items-center justify-center px-6 py-3 bg-gold-500 text-dark-900 rounded-md font-medium hover:bg-gold-400 shadow-md transition-all duration-300 transform hover:scale-105"
       >
         Become a Sponsor
       </a>

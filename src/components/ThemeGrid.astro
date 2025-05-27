@@ -39,14 +39,14 @@ const themes = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {themes.map((theme, index) => (
         <div 
-          class="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden relative border border-dark-100"
+          class="group bg-white rounded-lg shadow-md transition-all duration-300 overflow-hidden relative border border-dark-100"
           style={`animation-delay: ${index * 100}ms`}
         >
           <div class="absolute inset-0 bg-gradient-to-br from-ruby-500/0 via-ruby-500/0 to-ruby-500/0 group-hover:from-ruby-500/5 group-hover:via-ruby-500/10 group-hover:to-ruby-500/20 transition-all duration-300"></div>
           
           <div class="p-6 h-full flex flex-col">
-            <div class="w-20 h-20 rounded-full bg-ruby-100 flex items-center justify-center mb-4">
-              <!-- Simple icon placeholder - would be replaced with actual icons -->
+            <div class="w-28 h-28 flex items-center justify-center mb-4">
+              
               <img
                 src={theme.icon}
                 alt="Logo"
