@@ -3,7 +3,7 @@
   font-display: swap;
   src: url('/fonts/MartianGrotesk.woff2') format('woff2');
   font-weight: 100 800;
-  /*font-stretch: 75% 150%;*/
+  font-stretch: 150%;
 }
 
 @font-face {
