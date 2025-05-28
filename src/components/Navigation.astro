@@ -14,25 +14,25 @@ const navItems = [
       <a href="/" class="font-display font-bold text-xl md:text-2xl text-ruby-500">
         <img src="/sfruby_letters_black.png" class="object-contain w-24 h-10">
       </a>
-      
+
       <!-- Desktop navigation -->
       <nav class="hidden md:flex items-center space-x-8">
         {navItems.map((item) => (
-          <a 
-            href={item.href} 
+          <a
+            href={item.href}
             class="font-medium text-cloud-900 hover:text-ruby-400 transition-colors duration-200"
           >
             {item.name}
           </a>
         ))}
-        <!-- <a 
-          href="#newsletter" 
+        <!-- <a
+          href="#newsletter"
           class="px-4 py-2 rounded-md bg-ruby-500 text-cloud-500 font-medium hover:bg-ruby-600 transition-colors duration-200"
         >
           Sign up
         </a>-->
       </nav>
-      
+
       <!-- Mobile menu button -->
       <button id="mobile-menu-button" class="md:hidden flex items-center text-sky-800">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -41,20 +41,20 @@ const navItems = [
       </button>
     </div>
   </div>
-  
+
   <!-- Mobile navigation -->
-  <div id="mobile-menu" class="hidden md:hidden bg-cloud-500 shadow-lg absolute w-full">
+  <div id="mobile-menu" class="hidden md:hidden bg-cloud-100 shadow-lg absolute w-full">
     <div class="px-2 pt-2 pb-3 space-y-1">
       {navItems.map((item) => (
-        <a 
-          href={item.href} 
+        <a
+          href={item.href}
           class="block px-3 py-2 rounded-md text-base font-medium text-sky-800 hover:bg-sky-50 hover:text-ruby-500"
         >
           {item.name}
         </a>
       ))}
-      <!--<a 
-        href="/#newsletter" 
+      <!--<a
+        href="/#newsletter"
         class="block px-3 py-2 rounded-md text-base font-medium bg-ruby-500 text-cloud-500 hover:bg-ruby-600"
       >
         Sign up
@@ -67,16 +67,16 @@ const navItems = [
   // Mobile menu toggle
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  
+
   mobileMenuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
   });
-  
+
   // Close mobile menu when clicking outside
   document.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
-    if (mobileMenu && !mobileMenu.classList.contains('hidden') && 
-        mobileMenuButton && !mobileMenuButton.contains(target) && 
+    if (mobileMenu && !mobileMenu.classList.contains('hidden') &&
+        mobileMenuButton && !mobileMenuButton.contains(target) &&
         !mobileMenu.contains(target)) {
       mobileMenu.classList.add('hidden');
     }

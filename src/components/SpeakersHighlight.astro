@@ -35,32 +35,32 @@ const speakers = [
         Learn from the brightest minds in the Ruby community
       </p>
     </div>
-    
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {speakers.map((speaker) => (
         <div class="group">
           <div class="relative rounded-lg overflow-hidden mb-4">
-            <div class="aspect-w-3 aspect-h-4 bg-dark-200">
-              <img 
-                src={speaker.image} 
-                alt={speaker.name} 
-                class="w-30 h-30 object-cover" 
+            <div class="aspect-w-3 aspect-h-4 bg-dark-200 filter grayscale hover:grayscale-0 transition flex items-center flex-col">
+              <img
+                src={speaker.image}
+                alt={speaker.name}
+                class="object-cover object-top duration-300 rounded-full sm:rounded-none h-48 w-48 sm:h-auto sm:w-auto"
                 loading="lazy"
               />
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/70 via-dark-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+            <!-- <div class="absolute inset-0 bg-gradient-to-t from-dark-900/70 via-dark-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
               <div class="p-4 w-full text-center">
-                 <!-- <a 
+                 <!-- <a
                   href={`/speakers/${speaker.name.toLowerCase().replace(/\s/g, '-')}`}
                   class="inline-block px-4 py-2 bg-white/90 text-dark-800 rounded-md font-medium hover:bg-white transition-colors duration-200"
                 >
                   View Profile
-                </a>-->
+                </a>
               </div>
-            </div>
+            </div> -->
           </div>
-          
-          <div class="text-center">
+
+          <div class="text-center flex flex-col gap-2">
             <h3 class="font-bold text-lg text-dark-900">{speaker.name}</h3>
             <p class="text-ruby-500">{speaker.title}</p>
             <p class="text-dark-500 text-sm">{speaker.company}</p>
@@ -68,11 +68,11 @@ const speakers = [
         </div>
       ))}
     </div>
-    
-   <div class="text-center mt-12">
+
+   <div class="text-center mt-12 text-gray-500">
     More updates and call for speakers coming soon!
-      <!-- <a 
-        href="/speakers" 
+      <!-- <a
+        href="/speakers"
         class="inline-flex items-center justify-center px-6 py-3 border border-dark-300 rounded-md text-dark-800 bg-white hover:bg-dark-50 transition-colors duration-200 font-medium"
       >
         View All Speakers

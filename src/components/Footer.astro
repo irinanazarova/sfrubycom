@@ -63,10 +63,10 @@ const socialLinks = [
           </div>
         </div>
         <p class="mt-2 text-sky-300 text-sm">
-          Join us for the largest Ruby event in San Francisco. November 19-20, 2025 at Fort Mason.
+          Join us for the largest Ruby event in San&nbsp;Francisco. November&nbsp;19&#8209;20,&nbsp;2025 at Fort Mason.
         </p>
       </div>
-      
+
       <!-- Links -->
       {footerLinks.map((section) => (
         <div>
@@ -74,8 +74,8 @@ const socialLinks = [
           <ul class="space-y-2">
             {section.links.map((link) => (
               <li>
-                <a 
-                  href={link.href} 
+                <a
+                  href={link.href}
                   class="text-sky-300 hover:text-ruby-400 transition-colors duration-200 text-sm"
                 >
                   {link.name}
@@ -86,14 +86,14 @@ const socialLinks = [
         </div>
       ))}
     </div>
-    
+
     <!-- Social links and copyright -->
     <div class="mt-12 pt-8 border-t border-sky-800 flex flex-col md:flex-row justify-between items-center">
       <div class="flex space-x-6 mb-4 md:mb-0">
         {socialLinks.map((link) => (
-          <a 
-            href={link.href} 
-            target="_blank" 
+          <a
+            href={link.href}
+            target="_blank"
             rel="noopener noreferrer"
             class="text-sky-300 hover:text-ruby-400 transition-colors duration-200"
             aria-label={link.name}
@@ -105,7 +105,7 @@ const socialLinks = [
           </a>
         ))}
       </div>
-      
+
       <div class="text-sky-400 text-sm">
         &copy; {currentYear} Evil Martians Inc. for San Francisco Ruby Conference.  All rights reserved.
       </div>

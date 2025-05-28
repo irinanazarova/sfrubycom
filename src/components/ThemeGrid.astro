@@ -35,18 +35,18 @@ const themes = [
         San Francisco Ruby conference is where authors of open source and Ruby engineers meet startups and big companies building with Ruby.
       </p>
     </div>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {themes.map((theme, index) => (
-        <div 
-          class="group bg-white rounded-lg shadow-md transition-all duration-300 overflow-hidden relative border border-dark-100"
+        <div
+          class="group bg-white rounded-lg _shadow-md transition-all duration-300 overflow-hidden relative _border border-dark-100 sm:flex sm:flex-col sm:items-end"
           style={`animation-delay: ${index * 100}ms`}
         >
           <div class="absolute inset-0 bg-gradient-to-br from-ruby-500/0 via-ruby-500/0 to-ruby-500/0 group-hover:from-ruby-500/5 group-hover:via-ruby-500/10 group-hover:to-ruby-500/20 transition-all duration-300"></div>
-          
-          <div class="p-6 h-full flex flex-col">
-            <div class="w-28 h-28 flex items-center justify-center mb-4">
-              
+
+          <div class="p-6 h-full flex flex-col group-even:text-right md:!text-left">
+            <div class="w-28 h-28 flex items-center justify-center mb-4 group-even:self-end md:!self-start">
+
               <img
                 src={theme.icon}
                 alt="Logo"
@@ -54,12 +54,12 @@ const themes = [
                 loading="lazy"
               />
             </div>
-            
+
             <h3 class="text-xl font-bold text-dark-900 mb-2">{theme.title}</h3>
             <p class="text-dark-600 mb-4 flex-grow">{theme.description}</p>
-            
-            <!-- <a 
-              href={theme.link} 
+
+            <!-- <a
+              href={theme.link}
               class="text-ruby-500 hover:text-ruby-600 font-medium inline-flex items-center group-hover:translate-x-1 transition-transform duration-200"
             >
               Learn more
