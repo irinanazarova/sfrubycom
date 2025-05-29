@@ -21,10 +21,10 @@ const testimonials = [
       <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Built on the Success of the SF Ruby Meetup</h2>
     </div>
     <div class="text-center mt-12">
-     The Ruby community in the SF Bay area is full of energy today: we gather 70-100 people at the <a href="https://lu.ma/sfruby" class="no-underline hover:underline">SF Ruby meetup</a> every month for deep technical talks and conversations. Check out talks recordings on the <a href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup" class="no-underline hover:underline">Ruby Events</a>. 
+     The Ruby community in the SF Bay area is full of energy today: we gather 70-100 people at the <a href="https://lu.ma/sfruby" class="no-underline hover:underline">SF Ruby meetup</a> every month for deep technical talks and conversations. Check out talks recordings on the <a href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup" class="no-underline hover:underline">Ruby Events</a>.
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 md:mx-20 gap-8 text-center mt-4">
       {testimonials.map((testimonial) => (
         <div class="bg-white p-6 rounded-lg shadow-md flex flex-col h-full">
           <div class="mb-4 text-ruby-500">
@@ -33,17 +33,17 @@ const testimonials = [
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
           </div>
-          
+
           <blockquote class="flex-grow mb-6">
             <p class="text-dark-700 italic">"{testimonial.quote}"</p>
           </blockquote>
-          
+
           <div class="flex items-center">
             <div class="flex-shrink-0 mr-3">
-              <img 
-                src={testimonial.image} 
-                alt={testimonial.author} 
-                class="h-10 w-10 rounded-full object-cover" 
+              <img
+                src={testimonial.image}
+                alt={testimonial.author}
+                class="h-10 w-10 rounded-full object-cover"
                 loading="lazy"
               />
             </div>
