@@ -37,20 +37,32 @@ const {
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sfrubconf.com" />
+    <meta property="og:url" content="https://sfruby.com" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/sfruby_og.png" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://sfrubconf.com" />
+    <meta property="twitter:url" content="https://sfruby.com" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="https://sfrubconf.com/og-image.jpg" />
+    <meta property="twitter:image" content="https://sfruby.com/sfruby_og.png" />
 
-    <!-- Defer non-critical JavaScript -->
-    <script defer>
+    <script defer data-domain="sfruby.com" src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+
+  </head>
+  <body class="bg-white text-dark-800 font-sans min-h-screen flex flex-col">
+    <Navigation />
+    
+    <main class="flex-grow">
+      <slot />
+    </main>
+    
+    <Footer />
+    
+    <script>
       // Add smooth scrolling for anchor links
       document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
