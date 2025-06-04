@@ -4,25 +4,30 @@ const themes = [
     title: 'Startup Demos',
     description: 'Fast-paced 10-minute showcases from the hottest Ruby startups.',
     icon: 'startups.png',
-    link: '/startup-demos'
+    link: 'https://cfp.sfruby.com',
+    linktype: 'button',
+    linklabel: 'Call for Startups'
   },
   {
     title: 'Open Source & AI Tooling',
     description: 'New open source tools boosting ambitious Ruby products, including AI integration, frontend and more.',
     icon: 'oss.png',
-    link: '/open-source'
+    link: '/open-source',
+    linktype: 'none'
   },
   {
     title: 'Scaling Ruby',
     description: 'See how big organizations scale Ruby solving modularization, performance, architecture challenges!',
     icon: 'scaleups.png',
-    link: '/scaling'
+    link: '/scaling',
+    linktype: 'none'
   },
   {
     title: 'CTO Insights',
     description: 'CTO perspectives on the challenges and opportunities in the Ruby ecosystem.',
     icon: 'cto.png',
-    link: '/cto-insights'
+    link: '/cto-insights',
+    linktype: 'none'
   }
 ];
 ---
@@ -57,16 +62,16 @@ const themes = [
 
             <h3 class="text-xl font-bold text-dark-900 mb-2">{theme.title}</h3>
             <p class="text-dark-600 mb-4 flex-grow">{theme.description}</p>
-
-            <!-- <a
-              href={theme.link}
-              class="text-ruby-500 hover:text-ruby-600 font-medium inline-flex items-center group-hover:translate-x-1 transition-transform duration-200"
-            >
-              Learn more
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-              </svg>
-            </a>-->
+            {theme.linktype == 'button' ? 
+            <div class="text-center">
+              <a 
+                href="https://cfp.sfruby.com" 
+                class="inline-flex items-center justify-center px-6 py-3 bg-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
+              >
+                {theme.linklabel}
+              </a>
+            </div>
+            : <div></div>}
           </div>
         </div>
       ))}
