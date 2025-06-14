@@ -35,19 +35,17 @@ import { Image } from 'astro:assets';
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
-        <div class="text-center">
           <a 
             href="https://cfp.sfruby.com" 
-            class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+            class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
           >
             Call for Speakers is Live!
           </a>
-        </div>
         
         
         <a 
           href="#newsletter" 
-          class="px-8 py-2 bg-transparent border border-cloud-300 text-cloud-100 font-medium rounded-md transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-300 text-cloud-100 rounded-md font-medium transition-all duration-300 transform hover:shadow-glow hover:scale-105"
         >
           Sign up for updates
         </a>
@@ -160,7 +158,7 @@ import { Image } from 'astro:assets';
 
   // Countdown timer
   function updateCountdown() {
-    const targetDate = new Date('2025-07-03T07:59:59');
+    const targetDate = new Date('2025-07-03T08:00:00');
     const now = new Date();
     const difference = targetDate.getTime() - now.getTime();
     

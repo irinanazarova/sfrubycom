@@ -3,20 +3,22 @@ const tiers = [
   {
     name: 'Pickaxe ⛏️',
     sponsors: [
-      { name: 'Chime', logo: '/chime.png', url: 'https://www.chime.com' },
-      { name: 'Bolt.new by Stackblitz', logo: '/bolt.png', url: 'https://www.bolt.new' }
+      { name: 'Chime', logo: '/sponsor_chime.png', url: 'https://www.chime.com' },
+      { name: 'Bolt.new by Stackblitz', logo: '/sponsor_boltnew.png', url: 'https://www.bolt.new' }
     ]
   },
   {
     name: 'Ruby',
     sponsors: [
-      { name: 'Gusto', logo: '/gusto.png', url: 'https://www.gusto.com' }
+      { name: 'Gusto', logo: '/sponsor_gusto.png', url: 'https://www.gusto.com' }
     ]
   },
   {
     name: 'Emerald',
     sponsors: [
-      { name: 'Your company?', logo: null, url: '/sponsors' }
+      { name: 'Scout Monitoring', logo: '/sponsor_scout.png', url: 'https://scoutapm.com/' },
+      { name: 'typesense', logo: '/sponsor_typesense.png', url: 'https://typesense.org/' },
+      { name: 'Cedarcode', logo: '/sponsor_cedarcode.png', url: 'https://www.cedarcode.com/' }
     ]
   }
 ];
@@ -50,7 +52,7 @@ const tiers = [
                   <img 
                     src={sponsor.logo} 
                     alt={sponsor.name} 
-                    class={`h-12 md:h-16 w-auto ${tier.name === 'Pickaxe' ? 'md:h-20' : ''}`}
+                    class={`h-12 w-auto ${tier.name === 'Pickaxe ⛏️' ? 'md:h-24' : 'md:h-16'}`}
                     loading="lazy"
                   />
                 ) : (
@@ -80,7 +82,7 @@ const tiers = [
                 <img 
                     src=/evilmartians.png
                     alt="Evil Martians"
-                    class="h-12 md:h-16 w-auto md:h-20"
+                    class="h-24 md:h-48 w-auto"
                     loading="lazy"
                   />
               </a>
