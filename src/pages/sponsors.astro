@@ -10,10 +10,9 @@ const sponsorTiers = [
       'Prominent logo placement on all conference materials',
       'Featured sponsor acknowledgment during opening and closing remarks',
       'Dedicated sponsor spotlight on social media channels',
-      'Premium exhibition space 16.5’x5.8’',
+      'Premium exhibition space 16.5\'x5.8\'',
       'Opportunity to host a sponsored workshop, or a custom interactive experience',
       '5 complimentary conference tickets'
-
     ],
     available: 5,
     claimed: 2
@@ -26,7 +25,7 @@ const sponsorTiers = [
       'Logo on conference website and printed materials',
       'Sponsor acknowledgment during opening remarks',
       'Social media recognition',
-      'Exhibition space (5’x3.3’) or branded gifts for attendees',
+      'Exhibition space (5\'x3.3\') or branded gifts for attendees',
       'Lightning talk opportunity (5 minutes)',
       '2 complimentary conference tickets'
     ],
@@ -95,9 +94,6 @@ const currentSponsors = [
     logo: '/sponsor_cedarcode.png',
     url: 'https://www.cedarcode.com/'
   }
-
-
-
 ];
 ---
 
@@ -338,63 +334,13 @@ const currentSponsors = [
   </div>
 </Layout>
 
-<script>
-  // Store tier data for the modal
-  const tiers = {
-    sponsorTiers: [
-      {
-        name: 'Pickaxe ⛏️',
-        price: '$15,000',
-        description: 'Premier sponsorship with maximum visibility and branding.',
-        benefits: [
-          'Prominent logo placement on all conference materials',
-          'Featured sponsor acknowledgment during opening and closing remarks',
-          'Dedicated sponsor spotlight on social media channels',
-          'Premium exhibition space',
-          'Opportunity to host a sponsored workshop or breakout session',
-          '5 complimentary conference tickets'
-
-        ],
-        available: 3,
-        claimed: 2
-      },
-      {
-        name: 'Ruby',
-        price: '$7,000',
-        description: 'High-visibility sponsorship with excellent branding opportunities.',
-        benefits: [
-          'Logo on conference website and printed materials',
-          'Sponsor acknowledgment during opening remarks',
-          'Social media recognition',
-          'Exhibition space or branded gifts for attendees',
-          'Lightning talk opportunity (5 minutes)',
-          '2 complimentary conference tickets'
-        ],
-        available: 5,
-        claimed: 1
-      },
-      {
-        name: 'Emerald',
-        price: '$3,000',
-        description: 'Strong presence with quality branding and networking.',
-        benefits: [
-          'Logo on conference website and printed materials',
-          'Sponsor acknowledgment during opening remarks',
-          'Social media recognition',
-          '1 complimentary conference ticket'
-        ],
-        available: 10,
-        claimed: 0
-      }
-    ]
-  };
-
+<script define:vars={{ sponsorTiers }}>
   function showBenefits(tierName) {
     const modal = document.getElementById('benefitsModal');
     const modalTitle = document.getElementById('modalTitle');
     const benefitsList = document.getElementById('benefitsList');
 
-    const tier = tiers.sponsorTiers.find(t => t.name === tierName);
+    const tier = sponsorTiers.find(t => t.name === tierName);
 
     if (tier) {
       modalTitle.textContent = `${tier.name} Tier Benefits`;
