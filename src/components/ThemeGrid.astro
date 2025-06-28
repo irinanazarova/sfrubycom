@@ -6,7 +6,7 @@ const themes = [
     icon: 'startups.png',
     link: 'https://cfp.sfruby.com',
     linktype: 'button',
-    linklabel: 'Call for Startups'
+    linklabel: 'Submit a demo'
   },
   {
     title: 'Open Source & AI Tooling',
@@ -35,10 +35,10 @@ const themes = [
 <section id="themes" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Key Topics</h2>
-      <p class="mt-4 text-xl text-dark-600 max-w-3xl mx-auto">
-        San Francisco Ruby conference is where authors of open source and Ruby engineers meet startups and big companies building with Ruby.
+      <p class="mb-8 text-xl text-dark-600 max-w-3xl mx-auto">
+        SF Ruby is excited to invite you to our premier event: the San Francisco Ruby Conference! Our mission is to unite the Ruby community at the heart of Ruby-powered entrepreneurship. Let’s learn, connect, and build together to ensure lasting success with Ruby and Rails for years to come. ❤️
       </p>
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Key Topics</h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -62,10 +62,10 @@ const themes = [
 
             <h3 class="text-xl font-bold text-dark-900 mb-2">{theme.title}</h3>
             <p class="text-dark-600 mb-4 flex-grow">{theme.description}</p>
-            {theme.linktype == 'button' ? 
+            {theme.linktype == 'button' ?
             <div class="text-center">
-              <a 
-                href="https://cfp.sfruby.com" 
+              <a
+                href="https://cfp.sfruby.com"
                 class="inline-flex items-center justify-center px-6 py-3 bg-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
               >
                 {theme.linklabel}

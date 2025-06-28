@@ -21,38 +21,36 @@ import { Image } from 'astro:assets';
           loading="lazy"
         />
       </div>
-      
+
       <!-- <h1 class="font-display font-regular text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 font-stretch-extra-expanded split-text text-cloud-100">
         San Francisco Ruby Conference 2025
       </h1>-->
-      
+
       <p class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-4">
         Building the Future with Ruby
       </p>
-      
+
       <p class="text-lg md:text-xl split-text text-cloud-100 mb-4">
         November 19-20, 2025 • Fort Mason, San Francisco
       </p>
-      
+
       <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
-        <div class="text-center">
-          <a 
-            href="https://cfp.sfruby.com" 
-            class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+          <a
+            href="https://cfp.sfruby.com"
+            class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
           >
-            Call for Speakers is Live!
+            Submit a talk
           </a>
-        </div>
-        
-        
-        <a 
-          href="#newsletter" 
-          class="px-8 py-2 bg-transparent border border-cloud-300 text-cloud-100 font-medium rounded-md transition-all duration-300 transform hover:scale-105"
+
+
+        <a
+          href="#newsletter"
+          class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-300 text-cloud-100 rounded-md font-medium transition-all duration-300 transform hover:shadow-glow hover:scale-105"
         >
           Sign up for updates
         </a>
       </div>
-      
+
       <!-- Countdown timer -->
       <div class=" inline-flex items-center px-6 py-4 bg-sky-600/50 _backdrop-blur-sm rounded-full text-cloud-200">
         <span class="mr-3 text-ruby-300 font-medium">Early Bird Tickets Live In:</span>
@@ -60,17 +58,17 @@ import { Image } from 'astro:assets';
       </div>
     </div>
   </div>
-  
+
   <!-- Decorative wave divider -->
   <div class="absolute bottom-0 left-0 right-0 h-16 bg-cloud-50 text-sky-700 overflow-hidden">
-    <svg 
-      preserveAspectRatio="none" 
-      viewBox="0 0 1200 120" 
-      xmlns="http://www.w3.org/2000/svg" 
+    <svg
+      preserveAspectRatio="none"
+      viewBox="0 0 1200 120"
+      xmlns="http://www.w3.org/2000/svg"
       class="absolute bottom-0 w-full h-full"
     >
-      <path 
-        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+      <path
+        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
         fill="currentColor"
       ></path>
     </svg>
@@ -87,16 +85,16 @@ import { Image } from 'astro:assets';
     document.querySelectorAll('.split-text').forEach(element => {
       const text = element.textContent || '';
       element.textContent = '';
-      
+
       // Split text into words
       const words = text.split(' ');
-      
+
       words.forEach((word, wordIndex) => {
         // Create a container for the word
         const wordContainer = document.createElement('span');
         wordContainer.className = 'word';
         wordContainer.style.display = 'inline-block';
-        
+
         // Split word into characters
         word.split('').forEach(char => {
           const charSpan = document.createElement('span');
@@ -107,9 +105,9 @@ import { Image } from 'astro:assets';
           charSpan.style.display = 'inline-block';
           wordContainer.appendChild(charSpan);
         });
-        
+
         element.appendChild(wordContainer);
-        
+
         // Add space after word (except last word)
         if (wordIndex < words.length - 1) {
           const spaceSpan = document.createElement('span');
@@ -160,21 +158,21 @@ import { Image } from 'astro:assets';
 
   // Countdown timer
   function updateCountdown() {
-    const targetDate = new Date('2025-07-03T07:59:59');
+    const targetDate = new Date('2025-07-03T08:00:00');
     const now = new Date();
     const difference = targetDate.getTime() - now.getTime();
-    
+
     if (difference <= 0) {
       document.getElementById('countdown').textContent = 'Early bird pricing has ended';
       return;
     }
-    
+
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-    
-    document.getElementById('countdown').textContent = 
+
+    document.getElementById('countdown').textContent =
       `${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
   }
 
