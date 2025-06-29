@@ -72,9 +72,24 @@ const activities = [
     {
         category: "Nearby Attractions",
         items: [
-            { name: "Crissy Field", description: "Waterfront park with Golden Gate Bridge views, perfect for walks" },
-            { name: "Golden Gate Park", description: "Large urban park with museums, gardens, and trails" },
-            { name: "Ocean Beach & Sunset Dunes Park", description: "Pacific coastline with beach walks and sunset views" },
+            { 
+                name: "Crissy Field", 
+                description: "Waterfront park with Golden Gate Bridge views, perfect for walks",
+                image: "https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Golden Gate Bridge view from Crissy Field with green grass and walking paths"
+            },
+            { 
+                name: "Golden Gate Park", 
+                description: "Large urban park with museums, gardens, and trails",
+                image: "https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Golden Gate Park with lush green trees and walking paths"
+            },
+            { 
+                name: "Ocean Beach & Sunset Dunes Park", 
+                description: "Pacific coastline with beach walks and sunset views",
+                image: "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Ocean Beach sunset with waves and sandy coastline"
+            },
         ],
     },
     {
@@ -82,15 +97,21 @@ const activities = [
         items: [
             { 
                 name: "Muir Woods & Mill Valley", 
-                description: "Take Uber to Muir Woods ($40-50), hike among redwoods, lunch at Mountain Home Inn, return via bus" 
+                description: "Take Uber to Muir Woods ($40-50), hike among redwoods, lunch at Mountain Home Inn, return via bus",
+                image: "https://images.pexels.com/photos/1496373/pexels-photo-1496373.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Towering redwood trees in Muir Woods with hiking trail"
             },
             { 
                 name: "Stanford University", 
-                description: "Visit Cantor Arts Center, Anderson Collection, walk the Dish Trail (Caltrain accessible)" 
+                description: "Visit Cantor Arts Center, Anderson Collection, walk the Dish Trail (Caltrain accessible)",
+                image: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Stanford University campus with historic architecture and palm trees"
             },
             { 
                 name: "Computer History Museum", 
-                description: "Tech history museum in Mountain View, accessible via Caltrain" 
+                description: "Tech history museum in Mountain View, accessible via Caltrain",
+                image: "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Vintage computer displays and technology exhibits in a museum setting"
             },
         ],
     },
@@ -549,11 +570,21 @@ const activities = [
                 {activities.map((category) => (
                     <div>
                         <h3 class="font-bold text-lg text-dark-900 mb-4">{category.category}</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {category.items.map((item) => (
-                                <div class="bg-white border border-dark-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
-                                    <h4 class="font-medium text-dark-900 mb-2">{item.name}</h4>
-                                    <p class="text-dark-600 text-sm">{item.description}</p>
+                                <div class="bg-white border border-dark-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200">
+                                    <div class="h-48 overflow-hidden">
+                                        <img 
+                                            src={item.image} 
+                                            alt={item.imageAlt}
+                                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <div class="p-4">
+                                        <h4 class="font-medium text-dark-900 mb-2">{item.name}</h4>
+                                        <p class="text-dark-600 text-sm">{item.description}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>
