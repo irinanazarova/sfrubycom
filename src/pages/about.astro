@@ -1,34 +1,539 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
+const hotels = [
+    {
+        category: "Near Fort Mason/Fisherman's Wharf",
+        options: [
+            { name: "Hotel Zoe", price: "$121/night", description: "Boutique hotel in Fisherman's Wharf" },
+            { name: "Argonaut Hotel", price: "$238/night", description: "Historic waterfront hotel with nautical theme" },
+            { name: "Hotel Zephyr", price: "$120/night", description: "Playful nautical-themed hotel on the waterfront" },
+        ],
+    },
+    {
+        category: "Union Square",
+        options: [
+            { name: "Chancellor Hotel", price: "$99/night", description: "Classic downtown hotel near shopping" },
+            { name: "The Marker", price: "$114/night", description: "Modern boutique hotel in theater district" },
+            { name: "Hotel Nikko", price: "$130/night", description: "Japanese-inspired luxury hotel" },
+        ],
+    },
+    {
+        category: "Marina District",
+        options: [
+            { name: "Infinity Hotel", price: "$160/night", description: "Modern hotel in trendy Marina neighborhood" },
+            { name: "Motel 6 Lombard", price: "$94/night", description: "Budget-friendly option on Lombard Street" },
+        ],
+    },
+    {
+        category: "Budget Options",
+        options: [
+            { name: "Golden Gate Hotel", price: "$84/night", description: "Historic European-style hotel in Nob Hill" },
+            { name: "Hotel Garrett", price: "$81/night", description: "Simple, clean accommodations downtown" },
+        ],
+    },
+];
+
+const restaurants = [
+    {
+        category: "Breakfast & Brunch",
+        places: [
+            { name: "Toast Eatery", description: "Local favorite for hearty breakfast and brunch" },
+            { name: "Mama's on Washington Square", description: "Famous for French toast and weekend brunch" },
+        ],
+    },
+    {
+        category: "Lunch & Dinner",
+        places: [
+            { name: "Blackwood", description: "Modern American cuisine with local ingredients" },
+            { name: "Pacific Catch", description: "Fresh seafood and poke bowls" },
+            { name: "Delarosa", description: "Roman-style pizza and Italian dishes" },
+            { name: "Little Original Joe's", description: "Classic SF Italian-American comfort food" },
+        ],
+    },
+    {
+        category: "Coffee",
+        places: [
+            { name: "Coffee Movement", description: "Third-wave coffee with excellent espresso" },
+            { name: "Wrecking Ball Coffee", description: "Local roaster with multiple locations" },
+        ],
+    },
+    {
+        category: "Wine & Cocktails",
+        places: [
+            { name: "High Treason", description: "Natural wine bar in the Mission" },
+            { name: "Birba", description: "Wine bar with small plates in Hayes Valley" },
+            { name: "20 Spot", description: "Neighborhood wine bar with rotating selection" },
+        ],
+    },
+];
+
+const activities = [
+    {
+        category: "Nearby Attractions",
+        items: [
+            { name: "Crissy Field", description: "Waterfront park with Golden Gate Bridge views, perfect for walks" },
+            { name: "Golden Gate Park", description: "Large urban park with museums, gardens, and trails" },
+            { name: "Ocean Beach & Sunset Dunes Park", description: "Pacific coastline with beach walks and sunset views" },
+        ],
+    },
+    {
+        category: "Weekend Adventures",
+        items: [
+            { 
+                name: "Muir Woods & Mill Valley", 
+                description: "Take Uber to Muir Woods ($40-50), hike among redwoods, lunch at Mountain Home Inn, return via bus" 
+            },
+            { 
+                name: "Stanford University", 
+                description: "Visit Cantor Arts Center, Anderson Collection, walk the Dish Trail (Caltrain accessible)" 
+            },
+            { 
+                name: "Computer History Museum", 
+                description: "Tech history museum in Mountain View, accessible via Caltrain" 
+            },
+        ],
+    },
+];
 ---
 
-<Layout title="About - San Francisco Ruby Conference 2025">
-  <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-display font-bold text-center">About</h1>
-      <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-        San Francisco Ruby Conference 2025
-      </p>
-    </div>
-  </div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-    <div class="bg-dark-50 rounded-lg p-8">
-      <h2 class="text-2xl font-display font-bold text-dark-900 mb-6"></h2>
-
-      <div class="space-y-4">
-        Join us this November at San Francisco’s historic Fort Mason. The conference runs November 19–20, with unofficial community events—like hiking and picnics—on Friday, November 21. Mark your calendars and be part of something special!
-
-
-      </div>
+<Layout title="About - San Francisco Ruby Conference 2025" description="Everything you need to know about attending the San Francisco Ruby Conference 2025, including venue info, accommodations, dining, and things to do in SF.">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+                About the Conference
+            </h1>
+            <p class="text-xl text-center max-w-3xl mx-auto">
+                Everything you need to know for your San Francisco Ruby Conference experience
+            </p>
+        </div>
     </div>
 
-    <div class="mt-16 text-center">
-      <h2 class="text-2xl font-display font-bold text-dark-900 mb-4"></h2>
-      <p class="text-dark-600 mb-2">smth</p>
-      <p class="text-dark-600"></p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Welcome & Overview -->
+        <section class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Welcome to San Francisco</h2>
+                <div class="prose prose-lg max-w-none text-dark-600">
+                    <p class="mb-4">
+                        We're thrilled to welcome you to San Francisco—the birthplace of countless legendary Ruby startups and the city where new ones continue to emerge. There's no better place to celebrate how far Ruby has come and the incredible strength of our ecosystem today.
+                    </p>
+                    <p class="mb-4">
+                        Join us to share stories, exchange ideas, and connect with fellow builders who know that Ruby and Rails have never been more powerful for launching and scaling innovative products. Let's build the future together in the city where it all began.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conference Dates & Schedule -->
+        <section class="mb-16 bg-dark-50 rounded-lg p-8">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Conference Dates & Schedule</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="text-ruby-500 font-bold text-lg mb-2">November 19-20, 2025</div>
+                    <div class="font-medium text-dark-900 mb-2">Main Conference</div>
+                    <p class="text-dark-600 text-sm">Two full days of talks, workshops, and networking at Fort Mason Center</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="text-sky-500 font-bold text-lg mb-2">November 21, 2025</div>
+                    <div class="font-medium text-dark-900 mb-2">Community Day</div>
+                    <p class="text-dark-600 text-sm">Unofficial community activities like group hikes, walks, and informal meetups</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border-2 border-ruby-200">
+                    <div class="text-ruby-500 font-bold text-lg mb-2">Fort Mason Center</div>
+                    <div class="font-medium text-dark-900 mb-2">Historic Venue</div>
+                    <p class="text-dark-600 text-sm">Waterfront location with stunning Golden Gate Bridge views</p>
+                </div>
+            </div>
+            <div class="mt-4 text-center">
+                <p class="text-dark-600 text-sm">Community Day details will be shared closer to the event. Stay tuned!</p>
+            </div>
+        </section>
+
+        <!-- Venue Information -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Venue: Fort Mason & The Marina</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                        <img 
+                            src="https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                            alt="Golden Gate Bridge view from Fort Mason area"
+                            class="w-full h-48 object-cover"
+                            loading="lazy"
+                        />
+                        <div class="p-4">
+                            <h3 class="font-bold text-dark-900 mb-2">Historic Waterfront Location</h3>
+                            <p class="text-dark-600 text-sm">
+                                Fort Mason Center is a historic former military post turned cultural center, offering stunning views of the Golden Gate Bridge and San Francisco Bay.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-bold text-dark-900 mb-3">Getting to the Venue</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-ruby-100 flex items-center justify-center mr-3 mt-0.5">
+                                    <span class="text-ruby-500 text-sm">🚗</span>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-dark-900">Parking</div>
+                                    <p class="text-dark-600 text-sm">On-site parking available. Street parking also available in Marina District.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-sky-100 flex items-center justify-center mr-3 mt-0.5">
+                                    <span class="text-sky-500 text-sm">🚌</span>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-dark-900">Public Transit</div>
+                                    <p class="text-dark-600 text-sm">Muni lines 28, 30, and 43 serve the area. Short walk from Lombard Street stops.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5">
+                                    <span class="text-green-500 text-sm">🚶</span>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-dark-900">Walkability</div>
+                                    <p class="text-dark-600 text-sm">Easily walkable from Marina District hotels. Accessible pathways throughout the venue.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-dark-50 p-4 rounded-lg">
+                        <div class="font-medium text-dark-900 mb-2">Address</div>
+                        <p class="text-dark-600 mb-3">Fort Mason Center<br />2 Marina Blvd, San Francisco, CA 94123</p>
+                        <a 
+                            href="https://maps.google.com/?q=Fort+Mason+Center+San+Francisco" 
+                            target="_blank"
+                            class="inline-flex items-center text-ruby-500 hover:text-ruby-600 font-medium text-sm"
+                        >
+                            View on Google Maps
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Where to Stay -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Where to Stay</h2>
+            <div class="mb-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                    <div>
+                        <p class="text-amber-800 font-medium">Book Early for Best Rates</p>
+                        <p class="text-amber-700 text-sm mt-1">Prices shown are for November 18-22, 2025. Book soon as rates increase closer to the conference dates.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                {hotels.map((category) => (
+                    <div>
+                        <h3 class="font-bold text-lg text-dark-900 mb-4">{category.category}</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {category.options.map((hotel) => (
+                                <div class="bg-white border border-dark-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-medium text-dark-900">{hotel.name}</h4>
+                                        <span class="text-ruby-500 font-bold text-sm">{hotel.price}</span>
+                                    </div>
+                                    <p class="text-dark-600 text-sm">{hotel.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h4 class="font-medium text-green-800 mb-2">✅ Best Areas to Stay</h4>
+                    <ul class="text-green-700 text-sm space-y-1">
+                        <li>• Marina District (closest to venue)</li>
+                        <li>• North Beach (Italian quarter, walkable)</li>
+                        <li>• Fisherman's Wharf (tourist area, convenient)</li>
+                        <li>• Union Square (central, good transit)</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <h4 class="font-medium text-red-800 mb-2">⚠️ Areas to Avoid</h4>
+                    <ul class="text-red-700 text-sm space-y-1">
+                        <li>• Tenderloin (safety concerns)</li>
+                        <li>• Civic Center (not ideal for tourists)</li>
+                        <li>• Some parts of SOMA (check specific streets)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <p class="text-dark-600 mb-4">
+                    <strong>Alternative Options:</strong> Airbnb and Booking.com offer great apartment rentals, especially for longer stays or groups.
+                </p>
+            </div>
+        </section>
+
+        <!-- Food, Coffee & Wine -->
+        <section class="mb-16 bg-dark-50 rounded-lg p-8">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Food, Coffee & Wine</h2>
+            <p class="text-dark-600 mb-8 max-w-3xl">
+                San Francisco's culinary scene is world-class, offering everything from casual neighborhood gems to Michelin-starred restaurants. Here are our local favorites across all price points.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {restaurants.map((category) => (
+                    <div>
+                        <h3 class="font-bold text-lg text-dark-900 mb-4 flex items-center">
+                            {category.category === "Breakfast & Brunch" && "🥞"}
+                            {category.category === "Lunch & Dinner" && "🍽️"}
+                            {category.category === "Coffee" && "☕"}
+                            {category.category === "Wine & Cocktails" && "🍷"}
+                            <span class="ml-2">{category.category}</span>
+                        </h3>
+                        <div class="space-y-3">
+                            {category.places.map((place) => (
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h4 class="font-medium text-dark-900 mb-1">{place.name}</h4>
+                                    <p class="text-dark-600 text-sm">{place.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-8 bg-white p-6 rounded-lg shadow-sm">
+                <h4 class="font-medium text-dark-900 mb-2">🌮 Cuisine Diversity</h4>
+                <p class="text-dark-600 text-sm">
+                    SF offers incredible diversity: Mission burritos, Chinatown dim sum, North Beach Italian, 
+                    Castro brunch spots, and innovative California cuisine throughout the city. From $5 food trucks 
+                    to $200 tasting menus—there's something for every taste and budget.
+                </p>
+            </div>
+        </section>
+
+        <!-- Getting Here & Around -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Getting Here & Around</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">From San Francisco Airport (SFO)</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white border border-dark-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium text-dark-900">BART (Public Transit)</h4>
+                                <span class="text-green-600 font-bold">$11.15</span>
+                            </div>
+                            <p class="text-dark-600 text-sm mb-2">
+                                Take BART from SFO to downtown SF. Get a Clipper card for easy transit use throughout your stay.
+                            </p>
+                            <p class="text-dark-500 text-xs">Duration: ~45 minutes to downtown</p>
+                        </div>
+                        
+                        <div class="bg-white border border-dark-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium text-dark-900">Uber/Lyft</h4>
+                                <span class="text-amber-600 font-bold">$60-$80</span>
+                            </div>
+                            <p class="text-dark-600 text-sm mb-2">
+                                Direct ride to your hotel. Price varies with demand and traffic.
+                            </p>
+                            <p class="text-dark-500 text-xs">Duration: 30-60 minutes depending on traffic</p>
+                        </div>
+                        
+                        <div class="bg-white border border-dark-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium text-dark-900">Waymo (Driverless)</h4>
+                                <span class="text-blue-600 font-bold">~$65</span>
+                            </div>
+                            <p class="text-dark-600 text-sm mb-2">
+                                Autonomous vehicle service. Download the Waymo app (US phone number required).
+                            </p>
+                            <p class="text-dark-500 text-xs">Duration: 30-50 minutes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">Getting Around San Francisco</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white border border-dark-200 rounded-lg p-4">
+                            <h4 class="font-medium text-dark-900 mb-2">Muni (Public Transit)</h4>
+                            <p class="text-dark-600 text-sm mb-2">
+                                Buses and light rail throughout the city. Get a Clipper card for easy payment.
+                            </p>
+                            <p class="text-dark-500 text-xs">$2.50 per ride, day passes available</p>
+                        </div>
+                        
+                        <div class="bg-white border border-dark-200 rounded-lg p-4">
+                            <h4 class="font-medium text-dark-900 mb-2">Cable Cars</h4>
+                            <p class="text-dark-600 text-sm mb-2">
+                                Historic and fun, but mainly for tourists. Use Clipper card or exact change.
+                            </p>
+                            <p class="text-dark-500 text-xs">$8 per ride</p>
+                        </div>
+                        
+                        <div class="bg-white border border-dark-200 rounded-lg p-4">
+                            <h4 class="font-medium text-dark-900 mb-2">Caltrain</h4>
+                            <p class="text-dark-600 text-sm mb-2">
+                                Perfect for visiting Peninsula/South Bay (Stanford, Computer History Museum).
+                            </p>
+                            <p class="text-dark-500 text-xs">Varies by distance, Clipper card accepted</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <h4 class="font-medium text-blue-800 mb-2">💡 Pro Tip: Clipper Card</h4>
+                        <p class="text-blue-700 text-sm">
+                            Get a Clipper card at the airport or any transit station. Works on BART, Muni, Caltrain, 
+                            and most Bay Area transit. You can also use your phone with Apple Pay or Google Pay.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Things to Do -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Things to Do</h2>
+            
+            <div class="space-y-8">
+                {activities.map((category) => (
+                    <div>
+                        <h3 class="font-bold text-lg text-dark-900 mb-4">{category.category}</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {category.items.map((item) => (
+                                <div class="bg-white border border-dark-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
+                                    <h4 class="font-medium text-dark-900 mb-2">{item.name}</h4>
+                                    <p class="text-dark-600 text-sm">{item.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div class="mt-8 bg-gradient-to-r from-sky-50 to-sky-100 rounded-lg p-6">
+                <h4 class="font-bold text-dark-900 mb-4">🌉 Must-See SF Classics</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="text-dark-600 mb-2"><strong>Golden Gate Bridge:</strong> Walk or bike across, or view from Crissy Field</p>
+                        <p class="text-dark-600 mb-2"><strong>Alcatraz:</strong> Book tours in advance, departs from Pier 33</p>
+                        <p class="text-dark-600"><strong>Lombard Street:</strong> "Most crooked street in the world"</p>
+                    </div>
+                    <div>
+                        <p class="text-dark-600 mb-2"><strong>Chinatown:</strong> Largest outside of Asia, great for dim sum</p>
+                        <p class="text-dark-600 mb-2"><strong>Mission District:</strong> Street art, burritos, and nightlife</p>
+                        <p class="text-dark-600"><strong>Haight-Ashbury:</strong> Historic hippie neighborhood</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Local Tips & Practical Info -->
+        <section class="mb-16 bg-dark-50 rounded-lg p-8">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Local Tips & Practical Info</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">🛡️ Safety & Neighborhoods</h3>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-green-800 mb-2">Safe & Recommended Areas</h4>
+                            <ul class="text-dark-600 text-sm space-y-1">
+                                <li>• Marina District, North Beach, Fisherman's Wharf</li>
+                                <li>• Union Square, Nob Hill, Russian Hill</li>
+                                <li>• Castro, Mission (main streets), Hayes Valley</li>
+                                <li>• Pacific Heights, Presidio</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <h4 class="font-medium text-red-800 mb-2">Areas to Exercise Caution</h4>
+                            <ul class="text-dark-600 text-sm space-y-1">
+                                <li>• Tenderloin (especially at night)</li>
+                                <li>• Parts of SOMA (check specific streets)</li>
+                                <li>• Civic Center area</li>
+                                <li>• Some parts of Mission (side streets)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">🌤️ Weather & What to Pack</h3>
+                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+                        <h4 class="font-medium text-dark-900 mb-2">November Weather</h4>
+                        <ul class="text-dark-600 text-sm space-y-1">
+                            <li>• Highs: 60-65°F (15-18°C)</li>
+                            <li>• Lows: 45-50°F (7-10°C)</li>
+                            <li>• Possible light rain</li>
+                            <li>• Layers are essential!</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-medium text-dark-900 mb-2">Packing Essentials</h4>
+                        <ul class="text-dark-600 text-sm space-y-1">
+                            <li>• Light jacket or sweater</li>
+                            <li>• Comfortable walking shoes</li>
+                            <li>• Light rain jacket or umbrella</li>
+                            <li>• Layers for temperature changes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                    <div class="text-2xl mb-2">💳</div>
+                    <h4 class="font-medium text-dark-900 mb-1">Payment</h4>
+                    <p class="text-dark-600 text-sm">Cards accepted everywhere. Tipping: 18-20% at restaurants</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                    <div class="text-2xl mb-2">📱</div>
+                    <h4 class="font-medium text-dark-900 mb-1">Apps to Download</h4>
+                    <p class="text-dark-600 text-sm">Clipper, Uber/Lyft, Waymo, Citymapper for transit</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm text-center">
+                    <div class="text-2xl mb-2">🏨</div>
+                    <h4 class="font-medium text-dark-900 mb-1">Booking</h4>
+                    <p class="text-dark-600 text-sm">Book accommodations early. Prices increase closer to conference dates</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-lg p-8">
+            <h2 class="text-2xl font-display font-bold mb-4">Ready to Join Us?</h2>
+            <p class="text-lg mb-6 max-w-2xl mx-auto">
+                We can't wait to welcome you to San Francisco for an incredible Ruby conference experience. 
+                See you at Fort Mason in November!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                    href="https://lu.ma/sfrubyconf2025"
+                    target="_blank"
+                    class="inline-flex items-center justify-center px-8 py-3 bg-white text-ruby-600 rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
+                >
+                    Get Your Tickets
+                </a>
+                <a 
+                    href="#newsletter"
+                    class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-white text-white rounded-md font-medium transition-all duration-300 transform hover:scale-105"
+                >
+                    Stay Updated
+                </a>
+            </div>
+        </section>
     </div>
-  </div>
 </Layout>
