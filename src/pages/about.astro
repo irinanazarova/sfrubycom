@@ -38,32 +38,76 @@ const restaurants = [
     {
         category: "Breakfast & Brunch",
         places: [
-            { name: "Toast Eatery", description: "Local favorite for hearty breakfast and brunch" },
-            { name: "Mama's on Washington Square", description: "Famous for French toast and weekend brunch" },
+            { 
+                name: "Toast Eatery", 
+                description: "Local favorite for hearty breakfast and brunch",
+                mapsUrl: "https://maps.google.com/?q=Toast+Eatery+San+Francisco"
+            },
+            { 
+                name: "Mama's on Washington Square", 
+                description: "Famous for French toast and weekend brunch",
+                mapsUrl: "https://maps.google.com/?q=Mama's+on+Washington+Square+San+Francisco"
+            },
         ],
     },
     {
         category: "Lunch & Dinner",
         places: [
-            { name: "Blackwood", description: "Modern American cuisine with local ingredients" },
-            { name: "Pacific Catch", description: "Fresh seafood and poke bowls" },
-            { name: "Delarosa", description: "Roman-style pizza and Italian dishes" },
-            { name: "Little Original Joe's", description: "Classic SF Italian-American comfort food" },
+            { 
+                name: "Blackwood", 
+                description: "Modern American cuisine with local ingredients",
+                mapsUrl: "https://maps.google.com/?q=Blackwood+Restaurant+San+Francisco"
+            },
+            { 
+                name: "Pacific Catch", 
+                description: "Fresh seafood and poke bowls",
+                mapsUrl: "https://maps.google.com/?q=Pacific+Catch+San+Francisco"
+            },
+            { 
+                name: "Delarosa", 
+                description: "Roman-style pizza and Italian dishes",
+                mapsUrl: "https://maps.google.com/?q=Delarosa+San+Francisco"
+            },
+            { 
+                name: "Little Original Joe's", 
+                description: "Classic SF Italian-American comfort food",
+                mapsUrl: "https://maps.google.com/?q=Little+Original+Joe's+San+Francisco"
+            },
         ],
     },
     {
         category: "Coffee",
         places: [
-            { name: "Coffee Movement", description: "Third-wave coffee with excellent espresso" },
-            { name: "Wrecking Ball Coffee", description: "Local roaster with multiple locations" },
+            { 
+                name: "Coffee Movement", 
+                description: "Third-wave coffee with excellent espresso",
+                mapsUrl: "https://maps.google.com/?q=Coffee+Movement+San+Francisco"
+            },
+            { 
+                name: "Wrecking Ball Coffee", 
+                description: "Local roaster with multiple locations",
+                mapsUrl: "https://maps.google.com/?q=Wrecking+Ball+Coffee+San+Francisco"
+            },
         ],
     },
     {
         category: "Wine & Cocktails",
         places: [
-            { name: "High Treason", description: "Natural wine bar in the Mission" },
-            { name: "Birba", description: "Wine bar with small plates in Hayes Valley" },
-            { name: "20 Spot", description: "Neighborhood wine bar with rotating selection" },
+            { 
+                name: "High Treason", 
+                description: "Natural wine bar in the Mission",
+                mapsUrl: "https://maps.google.com/?q=High+Treason+San+Francisco"
+            },
+            { 
+                name: "Birba", 
+                description: "Wine bar with small plates in Hayes Valley",
+                mapsUrl: "https://maps.google.com/?q=Birba+San+Francisco"
+            },
+            { 
+                name: "20 Spot", 
+                description: "Neighborhood wine bar with rotating selection",
+                mapsUrl: "https://maps.google.com/?q=20+Spot+San+Francisco"
+            },
         ],
     },
 ];
@@ -472,6 +516,45 @@ const activities = [
                 San Francisco's culinary scene is world-class, offering everything from casual neighborhood gems to Michelin-starred restaurants. Here are our local favorites across all price points.
             </p>
 
+            <!-- Comprehensive Google Map -->
+            <div class="mb-8 bg-gradient-to-r from-ruby-50 to-sky-50 border border-ruby-200 rounded-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-dark-900 mb-2">🗺️ Complete SF Ruby Conference Map</h3>
+                        <p class="text-dark-600 text-sm">
+                            All restaurants, hotels, attractions, and the conference venue in one convenient map
+                        </p>
+                    </div>
+                    <div class="text-4xl">📍</div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a 
+                        href="https://maps.google.com/maps/d/u/0/viewer?mid=1example-sf-ruby-conference-map&ll=37.7749,-122.4194&z=13"
+                        target="_blank"
+                        class="inline-flex items-center justify-center px-6 py-3 bg-ruby-500 text-white rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        View Complete Conference Map
+                    </a>
+                    <a 
+                        href="https://maps.google.com/maps/d/u/0/edit?mid=1example-sf-ruby-conference-map"
+                        target="_blank"
+                        class="inline-flex items-center justify-center px-6 py-3 bg-sky-500 text-white rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                        </svg>
+                        Save to Your Maps
+                    </a>
+                </div>
+                <div class="mt-4 text-xs text-dark-500">
+                    💡 <strong>Pro tip:</strong> Save this map to your Google Maps for offline access during the conference!
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {restaurants.map((category) => (
                     <div>
@@ -485,7 +568,20 @@ const activities = [
                         <div class="space-y-3">
                             {category.places.map((place) => (
                                 <div class="bg-white p-4 rounded-lg shadow-sm">
-                                    <h4 class="font-medium text-dark-900 mb-1">{place.name}</h4>
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h4 class="font-medium text-dark-900">{place.name}</h4>
+                                        <a 
+                                            href={place.mapsUrl}
+                                            target="_blank"
+                                            class="text-ruby-500 hover:text-ruby-600 transition-colors duration-200"
+                                            aria-label={`View ${place.name} on Google Maps`}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                            </svg>
+                                        </a>
+                                    </div>
                                     <p class="text-dark-600 text-sm">{place.description}</p>
                                 </div>
                             ))}
