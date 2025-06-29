@@ -70,46 +70,69 @@ const restaurants = [
 
 const activities = [
     {
-        category: "Nearby Attractions",
+        category: "Indoor & Covered Attractions",
         items: [
             { 
-                name: "Crissy Field", 
-                description: "Waterfront park with Golden Gate Bridge views, perfect for walks",
-                image: "https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg?auto=compress&cs=tinysrgb&w=800",
-                imageAlt: "Golden Gate Bridge view from Crissy Field with green grass and walking paths"
+                name: "Exploratorium", 
+                description: "Interactive science museum at Pier 15, perfect for rainy days",
+                image: "https://images.pexels.com/photos/2280549/pexels-photo-2280549.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Interactive science exhibits and displays in a modern museum setting"
             },
             { 
-                name: "Golden Gate Park", 
-                description: "Large urban park with museums, gardens, and trails",
-                image: "https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=800",
-                imageAlt: "Golden Gate Park with lush green trees and walking paths"
+                name: "California Academy of Sciences", 
+                description: "Natural history museum with planetarium and aquarium in Golden Gate Park",
+                image: "https://images.pexels.com/photos/2280568/pexels-photo-2280568.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Modern museum building with glass dome and natural history exhibits"
             },
             { 
-                name: "Ocean Beach & Sunset Dunes Park", 
-                description: "Pacific coastline with beach walks and sunset views",
-                image: "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=800",
-                imageAlt: "Ocean Beach sunset with waves and sandy coastline"
+                name: "Ferry Building Marketplace", 
+                description: "Gourmet food hall with local vendors and covered shopping",
+                image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Historic ferry building with clock tower and bustling marketplace inside"
             },
         ],
     },
     {
-        category: "Weekend Adventures",
+        category: "Light Outdoor Activities",
         items: [
             { 
-                name: "Muir Woods & Mill Valley", 
-                description: "Take Uber to Muir Woods ($40-50), hike among redwoods, lunch at Mountain Home Inn, return via bus",
+                name: "Crissy Field Walk", 
+                description: "Covered walkways and Golden Gate Bridge views, manageable in light rain",
+                image: "https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Golden Gate Bridge view from Crissy Field with green grass and walking paths"
+            },
+            { 
+                name: "Fisherman's Wharf", 
+                description: "Covered piers, indoor attractions, and sea lions at Pier 39",
+                image: "https://images.pexels.com/photos/1006965/pexels-photo-1006965.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Fisherman's Wharf with boats, covered walkways, and tourist attractions"
+            },
+            { 
+                name: "Union Square Shopping", 
+                description: "Indoor shopping district with department stores and covered areas",
+                image: "https://images.pexels.com/photos/1797428/pexels-photo-1797428.jpeg?auto=compress&cs=tinysrgb&w=800",
+                imageAlt: "Union Square with palm trees, shops, and urban plaza"
+            },
+        ],
+    },
+    {
+        category: "Weekend Day Trips",
+        items: [
+            { 
+                name: "Muir Woods & Sausalito", 
+                description: "Covered forest trails, then warm up in Sausalito cafes and shops",
                 image: "https://images.pexels.com/photos/1496373/pexels-photo-1496373.jpeg?auto=compress&cs=tinysrgb&w=800",
                 imageAlt: "Towering redwood trees in Muir Woods with hiking trail"
             },
             { 
                 name: "Stanford University", 
-                description: "Visit Cantor Arts Center, Anderson Collection, walk the Dish Trail (Caltrain accessible)",
+                description: "Indoor museums (Cantor Arts, Anderson Collection) and covered walkways",
                 image: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800",
                 imageAlt: "Stanford University campus with historic architecture and palm trees"
             },
             { 
                 name: "Computer History Museum", 
-                description: "Tech history museum in Mountain View, accessible via Caltrain",
+                description: "Indoor tech museum in Mountain View, accessible via covered Caltrain",
                 image: "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800",
                 imageAlt: "Vintage computer displays and technology exhibits in a museum setting"
             },
@@ -159,7 +182,7 @@ const activities = [
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <div class="text-sky-500 font-bold text-lg mb-2">November 21, 2025</div>
                     <div class="font-medium text-dark-900 mb-2">Community Day</div>
-                    <p class="text-dark-600 text-sm">Unofficial community activities like group hikes, walks, and informal meetups</p>
+                    <p class="text-dark-600 text-sm">Unofficial community activities like indoor meetups, museum visits, and cozy gatherings</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-sm border-2 border-ruby-200">
                     <div class="text-ruby-500 font-bold text-lg mb-2">Fort Mason Center</div>
@@ -201,7 +224,7 @@ const activities = [
                                 <li>• Bay Trail: Scenic waterfront route</li>
                                 <li>• Marina Green bike path</li>
                                 <li>• Secure bike parking available at venue</li>
-                                <li>• Bike share stations nearby (Bay Wheels)</li>
+                                <li>• Bay Wheels bike share stations nearby</li>
                             </ul>
                         </div>
                         
@@ -293,17 +316,18 @@ const activities = [
                 </div>
                 
                 <div class="mt-6 bg-dark-50 p-4 rounded-lg">
-                    <h4 class="font-medium text-dark-900 mb-2">💡 Community Day Ideas</h4>
+                    <h4 class="font-medium text-dark-900 mb-2">💡 November-Friendly Community Day Ideas</h4>
                     <p class="text-dark-600 text-sm mb-2">
-                        Thinking of hosting something on Friday, November 21? Here are some ideas that have worked well:
+                        Thinking of hosting something on Friday, November 21? Here are weather-appropriate ideas:
                     </p>
                     <ul class="text-dark-600 text-sm space-y-1 ml-4">
-                        <li>• Group hikes (Lands End, Presidio, Marin Headlands)</li>
+                        <li>• Indoor coding workshops or hackathons</li>
+                        <li>• Coffee shop meetups and tech talks</li>
+                        <li>• Museum visits (Exploratorium, Computer History Museum)</li>
+                        <li>• Food tours with indoor stops (Ferry Building, Chinatown)</li>
+                        <li>• Wine tasting in heated venues</li>
                         <li>• Tech company office tours</li>
-                        <li>• Coding workshops or hackathons</li>
-                        <li>• Food tours (Mission burritos, Chinatown dim sum)</li>
-                        <li>• Beach volleyball or frisbee at Crissy Field</li>
-                        <li>• Wine tasting in Napa/Sonoma (group transportation)</li>
+                        <li>• Covered market visits (Ferry Building, Alemany Farmers Market)</li>
                     </ul>
                 </div>
             </div>
@@ -566,6 +590,21 @@ const activities = [
         <section class="mb-16">
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Things to Do</h2>
             
+            <!-- Weather Notice -->
+            <div class="mb-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5c.793 0 1.5-.076 2.25-.22a3 3 0 004.5-2.78 2.25 2.25 0 00-1.5-2.12 2.25 2.25 0 00-1.5-2.12 3 3 0 00-4.5-2.78C4.5 8.924 3.793 9 3 9a4.5 4.5 0 00-1.5 6z" />
+                    </svg>
+                    <div>
+                        <p class="text-blue-800 font-medium">November Weather in SF</p>
+                        <p class="text-blue-700 text-sm mt-1">
+                            Expect highs around 60°F (15°C) with possible light rain. We've curated activities that work well in cooler, potentially wet weather.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
             <div class="space-y-8">
                 {activities.map((category) => (
                     <div>
@@ -593,17 +632,17 @@ const activities = [
             </div>
 
             <div class="mt-8 bg-gradient-to-r from-sky-50 to-sky-100 rounded-lg p-6">
-                <h4 class="font-bold text-dark-900 mb-4">🌉 Must-See SF Classics</h4>
+                <h4 class="font-bold text-dark-900 mb-4">🌉 Must-See SF Classics (Weather Permitting)</h4>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                        <p class="text-dark-600 mb-2"><strong>Golden Gate Bridge:</strong> Walk or bike across, or view from Crissy Field</p>
-                        <p class="text-dark-600 mb-2"><strong>Alcatraz:</strong> Book tours in advance, departs from Pier 33</p>
-                        <p class="text-dark-600"><strong>Lombard Street:</strong> "Most crooked street in the world"</p>
+                        <p class="text-dark-600 mb-2"><strong>Golden Gate Bridge:</strong> Best viewed from covered areas or car on rainy days</p>
+                        <p class="text-dark-600 mb-2"><strong>Alcatraz:</strong> Indoor audio tour, ferry has covered areas</p>
+                        <p class="text-dark-600"><strong>Lombard Street:</strong> Quick photo stop, nearby cafes for warming up</p>
                     </div>
                     <div>
-                        <p class="text-dark-600 mb-2"><strong>Chinatown:</strong> Largest outside of Asia, great for dim sum</p>
-                        <p class="text-dark-600 mb-2"><strong>Mission District:</strong> Street art, burritos, and nightlife</p>
-                        <p class="text-dark-600"><strong>Haight-Ashbury:</strong> Historic hippie neighborhood</p>
+                        <p class="text-dark-600 mb-2"><strong>Chinatown:</strong> Covered markets and indoor restaurants</p>
+                        <p class="text-dark-600 mb-2"><strong>Mission District:</strong> Indoor murals at Clarion Alley, covered markets</p>
+                        <p class="text-dark-600"><strong>Haight-Ashbury:</strong> Indoor vintage shops and record stores</p>
                     </div>
                 </div>
             </div>
@@ -652,10 +691,11 @@ const activities = [
                     <div class="bg-white p-4 rounded-lg shadow-sm">
                         <h4 class="font-medium text-dark-900 mb-2">Packing Essentials</h4>
                         <ul class="text-dark-600 text-sm space-y-1">
-                            <li>• Light jacket or sweater</li>
-                            <li>• Comfortable walking shoes</li>
-                            <li>• Light rain jacket or umbrella</li>
-                            <li>• Layers for temperature changes</li>
+                            <li>• Waterproof jacket or light rain coat</li>
+                            <li>• Comfortable walking shoes (waterproof preferred)</li>
+                            <li>• Layers: sweater, light jacket, long pants</li>
+                            <li>• Compact umbrella</li>
+                            <li>• Warm accessories (scarf, light gloves)</li>
                         </ul>
                     </div>
                 </div>
