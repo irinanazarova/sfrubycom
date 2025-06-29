@@ -1,102 +1,139 @@
 ---
 const tiers = [
-  {
-    name: 'Pickaxe ⛏️',
-    sponsors: [
-      { name: 'Chime', logo: '/sponsor_chime.png', url: 'https://www.chime.com' },
-      { name: 'Bolt.new by Stackblitz', logo: '/sponsor_boltnew.png', url: 'https://www.bolt.new' }
-    ]
-  },
-  {
-    name: 'Ruby',
-    sponsors: [
-      { name: 'Gusto', logo: '/sponsor_gusto.png', url: 'https://www.gusto.com' }
-    ]
-  },
-  {
-    name: 'Emerald',
-    sponsors: [
-      { name: 'Scout Monitoring', logo: '/sponsor_scout.png', url: 'https://scoutapm.com/' },
-      { name: 'typesense', logo: '/sponsor_typesense.png', url: 'https://typesense.org/' },
-      { name: 'Cedarcode', logo: '/sponsor_cedarcode.png', url: 'https://www.cedarcode.com/' }
-    ]
-  }
+    {
+        name: "Pickaxe ⛏️",
+        sponsors: [
+            {
+                name: "Chime",
+                logo: "/sponsor_chime.png",
+                url: "https://www.chime.com",
+            },
+            {
+                name: "Bolt.new by Stackblitz",
+                logo: "/sponsor_boltnew.png",
+                url: "https://www.bolt.new",
+            },
+        ],
+    },
+    {
+        name: "Ruby",
+        sponsors: [
+            {
+                name: "Gusto",
+                logo: "/sponsor_gusto.png",
+                url: "https://www.gusto.com",
+            },
+        ],
+    },
+    {
+        name: "Emerald",
+        sponsors: [
+            {
+                name: "Scout Monitoring",
+                logo: "/sponsor_scout.png",
+                url: "https://scoutapm.com/",
+            },
+            {
+                name: "typesense",
+                logo: "/sponsor_typesense.png",
+                url: "https://typesense.org/",
+            },
+            {
+                name: "Cedarcode",
+                logo: "/sponsor_cedarcode.png",
+                url: "https://www.cedarcode.com/",
+            },
+        ],
+    },
 ];
 ---
 
 <section id="sponsors" class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Our Sponsors</h2>
-      <p class="mt-4 text-xl text-dark-600 max-w-3xl mx-auto">
-        These amazing companies help make SF Ruby Conference possible
-      </p>
-    </div>
-
-    <div class="space-y-16">
-      {tiers.map((tier) => (
-        <div>
-          <h3 class="text-center text-2xl font-bold text-dark-800 mb-8 font-display">
-            {tier.name} <span class="text-ruby-500">Sponsors</span>
-          </h3>
-
-          <div class="flex flex-wrap justify-center gap-8 items-center">
-            {tier.sponsors.map((sponsor) => (
-              <a
-                href={sponsor.url}
-                class={`block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 ${sponsor.logo ? 'bg-white hover:shadow-lg' : 'border-dashed border-dark-300 hover:border-ruby-500'}`}
-                target={sponsor.logo ? "_blank" : "_self"}
-                rel={sponsor.logo ? "noopener noreferrer" : ""}
-              >
-                {sponsor.logo ? (
-                  <img
-                    src={sponsor.logo}
-                    alt={sponsor.name}
-                    class={`h-12 w-auto ${tier.name === 'Pickaxe ⛏️' ? 'md:h-24' : 'md:h-16'}`}
-                    loading="lazy"
-                  />
-                ) : (
-                  <div class="flex items-center justify-center h-16 w-48 text-dark-500 font-medium">
-                    {sponsor.name}
-                  </div>
-                )}
-              </a>
-            ))}
-          </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2
+                class="text-3xl md:text-4xl font-display font-bold text-dark-900"
+            >
+                Our Sponsors
+            </h2>
+            <p class="mt-4 text-xl text-dark-600 max-w-3xl mx-auto">
+                These amazing companies help make the San Francisco Ruby
+                Conference possible
+            </p>
         </div>
-      ))}
-    </div>
-    <div class="py-16">
-        <div>
-          <h3 class="text-center text-2xl font-bold text-dark-800 mb-8 font-display">
-            ⚡️ Organizer ⚡️
-          </h3>
 
-          <div class="flex flex-wrap justify-center gap-8 items-center">
+        <div class="space-y-16">
+            {
+                tiers.map((tier) => (
+                    <div>
+                        <h3 class="text-center text-2xl font-bold text-dark-800 mb-8 font-display">
+                            {tier.name}{" "}
+                            <span class="text-ruby-500">Sponsors</span>
+                        </h3>
 
-              <a
-                href="https://evilmartians.com"
-                class="block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 bg-white hover:shadow-lg"
-                target="_blank"
-              >
-                <img
-                    src=/evilmartians.png
-                    alt="Evil Martians"
-                    class="h-24 md:h-48 w-auto"
-                    loading="lazy"
-                  />
-              </a>
-          </div>
+                        <div class="flex flex-wrap justify-center gap-8 items-center">
+                            {tier.sponsors.map((sponsor) => (
+                                <a
+                                    href={sponsor.url}
+                                    class={`block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 ${sponsor.logo ? "bg-white hover:shadow-lg" : "border-dashed border-dark-300 hover:border-ruby-500"}`}
+                                    target={sponsor.logo ? "_blank" : "_self"}
+                                    rel={
+                                        sponsor.logo
+                                            ? "noopener noreferrer"
+                                            : ""
+                                    }
+                                >
+                                    {sponsor.logo ? (
+                                        <img
+                                            src={sponsor.logo}
+                                            alt={sponsor.name}
+                                            class={`h-12 w-auto ${tier.name === "Pickaxe ⛏️" ? "md:h-24" : "md:h-16"}`}
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        <div class="flex items-center justify-center h-16 w-48 text-dark-500 font-medium">
+                                            {sponsor.name}
+                                        </div>
+                                    )}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+        <div class="py-16">
+            <div>
+                <h3
+                    class="text-center text-2xl font-bold text-dark-800 mb-8 font-display"
+                >
+                    ⚡️ Organizer ⚡️
+                </h3>
+
+                <div class="flex flex-wrap justify-center gap-8 items-center">
+                    <a
+                        href="https://evilmartians.com"
+                        class="block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 bg-white hover:shadow-lg"
+                        target="_blank"
+                    >
+                        <img
+                            src="/evilmartians.png"
+                            alt="Evil Martians"
+                            class="h-24 md:h-48 w-auto"
+                            loading="lazy"
+                        />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a
+                href="/sponsors"
+                class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+            >
+                Become a Sponsor
+            </a>
         </div>
     </div>
-
-    <div class="text-center">
-      <a
-        href="/sponsors"
-        class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
-      >
-        Become a Sponsor
-      </a>
-    </div>
-  </div>
 </section>

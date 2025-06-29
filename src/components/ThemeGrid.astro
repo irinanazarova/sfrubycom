@@ -1,80 +1,109 @@
 ---
 const themes = [
-  {
-    title: 'Startup Demos',
-    description: 'Fast-paced 10-minute showcases from the hottest Ruby startups.',
-    icon: 'startups.png',
-    link: 'https://cfp.sfruby.com',
-    linktype: 'button',
-    linklabel: 'Submit a demo'
-  },
-  {
-    title: 'Open Source & AI Tooling',
-    description: 'New open source tools boosting ambitious Ruby products, including AI integration, frontend and more.',
-    icon: 'oss.png',
-    link: '/open-source',
-    linktype: 'none'
-  },
-  {
-    title: 'Scaling Ruby',
-    description: 'See how big organizations scale Ruby solving modularization, performance, architecture challenges!',
-    icon: 'scaleups.png',
-    link: '/scaling',
-    linktype: 'none'
-  },
-  {
-    title: 'CTO Insights',
-    description: 'CTO perspectives on the challenges and opportunities in the Ruby ecosystem.',
-    icon: 'cto.png',
-    link: '/cto-insights',
-    linktype: 'none'
-  }
+    {
+        title: "New Open Source & Tooling",
+        description:
+            "New open source and tools built for the most ambitious Ruby-powered products, including Ruby&AI.",
+        icon: "oss.png",
+        link: "/open-source",
+        linktype: "none",
+    },
+    {
+        title: "Ruby at Scale",
+        description:
+            "Stories from Ruby startups that grew into big organizations on solving scalability and performance challenges.",
+        icon: "scaleups.png",
+        link: "/scaling",
+        linktype: "none",
+    },
+    {
+        title: "CTO Panel",
+        description:
+            "Learn from the CTOs of big Ruby companies what we can all do to ensure success of our favorite stack for years to come.",
+        icon: "cto.png",
+        link: "/cto-insights",
+        linktype: "none",
+    },
+    {
+        title: "Startup Demos",
+        description:
+            "Get inspired by the most ambitious teams building new products with Ruby today.",
+        icon: "startups.png",
+        link: "https://cfp.sfruby.com",
+        linktype: "none",
+        linklabel: "Submit a demo",
+    },
 ];
 ---
 
 <section id="themes" class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <p class="mb-8 text-xl text-dark-600 max-w-3xl mx-auto">
-        SF Ruby is excited to invite you to our premier event: the San Francisco Ruby Conference! Our mission is to unite the Ruby community at the heart of Ruby-powered entrepreneurship. Let’s learn, connect, and build together to ensure lasting success with Ruby and Rails for years to come. ❤️
-      </p>
-      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Key Topics</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {themes.map((theme, index) => (
-        <div
-          class="group bg-white rounded-lg _shadow-md transition-all duration-300 overflow-hidden relative _border border-dark-100 sm:flex sm:flex-col sm:items-end"
-          style={`animation-delay: ${index * 100}ms`}
-        >
-          <div class="absolute inset-0 bg-gradient-to-br from-ruby-500/0 via-ruby-500/0 to-ruby-500/0 group-hover:from-ruby-500/5 group-hover:via-ruby-500/10 group-hover:to-ruby-500/20 transition-all duration-300"></div>
-
-          <div class="p-6 h-full flex flex-col group-even:text-right md:!text-left">
-            <div class="w-28 h-28 flex items-center justify-center mb-4 group-even:self-end md:!self-start">
-
-              <img
-                src={theme.icon}
-                alt="Logo"
-                class="object-contain w-full h-full"
-                loading="lazy"
-              />
-            </div>
-
-            <h3 class="text-xl font-bold text-dark-900 mb-2">{theme.title}</h3>
-            <p class="text-dark-600 mb-4 flex-grow">{theme.description}</p>
-            {theme.linktype == 'button' ?
-            <div class="text-center">
-              <a
-                href="https://cfp.sfruby.com"
-                class="inline-flex items-center justify-center px-6 py-3 bg-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
-              >
-                {theme.linklabel}
-              </a>
-            </div>
-            : <div></div>}
-          </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <p class="mb-8 text-xl text-dark-600 max-w-3xl mx-auto">
+                SF Ruby is excited to invite you to our premier event: the San
+                Francisco Ruby Conference!
+            </p>
+            <p class="mb-8 text-md text-dark-600 text-left max-w-3xl mx-auto">
+                We’re gathering in San Francisco—the birthplace of so many
+                legendary Ruby startups, and the city where new ones keep
+                emerging. There’s no better place to celebrate how far Ruby has
+                come and how much stronger the ecosystem is today, thanks to
+                years of community-driven progress.
+            </p>
+            <p class="mb-8 text-md text-dark-600 text-left max-w-3xl mx-auto">
+                Join us to share stories, swap ideas, and meet fellow builders
+                who know that Ruby and Rails have never been more powerful for
+                launching and growing something new. Let’s keep building the
+                future—together. ❤️
+            </p>
+            <h2
+                class="text-3xl md:text-4xl font-display font-bold text-dark-900"
+            >
+                Key Topics
+            </h2>
         </div>
-      ))}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {
+                themes.map((theme, index) => (
+                    <div
+                        class="group bg-white rounded-lg _shadow-md transition-all duration-300 overflow-hidden relative _border border-dark-100 sm:flex sm:flex-col sm:items-end"
+                        style={`animation-delay: ${index * 100}ms`}
+                    >
+                        <div class="absolute inset-0 bg-gradient-to-br from-ruby-500/0 via-ruby-500/0 to-ruby-500/0 group-hover:from-ruby-500/5 group-hover:via-ruby-500/10 group-hover:to-ruby-500/20 transition-all duration-300" />
+
+                        <div class="p-6 h-full flex flex-col group-even:text-right md:!text-left">
+                            <div class="w-28 h-28 flex items-center justify-center mb-4 group-even:self-end md:!self-start">
+                                <img
+                                    src={theme.icon}
+                                    alt="Logo"
+                                    class="object-contain w-full h-full"
+                                    loading="lazy"
+                                />
+                            </div>
+
+                            <h3 class="text-xl font-bold text-dark-900 mb-2">
+                                {theme.title}
+                            </h3>
+                            <p class="text-dark-600 mb-4 flex-grow">
+                                {theme.description}
+                            </p>
+                            {theme.linktype == "button" ? (
+                                <div class="text-center">
+                                    <a
+                                        href="https://cfp.sfruby.com"
+                                        class="inline-flex items-center justify-center px-6 py-3 bg-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
+                                    >
+                                        {theme.linklabel}
+                                    </a>
+                                </div>
+                            ) : (
+                                <div />
+                            )}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
     </div>
-  </div>
 </section>

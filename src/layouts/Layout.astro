@@ -1,91 +1,113 @@
 ---
-import Navigation from '../components/Navigation.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 
 export interface Props {
-  title?: string;
-  description?: string;
+    title?: string;
+    description?: string;
 }
 
-const { 
-  title = "San Francisco Ruby Conference 2025", 
-  description = "Join us for the San Francisco Ruby Conference 2025: Building the Future with Ruby. November 19-20 at Fort Mason, San Francisco."
+const {
+    title = "San Francisco Ruby Conference 2025",
+    description = "Join us for the San Francisco Ruby Conference 2025: Building the Future with Ruby. November 19-20 at Fort Mason, San Francisco.",
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.ico">
-    <link rel="image/png" href="/favicon.png" sizes="96x96">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <title>{title}</title>
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/fonts/MartianGrotesk.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/MartianMono.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/sfruby_logo_h.png" as="image" fetchpriority="high">
-    <link rel="preload" href="/hero.png" as="image" fetchpriority="high">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="image/png" href="/favicon.png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+        <title>{title}</title>
 
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://images.pexels.com">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sfruby.com" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content="/sfruby_og.jpg" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://sfruby.com" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="https://sfruby.com/sfruby_og.jpg" />
+        <!-- Preload critical assets -->
+        <link
+            rel="preload"
+            href="/fonts/MartianGrotesk.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/fonts/MartianMono.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/sfruby_logo_h.png"
+            as="image"
+            fetchpriority="high"
+        />
+        <link rel="preload" href="/hero.png" as="image" fetchpriority="high" />
 
-    <script defer data-domain="sfruby.com" src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"></script>
-    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+        <!-- Preconnect to external domains -->
+        <link rel="preconnect" href="https://images.pexels.com" />
 
-  </head>
-  <body class="bg-white text-dark-800 font-sans min-h-screen flex flex-col">
-    <Navigation />
-    
-    <main class="flex-grow">
-      <slot />
-    </main>
-    
-    <Footer />
-    
-    <script>
-      // Add smooth scrolling for anchor links
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId !== '#') {
-              document.querySelector(targetId)?.scrollIntoView({
-                behavior: 'smooth'
-              });
-            }
-          });
-        });
-      });
-    </script>
-  </head>
-  <body class="bg-white text-dark-800 font-sans min-h-screen flex flex-col">
-    <Navigation />
-    
-    <main class="flex-grow">
-      <slot />
-    </main>
-    
-    <Footer />
-  </body>
+        <!-- Open Graph / Social Media -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sfruby.com" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content="/sfruby_og.jpg" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://sfruby.com" />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta
+            property="twitter:image"
+            content="https://sfruby.com/sfruby_og.jpg"
+        />
+
+        <script
+            defer
+            data-domain="sfruby.com"
+            src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
+        ></script>
+        <script>
+            window.plausible =
+                window.plausible ||
+                function () {
+                    (window.plausible.q = window.plausible.q || []).push(
+                        arguments,
+                    );
+                };
+        </script>
+    </head>
+    <body class="bg-white text-dark-800 font-sans min-h-screen flex flex-col">
+        <Navigation />
+
+        <main class="flex-grow">
+            <slot />
+        </main>
+
+        <Footer />
+
+        <script>
+            // Add smooth scrolling for anchor links
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                    anchor.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute("href");
+                        if (targetId !== "#") {
+                            document.querySelector(targetId)?.scrollIntoView({
+                                behavior: "smooth",
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
 </html>
