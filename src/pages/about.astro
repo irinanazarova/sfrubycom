@@ -51,8 +51,7 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         9:00 AM - 6:00 PM each day
                     </p>
                     <p class="text-dark-600 text-sm">
-                        Plus evening after-party events and networking
-                        opportunities
+                        Plus unofficial evening events
                     </p>
                 </div>
                 <div class="bg-white border border-sky-200 rounded-lg p-6">
@@ -191,8 +190,19 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                     class="inline-flex items-center px-4 py-2 bg-ruby-500 text-white rounded-md font-medium hover:bg-ruby-600 transition-colors"
                 >
                     View Full Dining Guide
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-4 h-4 ml-2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                        ></path>
                     </svg>
                 </a>
             </div>
@@ -211,23 +221,39 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
                         <h3 class="font-bold text-dark-900">🏢 At the Venue</h3>
-                        <DistanceBadge distance="0 min" type="walk" color="green" />
+                        <DistanceBadge
+                            distance="0 min"
+                            type="walk"
+                            color="green"
+                        />
                     </div>
                     <ul class="space-y-2 text-dark-600 text-sm">
-                        <li>• <strong>Equator Coffee:</strong> Espresso, pastries</li>
+                        <li>
+                            • <strong>Equator Coffee:</strong> Espresso, pastries
+                        </li>
                         <li>• <strong>Radhaus:</strong> Sandwiches, salads</li>
-                        <li>• <strong>The Interval:</strong> Cocktails, wine</li>
+                        <li>
+                            • <strong>The Interval:</strong> Cocktails, wine
+                        </li>
                     </ul>
                 </div>
 
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
                         <h3 class="font-bold text-dark-900">🚶 Close By</h3>
-                        <DistanceBadge distance="5-20 min" type="walk" color="blue" />
+                        <DistanceBadge
+                            distance="5-20 min"
+                            type="walk"
+                            color="blue"
+                        />
                     </div>
                     <ul class="space-y-2 text-dark-600 text-sm">
-                        <li>• <strong>Reveille Coffee:</strong> Artisan coffee</li>
-                        <li>• <strong>Komeya no Bento:</strong> Japanese bento</li>
+                        <li>
+                            • <strong>Reveille Coffee:</strong> Artisan coffee
+                        </li>
+                        <li>
+                            • <strong>Komeya no Bento:</strong> Japanese bento
+                        </li>
                         <li>• <strong>Bar Darling:</strong> Craft cocktails</li>
                     </ul>
                 </div>
@@ -235,11 +261,19 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
                         <h3 class="font-bold text-dark-900">🌆 In the Area</h3>
-                        <DistanceBadge distance="20-40 min" type="walk" color="amber" />
+                        <DistanceBadge
+                            distance="20-40 min"
+                            type="walk"
+                            color="amber"
+                        />
                     </div>
                     <ul class="space-y-2 text-dark-600 text-sm">
-                        <li>• <strong>Blue Bottle:</strong> Famous hot waffle</li>
-                        <li>• <strong>Swan Oyster Depot:</strong> Historic seafood</li>
+                        <li>
+                            • <strong>Blue Bottle:</strong> Famous hot waffle
+                        </li>
+                        <li>
+                            • <strong>Swan Oyster Depot:</strong> Historic seafood
+                        </li>
                         <li>• <strong>State Bird:</strong> Michelin-starred</li>
                     </ul>
                 </div>
@@ -310,12 +344,17 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                     </div>
 
                     <!-- Safety Note -->
-                    <div class="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
+                    <div
+                        class="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4"
+                    >
                         <h4 class="font-medium text-amber-800 mb-2">
                             🛡️ Accommodation Safety Note
                         </h4>
                         <p class="text-amber-700 text-sm">
-                            For your safety and comfort, we recommend avoiding accommodations in the Tenderloin, Civic Center, and parts of SOMA. Stick to Marina, Union Square, Nob Hill, or North Beach for the best experience.
+                            For your safety and comfort, we recommend avoiding
+                            accommodations in the Tenderloin, Civic Center, and
+                            parts of SOMA. Stick to Marina, Union Square, Nob
+                            Hill, or North Beach for the best experience.
                         </p>
                     </div>
                 </div>
@@ -414,8 +453,16 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         <h3 class="font-bold text-dark-900">
                             🌉 Fort Mason to Crissy Field Walk
                         </h3>
-                        <DistanceBadge distance="30-45 min" type="time" color="green" />
-                        <DistanceBadge distance="Easy walk" type="walk" color="blue" />
+                        <DistanceBadge
+                            distance="30-45 min"
+                            type="time"
+                            color="green"
+                        />
+                        <DistanceBadge
+                            distance="Easy walk"
+                            type="walk"
+                            color="blue"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm">
                         Walk from the venue to Crissy Field for Golden Gate
@@ -430,8 +477,16 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         <h3 class="font-bold text-dark-900">
                             🌳 Golden Gate Park to Ocean Beach
                         </h3>
-                        <DistanceBadge distance="Half day" type="time" color="amber" />
-                        <DistanceBadge distance="Muni accessible" type="transit" color="purple" />
+                        <DistanceBadge
+                            distance="Half day"
+                            type="time"
+                            color="amber"
+                        />
+                        <DistanceBadge
+                            distance="Muni accessible"
+                            type="transit"
+                            color="purple"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm">
                         Explore Golden Gate Park (museums, bison paddock, boat
@@ -446,8 +501,16 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         <h3 class="font-bold text-dark-900">
                             🌲 Muir Woods Adventure
                         </h3>
-                        <DistanceBadge distance="Full day" type="time" color="amber" />
-                        <DistanceBadge distance="Moderate hiking" type="walk" color="green" />
+                        <DistanceBadge
+                            distance="Full day"
+                            type="time"
+                            color="amber"
+                        />
+                        <DistanceBadge
+                            distance="Moderate hiking"
+                            type="walk"
+                            color="green"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm">
                         Uber to Muir Woods ($40-50), hike among the redwoods,
@@ -462,8 +525,16 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         <h3 class="font-bold text-dark-900">
                             🎓 Stanford University Day Trip
                         </h3>
-                        <DistanceBadge distance="Full day" type="time" color="amber" />
-                        <DistanceBadge distance="Caltrain $7-15" type="transit" color="purple" />
+                        <DistanceBadge
+                            distance="Full day"
+                            type="time"
+                            color="amber"
+                        />
+                        <DistanceBadge
+                            distance="Caltrain $7-15"
+                            type="transit"
+                            color="purple"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm">
                         Take Caltrain to Stanford. Visit two free art museums
@@ -569,13 +640,13 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                     target="_blank"
                     class="inline-flex items-center justify-center px-8 py-3 bg-white text-ruby-600 rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
                 >
-                    Get Your Tickets
+                    Submit a talk
                 </a>
                 <a
-                    href="#newsletter"
+                    href="/#newsletter"
                     class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-white text-white rounded-md font-medium transition-all duration-300 transform hover:scale-105"
                 >
-                    Stay Updated
+                    Sign up for updates
                 </a>
             </div>
         </section>
