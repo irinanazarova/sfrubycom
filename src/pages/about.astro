@@ -25,19 +25,20 @@ import WeatherWidget from "../components/WeatherWidget.astro";
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
         <!-- 1. Mark Your Calendars -->
         <section>
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-dark-200 rounded-lg flex items-center justify-center">
-                    <img
-                        src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=400"
-                        alt="Calendar placeholder"
-                        class="w-full h-full object-cover rounded-lg"
-                        loading="lazy"
-                    />
-                </div>
-                <h2 class="text-2xl font-display font-bold text-dark-900">
-                    Mark Your Calendars
-                </h2>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                Mark Your Calendars
+            </h2>
+            
+            <!-- Section placeholder image -->
+            <div class="mb-6">
+                <img
+                    src="https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Calendar and planning"
+                    class="w-full h-48 object-cover rounded-lg"
+                    loading="lazy"
+                />
             </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div class="bg-white border border-ruby-200 rounded-lg p-6">
                     <h3 class="font-bold text-ruby-600 text-lg mb-2">
@@ -108,19 +109,20 @@ import WeatherWidget from "../components/WeatherWidget.astro";
 
         <!-- 2. Plan Your Local Commute -->
         <section>
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-dark-200 rounded-lg flex items-center justify-center">
-                    <img
-                        src="https://images.pexels.com/photos/544966/pexels-photo-544966.jpeg?auto=compress&cs=tinysrgb&w=400"
-                        alt="Public transit placeholder"
-                        class="w-full h-full object-cover rounded-lg"
-                        loading="lazy"
-                    />
-                </div>
-                <h2 class="text-2xl font-display font-bold text-dark-900">
-                    Plan Your Local Commute
-                </h2>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                Plan Your Local Commute
+            </h2>
+            
+            <!-- Section placeholder image -->
+            <div class="mb-6">
+                <img
+                    src="https://images.pexels.com/photos/544966/pexels-photo-544966.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Public transportation in San Francisco"
+                    class="w-full h-48 object-cover rounded-lg"
+                    loading="lazy"
+                />
             </div>
+            
             <div class="bg-dark-50 rounded-lg p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -181,19 +183,9 @@ import WeatherWidget from "../components/WeatherWidget.astro";
         <!-- 3. Dining Options -->
         <section>
             <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 bg-dark-200 rounded-lg flex items-center justify-center">
-                        <img
-                            src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=400"
-                            alt="Dining placeholder"
-                            class="w-full h-full object-cover rounded-lg"
-                            loading="lazy"
-                        />
-                    </div>
-                    <h2 class="text-2xl font-display font-bold text-dark-900">
-                        Dining Options
-                    </h2>
-                </div>
+                <h2 class="text-2xl font-display font-bold text-dark-900">
+                    Dining Options
+                </h2>
                 <a
                     href="/dining"
                     class="inline-flex items-center px-4 py-2 bg-ruby-500 text-white rounded-md font-medium hover:bg-ruby-600 transition-colors"
@@ -203,6 +195,16 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                     </svg>
                 </a>
+            </div>
+
+            <!-- Section placeholder image -->
+            <div class="mb-6">
+                <img
+                    src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="San Francisco dining and restaurants"
+                    class="w-full h-48 object-cover rounded-lg"
+                    loading="lazy"
+                />
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -246,18 +248,18 @@ import WeatherWidget from "../components/WeatherWidget.astro";
 
         <!-- 4. Plan Your Trip to SF -->
         <section>
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-dark-200 rounded-lg flex items-center justify-center">
-                    <img
-                        src="https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=400"
-                        alt="Travel planning placeholder"
-                        class="w-full h-full object-cover rounded-lg"
-                        loading="lazy"
-                    />
-                </div>
-                <h2 class="text-2xl font-display font-bold text-dark-900">
-                    Plan Your Trip to SF
-                </h2>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                Plan Your Trip to SF
+            </h2>
+
+            <!-- Section placeholder image -->
+            <div class="mb-6">
+                <img
+                    src="https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Travel planning and luggage"
+                    class="w-full h-48 object-cover rounded-lg"
+                    loading="lazy"
+                />
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -392,18 +394,18 @@ import WeatherWidget from "../components/WeatherWidget.astro";
 
         <!-- 5. Plan Routes Around SF -->
         <section>
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-dark-200 rounded-lg flex items-center justify-center">
-                    <img
-                        src="https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg?auto=compress&cs=tinysrgb&w=400"
-                        alt="San Francisco activities placeholder"
-                        class="w-full h-full object-cover rounded-lg"
-                        loading="lazy"
-                    />
-                </div>
-                <h2 class="text-2xl font-display font-bold text-dark-900">
-                    Plan Your Stay in SF
-                </h2>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                Plan Your Stay in SF
+            </h2>
+
+            <!-- Section placeholder image -->
+            <div class="mb-6">
+                <img
+                    src="https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Golden Gate Bridge and San Francisco skyline"
+                    class="w-full h-48 object-cover rounded-lg"
+                    loading="lazy"
+                />
             </div>
 
             <div class="space-y-6">
@@ -475,18 +477,18 @@ import WeatherWidget from "../components/WeatherWidget.astro";
 
         <!-- 6. Get Involved -->
         <section>
-            <div class="flex items-center gap-4 mb-6">
-                <div class="w-16 h-16 bg-dark-200 rounded-lg flex items-center justify-center">
-                    <img
-                        src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=400"
-                        alt="Community involvement placeholder"
-                        class="w-full h-full object-cover rounded-lg"
-                        loading="lazy"
-                    />
-                </div>
-                <h2 class="text-2xl font-display font-bold text-dark-900">
-                    Get Involved
-                </h2>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                Get Involved
+            </h2>
+
+            <!-- Section placeholder image -->
+            <div class="mb-6">
+                <img
+                    src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Community collaboration and teamwork"
+                    class="w-full h-48 object-cover rounded-lg"
+                    loading="lazy"
+                />
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
