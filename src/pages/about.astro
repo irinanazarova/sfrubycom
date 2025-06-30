@@ -61,20 +61,29 @@ import WeatherWidget from "../components/WeatherWidget.astro";
             </div>
             
             <!-- Venue Information -->
-            <div class="bg-white border border-dark-200 rounded-lg p-6">
-                <h3 class="font-bold text-dark-900 text-lg mb-3">
-                    📍 Venue: Fort Mason Center for Arts & Culture
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+            <div class="bg-white border border-dark-200 rounded-lg overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <!-- Venue Photo -->
+                    <div class="h-48 md:h-auto">
+                        <img
+                            src="https://www.sfmta.com/sites/default/files/pictures/150717_AqPk_%20FtMs_18%20%281%29.jpg"
+                            alt="Fort Mason Center waterfront view"
+                            class="w-full h-full object-cover"
+                            loading="lazy"
+                        />
+                    </div>
+                    
+                    <!-- Venue Details -->
+                    <div class="p-6">
+                        <h3 class="font-bold text-dark-900 text-lg mb-3">
+                            📍 Venue: Fort Mason Center for Arts & Culture
+                        </h3>
                         <p class="text-dark-900 font-medium mb-2">
                             2 Marina Blvd, San Francisco, CA 94123
                         </p>
-                        <p class="text-dark-600 text-sm">
-                            Historic waterfront venue in the Golden Gate National Recreation Area, hosting over 1.2 million visitors annually with theater, dance, and cultural programming.
+                        <p class="text-dark-600 text-sm mb-4">
+                            Historic waterfront venue in the Golden Gate National Recreation Area.
                         </p>
-                    </div>
-                    <div class="flex items-center justify-center md:justify-end">
                         <a
                             href="https://maps.google.com/?q=Fort+Mason+Center+San+Francisco"
                             target="_blank"
