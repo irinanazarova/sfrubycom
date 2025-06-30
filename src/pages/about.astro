@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import FoodVenue from "../components/FoodVenue.astro";
+import QuickReference from "../components/QuickReference.astro";
+import DistanceBadge from "../components/DistanceBadge.astro";
+import WeatherWidget from "../components/WeatherWidget.astro";
 ---
 
 <Layout
     title="About - San Francisco Ruby Conference 2025"
-    description="Everything you need to know about attending the San Francisco Ruby Conference 2025, including venue info, accommodations, dining, and things to do in SF."
+    description="Everything you need to know about attending the San Francisco Ruby Conference 2025, including venue info, accommodations, and things to do in SF."
 >
     <!-- Hero Section -->
     <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
@@ -22,6 +24,9 @@ import FoodVenue from "../components/FoodVenue.astro";
     </div>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        <!-- Quick Reference -->
+        <QuickReference />
+
         <!-- 1. Mark Your Calendars -->
         <section>
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
@@ -122,173 +127,58 @@ import FoodVenue from "../components/FoodVenue.astro";
             </div>
         </section>
 
-        <!-- 3. Plan Deliciousness -->
+        <!-- 3. Dining Options -->
         <section>
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
-                Plan Deliciousness
-            </h2>
-
-            <!-- At the Venue -->
-            <div class="mb-8">
-                <h3 class="font-bold text-lg text-dark-900 mb-4">
-                    🏢 At the Venue
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <FoodVenue
-                        name="Equator Coffee"
-                        type="☕"
-                        hours="Daily 7:00 AM - 4:00 PM"
-                        pricing="Espresso $3, Latte $5, Pastries $4-6"
-                        mapQuery="Equator Coffee Fort Mason San Francisco"
-                    />
-                    <FoodVenue
-                        name="Radhaus"
-                        type="🍽️"
-                        hours="Breakfast, Lunch, Dinner"
-                        pricing="Sandwiches $12-16, Salads $14-18"
-                        mapQuery="Radhaus Fort Mason San Francisco"
-                    />
-                    <FoodVenue
-                        name="The Interval"
-                        type="🍸"
-                        hours="Bar & Café"
-                        pricing="Cocktails $12-16, Wine $8-14"
-                        mapQuery="The Interval Fort Mason San Francisco"
-                    />
-                </div>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-display font-bold text-dark-900">
+                    Dining Options
+                </h2>
+                <a
+                    href="/dining"
+                    class="inline-flex items-center px-4 py-2 bg-ruby-500 text-white rounded-md font-medium hover:bg-ruby-600 transition-colors"
+                >
+                    View Full Dining Guide
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                    </svg>
+                </a>
             </div>
 
-            <!-- Close By (20 min walk) -->
-            <div class="mb-8">
-                <h3 class="font-bold text-lg text-dark-900 mb-4">
-                    🚶 Close By (20-minute walk)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-medium text-dark-900 mb-3">
-                            🥞 Breakfast
-                        </h4>
-                        <div class="space-y-3">
-                            <FoodVenue
-                                name="Reveille Coffee"
-                                type=""
-                                description="Artisan coffee & pastries"
-                                mapQuery="Reveille Coffee San Francisco"
-                            />
-                            <FoodVenue
-                                name="Cracked & Buttered"
-                                type=""
-                                description="Gourmet breakfast sandwiches"
-                                mapQuery="Cracked Buttered San Francisco"
-                            />
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white border border-dark-200 rounded-lg p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="font-bold text-dark-900">🏢 At the Venue</h3>
+                        <DistanceBadge distance="0 min" type="walk" color="green" />
                     </div>
-                    <div>
-                        <h4 class="font-medium text-dark-900 mb-3">🍜 Lunch</h4>
-                        <div class="space-y-3">
-                            <FoodVenue
-                                name="Komeya no Bento"
-                                type=""
-                                description="Authentic Japanese bento boxes"
-                                mapQuery="Komeya no Bento San Francisco"
-                            />
-                            <FoodVenue
-                                name="Hinodeya Ramen"
-                                type=""
-                                description="Traditional tonkotsu ramen"
-                                mapQuery="Hinodeya Ramen San Francisco"
-                            />
-                            <FoodVenue
-                                name="Marufuku Ramen"
-                                type=""
-                                description="Hakata-style ramen specialist"
-                                mapQuery="Marufuku Ramen San Francisco"
-                            />
-                        </div>
-                    </div>
+                    <ul class="space-y-2 text-dark-600 text-sm">
+                        <li>• <strong>Equator Coffee:</strong> Espresso, pastries</li>
+                        <li>• <strong>Radhaus:</strong> Sandwiches, salads</li>
+                        <li>• <strong>The Interval:</strong> Cocktails, wine</li>
+                    </ul>
                 </div>
-                <div class="mt-4">
-                    <h4 class="font-medium text-dark-900 mb-3">🍷 Bar</h4>
-                    <div class="max-w-md">
-                        <FoodVenue
-                            name="Bar Darling"
-                            type=""
-                            description="Craft cocktails & natural wines"
-                            mapQuery="Bar Darling San Francisco"
-                        />
-                    </div>
-                </div>
-            </div>
 
-            <!-- In the Area (up to 40 min walk) -->
-            <div>
-                <h3 class="font-bold text-lg text-dark-900 mb-4">
-                    🌆 In the Area (up to 40-minute walk)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div>
-                        <h4 class="font-medium text-dark-900 mb-3">
-                            ☕ Coffee
-                        </h4>
-                        <div class="space-y-3">
-                            <FoodVenue
-                                name="Coffee Movement"
-                                type=""
-                                description="Third-wave specialty coffee"
-                                mapQuery="Coffee Movement San Francisco"
-                            />
-                            <FoodVenue
-                                name="Blue Bottle Coffee"
-                                type=""
-                                description="Famous for their hot waffle!"
-                                mapQuery="Blue Bottle Coffee San Francisco"
-                            />
-                        </div>
+                <div class="bg-white border border-dark-200 rounded-lg p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="font-bold text-dark-900">🚶 Close By</h3>
+                        <DistanceBadge distance="5-20 min" type="walk" color="blue" />
                     </div>
-                    <div>
-                        <h4 class="font-medium text-dark-900 mb-3">
-                            🥞 Breakfast
-                        </h4>
-                        <div class="space-y-3">
-                            <FoodVenue
-                                name="Camino Alto"
-                                type=""
-                                description="Elevated brunch experience"
-                                mapQuery="Camino Alto San Francisco"
-                            />
-                            <FoodVenue
-                                name="Mama's on Washington"
-                                type=""
-                                description="Famous French toast"
-                                mapQuery="Mama's Washington Square San Francisco"
-                            />
-                        </div>
+                    <ul class="space-y-2 text-dark-600 text-sm">
+                        <li>• <strong>Reveille Coffee:</strong> Artisan coffee</li>
+                        <li>• <strong>Komeya no Bento:</strong> Japanese bento</li>
+                        <li>• <strong>Bar Darling:</strong> Craft cocktails</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-dark-200 rounded-lg p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="font-bold text-dark-900">🌆 In the Area</h3>
+                        <DistanceBadge distance="20-40 min" type="walk" color="amber" />
                     </div>
-                    <div>
-                        <h4 class="font-medium text-dark-900 mb-3">
-                            🍽️ Lunch & Dinner
-                        </h4>
-                        <div class="space-y-3">
-                            <FoodVenue
-                                name="Swan Oyster Depot"
-                                type=""
-                                description="Historic seafood counter"
-                                mapQuery="Swan Oyster Depot San Francisco"
-                            />
-                            <FoodVenue
-                                name="Tony's Little Star"
-                                type=""
-                                description="Deep-dish pizza legend"
-                                mapQuery="Tony's Little Star Pizza San Francisco"
-                            />
-                            <FoodVenue
-                                name="State Bird Provisions"
-                                type=""
-                                description="Michelin-starred dim sum"
-                                mapQuery="State Bird Provisions San Francisco"
-                            />
-                        </div>
-                    </div>
+                    <ul class="space-y-2 text-dark-600 text-sm">
+                        <li>• <strong>Blue Bottle:</strong> Famous hot waffle</li>
+                        <li>• <strong>Swan Oyster Depot:</strong> Historic seafood</li>
+                        <li>• <strong>State Bird:</strong> Michelin-starred</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -345,6 +235,16 @@ import FoodVenue from "../components/FoodVenue.astro";
                             </p>
                         </div>
                     </div>
+
+                    <!-- Safety Note -->
+                    <div class="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
+                        <h4 class="font-medium text-amber-800 mb-2">
+                            🛡️ Accommodation Safety Note
+                        </h4>
+                        <p class="text-amber-700 text-sm">
+                            For your safety and comfort, we recommend avoiding accommodations in the Tenderloin, Civic Center, and parts of SOMA. Stick to Marina, Union Square, Nob Hill, or North Beach for the best experience.
+                        </p>
+                    </div>
                 </div>
 
                 <div>
@@ -373,7 +273,7 @@ import FoodVenue from "../components/FoodVenue.astro";
                     <h3 class="font-bold text-lg text-dark-900 mb-4">
                         🚗 From the Airport
                     </h3>
-                    <div class="space-y-2">
+                    <div class="space-y-2 mb-6">
                         <div
                             class="flex justify-between items-center bg-white border rounded-lg p-3"
                         >
@@ -400,10 +300,13 @@ import FoodVenue from "../components/FoodVenue.astro";
                             <span class="text-blue-600 font-medium">~$65</span>
                         </div>
                     </div>
+
+                    <!-- Weather Widget -->
+                    <WeatherWidget />
                 </div>
             </div>
 
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-1 gap-6">
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
                     <h4 class="font-medium text-blue-800 mb-2">
                         🎫 Getting a Local Transport Card
@@ -411,19 +314,6 @@ import FoodVenue from "../components/FoodVenue.astro";
                     <p class="text-blue-700 text-sm">
                         Download the Clipper app or add to Apple/Google Wallet.
                         Works on all Bay Area transit systems.
-                    </p>
-                </div>
-                <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                    <h4 class="font-medium text-amber-800 mb-2">
-                        👕 Plan Your Wardrobe
-                    </h4>
-                    <p class="text-amber-700 text-sm mb-2">
-                        <strong>Weather:</strong> 60°F/15°C highs, possible light
-                        rain
-                    </p>
-                    <p class="text-amber-700 text-sm">
-                        <strong>Pack:</strong> Layers (tee + hoodie + rain jacket),
-                        comfortable shoes, hiking boots for weekend adventures!
                     </p>
                 </div>
             </div>
@@ -437,67 +327,67 @@ import FoodVenue from "../components/FoodVenue.astro";
 
             <div class="space-y-6">
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-3">
-                        🌉 Fort Mason to Crissy Field Walk
-                    </h3>
-                    <p class="text-dark-600 text-sm mb-3">
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="font-bold text-dark-900">
+                            🌉 Fort Mason to Crissy Field Walk
+                        </h3>
+                        <DistanceBadge distance="30-45 min" type="time" color="green" />
+                        <DistanceBadge distance="Easy walk" type="walk" color="blue" />
+                    </div>
+                    <p class="text-dark-600 text-sm">
                         Walk from the venue to Crissy Field for Golden Gate
                         Bridge views. Grab a bite from food trucks, then find
                         the hidden Yoda statue in the Presidio. Perfect for
                         conference breaks!
                     </p>
-                    <div class="flex items-center text-dark-500 text-sm">
-                        <span class="mr-4">⏱️ 30-45 minutes</span>
-                        <span>🚶 Easy walk</span>
-                    </div>
                 </div>
 
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-3">
-                        🌳 Golden Gate Park to Ocean Beach
-                    </h3>
-                    <p class="text-dark-600 text-sm mb-3">
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="font-bold text-dark-900">
+                            🌳 Golden Gate Park to Ocean Beach
+                        </h3>
+                        <DistanceBadge distance="Half day" type="time" color="amber" />
+                        <DistanceBadge distance="Muni accessible" type="transit" color="purple" />
+                    </div>
+                    <p class="text-dark-600 text-sm">
                         Explore Golden Gate Park (museums, bison paddock, boat
                         rentals at Stow Lake), then walk to Ocean Beach and
                         Sunset Dunes Park. Indoor museum options if weather
                         turns.
                     </p>
-                    <div class="flex items-center text-dark-500 text-sm">
-                        <span class="mr-4">⏱️ Half day</span>
-                        <span>🚌 Muni accessible</span>
-                    </div>
                 </div>
 
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-3">
-                        🌲 Muir Woods Adventure
-                    </h3>
-                    <p class="text-dark-600 text-sm mb-3">
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="font-bold text-dark-900">
+                            🌲 Muir Woods Adventure
+                        </h3>
+                        <DistanceBadge distance="Full day" type="time" color="amber" />
+                        <DistanceBadge distance="Moderate hiking" type="walk" color="green" />
+                    </div>
+                    <p class="text-dark-600 text-sm">
                         Uber to Muir Woods ($40-50), hike among the redwoods,
                         then walk down to Mill Valley for lunch. Take the Golden
                         Gate Transit bus back to SF. Covered trails perfect for
                         light rain!
                     </p>
-                    <div class="flex items-center text-dark-500 text-sm">
-                        <span class="mr-4">⏱️ Full day</span>
-                        <span>🥾 Moderate hiking</span>
-                    </div>
                 </div>
 
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-3">
-                        🎓 Stanford University Day Trip
-                    </h3>
-                    <p class="text-dark-600 text-sm mb-3">
+                    <div class="flex items-center gap-2 mb-3">
+                        <h3 class="font-bold text-dark-900">
+                            🎓 Stanford University Day Trip
+                        </h3>
+                        <DistanceBadge distance="Full day" type="time" color="amber" />
+                        <DistanceBadge distance="Caltrain $7-15" type="transit" color="purple" />
+                    </div>
+                    <p class="text-dark-600 text-sm">
                         Take Caltrain to Stanford. Visit two free art museums
                         (Cantor Arts Center, Anderson Collection), lunch at
                         Treehouse, then hike the Dish Trail. Dinner in Palo Alto
                         before returning.
                     </p>
-                    <div class="flex items-center text-dark-500 text-sm">
-                        <span class="mr-4">⏱️ Full day</span>
-                        <span>🚂 Caltrain $7-15</span>
-                    </div>
                 </div>
             </div>
         </section>
@@ -561,7 +451,7 @@ import FoodVenue from "../components/FoodVenue.astro";
                     </p>
                     <a
                         href="/sponsors"
-                        class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600 transition-colors"
+                        class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-green-600 transition-colors"
                     >
                         Learn About Sponsoring
                     </a>
