@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import FoodVenue from "../components/FoodVenue.astro";
 ---
 
 <Layout
@@ -133,55 +134,27 @@ import Layout from "../layouts/Layout.astro";
                     🏢 At the Venue
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-white border rounded-lg p-4">
-                        <h4 class="font-medium text-dark-900 mb-2">
-                            ☕ Equator Coffee
-                        </h4>
-                        <p class="text-dark-600 text-sm mb-2">
-                            Daily 7:00 AM - 4:00 PM
-                        </p>
-                        <p class="text-dark-600 text-sm mb-3">
-                            Espresso $3, Latte $5, Pastries $4-6
-                        </p>
-                        <a
-                            href="https://maps.google.com/?q=Equator+Coffee+Fort+Mason+San+Francisco"
-                            target="_blank"
-                            class="text-ruby-500 hover:text-ruby-600 text-sm"
-                            >📍 View on Map</a
-                        >
-                    </div>
-                    <div class="bg-white border rounded-lg p-4">
-                        <h4 class="font-medium text-dark-900 mb-2">
-                            🍽️ Radhaus
-                        </h4>
-                        <p class="text-dark-600 text-sm mb-2">
-                            Breakfast, Lunch, Dinner
-                        </p>
-                        <p class="text-dark-600 text-sm mb-3">
-                            Sandwiches $12-16, Salads $14-18
-                        </p>
-                        <a
-                            href="https://maps.google.com/?q=Radhaus+Fort+Mason+San+Francisco"
-                            target="_blank"
-                            class="text-ruby-500 hover:text-ruby-600 text-sm"
-                            >📍 View on Map</a
-                        >
-                    </div>
-                    <div class="bg-white border rounded-lg p-4">
-                        <h4 class="font-medium text-dark-900 mb-2">
-                            🍸 The Interval
-                        </h4>
-                        <p class="text-dark-600 text-sm mb-2">Bar & Café</p>
-                        <p class="text-dark-600 text-sm mb-3">
-                            Cocktails $12-16, Wine $8-14
-                        </p>
-                        <a
-                            href="https://maps.google.com/?q=The+Interval+Fort+Mason+San+Francisco"
-                            target="_blank"
-                            class="text-ruby-500 hover:text-ruby-600 text-sm"
-                            >📍 View on Map</a
-                        >
-                    </div>
+                    <FoodVenue
+                        name="Equator Coffee"
+                        type="☕"
+                        hours="Daily 7:00 AM - 4:00 PM"
+                        pricing="Espresso $3, Latte $5, Pastries $4-6"
+                        mapQuery="Equator Coffee Fort Mason San Francisco"
+                    />
+                    <FoodVenue
+                        name="Radhaus"
+                        type="🍽️"
+                        hours="Breakfast, Lunch, Dinner"
+                        pricing="Sandwiches $12-16, Salads $14-18"
+                        mapQuery="Radhaus Fort Mason San Francisco"
+                    />
+                    <FoodVenue
+                        name="The Interval"
+                        type="🍸"
+                        hours="Bar & Café"
+                        pricing="Cocktails $12-16, Wine $8-14"
+                        mapQuery="The Interval Fort Mason San Francisco"
+                    />
                 </div>
             </div>
 
@@ -196,122 +169,53 @@ import Layout from "../layouts/Layout.astro";
                             🥞 Breakfast
                         </h4>
                         <div class="space-y-3">
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Reveille Coffee
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Artisan coffee & pastries
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Reveille+Coffee+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Cracked & Buttered
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Gourmet breakfast sandwiches
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Cracked+Buttered+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
+                            <FoodVenue
+                                name="Reveille Coffee"
+                                type=""
+                                description="Artisan coffee & pastries"
+                                mapQuery="Reveille Coffee San Francisco"
+                            />
+                            <FoodVenue
+                                name="Cracked & Buttered"
+                                type=""
+                                description="Gourmet breakfast sandwiches"
+                                mapQuery="Cracked Buttered San Francisco"
+                            />
                         </div>
                     </div>
                     <div>
                         <h4 class="font-medium text-dark-900 mb-3">🍜 Lunch</h4>
                         <div class="space-y-3">
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Komeya no Bento
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Authentic Japanese bento boxes
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Komeya+no+Bento+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Hinodeya Ramen
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Traditional tonkotsu ramen
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Hinodeya+Ramen+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Marufuku Ramen
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Hakata-style ramen specialist
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Marufuku+Ramen+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
+                            <FoodVenue
+                                name="Komeya no Bento"
+                                type=""
+                                description="Authentic Japanese bento boxes"
+                                mapQuery="Komeya no Bento San Francisco"
+                            />
+                            <FoodVenue
+                                name="Hinodeya Ramen"
+                                type=""
+                                description="Traditional tonkotsu ramen"
+                                mapQuery="Hinodeya Ramen San Francisco"
+                            />
+                            <FoodVenue
+                                name="Marufuku Ramen"
+                                type=""
+                                description="Hakata-style ramen specialist"
+                                mapQuery="Marufuku Ramen San Francisco"
+                            />
                         </div>
                     </div>
                 </div>
                 <div class="mt-4">
                     <h4 class="font-medium text-dark-900 mb-3">🍷 Bar</h4>
-                    <div class="bg-white border rounded-lg p-3 max-w-md">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <p class="font-medium text-dark-900">
-                                    Bar Darling
-                                </p>
-                                <p class="text-dark-600 text-sm">
-                                    Craft cocktails & natural wines
-                                </p>
-                            </div>
-                            <a
-                                href="https://maps.google.com/?q=Bar+Darling+San+Francisco"
-                                target="_blank"
-                                class="text-ruby-500 hover:text-ruby-600">📍</a
-                            >
-                        </div>
+                    <div class="max-w-md">
+                        <FoodVenue
+                            name="Bar Darling"
+                            type=""
+                            description="Craft cocktails & natural wines"
+                            mapQuery="Bar Darling San Francisco"
+                        />
                     </div>
                 </div>
             </div>
@@ -327,42 +231,18 @@ import Layout from "../layouts/Layout.astro";
                             ☕ Coffee
                         </h4>
                         <div class="space-y-3">
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Coffee Movement
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Third-wave specialty coffee
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Coffee+Movement+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Blue Bottle Coffee
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Famous for their hot waffle!
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Blue+Bottle+Coffee+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
+                            <FoodVenue
+                                name="Coffee Movement"
+                                type=""
+                                description="Third-wave specialty coffee"
+                                mapQuery="Coffee Movement San Francisco"
+                            />
+                            <FoodVenue
+                                name="Blue Bottle Coffee"
+                                type=""
+                                description="Famous for their hot waffle!"
+                                mapQuery="Blue Bottle Coffee San Francisco"
+                            />
                         </div>
                     </div>
                     <div>
@@ -370,42 +250,18 @@ import Layout from "../layouts/Layout.astro";
                             🥞 Breakfast
                         </h4>
                         <div class="space-y-3">
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Camino Alto
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Elevated brunch experience
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Camino+Alto+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Mama's on Washington
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Famous French toast
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Mama's+Washington+Square+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
+                            <FoodVenue
+                                name="Camino Alto"
+                                type=""
+                                description="Elevated brunch experience"
+                                mapQuery="Camino Alto San Francisco"
+                            />
+                            <FoodVenue
+                                name="Mama's on Washington"
+                                type=""
+                                description="Famous French toast"
+                                mapQuery="Mama's Washington Square San Francisco"
+                            />
                         </div>
                     </div>
                     <div>
@@ -413,60 +269,24 @@ import Layout from "../layouts/Layout.astro";
                             🍽️ Lunch & Dinner
                         </h4>
                         <div class="space-y-3">
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Swan Oyster Depot
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Historic seafood counter
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Swan+Oyster+Depot+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            Tony's Little Star
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Deep-dish pizza legend
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=Tony's+Little+Star+Pizza+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
-                            <div class="bg-white border rounded-lg p-3">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-medium text-dark-900">
-                                            State Bird Provisions
-                                        </p>
-                                        <p class="text-dark-600 text-sm">
-                                            Michelin-starred dim sum
-                                        </p>
-                                    </div>
-                                    <a
-                                        href="https://maps.google.com/?q=State+Bird+Provisions+San+Francisco"
-                                        target="_blank"
-                                        class="text-ruby-500 hover:text-ruby-600"
-                                        >📍</a
-                                    >
-                                </div>
-                            </div>
+                            <FoodVenue
+                                name="Swan Oyster Depot"
+                                type=""
+                                description="Historic seafood counter"
+                                mapQuery="Swan Oyster Depot San Francisco"
+                            />
+                            <FoodVenue
+                                name="Tony's Little Star"
+                                type=""
+                                description="Deep-dish pizza legend"
+                                mapQuery="Tony's Little Star Pizza San Francisco"
+                            />
+                            <FoodVenue
+                                name="State Bird Provisions"
+                                type=""
+                                description="Michelin-starred dim sum"
+                                mapQuery="State Bird Provisions San Francisco"
+                            />
                         </div>
                     </div>
                 </div>
