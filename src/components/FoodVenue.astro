@@ -1,0 +1,40 @@
+---
+export interface Props {
+    name: string;
+    type: string;
+    hours?: string;
+    pricing?: string;
+    description?: string;
+    mapQuery: string;
+}
+
+const { name, type, hours, pricing, description, mapQuery } = Astro.props;
+---
+
+<div class="bg-white border rounded-lg p-4">
+    <h4 class="font-medium text-dark-900 mb-2">
+        {type} {name}
+    </h4>
+    {hours && (
+        <p class="text-dark-600 text-sm mb-2">
+            {hours}
+        </p>
+    )}
+    {pricing && (
+        <p class="text-dark-600 text-sm mb-3">
+            {pricing}
+        </p>
+    )}
+    {description && (
+        <p class="text-dark-600 text-sm mb-3">
+            {description}
+        </p>
+    )}
+    <a
+        href={`https://maps.google.com/?q=${encodeURIComponent(mapQuery)}`}
+        target="_blank"
+        class="text-ruby-500 hover:text-ruby-600 text-sm"
+    >
+        📍 View on Map
+    </a>
+</div>

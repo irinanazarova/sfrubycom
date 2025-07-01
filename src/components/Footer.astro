@@ -2,113 +2,117 @@
 const currentYear = new Date().getFullYear();
 
 const footerLinks = [
-  {
-    title: "",
-    links: []
-  },
-  {
-    title: "",
-    links: []
-  },
- /* {
-    title: 'Event',
-    links: [
-    //  { name: 'About', href: '/about' },
-    // { name: 'Schedule', href: '/schedule' },
-    //  { name: 'Speakers', href: '/speakers' },
-    //  { name: 'Register', href: '/register' },
-    ]
-  },
-  {
-    title: 'Information',
-    links: [
-    //  { name: 'Venue', href: '/venue' },
-    //  { name: 'Travel', href: '/travel' },
-    //  { name: 'Hotels', href: '/hotels' },
-    //  { name: 'FAQ', href: '/faq' },
-    ]
-  },*/
-  {
-    title: 'Get Involved',
-    links: [
-      { name: 'Sponsors', href: '/sponsors' },
-    //  { name: 'Startup Demos', href: '/startup-demos' },
-    //  { name: 'Code of Conduct', href: '/code-of-conduct' },
-      { name: 'Contact', href: '/contact' },
-    ]
-  }
+    {
+        title: "Event",
+        links: [
+            { name: "About", href: "/about" },
+            // { name: 'Schedule', href: '/schedule' },
+            { name: "Speakers", href: "/speakers" },
+            {
+                name: "Tickets",
+                href: "https://lu.ma/sfrubyconf2025",
+                target: "_blank",
+            },
+        ],
+    },
+    {
+        title: "Get Involved",
+        links: [
+            {
+                name: "Join Slack",
+                href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-327ylyio2-N10OGtkl~QSt0jnIxDXmZg",
+                target: "_blank",
+            },
+            { name: "Sponsor", href: "/sponsors" },
+            //  { name: 'Startup Demos', href: '/startup-demos' },
+            { name: "Contact", href: "/contact" },
+        ],
+    },
 ];
 
 const socialLinks = [
- // { name: 'Twitter', href: 'https://twitter.com/sfrubconf', icon: 'twitter' },
- // { name: 'GitHub', href: 'https://github.com/sfrubconf', icon: 'github' },
- // { name: 'LinkedIn', href: 'https://linkedin.com/company/sfrubconf', icon: 'linkedin' }
+    // { name: 'Twitter', href: 'https://twitter.com/sfrubconf', icon: 'twitter' },
+    // { name: 'GitHub', href: 'https://github.com/sfrubconf', icon: 'github' },
+    // { name: 'LinkedIn', href: 'https://linkedin.com/company/sfrubconf', icon: 'linkedin' }
 ];
 ---
 
 <footer class="bg-sky-800 text-cloud-500">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <!-- Logo and description -->
-      <div class="col-span-1">
-        <div class="flex items-center space-x-2 mb-4">
-          <!-- Ruby logo -->
-          <div class="w-20 h-20">
-            <img
-              src="/sfruby_logo_h.png"
-              alt="Logo"
-              class="object-contain w-full h-full"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <p class="mt-2 text-sky-300 text-sm">
-          Join us for the largest Ruby event in San&nbsp;Francisco. November&nbsp;19&#8209;20,&nbsp;2025 at Fort Mason.
-        </p>
-      </div>
-
-      <!-- Links -->
-      {footerLinks.map((section) => (
-        <div>
-          <h3 class="font-medium text-cloud-100 mb-4">{section.title}</h3>
-          <ul class="space-y-2">
-            {section.links.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-sky-300 hover:text-ruby-400 transition-colors duration-200 text-sm"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-
-    <!-- Social links and copyright -->
-    <div class="mt-12 pt-8 border-t border-sky-800 flex flex-col md:flex-row justify-between items-center">
-      <div class="flex space-x-6 mb-4 md:mb-0">
-        {socialLinks.map((link) => (
-          <a
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sky-300 hover:text-ruby-400 transition-colors duration-200"
-            aria-label={link.name}
-          >
-            <span class="sr-only">{link.name}</span>
-            <div class="h-6 w-6 flex items-center justify-center rounded-full border border-sky-700">
-              {link.icon.charAt(0).toUpperCase()}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Logo and description -->
+            <div class="col-span-1">
+                <div class="flex items-center space-x-2 mb-4">
+                    <!-- Ruby logo -->
+                    <div class="h-20">
+                        <img
+                            src="/sfruby_logo_h.png"
+                            alt="Logo"
+                            class="object-contain w-full h-full"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+                <p class="mt-2 text-sky-300 text-sm">
+                    November&nbsp;19&#8209;20,&nbsp;2025
+                    <br />Fort Mason Center
+                    <br />2 Marina Blvd
+                    <br />San Francisco, CA 94123
+                </p>
             </div>
-          </a>
-        ))}
-      </div>
 
-      <div class="text-sky-400 text-sm">
-        &copy; {currentYear} Evil Martians Inc. for San Francisco Ruby Conference.  All rights reserved.
-      </div>
+            <!-- Links -->
+            {
+                footerLinks.map((section) => (
+                    <div>
+                        <h3 class="font-medium text-cloud-100 mb-4">
+                            {section.title}
+                        </h3>
+                        <ul class="space-y-2">
+                            {section.links.map((link) => (
+                                <li>
+                                    <a
+                                        href={link.href}
+                                        target={link.target && link.target}
+                                        class="text-sky-300 hover:text-ruby-400 transition-colors duration-200 text-sm"
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Social links and copyright -->
+        <div
+            class="mt-12 pt-8 border-t border-sky-800 flex flex-col md:flex-row justify-between items-center"
+        >
+            <div class="flex space-x-6 mb-4 md:mb-0">
+                {
+                    socialLinks.map((link) => (
+                        <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-sky-300 hover:text-ruby-400 transition-colors duration-200"
+                            aria-label={link.name}
+                        >
+                            <span class="sr-only">{link.name}</span>
+                            <div class="h-6 w-6 flex items-center justify-center rounded-full border border-sky-700">
+                                {link.icon.charAt(0).toUpperCase()}
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+
+            <div class="text-sky-400 text-sm">
+                &copy; {currentYear} Evil Martians Inc. for San Francisco Ruby Conference.
+                All rights reserved.
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
