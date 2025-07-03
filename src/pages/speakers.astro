@@ -160,17 +160,32 @@ const speakers = [
         bio: "Brandon is an artist turned programmer who teaches Ruby with a series of colorful cartoon lemurs going on storybook adventures. This time though? He's going deep on AI and Rails.",
         group: "speaker",
     },
-    /*{
+    {
+        name: "Takashi Kokubun",
+        company: "Shopify",
+        role: "Staff Developer",
+        image: "/speaker_takashi.jpg",
+        socials: [
+            "https://x.com/k0kubun",
+            "https://ruby.social/@k0kubun",
+            "https://bsky.app/profile/k0kubun.com",
+        ],
+        bio: "Takashi Kokubun is a Ruby committer and a member of Shopify's Ruby Infrastructure team. He's currently working on ZJIT, the next generation of YJIT. He has been working on JIT compilers for Ruby since 2017.",
+        group: "speaker",
+    },
+    ,
+    {
         name: "Edward Kim",
         company: "Gusto",
         role: "Co-founder and CTO",
-        image: "/speaker_eddie.jpg",
+        image: "/speaker_edward.jpg",
         socials: [
-            "",
+            "https://x.com/edawerd",
+            "https://www.linkedin.com/in/edawerd/",
         ],
-        bio: "",
+        bio: "Edward leads the long-term technology roadmap for Gusto, including major platform initiatives such as Artificial Intelligence. He also empowers Security and IT. Before co-founding Gusto, Edward was the CEO and co-founder of Picwing, a Y Combinator startup and photo-printing platform. Edward holds bachelor’s and master’s degrees in Electrical Engineering from Stanford University.",
         group: "cto",
-    } */ /*
+    } /*
     {
         name: "Brandon Shar",
         company: "ezCater",
@@ -189,8 +204,7 @@ const speakers = [
         bio: "",
         group: "speaker",
         },
-    },*/
-    ,
+    },*/,
     ,
 ];
 
@@ -268,7 +282,7 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
         </div>
 
         <!-- Regular speakers section -->
-        <div>
+        <div class="mb-16">
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
                 Speakers
             </h2>
@@ -276,6 +290,52 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
                     regularSpeakers.map((speaker) => (
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="aspect-w-1 aspect-h-1 bg-dark-200">
+                                <img
+                                    src={speaker.image}
+                                    alt={speaker.name}
+                                    class="w-full h-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl text-dark-900">
+                                    {speaker.name}
+                                </h3>
+                                <p class="text-ruby-500 font-display font-medium mt-2">
+                                    {speaker.company}
+                                </p>
+                                <p class="text-cloud-600 font-display font-medium mb-2">
+                                    {speaker.role}
+                                </p>
+
+                                <p class="text-dark-600 text-sm mb-4">
+                                    {speaker.bio}
+                                </p>
+
+                                <div class="flex space-x-4">
+                                    {speaker.socials.map((url) => (
+                                        <SocialLink url={url} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- Regular speakers section -->
+        <div class="mb-16">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
+                CTO Panel
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {
+                    CTOSpeakers.map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img

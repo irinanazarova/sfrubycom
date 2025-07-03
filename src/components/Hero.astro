@@ -45,14 +45,14 @@ import { Image } from "astro:assets";
             <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
                 <a
                     href="https://cfp.sfruby.com"
-                    class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                    class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-300 text-cloud-100 rounded-md font-medium transition-all duration-300 transform hover:shadow-glow hover:scale-105"
                 >
                     Submit a talk
                 </a>
 
                 <a
                     href="https://lu.ma/sfrubyconf2025"
-                    class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-300 text-cloud-100 rounded-md font-medium transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                    class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
                 >
                     Get tickets
                 </a>
@@ -163,36 +163,4 @@ import { Image } from "astro:assets";
             direction: "alternate",
         });
     }
-
-    // Countdown timer
-    function updateCountdown() {
-        const targetDate = new Date("2025-07-03T08:00:00");
-        const now = new Date();
-        const difference = targetDate.getTime() - now.getTime();
-
-        if (difference <= 0) {
-            document.getElementById("countdown").textContent =
-                "Early bird pricing has ended";
-            return;
-        }
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        );
-        const minutes = Math.floor(
-            (difference % (1000 * 60 * 60)) / (1000 * 60),
-        );
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").textContent =
-            `${days}d ${hours.toString().padStart(2, "0")}h ${minutes.toString().padStart(2, "0")}m ${seconds.toString().padStart(2, "0")}s`;
-    }
-
-    // Initialize everything when the page loads
-    document.addEventListener("DOMContentLoaded", () => {
-        initializeAnimations();
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    });
 </script>
