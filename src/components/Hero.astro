@@ -1,185 +1,198 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 ---
 
-<section class="relative bg-gradient-to-b from-sky-500 via-sky-700 to-sky-700 text-white overflow-hidden min-h-screen flex items-center">
-  <!-- Animated background pattern -->
-  <div class="absolute inset-0 overflow-hidden opacity-10">
-    <div class="absolute -inset-[10px] z-0" aria-hidden="true">
-      <div class="ruby-grid"></div>
+<section
+    class="relative bg-gradient-to-b from-sky-500 via-sky-700 to-sky-700 text-white overflow-hidden min-h-screen flex items-center"
+>
+    <!-- Animated background pattern -->
+    <div class="absolute inset-0 overflow-hidden opacity-10">
+        <div class="absolute -inset-[10px] z-0" aria-hidden="true">
+            <div class="ruby-grid"></div>
+        </div>
     </div>
-  </div>
 
-  <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-8 relative z-10">
-    <div class="flex flex-col items-center text-center">
-      <!-- logo -->
-      <div class="w-full relative flex items-center justify-center py-2 md:py-2">
-        <img
-          src="/hero.png"
-          alt="San Francisco Ruby Conference 2025"
-          class="object-contain w-full md:w-full lg:w-1/2"
-          loading="lazy"
-        />
-      </div>
+    <div
+        class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-8 relative z-10"
+    >
+        <div class="flex flex-col items-center text-center">
+            <!-- logo -->
+            <div
+                class="w-full relative flex items-center justify-center py-2 md:py-2"
+            >
+                <img
+                    src="/hero.png"
+                    alt="San Francisco Ruby Conference 2025"
+                    class="object-contain w-full md:w-full lg:w-1/2"
+                    loading="lazy"
+                />
+            </div>
 
-      <!-- <h1 class="font-display font-regular text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 font-stretch-extra-expanded split-text text-cloud-100">
+            <!-- <h1 class="font-display font-regular text-4xl md:text-6xl lg:text-7xl max-w-4xl leading-tight mb-6 font-stretch-extra-expanded split-text text-cloud-100">
         San Francisco Ruby Conference 2025
       </h1>-->
 
-      <p class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-4">
-        Building the Future with Ruby
-      </p>
+            <p
+                class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-4"
+            >
+                Building the Future with Ruby
+            </p>
 
-      <p class="text-lg md:text-xl split-text text-cloud-100 mb-4">
-        November 19-20, 2025 • Fort Mason, San Francisco
-      </p>
+            <p class="text-lg md:text-xl split-text text-cloud-100 mb-4">
+                November 19-20, 2025 • Fort Mason, San Francisco
+            </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
-          <a
-            href="https://cfp.sfruby.com"
-            class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
-          >
-            Submit a talk
-          </a>
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                <a
+                    href="https://cfp.sfruby.com"
+                    class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                >
+                    Submit a talk
+                </a>
 
-
-        <a
-          href="#newsletter"
-          class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-300 text-cloud-100 rounded-md font-medium transition-all duration-300 transform hover:shadow-glow hover:scale-105"
-        >
-          Sign up for updates
-        </a>
-      </div>
-
-      <!-- Countdown timer -->
-      <div class=" inline-flex items-center px-6 py-4 bg-sky-600/50 _backdrop-blur-sm rounded-full text-cloud-200">
-        <span class="mr-3 text-ruby-300 font-medium">Early Bird Tickets Live In:</span>
-        <span id="countdown" class="font-mono countdown"></span>
-      </div>
+                <a
+                    href="https://lu.ma/sfrubyconf2025"
+                    class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-300 text-cloud-100 rounded-md font-medium transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                >
+                    Get tickets
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- Decorative wave divider -->
-  <div class="absolute bottom-0 left-0 right-0 h-16 bg-cloud-50 text-sky-700 overflow-hidden">
-    <svg
-      preserveAspectRatio="none"
-      viewBox="0 0 1200 120"
-      xmlns="http://www.w3.org/2000/svg"
-      class="absolute bottom-0 w-full h-full"
+    <!-- Decorative wave divider -->
+    <div
+        class="absolute bottom-0 left-0 right-0 h-16 bg-cloud-50 text-sky-700 overflow-hidden"
     >
-      <path
-        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-        fill="currentColor"
-      ></path>
-    </svg>
-  </div>
+        <svg
+            preserveAspectRatio="none"
+            viewBox="0 0 1200 120"
+            xmlns="http://www.w3.org/2000/svg"
+            class="absolute bottom-0 w-full h-full"
+        >
+            <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                fill="currentColor"></path>
+        </svg>
+    </div>
 </section>
 
-
 <script>
-  import anime from 'animejs';
+    import anime from "animejs";
 
-  // Initialize animations
-  function initializeAnimations() {
-    // Split text animation
-    document.querySelectorAll('.split-text').forEach(element => {
-      const text = element.textContent || '';
-      element.textContent = '';
+    // Initialize animations
+    function initializeAnimations() {
+        // Split text animation
+        document.querySelectorAll(".split-text").forEach((element) => {
+            const text = element.textContent || "";
+            element.textContent = "";
 
-      // Split text into words
-      const words = text.split(' ');
+            // Split text into words
+            const words = text.split(" ");
 
-      words.forEach((word, wordIndex) => {
-        // Create a container for the word
-        const wordContainer = document.createElement('span');
-        wordContainer.className = 'word';
-        wordContainer.style.display = 'inline-block';
+            words.forEach((word, wordIndex) => {
+                // Create a container for the word
+                const wordContainer = document.createElement("span");
+                wordContainer.className = "word";
+                wordContainer.style.display = "inline-block";
 
-        // Split word into characters
-        word.split('').forEach(char => {
-          const charSpan = document.createElement('span');
-          charSpan.className = 'char';
-          charSpan.textContent = char;
-          charSpan.style.opacity = '0';
-          charSpan.style.transform = 'translateY(20px)';
-          charSpan.style.display = 'inline-block';
-          wordContainer.appendChild(charSpan);
+                // Split word into characters
+                word.split("").forEach((char) => {
+                    const charSpan = document.createElement("span");
+                    charSpan.className = "char";
+                    charSpan.textContent = char;
+                    charSpan.style.opacity = "0";
+                    charSpan.style.transform = "translateY(20px)";
+                    charSpan.style.display = "inline-block";
+                    wordContainer.appendChild(charSpan);
+                });
+
+                element.appendChild(wordContainer);
+
+                // Add space after word (except last word)
+                if (wordIndex < words.length - 1) {
+                    const spaceSpan = document.createElement("span");
+                    spaceSpan.className = "space";
+                    spaceSpan.innerHTML = "&nbsp;";
+                    spaceSpan.style.display = "inline-block";
+                    element.appendChild(spaceSpan);
+                }
+            });
         });
 
-        element.appendChild(wordContainer);
+        // Animate text
+        anime
+            .timeline({
+                easing: "easeOutExpo",
+            })
+            .add({
+                targets: ".ruby-logo",
+                scale: [0, 1],
+                opacity: [0, 1],
+                duration: 1000,
+            })
+            .add(
+                {
+                    targets: ".split-text .char",
+                    opacity: [0, 1],
+                    translateY: [20, 0],
+                    duration: 800,
+                    delay: anime.stagger(20),
+                },
+                "-=400",
+            )
+            .add(
+                {
+                    targets: ".register-btn",
+                    scale: [0.9, 1],
+                    opacity: [0, 1],
+                    duration: 600,
+                },
+                "-=400",
+            );
 
-        // Add space after word (except last word)
-        if (wordIndex < words.length - 1) {
-          const spaceSpan = document.createElement('span');
-          spaceSpan.className = 'space';
-          spaceSpan.innerHTML = '&nbsp;';
-          spaceSpan.style.display = 'inline-block';
-          element.appendChild(spaceSpan);
-        }
-      });
-    });
-
-    // Animate text
-    anime.timeline({
-      easing: 'easeOutExpo',
-    })
-    .add({
-      targets: '.ruby-logo',
-      scale: [0, 1],
-      opacity: [0, 1],
-      duration: 1000,
-    })
-    .add({
-      targets: '.split-text .char',
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 800,
-      delay: anime.stagger(20),
-    }, '-=400')
-    .add({
-      targets: '.register-btn',
-      scale: [0.9, 1],
-      opacity: [0, 1],
-      duration: 600,
-    }, '-=400');
-
-    // Ruby grid animation
-    anime({
-      targets: '.ruby-grid div',
-      scale: [
-        {value: 0.1, duration: 500, easing: 'easeOutSine'},
-        {value: 1, duration: 1000, easing: 'easeInOutQuad'}
-      ],
-      delay: anime.stagger(200, {grid: [12, 12], from: 'center'}),
-      loop: true,
-      direction: 'alternate',
-    });
-  }
-
-  // Countdown timer
-  function updateCountdown() {
-    const targetDate = new Date('2025-07-03T08:00:00');
-    const now = new Date();
-    const difference = targetDate.getTime() - now.getTime();
-
-    if (difference <= 0) {
-      document.getElementById('countdown').textContent = 'Early bird pricing has ended';
-      return;
+        // Ruby grid animation
+        anime({
+            targets: ".ruby-grid div",
+            scale: [
+                { value: 0.1, duration: 500, easing: "easeOutSine" },
+                { value: 1, duration: 1000, easing: "easeInOutQuad" },
+            ],
+            delay: anime.stagger(200, { grid: [12, 12], from: "center" }),
+            loop: true,
+            direction: "alternate",
+        });
     }
 
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    // Countdown timer
+    function updateCountdown() {
+        const targetDate = new Date("2025-07-03T08:00:00");
+        const now = new Date();
+        const difference = targetDate.getTime() - now.getTime();
 
-    document.getElementById('countdown').textContent =
-      `${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
-  }
+        if (difference <= 0) {
+            document.getElementById("countdown").textContent =
+                "Early bird pricing has ended";
+            return;
+        }
 
-  // Initialize everything when the page loads
-  document.addEventListener('DOMContentLoaded', () => {
-    initializeAnimations();
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  });
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor(
+            (difference % (1000 * 60 * 60)) / (1000 * 60),
+        );
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").textContent =
+            `${days}d ${hours.toString().padStart(2, "0")}h ${minutes.toString().padStart(2, "0")}m ${seconds.toString().padStart(2, "0")}s`;
+    }
+
+    // Initialize everything when the page loads
+    document.addEventListener("DOMContentLoaded", () => {
+        initializeAnimations();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    });
 </script>
