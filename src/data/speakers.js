@@ -199,7 +199,7 @@ export const speakers = {
       'https://www.linkedin.com/in/edawerd/',
     ],
     bio: 'Edward leads the long-term technology roadmap for Gusto, including major platform initiatives such as Artificial Intelligence. He also empowers Security and IT. Before co-founding Gusto, Edward was the CEO and co-founder of Picwing, a Y Combinator startup and photo-printing platform. Edward holds bachelor\'s and master\'s degrees in Electrical Engineering from Stanford University.',
-    group: 'cto',
+    group: 'speaker',
   },
   'noel-rappin': {
     id: 'noel-rappin',
@@ -213,6 +213,20 @@ export const speakers = {
       'https://buttondown.com/noelrap',
     ],
     bio: 'Noel is the co-author of Programming Ruby 3.3 and other technical books in the Ruby Community. He\'s dedicated to making Ruby joyful and productive for developers, and is known for building community and championing better tools and practices. You can find Noel online at noelrappin.com.',
+    group: 'speaker',
+  },
+  'jose-valim': {
+    id: 'jose-valim',
+    name: 'José Valim',
+    company: 'Dashbit',
+    role: 'Co-founder and Chief Adoption Officer',
+    image: '/speaker_jose.jpg',
+    socials: [
+      'https://github.com/josevalim',
+      'https://x.com/josevalim',
+      'https://bsky.app/profile/josevalim.com',
+    ],
+    bio: 'José Valim is the creator of the Elixir programming language and a Rails Core Team member. He\'s passionate about building tools that make developers more productive and happy. José is also the co-founder of Dashbit, where he helps companies adopt and run Elixir in production.',
     group: 'speaker',
   },
   'brian-knoles': {

@@ -111,7 +111,7 @@ const CTOSpeakers = getSpeakersByGroup('cto');
             </div>
         </div>
 
-        <!-- Regular speakers section -->
+        <!-- CTO Panel section -->
         <div class="mb-16">
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
                 CTO Panel
@@ -119,7 +119,7 @@ const CTOSpeakers = getSpeakersByGroup('cto');
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    Object.values(CTOSpeakers).map((speaker) => (
+                    [speakers['edward-kim']].map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img
