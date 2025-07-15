@@ -505,11 +505,25 @@ function getSessionData(session) {
     // Get speaker data from the global speakers object
     const speakerData = window.speakersData?.[talk.speakerId];
     
+    // Determine location based on track
+    let location = '';
+    let locationColor = '';
+    if (talk.track === 'main') {
+      location = 'Main Stage';
+      locationColor = 'bg-ruby-100 text-ruby-800';
+    } else if (talk.track === 'blackbox') {
+      location = 'Blackbox Theater';
+      locationColor = 'bg-sky-100 text-sky-800';
+    } else if (talk.track === 'workshop') {
+      location = 'Workshops Studio';
+      locationColor = 'bg-emerald-100 text-emerald-800';
+    }
+    
     modalContent.innerHTML = `
       <div class="mb-6">
         <div class="flex items-center gap-4 mb-4">
-          <span class="px-3 py-1 bg-ruby-100 text-ruby-800 rounded-full text-sm font-medium">
-            ${talk.type.charAt(0).toUpperCase() + talk.type.slice(1)}
+          <span class="px-3 py-1 ${locationColor} rounded-full text-sm font-medium">
+            ${location}
           </span>
           <span class="text-dark-500 text-sm">
             Day ${talk.day} • ${talk.time} - ${talk.endTime}
