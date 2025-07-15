@@ -179,13 +179,15 @@ const days = [
 
 // Define colors for different session types
 const sessionColors = {
-  'Keynote': 'bg-ruby-100 text-ruby-800 border-ruby-200',
-  'CTO roundtable': 'bg-purple-100 text-purple-800 border-purple-200',
-  'VC roundtable': 'bg-amber-100 text-amber-800 border-amber-200',
-  'Startup demos': 'bg-green-100 text-green-800 border-green-200',
-  'Lunch break': 'bg-sky-100 text-sky-800 border-sky-200',
-  'Doors open': 'bg-cloud-100 text-cloud-800 border-cloud-200',
-  'Intro': 'bg-cloud-100 text-cloud-800 border-cloud-200'
+  'Keynote': 'bg-ruby-500 text-white',
+  'CTO roundtable': 'bg-purple-500 text-white',
+  'VC roundtable': 'bg-amber-500 text-white',
+  'Startup demos': 'bg-green-500 text-white',
+  'Lunch break': 'bg-sky-500 text-white',
+  'Doors open': 'bg-cloud-600 text-white',
+  'Intro': 'bg-cloud-600 text-white',
+  'Speaker': 'bg-white text-dark-700 border border-dark-200',
+  'Workshop': 'bg-emerald-100 text-emerald-800 border border-emerald-200'
 };
 
 function getSessionColor(sessionName) {
@@ -194,7 +196,7 @@ function getSessionColor(sessionName) {
       return color;
     }
   }
-  return 'bg-white border-cloud-200';
+  return 'bg-white text-dark-700 border border-dark-200';
 }
 ---
 
@@ -209,114 +211,149 @@ function getSessionColor(sessionName) {
   </div>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Schedule navigation -->
-    <div class="mb-12 flex justify-center space-x-4">
-      {days.map((day, index) => (
-        <button 
-          class={`schedule-tab px-8 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none ${
-            index === 0 
-              ? 'bg-ruby-500 text-white shadow-md' 
-              : 'bg-white text-dark-700 border border-dark-200 hover:bg-dark-50'
-          }`}
-          data-index={index}
-          aria-selected={index === 0 ? 'true' : 'false'}
-        >
-          {day.dayLabel}
-          <span class="hidden md:inline ml-2 text-sm opacity-90">{day.date}</span>
-        </button>
-      ))}
+    <!-- Hero Image -->
+    <div class="w-full h-48 mb-12 rounded-lg overflow-hidden">
+      <img
+        src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=800"
+        alt="Conference schedule planning"
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
     </div>
-    
-    <!-- Track legend -->
-    <div class="mb-12">
-      <h2 class="text-2xl font-display font-bold text-dark-900 mb-8 text-center">Conference Tracks</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-6 text-center border border-ruby-200">
-          <h3 class="font-bold text-ruby-600 mb-3 text-lg">Main Track</h3>
-          <p class="text-dark-600">Keynotes, featured talks, and major presentations</p>
+
+    <!-- Track Overview Cards -->
+    <div class="mb-16">
+      <h2 class="text-3xl font-display font-bold text-dark-900 mb-8 text-center">Conference Tracks</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-ruby-500 transform transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-ruby-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🎤</span>
+          </div>
+          <h3 class="font-bold text-ruby-600 mb-3 text-xl">Main Track</h3>
+          <p class="text-dark-600">Keynotes, featured talks, and major presentations from industry leaders</p>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-6 text-center border border-sky-200">
-          <h3 class="font-bold text-sky-600 mb-3 text-lg">Track #2</h3>
-          <p class="text-dark-600">Specialized talks and technical deep-dives</p>
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-sky-500 transform transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">💻</span>
+          </div>
+          <h3 class="font-bold text-sky-600 mb-3 text-xl">Track #2</h3>
+          <p class="text-dark-600">Specialized talks and technical deep-dives for experienced developers</p>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-6 text-center border border-green-200">
-          <h3 class="font-bold text-green-600 mb-3 text-lg">Workshops</h3>
-          <p class="text-dark-600">Hands-on learning and interactive sessions</p>
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-emerald-500 transform transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🛠️</span>
+          </div>
+          <h3 class="font-bold text-emerald-600 mb-3 text-xl">Workshops</h3>
+          <p class="text-dark-600">Hands-on learning sessions and interactive coding experiences</p>
         </div>
       </div>
     </div>
+
+    <!-- Day Navigation -->
+    <div class="mb-12 flex justify-center">
+      <div class="bg-white rounded-xl shadow-lg p-2 inline-flex space-x-2">
+        {days.map((day, index) => (
+          <button 
+            class={`schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none ${
+              index === 0 
+                ? 'bg-ruby-500 text-white shadow-md transform scale-105' 
+                : 'text-dark-700 hover:bg-dark-50'
+            }`}
+            data-index={index}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            <div class="font-bold">{day.dayLabel}</div>
+            <div class="text-sm opacity-90">{day.date}</div>
+          </button>
+        ))}
+      </div>
+    </div>
     
-    <!-- Schedule tabs content -->
+    <!-- Schedule Content -->
     <div class="space-y-8">
       {days.map((day, dayIndex) => (
         <div 
-          class="schedule-content bg-white rounded-lg shadow-md overflow-hidden" 
+          class="schedule-content" 
           data-index={dayIndex}
           style={dayIndex === 0 ? "" : "display: none;"}
         >
-          <div class="bg-dark-50 px-6 py-4 border-b border-dark-200">
-            <h3 class="text-xl font-display font-bold text-dark-900">{day.dayLabel} - {day.date}</h3>
-          </div>
-          
-          <div class="overflow-x-auto">
-            <table class="min-w-full">
-              <thead class="bg-dark-100">
-                <tr>
-                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/6">Time</th>
-                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/3">Main Track</th>
-                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/3">Track #2</th>
-                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/6">Workshops</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white divide-y divide-dark-200">
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Day Header -->
+            <div class="bg-gradient-to-r from-ruby-500 to-ruby-600 text-white px-8 py-6">
+              <h3 class="text-2xl font-display font-bold">{day.dayLabel}</h3>
+              <p class="text-ruby-100 mt-1">{day.date}</p>
+            </div>
+            
+            <!-- Schedule Grid -->
+            <div class="p-8">
+              <div class="space-y-4">
                 {day.sessions.map((session, index) => (
-                  <tr class={index % 2 === 0 ? 'bg-white' : 'bg-dark-50'}>
-                    <td class="px-6 py-4 text-sm font-medium text-dark-900">
-                      <div class="font-semibold">{session.time}</div>
-                      <div class="text-dark-500 text-xs">- {session.endTime}</div>
-                    </td>
-                    <td class="px-6 py-4">
+                  <div class="grid grid-cols-12 gap-6 items-center py-4 border-b border-dark-100 last:border-b-0">
+                    <!-- Time Column -->
+                    <div class="col-span-12 md:col-span-2">
+                      <div class="text-center md:text-left">
+                        <div class="font-bold text-dark-900 text-lg">{session.time}</div>
+                        <div class="text-dark-500 text-sm">to {session.endTime}</div>
+                      </div>
+                    </div>
+                    
+                    <!-- Main Track -->
+                    <div class="col-span-12 md:col-span-4">
                       {session.main && (
-                        <div class={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium border ${getSessionColor(session.main)}`}>
+                        <div class={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-full justify-center md:justify-start ${getSessionColor(session.main)}`}>
                           {session.main}
                         </div>
                       )}
-                    </td>
-                    <td class="px-6 py-4">
+                    </div>
+                    
+                    <!-- Track #2 -->
+                    <div class="col-span-12 md:col-span-3">
                       {session.track2 && (
-                        <div class={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium border ${getSessionColor(session.track2)}`}>
+                        <div class={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-full justify-center md:justify-start ${getSessionColor(session.track2)}`}>
                           {session.track2}
                         </div>
                       )}
-                    </td>
-                    <td class="px-6 py-4">
+                    </div>
+                    
+                    <!-- Workshops -->
+                    <div class="col-span-12 md:col-span-3">
                       {session.workshop && (
-                        <div class={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium border ${getSessionColor(session.workshop)}`}>
+                        <div class={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-full justify-center md:justify-start ${getSessionColor(session.workshop)}`}>
                           {session.workshop}
                         </div>
                       )}
-                    </td>
-                  </tr>
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </div>
           </div>
         </div>
       ))}
     </div>
     
-    <!-- Additional info -->
-    <div class="mt-16 bg-dark-50 rounded-lg p-8">
-      <h3 class="text-2xl font-display font-bold text-dark-900 mb-6">Schedule Notes</h3>
+    <!-- Schedule Notes -->
+    <div class="mt-16 bg-dark-50 rounded-xl p-8">
+      <h3 class="text-2xl font-display font-bold text-dark-900 mb-6 text-center">Important Information</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h4 class="font-bold text-dark-900 mb-3">Workshop Registration</h4>
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
+              <span class="text-emerald-600">🎫</span>
+            </div>
+            <h4 class="font-bold text-dark-900">Workshop Registration</h4>
+          </div>
           <p class="text-dark-600">
             Workshops have limited capacity and require separate registration. Details will be announced closer to the conference date.
           </p>
         </div>
-        <div>
-          <h4 class="font-bold text-dark-900 mb-3">Schedule Updates</h4>
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+              <span class="text-amber-600">📅</span>
+            </div>
+            <h4 class="font-bold text-dark-900">Schedule Updates</h4>
+          </div>
           <p class="text-dark-600">
             This schedule is preliminary and subject to change. Final speaker assignments and session details will be announced in October 2025.
           </p>
@@ -324,23 +361,23 @@ function getSessionColor(sessionName) {
       </div>
     </div>
 
-    <!-- Call to action -->
-    <div class="mt-16 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-lg p-8">
-      <h3 class="text-2xl font-display font-bold mb-4">Ready to Join Us?</h3>
-      <p class="text-lg mb-6 max-w-2xl mx-auto">
+    <!-- Call to Action -->
+    <div class="mt-16 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-xl p-12">
+      <h3 class="text-3xl font-display font-bold mb-4">Ready to Join Us?</h3>
+      <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
         Don't miss out on two days of Ruby excellence with three concurrent tracks designed for every skill level.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
           href="https://lu.ma/sfrubyconf2025"
           target="_blank"
-          class="inline-flex items-center justify-center px-8 py-3 bg-white text-ruby-600 rounded-md font-medium shadow-md transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white text-ruby-600 rounded-lg font-medium shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
         >
           Get Tickets
         </a>
         <a 
           href="/#newsletter"
-          class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-white text-white rounded-md font-medium transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-ruby-600"
         >
           Sign up for updates
         </a>
@@ -359,11 +396,11 @@ function getSessionColor(sessionName) {
       // Update tab styling
       tabs.forEach(t => {
         t.setAttribute('aria-selected', 'false');
-        t.className = 'schedule-tab px-8 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none bg-white text-dark-700 border border-dark-200 hover:bg-dark-50';
+        t.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none text-dark-700 hover:bg-dark-50';
       });
       
       tab.setAttribute('aria-selected', 'true');
-      tab.className = 'schedule-tab px-8 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none bg-ruby-500 text-white shadow-md';
+      tab.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none bg-ruby-500 text-white shadow-md transform scale-105';
       
       // Show selected content
       const index = tab.getAttribute('data-index');
