@@ -243,6 +243,19 @@ export const speakers = {
     bio: 'Brian leads development at Bellawatt, a software consultancy that works with energy companies. He\'s a co-author of Inertia Rails and loves using Rails and React together. He\'s known to say "I wonder..." a lot, and he often spends the daily walks with his inexhaustible dog lost in thought.',
     group: 'speaker',
   },
+  'justin-bowen': {
+    id: 'justin-bowen',
+    name: 'Justin Bowen',
+    company: 'Active Agent',
+    role: 'Founder',
+    image: '/speaker_justin.jpg',
+    socials: [
+      'https://github.com/justinbowen',
+      'https://x.com/justinbowen',
+    ],
+    bio: 'Justin Bowen is the creator of Active Agent, the first truly Rails-native AI framework, where Agents are Controllers. Since 2015, he\'s been building real-world AI products in agriculture, healthcare, HR tech, and more, with a specialization in computer vision. His work with Active Agent combines his extensive experience in Python and Next.js, bringing it to Rails with the goal of making Ruby the language of choice for new startups in the AI age.',
+    group: 'speaker',
+  },
 };
 
 export const talks = {
