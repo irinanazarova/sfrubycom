@@ -385,22 +385,36 @@ export const talks = {
     title: 'Building AI Agents on Rails',
     speakerId: 'justin-bowen',
     description: 'Learn how to build intelligent AI agents using Rails with Active Agent. Justin demonstrates practical patterns for creating AI-powered applications that can reason, plan, and execute complex tasks.',
-    type: 'talk',
-    track: 'main',
+    type: 'workshop',
+    track: 'workshop',
     day: 1,
-    time: '3:30 PM',
-    endTime: '4:00 PM'
+    time: '10:20 AM',
+    endTime: '12:20 PM',
+    lumaId: 'workshop-1'
   },
-  'graphql-best-practices': {
-    id: 'graphql-best-practices',
+  'metaprogramming-workshop': {
+    id: 'metaprogramming-workshop',
     title: 'Metaprogramming',
     speakerId: 'noel-rappin',
-    description: 'Master the art of Ruby metaprogramming. Noel explores advanced Ruby techniques, when to use metaprogramming effectively, and how to write code that writes code while maintaining readability and performance.',
-    type: 'talk',
-    track: 'blackbox',
+    description: 'Dive deep into Ruby metaprogramming in this hands-on workshop. Learn advanced techniques for writing flexible, powerful Ruby code while avoiding common pitfalls and maintaining code clarity.',
+    type: 'workshop',
+    track: 'workshop',
     day: 1,
-    time: '3:30 PM',
-    endTime: '4:00 PM'
+    time: '2:00 PM',
+    endTime: '4:00 PM',
+    lumaId: 'workshop-2'
+  },
+  'inertia-rails-workshop': {
+    id: 'inertia-rails-workshop',
+    title: 'Inertia Rails',
+    speakerId: ['brandon-shar', 'brian-knoles', 'svyatoslav-kryukov'],
+    description: 'Master Inertia.js with Rails in this comprehensive workshop. Learn how to build modern, reactive applications using Rails as your backend and your favorite frontend framework, all without building an API.',
+    type: 'workshop',
+    track: 'workshop',
+    day: 2,
+    time: '10:10 AM',
+    endTime: '12:10 PM',
+    lumaId: 'workshop-3'
   },
   'ruby-modern-startups': {
     id: 'ruby-modern-startups',
@@ -545,55 +559,6 @@ export const talks = {
     time: '6:00 PM',
     endTime: '6:30 PM'
   },
-  // Workshops
-  'building-modern-rails-apis': {
-    id: 'building-modern-rails-apis',
-    title: 'Inertia Rails',
-    speakerId: ['brandon-shar', 'brian-knoles', 'svyatoslav-kryukov'],
-    description: 'Master Inertia.js with Rails in this comprehensive workshop. Learn how to build modern, reactive applications using Rails as your backend and your favorite frontend framework, all without building an API.',
-    type: 'workshop',
-    track: 'workshop',
-    day: 1,
-    time: '10:20 AM',
-    endTime: '12:20 PM',
-    lumaId: 'workshop-1'
-  },
-  'tdd-mastery': {
-    id: 'tdd-mastery',
-    title: 'Metaprogramming',
-    speakerId: 'noel-rappin',
-    description: 'Dive deep into Ruby metaprogramming in this hands-on workshop. Learn advanced techniques for writing flexible, powerful Ruby code while avoiding common pitfalls and maintaining code clarity.',
-    type: 'workshop',
-    track: 'workshop',
-    day: 1,
-    time: '2:00 PM',
-    endTime: '4:00 PM',
-    lumaId: 'workshop-2'
-  },
-  'advanced-ruby-patterns': {
-    id: 'advanced-ruby-patterns',
-    title: 'Advanced Ruby Patterns',
-    speakerId: 'jeremy-evans',
-    description: 'Dive deep into advanced Ruby patterns and techniques. This workshop covers metaprogramming, design patterns, performance optimization, and advanced Ruby features that will elevate your Ruby skills.',
-    type: 'workshop',
-    track: 'workshop',
-    day: 2,
-    time: '10:10 AM',
-    endTime: '12:10 PM',
-    lumaId: 'workshop-3'
-  },
-  'building-ruby-cli-tools': {
-    id: 'building-ruby-cli-tools',
-    title: 'Building Ruby CLI Tools',
-    speakerId: 'takashi-kokubun',
-    description: 'Create powerful command-line tools with Ruby in this practical workshop. Learn CLI design principles, argument parsing, testing CLI applications, and distribution strategies for your Ruby tools.',
-    type: 'workshop',
-    track: 'workshop',
-    day: 2,
-    time: '2:00 PM',
-    endTime: '5:00 PM',
-    lumaId: 'workshop-4'
-  }
 };
 
 // Helper functions
