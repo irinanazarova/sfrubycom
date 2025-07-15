@@ -7,6 +7,9 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   vite: {
+    optimizeDeps: {
+      include: ['animejs']
+    },
     build: {
       cssCodeSplit: true,
       rollupOptions: {
