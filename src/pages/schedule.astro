@@ -230,21 +230,21 @@ function getSessionData(session) {
           <div class="w-16 h-16 bg-ruby-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-2xl">🎤</span>
           </div>
-          <h3 class="font-bold text-ruby-600 mb-3 text-xl">Main Stage</h3>
+          <h3 class="font-display font-bold text-ruby-600 mb-3 text-xl">Main Stage</h3>
           <p class="text-dark-600">Keynotes and featured presentations</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-sky-500 transform transition-all duration-300 hover:-translate-y-2">
           <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-2xl">🎭</span>
           </div>
-          <h3 class="font-bold text-sky-600 mb-3 text-xl">Blackbox Theater</h3>
+          <h3 class="font-display font-bold text-sky-600 mb-3 text-xl">Blackbox Theater</h3>
           <p class="text-dark-600">Technical talks and specialized sessions</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-emerald-500 transform transition-all duration-300 hover:-translate-y-2">
           <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-2xl">🛠️</span>
           </div>
-          <h3 class="font-bold text-emerald-600 mb-3 text-xl">Workshops Studio</h3>
+          <h3 class="font-display font-bold text-emerald-600 mb-3 text-xl">Workshops Studio</h3>
           <p class="text-dark-600">Hands-on learning experiences</p>
         </div>
       </div>
@@ -263,7 +263,7 @@ function getSessionData(session) {
             data-index={index}
             aria-selected={index === 0 ? 'true' : 'false'}
           >
-            <div class="font-bold">{day.dayLabel}</div>
+            <div class="font-display font-bold">{day.dayLabel}</div>
             <div class="text-sm opacity-90">{day.date}</div>
           </button>
         ))}
@@ -289,16 +289,16 @@ function getSessionData(session) {
             <div class="px-8 py-4 bg-dark-50 border-b border-dark-200">
               <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-12 md:col-span-2">
-                  <h4 class="font-bold text-dark-700 text-sm">TIME</h4>
+                  <h4 class="font-display font-bold text-dark-700 text-sm tracking-wide">TIME</h4>
                 </div>
                 <div class="col-span-12 md:col-span-4">
-                  <h4 class="font-bold text-ruby-600 text-sm">MAIN STAGE</h4>
+                  <h4 class="font-display font-bold text-ruby-600 text-sm tracking-wide">MAIN STAGE</h4>
                 </div>
                 <div class="col-span-12 md:col-span-3">
-                  <h4 class="font-bold text-sky-600 text-sm">BLACKBOX THEATER</h4>
+                  <h4 class="font-display font-bold text-sky-600 text-sm tracking-wide">BLACKBOX THEATER</h4>
                 </div>
                 <div class="col-span-12 md:col-span-3">
-                  <h4 class="font-bold text-emerald-600 text-sm">WORKSHOPS STUDIO</h4>
+                  <h4 class="font-display font-bold text-emerald-600 text-sm tracking-wide">WORKSHOPS STUDIO</h4>
                 </div>
               </div>
             </div>
@@ -311,7 +311,7 @@ function getSessionData(session) {
                     <!-- Time Column -->
                     <div class="col-span-12 md:col-span-2">
                       <div class="text-center md:text-left">
-                        <div class="font-bold text-dark-900 text-lg">{session.time}</div>
+                        <div class="font-display font-bold text-dark-900 text-lg">{session.time}</div>
                         <div class="text-dark-500 text-sm">to {session.endTime}</div>
                       </div>
                     </div>
@@ -327,7 +327,7 @@ function getSessionData(session) {
                             class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
                             onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
                           >
-                            <div class="font-medium text-sm mb-1">{sessionData.title}</div>
+                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
                             {sessionData.speaker && (
                               <div class="text-xs opacity-75">{sessionData.speaker}</div>
                             )}
@@ -347,7 +347,7 @@ function getSessionData(session) {
                             class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
                             onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
                           >
-                            <div class="font-medium text-sm mb-1">{sessionData.title}</div>
+                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
                             {sessionData.speaker && (
                               <div class="text-xs opacity-75">{sessionData.speaker}</div>
                             )}
@@ -367,7 +367,7 @@ function getSessionData(session) {
                             class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
                             onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
                           >
-                            <div class="font-medium text-sm mb-1">{sessionData.title}</div>
+                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
                             {sessionData.speaker && (
                               <div class="text-xs opacity-75 mb-2">{sessionData.speaker}</div>
                             )}
@@ -422,7 +422,7 @@ function getSessionData(session) {
             <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
               <span class="text-emerald-600">🎫</span>
             </div>
-            <h4 class="font-bold text-dark-900">Workshop Registration</h4>
+            <h4 class="font-display font-bold text-dark-900">Workshop Registration</h4>
           </div>
           <p class="text-dark-600">
             Workshops have limited capacity and require separate registration via Luma. Click the "Sign Up" button for each workshop you'd like to attend.
@@ -433,7 +433,7 @@ function getSessionData(session) {
             <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
               <span class="text-amber-600">📍</span>
             </div>
-            <h4 class="font-bold text-dark-900">Venue Locations</h4>
+            <h4 class="font-display font-bold text-dark-900">Venue Locations</h4>
           </div>
           <p class="text-dark-600">
             All three venues are located within Fort Mason Center. Maps and directions will be provided at registration.
