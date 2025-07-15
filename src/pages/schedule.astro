@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { talks, getTalkWithSpeaker } from '../data/speakers.js';
+import { talks, getTalkWithSpeaker, speakers } from '../data/speakers.js';
 
 const days = [
   {
@@ -367,15 +367,15 @@ function getSessionData(session) {
                         if (sessionData.talkData && sessionData.talkData.speakerId) {
                           if (Array.isArray(sessionData.talkData.speakerId)) {
                             // Multiple speakers
-                            const speakers = sessionData.talkData.speakerId.map(id => window.speakersData?.[id]?.name).filter(Boolean);
-                            if (speakers.length > 1) {
-                              speakerNames = speakers.slice(0, -1).join(', ') + ' & ' + speakers[speakers.length - 1];
-                            } else if (speakers.length === 1) {
-                              speakerNames = speakers[0];
+                            const speakersList = sessionData.talkData.speakerId.map(id => speakers?.[id]?.name).filter(Boolean);
+                            if (speakersList.length > 1) {
+                              speakerNames = speakersList.slice(0, -1).join(', ') + ' & ' + speakersList[speakersList.length - 1];
+                            } else if (speakersList.length === 1) {
+                              speakerNames = speakersList[0];
                             }
                           } else {
                             // Single speaker
-                            speakerNames = window.speakersData?.[sessionData.talkData.speakerId]?.name || '';
+                            speakerNames = speakers?.[sessionData.talkData.speakerId]?.name || '';
                           }
                         } else if (sessionData.speaker) {
                           speakerNames = sessionData.speaker;
@@ -486,7 +486,7 @@ function getSessionData(session) {
   </div>
 </Layout>
 
-<script define:vars={{ talks }}>
+<script define:vars={{ talks, speakers }} client:load>
   // Handle tab switching
   const tabs = document.querySelectorAll('.schedule-tab');
   const contents = document.querySelectorAll('.schedule-content');
@@ -522,7 +522,7 @@ function getSessionData(session) {
     modalTitle.textContent = talk.title;
     
     // Get speaker data from the global speakers object
-    const speakerData = window.speakersData?.[talk.speakerId];
+    const speakerData = speakers?.[talk.speakerId];
     
     // Determine location based on track
     let location = '';
@@ -554,14 +554,14 @@ function getSessionData(session) {
       ${(() => {
         // Handle multiple speakers
         if (Array.isArray(talk.speakerId)) {
-          const speakers = talk.speakerId.map(id => window.speakersData?.[id]).filter(Boolean);
-          if (speakers.length === 0) return '';
+          const speakersList = talk.speakerId.map(id => speakers?.[id]).filter(Boolean);
+          if (speakersList.length === 0) return '';
           
           return `
             <div class="border-t border-dark-200 pt-6">
-              <h5 class="font-bold text-dark-900 mb-4">About the Speaker${speakers.length > 1 ? 's' : ''}</h5>
+              <h5 class="font-bold text-dark-900 mb-4">About the Speaker${speakersList.length > 1 ? 's' : ''}</h5>
               <div class="space-y-6">
-                ${speakers.map(speaker => `
+                ${speakersList.map(speaker => `
                   <div class="flex items-start gap-4">
                     <img 
                       src="${speaker.image}" 
@@ -620,7 +620,7 @@ function getSessionData(session) {
           `;
         } else {
           // Single speaker
-          const speakerData = window.speakersData?.[talk.speakerId];
+          const speakerData = speakers?.[talk.speakerId];
           if (!speakerData) return '';
           
           return `
@@ -726,10 +726,4 @@ function getSessionData(session) {
   // Make functions globally accessible
   window.openTalkModal = openTalkModal;
   window.closeTalkModal = closeTalkModal;
-</script>
-
-<script>
-  // Import speaker data for the modal
-  import { speakers } from '../data/speakers.js';
-  window.speakersData = speakers;
 </script>
