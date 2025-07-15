@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { talks, getTalkWithSpeaker } from '../data/speakers.js';
 
 const days = [
   {
@@ -23,30 +24,30 @@ const days = [
       { 
         time: '9:35 AM', 
         endTime: '10:05 AM',
-        main: { title: 'The Future of Ruby: Building Tomorrow\'s Applications', speaker: 'Obie Fernandez', type: 'keynote' }, 
+        main: { talkId: 'future-of-ruby', type: 'keynote' }, 
         track2: null, 
         workshop: null 
       },
       { 
         time: '10:20 AM', 
         endTime: '10:50 AM',
-        main: { title: 'Scaling Rails: Lessons from 10M+ Users', speaker: 'Ngan Pham', type: 'talk' }, 
-        track2: { title: 'Ruby Performance Deep Dive with YJIT', speaker: 'Takashi Kokubun', type: 'talk' }, 
-        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop', lumaId: 'workshop-1' }
+        main: { talkId: 'scaling-rails', type: 'talk' }, 
+        track2: { talkId: 'ruby-performance-yjit', type: 'talk' }, 
+        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
       },
       { 
         time: '11:05 AM', 
         endTime: '11:35 AM',
-        main: { title: 'AI-Powered Ruby Development', speaker: 'Carmine Paolino', type: 'talk' }, 
-        track2: { title: 'Advanced Testing Strategies', speaker: 'Vladimir Dementyev', type: 'talk' }, 
-        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop', lumaId: 'workshop-1' }
+        main: { talkId: 'ai-powered-ruby', type: 'talk' }, 
+        track2: { talkId: 'advanced-testing', type: 'talk' }, 
+        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
       },
       { 
         time: '11:50 AM', 
         endTime: '12:20 PM',
-        main: { title: 'Ruby in Production: Battle-Tested Patterns', speaker: 'Mike Perham', type: 'talk' }, 
-        track2: { title: 'Hotwire & Stimulus: The Future of Rails Frontend', speaker: 'Svyatoslav Kryukov', type: 'talk' }, 
-        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop', lumaId: 'workshop-1' }
+        main: { talkId: 'ruby-production-patterns', type: 'talk' }, 
+        track2: { talkId: 'hotwire-stimulus', type: 'talk' }, 
+        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
       },
       { 
         time: '12:35 PM', 
@@ -58,28 +59,28 @@ const days = [
       { 
         time: '2:00 PM', 
         endTime: '2:30 PM',
-        main: { title: 'Ruby Security: Protecting Your Applications', speaker: 'Jeremy Evans', type: 'talk' }, 
-        track2: { title: 'Database Optimization for Rails Apps', speaker: 'Fito von Zastrow', type: 'talk' }, 
-        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop', lumaId: 'workshop-2' }
+        main: { talkId: 'ruby-security', type: 'talk' }, 
+        track2: { talkId: 'database-optimization', type: 'talk' }, 
+        workshop: { talkId: 'tdd-mastery', type: 'workshop' }
       },
       { 
         time: '2:45 PM', 
         endTime: '3:15 PM',
-        main: { title: 'Building Developer Tools with Ruby', speaker: 'Rachael Wright-Munn', type: 'talk' }, 
-        track2: { title: 'Microservices Architecture with Ruby', speaker: 'Alan Ridlehoover', type: 'talk' }, 
-        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop', lumaId: 'workshop-2' }
+        main: { talkId: 'building-developer-tools', type: 'talk' }, 
+        track2: { talkId: 'microservices-architecture', type: 'talk' }, 
+        workshop: { talkId: 'tdd-mastery', type: 'workshop' }
       },
       { 
         time: '3:30 PM', 
         endTime: '4:00 PM',
-        main: { title: 'Ruby Concurrency: Threads, Fibers & Async', speaker: 'Brandon Weaver', type: 'talk' }, 
-        track2: { title: 'GraphQL with Ruby: Best Practices', speaker: 'Brandon Shar', type: 'talk' }, 
-        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop', lumaId: 'workshop-2' }
+        main: { talkId: 'ruby-concurrency', type: 'talk' }, 
+        track2: { talkId: 'graphql-best-practices', type: 'talk' }, 
+        workshop: { talkId: 'tdd-mastery', type: 'workshop' }
       },
       { 
         time: '4:15 PM', 
         endTime: '4:45 PM',
-        main: { title: 'Ruby\'s Role in Modern Startups', speaker: 'Edward Kim', type: 'keynote' }, 
+        main: { talkId: 'ruby-modern-startups', type: 'keynote' }, 
         track2: null, 
         workshop: null 
       },
@@ -106,30 +107,30 @@ const days = [
       { 
         time: '9:25 AM', 
         endTime: '9:55 AM',
-        main: { title: 'The Art of Ruby: Writing Beautiful Code', speaker: 'Vladimir Dementyev', type: 'keynote' }, 
+        main: { talkId: 'art-of-ruby', type: 'keynote' }, 
         track2: null, 
         workshop: null 
       },
       { 
         time: '10:10 AM', 
         endTime: '10:40 AM',
-        main: { title: 'Rails 8: What\'s New and Exciting', speaker: 'Marco Roth', type: 'talk' }, 
-        track2: { title: 'Background Jobs at Scale', speaker: 'Mike Perham', type: 'talk' }, 
-        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop', lumaId: 'workshop-3' }
+        main: { talkId: 'rails-8-whats-new', type: 'talk' }, 
+        track2: { talkId: 'background-jobs-scale', type: 'talk' }, 
+        workshop: { talkId: 'advanced-ruby-patterns', type: 'workshop' }
       },
       { 
         time: '10:55 AM', 
         endTime: '11:25 AM',
-        main: { title: 'Ruby Gems: Building & Maintaining', speaker: 'Svyatoslav Kryukov', type: 'talk' }, 
-        track2: { title: 'Debugging Ruby Applications', speaker: 'Rachael Wright-Munn', type: 'talk' }, 
-        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop', lumaId: 'workshop-3' }
+        main: { talkId: 'ruby-gems-building', type: 'talk' }, 
+        track2: { talkId: 'debugging-ruby', type: 'talk' }, 
+        workshop: { talkId: 'advanced-ruby-patterns', type: 'workshop' }
       },
       { 
         time: '11:40 AM', 
         endTime: '12:20 PM',
-        main: { title: 'Machine Learning with Ruby', speaker: 'Brandon Weaver', type: 'talk' }, 
-        track2: { title: 'Code Review Best Practices', speaker: 'Alan Ridlehoover', type: 'talk' }, 
-        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop', lumaId: 'workshop-3' }
+        main: { talkId: 'machine-learning-ruby', type: 'talk' }, 
+        track2: { talkId: 'code-review-practices', type: 'talk' }, 
+        workshop: { talkId: 'advanced-ruby-patterns', type: 'workshop' }
       },
       { 
         time: '12:25 PM', 
@@ -141,23 +142,23 @@ const days = [
       { 
         time: '2:00 PM', 
         endTime: '2:30 PM',
-        main: { title: 'Ruby in the Cloud: Deployment Strategies', speaker: 'Fito von Zastrow', type: 'talk' }, 
-        track2: { title: 'API Design with Ruby', speaker: 'Brandon Shar', type: 'talk' }, 
-        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop', lumaId: 'workshop-4' }
+        main: { talkId: 'ruby-cloud-deployment', type: 'talk' }, 
+        track2: { talkId: 'api-design-ruby', type: 'talk' }, 
+        workshop: { talkId: 'building-ruby-cli-tools', type: 'workshop' }
       },
       { 
         time: '2:45 PM', 
         endTime: '3:15 PM',
-        main: { title: 'Open Source Sustainability', speaker: 'Noel Rappin', type: 'talk' }, 
-        track2: { title: 'Ruby Memory Management', speaker: 'Brian Knoles', type: 'talk' }, 
-        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop', lumaId: 'workshop-4' }
+        main: { talkId: 'open-source-sustainability', type: 'talk' }, 
+        track2: { talkId: 'ruby-memory-management', type: 'talk' }, 
+        workshop: { talkId: 'building-ruby-cli-tools', type: 'workshop' }
       },
       { 
         time: '3:30 PM', 
         endTime: '5:00 PM',
         main: { title: 'Startup Demo Showcase', speaker: 'Various Founders', type: 'demos' }, 
         track2: null, 
-        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop', lumaId: 'workshop-4' }
+        workshop: { talkId: 'building-ruby-cli-tools', type: 'workshop' }
       },
       { 
         time: '5:15 PM', 
@@ -169,7 +170,7 @@ const days = [
       { 
         time: '6:00 PM', 
         endTime: '6:30 PM',
-        main: { title: 'Closing Keynote: Ruby\'s Bright Future', speaker: 'Obie Fernandez', type: 'keynote' }, 
+        main: { talkId: 'closing-keynote', type: 'keynote' }, 
         track2: null, 
         workshop: null 
       }
@@ -190,6 +191,23 @@ const sessionColors = {
 
 function getSessionColor(sessionType) {
   return sessionColors[sessionType] || 'bg-white text-dark-700 border border-dark-200';
+}
+
+// Helper function to get session data
+function getSessionData(session) {
+  if (!session) return null;
+  
+  if (session.talkId) {
+    const talkData = getTalkWithSpeaker(session.talkId);
+    return {
+      ...session,
+      title: talkData?.title || 'TBA',
+      speaker: talkData?.speaker?.name || '',
+      talkData
+    };
+  }
+  
+  return session;
 }
 ---
 
@@ -300,11 +318,275 @@ function getSessionColor(sessionType) {
                     
                     <!-- Main Stage -->
                     <div class="col-span-12 md:col-span-4">
-                      {session.main && (
-                        <div class={`p-4 rounded-lg ${getSessionColor(session.main.type)}`}>
-                          <div class="font-medium text-sm mb-1">{session.main.title}</div>
-                          {session.main.speaker && (
-                            <div class="text-xs opacity-75">{session.main.speaker}</div>
+                      {(() => {
+                        const sessionData = getSessionData(session.main);
+                        if (!sessionData) return null;
+                        
+                        return (
+                          <div 
+                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
+                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
+                          >
+                            <div class="font-medium text-sm mb-1">{sessionData.title}</div>
+                            {sessionData.speaker && (
+                              <div class="text-xs opacity-75">{sessionData.speaker}</div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                    
+                    <!-- Blackbox Theater -->
+                    <div class="col-span-12 md:col-span-3">
+                      {(() => {
+                        const sessionData = getSessionData(session.track2);
+                        if (!sessionData) return null;
+                        
+                        return (
+                          <div 
+                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
+                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
+                          >
+                            <div class="font-medium text-sm mb-1">{sessionData.title}</div>
+                            {sessionData.speaker && (
+                              <div class="text-xs opacity-75">{sessionData.speaker}</div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                    
+                    <!-- Workshops Studio -->
+                    <div class="col-span-12 md:col-span-3">
+                      {(() => {
+                        const sessionData = getSessionData(session.workshop);
+                        if (!sessionData) return null;
+                        
+                        return (
+                          <div 
+                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
+                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
+                          >
+                            <div class="font-medium text-sm mb-1">{sessionData.title}</div>
+                            {sessionData.speaker && (
+                              <div class="text-xs opacity-75 mb-2">{sessionData.speaker}</div>
+                            )}
+                            {sessionData.talkData?.lumaId && (
+                              <a
+                                href={`https://lu.ma/${sessionData.talkData.lumaId}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-block px-3 py-1 bg-emerald-500 text-white text-xs font-medium rounded-md hover:bg-emerald-600 transition-colors duration-200"
+                                onclick="event.stopPropagation()"
+                              >
+                                Sign Up
+                              </a>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Talk Details Modal -->
+    <div id="talkModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b border-dark-200 px-6 py-4 flex justify-between items-center">
+          <h3 class="text-xl font-bold text-dark-900" id="modalTitle">Talk Details</h3>
+          <button onclick="closeTalkModal()" class="text-dark-400 hover:text-dark-600 text-2xl">
+            ×
+          </button>
+        </div>
+        
+        <div class="p-6">
+          <div id="modalContent">
+            <!-- Content will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Schedule Notes -->
+    <div class="mt-16 bg-dark-50 rounded-xl p-8">
+      <h3 class="text-2xl font-display font-bold text-dark-900 mb-6 text-center">Important Information</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
+              <span class="text-emerald-600">🎫</span>
+            </div>
+            <h4 class="font-bold text-dark-900">Workshop Registration</h4>
+          </div>
+          <p class="text-dark-600">
+            Workshops have limited capacity and require separate registration via Luma. Click the "Sign Up" button for each workshop you'd like to attend.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+              <span class="text-amber-600">📍</span>
+            </div>
+            <h4 class="font-bold text-dark-900">Venue Locations</h4>
+          </div>
+          <p class="text-dark-600">
+            All three venues are located within Fort Mason Center. Maps and directions will be provided at registration.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-16 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-xl p-12">
+      <h3 class="text-3xl font-display font-bold mb-4">Ready to Join Us?</h3>
+      <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+        Don't miss out on two days of Ruby excellence across three venues at Fort Mason Center.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="https://lu.ma/sfrubyconf2025"
+          target="_blank"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white text-ruby-600 rounded-lg font-medium shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+        >
+          Get Tickets
+        </a>
+        <a 
+          href="/#newsletter"
+          class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-ruby-600"
+        >
+          Sign up for updates
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script define:vars={{ talks }}>
+  // Handle tab switching
+  const tabs = document.querySelectorAll('.schedule-tab');
+  const contents = document.querySelectorAll('.schedule-content');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update tab styling
+      tabs.forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none text-dark-700 hover:bg-dark-50';
+      });
+      
+      tab.setAttribute('aria-selected', 'true');
+      tab.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none bg-ruby-500 text-white shadow-md transform scale-105';
+      
+      // Show selected content
+      const index = tab.getAttribute('data-index');
+      contents.forEach(content => {
+        content.style.display = content.getAttribute('data-index') === index ? '' : 'none';
+      });
+    });
+  });
+  
+  // Talk modal functionality
+  function openTalkModal(talkId) {
+    const talk = talks[talkId];
+    if (!talk) return;
+    
+    const modal = document.getElementById('talkModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    
+    modalTitle.textContent = talk.title;
+    
+    // Get speaker data from the global speakers object
+    const speakerData = window.speakersData?.[talk.speakerId];
+    
+    modalContent.innerHTML = `
+      <div class="mb-6">
+        <h4 class="text-lg font-bold text-dark-900 mb-2">${talk.title}</h4>
+        <div class="flex items-center gap-4 mb-4">
+          <span class="px-3 py-1 bg-ruby-100 text-ruby-800 rounded-full text-sm font-medium">
+            ${talk.type.charAt(0).toUpperCase() + talk.type.slice(1)}
+          </span>
+          <span class="text-dark-500 text-sm">
+            Day ${talk.day} • ${talk.time} - ${talk.endTime}
+          </span>
+        </div>
+        <p class="text-dark-700 leading-relaxed">${talk.description}</p>
+      </div>
+      
+      ${speakerData ? `
+        <div class="border-t border-dark-200 pt-6">
+          <h5 class="font-bold text-dark-900 mb-4">About the Speaker</h5>
+          <div class="flex items-start gap-4">
+            <img 
+              src="${speakerData.image}" 
+              alt="${speakerData.name}"
+              class="w-16 h-16 rounded-full object-cover"
+            />
+            <div class="flex-1">
+              <h6 class="font-bold text-dark-900">${speakerData.name}</h6>
+              <p class="text-ruby-500 text-sm mb-2">${speakerData.company}</p>
+              <p class="text-dark-600 text-sm">${speakerData.bio}</p>
+            </div>
+          </div>
+        </div>
+      ` : ''}
+      
+      ${talk.lumaId ? `
+        <div class="mt-6 text-center">
+          <a
+            href="https://lu.ma/${talk.lumaId}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white font-medium rounded-lg hover:bg-emerald-600 transition-colors duration-200"
+          >
+            Sign Up for Workshop
+          </a>
+        </div>
+      ` : ''}
+    `;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeTalkModal() {
+    const modal = document.getElementById('talkModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+  
+  // Close modal when clicking outside
+  document.getElementById('talkModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      closeTalkModal();
+    }
+  });
+  
+  // Close modal on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeTalkModal();
+    }
+  });
+  
+  // Make functions globally accessible
+  window.openTalkModal = openTalkModal;
+  window.closeTalkModal = closeTalkModal;
+</script>
+
+<script>
+  // Import speaker data for the modal
+  import { speakers } from '../data/speakers.js';
+  window.speakersData = speakers;
+</script>
                           )}
                         </div>
                       )}
