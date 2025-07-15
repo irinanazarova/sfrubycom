@@ -9,86 +9,86 @@ const days = [
       { 
         time: '8:00 AM', 
         endTime: '9:00 AM',
-        main: 'Doors open', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'Doors Open & Registration', speaker: '', type: 'logistics' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '9:00 AM', 
         endTime: '9:20 AM',
-        main: 'Intro', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'Welcome & Opening Remarks', speaker: '', type: 'logistics' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '9:35 AM', 
         endTime: '10:05 AM',
-        main: 'Keynote', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'The Future of Ruby: Building Tomorrow\'s Applications', speaker: 'Obie Fernandez', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '10:20 AM', 
         endTime: '10:50 AM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #1' 
+        main: { title: 'Scaling Rails: Lessons from 10M+ Users', speaker: 'Ngan Pham', type: 'talk' }, 
+        track2: { title: 'Ruby Performance Deep Dive with YJIT', speaker: 'Takashi Kokubun', type: 'talk' }, 
+        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop' }
       },
       { 
         time: '11:05 AM', 
         endTime: '11:35 AM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #1' 
+        main: { title: 'AI-Powered Ruby Development', speaker: 'Carmine Paolino', type: 'talk' }, 
+        track2: { title: 'Advanced Testing Strategies', speaker: 'Vladimir Dementyev', type: 'talk' }, 
+        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop' }
       },
       { 
         time: '11:50 AM', 
         endTime: '12:20 PM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #1' 
+        main: { title: 'Ruby in Production: Battle-Tested Patterns', speaker: 'Mike Perham', type: 'talk' }, 
+        track2: { title: 'Hotwire & Stimulus: The Future of Rails Frontend', speaker: 'Svyatoslav Kryukov', type: 'talk' }, 
+        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop' }
       },
       { 
         time: '12:35 PM', 
         endTime: '2:05 PM',
-        main: 'Lunch break', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'Lunch Break & Networking', speaker: '', type: 'break' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '2:20 PM', 
         endTime: '2:50 PM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #2' 
+        main: { title: 'Ruby Security: Protecting Your Applications', speaker: 'Jeremy Evans', type: 'talk' }, 
+        track2: { title: 'Database Optimization for Rails Apps', speaker: 'Fito von Zastrow', type: 'talk' }, 
+        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop' }
       },
       { 
         time: '3:05 PM', 
         endTime: '3:35 PM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #2' 
+        main: { title: 'Building Developer Tools with Ruby', speaker: 'Rachael Wright-Munn', type: 'talk' }, 
+        track2: { title: 'Microservices Architecture with Ruby', speaker: 'Alan Ridlehoover', type: 'talk' }, 
+        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop' }
       },
       { 
         time: '3:50 PM', 
         endTime: '4:20 PM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #2' 
+        main: { title: 'Ruby Concurrency: Threads, Fibers & Async', speaker: 'Brandon Weaver', type: 'talk' }, 
+        track2: { title: 'GraphQL with Ruby: Best Practices', speaker: 'Brandon Shar', type: 'talk' }, 
+        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop' }
       },
       { 
         time: '4:35 PM', 
         endTime: '5:05 PM',
-        main: 'Keynote', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'Ruby\'s Role in Modern Startups', speaker: 'Edward Kim', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '5:20 PM', 
         endTime: '6:20 PM',
-        main: 'CTO roundtable', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'CTO Panel: Scaling Engineering Teams', speaker: 'Edward Kim, Ngan Pham & More', type: 'panel' }, 
+        track2: null, 
+        workshop: null 
       }
     ]
   },
@@ -99,79 +99,79 @@ const days = [
       { 
         time: '9:00 AM', 
         endTime: '9:20 AM',
-        main: 'Intro', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'Day 2 Welcome & Announcements', speaker: '', type: 'logistics' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '9:35 AM', 
         endTime: '10:05 AM',
-        main: 'Keynote', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'The Art of Ruby: Writing Beautiful Code', speaker: 'Vladimir Dementyev', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '10:20 AM', 
         endTime: '10:50 AM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #3' 
+        main: { title: 'Rails 8: What\'s New and Exciting', speaker: 'Marco Roth', type: 'talk' }, 
+        track2: { title: 'Background Jobs at Scale', speaker: 'Mike Perham', type: 'talk' }, 
+        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop' }
       },
       { 
         time: '11:05 AM', 
         endTime: '11:35 AM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #3' 
+        main: { title: 'Ruby Gems: Building & Maintaining', speaker: 'Svyatoslav Kryukov', type: 'talk' }, 
+        track2: { title: 'Debugging Ruby Applications', speaker: 'Rachael Wright-Munn', type: 'talk' }, 
+        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop' }
       },
       { 
         time: '11:50 AM', 
         endTime: '12:20 PM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #3' 
+        main: { title: 'Machine Learning with Ruby', speaker: 'Brandon Weaver', type: 'talk' }, 
+        track2: { title: 'Code Review Best Practices', speaker: 'Alan Ridlehoover', type: 'talk' }, 
+        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop' }
       },
       { 
         time: '12:35 PM', 
         endTime: '2:05 PM',
-        main: 'Lunch break', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'Lunch Break & Networking', speaker: '', type: 'break' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '2:20 PM', 
         endTime: '2:50 PM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #4' 
+        main: { title: 'Ruby in the Cloud: Deployment Strategies', speaker: 'Fito von Zastrow', type: 'talk' }, 
+        track2: { title: 'API Design with Ruby', speaker: 'Brandon Shar', type: 'talk' }, 
+        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop' }
       },
       { 
         time: '3:05 PM', 
         endTime: '3:35 PM',
-        main: 'Speaker', 
-        track2: 'Speaker', 
-        workshop: 'Workshop #4' 
+        main: { title: 'Open Source Sustainability', speaker: 'Noel Rappin', type: 'talk' }, 
+        track2: { title: 'Ruby Memory Management', speaker: 'Brian Knoles', type: 'talk' }, 
+        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop' }
       },
       { 
         time: '3:50 PM', 
         endTime: '5:20 PM',
-        main: 'Startup demos', 
-        track2: '', 
-        workshop: 'Workshop #4' 
+        main: { title: 'Startup Demo Showcase', speaker: 'Various Founders', type: 'demos' }, 
+        track2: null, 
+        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop' }
       },
       { 
         time: '5:35 PM', 
         endTime: '6:05 PM',
-        main: 'VC roundtable', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'VC Panel: Funding Ruby Startups', speaker: 'Industry VCs', type: 'panel' }, 
+        track2: null, 
+        workshop: null 
       },
       { 
         time: '6:20 PM', 
         endTime: '6:50 PM',
-        main: 'Keynote', 
-        track2: '', 
-        workshop: '' 
+        main: { title: 'Closing Keynote: Ruby\'s Bright Future', speaker: 'Obie Fernandez', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
       }
     ]
   }
@@ -179,24 +179,17 @@ const days = [
 
 // Define colors for different session types
 const sessionColors = {
-  'Keynote': 'bg-ruby-500 text-white',
-  'CTO roundtable': 'bg-purple-500 text-white',
-  'VC roundtable': 'bg-amber-500 text-white',
-  'Startup demos': 'bg-green-500 text-white',
-  'Lunch break': 'bg-sky-500 text-white',
-  'Doors open': 'bg-cloud-600 text-white',
-  'Intro': 'bg-cloud-600 text-white',
-  'Speaker': 'bg-white text-dark-700 border border-dark-200',
-  'Workshop': 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+  'keynote': 'bg-ruby-500 text-white',
+  'panel': 'bg-purple-500 text-white',
+  'demos': 'bg-green-500 text-white',
+  'break': 'bg-sky-500 text-white',
+  'logistics': 'bg-cloud-600 text-white',
+  'talk': 'bg-white text-dark-700 border border-dark-200',
+  'workshop': 'bg-emerald-100 text-emerald-800 border border-emerald-200'
 };
 
-function getSessionColor(sessionName) {
-  for (const [key, color] of Object.entries(sessionColors)) {
-    if (sessionName.includes(key)) {
-      return color;
-    }
-  }
-  return 'bg-white text-dark-700 border border-dark-200';
+function getSessionColor(sessionType) {
+  return sessionColors[sessionType] || 'bg-white text-dark-700 border border-dark-200';
 }
 ---
 
@@ -211,16 +204,6 @@ function getSessionColor(sessionName) {
   </div>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Hero Image -->
-    <div class="w-full h-48 mb-12 rounded-lg overflow-hidden">
-      <img
-        src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=800"
-        alt="Conference schedule planning"
-        class="w-full h-full object-cover"
-        loading="lazy"
-      />
-    </div>
-
     <!-- Track Overview Cards -->
     <div class="mb-16">
       <h2 class="text-3xl font-display font-bold text-dark-900 mb-8 text-center">Conference Tracks</h2>
@@ -286,9 +269,9 @@ function getSessionColor(sessionName) {
             
             <!-- Schedule Grid -->
             <div class="p-8">
-              <div class="space-y-4">
+              <div class="space-y-6">
                 {day.sessions.map((session, index) => (
-                  <div class="grid grid-cols-12 gap-6 items-center py-4 border-b border-dark-100 last:border-b-0">
+                  <div class="grid grid-cols-12 gap-6 items-start py-4 border-b border-dark-100 last:border-b-0">
                     <!-- Time Column -->
                     <div class="col-span-12 md:col-span-2">
                       <div class="text-center md:text-left">
@@ -300,8 +283,11 @@ function getSessionColor(sessionName) {
                     <!-- Main Track -->
                     <div class="col-span-12 md:col-span-4">
                       {session.main && (
-                        <div class={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-full justify-center md:justify-start ${getSessionColor(session.main)}`}>
-                          {session.main}
+                        <div class={`p-4 rounded-lg ${getSessionColor(session.main.type)}`}>
+                          <div class="font-medium text-sm mb-1">{session.main.title}</div>
+                          {session.main.speaker && (
+                            <div class="text-xs opacity-75">{session.main.speaker}</div>
+                          )}
                         </div>
                       )}
                     </div>
@@ -309,8 +295,11 @@ function getSessionColor(sessionName) {
                     <!-- Track #2 -->
                     <div class="col-span-12 md:col-span-3">
                       {session.track2 && (
-                        <div class={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-full justify-center md:justify-start ${getSessionColor(session.track2)}`}>
-                          {session.track2}
+                        <div class={`p-4 rounded-lg ${getSessionColor(session.track2.type)}`}>
+                          <div class="font-medium text-sm mb-1">{session.track2.title}</div>
+                          {session.track2.speaker && (
+                            <div class="text-xs opacity-75">{session.track2.speaker}</div>
+                          )}
                         </div>
                       )}
                     </div>
@@ -318,8 +307,11 @@ function getSessionColor(sessionName) {
                     <!-- Workshops -->
                     <div class="col-span-12 md:col-span-3">
                       {session.workshop && (
-                        <div class={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium w-full justify-center md:justify-start ${getSessionColor(session.workshop)}`}>
-                          {session.workshop}
+                        <div class={`p-4 rounded-lg ${getSessionColor(session.workshop.type)}`}>
+                          <div class="font-medium text-sm mb-1">{session.workshop.title}</div>
+                          {session.workshop.speaker && (
+                            <div class="text-xs opacity-75">{session.workshop.speaker}</div>
+                          )}
                         </div>
                       )}
                     </div>
