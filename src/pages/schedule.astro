@@ -184,8 +184,8 @@ const sessionColors = {
   'VC roundtable': 'bg-amber-100 text-amber-800 border-amber-200',
   'Startup demos': 'bg-green-100 text-green-800 border-green-200',
   'Lunch break': 'bg-sky-100 text-sky-800 border-sky-200',
-  'Doors open': 'bg-dark-100 text-dark-800 border-dark-200',
-  'Intro': 'bg-dark-100 text-dark-800 border-dark-200'
+  'Doors open': 'bg-cloud-100 text-cloud-800 border-cloud-200',
+  'Intro': 'bg-cloud-100 text-cloud-800 border-cloud-200'
 };
 
 function getSessionColor(sessionName) {
@@ -194,7 +194,7 @@ function getSessionColor(sessionName) {
       return color;
     }
   }
-  return 'bg-white border-dark-200';
+  return 'bg-white border-cloud-200';
 }
 ---
 
@@ -209,45 +209,39 @@ function getSessionColor(sessionName) {
   </div>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Add placeholder image -->
-    <div class="mb-8">
-      <img 
-        src="https://images.pexels.com/photos/1181403/pexels-photo-1181403.jpeg?auto=compress&cs=tinysrgb&w=800" 
-        alt="Conference schedule planning" 
-        class="w-full h-48 object-cover rounded-lg"
-        loading="lazy"
-      />
-    </div>
-
     <!-- Schedule navigation -->
-    <div class="mb-8 flex justify-center space-x-4">
+    <div class="mb-12 flex justify-center space-x-4">
       {days.map((day, index) => (
         <button 
-          class="schedule-tab px-6 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none"
+          class={`schedule-tab px-8 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none ${
+            index === 0 
+              ? 'bg-ruby-500 text-white shadow-md' 
+              : 'bg-white text-dark-700 border border-dark-200 hover:bg-dark-50'
+          }`}
           data-index={index}
           aria-selected={index === 0 ? 'true' : 'false'}
         >
           {day.dayLabel}
-          <span class="hidden md:inline ml-2">{day.date}</span>
+          <span class="hidden md:inline ml-2 text-sm opacity-90">{day.date}</span>
         </button>
       ))}
     </div>
     
     <!-- Track legend -->
-    <div class="mb-8 bg-dark-50 rounded-lg p-6">
-      <h3 class="font-bold text-dark-900 mb-4 text-center">Conference Tracks</h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-white p-4 rounded-lg border border-ruby-200 text-center">
-          <h4 class="font-bold text-ruby-600 mb-2">Main Track</h4>
-          <p class="text-dark-600 text-sm">Keynotes, featured talks, and major presentations</p>
+    <div class="mb-12">
+      <h2 class="text-2xl font-display font-bold text-dark-900 mb-8 text-center">Conference Tracks</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-md p-6 text-center border border-ruby-200">
+          <h3 class="font-bold text-ruby-600 mb-3 text-lg">Main Track</h3>
+          <p class="text-dark-600">Keynotes, featured talks, and major presentations</p>
         </div>
-        <div class="bg-white p-4 rounded-lg border border-sky-200 text-center">
-          <h4 class="font-bold text-sky-600 mb-2">Track #2</h4>
-          <p class="text-dark-600 text-sm">Specialized talks and technical deep-dives</p>
+        <div class="bg-white rounded-lg shadow-md p-6 text-center border border-sky-200">
+          <h3 class="font-bold text-sky-600 mb-3 text-lg">Track #2</h3>
+          <p class="text-dark-600">Specialized talks and technical deep-dives</p>
         </div>
-        <div class="bg-white p-4 rounded-lg border border-green-200 text-center">
-          <h4 class="font-bold text-green-600 mb-2">Workshops</h4>
-          <p class="text-dark-600 text-sm">Hands-on learning and interactive sessions</p>
+        <div class="bg-white rounded-lg shadow-md p-6 text-center border border-green-200">
+          <h3 class="font-bold text-green-600 mb-3 text-lg">Workshops</h3>
+          <p class="text-dark-600">Hands-on learning and interactive sessions</p>
         </div>
       </div>
     </div>
@@ -261,43 +255,43 @@ function getSessionColor(sessionName) {
           style={dayIndex === 0 ? "" : "display: none;"}
         >
           <div class="bg-dark-50 px-6 py-4 border-b border-dark-200">
-            <h2 class="text-2xl font-display font-bold text-dark-900">{day.dayLabel} - {day.date}</h2>
+            <h3 class="text-xl font-display font-bold text-dark-900">{day.dayLabel} - {day.date}</h3>
           </div>
           
           <div class="overflow-x-auto">
             <table class="min-w-full">
               <thead class="bg-dark-100">
                 <tr>
-                  <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-dark-700 w-1/6">Time</th>
-                  <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-dark-700 w-1/3">Main Track</th>
-                  <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-dark-700 w-1/3">Track #2</th>
-                  <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-dark-700 w-1/6">Workshops</th>
+                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/6">Time</th>
+                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/3">Main Track</th>
+                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/3">Track #2</th>
+                  <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-dark-700 uppercase tracking-wider w-1/6">Workshops</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-dark-200">
+              <tbody class="bg-white divide-y divide-dark-200">
                 {day.sessions.map((session, index) => (
                   <tr class={index % 2 === 0 ? 'bg-white' : 'bg-dark-50'}>
-                    <td class="px-4 py-4 text-sm font-medium text-dark-900">
-                      <div>{session.time}</div>
+                    <td class="px-6 py-4 text-sm font-medium text-dark-900">
+                      <div class="font-semibold">{session.time}</div>
                       <div class="text-dark-500 text-xs">- {session.endTime}</div>
                     </td>
-                    <td class="px-4 py-4">
+                    <td class="px-6 py-4">
                       {session.main && (
-                        <div class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${getSessionColor(session.main)}`}>
+                        <div class={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium border ${getSessionColor(session.main)}`}>
                           {session.main}
                         </div>
                       )}
                     </td>
-                    <td class="px-4 py-4">
+                    <td class="px-6 py-4">
                       {session.track2 && (
-                        <div class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${getSessionColor(session.track2)}`}>
+                        <div class={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium border ${getSessionColor(session.track2)}`}>
                           {session.track2}
                         </div>
                       )}
                     </td>
-                    <td class="px-4 py-4">
+                    <td class="px-6 py-4">
                       {session.workshop && (
-                        <div class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${getSessionColor(session.workshop)}`}>
+                        <div class={`inline-flex items-center px-3 py-2 rounded-full text-sm font-medium border ${getSessionColor(session.workshop)}`}>
                           {session.workshop}
                         </div>
                       )}
@@ -312,18 +306,18 @@ function getSessionColor(sessionName) {
     </div>
     
     <!-- Additional info -->
-    <div class="mt-12 bg-dark-50 rounded-lg p-8">
-      <h3 class="text-xl font-display font-bold text-dark-900 mb-4">Schedule Notes</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="mt-16 bg-dark-50 rounded-lg p-8">
+      <h3 class="text-2xl font-display font-bold text-dark-900 mb-6">Schedule Notes</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <h4 class="font-bold text-dark-900 mb-2">Workshop Registration</h4>
-          <p class="text-dark-600 text-sm">
+          <h4 class="font-bold text-dark-900 mb-3">Workshop Registration</h4>
+          <p class="text-dark-600">
             Workshops have limited capacity and require separate registration. Details will be announced closer to the conference date.
           </p>
         </div>
         <div>
-          <h4 class="font-bold text-dark-900 mb-2">Schedule Updates</h4>
-          <p class="text-dark-600 text-sm">
+          <h4 class="font-bold text-dark-900 mb-3">Schedule Updates</h4>
+          <p class="text-dark-600">
             This schedule is preliminary and subject to change. Final speaker assignments and session details will be announced in October 2025.
           </p>
         </div>
@@ -331,7 +325,7 @@ function getSessionColor(sessionName) {
     </div>
 
     <!-- Call to action -->
-    <div class="mt-12 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-lg p-8">
+    <div class="mt-16 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-lg p-8">
       <h3 class="text-2xl font-display font-bold mb-4">Ready to Join Us?</h3>
       <p class="text-lg mb-6 max-w-2xl mx-auto">
         Don't miss out on two days of Ruby excellence with three concurrent tracks designed for every skill level.
@@ -355,21 +349,6 @@ function getSessionColor(sessionName) {
   </div>
 </Layout>
 
-<style>
-  .schedule-tab[aria-selected="true"] {
-    background-color: #e0115f;
-    color: white;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-  .schedule-tab[aria-selected="false"] {
-    background-color: #f8fafc;
-    color: #334155;
-  }
-  .schedule-tab[aria-selected="false"]:hover {
-    background-color: #e2e8f0;
-  }
-</style>
-
 <script>
   // Handle tab switching
   const tabs = document.querySelectorAll('.schedule-tab');
@@ -378,8 +357,13 @@ function getSessionColor(sessionName) {
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       // Update tab styling
-      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      tabs.forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.className = 'schedule-tab px-8 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none bg-white text-dark-700 border border-dark-200 hover:bg-dark-50';
+      });
+      
       tab.setAttribute('aria-selected', 'true');
+      tab.className = 'schedule-tab px-8 py-3 rounded-md font-medium transition-all duration-200 focus:outline-none bg-ruby-500 text-white shadow-md';
       
       // Show selected content
       const index = tab.getAttribute('data-index');
