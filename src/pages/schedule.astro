@@ -32,21 +32,21 @@ const days = [
         endTime: '10:50 AM',
         main: { title: 'Scaling Rails: Lessons from 10M+ Users', speaker: 'Ngan Pham', type: 'talk' }, 
         track2: { title: 'Ruby Performance Deep Dive with YJIT', speaker: 'Takashi Kokubun', type: 'talk' }, 
-        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop' }
+        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop', lumaId: 'workshop-1' }
       },
       { 
         time: '11:05 AM', 
         endTime: '11:35 AM',
         main: { title: 'AI-Powered Ruby Development', speaker: 'Carmine Paolino', type: 'talk' }, 
         track2: { title: 'Advanced Testing Strategies', speaker: 'Vladimir Dementyev', type: 'talk' }, 
-        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop' }
+        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop', lumaId: 'workshop-1' }
       },
       { 
         time: '11:50 AM', 
         endTime: '12:20 PM',
         main: { title: 'Ruby in Production: Battle-Tested Patterns', speaker: 'Mike Perham', type: 'talk' }, 
         track2: { title: 'Hotwire & Stimulus: The Future of Rails Frontend', speaker: 'Svyatoslav Kryukov', type: 'talk' }, 
-        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop' }
+        workshop: { title: 'Building Modern Rails APIs', speaker: 'Marco Roth', type: 'workshop', lumaId: 'workshop-1' }
       },
       { 
         time: '12:35 PM', 
@@ -60,21 +60,21 @@ const days = [
         endTime: '2:50 PM',
         main: { title: 'Ruby Security: Protecting Your Applications', speaker: 'Jeremy Evans', type: 'talk' }, 
         track2: { title: 'Database Optimization for Rails Apps', speaker: 'Fito von Zastrow', type: 'talk' }, 
-        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop' }
+        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop', lumaId: 'workshop-2' }
       },
       { 
         time: '3:05 PM', 
         endTime: '3:35 PM',
         main: { title: 'Building Developer Tools with Ruby', speaker: 'Rachael Wright-Munn', type: 'talk' }, 
         track2: { title: 'Microservices Architecture with Ruby', speaker: 'Alan Ridlehoover', type: 'talk' }, 
-        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop' }
+        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop', lumaId: 'workshop-2' }
       },
       { 
         time: '3:50 PM', 
         endTime: '4:20 PM',
         main: { title: 'Ruby Concurrency: Threads, Fibers & Async', speaker: 'Brandon Weaver', type: 'talk' }, 
         track2: { title: 'GraphQL with Ruby: Best Practices', speaker: 'Brandon Shar', type: 'talk' }, 
-        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop' }
+        workshop: { title: 'Test-Driven Development Mastery', speaker: 'Noel Rappin', type: 'workshop', lumaId: 'workshop-2' }
       },
       { 
         time: '4:35 PM', 
@@ -115,21 +115,21 @@ const days = [
         endTime: '10:50 AM',
         main: { title: 'Rails 8: What\'s New and Exciting', speaker: 'Marco Roth', type: 'talk' }, 
         track2: { title: 'Background Jobs at Scale', speaker: 'Mike Perham', type: 'talk' }, 
-        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop' }
+        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop', lumaId: 'workshop-3' }
       },
       { 
         time: '11:05 AM', 
         endTime: '11:35 AM',
         main: { title: 'Ruby Gems: Building & Maintaining', speaker: 'Svyatoslav Kryukov', type: 'talk' }, 
         track2: { title: 'Debugging Ruby Applications', speaker: 'Rachael Wright-Munn', type: 'talk' }, 
-        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop' }
+        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop', lumaId: 'workshop-3' }
       },
       { 
         time: '11:50 AM', 
         endTime: '12:20 PM',
         main: { title: 'Machine Learning with Ruby', speaker: 'Brandon Weaver', type: 'talk' }, 
         track2: { title: 'Code Review Best Practices', speaker: 'Alan Ridlehoover', type: 'talk' }, 
-        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop' }
+        workshop: { title: 'Advanced Ruby Patterns', speaker: 'Jeremy Evans', type: 'workshop', lumaId: 'workshop-3' }
       },
       { 
         time: '12:35 PM', 
@@ -143,21 +143,21 @@ const days = [
         endTime: '2:50 PM',
         main: { title: 'Ruby in the Cloud: Deployment Strategies', speaker: 'Fito von Zastrow', type: 'talk' }, 
         track2: { title: 'API Design with Ruby', speaker: 'Brandon Shar', type: 'talk' }, 
-        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop' }
+        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop', lumaId: 'workshop-4' }
       },
       { 
         time: '3:05 PM', 
         endTime: '3:35 PM',
         main: { title: 'Open Source Sustainability', speaker: 'Noel Rappin', type: 'talk' }, 
         track2: { title: 'Ruby Memory Management', speaker: 'Brian Knoles', type: 'talk' }, 
-        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop' }
+        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop', lumaId: 'workshop-4' }
       },
       { 
         time: '3:50 PM', 
         endTime: '5:20 PM',
         main: { title: 'Startup Demo Showcase', speaker: 'Various Founders', type: 'demos' }, 
         track2: null, 
-        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop' }
+        workshop: { title: 'Building Ruby CLI Tools', speaker: 'Takashi Kokubun', type: 'workshop', lumaId: 'workshop-4' }
       },
       { 
         time: '5:35 PM', 
@@ -198,36 +198,36 @@ function getSessionColor(sessionType) {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl md:text-4xl font-display font-bold text-center">Schedule</h1>
       <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-        Two days of Ruby excellence with three concurrent tracks
+        Two days of Ruby excellence across three venues at Fort Mason
       </p>
     </div>
   </div>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Track Overview Cards -->
+    <!-- Venue Overview Cards -->
     <div class="mb-16">
-      <h2 class="text-3xl font-display font-bold text-dark-900 mb-8 text-center">Conference Tracks</h2>
+      <h2 class="text-3xl font-display font-bold text-dark-900 mb-8 text-center">Conference Venues</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-ruby-500 transform transition-all duration-300 hover:-translate-y-2">
           <div class="w-16 h-16 bg-ruby-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-2xl">🎤</span>
           </div>
-          <h3 class="font-bold text-ruby-600 mb-3 text-xl">Main Track</h3>
-          <p class="text-dark-600">Keynotes, featured talks, and major presentations from industry leaders</p>
+          <h3 class="font-bold text-ruby-600 mb-3 text-xl">Main Stage</h3>
+          <p class="text-dark-600">Keynotes and featured presentations</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-sky-500 transform transition-all duration-300 hover:-translate-y-2">
           <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span class="text-2xl">💻</span>
+            <span class="text-2xl">🎭</span>
           </div>
-          <h3 class="font-bold text-sky-600 mb-3 text-xl">Track #2</h3>
-          <p class="text-dark-600">Specialized talks and technical deep-dives for experienced developers</p>
+          <h3 class="font-bold text-sky-600 mb-3 text-xl">Blackbox Theater</h3>
+          <p class="text-dark-600">Technical talks and specialized sessions</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg p-8 text-center border-t-4 border-emerald-500 transform transition-all duration-300 hover:-translate-y-2">
           <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-2xl">🛠️</span>
           </div>
-          <h3 class="font-bold text-emerald-600 mb-3 text-xl">Workshops</h3>
-          <p class="text-dark-600">Hands-on learning sessions and interactive coding experiences</p>
+          <h3 class="font-bold text-emerald-600 mb-3 text-xl">Workshops Studio</h3>
+          <p class="text-dark-600">Hands-on learning experiences</p>
         </div>
       </div>
     </div>
@@ -267,6 +267,24 @@ function getSessionColor(sessionType) {
               <p class="text-ruby-100 mt-1">{day.date}</p>
             </div>
             
+            <!-- Schedule Grid Header -->
+            <div class="px-8 py-4 bg-dark-50 border-b border-dark-200">
+              <div class="grid grid-cols-12 gap-6">
+                <div class="col-span-12 md:col-span-2">
+                  <h4 class="font-bold text-dark-700 text-sm">TIME</h4>
+                </div>
+                <div class="col-span-12 md:col-span-4">
+                  <h4 class="font-bold text-ruby-600 text-sm">MAIN STAGE</h4>
+                </div>
+                <div class="col-span-12 md:col-span-3">
+                  <h4 class="font-bold text-sky-600 text-sm">BLACKBOX THEATER</h4>
+                </div>
+                <div class="col-span-12 md:col-span-3">
+                  <h4 class="font-bold text-emerald-600 text-sm">WORKSHOPS STUDIO</h4>
+                </div>
+              </div>
+            </div>
+            
             <!-- Schedule Grid -->
             <div class="p-8">
               <div class="space-y-6">
@@ -280,7 +298,7 @@ function getSessionColor(sessionType) {
                       </div>
                     </div>
                     
-                    <!-- Main Track -->
+                    <!-- Main Stage -->
                     <div class="col-span-12 md:col-span-4">
                       {session.main && (
                         <div class={`p-4 rounded-lg ${getSessionColor(session.main.type)}`}>
@@ -292,7 +310,7 @@ function getSessionColor(sessionType) {
                       )}
                     </div>
                     
-                    <!-- Track #2 -->
+                    <!-- Blackbox Theater -->
                     <div class="col-span-12 md:col-span-3">
                       {session.track2 && (
                         <div class={`p-4 rounded-lg ${getSessionColor(session.track2.type)}`}>
@@ -304,13 +322,23 @@ function getSessionColor(sessionType) {
                       )}
                     </div>
                     
-                    <!-- Workshops -->
+                    <!-- Workshops Studio -->
                     <div class="col-span-12 md:col-span-3">
                       {session.workshop && (
                         <div class={`p-4 rounded-lg ${getSessionColor(session.workshop.type)}`}>
                           <div class="font-medium text-sm mb-1">{session.workshop.title}</div>
                           {session.workshop.speaker && (
-                            <div class="text-xs opacity-75">{session.workshop.speaker}</div>
+                            <div class="text-xs opacity-75 mb-2">{session.workshop.speaker}</div>
+                          )}
+                          {session.workshop.lumaId && (
+                            <a
+                              href={`https://lu.ma/${session.workshop.lumaId}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-block px-3 py-1 bg-emerald-500 text-white text-xs font-medium rounded-md hover:bg-emerald-600 transition-colors duration-200"
+                            >
+                              Sign Up
+                            </a>
                           )}
                         </div>
                       )}
@@ -336,18 +364,18 @@ function getSessionColor(sessionType) {
             <h4 class="font-bold text-dark-900">Workshop Registration</h4>
           </div>
           <p class="text-dark-600">
-            Workshops have limited capacity and require separate registration. Details will be announced closer to the conference date.
+            Workshops have limited capacity and require separate registration via Luma. Click the "Sign Up" button for each workshop you'd like to attend.
           </p>
         </div>
         <div class="bg-white rounded-lg p-6 shadow-sm">
           <div class="flex items-center mb-4">
             <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
-              <span class="text-amber-600">📅</span>
+              <span class="text-amber-600">📍</span>
             </div>
-            <h4 class="font-bold text-dark-900">Schedule Updates</h4>
+            <h4 class="font-bold text-dark-900">Venue Locations</h4>
           </div>
           <p class="text-dark-600">
-            This schedule is preliminary and subject to change. Final speaker assignments and session details will be announced in October 2025.
+            All three venues are located within Fort Mason Center. Maps and directions will be provided at registration.
           </p>
         </div>
       </div>
@@ -357,7 +385,7 @@ function getSessionColor(sessionType) {
     <div class="mt-16 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-xl p-12">
       <h3 class="text-3xl font-display font-bold mb-4">Ready to Join Us?</h3>
       <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-        Don't miss out on two days of Ruby excellence with three concurrent tracks designed for every skill level.
+        Don't miss out on two days of Ruby excellence across three venues at Fort Mason Center.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
