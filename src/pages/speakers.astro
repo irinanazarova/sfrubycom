@@ -1,246 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SocialLink from "../components/SocialLink.astro";
+import { speakers, getSpeakersByGroup } from "../data/speakers.js";
 
-const speakers = [
-    {
-        name: "Obie Fernandez",
-        company: "Shopify",
-        role: "Principal Engineer",
-        image: "/speaker_obie.jpg",
-        socials: [
-            "https://github.com/obie",
-            "https://x.com/obie",
-            "https://bsky.app/profile/obiefernandez.bsky.social",
-        ],
-        bio: "Obie Fernandez is a Ruby and Rails pioneer, and best-selling author of The Rails Way. With three decades in software and a string of successful startups—including Hashrocket and Andela—he’s helped shape the Rails community from the start. Obie now leads AI and developer experience initiatives at Shopify, and still finds time to DJ and make music in Mexico City.",
-        group: "featured",
-    },
-    {
-        name: "Vladimir (Vova) Dementyev",
-        company: "Evil Martians",
-        role: "Head of Backend",
-        image: "/speaker_vova.jpg",
-        socials: ["https://github.com/palkan", "https://x.com/palkan_tula"],
-        bio: "A mathematician who found his happiness in programming Ruby and Erlang, contributing to open source and being an Evil Martian. Author of AnyCable, TestProf, Action Policy and many yet unknown ukulele melodies.",
-        group: "featured",
-    },
-    {
-        name: "Carmine Paolino",
-        company: "Chat with Work",
-        role: "Founder and CEO",
-        image: "/speaker_carmine.jpg",
-        github: "crmne",
-        socials: ["https://github.com/crmne", "https://x.com/paolino"],
-        bio: "AI engineer and open source contributor, Carmine has built large-scale systems at OLX, Capgemini, and the Alan Turing Institute. He’s the creator of RubyLLM, bringing modern AI tooling to Ruby, and has co-founded startups like Freshflow, and Chat with Work. Carmine loves Ruby, deep learning, and producing electronic music in Berlin.",
-        group: "featured",
-    },
-    {
-        name: "Marco Roth",
-        company: "Independent",
-        role: "Consultant",
-        image: "/speaker_marco.jpg",
-        socials: [
-            "https://github.com/marcoroth",
-            "https://x.com/marcoroth_",
-            "https://bsky.app/profile/marcoroth.dev",
-        ],
-        bio: "Full-stack Ruby on Rails developer and open source enthusiast, Marco is a core contributor to Hotwire and StimulusReflex. He’s passionate about pushing the boundaries of real-time, server-rendered apps with HTML-over-the-wire, and maintains several key libraries in the Hotwire and Rails ecosystem.",
-        group: "featured",
-    },
-    {
-        name: "Rachael Wright-Munn",
-        company: "Looking for Work",
-        role: "Software Engineer",
-        image: "/speaker_rachael.jpg",
-        socials: [
-            "https://github.com/ChaelCodes",
-            "https://x.com/ChaelCodes",
-            "https://bsky.app/profile/chaelcodes.bsky.social",
-            "https://ruby.social/@ChaelCodes",
-        ],
-        bio: "Rachael wants to share the joy and beauty of programming through programming games and regular open-source streams on Twitch. She's been a software engineer since 2012, 3x Team Lead, and manages a few small open-source projects.",
-        group: "speaker",
-    },
-    {
-        name: "Justin Bowen",
-        company: "Active Agent",
-        role: "Founder",
-        image: "/speaker_justin.jpg",
-        socials: [
-            "https://github.com/TonsOfFun",
-            "https://x.com/TonsOfFun111",
-            "https://bsky.app/profile/tonsoffun.bsky.social",
-        ],
-        bio: "Justin Bowen is the creator of Active Agent, the first truly Rails-native AI framework, where Agents are Controllers. Since 2015, he’s been building real-world AI products in agriculture, healthcare, HR tech, and more, with a specialization in computer vision. His work with Active Agent combines his extensive experience in Python and Next.js, bringing it to Rails with the goal of making Ruby the language of choice for new startups in the AI age.",
-        group: "speaker",
-    },
-    {
-        name: "Jeremy Evans",
-        company: "Ubicloud",
-        role: "Principal Engineer",
-        image: "/speaker_jeremy.jpg",
-        socials: [
-            "https://github.com/jeremyevans",
-            "https://x.com/jeremyevans0",
-        ],
-        bio: 'Jeremy Evans is a Ruby committer who focuses on fixing bugs in Ruby. He the lead developer of Sequel, Roda, Rodauth, and many other Ruby libraries. He is the author of "Polished Ruby Programming".',
-        group: "speaker",
-    },
-    {
-        name: "Noel Rappin",
-        company: "Chime Financial",
-        role: "Staff Software Engineer",
-        image: "/speaker_noel.jpg",
-        socials: [
-            "https://github.com/noelrappin",
-            "https://bsky.app/profile/noelrappin.com",
-            "https://buttondown.com/noelrap",
-        ],
-        bio: "Noel is the co-author of Programming Ruby 3.3 and other technical books in the Ruby Community. He’s dedicated to making Ruby joyful and productive for developers, and is known for building community and championing better tools and practices. You can find Noel online at noelrappin.com.",
-        group: "speaker",
-    },
-    {
-        name: "Ngan Pham",
-        company: "Gusto",
-        role: "Distinguished Engineer",
-        image: "/speaker_ngan.jpg",
-        socials: [
-            "https://github.com/ngan",
-            "https://x.com/nganpham",
-            "https://www.linkedin.com/in/nganpham63",
-        ],
-        bio: "Ngan is a prolific open source contributor and Rubyist with a knack for scaling systems and building strong engineering teams. He’s known for mentoring developers and sharing insights on everything from Rails architecture to developer happiness. Outside of work he loves traveling with his family.",
-        group: "speaker",
-    },
-    {
-        name: "Mike Perham",
-        company: "Contributed Systems",
-        role: "CEO",
-        image: "/speaker_mike.jpg",
-        socials: [
-            "https://github.com/mperham",
-            "http://ruby.social/@getajobmike",
-            "https://bsky.app/profile/mike.contribsys.com",
-        ],
-        bio: "Mike is the author and maintainer of Sidekiq, the leading background job framework for Ruby. He's developed open source software for Ruby since 2005 and lives in Portland, OR.",
-        group: "speaker",
-    },
-    {
-        name: "Svyatoslav (Svyat) Kryukov",
-        company: "Evil Martians",
-        role: "Senior Backend Engineer",
-        image: "/speaker_svyatoslav.jpg",
-        socials: [
-            "https://github.com/skryukov",
-            "https://x.com/skryukov_dev",
-            "https://bsky.app/profile/skryukov.dev",
-        ],
-        bio: "Svyat is passionate about bridging backend and frontend worlds in Ruby. He’s the creator of Skooma for strong interfaces and TurboMount for bringing modern widgets to Hotwire, and a key contributor to Inertia Rails. When he’s not coding, Svyat is a true coffee geek, always searching for the perfect pour over setup.",
-        group: "speaker",
-    },
-    {
-        name: "Fito von Zastrow",
-        company: "Cisco",
-        role: "Staff Software Engineer",
-        image: "/speaker_fito.jpg",
-        socials: [
-            "https://github.com/Fito",
-            "https://bsky.app/profile/fito.codegardener.com",
-        ],
-        bio: "Fito is a Staff Software Engineer @ Cisco's Network Platform. He is a SF Bay Area transplant from Asunción, Paraguay. He enjoys hiking, watching soccer, video games, and pair-programming.",
-        group: "speaker",
-    },
-    {
-        name: "Alan Ridlehoover",
-        company: "Cisco",
-        role: "Senior Engineering Manager",
-        image: "/speaker_alan.jpg",
-        socials: [
-            "https://github.com/aridlehoover",
-            "https://bsky.app/profile/alan.codegardener.com",
-        ],
-        bio: "Passionate Rubyist. Empathetic leader. Fallible human. Swell photographer. Rusty drummer. Loving husband & twins dad. Owner of too many hats, given I only have the one head.",
-        group: "speaker",
-    },
-    {
-        name: "Brandon Weaver",
-        company: "Amazon One Medical",
-        role: "Senior Software Engineer",
-        image: "/speaker_brandonweaver.jpg",
-        socials: [
-            "https://github.com/baweaver",
-            "https://bsky.app/profile/baweaver.bsky.social",
-        ],
-        bio: "Brandon is an artist turned programmer who teaches Ruby with a series of colorful cartoon lemurs going on storybook adventures. This time though? He's going deep on AI and Rails.",
-        group: "speaker",
-    },
-    {
-        name: "Takashi Kokubun",
-        company: "Shopify",
-        role: "Staff Developer",
-        image: "/speaker_takashi.jpg",
-        socials: [
-            "https://github.com/k0kubun",
-            "https://x.com/k0kubun",
-            "https://ruby.social/@k0kubun",
-            "https://bsky.app/profile/k0kubun.com",
-        ],
-        bio: "Takashi Kokubun is a Ruby committer and a member of Shopify's Ruby Infrastructure team. He's currently working on ZJIT, the next generation of YJIT. He has been working on JIT compilers for Ruby since 2017.",
-        group: "speaker",
-    },
-    ,
-    {
-        name: "Edward Kim",
-        company: "Gusto",
-        role: "Co-founder and CTO",
-        image: "/speaker_edward.jpg",
-        socials: [
-            "https://x.com/edawerd",
-            "https://www.linkedin.com/in/edawerd/",
-        ],
-        bio: "Edward leads the long-term technology roadmap for Gusto, including major platform initiatives such as Artificial Intelligence. He also empowers Security and IT. Before co-founding Gusto, Edward was the CEO and co-founder of Picwing, a Y Combinator startup and photo-printing platform. Edward holds bachelor’s and master’s degrees in Electrical Engineering from Stanford University.",
-        group: "cto",
-    },
-    {
-        name: "Brandon Shar",
-        company: "",
-        role: "Staff Software Engineer",
-        image: "/speaker_brandonshar.jpg",
-        socials: [
-            "https://github.com/BrandonShar",
-            "https://x.com/brandonshar",
-        ],
-        bio: "Staff Software Engineer focused on AI product development. Co-creator of Inertia Rails and Inertia Django. Passionate about full-stack engineering, product focused development, and expressive, simple, and changeable code. Currently hooked on MCP servers and AI-enabled productivity boosts.",
-        group: "speaker",
-    },
-    {
-        name: "Brian Knoles",
-        company: "Bellawatt",
-        role: "CTO",
-        image: "/speaker_brian.jpg",
-        socials: [
-            "https://github.com/bknoles",
-            "https://x.com/BrianKnoles",
-            "https://www.linkedin.com/in/brian-knoles-4049557",
-        ],
-        bio: "Brian leads development at Bellawatt, a software consultancy that works with energy companies. He's a co-author of Inertia Rails and loves using Rails and React together. He's known to say \"I wonder...\" a lot, and he often spends the daily walks with his inexhaustible dog lost in thought.",
-        group: "speaker",
-    },
-];
-
-// Featured speakers for the top row
-const featuredSpeakers = speakers.filter(
-    (speaker) => speaker.group === "featured",
-);
-// Normal speakers
-const regularSpeakers = speakers.filter(
-    (speaker) => speaker.group === "speaker",
-);
-// CTOs
-const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
-// MCs
-//const regularSpeakers = speakers.filter((speaker) => speaker.group ==="speakers");
+// Get speakers by group
+const featuredSpeakers = getSpeakersByGroup('featured');
+const regularSpeakers = getSpeakersByGroup('speaker');
+const CTOSpeakers = getSpeakersByGroup('cto');
 ---
 
 <Layout title="Speakers - San Francisco Ruby Conference 2025">
@@ -264,7 +30,7 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    featuredSpeakers.map((speaker) => (
+                    Object.values(featuredSpeakers).map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img
@@ -282,7 +48,7 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
                                 <p class="text-ruby-500 font-display font-medium mt-2">
                                     {speaker.company}
                                 </p>
-                                <p class="text-cloud-600 font-display font-medium mb-2">
+                                <p class="text-dark-500 text-sm mb-2">
                                     {speaker.role}
                                 </p>
 
@@ -310,7 +76,21 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    regularSpeakers.map((speaker) => (
+                    [
+                        speakers['rachael-wright-munn'],
+                        speakers['justin-bowen'],
+                        speakers['jeremy-evans'],
+                        speakers['noel-rappin'],
+                        speakers['ngan-pham'],
+                        speakers['mike-perham'],
+                        speakers['svyatoslav-kryukov'],
+                        speakers['fito-von-zastrow'],
+                        speakers['alan-ridlehoover'],
+                        speakers['brandon-weaver'],
+                        speakers['takashi-kokubun'],
+                        speakers['brandon-shar'],
+                        speakers['brian-knoles']
+                    ].map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img
@@ -328,7 +108,7 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
                                 <p class="text-ruby-500 font-display font-medium mt-2">
                                     {speaker.company}
                                 </p>
-                                <p class="text-cloud-600 font-display font-medium mb-2">
+                                <p class="text-dark-500 text-sm mb-2">
                                     {speaker.role}
                                 </p>
 
@@ -348,7 +128,7 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
             </div>
         </div>
 
-        <!-- Regular speakers section -->
+        <!-- CTO Panel section -->
         <div class="mb-16">
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
                 CTO Panel
@@ -356,7 +136,7 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    CTOSpeakers.map((speaker) => (
+                    [speakers['edward-kim']].map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img
@@ -374,13 +154,11 @@ const CTOSpeakers = speakers.filter((speaker) => speaker.group === "cto");
                                 <p class="text-ruby-500 font-display font-medium mt-2">
                                     {speaker.company}
                                 </p>
-                                <p class="text-cloud-600 font-display font-medium mb-2">
+                                <p class="text-dark-500 text-sm mb-2">
                                     {speaker.role}
                                 </p>
 
-                                <p class="text-dark-600 text-sm mb-4">
-                                    {speaker.bio}
-                                </p>
+                                <p class="text-dark-600 text-sm mb-4">{speaker.bio}</p>
 
                                 <div class="flex space-x-4">
                                     {speaker.socials.map((url) => (

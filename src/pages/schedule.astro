@@ -1,87 +1,249 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { talks, getTalkWithSpeaker, speakers } from '../data/speakers.js';
 
 const days = [
   {
     date: 'November 19, 2025',
+    dayLabel: 'Day 1',
     sessions: [
-      { time: '8:00 AM - 9:00 AM', title: 'Registration & Breakfast', track: null },
-      { time: '9:00 AM - 9:30 AM', title: 'Welcome & Opening Remarks', track: null },
-      { time: '9:30 AM - 10:30 AM', title: 'Keynote: The Future of Ruby in the AI Era', speaker: 'Andrew Kane', track: null },
-      { time: '10:45 AM - 11:30 AM', title: 'Building AI-Powered Rails Apps with ActiveAgent', speaker: 'Sarah Chen', track: 'Open Source & AI' },
-      { time: '10:45 AM - 11:30 AM', title: 'Scaling Ruby at Stripe: Lessons Learned', speaker: 'Miguel Rodriguez', track: 'Scaling Ruby' },
-      { time: '11:45 AM - 12:30 PM', title: 'RubyLLM: Bringing Large Language Models to Ruby', speaker: 'Aisha Johnson', track: 'Open Source & AI' },
-      { time: '11:45 AM - 12:30 PM', title: 'Using Sorbet & Packwerk for Large Codebases', speaker: 'James Wilson', track: 'Scaling Ruby' },
-      { time: '12:30 PM - 2:00 PM', title: 'Lunch & Networking', track: null },
-      { time: '2:00 PM - 3:30 PM', title: 'Startup Demo Showcase (10-minute sessions)', track: 'Startup Demos' },
-      { time: '3:45 PM - 4:30 PM', title: 'VC Panel: Why Ruby Wins in AI', track: 'VC Insights' },
-      { time: '4:45 PM - 5:30 PM', title: 'Lightning Talks', track: null },
-      { time: '6:00 PM - 8:00 PM', title: 'Evening Reception', track: null }
+      { 
+        time: '8:00 AM', 
+        endTime: '',
+        main: { title: 'Doors Open & Registration', speaker: '', type: 'logistics' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '9:00 AM', 
+        endTime: '9:20 AM',
+        main: { title: 'Welcome & Opening Remarks', speaker: '', type: 'logistics' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '9:35 AM', 
+        endTime: '10:05 AM',
+        main: { talkId: 'future-of-ruby', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '10:20 AM', 
+        endTime: '10:50 AM',
+        main: { talkId: 'scaling-rails', type: 'talk' }, 
+        track2: { talkId: 'ruby-performance-yjit', type: 'talk' }, 
+        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
+      },
+      { 
+        time: '11:05 AM', 
+        endTime: '11:35 AM',
+        main: { talkId: 'ai-powered-ruby', type: 'talk' }, 
+        track2: { talkId: 'advanced-testing', type: 'talk' }, 
+        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
+      },
+      { 
+        time: '11:50 AM', 
+        endTime: '12:20 PM',
+        main: { talkId: 'ruby-production-patterns', type: 'talk' }, 
+        track2: { talkId: 'hotwire-stimulus', type: 'talk' }, 
+        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
+      },
+      { 
+        time: '12:35 PM', 
+        endTime: '2:00 PM',
+        main: { title: 'Lunch Break & Networking', speaker: '', type: 'break' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '2:00 PM', 
+        endTime: '2:30 PM',
+        main: { talkId: 'ruby-security', type: 'talk' }, 
+        track2: { talkId: 'database-optimization', type: 'talk' }, 
+        workshop: { talkId: 'metaprogramming-workshop', type: 'workshop' }
+      },
+      { 
+        time: '2:45 PM', 
+        endTime: '3:15 PM',
+        main: { talkId: 'building-developer-tools', type: 'talk' }, 
+        track2: { talkId: 'microservices-architecture', type: 'talk' }, 
+        workshop: { talkId: 'metaprogramming-workshop', type: 'workshop' }
+      },
+      { 
+        time: '3:30 PM', 
+        endTime: '4:00 PM',
+        main: { talkId: 'ruby-concurrency', type: 'talk' }, 
+        track2: { talkId: 'graphql-best-practices', type: 'talk' }, 
+        workshop: { talkId: 'metaprogramming-workshop', type: 'workshop' }
+      },
+      { 
+        time: '4:15 PM', 
+        endTime: '4:45 PM',
+        main: { talkId: 'ruby-modern-startups', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '5:00 PM', 
+        endTime: '6:00 PM',
+        main: { title: 'CTO Panel: Scaling Engineering Teams', speaker: 'Edward Kim, Ngan Pham & More', type: 'panel' }, 
+        track2: null, 
+        workshop: null 
+      }
     ]
   },
   {
     date: 'November 20, 2025',
+    dayLabel: 'Day 2',
     sessions: [
-      { time: '8:30 AM - 9:30 AM', title: 'Breakfast & Morning Networking', track: null },
-      { time: '9:30 AM - 10:30 AM', title: 'Keynote: Ruby Beyond 4.0', speaker: 'Emma Thompson', track: null },
-      { time: '10:45 AM - 11:30 AM', title: 'Performance Optimization Techniques for Ruby Apps', speaker: 'David Park', track: 'Scaling Ruby' },
-      { time: '10:45 AM - 11:30 AM', title: 'Building Ruby Gems for AI Integration', speaker: 'Olivia Martinez', track: 'Open Source & AI' },
-      { time: '11:45 AM - 12:30 PM', title: 'Big on Ruby Roundtable: Success Stories', track: 'Scaling Ruby' },
-      { time: '11:45 AM - 12:30 PM', title: 'Startup Founder Panel: From MVP to Scale', track: 'Startup Demos' },
-      { time: '12:30 PM - 2:00 PM', title: 'Lunch & Networking', track: null },
-      { time: '2:00 PM - 2:45 PM', title: 'The Future of Ruby Tooling', speaker: 'Lucas Kim', track: 'Open Source & AI' },
-      { time: '3:00 PM - 3:45 PM', title: 'Ruby Security Best Practices', speaker: 'Sophia Chen', track: 'Scaling Ruby' },
-      { time: '4:00 PM - 5:00 PM', title: 'Closing Keynote: Building Community in Tech', speaker: 'Marcus Johnson', track: null },
-      { time: '5:00 PM - 5:30 PM', title: 'Closing Remarks & Farewell', track: null }
+      { 
+        time: '9:00 AM', 
+        endTime: '9:10 AM',
+        main: { title: 'Day 2 Welcome & Announcements', speaker: '', type: 'logistics' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '9:25 AM', 
+        endTime: '9:55 AM',
+        main: { talkId: 'art-of-ruby', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '10:10 AM', 
+        endTime: '10:40 AM',
+        main: { talkId: 'rails-8-whats-new', type: 'talk' }, 
+        track2: { talkId: 'background-jobs-scale', type: 'talk' }, 
+        workshop: { talkId: 'inertia-rails-workshop', type: 'workshop' }
+      },
+      { 
+        time: '10:55 AM', 
+        endTime: '11:25 AM',
+        main: { talkId: 'ruby-gems-building', type: 'talk' }, 
+        track2: { talkId: 'debugging-ruby', type: 'talk' }, 
+        workshop: { talkId: 'inertia-rails-workshop', type: 'workshop' }
+      },
+      { 
+        time: '11:40 AM', 
+        endTime: '12:10 PM',
+        main: { talkId: 'machine-learning-ruby', type: 'talk' }, 
+        track2: { talkId: 'code-review-practices', type: 'talk' }, 
+        workshop: { talkId: 'inertia-rails-workshop', type: 'workshop' }
+      },
+      { 
+        time: '12:25 PM', 
+        endTime: '2:00 PM',
+        main: { title: 'Lunch Break & Networking', speaker: '', type: 'break' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '2:00 PM', 
+        endTime: '2:30 PM',
+        main: { talkId: 'ruby-cloud-deployment', type: 'talk' }, 
+        track2: { talkId: 'api-design-ruby', type: 'talk' }, 
+        workshop: { title: 'TBA', speaker: '', type: 'workshop' }
+      },
+      { 
+        time: '2:45 PM', 
+        endTime: '3:15 PM',
+        main: { talkId: 'open-source-sustainability', type: 'talk' }, 
+        track2: { talkId: 'ruby-memory-management', type: 'talk' }, 
+        workshop: { title: 'TBA', speaker: '', type: 'workshop' }
+      },
+      { 
+        time: '3:30 PM', 
+        endTime: '5:00 PM',
+        main: { title: 'Startup Demo Showcase', speaker: 'Various Founders', type: 'demos' }, 
+        track2: null, 
+        workshop: { title: 'TBA', speaker: '', type: 'workshop' }
+      },
+      { 
+        time: '5:15 PM', 
+        endTime: '5:45 PM',
+        main: { title: 'VC Panel: Funding Ruby Startups', speaker: 'Industry VCs', type: 'panel' }, 
+        track2: null, 
+        workshop: null 
+      },
+      { 
+        time: '6:00 PM', 
+        endTime: '6:30 PM',
+        main: { talkId: 'closing-keynote', type: 'keynote' }, 
+        track2: null, 
+        workshop: null 
+      }
     ]
   }
 ];
 
-// Define colors for different tracks
-const trackColors = {
-  'Open Source & AI': 'bg-blue-100 text-blue-800',
-  'Scaling Ruby': 'bg-green-100 text-green-800',
-  'Startup Demos': 'bg-purple-100 text-purple-800',
-  'VC Insights': 'bg-amber-100 text-amber-800'
+// Define colors for different session types
+const sessionColors = {
+  'keynote': 'bg-ruby-500 text-white',
+  'panel': 'bg-purple-500 text-white',
+  'demos': 'bg-green-500 text-white',
+  'break': 'bg-sky-500 text-white',
+  'logistics': 'bg-cloud-600 text-white',
+  'talk': 'bg-white text-dark-700 border border-dark-200',
+  'workshop': 'bg-emerald-100 text-emerald-800 border border-emerald-200'
 };
+
+function getSessionColor(sessionType) {
+  return sessionColors[sessionType] || 'bg-white text-dark-700 border border-dark-200';
+}
+
+// Helper function to get session data
+function getSessionData(session) {
+  if (!session) return null;
+  
+  if (session.talkId) {
+    const talkData = getTalkWithSpeaker(session.talkId);
+    return {
+      ...session,
+      title: talkData?.title || 'TBA',
+      speaker: talkData?.speaker?.name || '',
+      talkData
+    };
+  }
+  
+  return session;
+}
 ---
 
 <Layout title="Schedule - San Francisco Ruby Conference 2025">
   <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-display font-bold text-center">Conference Schedule</h1>
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-center">Schedule</h1>
       <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-        Plan your SF Ruby Conference experience with our comprehensive schedule
+        Two days and three tracks at Fort Mason, San Francisco
       </p>
     </div>
   </div>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Schedule navigation -->
-    <div class="mb-8 flex justify-center space-x-4">
-      {days.map((day, index) => (
-        <button 
-          class="schedule-tab px-6 py-2 rounded-md text-dark-800 font-medium transition-colors duration-200 focus:outline-none"
-          data-index={index}
-          aria-selected={index === 0 ? 'true' : 'false'}
-        >
-          Day {index + 1}
-          <span class="hidden md:inline ml-2">{day.date}</span>
-        </button>
-      ))}
+
+    <!-- Day Navigation -->
+    <div class="mb-12 flex justify-center">
+      <div class="bg-white rounded-xl shadow-lg p-2 inline-flex space-x-2">
+        {days.map((day, index) => (
+          <button 
+            class={`schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none ${
+              index === 0 
+                ? 'bg-ruby-500 text-white shadow-md transform scale-105' 
+                : 'text-dark-700 hover:bg-dark-50'
+            }`}
+            data-index={index}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            <div class="font-display font-bold">{day.dayLabel}</div>
+            <div class="text-sm opacity-90">{day.date}</div>
+          </button>
+        ))}
+      </div>
     </div>
     
-    <!-- Track legend -->
-    <div class="mb-8 flex flex-wrap justify-center gap-4">
-      {Object.entries(trackColors).map(([track, color]) => (
-        <div class="flex items-center">
-          <span class={`inline-block w-3 h-3 rounded-full ${color.split(' ')[0]} mr-2`}></span>
-          <span class="text-dark-600 text-sm">{track}</span>
-        </div>
-      ))}
-    </div>
-    
-    <!-- Schedule tabs content -->
+    <!-- Schedule Content -->
     <div class="space-y-8">
       {days.map((day, dayIndex) => (
         <div 
@@ -89,69 +251,241 @@ const trackColors = {
           data-index={dayIndex}
           style={dayIndex === 0 ? "" : "display: none;"}
         >
-          <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">{day.date}</h2>
-          
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-dark-200">
-              <thead class="bg-dark-50">
-                <tr>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-dark-500 uppercase tracking-wider w-1/4">Time</th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-dark-500 uppercase tracking-wider w-1/2">Session</th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-dark-500 uppercase tracking-wider w-1/4">Speaker</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white divide-y divide-dark-200">
-                {day.sessions.map((session) => (
-                  <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-dark-900">{session.time}</td>
-                    <td class="px-6 py-4">
-                      <div class="text-sm font-medium text-dark-900">{session.title}</div>
-                      {session.track && (
-                        <span class={`mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${trackColors[session.track]}`}>
-                          {session.track}
-                        </span>
-                      )}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-dark-500">
-                      {session.speaker ? session.speaker : ''}
-                    </td>
-                  </tr>
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Day Header -->
+            <div class="bg-gradient-to-r from-ruby-500 to-ruby-600 text-white px-8 py-6">
+              <h3 class="text-2xl font-display font-bold">{day.dayLabel}</h3>
+              <p class="text-ruby-100 mt-1">{day.date}</p>
+            </div>
+            
+            <!-- Schedule Grid Header -->
+            <div class="px-8 py-4 bg-dark-50 border-b border-dark-200">
+              <div class="grid grid-cols-12 gap-6">
+                <div class="col-span-12 md:col-span-2">
+                  <h4 class="font-display font-bold text-dark-700 text-sm tracking-wide">TIME</h4>
+                </div>
+                <div class="col-span-12 md:col-span-4">
+                  <h4 class="font-display font-bold text-ruby-600 text-sm tracking-wide">MAIN STAGE</h4>
+                </div>
+                <div class="col-span-12 md:col-span-3">
+                  <h4 class="font-display font-bold text-sky-600 text-sm tracking-wide">BLACKBOX THEATER</h4>
+                </div>
+                <div class="col-span-12 md:col-span-3">
+                  <h4 class="font-display font-bold text-emerald-600 text-sm tracking-wide">WORKSHOPS STUDIO</h4>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Schedule Grid -->
+            <div class="p-8">
+              <div class="space-y-6">
+                {day.sessions.map((session, index) => (
+                  <div class="grid grid-cols-12 gap-6 items-start py-4 border-b border-dark-100 last:border-b-0">
+                    <!-- Time Column -->
+                    <div class="col-span-12 md:col-span-2">
+                      <div class="text-center md:text-left">
+                        <div class="font-display font-bold text-dark-900 text-lg">{session.time}</div>
+                        <div class="text-dark-500 text-sm">to {session.endTime}</div>
+                      </div>
+                    </div>
+                    
+                    <!-- Main Stage -->
+                    <div class="col-span-12 md:col-span-4">
+                      {(() => {
+                        const sessionData = getSessionData(session.main);
+                        if (!sessionData) return null;
+                        
+                        return (
+                          <div 
+                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
+                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
+                          >
+                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
+                            {sessionData.speaker && (
+                              <div class="text-xs opacity-75">{sessionData.speaker}</div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                    
+                    <!-- Blackbox Theater -->
+                    <div class="col-span-12 md:col-span-3">
+                      {(() => {
+                        const sessionData = getSessionData(session.track2);
+                        if (!sessionData) return null;
+                        
+                        return (
+                          <div 
+                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
+                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
+                          >
+                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
+                            {sessionData.speaker && (
+                              <div class="text-xs opacity-75">{sessionData.speaker}</div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                    
+                    <!-- Workshops Studio -->
+                    <div class="col-span-12 md:col-span-3">
+                      {(() => {
+                        const sessionData = getSessionData(session.workshop);
+                        if (!sessionData) return null;
+                        
+                        // Handle multiple speakers
+                        let speakerNames = '';
+                        if (sessionData.talkData && sessionData.talkData.speakerId) {
+                          if (Array.isArray(sessionData.talkData.speakerId)) {
+                            // Multiple speakers
+                            const speakersList = sessionData.talkData.speakerId.map(id => speakers?.[id]?.name).filter(Boolean);
+                            if (speakersList.length > 1) {
+                              speakerNames = speakersList.slice(0, -1).join(', ') + ' & ' + speakersList[speakersList.length - 1];
+                            } else if (speakersList.length === 1) {
+                              speakerNames = speakersList[0];
+                            }
+                          } else {
+                            // Single speaker
+                            speakerNames = speakers?.[sessionData.talkData.speakerId]?.name || '';
+                          }
+                        } else if (sessionData.speaker) {
+                          speakerNames = sessionData.speaker;
+                        }
+                        
+                        return (
+                          <div 
+                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
+                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
+                          >
+                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
+                            {speakerNames && (
+                              <div class="text-xs opacity-75 mb-2">{speakerNames}</div>
+                            )}
+                            {sessionData.talkData?.lumaId && (
+                              <a
+                                href={`https://lu.ma/${sessionData.talkData.lumaId}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-block px-3 py-1 bg-emerald-500 text-white text-xs font-medium rounded-md hover:bg-emerald-600 transition-colors duration-200"
+                                onclick="event.stopPropagation()"
+                              >
+                                Sign Up
+                              </a>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </div>
           </div>
         </div>
       ))}
     </div>
     
-    <div class="mt-12 text-center">
-      <p class="text-dark-600 mb-4">
-        Schedule is subject to change. Last updated: August 10, 2025
+    <!-- Talk Details Modal -->
+    <div id="talkModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b border-dark-200 px-6 py-4 flex justify-between items-center">
+          <h3 class="text-xl font-bold text-dark-900" id="modalTitle">Talk Details</h3>
+          <button onclick="closeTalkModal()" class="text-dark-400 hover:text-dark-600 text-2xl">
+            ×
+          </button>
+        </div>
+        
+        <div class="p-6">
+          <div id="modalContent">
+            <!-- Content will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Schedule Notes -->
+    <div class="mt-16 bg-dark-50 rounded-xl p-8">
+      <h3 class="text-2xl font-display font-bold text-dark-900 mb-6 text-center">Important Information</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
+              <span class="text-emerald-600">🎫</span>
+            </div>
+            <h4 class="font-display font-bold text-dark-900">Workshop Registration</h4>
+          </div>
+          <p class="text-dark-600">
+            Workshops have limited capacity and require separate registration via Luma. Click the "Sign Up" button for each workshop you'd like to attend.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+              <span class="text-amber-600">📍</span>
+            </div>
+            <h4 class="font-display font-bold text-dark-900">Venue Locations</h4>
+          </div>
+          <p class="text-dark-600">
+            All three venues are located within Fort Mason Center. Maps and directions will be provided at registration.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-16 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-xl p-12">
+      <h3 class="text-3xl font-display font-bold mb-4">Ready to Join Us?</h3>
+      <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+        Don't miss out on two days of Ruby excellence across three venues at Fort Mason Center.
       </p>
-      <a 
-        href="/calendar.ics" 
-        class="inline-flex items-center justify-center px-4 py-2 border border-dark-300 rounded-md shadow-sm text-sm font-medium text-dark-700 bg-white hover:bg-dark-50"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5" />
-        </svg>
-        Add to Calendar
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="https://lu.ma/sfrubyconf2025"
+          target="_blank"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white text-ruby-600 rounded-lg font-medium shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+        >
+          Get Tickets
+        </a>
+        <a 
+          href="/#newsletter"
+          class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-ruby-600"
+        >
+          Sign up for updates
+        </a>
+      </div>
     </div>
   </div>
 </Layout>
 
-<style>
-  .schedule-tab[aria-selected="true"] {
-    background-color: #e0115f;
-    color: white;
+<script define:vars={{ talks, speakers }} client:load>
+  // Social icon function moved from SocialLink component
+  function getSocialIcon(url) {
+    if (url.includes('github.com')) {
+      return '<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>';
+    } else if (url.includes('linkedin.com')) {
+      return '<svg width="16" height="16" fill="currentColor" viewBox="0 0 382 382"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472L341.91,330.654L341.91,330.654z"/></svg>';
+    } else if (url.includes('x.com')) {
+      return '<svg width="16" height="16" viewBox="0 0 1200 1227" fill="currentColor"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>';
+    } else if (url.includes('bsky.app')) {
+      return '<svg width="16" height="16" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0535 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z"/></svg>';
+    } else if (url.includes('ruby.social')) {
+      return '<svg width="16" height="16" viewBox="0 0 216.4144 232.00976" fill="currentColor"><path d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915"/><path fill="#ffffff" d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675"/></svg>';
+    } else {
+      return '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/></svg>';
+    }
   }
-  .schedule-tab[aria-selected="false"] {
-    background-color: #f1f5f9;
-  }
-</style>
 
-<script>
+  function getSocialLabel(url) {
+    if (url.includes('github.com')) return 'GitHub';
+    if (url.includes('linkedin.com')) return 'LinkedIn';
+    if (url.includes('x.com')) return 'X';
+    if (url.includes('bsky.app')) return 'Bluesky';
+    if (url.includes('ruby.social')) return 'Mastodon';
+    return 'Website';
+  }
+
   // Handle tab switching
   const tabs = document.querySelectorAll('.schedule-tab');
   const contents = document.querySelectorAll('.schedule-content');
@@ -159,8 +493,13 @@ const trackColors = {
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       // Update tab styling
-      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      tabs.forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none text-dark-700 hover:bg-dark-50';
+      });
+      
       tab.setAttribute('aria-selected', 'true');
+      tab.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none bg-ruby-500 text-white shadow-md transform scale-105';
       
       // Show selected content
       const index = tab.getAttribute('data-index');
@@ -169,4 +508,222 @@ const trackColors = {
       });
     });
   });
+  
+  // Talk modal functionality
+  function openTalkModal(talkId) {
+    const talk = talks[talkId];
+    if (!talk) return;
+    
+    const modal = document.getElementById('talkModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    
+    modalTitle.textContent = talk.title;
+    
+    // Get speaker data from the global speakers object
+    const speakerData = speakers?.[talk.speakerId];
+    
+    // Determine location based on track
+    let location = '';
+    let locationColor = '';
+    if (talk.track === 'main') {
+      location = 'Main Stage';
+      locationColor = 'bg-ruby-100 text-ruby-800';
+    } else if (talk.track === 'blackbox') {
+      location = 'Blackbox Theater';
+      locationColor = 'bg-sky-100 text-sky-800';
+    } else if (talk.track === 'workshop') {
+      location = 'Workshops Studio';
+      locationColor = 'bg-emerald-100 text-emerald-800';
+    }
+    
+    modalContent.innerHTML = `
+      <div class="mb-6">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="px-3 py-1 ${locationColor} rounded-full text-sm font-medium">
+            ${location}
+          </span>
+          <span class="text-dark-500 text-sm">
+            Day ${talk.day} • ${talk.time} - ${talk.endTime}
+          </span>
+        </div>
+        <p class="text-dark-700 leading-relaxed">${talk.description}</p>
+      </div>
+      
+      ${(() => {
+        // Handle multiple speakers
+        if (Array.isArray(talk.speakerId)) {
+          const speakersList = talk.speakerId.map(id => speakers?.[id]).filter(Boolean);
+          if (speakersList.length === 0) return '';
+          
+          return `
+            <div class="border-t border-dark-200 pt-6">
+              <h5 class="font-bold text-dark-900 mb-4">About the Speaker${speakersList.length > 1 ? 's' : ''}</h5>
+              <div class="space-y-6">
+                ${speakersList.map(speaker => `
+                  <div class="flex items-start gap-4">
+                    <img 
+                      src="${speaker.image}" 
+                      alt="${speaker.name}"
+                      class="w-16 h-16 rounded-full object-cover"
+                    />
+                    <div class="flex-1">
+                      <h6 class="font-bold text-dark-900">${speaker.name}</h6>
+                      <p class="text-ruby-500 text-sm mb-2">${speaker.company}</p>
+                      <p class="text-dark-600 text-sm">${speaker.bio}</p>
+                      ${speaker.socials && speaker.socials.length > 0 ? `
+                        <div class="flex items-center gap-3 mt-3">
+                          ${speaker.socials.map(url => {
+                            let icon = '';
+                            let label = '';
+                            
+                            if (url.includes('github.com')) {
+                              icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>';
+                              label = 'GitHub';
+                            } else if (url.includes('linkedin.com')) {
+                              icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 382 382"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472L341.91,330.654L341.91,330.654z"/></svg>';
+                              label = 'LinkedIn';
+                            } else if (url.includes('x.com')) {
+                              icon = '<svg width="16" height="16" viewBox="0 0 1200 1227" fill="currentColor"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>';
+                              label = 'X';
+                            } else if (url.includes('bsky.app')) {
+                              icon = '<svg width="16" height="16" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0535 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z"/></svg>';
+                              label = 'Bluesky';
+                            } else if (url.includes('ruby.social')) {
+                              icon = '<svg width="16" height="16" viewBox="0 0 216.4144 232.00976" fill="currentColor"><path d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915"/><path fill="#ffffff" d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675"/></svg>';
+                              label = 'Mastodon';
+                            } else {
+                              icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/></svg>';
+                              label = 'Website';
+                            }
+                            
+                            return `
+                              <a
+                                href="${url}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex items-center justify-center w-8 h-8 bg-dark-100 hover:bg-ruby-100 text-dark-600 hover:text-ruby-600 rounded-full transition-colors duration-200"
+                                title="${label}"
+                              >
+                                ${icon}
+                              </a>
+                            `;
+                          }).join('')}
+                        </div>
+                      ` : ''}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        } else {
+          // Single speaker
+          const speakerData = speakers?.[talk.speakerId];
+          if (!speakerData) return '';
+          
+          return `
+        <div class="border-t border-dark-200 pt-6">
+          <h5 class="font-bold text-dark-900 mb-4">About the Speaker</h5>
+          <div class="flex items-start gap-4">
+            <img 
+              src="${speakerData.image}" 
+              alt="${speakerData.name}"
+              class="w-16 h-16 rounded-full object-cover"
+            />
+            <div class="flex-1">
+              <h6 class="font-bold text-dark-900">${speakerData.name}</h6>
+              <p class="text-ruby-500 text-sm mb-2">${speakerData.company}</p>
+              <p class="text-dark-600 text-sm">${speakerData.bio}</p>
+              ${speakerData.socials && speakerData.socials.length > 0 ? `
+                <div class="flex items-center gap-3 mt-3">
+                  ${speakerData.socials.map(url => {
+                    let icon = '';
+                    let label = '';
+                    
+                    if (url.includes('github.com')) {
+                      icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>';
+                      label = 'GitHub';
+                    } else if (url.includes('linkedin.com')) {
+                      icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 382 382"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472L341.91,330.654L341.91,330.654z"/></svg>';
+                      label = 'LinkedIn';
+                    } else if (url.includes('x.com')) {
+                      icon = '<svg width="16" height="16" viewBox="0 0 1200 1227" fill="currentColor"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>';
+                      label = 'X';
+                    } else if (url.includes('bsky.app')) {
+                      icon = '<svg width="16" height="16" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0535 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z"/></svg>';
+                      label = 'Bluesky';
+                    } else if (url.includes('ruby.social')) {
+                      icon = '<svg width="16" height="16" viewBox="0 0 216.4144 232.00976" fill="currentColor"><path d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915"/><path fill="#ffffff" d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675"/></svg>';
+                      label = 'Mastodon';
+                    } else {
+                      icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/></svg>';
+                      label = 'Website';
+                    }
+                    
+                    return `
+                      <a
+                        href="${url}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex items-center justify-center w-8 h-8 bg-dark-100 hover:bg-ruby-100 text-dark-600 hover:text-ruby-600 rounded-full transition-colors duration-200"
+                        title="${label}"
+                      >
+                        ${icon}
+                      </a>
+                    `;
+                  }).join('')}
+                </div>
+              ` : ''}
+            </div>
+          </div>
+          
+        </div>
+          `;
+        }
+      })()}
+      
+      ${talk.lumaId ? `
+        <div class="mt-6 text-center">
+          <a
+            href="https://lu.ma/${talk.lumaId}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white font-medium rounded-lg hover:bg-emerald-600 transition-colors duration-200"
+          >
+            Sign Up for Workshop
+          </a>
+        </div>
+      ` : ''}
+    `;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeTalkModal() {
+    const modal = document.getElementById('talkModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+  
+  // Close modal when clicking outside
+  document.getElementById('talkModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      closeTalkModal();
+    }
+  });
+  
+  // Close modal on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeTalkModal();
+    }
+  });
+  
+  // Make functions globally accessible
+  window.openTalkModal = openTalkModal;
+  window.closeTalkModal = closeTalkModal;
 </script>

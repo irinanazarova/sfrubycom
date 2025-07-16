@@ -7,6 +7,12 @@ export default defineConfig({
     inlineStylesheets: 'auto',
   },
   vite: {
+    esbuild: {
+      target: 'es2020'
+    },
+    optimizeDeps: {
+      include: ['animejs']
+    },
     build: {
       cssCodeSplit: true,
       rollupOptions: {
