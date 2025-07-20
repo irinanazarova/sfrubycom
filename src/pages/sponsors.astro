@@ -57,6 +57,13 @@ const specialOpportunities = [
 ];
 
 const currentSponsors = [
+
+  {
+    name: 'Evil Martians',
+    tier: 'Organizer',
+    logo: '/evilmartians.png',
+    url: 'https://www.evilmartians.com'
+  },
   {
     name: 'Chime',
     tier: 'Pickaxe ⛏️',
@@ -120,7 +127,7 @@ const currentSponsors = [
             rel="noopener noreferrer"
             class="flex flex-col items-center bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
           >
-            <div class="text-sm font-medium text-dark-500 mb-4">{sponsor.tier} Sponsor</div>
+              <div class="text-sm font-medium text-dark-500 mb-4">{sponsor.tier} {sponsor.tier != "Organizer" ? "Sponsor" : ""}</div>
             <div class="h-16 flex items-center justify-center mb-4">
               <img
                 src={sponsor.logo}
