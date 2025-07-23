@@ -4,9 +4,9 @@ import SocialLink from "../components/SocialLink.astro";
 import { speakers, getSpeakersByGroup } from "../data/speakers.js";
 
 // Get speakers by group
-const featuredSpeakers = getSpeakersByGroup('featured');
-const regularSpeakers = getSpeakersByGroup('speaker');
-const CTOSpeakers = getSpeakersByGroup('cto');
+const featuredSpeakers = getSpeakersByGroup("featured");
+const regularSpeakers = getSpeakersByGroup("speaker");
+const CTOSpeakers = getSpeakersByGroup("cto");
 ---
 
 <Layout title="Speakers - San Francisco Ruby Conference 2025">
@@ -76,21 +76,7 @@ const CTOSpeakers = getSpeakersByGroup('cto');
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    [
-                        speakers['rachael-wright-munn'],
-                        speakers['justin-bowen'],
-                        speakers['jeremy-evans'],
-                        speakers['noel-rappin'],
-                        speakers['ngan-pham'],
-                        speakers['mike-perham'],
-                        speakers['svyatoslav-kryukov'],
-                        speakers['fito-von-zastrow'],
-                        speakers['alan-ridlehoover'],
-                        speakers['brandon-weaver'],
-                        speakers['takashi-kokubun'],
-                        speakers['brandon-shar'],
-                        speakers['brian-knoles']
-                    ].map((speaker) => (
+                    Object.values(regularSpeakers).map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img
@@ -136,7 +122,7 @@ const CTOSpeakers = getSpeakersByGroup('cto');
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    [speakers['edward-kim']].map((speaker) => (
+                    [speakers["edward-kim"]].map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img
@@ -158,7 +144,9 @@ const CTOSpeakers = getSpeakersByGroup('cto');
                                     {speaker.role}
                                 </p>
 
-                                <p class="text-dark-600 text-sm mb-4">{speaker.bio}</p>
+                                <p class="text-dark-600 text-sm mb-4">
+                                    {speaker.bio}
+                                </p>
 
                                 <div class="flex space-x-4">
                                     {speaker.socials.map((url) => (
