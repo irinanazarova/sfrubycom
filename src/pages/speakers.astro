@@ -3,9 +3,20 @@ import Layout from "../layouts/Layout.astro";
 import SocialLink from "../components/SocialLink.astro";
 import { speakers, getSpeakersByGroup } from "../data/speakers.js";
 
+// Shuffle function to randomize array order
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
 // Get speakers by group
 const featuredSpeakers = getSpeakersByGroup("featured");
-const regularSpeakers = getSpeakersByGroup("speaker");
+const regularSpeakersRaw = getSpeakersByGroup("speaker");
+const regularSpeakers = shuffleArray(Object.values(regularSpeakersRaw));
 const CTOSpeakers = getSpeakersByGroup("cto");
 ---
 
@@ -122,7 +133,7 @@ const CTOSpeakers = getSpeakersByGroup("cto");
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    [speakers["edward-kim"]].map((speaker) => (
+                    CTOSpeakers.map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                             <div class="aspect-w-1 aspect-h-1 bg-dark-200">
                                 <img
