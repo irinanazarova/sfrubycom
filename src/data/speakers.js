@@ -361,7 +361,7 @@ export const speakers = {
   "evgeny-li": {
     id: "evgeny-li",
     name: "Evgeny Li",
-    company: "Bemi",
+    company: "BemiDB",
     role: "Co-founder and CEO",
     image: "/speaker_evgeny.jpg",
     socials: ["https://github.com/exAspArk", "https://x.com/exAspArk"],
