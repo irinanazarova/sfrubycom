@@ -55,7 +55,7 @@ export const speakers = {
     id: "ngan-pham",
     name: "Ngan Pham",
     company: "Gusto",
-    role: "Distinguished Engineer",
+    role: "Software Engineer",
     image: "/speaker_ngan.jpg",
     socials: [
       "https://github.com/ngan",
