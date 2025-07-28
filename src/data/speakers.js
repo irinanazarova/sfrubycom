@@ -175,11 +175,11 @@ export const speakers = {
   "brandon-shar": {
     id: "brandon-shar",
     name: "Brandon Shar",
-    company: "",
+    company: "ezCater",
     role: "Staff Software Engineer",
     image: "/speaker_brandonshar.jpg",
     socials: ["https://github.com/BrandonShar", "https://x.com/brandonshar"],
-    bio: "Staff Software Engineer focused on AI product development. Co-creator of Inertia Rails and Inertia Django. Passionate about full-stack engineering, product focused development, and expressive, simple, and changeable code. Currently hooked on MCP servers and AI-enabled productivity boosts.",
+    bio: "Brandon is a full-stack developer currently leading AI product engineering at ezCater. He's the co-author of Inertia Rails and Inertia Django and is passionate about product-focused development, batteries included frameworks, and changeable code. Currently hooked on MCP servers, AI-coding tools, and runDisney races.",
     group: "speaker",
   },
   "edward-kim": {
