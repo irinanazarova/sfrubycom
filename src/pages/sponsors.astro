@@ -1,100 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import {
+  sponsorTiers,
+  specialOpportunities,
+  getSponsorsForSponsorsPage
+} from '../data/sponsors.js';
 
-const sponsorTiers = [
-  {
-    name: 'Pickaxe ⛏️',
-    price: '$15,000',
-    description: 'Premier sponsorship with maximum visibility and branding.',
-    benefits: [
-      'Prominent logo placement on all conference materials',
-      'Featured sponsor acknowledgment during opening and closing remarks',
-      'Dedicated sponsor spotlight on social media channels',
-      'Premium exhibition space 16.5\'x5.8\'',
-      'Opportunity to host a sponsored workshop, or a custom interactive experience',
-      '5 complimentary conference tickets'
-    ],
-    available: 5,
-    claimed: 2
-  },
-  {
-    name: 'Ruby',
-    price: '$7,000',
-    description: 'High-visibility sponsorship with excellent branding opportunities.',
-    benefits: [
-      'Logo on conference website and printed materials',
-      'Sponsor acknowledgment during opening remarks',
-      'Social media recognition',
-      'Exhibition space (5\'x3.3\') or branded gifts for attendees',
-      'Lightning talk opportunity (5 minutes)',
-      '2 complimentary conference tickets'
-    ],
-    available: 10,
-    claimed: 2
-  },
-  {
-    name: 'Emerald',
-    price: '$3,000',
-    description: 'Strong presence with quality branding and networking.',
-    benefits: [
-      'Logo on conference website and printed materials',
-      'Sponsor acknowledgment during opening remarks',
-      'Social media recognition'
-    ],
-    available: 15,
-    claimed: 4
-  }
-];
-
-const specialOpportunities = [
- {
-    name: 'Reception Sponsor',
-    price: 'TBD',
-    description: 'Exclusive sponsorship of the evening reception on Day 1.',
-    available: 1,
-    claimed: 0
-  }
-];
-
-const currentSponsors = [
-  {
-    name: 'Chime',
-    tier: 'Pickaxe ⛏️',
-    logo: '/sponsor_chime.png',
-    url: 'https://www.chime.com'
-  },
-
-  {
-    name: 'Bolt.new',
-    tier: 'Pickaxe ⛏️',
-    logo: '/sponsor_boltnew.png',
-    url: 'https://www.bolt.new'
-  },
-  {
-    name: 'Gusto',
-    tier: 'Ruby',
-    logo: '/sponsor_gusto.png',
-    url: 'https://www.gusto.com'
-  },
-  {
-    name: 'Scout Monitoring',
-    tier: 'Emerald',
-    logo: '/sponsor_scout.png',
-    url: 'https://scoutapm.com/'
-  },
-  {
-    name: 'typesense',
-    tier: 'Emerald',
-    logo: '/sponsor_typesense.png',
-    url: 'https://typesense.org/'
-  },
-  {
-    name: 'Cedarcode',
-    tier: 'Emerald',
-    logo: '/sponsor_cedarcode.png',
-    url: 'https://www.cedarcode.com/'
-  }
-];
+const currentSponsors = getSponsorsForSponsorsPage();
 ---
 
 <Layout title="Sponsors - San Francisco Ruby Conference 2025">
