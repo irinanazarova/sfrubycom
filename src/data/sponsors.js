@@ -28,8 +28,8 @@ export const sponsorTiers = [
       "Lightning talk opportunity (5 minutes)",
       "2 complimentary conference tickets",
     ],
-    available: 10,
-    claimed: 2,
+    available: 5,
+    claimed: 1,
   },
   {
     name: "Emerald",
@@ -94,12 +94,26 @@ export const sponsors = {
     logo: "/sponsor_typesense.png",
     url: "https://typesense.org/",
   },
+  temporal: {
+    id: "temporal",
+    name: "Temporal",
+    tier: "Ruby",
+    logo: "/sponsor_temporal.png",
+    url: "https://temporal.io/",
+  },
   cedarcode: {
     id: "cedarcode",
     name: "Cedarcode",
     tier: "Emerald",
     logo: "/sponsor_cedarcode.png",
     url: "https://www.cedarcode.com/",
+  },
+  "planet-argon": {
+    id: "planet-argon",
+    name: "Planet Argon",
+    tier: "Emerald",
+    logo: "/sponsor_planetargon.png",
+    url: "https://www.planetargon.com/",
   },
 };
 
