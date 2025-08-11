@@ -1,17 +1,13 @@
 export const speakers = {
-  "obie-fernandez": {
-    id: "obie-fernandez",
-    name: "Obie Fernandez",
-    title: "Author of the Rails Way. Creator of Roast",
-    company: "Shopify",
-    role: "Principal Engineer",
-    image: "/speaker_obie.jpg",
-    socials: [
-      "https://github.com/obie",
-      "https://x.com/obie",
-      "https://bsky.app/profile/obiefernandez.bsky.social",
-    ],
-    bio: "Obie Fernandez is a Ruby and Rails pioneer, and best-selling author of The Rails Way. With three decades in software and a string of successful startups—including Hashrocket and Andela—he's helped shape the Rails community from the start. Obie now leads AI and developer experience initiatives at Shopify, and still finds time to DJ and make music in Mexico City.",
+  "carmine-paolino": {
+    id: "carmine-paolino",
+    name: "Carmine Paolino",
+    title: "Author of RubyLLM",
+    company: "Chat with Work",
+    role: "Founder and CEO",
+    image: "/speaker_carmine.jpg",
+    socials: ["https://github.com/crmne", "https://x.com/paolino"],
+    bio: "AI engineer and open source contributor, Carmine has built large-scale systems at OLX, Capgemini, and the Alan Turing Institute. He's the creator of RubyLLM, bringing modern AI tooling to Ruby, and has co-founded startups like Freshflow, and Chat with Work. Carmine loves Ruby, deep learning, and producing electronic music in Berlin.",
     group: "featured",
   },
   "vladimir-dementyev": {
@@ -23,17 +19,6 @@ export const speakers = {
     image: "/speaker_vova.jpg",
     socials: ["https://github.com/palkan", "https://x.com/palkan_tula"],
     bio: "A mathematician who found his happiness in programming Ruby and Erlang, contributing to open source and being an Evil Martian. Author of AnyCable, TestProf, Action Policy and many yet unknown ukulele melodies.",
-    group: "featured",
-  },
-  "carmine-paolino": {
-    id: "carmine-paolino",
-    name: "Carmine Paolino",
-    title: "Author of RubyLLM",
-    company: "Chat with Work",
-    role: "Founder and CEO",
-    image: "/speaker_carmine.jpg",
-    socials: ["https://github.com/crmne", "https://x.com/paolino"],
-    bio: "AI engineer and open source contributor, Carmine has built large-scale systems at OLX, Capgemini, and the Alan Turing Institute. He's the creator of RubyLLM, bringing modern AI tooling to Ruby, and has co-founded startups like Freshflow, and Chat with Work. Carmine loves Ruby, deep learning, and producing electronic music in Berlin.",
     group: "featured",
   },
   "marco-roth": {
@@ -49,6 +34,21 @@ export const speakers = {
       "https://bsky.app/profile/marcoroth.dev",
     ],
     bio: "Full-stack Ruby on Rails developer and open source enthusiast, Marco is a core contributor to Hotwire and StimulusReflex. He's passionate about pushing the boundaries of real-time, server-rendered apps with HTML-over-the-wire, and maintains several key libraries in the Hotwire and Rails ecosystem.",
+    group: "featured",
+  },
+  "obie-fernandez": {
+    id: "obie-fernandez",
+    name: "Obie Fernandez",
+    title: "Author of the Rails Way. Creator of Roast",
+    company: "Shopify",
+    role: "Principal Engineer",
+    image: "/speaker_obie.jpg",
+    socials: [
+      "https://github.com/obie",
+      "https://x.com/obie",
+      "https://bsky.app/profile/obiefernandez.bsky.social",
+    ],
+    bio: "Obie Fernandez is a Ruby and Rails pioneer, and best-selling author of The Rails Way. With three decades in software and a string of successful startups—including Hashrocket and Andela—he's helped shape the Rails community from the start. Obie now leads AI and developer experience initiatives at Shopify, and still finds time to DJ and make music in Mexico City.",
     group: "featured",
   },
   "ngan-pham": {

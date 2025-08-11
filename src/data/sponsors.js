@@ -39,6 +39,7 @@ export const sponsorTiers = [
       "Logo on conference website and printed materials",
       "Sponsor acknowledgment during opening remarks",
       "Social media recognition",
+      "1 complimentary conference ticket",
     ],
     available: 15,
     claimed: 4,
