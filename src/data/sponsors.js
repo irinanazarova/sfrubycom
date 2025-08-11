@@ -28,8 +28,8 @@ export const sponsorTiers = [
       "Lightning talk opportunity (5 minutes)",
       "2 complimentary conference tickets",
     ],
-    available: 5,
-    claimed: 1,
+    available: 10,
+    claimed: 2,
   },
   {
     name: "Emerald",
