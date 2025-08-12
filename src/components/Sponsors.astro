@@ -1,7 +1,61 @@
 ---
-import { getSponsorsForComponent, organizers } from "../data/sponsors.js";
-
-const tiers = getSponsorsForComponent();
+const tiers = [
+    {
+        name: "Pickaxe ⛏️",
+        sponsors: [
+            {
+                name: "Chime",
+                logo: "/sponsor_chime.png",
+                url: "https://www.chime.com",
+            },
+            {
+                name: "Bolt.new by Stackblitz",
+                logo: "/sponsor_boltnew.png",
+                url: "https://www.bolt.new",
+            },
+        ],
+    },
+    {
+        name: "Ruby",
+        sponsors: [
+            {
+                name: "Gusto",
+                logo: "/sponsor_gusto.png",
+                url: "https://www.gusto.com",
+            },
+            {
+                name: "Temporal",
+                logo: "/sponsor_temporal.png",
+                url: "https://temporal.io/",
+            },
+        ],
+    },
+    {
+        name: "Emerald",
+        sponsors: [
+            {
+                name: "Scout Monitoring",
+                logo: "/sponsor_scout.png",
+                url: "https://scoutapm.com/",
+            },
+            {
+                name: "typesense",
+                logo: "/sponsor_typesense.png",
+                url: "https://typesense.org/",
+            },
+            {
+                name: "Cedarcode",
+                logo: "/sponsor_cedarcode.png",
+                url: "https://www.cedarcode.com/",
+            },
+            {
+                name: "Planet Argon",
+                logo: "/sponsor_planetargon.png",
+                url: "https://www.planetargon.com/",
+            },
+        ],
+    },
+];
 ---
 
 <section id="sponsors" class="py-20 bg-white">
@@ -43,7 +97,7 @@ const tiers = getSponsorsForComponent();
                                         <img
                                             src={sponsor.logo}
                                             alt={sponsor.name}
-                                            class={`h-12 w-auto ${tier.name === "Pickaxe ⛏️" ? "md:h-24" : "md:h-16"}`}
+                                            class={`h-12 w-auto ${tier.name === "Pickaxe ⛏️" ? "md:h-32" : tier.name === "Ruby" ? "md:h-24" : "md:h-16"}`}
                                             loading="lazy"
                                         />
                                     ) : (
@@ -58,7 +112,6 @@ const tiers = getSponsorsForComponent();
                 ))
             }
         </div>
-
         <div class="py-16">
             <div>
                 <h3
@@ -68,22 +121,18 @@ const tiers = getSponsorsForComponent();
                 </h3>
 
                 <div class="flex flex-wrap justify-center gap-8 items-center">
-                    {
-                        Object.values(organizers).map((organizer) => (
-                            <a
-                                href={organizer.url}
-                                class="block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 bg-white hover:shadow-lg"
-                                target="_blank"
-                            >
-                                <img
-                                    src={organizer.logo}
-                                    alt={organizer.name}
-                                    class="h-24 md:h-48 w-auto"
-                                    loading="lazy"
-                                />
-                            </a>
-                        ))
-                    }
+                    <a
+                        href="https://evilmartians.com"
+                        class="block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 bg-white hover:shadow-lg"
+                        target="_blank"
+                    >
+                        <img
+                            src="/evilmartians.png"
+                            alt="Evil Martians"
+                            class="h-24 md:h-48 w-auto"
+                            loading="lazy"
+                        />
+                    </a>
                 </div>
             </div>
         </div>
