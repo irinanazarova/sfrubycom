@@ -9,7 +9,7 @@ const days = [
     sessions: [
       {
         time: '8:00 AM',
-        endTime: '',
+        endTime: '8:45 AM',
         main: { title: 'Doors Open & Registration', speaker: '', type: 'logistics' },
         track2: null,
         workshop: null
@@ -50,44 +50,51 @@ const days = [
         workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
       },
       {
-        time: '12:35 PM',
-        endTime: '2:00 PM',
-        main: { title: 'Lunch Break & Networking', speaker: '', type: 'break' },
+        time: '12:20 PM',
+        endTime: '1:30 PM',
+        main: { title: 'Lunch & Networking', speaker: '', type: 'break' },
         track2: null,
         workshop: null
       },
       {
-        time: '2:00 PM',
-        endTime: '2:30 PM',
-        main: { talkId: 'ruby-security', type: 'talk' },
-        track2: { talkId: 'database-optimization', type: 'talk' },
-        workshop: { talkId: 'metaprogramming-workshop', type: 'workshop' }
+        time: '1:30 PM',
+        endTime: '2:00 PM',
+        main: { talkId: 'ruby-security-best-practices', type: 'talk' },
+        track2: { talkId: 'rails-modern-frontend', type: 'talk' },
+        workshop: { talkId: 'testing-workshop', type: 'workshop' }
       },
       {
-        time: '2:45 PM',
-        endTime: '3:15 PM',
-        main: { talkId: 'building-developer-tools', type: 'talk' },
-        track2: { talkId: 'microservices-architecture', type: 'talk' },
-        workshop: { talkId: 'metaprogramming-workshop', type: 'workshop' }
+        time: '2:15 PM',
+        endTime: '2:45 PM',
+        main: { talkId: 'microservices-monoliths', type: 'talk' },
+        track2: { talkId: 'ruby-concurrency', type: 'talk' },
+        workshop: { talkId: 'testing-workshop', type: 'workshop' }
+      },
+      {
+        time: '3:00 PM',
+        endTime: '3:30 PM',
+        main: { talkId: 'ruby-devops', type: 'talk' },
+        track2: { talkId: 'rails-api-design', type: 'talk' },
+        workshop: { talkId: 'testing-workshop', type: 'workshop' }
       },
       {
         time: '3:30 PM',
         endTime: '4:00 PM',
-        main: { talkId: 'ruby-concurrency', type: 'talk' },
-        track2: { talkId: 'graphql-best-practices', type: 'talk' },
-        workshop: { talkId: 'metaprogramming-workshop', type: 'workshop' }
+        main: { title: 'Coffee Break & Networking', speaker: '', type: 'break' },
+        track2: null,
+        workshop: null
       },
       {
-        time: '4:15 PM',
-        endTime: '4:45 PM',
-        main: { talkId: 'ruby-modern-startups', type: 'keynote' },
+        time: '4:00 PM',
+        endTime: '5:00 PM',
+        main: { talkId: 'startup-demos', type: 'demos' },
         track2: null,
         workshop: null
       },
       {
         time: '5:00 PM',
         endTime: '6:00 PM',
-        main: { title: 'CTO Panel: Scaling Engineering Teams', speaker: 'Edward Kim, Ngan Pham & More', type: 'panel' },
+        main: { title: 'Reception & Networking', speaker: '', type: 'break' },
         track2: null,
         workshop: null
       }
@@ -98,79 +105,86 @@ const days = [
     dayLabel: 'Day 2',
     sessions: [
       {
+        time: '8:00 AM',
+        endTime: '8:45 AM',
+        main: { title: 'Doors Open & Coffee', speaker: '', type: 'logistics' },
+        track2: null,
+        workshop: null
+      },
+      {
         time: '9:00 AM',
-        endTime: '9:10 AM',
-        main: { title: 'Day 2 Welcome & Announcements', speaker: '', type: 'logistics' },
+        endTime: '9:20 AM',
+        main: { title: 'Day 2 Welcome', speaker: '', type: 'logistics' },
         track2: null,
         workshop: null
       },
       {
-        time: '9:25 AM',
-        endTime: '9:55 AM',
-        main: { talkId: 'art-of-ruby', type: 'keynote' },
+        time: '9:35 AM',
+        endTime: '10:05 AM',
+        main: { talkId: 'ruby-future-keynote', type: 'keynote' },
         track2: null,
         workshop: null
       },
       {
-        time: '10:10 AM',
-        endTime: '10:40 AM',
-        main: { talkId: 'rails-8-whats-new', type: 'talk' },
-        track2: { talkId: 'background-jobs-scale', type: 'talk' },
-        workshop: { talkId: 'inertia-rails-workshop', type: 'workshop' }
+        time: '10:20 AM',
+        endTime: '10:50 AM',
+        main: { talkId: 'rails-7-features', type: 'talk' },
+        track2: { talkId: 'ruby-gems-deep-dive', type: 'talk' },
+        workshop: { talkId: 'performance-workshop', type: 'workshop' }
       },
       {
-        time: '10:55 AM',
-        endTime: '11:25 AM',
-        main: { talkId: 'ruby-gems-building', type: 'talk' },
-        track2: { talkId: 'debugging-ruby', type: 'talk' },
-        workshop: { talkId: 'inertia-rails-workshop', type: 'workshop' }
+        time: '11:05 AM',
+        endTime: '11:35 AM',
+        main: { talkId: 'database-optimization', type: 'talk' },
+        track2: { talkId: 'ruby-metaprogramming', type: 'talk' },
+        workshop: { talkId: 'performance-workshop', type: 'workshop' }
       },
       {
-        time: '11:40 AM',
-        endTime: '12:10 PM',
-        main: { talkId: 'machine-learning-ruby', type: 'talk' },
-        track2: { talkId: 'code-review-practices', type: 'talk' },
-        workshop: { talkId: 'inertia-rails-workshop', type: 'workshop' }
+        time: '11:50 AM',
+        endTime: '12:20 PM',
+        main: { talkId: 'cto-panel', type: 'panel' },
+        track2: null,
+        workshop: null
       },
       {
-        time: '12:25 PM',
+        time: '12:20 PM',
+        endTime: '1:30 PM',
+        main: { title: 'Lunch & Networking', speaker: '', type: 'break' },
+        track2: null,
+        workshop: null
+      },
+      {
+        time: '1:30 PM',
         endTime: '2:00 PM',
-        main: { title: 'Lunch Break & Networking', speaker: '', type: 'break' },
+        main: { talkId: 'ruby-community', type: 'talk' },
+        track2: { talkId: 'rails-deployment', type: 'talk' },
+        workshop: { talkId: 'ai-workshop', type: 'workshop' }
+      },
+      {
+        time: '2:15 PM',
+        endTime: '2:45 PM',
+        main: { talkId: 'open-source-sustainability', type: 'talk' },
+        track2: { talkId: 'ruby-debugging', type: 'talk' },
+        workshop: { talkId: 'ai-workshop', type: 'workshop' }
+      },
+      {
+        time: '3:00 PM',
+        endTime: '3:30 PM',
+        main: { title: 'Coffee Break & Networking', speaker: '', type: 'break' },
         track2: null,
         workshop: null
-      },
-      {
-        time: '2:00 PM',
-        endTime: '2:30 PM',
-        main: { talkId: 'ruby-cloud-deployment', type: 'talk' },
-        track2: { talkId: 'api-design-ruby', type: 'talk' },
-        workshop: { title: 'TBA', speaker: '', type: 'workshop' }
-      },
-      {
-        time: '2:45 PM',
-        endTime: '3:15 PM',
-        main: { talkId: 'open-source-sustainability', type: 'talk' },
-        track2: { talkId: 'ruby-memory-management', type: 'talk' },
-        workshop: { title: 'TBA', speaker: '', type: 'workshop' }
       },
       {
         time: '3:30 PM',
-        endTime: '5:00 PM',
-        main: { title: 'Startup Demo Showcase', speaker: 'Various Founders', type: 'demos' },
-        track2: null,
-        workshop: { title: 'TBA', speaker: '', type: 'workshop' }
-      },
-      {
-        time: '5:15 PM',
-        endTime: '5:45 PM',
-        main: { title: 'VC Panel: Funding Ruby Startups', speaker: 'Industry VCs', type: 'panel' },
+        endTime: '4:00 PM',
+        main: { talkId: 'ruby-reflection', type: 'keynote' },
         track2: null,
         workshop: null
       },
       {
-        time: '6:00 PM',
-        endTime: '6:30 PM',
-        main: { talkId: 'closing-keynote', type: 'keynote' },
+        time: '4:00 PM',
+        endTime: '4:15 PM',
+        main: { title: 'Closing Remarks & Thank You', speaker: '', type: 'logistics' },
         track2: null,
         workshop: null
       }
@@ -180,17 +194,17 @@ const days = [
 
 // Define colors for different session types
 const sessionColors = {
-  'keynote': 'bg-ruby-500 text-white',
-  'panel': 'bg-purple-500 text-white',
-  'demos': 'bg-green-500 text-white',
-  'break': 'bg-sky-500 text-white',
-  'logistics': 'bg-cloud-600 text-white',
-  'talk': 'bg-white text-dark-700 border border-dark-200',
-  'workshop': 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+  'keynote': 'bg-gradient-to-r from-ruby-500 to-pink-500 text-white border-ruby-400',
+  'panel': 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-purple-400',
+  'demos': 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-green-400',
+  'break': 'bg-gradient-to-r from-sky-400 to-blue-500 text-white border-sky-400',
+  'logistics': 'bg-gray-100 text-gray-700 border-gray-200',
+  'talk': 'bg-white text-gray-900 border-gray-200 hover:border-ruby-300 hover:shadow-lg',
+  'workshop': 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:border-emerald-300 hover:shadow-lg'
 };
 
 function getSessionColor(sessionType) {
-  return sessionColors[sessionType] || 'bg-white text-dark-700 border border-dark-200';
+  return sessionColors[sessionType] || 'bg-white text-gray-900 border-gray-200';
 }
 
 // Helper function to get session data
@@ -212,560 +226,389 @@ function getSessionData(session) {
 ---
 
 <Layout title="Schedule - San Francisco Ruby Conference 2025">
-    <div class="bg-gradient-to-b from-ruby-100 to-ruby-700 text-white py-16">
+    <!-- Hero Section -->
+    <section class="py-32 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-center">
-                Schedule
-            </h1>
-            <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-                Detailed plan for two days and three tracks
-            </p>
-        </div>
-    </div>
+            <div class="text-center mb-20">
+                <div class="inline-block">
+                    <a href="#schedule" class="group">
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-ruby-600"
+                        >
+                            Conference Schedule
+                        </h1>
+                    </a>
+                    <div
+                        class="w-24 h-1 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto"
+                    >
+                    </div>
+                </div>
+                <p
+                    class="mt-6 text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light"
+                >
+                    Two days packed with inspiring talks, hands-on workshops, and networking opportunities
+                </p>
+            </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- Day Navigation -->
-    <div class="mb-12 flex justify-center">
-      <div class="bg-white rounded-xl shadow-lg p-2 inline-flex space-x-2">
-        {days.map((day, index) => (
-          <button
-            class={`schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none ${
-              index === 0
-                ? 'bg-ruby-500 text-white shadow-md transform scale-105'
-                : 'text-dark-700 hover:bg-dark-50'
-            }`}
-            data-index={index}
-            aria-selected={index === 0 ? 'true' : 'false'}
-          >
-            <div class="font-display font-bold">{day.dayLabel}</div>
-            <div class="text-sm opacity-90">{day.date}</div>
-          </button>
-        ))}
-      </div>
-    </div>
-
-    <!-- Mobile Track Legend -->
-    <div class="mb-8 md:hidden">
-      <h4 class="text-lg font-display font-bold text-dark-900 mb-4 text-center">Venue Guide</h4>
-      <div class="flex flex-col space-y-3 max-w-md mx-auto">
-        <div class="flex items-center justify-center space-x-3">
-          <span class="px-3 py-1 bg-ruby-100 text-ruby-700 text-xs font-medium rounded-full">
-            Main Stage
-          </span>
-          <span class="text-sm text-dark-600">Keynotes & Featured Talks</span>
         </div>
-        <div class="flex items-center justify-center space-x-3">
-          <span class="px-3 py-1 bg-sky-100 text-sky-700 text-xs font-medium rounded-full">
-            Blackbox Theater
-          </span>
-          <span class="text-sm text-dark-600">Technical Deep Dives</span>
-        </div>
-        <div class="flex items-center justify-center space-x-3">
-          <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
-            Workshops Studio
-          </span>
-          <span class="text-sm text-dark-600">Hands-on Workshops</span>
-        </div>
-      </div>
-    </div>
+    </section>
 
     <!-- Schedule Content -->
-    <div class="space-y-8">
-      {days.map((day, dayIndex) => (
-        <div
-          class="schedule-content"
-          data-index={dayIndex}
-          style={dayIndex === 0 ? "" : "display: none;"}
-        >
-          <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <!-- Day Header -->
-            <div class="bg-gradient-to-r from-ruby-500 to-ruby-600 text-white px-8 py-6">
-              <h3 class="text-2xl font-display font-bold">{day.dayLabel}</h3>
-              <p class="text-ruby-100 mt-1">{day.date}</p>
+    <section id="schedule" class="py-16 bg-white relative overflow-hidden">
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-20 right-20 w-32 h-32 bg-ruby-400 rounded-full filter blur-xl"></div>
+            <div class="absolute bottom-40 left-20 w-24 h-24 bg-sky-400 rounded-full filter blur-xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Day Navigation -->
+            <div class="mb-16 flex justify-center">
+                <div class="bg-gray-100 rounded-xl p-2 inline-flex space-x-2">
+                    {days.map((day, index) => (
+                        <button
+                            class={`schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 ${
+                                index === 0
+                                    ? 'bg-ruby-500 text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-white hover:shadow-sm'
+                            }`}
+                            data-index={index}
+                            style="display: block; visibility: visible;"
+                        >
+                            <div class="font-display font-bold">{day.dayLabel}</div>
+                            <div class="text-sm opacity-90">{day.date}</div>
+                        </button>
+                    ))}
+                </div>
             </div>
 
-            <!-- Schedule Grid Header -->
-            <div class="px-8 py-4 bg-dark-50 border-b border-dark-200">
-              <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-12 md:col-span-2">
-                  <h4 class="font-display font-bold text-dark-700 text-sm tracking-wide">TIME</h4>
-                </div>
-                <div class="col-span-12 md:col-span-4">
-                  <h4 class="font-display font-bold text-ruby-600 text-sm tracking-wide">MAIN STAGE</h4>
-                </div>
-                <div class="col-span-12 md:col-span-3">
-                  <h4 class="font-display font-bold text-sky-600 text-sm tracking-wide">BLACKBOX THEATER</h4>
-                </div>
-                <div class="col-span-12 md:col-span-3">
-                  <h4 class="font-display font-bold text-emerald-600 text-sm tracking-wide">WORKSHOPS STUDIO</h4>
-                </div>
-              </div>
-            </div>
+            <!-- Schedule Days -->
+            <div class="space-y-8">
+                {days.map((day, dayIndex) => (
+                    <div
+                        class="schedule-content"
+                        data-index={dayIndex}
+                        style={dayIndex === 0 ? "display: block; visibility: visible;" : "display: none;"}
+                    >
+                        <!-- Day Header -->
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-display font-bold text-gray-900 mb-2">
+                                {day.dayLabel}
+                            </h2>
+                            <p class="text-gray-600 text-lg">{day.date}</p>
+                        </div>
 
-            <!-- Schedule Grid -->
-            <div class="p-8">
-              <div class="space-y-6">
-                {day.sessions.map((session, index) => (
-                  <div class="grid grid-cols-12 gap-6 items-start py-4 border-b border-dark-100 last:border-b-0">
-                    <!-- Time Column -->
-                    <div class="col-span-12 md:col-span-2">
-                      <div class="text-center md:text-left">
-                        <div class="font-display font-bold text-dark-900 text-lg">{session.time}</div>
-                        <div class="text-dark-500 text-sm">to {session.endTime}</div>
-                      </div>
-                    </div>
-
-                    <!-- Main Stage -->
-                    <div class="col-span-12 md:col-span-4">
-                      {(() => {
-                        const sessionData = getSessionData(session.main);
-                        if (!sessionData) return null;
-
-                        return (
-                          <div
-                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
-                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
-                          >
-                            <div class="flex items-center justify-between mb-2 md:hidden">
-                              <span class="px-2 py-1 bg-ruby-100 text-ruby-700 text-xs font-medium rounded-full">
-                                Main Stage
-                              </span>
+                        <!-- Schedule Grid -->
+                        <div class="space-y-8">
+                        <!-- Desktop Column Headers -->
+                        <div class="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                            <div class="lg:col-span-2"></div>
+                            <div class="lg:col-span-10">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="text-center">
+                                        <h4 class="font-display font-bold text-ruby-600 text-sm tracking-wide mb-2">MAIN STAGE</h4>
+                                        <div class="w-8 h-0.5 bg-ruby-500 rounded-full mx-auto"></div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h4 class="font-display font-bold text-sky-600 text-sm tracking-wide mb-2">BLACKBOX THEATER</h4>
+                                        <div class="w-8 h-0.5 bg-sky-500 rounded-full mx-auto"></div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h4 class="font-display font-bold text-emerald-600 text-sm tracking-wide mb-2">WORKSHOPS STUDIO</h4>
+                                        <div class="w-8 h-0.5 bg-emerald-500 rounded-full mx-auto"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
-                            {sessionData.speaker && (
-                              <div class="text-xs opacity-75">{sessionData.speaker}</div>
-                            )}
-                          </div>
-                        );
-                      })()}
+                        </div>
+
+                            {day.sessions.map((session) => (
+                                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                                    <!-- Time Column -->
+                                    <div class="lg:col-span-2">
+                                        <div class="text-center lg:text-left sticky top-24">
+                                            <div class="font-display font-bold text-gray-900 text-xl mb-1">
+                                                {session.time}
+                                            </div>
+                                            <div class="text-gray-500 text-sm">
+                                                to {session.endTime}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sessions Column -->
+                                    <div class="lg:col-span-10">
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            <!-- Main Stage -->
+                                            <div class="md:col-span-1">
+                                                {(() => {
+                                                    const sessionData = getSessionData(session.main);
+                                                    if (!sessionData) return null;
+
+                                                    return (
+                                                        <div
+                                                            class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${getSessionColor(sessionData.type)}`}
+                                                            style="display: block; visibility: visible;"
+                                                        >
+                                                            <div class="mb-3 md:hidden">
+                                                                <span class="px-3 py-1 bg-ruby-100 text-ruby-700 text-xs font-medium rounded-full">
+                                                                    Main Stage
+                                                                </span>
+                                                            </div>
+                                                            <h3 class="font-bold text-lg mb-2 leading-tight">
+                                                                {sessionData.title}
+                                                            </h3>
+                                                            {sessionData.speaker && (
+                                                                <p class="text-sm opacity-80 mb-3">
+                                                                    {sessionData.speaker}
+                                                                </p>
+                                                            )}
+                                                            {sessionData.talkData?.description && (
+                                                                <p class="text-sm opacity-70 line-clamp-3">
+                                                                    {sessionData.talkData.description}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })()}
+                                            </div>
+
+                                            <!-- Blackbox Theater -->
+                                            <div class="md:col-span-1">
+                                                {(() => {
+                                                    const sessionData = getSessionData(session.track2);
+                                                    if (!sessionData) return (
+                                                        <div class="p-6 rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-center min-h-[140px]">
+                                                            <span class="text-gray-400 text-sm">No session</span>
+                                                        </div>
+                                                    );
+
+                                                    return (
+                                                        <div
+                                                            class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${getSessionColor(sessionData.type)}`}
+                                                            style="display: block; visibility: visible;"
+                                                        >
+                                                            <div class="mb-3 md:hidden">
+                                                                <span class="px-3 py-1 bg-sky-100 text-sky-700 text-xs font-medium rounded-full">
+                                                                    Blackbox Theater
+                                                                </span>
+                                                            </div>
+                                                            <h3 class="font-bold text-lg mb-2 leading-tight">
+                                                                {sessionData.title}
+                                                            </h3>
+                                                            {sessionData.speaker && (
+                                                                <p class="text-sm opacity-80 mb-3">
+                                                                    {sessionData.speaker}
+                                                                </p>
+                                                            )}
+                                                            {sessionData.talkData?.description && (
+                                                                <p class="text-sm opacity-70 line-clamp-3">
+                                                                    {sessionData.talkData.description}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })()}
+                                            </div>
+
+                                            <!-- Workshops Studio -->
+                                            <div class="md:col-span-1">
+                                                {(() => {
+                                                    const sessionData = getSessionData(session.workshop);
+                                                    if (!sessionData) return (
+                                                        <div class="p-6 rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-center min-h-[140px]">
+                                                            <span class="text-gray-400 text-sm">No workshop</span>
+                                                        </div>
+                                                    );
+
+                                                    // Handle multiple speakers for workshops
+                                                    let speakerNames = '';
+                                                    if (sessionData.talkData && sessionData.talkData.speakerId) {
+                                                        if (Array.isArray(sessionData.talkData.speakerId)) {
+                                                            const speakersList = sessionData.talkData.speakerId.map(id => speakers?.[id]?.name).filter(Boolean);
+                                                            if (speakersList.length > 1) {
+                                                                speakerNames = speakersList.slice(0, -1).join(', ') + ' & ' + speakersList[speakersList.length - 1];
+                                                            } else if (speakersList.length === 1) {
+                                                                speakerNames = speakersList[0];
+                                                            }
+                                                        } else {
+                                                            speakerNames = speakers?.[sessionData.talkData.speakerId]?.name || '';
+                                                        }
+                                                    } else if (sessionData.speaker) {
+                                                        speakerNames = sessionData.speaker;
+                                                    }
+
+                                                    return (
+                                                        <div
+                                                            class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${getSessionColor(sessionData.type)}`}
+                                                            style="display: block; visibility: visible;"
+                                                        >
+                                                            <div class="mb-3 md:hidden">
+                                                                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
+                                                                    Workshops Studio
+                                                                </span>
+                                                            </div>
+                                                            <h3 class="font-bold text-lg mb-2 leading-tight">
+                                                                {sessionData.title}
+                                                            </h3>
+                                                            {speakerNames && (
+                                                                <p class="text-sm opacity-80 mb-3">
+                                                                    {speakerNames}
+                                                                </p>
+                                                            )}
+                                                            {sessionData.talkData?.description && (
+                                                                <p class="text-sm opacity-70 line-clamp-3 mb-4">
+                                                                    {sessionData.talkData.description}
+                                                                </p>
+                                                            )}
+                                                            {sessionData.talkData?.lumaId && (
+                                                                <a
+                                                                    href={`https://lu.ma/${sessionData.talkData.lumaId}`}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    class="inline-block px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition-colors duration-200"
+                                                                >
+                                                                    Sign Up
+                                                                </a>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })()}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-
-                    <!-- Blackbox Theater -->
-                    <div class="col-span-12 md:col-span-3">
-                      {(() => {
-                        const sessionData = getSessionData(session.track2);
-                        if (!sessionData) return null;
-
-                        return (
-                          <div
-                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
-                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
-                          >
-                            <div class="flex items-center justify-between mb-2 md:hidden">
-                              <span class="px-2 py-1 bg-sky-100 text-sky-700 text-xs font-medium rounded-full">
-                                Blackbox Theater
-                              </span>
-                            </div>
-                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
-                            {sessionData.speaker && (
-                              <div class="text-xs opacity-75">{sessionData.speaker}</div>
-                            )}
-                          </div>
-                        );
-                      })()}
-                    </div>
-
-                    <!-- Workshops Studio -->
-                    <div class="col-span-12 md:col-span-3">
-                      {(() => {
-                        const sessionData = getSessionData(session.workshop);
-                        if (!sessionData) return null;
-
-                        // Handle multiple speakers
-                        let speakerNames = '';
-                        if (sessionData.talkData && sessionData.talkData.speakerId) {
-                          if (Array.isArray(sessionData.talkData.speakerId)) {
-                            // Multiple speakers
-                            const speakersList = sessionData.talkData.speakerId.map(id => speakers?.[id]?.name).filter(Boolean);
-                            if (speakersList.length > 1) {
-                              speakerNames = speakersList.slice(0, -1).join(', ') + ' & ' + speakersList[speakersList.length - 1];
-                            } else if (speakersList.length === 1) {
-                              speakerNames = speakersList[0];
-                            }
-                          } else {
-                            // Single speaker
-                            speakerNames = speakers?.[sessionData.talkData.speakerId]?.name || '';
-                          }
-                        } else if (sessionData.speaker) {
-                          speakerNames = sessionData.speaker;
-                        }
-
-                        return (
-                          <div
-                            class={`p-4 rounded-lg cursor-pointer transition-all duration-200 hover:shadow-md ${getSessionColor(sessionData.type)}`}
-                            onclick={sessionData.talkData ? `openTalkModal('${sessionData.talkData.id}')` : ''}
-                          >
-                            <div class="flex items-center justify-between mb-2 md:hidden">
-                              <span class="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
-                                Workshops Studio
-                              </span>
-                            </div>
-                            <div class="font-display font-medium text-sm mb-1">{sessionData.title}</div>
-                            {speakerNames && (
-                              <div class="text-xs opacity-75 mb-2">{speakerNames}</div>
-                            )}
-                            {sessionData.talkData?.lumaId && (
-                              <a
-                                href={`https://lu.ma/${sessionData.talkData.lumaId}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-block px-3 py-1 bg-emerald-500 text-white text-xs font-medium rounded-md hover:bg-emerald-600 transition-colors duration-200"
-                                onclick="event.stopPropagation()"
-                              >
-                                Sign Up
-                              </a>
-                            )}
-                          </div>
-                        );
-                      })()}
-                    </div>
-                  </div>
                 ))}
-              </div>
             </div>
-          </div>
-        </div>
-      ))}
-    </div>
 
-    <!-- Talk Details Modal -->
-    <div id="talkModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="sticky top-0 bg-white border-b border-dark-200 px-6 py-4 flex justify-between items-center">
-          <h3 class="text-xl font-bold text-dark-900" id="modalTitle">Talk Details</h3>
-          <button onclick="closeTalkModal()" class="text-dark-400 hover:text-dark-600 text-2xl">
-            ×
-          </button>
-        </div>
-
-        <div class="p-6">
-          <div id="modalContent">
-            <!-- Content will be populated by JavaScript -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Schedule Notes -->
-    <div class="mt-16 bg-dark-50 rounded-xl p-8">
-      <h3 class="text-2xl font-display font-bold text-dark-900 mb-6 text-center">Important Information</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-lg p-6 shadow-sm">
-          <div class="flex items-center mb-4">
-            <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mr-3">
-              <span class="text-emerald-600">🎫</span>
+            <!-- Schedule Notes -->
+            <div class="mt-16 bg-gray-50 rounded-xl p-8">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+                    Important Notes
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-600">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">📍 Location</h4>
+                        <p>Fort Mason Center for Arts & Culture<br/>2 Marina Blvd, San Francisco, CA 94123</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">🎫 Workshops</h4>
+                        <p>Separate registration required for hands-on workshops. Limited capacity.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">☕ Refreshments</h4>
+                        <p>Coffee, lunch, and snacks are included with your conference ticket.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">📱 Updates</h4>
+                        <p>Follow <a href="https://x.com/sfruby" class="text-ruby-600 hover:text-ruby-700">@sfruby</a> for any schedule changes or announcements.</p>
+                    </div>
+                </div>
             </div>
-            <h4 class="font-display font-bold text-dark-900">Workshop Registration</h4>
-          </div>
-          <p class="text-dark-600">
-            Workshops have limited capacity and require separate registration via Luma. Click the "Sign Up" button for each workshop you'd like to attend.
-          </p>
         </div>
-        <div class="bg-white rounded-lg p-6 shadow-sm">
-          <div class="flex items-center mb-4">
-            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
-              <span class="text-amber-600">📍</span>
-            </div>
-            <h4 class="font-display font-bold text-dark-900">Venue Locations</h4>
-          </div>
-          <p class="text-dark-600">
-            All three venues are located within Fort Mason Center. Maps and directions will be provided at registration.
-          </p>
-        </div>
-      </div>
-    </div>
+    </section>
 
     <!-- Call to Action -->
-    <div class="mt-16 text-center bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-xl p-12">
-      <h3 class="text-3xl font-display font-bold mb-4">Ready to Join Us?</h3>
-      <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-        Don't miss out on two days of Ruby excellence across three venues at Fort Mason Center.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="https://lu.ma/sfrubyconf2025"
-          target="_blank"
-          class="inline-flex items-center justify-center px-8 py-4 bg-white text-ruby-600 rounded-lg font-medium shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-        >
-          Get Tickets
-        </a>
-        <a
-          href="/#newsletter"
-          class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-ruby-600"
-        >
-          Sign up for updates
-        </a>
-      </div>
-    </div>
-  </div>
+    <section class="py-16 bg-gradient-to-r from-ruby-500 to-pink-500">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-3xl font-display font-bold text-white mb-4">
+                Ready to Join Us?
+            </h3>
+            <p class="text-xl text-ruby-100 mb-8">
+                Don't miss out on two incredible days of Ruby learning and networking
+            </p>
+            <a
+                href="https://lu.ma/sfrubyconf2025"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-10 py-4 bg-white text-ruby-600 rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105"
+            >
+                <span class="mr-2">Get Your Ticket</span>
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
+                    ></path>
+                </svg>
+            </a>
+        </div>
+    </section>
 </Layout>
 
-<script define:vars={{ talks, speakers }} client:load>
-  // Social icon function moved from SocialLink component
-  function getSocialIcon(url) {
-    if (url.includes('github.com')) {
-      return '<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>';
-    } else if (url.includes('linkedin.com')) {
-      return '<svg width="16" height="16" fill="currentColor" viewBox="0 0 382 382"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472L341.91,330.654L341.91,330.654z"/></svg>';
-    } else if (url.includes('x.com')) {
-      return '<svg width="16" height="16" viewBox="0 0 1200 1227" fill="currentColor"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>';
-    } else if (url.includes('bsky.app')) {
-      return '<svg width="16" height="16" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0535 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z"/></svg>';
-    } else if (url.includes('ruby.social')) {
-      return '<svg width="16" height="16" viewBox="0 0 216.4144 232.00976" fill="currentColor"><path d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915"/><path fill="#ffffff" d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675"/></svg>';
-    } else {
-      return '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/></svg>';
-    }
-  }
+<script>
+    // Handle tab switching
+    const tabs = document.querySelectorAll('.schedule-tab');
+    const contents = document.querySelectorAll('.schedule-content');
 
-  function getSocialLabel(url) {
-    if (url.includes('github.com')) return 'GitHub';
-    if (url.includes('linkedin.com')) return 'LinkedIn';
-    if (url.includes('x.com')) return 'X';
-    if (url.includes('bsky.app')) return 'Bluesky';
-    if (url.includes('ruby.social')) return 'Mastodon';
-    return 'Website';
-  }
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Update tab styling
+            tabs.forEach(t => {
+                t.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 text-gray-700 hover:bg-white hover:shadow-sm';
+            });
 
-  // Handle tab switching
-  const tabs = document.querySelectorAll('.schedule-tab');
-  const contents = document.querySelectorAll('.schedule-content');
+            tab.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 bg-ruby-500 text-white shadow-md';
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      // Update tab styling
-      tabs.forEach(t => {
-        t.setAttribute('aria-selected', 'false');
-        t.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none text-dark-700 hover:bg-dark-50';
-      });
-
-      tab.setAttribute('aria-selected', 'true');
-      tab.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 focus:outline-none bg-ruby-500 text-white shadow-md transform scale-105';
-
-      // Show selected content
-      const index = tab.getAttribute('data-index');
-      contents.forEach(content => {
-        content.style.display = content.getAttribute('data-index') === index ? '' : 'none';
-      });
+            // Show selected content
+            const index = tab.getAttribute('data-index');
+            contents.forEach(content => {
+                if (content.getAttribute('data-index') === index) {
+                    content.style.display = 'block';
+                    content.style.visibility = 'visible';
+                } else {
+                    content.style.display = 'none';
+                }
+            });
+        });
     });
-  });
 
-  // Talk modal functionality
-  function openTalkModal(talkId) {
-    const talk = talks[talkId];
-    if (!talk) return;
-
-    const modal = document.getElementById('talkModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
-
-    modalTitle.textContent = talk.title;
-
-    // Get speaker data from the global speakers object
-    const speakerData = speakers?.[talk.speakerId];
-
-    // Determine location based on track
-    let location = '';
-    let locationColor = '';
-    if (talk.track === 'main') {
-      location = 'Main Stage';
-      locationColor = 'bg-ruby-100 text-ruby-800';
-    } else if (talk.track === 'blackbox') {
-      location = 'Blackbox Theater';
-      locationColor = 'bg-sky-100 text-sky-800';
-    } else if (talk.track === 'workshop') {
-      location = 'Workshops Studio';
-      locationColor = 'bg-emerald-100 text-emerald-800';
-    }
-
-    modalContent.innerHTML = `
-      <div class="mb-6">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="px-3 py-1 ${locationColor} rounded-full text-sm font-medium">
-            ${location}
-          </span>
-          <span class="text-dark-500 text-sm">
-            Day ${talk.day} • ${talk.time} - ${talk.endTime}
-          </span>
-        </div>
-        <p class="text-dark-700 leading-relaxed">${talk.description}</p>
-      </div>
-
-      ${(() => {
-        // Handle multiple speakers
-        if (Array.isArray(talk.speakerId)) {
-          const speakersList = talk.speakerId.map(id => speakers?.[id]).filter(Boolean);
-          if (speakersList.length === 0) return '';
-
-          return `
-            <div class="border-t border-dark-200 pt-6">
-              <h5 class="font-bold text-dark-900 mb-4">About the Speaker${speakersList.length > 1 ? 's' : ''}</h5>
-              <div class="space-y-6">
-                ${speakersList.map(speaker => `
-                  <div class="flex items-start gap-4">
-                    <img
-                      src="${speaker.image}"
-                      alt="${speaker.name}"
-                      class="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div class="flex-1">
-                      <h6 class="font-bold text-dark-900">${speaker.name}</h6>
-                      <p class="text-ruby-500 text-sm mb-2">${speaker.company}</p>
-                      <p class="text-dark-600 text-sm">${speaker.bio}</p>
-                      ${speaker.socials && speaker.socials.length > 0 ? `
-                        <div class="flex items-center gap-3 mt-3">
-                          ${speaker.socials.map(url => {
-                            let icon = '';
-                            let label = '';
-
-                            if (url.includes('github.com')) {
-                              icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>';
-                              label = 'GitHub';
-                            } else if (url.includes('linkedin.com')) {
-                              icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 382 382"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472L341.91,330.654L341.91,330.654z"/></svg>';
-                              label = 'LinkedIn';
-                            } else if (url.includes('x.com')) {
-                              icon = '<svg width="16" height="16" viewBox="0 0 1200 1227" fill="currentColor"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>';
-                              label = 'X';
-                            } else if (url.includes('bsky.app')) {
-                              icon = '<svg width="16" height="16" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0535 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z"/></svg>';
-                              label = 'Bluesky';
-                            } else if (url.includes('ruby.social')) {
-                              icon = '<svg width="16" height="16" viewBox="0 0 216.4144 232.00976" fill="currentColor"><path d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915"/><path fill="#ffffff" d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675"/></svg>';
-                              label = 'Mastodon';
-                            } else {
-                              icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/></svg>';
-                              label = 'Website';
-                            }
-
-                            return `
-                              <a
-                                href="${url}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="flex items-center justify-center w-8 h-8 bg-dark-100 hover:bg-ruby-100 text-dark-600 hover:text-ruby-600 rounded-full transition-colors duration-200"
-                                title="${label}"
-                              >
-                                ${icon}
-                              </a>
-                            `;
-                          }).join('')}
-                        </div>
-                      ` : ''}
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `;
-        } else {
-          // Single speaker
-          const speakerData = speakers?.[talk.speakerId];
-          if (!speakerData) return '';
-
-          return `
-        <div class="border-t border-dark-200 pt-6">
-          <h5 class="font-bold text-dark-900 mb-4">About the Speaker</h5>
-          <div class="flex items-start gap-4">
-            <img
-              src="${speakerData.image}"
-              alt="${speakerData.name}"
-              class="w-16 h-16 rounded-full object-cover"
-            />
-            <div class="flex-1">
-              <h6 class="font-bold text-dark-900">${speakerData.name}</h6>
-              <p class="text-ruby-500 text-sm mb-2">${speakerData.company}</p>
-              <p class="text-dark-600 text-sm">${speakerData.bio}</p>
-              ${speakerData.socials && speakerData.socials.length > 0 ? `
-                <div class="flex items-center gap-3 mt-3">
-                  ${speakerData.socials.map(url => {
-                    let icon = '';
-                    let label = '';
-
-                    if (url.includes('github.com')) {
-                      icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>';
-                      label = 'GitHub';
-                    } else if (url.includes('linkedin.com')) {
-                      icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 382 382"><path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472L341.91,330.654L341.91,330.654z"/></svg>';
-                      label = 'LinkedIn';
-                    } else if (url.includes('x.com')) {
-                      icon = '<svg width="16" height="16" viewBox="0 0 1200 1227" fill="currentColor"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>';
-                      label = 'X';
-                    } else if (url.includes('bsky.app')) {
-                      icon = '<svg width="16" height="16" viewBox="0 0 568 501" fill="currentColor"><path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0535 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z"/></svg>';
-                      label = 'Bluesky';
-                    } else if (url.includes('ruby.social')) {
-                      icon = '<svg width="16" height="16" viewBox="0 0 216.4144 232.00976" fill="currentColor"><path d="M211.80734 139.0875c-3.18125 16.36625-28.4925 34.2775-57.5625 37.74875-15.15875 1.80875-30.08375 3.47125-45.99875 2.74125-26.0275-1.1925-46.565-6.2125-46.565-6.2125 0 2.53375.15625 4.94625.46875 7.2025 3.38375 25.68625 25.47 27.225 46.39125 27.9425 21.11625.7225 39.91875-5.20625 39.91875-5.20625l.8675 19.09s-14.77 7.93125-41.08125 9.39c-14.50875.7975-32.52375-.365-53.50625-5.91875C9.23234 213.82 1.40609 165.31125.20859 116.09125c-.365-14.61375-.14-28.39375-.14-39.91875 0-50.33 32.97625-65.0825 32.97625-65.0825C49.67234 3.45375 78.20359.2425 107.86484 0h.72875c29.66125.2425 58.21125 3.45375 74.8375 11.09 0 0 32.975 14.7525 32.975 65.0825 0 0 .41375 37.13375-4.59875 62.915"/><path fill="#ffffff" d="M177.50984 80.077v60.94125h-24.14375v-59.15c0-12.46875-5.24625-18.7975-15.74-18.7975-11.6025 0-17.4175 7.5075-17.4175 22.3525v32.37625H96.20734V85.42325c0-14.845-5.81625-22.3525-17.41875-22.3525-10.49375 0-15.74 6.32875-15.74 18.7975v59.15H38.90484V80.077c0-12.455 3.17125-22.3525 9.54125-29.675 6.56875-7.3225 15.17125-11.07625 25.85-11.07625 12.355 0 21.71125 4.74875 27.8975 14.2475l6.01375 10.08125 6.015-10.08125c6.185-9.49875 15.54125-14.2475 27.8975-14.2475 10.6775 0 19.28 3.75375 25.85 11.07625 6.36875 7.3225 9.54 17.22 9.54 29.675"/></svg>';
-                      label = 'Mastodon';
-                    } else {
-                      icon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z"/></svg>';
-                      label = 'Website';
+    // Smooth scroll for anchor links
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", function (e) {
+                e.preventDefault();
+                const href = this.getAttribute("href");
+                if (href && href !== "#") {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
                     }
-
-                    return `
-                      <a
-                        href="${url}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="flex items-center justify-center w-8 h-8 bg-dark-100 hover:bg-ruby-100 text-dark-600 hover:text-ruby-600 rounded-full transition-colors duration-200"
-                        title="${label}"
-                      >
-                        ${icon}
-                      </a>
-                    `;
-                  }).join('')}
-                </div>
-              ` : ''}
-            </div>
-          </div>
-
-        </div>
-          `;
-        }
-      })()}
-
-      ${talk.lumaId ? `
-        <div class="mt-6 text-center">
-          <a
-            href="https://lu.ma/${talk.lumaId}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white font-medium rounded-lg hover:bg-emerald-600 transition-colors duration-200"
-          >
-            Sign Up for Workshop
-          </a>
-        </div>
-      ` : ''}
-    `;
-
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeTalkModal() {
-    const modal = document.getElementById('talkModal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.style.overflow = '';
-  }
-
-  // Close modal when clicking outside
-  document.getElementById('talkModal').addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) {
-      closeTalkModal();
-    }
-  });
-
-  // Close modal on escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeTalkModal();
-    }
-  });
-
-  // Make functions globally accessible
-  window.openTalkModal = openTalkModal;
-  window.closeTalkModal = closeTalkModal;
+                }
+            });
+        });
+    });
 </script>
+
+<style>
+    /* Ensure proper display */
+    .schedule-tab,
+    .schedule-content {
+        visibility: visible !important;
+    }
+
+    /* Line clamp utility for text truncation */
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Smooth transitions */
+    .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+</style>

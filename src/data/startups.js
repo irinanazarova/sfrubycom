@@ -1,15 +1,3 @@
-/*  Startup companies data - real companies founded or led by our speakers
-Bolt.new
-Lago
-Stepful
-AccessGrid
-Binti
-Suppli
-NexHealth
-Simple AI
-Sixfold
-Cactus
-*/
 export const startups = {
   bolt_new: {
     id: "bolt_new",
@@ -57,7 +45,7 @@ export const startups = {
     logo: "/startup_binti.png",
     url: "https://binti.com",
     description:
-      "SaaS for child welfare, streamlining foster/adoption for agencies and families.",
+      "Mission-driven tech company using software to help children find families, streamlining foster/adoption, and has helped over 110,000 families.",
     speakerId: "",
     demoTime: "",
   },
@@ -77,7 +65,7 @@ export const startups = {
     logo: "/startup_nexhealth.png",
     url: "https://nexhealth.com",
     description:
-      "End-to-end patient experience platform for healthcare practices.",
+      "Patient experience platform that streamlines the entire healthcare journey, from online scheduling and digital forms to automated messaging and online payments.",
     speakerId: "",
     demoTime: "",
   },
@@ -87,7 +75,7 @@ export const startups = {
     logo: "/startup_simpleai.png",
     url: "https://usesimple.ai",
     description:
-      "Voice AI agents for enterprise—sales, support, scheduling via phone.",
+      "Simple AI makes it easy to build and deploy enterprise-grade phone agents in days, not weeks. Iconic businesses use us for sales calls, customer support, leads qualification, and more. YC-backed.",
     speakerId: "",
     demoTime: "",
   },
@@ -97,7 +85,7 @@ export const startups = {
     logo: "/startup_sixfold.png",
     url: "https://sixfold.ai",
     description:
-      "GenAI platform for insurance carriers: automates underwriting, triages risk.",
+      "Insurtech startup that utilizes generative AI to optimize insurance underwriting processes. ",
     speakerId: "",
     demoTime: "",
   },
@@ -107,7 +95,17 @@ export const startups = {
     logo: "/startup_cactus.png",
     url: "https://oncactus.com",
     description:
-      "AI copilot that runs admin and booking for solopreneurs and small businesses.",
+      "AI-powered business assistant for solopreneurs (like private chefs, photographers, etc.) to automate administrative tasks.",
+    speakerId: "",
+    demoTime: "",
+  },
+  corepilot: {
+    id: "corepilot",
+    name: "CorePilot  ",
+    logo: "/startup_corepilot.png",
+    url: "https://corepilot.com",
+    description:
+      "AI-powered Enterprise Resource Planning (ERP) platform specifically designed to streamline and automate workflows within the aviation aftermarket. ",
     speakerId: "",
     demoTime: "",
   },
