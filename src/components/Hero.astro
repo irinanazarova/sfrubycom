@@ -104,7 +104,7 @@ import { Image } from "astro:assets";
         >
             <path
                 d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
-                fill="white"></path>
+                fill="#f8fafc"></path>
         </svg>
     </div>
 </section>
@@ -148,24 +148,5 @@ import { Image } from "astro:assets";
 </style>
 
 <script>
-    // Simple fade-in animation without anime.js dependency
-    function initializeAnimations() {
-        const elements = document.querySelectorAll(".hero-content > *");
-        elements.forEach((el, index) => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            setTimeout(() => {
-                el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-                el.style.opacity = "1";
-                el.style.transform = "translateY(0)";
-            }, index * 200);
-        });
-    }
-
-    // Initialize when DOM is loaded
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initializeAnimations);
-    } else {
-        initializeAnimations();
-    }
+    // No animations - content visible immediately
 </script>

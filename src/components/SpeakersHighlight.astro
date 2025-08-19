@@ -2,7 +2,13 @@
 import { getSpeakersByGroup } from "../data/speakers.js";
 
 // Get featured speakers in their natural data file order
-const speakers = getSpeakersByGroup("featured");
+const featuredSpeakers = getSpeakersByGroup("featured");
+
+// Get regular speakers (excluding featured and cto groups) and pick 4 random ones
+const regularSpeakers = getSpeakersByGroup("speaker");
+const randomSpeakers = regularSpeakers
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 4);
 ---
 
 <section
@@ -24,13 +30,15 @@ const speakers = getSpeakersByGroup("featured");
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-20">
             <div class="inline-block mb-6">
-                <h2
-                    class="text-4xl md:text-5xl lg:text-6xl font-display font-bold bg-gradient-to-r from-dark-900 via-ruby-600 to-dark-900 bg-clip-text text-transparent tracking-tight"
-                >
-                    Featured Speakers
-                </h2>
+                <a href="#speakers" class="group">
+                    <h2
+                        class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-dark-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-ruby-600"
+                    >
+                        Speakers
+                    </h2>
+                </a>
                 <div
-                    class="w-32 h-1 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto mt-4"
+                    class="w-24 h-1 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto"
                 >
                 </div>
             </div>
@@ -45,17 +53,17 @@ const speakers = getSpeakersByGroup("featured");
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
             {
-                speakers.map((speaker, index) => (
+                featuredSpeakers.map((speaker, index) => (
                     <div
                         class="group speaker-card"
                         style={`animation-delay: ${index * 150}ms`}
                     >
-                        <div class="relative rounded-2xl overflow-hidden mb-6 shadow-lg group-hover:shadow-2xl transition-all duration-500">
-                            <div class="aspect-w-3 aspect-h-4 bg-gradient-to-br from-dark-100 to-dark-200 filter grayscale hover:grayscale-0 transition-all duration-500 flex items-center flex-col">
+                        <div class="relative mb-6 flex justify-center">
+                            <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 filter grayscale hover:grayscale-0">
                                 <img
                                     src={speaker.image}
                                     alt={speaker.name}
-                                    class="object-cover object-top duration-500 rounded-full sm:rounded-none h-48 w-48 sm:h-auto sm:w-auto group-hover:scale-105"
+                                    class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                                     loading="lazy"
                                 />
                             </div>
@@ -90,7 +98,68 @@ const speakers = getSpeakersByGroup("featured");
                                     )}
                             </h3>
                             <p class="text-ruby-600 font-medium leading-relaxed">
-                                {speaker.title}
+                                {speaker.title || speaker.role}
+                            </p>
+                            <p class="text-dark-600 text-sm font-medium tracking-wide">
+                                {speaker.company}
+                            </p>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Second row of speakers -->
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mt-16"
+        >
+            {
+                randomSpeakers.map((speaker, index) => (
+                    <div
+                        class="group speaker-card"
+                        style={`animation-delay: ${(index + 4) * 150}ms`}
+                    >
+                        <div class="relative mb-6 flex justify-center">
+                            <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 filter grayscale hover:grayscale-0">
+                                <img
+                                    src={speaker.image}
+                                    alt={speaker.name}
+                                    class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="text-center flex flex-col gap-3">
+                            <h3 class="font-bold text-xl text-dark-900 group-hover:text-ruby-600 transition-colors duration-300">
+                                {speaker.name}{" "}
+                                {speaker.socials &&
+                                    speaker.socials.find((social) =>
+                                        social.includes("github.com"),
+                                    ) && (
+                                        <a
+                                            href={speaker.socials.find(
+                                                (social) =>
+                                                    social.includes(
+                                                        "github.com",
+                                                    ),
+                                            )}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="inline-flex items-center justify-center gap-2 text-sm text-dark-600 hover:text-ruby-500 transition-colors duration-200"
+                                        >
+                                            <svg
+                                                class="w-5 h-5"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                            </svg>
+                                        </a>
+                                    )}
+                            </h3>
+                            <p class="text-ruby-600 font-medium leading-relaxed">
+                                {speaker.title || speaker.role}
                             </p>
                             <p class="text-dark-600 text-sm font-medium tracking-wide">
                                 {speaker.company}
@@ -102,10 +171,10 @@ const speakers = getSpeakersByGroup("featured");
         </div>
 
         <div class="flex flex-col items-center text-center mt-16">
-            <div class="text-center">
+            <div class="mt-20 text-center">
                 <a
                     href="/speakers"
-                    class="group inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 border-2 border-ruby-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-500 transform hover:shadow-2xl hover:shadow-ruby-500/30 hover:scale-105 hover:from-ruby-400 hover:to-pink-400"
+                    class="group inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 border-2 border-ruby-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:shadow-ruby-500/30 hover:scale-105 hover:from-ruby-400 hover:to-pink-400"
                 >
                     <span
                         class="mr-2 group-hover:mr-3 transition-all duration-300"
@@ -121,7 +190,7 @@ const speakers = getSpeakersByGroup("featured");
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            d="M9 5l7 7-7 7"></path>
                     </svg>
                 </a>
             </div>
@@ -131,20 +200,12 @@ const speakers = getSpeakersByGroup("featured");
 
 <style>
     .speaker-card {
-        opacity: 0;
-        transform: translateY(30px);
-        animation: slideInUp 0.8s ease-out forwards;
-    }
-
-    @keyframes slideInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        opacity: 1;
+        transform: translateY(0);
     }
 
     /* Enhanced hover effects */
-    .group:hover .aspect-w-3 {
+    .group:hover .rounded-full {
         transform: translateY(-2px);
     }
 </style>
