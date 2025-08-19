@@ -95,7 +95,7 @@ export const startups = {
     logo: "/startup_cactus.png",
     url: "https://oncactus.com",
     description:
-      "AI-powered business assistant for solopreneurs (like private chefs, photographers, etc.) to automate administrative tasks.",
+      "AI-powered business assistant that answers, qualifies, and follows up with every lead around the clock—so you never miss a customer, call, or opportunity. ",
     speakerId: "",
     demoTime: "",
   },
