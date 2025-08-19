@@ -102,24 +102,68 @@ import { Image } from "astro:assets";
         </div>
     </div>
 
-    <!-- Premium gradient transition -->
-    <div class="absolute bottom-0 left-0 right-0 h-24">
-        <div
-            class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-700/20 to-white"
+    <!-- Cloud-shaped transition -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
+        <svg
+            preserveAspectRatio="none"
+            viewBox="0 0 1200 200"
+            xmlns="http://www.w3.org/2000/svg"
+            class="absolute bottom-0 w-full h-full"
         >
-        </div>
-        <div
-            class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"
-        >
-        </div>
+            <defs>
+                <linearGradient
+                    id="cloudGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="0%"
+                    y2="100%"
+                >
+                    <stop
+                        offset="0%"
+                        style="stop-color:#1E3A8A;stop-opacity:0.6"></stop>
+                    <stop
+                        offset="30%"
+                        style="stop-color:#3B82F6;stop-opacity:0.4"></stop>
+                    <stop
+                        offset="70%"
+                        style="stop-color:#DBEAFE;stop-opacity:0.6"></stop>
+                    <stop
+                        offset="100%"
+                        style="stop-color:#FFFFFF;stop-opacity:1"></stop>
+                </linearGradient>
+            </defs>
+            <!-- Bottom cloud layer - deepest -->
+            <path
+                d="M0,200 L0,100 C40,80 90,70 140,75 C180,65 220,68 260,75 C300,65 340,68 380,72 C420,62 460,65 500,70 C540,60 580,63 620,68 C660,58 700,61 740,66 C780,56 820,59 860,64 C900,54 940,57 980,62 C1020,52 1060,55 1100,60 C1140,50 1180,53 1200,58 L1200,200 Z"
+                fill="#1E40AF"
+                opacity="0.3"></path>
+            <!-- Middle cloud layer -->
+            <path
+                d="M0,200 L0,130 C70,115 110,105 160,110 C210,100 260,103 310,110 C360,100 410,103 460,107 C510,97 560,100 610,105 C660,95 710,98 760,103 C810,93 860,96 910,101 C960,91 1010,94 1060,99 C1110,89 1160,92 1200,97 L1200,200 Z"
+                fill="url(#cloudGradient)"
+                opacity="0.8"></path>
+            <!-- Top fluffy cloud layer -->
+            <path
+                d="M0,200 L0,150 C50,140 80,135 130,138 C170,128 210,131 250,138 C290,128 330,131 370,135 C410,125 450,128 490,133 C530,123 570,126 610,131 C650,121 690,124 730,129 C770,119 810,122 850,127 C890,117 930,120 970,125 C1010,115 1050,118 1090,123 C1130,113 1170,116 1200,121 L1200,200 Z"
+                fill="white"
+                opacity="0.9"></path>
+            <!-- Final smooth cloud layer -->
+            <path
+                d="M0,200 L0,170 C100,160 150,155 250,160 C350,150 450,153 550,160 C650,150 750,153 850,160 C950,150 1050,153 1150,160 C1175,157 1187,158 1200,160 L1200,200 Z"
+                fill="white"></path>
+        </svg>
 
-        <!-- Subtle geometric elements -->
+        <!-- Floating cloud elements -->
         <div
-            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
+            class="absolute top-8 left-1/4 w-16 h-8 bg-white/20 rounded-full animate-float-slow"
         >
         </div>
         <div
-            class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full"
+            class="absolute top-12 right-1/3 w-12 h-6 bg-white/15 rounded-full animate-float-slower"
+        >
+        </div>
+        <div
+            class="absolute top-6 right-1/4 w-8 h-4 bg-white/10 rounded-full animate-float"
         >
         </div>
     </div>
@@ -242,6 +286,52 @@ import { Image } from "astro:assets";
         p {
             font-size: 1rem;
         }
+    }
+
+    /* Cloud animation */
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0px) translateX(0px);
+        }
+        33% {
+            transform: translateY(-8px) translateX(4px);
+        }
+        66% {
+            transform: translateY(2px) translateX(-2px);
+        }
+    }
+
+    @keyframes float-slow {
+        0%,
+        100% {
+            transform: translateY(0px) translateX(0px);
+        }
+        50% {
+            transform: translateY(-6px) translateX(6px);
+        }
+    }
+
+    @keyframes float-slower {
+        0%,
+        100% {
+            transform: translateY(0px) translateX(0px);
+        }
+        50% {
+            transform: translateY(-4px) translateX(-4px);
+        }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-float-slow {
+        animation: float-slow 8s ease-in-out infinite;
+    }
+
+    .animate-float-slower {
+        animation: float-slower 10s ease-in-out infinite;
     }
 
     /* Smooth scroll behavior */
