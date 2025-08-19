@@ -5,18 +5,10 @@ import { Image } from "astro:assets";
 <section
     class="relative bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 text-white overflow-hidden h-screen flex items-center"
 >
-    <!-- Enhanced animated background pattern -->
+    <!-- Clean background -->
     <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute -inset-[10px] z-0 opacity-20" aria-hidden="true">
-            <div class="ruby-grid"></div>
-        </div>
-        <!-- Floating particles -->
-        <div class="absolute inset-0 z-0">
-            <div class="floating-particles opacity-30"></div>
-        </div>
-        <!-- Subtle gradient overlay -->
         <div
-            class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-5"
+            class="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent"
         >
         </div>
     </div>
@@ -102,70 +94,18 @@ import { Image } from "astro:assets";
         </div>
     </div>
 
-    <!-- Cloud-shaped transition -->
-    <div class="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
+    <!-- Simple cloud-shaped transition -->
+    <div class="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
         <svg
             preserveAspectRatio="none"
-            viewBox="0 0 1200 200"
+            viewBox="0 0 1200 120"
             xmlns="http://www.w3.org/2000/svg"
             class="absolute bottom-0 w-full h-full"
         >
-            <defs>
-                <linearGradient
-                    id="cloudGradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="0%"
-                    y2="100%"
-                >
-                    <stop
-                        offset="0%"
-                        style="stop-color:#1E3A8A;stop-opacity:0.6"></stop>
-                    <stop
-                        offset="30%"
-                        style="stop-color:#3B82F6;stop-opacity:0.4"></stop>
-                    <stop
-                        offset="70%"
-                        style="stop-color:#DBEAFE;stop-opacity:0.6"></stop>
-                    <stop
-                        offset="100%"
-                        style="stop-color:#FFFFFF;stop-opacity:1"></stop>
-                </linearGradient>
-            </defs>
-            <!-- Bottom cloud layer - deepest -->
             <path
-                d="M0,200 L0,100 C40,80 90,70 140,75 C180,65 220,68 260,75 C300,65 340,68 380,72 C420,62 460,65 500,70 C540,60 580,63 620,68 C660,58 700,61 740,66 C780,56 820,59 860,64 C900,54 940,57 980,62 C1020,52 1060,55 1100,60 C1140,50 1180,53 1200,58 L1200,200 Z"
-                fill="#1E40AF"
-                opacity="0.3"></path>
-            <!-- Middle cloud layer -->
-            <path
-                d="M0,200 L0,130 C70,115 110,105 160,110 C210,100 260,103 310,110 C360,100 410,103 460,107 C510,97 560,100 610,105 C660,95 710,98 760,103 C810,93 860,96 910,101 C960,91 1010,94 1060,99 C1110,89 1160,92 1200,97 L1200,200 Z"
-                fill="url(#cloudGradient)"
-                opacity="0.8"></path>
-            <!-- Top fluffy cloud layer -->
-            <path
-                d="M0,200 L0,150 C50,140 80,135 130,138 C170,128 210,131 250,138 C290,128 330,131 370,135 C410,125 450,128 490,133 C530,123 570,126 610,131 C650,121 690,124 730,129 C770,119 810,122 850,127 C890,117 930,120 970,125 C1010,115 1050,118 1090,123 C1130,113 1170,116 1200,121 L1200,200 Z"
-                fill="white"
-                opacity="0.9"></path>
-            <!-- Final smooth cloud layer -->
-            <path
-                d="M0,200 L0,170 C100,160 150,155 250,160 C350,150 450,153 550,160 C650,150 750,153 850,160 C950,150 1050,153 1150,160 C1175,157 1187,158 1200,160 L1200,200 Z"
+                d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
                 fill="white"></path>
         </svg>
-
-        <!-- Floating cloud elements -->
-        <div
-            class="absolute top-8 left-1/4 w-16 h-8 bg-white/20 rounded-full animate-float-slow"
-        >
-        </div>
-        <div
-            class="absolute top-12 right-1/3 w-12 h-6 bg-white/15 rounded-full animate-float-slower"
-        >
-        </div>
-        <div
-            class="absolute top-6 right-1/4 w-8 h-4 bg-white/10 rounded-full animate-float"
-        >
-        </div>
     </div>
 </section>
 
@@ -174,93 +114,6 @@ import { Image } from "astro:assets";
     section {
         min-height: 100vh;
         min-height: 100dvh; /* Dynamic viewport height for mobile */
-    }
-
-    /* Enhanced floating particles */
-    .floating-particles {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
-
-    .floating-particles::before,
-    .floating-particles::after {
-        content: "";
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.6);
-        border-radius: 50%;
-        animation: float 6s ease-in-out infinite;
-    }
-
-    .floating-particles::before {
-        top: 20%;
-        left: 20%;
-        animation-delay: 0s;
-    }
-
-    .floating-particles::after {
-        top: 60%;
-        right: 30%;
-        animation-delay: -3s;
-    }
-
-    @keyframes float {
-        0%,
-        100% {
-            transform: translateY(0px) translateX(0px);
-            opacity: 0.6;
-        }
-        33% {
-            transform: translateY(-20px) translateX(10px);
-            opacity: 1;
-        }
-        66% {
-            transform: translateY(5px) translateX(-5px);
-            opacity: 0.8;
-        }
-    }
-
-    /* Enhanced ruby grid */
-    .ruby-grid {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: repeat(12, 1fr);
-        gap: 8px;
-        width: 100%;
-        height: 100%;
-    }
-
-    .ruby-grid::before {
-        content: "";
-        grid-column: 3 / 5;
-        grid-row: 2 / 4;
-        background: rgba(255, 182, 193, 0.3);
-        border-radius: 4px;
-        animation: pulse 4s ease-in-out infinite;
-    }
-
-    .ruby-grid::after {
-        content: "";
-        grid-column: 8 / 10;
-        grid-row: 6 / 8;
-        background: rgba(255, 105, 180, 0.3);
-        border-radius: 4px;
-        animation: pulse 4s ease-in-out infinite;
-        animation-delay: -2s;
-    }
-
-    @keyframes pulse {
-        0%,
-        100% {
-            opacity: 0.3;
-            transform: scale(1);
-        }
-        50% {
-            opacity: 0.6;
-            transform: scale(1.1);
-        }
     }
 
     /* Enhanced button glow effects */
@@ -288,52 +141,6 @@ import { Image } from "astro:assets";
         }
     }
 
-    /* Cloud animation */
-    @keyframes float {
-        0%,
-        100% {
-            transform: translateY(0px) translateX(0px);
-        }
-        33% {
-            transform: translateY(-8px) translateX(4px);
-        }
-        66% {
-            transform: translateY(2px) translateX(-2px);
-        }
-    }
-
-    @keyframes float-slow {
-        0%,
-        100% {
-            transform: translateY(0px) translateX(0px);
-        }
-        50% {
-            transform: translateY(-6px) translateX(6px);
-        }
-    }
-
-    @keyframes float-slower {
-        0%,
-        100% {
-            transform: translateY(0px) translateX(0px);
-        }
-        50% {
-            transform: translateY(-4px) translateX(-4px);
-        }
-    }
-
-    .animate-float {
-        animation: float 6s ease-in-out infinite;
-    }
-
-    .animate-float-slow {
-        animation: float-slow 8s ease-in-out infinite;
-    }
-
-    .animate-float-slower {
-        animation: float-slower 10s ease-in-out infinite;
-    }
-
     /* Smooth scroll behavior */
     html {
         scroll-behavior: smooth;
@@ -341,103 +148,18 @@ import { Image } from "astro:assets";
 </style>
 
 <script>
-    import anime from "animejs";
-
-    // Initialize animations
+    // Simple fade-in animation without anime.js dependency
     function initializeAnimations() {
-        // Create additional floating particles dynamically
-        const particleContainer = document.querySelector(".floating-particles");
-        if (particleContainer) {
-            for (let i = 0; i < 8; i++) {
-                const particle = document.createElement("div");
-                particle.style.cssText = `
-                    position: absolute;
-                    width: ${Math.random() * 3 + 2}px;
-                    height: ${Math.random() * 3 + 2}px;
-                    background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3});
-                    border-radius: 50%;
-                    top: ${Math.random() * 100}%;
-                    left: ${Math.random() * 100}%;
-                    animation: float ${Math.random() * 4 + 4}s ease-in-out infinite;
-                    animation-delay: ${Math.random() * -6}s;
-                `;
-                particleContainer.appendChild(particle);
-            }
-        }
-
-        // Split text animation
-        document.querySelectorAll(".split-text").forEach((element) => {
-            const text = element.textContent || "";
-            element.textContent = "";
-
-            // Split text into words
-            const words = text.split(" ");
-
-            words.forEach((word, wordIndex) => {
-                // Create a container for the word
-                const wordContainer = document.createElement("span");
-                wordContainer.className = "word";
-                wordContainer.style.display = "inline-block";
-
-                // Split word into characters
-                word.split("").forEach((char) => {
-                    const charSpan = document.createElement("span");
-                    charSpan.className = "char";
-                    charSpan.textContent = char;
-                    charSpan.style.opacity = "0";
-                    charSpan.style.transform = "translateY(30px)";
-                    charSpan.style.display = "inline-block";
-                    wordContainer.appendChild(charSpan);
-                });
-
-                element.appendChild(wordContainer);
-
-                // Add space after word (except last word)
-                if (wordIndex < words.length - 1) {
-                    const spaceSpan = document.createElement("span");
-                    spaceSpan.className = "space";
-                    spaceSpan.innerHTML = "&nbsp;";
-                    spaceSpan.style.display = "inline-block";
-                    element.appendChild(spaceSpan);
-                }
-            });
+        const elements = document.querySelectorAll(".hero-content > *");
+        elements.forEach((el, index) => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            setTimeout(() => {
+                el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+                el.style.opacity = "1";
+                el.style.transform = "translateY(0)";
+            }, index * 200);
         });
-
-        // Enhanced text animation timeline
-        anime
-            .timeline({
-                easing: "easeOutExpo",
-            })
-            .add({
-                targets: "img[alt*='San Francisco Ruby Conference']",
-                scale: [0.8, 1],
-                opacity: [0, 1],
-                duration: 1200,
-                easing: "easeOutElastic(1, .8)",
-            })
-            .add(
-                {
-                    targets: ".split-text .char",
-                    opacity: [0, 1],
-                    translateY: [30, 0],
-                    duration: 1000,
-                    delay: anime.stagger(30, { start: 200 }),
-                    easing: "easeOutElastic(1, .6)",
-                },
-                "-=800",
-            )
-            .add(
-                {
-                    targets: "a[href*='speakers'], a[href*='lu.ma']",
-                    scale: [0.8, 1],
-                    opacity: [0, 1],
-                    translateY: [20, 0],
-                    duration: 800,
-                    delay: anime.stagger(100),
-                    easing: "easeOutBack(1.7)",
-                },
-                "-=400",
-            );
     }
 
     // Initialize when DOM is loaded
