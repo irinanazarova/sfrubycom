@@ -124,7 +124,8 @@ export const startups = {
     name: "Sunchaser",
     logo: "/startup_sunchaser.png",
     url: "https://sunchaser.io",
-    description: "",
+    description:
+      "Collaborative on-call management tool for engineering teams, integrating seamlessly with Slack and PagerDuty to automate shift coverage and streamline incident response.",
     speakerId: "",
     demoTime: "",
   },
