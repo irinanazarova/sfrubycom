@@ -35,7 +35,7 @@ export const startups = {
     logo: "/startup_accessgrid.png",
     url: "https://accessgrid.com",
     description:
-      "API for issuing NFC credentials on mobile, compatible with 50+ DESFire readers.",
+      "API for issuing NFC keys for Apple and Google Wallet for startups, access control integrators, and large enterprises.",
     speakerId: "",
     demoTime: "",
   },
@@ -55,7 +55,7 @@ export const startups = {
     logo: "/startup_suppli.png",
     url: "https://gosuppli.com",
     description:
-      "A/R, collections, and payment automation for B2B construction suppliers.",
+      "Suppli provides digital payments and accounts receivable (AR) software solutions for construction materials supply and distribution sector.",
     speakerId: "",
     demoTime: "",
   },
@@ -65,7 +65,7 @@ export const startups = {
     logo: "/startup_nexhealth.png",
     url: "https://nexhealth.com",
     description:
-      "Patient experience platform that streamlines the entire healthcare journey, from online scheduling and digital forms to automated messaging and online payments.",
+      "Patient experience platform that streamlines the entire healthcare journey. A Series C startup with $1b valuation, NexHealth serves 15,000 practices in North America, with almost 150 third-party developers building on top of it.",
     speakerId: "",
     demoTime: "",
   },
@@ -106,6 +106,25 @@ export const startups = {
     url: "https://corepilot.com",
     description:
       "AI-powered Enterprise Resource Planning (ERP) platform specifically designed to streamline and automate workflows within the aviation aftermarket. ",
+    speakerId: "",
+    demoTime: "",
+  },
+  tend: {
+    id: "tend",
+    name: "Tend",
+    logo: "/startup_tend.png",
+    url: "https://tend.cash",
+    description:
+      "Tend is for people with full lives who need clear visibility of their finances without the burden of traditional budgeting.",
+    speakerId: "",
+    demoTime: "",
+  },
+  sunchaser: {
+    id: "sunchaser",
+    name: "Sunchaser",
+    logo: "/startup_sunchaser.png",
+    url: "https://sunchaser.io",
+    description: "",
     speakerId: "",
     demoTime: "",
   },
