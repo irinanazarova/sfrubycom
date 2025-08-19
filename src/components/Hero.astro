@@ -3,12 +3,21 @@ import { Image } from "astro:assets";
 ---
 
 <section
-    class="relative bg-gradient-to-b from-sky-500 via-sky-700 to-sky-700 text-white overflow-hidden min-h-screen flex items-center"
+    class="relative bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 text-white overflow-hidden min-h-screen flex items-center"
 >
-    <!-- Animated background pattern -->
-    <div class="absolute inset-0 overflow-hidden opacity-10">
-        <div class="absolute -inset-[10px] z-0" aria-hidden="true">
+    <!-- Enhanced animated background pattern -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -inset-[10px] z-0 opacity-20" aria-hidden="true">
             <div class="ruby-grid"></div>
+        </div>
+        <!-- Floating particles -->
+        <div class="absolute inset-0 z-0">
+            <div class="floating-particles opacity-30"></div>
+        </div>
+        <!-- Subtle gradient overlay -->
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-5"
+        >
         </div>
     </div>
 
@@ -33,28 +42,61 @@ import { Image } from "astro:assets";
       </h1>-->
 
             <p
-                class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-4"
+                class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-6 max-w-2xl"
             >
                 Building the Future with Ruby
             </p>
 
-            <p class="text-lg md:text-xl split-text text-cloud-100 mb-4">
+            <p
+                class="text-lg md:text-xl split-text text-cloud-100/90 mb-8 font-light tracking-wide"
+            >
                 November 19-20, 2025 • Fort Mason, San Francisco
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
                 <a
                     href="/speakers"
-                    class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-100 text-cloud-100 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                    class="group inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold shadow-xl transition-all duration-500 transform hover:shadow-2xl hover:shadow-white/20 hover:scale-105 hover:bg-white/20 hover:border-white/50"
                 >
-                    Full program
+                    <span
+                        class="mr-2 group-hover:mr-3 transition-all duration-300"
+                        >Full program</span
+                    >
+                    <svg
+                        class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </a>
 
                 <a
                     href="https://lu.ma/sfrubyconf2025"
-                    class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                    class="group inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 border-2 border-ruby-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-500 transform hover:shadow-2xl hover:shadow-ruby-500/30 hover:scale-105 hover:from-ruby-400 hover:to-pink-400"
                 >
-                    Get a ticket
+                    <span
+                        class="mr-2 group-hover:mr-3 transition-all duration-300"
+                        >Get a ticket</span
+                    >
+                    <svg
+                        class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
+                        ></path>
+                    </svg>
                 </a>
             </div>
         </div>
@@ -77,11 +119,130 @@ import { Image } from "astro:assets";
     </div>
 </section>
 
+<style>
+    /* Enhanced floating particles */
+    .floating-particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .floating-particles::before,
+    .floating-particles::after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-particles::before {
+        top: 20%;
+        left: 20%;
+        animation-delay: 0s;
+    }
+
+    .floating-particles::after {
+        top: 60%;
+        right: 30%;
+        animation-delay: -3s;
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0px) translateX(0px);
+            opacity: 0.6;
+        }
+        33% {
+            transform: translateY(-20px) translateX(10px);
+            opacity: 1;
+        }
+        66% {
+            transform: translateY(5px) translateX(-5px);
+            opacity: 0.8;
+        }
+    }
+
+    /* Enhanced ruby grid */
+    .ruby-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+        gap: 8px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .ruby-grid::before {
+        content: "";
+        grid-column: 3 / 5;
+        grid-row: 2 / 4;
+        background: rgba(255, 182, 193, 0.3);
+        border-radius: 4px;
+        animation: pulse 4s ease-in-out infinite;
+    }
+
+    .ruby-grid::after {
+        content: "";
+        grid-column: 8 / 10;
+        grid-row: 6 / 8;
+        background: rgba(255, 105, 180, 0.3);
+        border-radius: 4px;
+        animation: pulse 4s ease-in-out infinite;
+        animation-delay: -2s;
+    }
+
+    @keyframes pulse {
+        0%,
+        100% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.6;
+            transform: scale(1.1);
+        }
+    }
+
+    /* Enhanced button glow effects */
+    .group:hover {
+        filter: brightness(1.1);
+    }
+
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
 <script>
     import anime from "animejs";
 
     // Initialize animations
     function initializeAnimations() {
+        // Create additional floating particles dynamically
+        const particleContainer = document.querySelector(".floating-particles");
+        if (particleContainer) {
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement("div");
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 3 + 2}px;
+                    height: ${Math.random() * 3 + 2}px;
+                    background: rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3});
+                    border-radius: 50%;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    animation: float ${Math.random() * 4 + 4}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * -6}s;
+                `;
+                particleContainer.appendChild(particle);
+            }
+        }
+
         // Split text animation
         document.querySelectorAll(".split-text").forEach((element) => {
             const text = element.textContent || "";
@@ -102,7 +263,7 @@ import { Image } from "astro:assets";
                     charSpan.className = "char";
                     charSpan.textContent = char;
                     charSpan.style.opacity = "0";
-                    charSpan.style.transform = "translateY(20px)";
+                    charSpan.style.transform = "translateY(30px)";
                     charSpan.style.display = "inline-block";
                     wordContainer.appendChild(charSpan);
                 });
@@ -120,47 +281,47 @@ import { Image } from "astro:assets";
             });
         });
 
-        // Animate text
+        // Enhanced text animation timeline
         anime
             .timeline({
                 easing: "easeOutExpo",
             })
             .add({
-                targets: ".ruby-logo",
-                scale: [0, 1],
+                targets: "img[alt*='San Francisco Ruby Conference']",
+                scale: [0.8, 1],
                 opacity: [0, 1],
-                duration: 1000,
+                duration: 1200,
+                easing: "easeOutElastic(1, .8)",
             })
             .add(
                 {
                     targets: ".split-text .char",
                     opacity: [0, 1],
-                    translateY: [20, 0],
-                    duration: 800,
-                    delay: anime.stagger(20),
+                    translateY: [30, 0],
+                    duration: 1000,
+                    delay: anime.stagger(30, { start: 200 }),
+                    easing: "easeOutElastic(1, .6)",
                 },
-                "-=400",
+                "-=800",
             )
             .add(
                 {
-                    targets: ".register-btn",
-                    scale: [0.9, 1],
+                    targets: "a[href*='speakers'], a[href*='lu.ma']",
+                    scale: [0.8, 1],
                     opacity: [0, 1],
-                    duration: 600,
+                    translateY: [20, 0],
+                    duration: 800,
+                    delay: anime.stagger(100),
+                    easing: "easeOutBack(1.7)",
                 },
                 "-=400",
             );
+    }
 
-        // Ruby grid animation
-        anime({
-            targets: ".ruby-grid div",
-            scale: [
-                { value: 0.1, duration: 500, easing: "easeOutSine" },
-                { value: 1, duration: 1000, easing: "easeInOutQuad" },
-            ],
-            delay: anime.stagger(200, { grid: [12, 12], from: "center" }),
-            loop: true,
-            direction: "alternate",
-        });
+    // Initialize when DOM is loaded
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeAnimations);
+    } else {
+        initializeAnimations();
     }
 </script>
