@@ -42,7 +42,7 @@ export const sponsorTiers = [
       "1 complimentary conference ticket",
     ],
     available: 15,
-    claimed: 4,
+    claimed: 5,
   },
 ];
 
@@ -81,8 +81,8 @@ export const sponsors = {
     logo: "/sponsor_gusto.png",
     url: "https://www.gusto.com",
   },
-  "scout-monitoring": {
-    id: "scout-monitoring",
+  scout: {
+    id: "scout",
     name: "Scout Monitoring",
     tier: "Emerald",
     logo: "/sponsor_scout.png",
@@ -115,6 +115,13 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_planetargon.png",
     url: "https://www.planetargon.com/",
+  },
+  cactus: {
+    id: "cactus",
+    name: "Cactus",
+    tier: "Emerald",
+    logo: "/sponsor_cactus.png",
+    url: "https://oncactus.com",
   },
 };
 

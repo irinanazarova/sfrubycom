@@ -1,14 +1,8 @@
 ---
-import { getSpeaker } from "../data/speakers.js";
+import { getSpeakersByGroup } from "../data/speakers.js";
 
-// Get featured speakers in desired order
-const featuredSpeakerIds = [
-    "obie-fernandez",
-    "vladimir-dementyev",
-    "carmine-paolino",
-    "marco-roth",
-];
-const speakers = featuredSpeakerIds.map((id) => getSpeaker(id)).filter(Boolean);
+// Get featured speakers in their natural data file order
+const speakers = getSpeakersByGroup("featured");
 ---
 
 <section id="speakers" class="py-20 bg-dark-50">

@@ -1,85 +1,116 @@
-// Startup companies data - real companies founded or led by our speakers
+/*  Startup companies data - real companies founded or led by our speakers
+Bolt.new
+Lago
+Stepful
+AccessGrid
+Binti
+Suppli
+NexHealth
+Simple AI
+Sixfold
+Cactus
+*/
 export const startups = {
-  "roast-tech": {
-    id: "roast-tech",
-    name: "Roast",
-    logo: "/startup_roast.png",
-    url: "https://roast.tech",
-    description: "AI-powered code review and optimization platform built with Ruby",
-    speakerId: "obie-fernandez",
-    category: "AI/ML",
-    demoTime: "Day 1 - 3:00 PM"
+  bolt_new: {
+    id: "bolt_new",
+    name: "Bolt.new",
+    logo: "/startup_boltnew.png",
+    url: "https://bolt.new",
+    description:
+      "AI-native browser tool for building and deploying full-stack web apps with zero code. Launched 2024; $40M ARR in 5 months.",
+    speakerId: "",
+    demoTime: "",
   },
-  "active-agent": {
-    id: "active-agent",
-    name: "Active Agent",
-    logo: "/startup_activeagent.png",
-    url: "https://activeagent.ai",
-    description: "Rails-native AI framework where Agents are Controllers",
-    speakerId: "justin-bowen",
-    category: "AI/ML",
-    demoTime: "Day 1 - 3:15 PM"
+  lago: {
+    id: "lago",
+    name: "Lago",
+    logo: "/startup_lago.png",
+    url: "https://getlago.com",
+    description:
+      "Open-source platform for metering, billing, and usage-based pricing. Flexible, self-hosted, developer-first. YC-backed.",
+    speakerId: "",
+    demoTime: "",
   },
-  "chat-with-work": {
-    id: "chat-with-work",
-    name: "Chat with Work",
-    logo: "/startup_chatwithwork.png",
-    url: "https://chatwith.work",
-    description: "Enterprise AI assistant for workplace productivity",
-    speakerId: "carmine-paolino",
-    category: "AI/ML",
-    demoTime: "Day 1 - 3:30 PM"
+  stepful: {
+    id: "stepful",
+    name: "Stepful",
+    logo: "/startup_stepful.png",
+    url: "https://www.stepful.com",
+    description:
+      "Online healthcare training for entry-level roles in four months. Tech-driven, accessible to those with a high school diploma.",
+    speakerId: "",
+    demoTime: "",
   },
-  "frontdoor-benefits": {
-    id: "frontdoor-benefits",
-    name: "Frontdoor Benefits",
-    logo: "/startup_frontdoor.png",
-    url: "https://frontdoorbenefits.com",
-    description: "Modern benefits administration platform for growing companies",
-    speakerId: "ben-sheldon",
-    category: "HR Tech",
-    demoTime: "Day 2 - 1:00 PM"
+  accessgrid: {
+    id: "accessgrid",
+    name: "AccessGrid",
+    logo: "/startup_accessgrid.png",
+    url: "https://accessgrid.com",
+    description:
+      "API for issuing NFC credentials on mobile, compatible with 50+ DESFire readers.",
+    speakerId: "",
+    demoTime: "",
   },
-  "bellawatt": {
-    id: "bellawatt",
-    name: "Bellawatt",
-    logo: "/startup_bellawatt.png",
-    url: "https://bellawatt.com",
-    description: "Software consultancy specializing in energy sector solutions",
-    speakerId: "brian-knoles",
-    category: "Energy",
-    demoTime: "Day 2 - 1:15 PM"
+  binti: {
+    id: "binti",
+    name: "Binti",
+    logo: "/startup_binti.png",
+    url: "https://binti.com",
+    description:
+      "SaaS for child welfare, streamlining foster/adoption for agencies and families.",
+    speakerId: "",
+    demoTime: "",
   },
-  "wealthbox": {
-    id: "wealthbox",
-    name: "Wealthbox CRM",
-    logo: "/startup_wealthbox.png",
-    url: "https://wealthbox.com",
-    description: "CRM platform designed specifically for financial advisors",
-    speakerId: "jp-camara",
-    category: "FinTech",
-    demoTime: "Day 2 - 1:30 PM"
+  suppli: {
+    id: "suppli",
+    name: "Suppli",
+    logo: "/startup_suppli.png",
+    url: "https://gosuppli.com",
+    description:
+      "A/R, collections, and payment automation for B2B construction suppliers.",
+    speakerId: "",
+    demoTime: "",
   },
-  "avo-hq": {
-    id: "avo-hq",
-    name: "Avo",
-    logo: "/startup_avo.png",
-    url: "https://avohq.io",
-    description: "Admin panel framework for Ruby on Rails applications",
-    speakerId: "adrian-marin",
-    category: "Dev Tools",
-    demoTime: "Day 2 - 1:45 PM"
+  nexhealth: {
+    id: "nexhealth",
+    name: "NexHealth",
+    logo: "/startup_nexhealth.png",
+    url: "https://nexhealth.com",
+    description:
+      "End-to-end patient experience platform for healthcare practices.",
+    speakerId: "",
+    demoTime: "",
   },
-  "kaspth-consulting": {
-    id: "kaspth-consulting",
-    name: "kaspth.com",
-    logo: "/startup_kaspth.png",
-    url: "https://kaspth.com",
-    description: "Rails consulting and training for teams looking to level up",
-    speakerId: "kasper",
-    category: "Consulting",
-    demoTime: "Day 2 - 2:00 PM"
-  }
+  simple_ai: {
+    id: "simple_ai",
+    name: "Simple AI",
+    logo: "/startup_simpleai.png",
+    url: "https://usesimple.ai",
+    description:
+      "Voice AI agents for enterprise—sales, support, scheduling via phone.",
+    speakerId: "",
+    demoTime: "",
+  },
+  sixfold: {
+    id: "sixfold",
+    name: "Sixfold",
+    logo: "/startup_sixfold.png",
+    url: "https://sixfold.ai",
+    description:
+      "GenAI platform for insurance carriers: automates underwriting, triages risk.",
+    speakerId: "",
+    demoTime: "",
+  },
+  cactus: {
+    id: "cactus",
+    name: "Cactus",
+    logo: "/startup_cactus.png",
+    url: "https://oncactus.com",
+    description:
+      "AI copilot that runs admin and booking for solopreneurs and small businesses.",
+    speakerId: "",
+    demoTime: "",
+  },
 };
 
 // Helper functions
@@ -92,11 +123,15 @@ export function getStartup(startupId) {
 }
 
 export function getStartupsByCategory(category) {
-  return Object.values(startups).filter(startup => startup.category === category);
+  return Object.values(startups).filter(
+    (startup) => startup.category === category,
+  );
 }
 
 export function getStartupCategories() {
-  const categories = [...new Set(Object.values(startups).map(startup => startup.category))];
+  const categories = [
+    ...new Set(Object.values(startups).map((startup) => startup.category)),
+  ];
   return categories.sort();
 }
 
