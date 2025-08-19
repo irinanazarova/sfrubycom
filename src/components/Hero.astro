@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 ---
 
 <section
-    class="relative bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 text-white overflow-hidden min-h-screen flex items-center"
+    class="relative bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 text-white overflow-hidden h-screen flex items-center"
 >
     <!-- Enhanced animated background pattern -->
     <div class="absolute inset-0 overflow-hidden">
@@ -22,17 +22,17 @@ import { Image } from "astro:assets";
     </div>
 
     <div
-        class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 2xl:py-8 py-4 relative z-10"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center"
     >
-        <div class="flex flex-col items-center text-center">
+        <div
+            class="hero-content flex flex-col items-center text-center w-full py-8"
+        >
             <!-- logo -->
-            <div
-                class="w-full relative flex items-center justify-center py-4 md:py-12 lg:py-4 2xl:py-8"
-            >
+            <div class="w-full relative flex items-center justify-center mb-6">
                 <img
                     src="/hero.png"
                     alt="San Francisco Ruby Conference 2025"
-                    class="object-contain w-full md:w-3/4 lg:w-1/2"
+                    class="hero-logo object-contain w-full max-w-xl md:max-w-2xl lg:max-w-3xl h-auto max-h-[40vh]"
                     loading="lazy"
                 />
             </div>
@@ -42,7 +42,7 @@ import { Image } from "astro:assets";
       </h1>-->
 
             <p
-                class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-6 max-w-2xl"
+                class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-4 max-w-2xl"
             >
                 Building the Future with Ruby
             </p>
@@ -53,7 +53,7 @@ import { Image } from "astro:assets";
                 November 19-20, 2025 • Fort Mason, San Francisco
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
                 <a
                     href="/speakers"
                     class="group inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold shadow-xl transition-all duration-500 transform hover:shadow-2xl hover:shadow-white/20 hover:scale-105 hover:bg-white/20 hover:border-white/50"
@@ -102,24 +102,36 @@ import { Image } from "astro:assets";
         </div>
     </div>
 
-    <!-- Decorative wave divider -->
-    <div
-        class="absolute bottom-0 left-0 right-0 h-16 bg-cloud-50 text-sky-700 overflow-hidden"
-    >
-        <svg
-            preserveAspectRatio="none"
-            viewBox="0 0 1200 120"
-            xmlns="http://www.w3.org/2000/svg"
-            class="absolute bottom-0 w-full h-full"
+    <!-- Premium gradient transition -->
+    <div class="absolute bottom-0 left-0 right-0 h-24">
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-700/20 to-white"
         >
-            <path
-                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                fill="currentColor"></path>
-        </svg>
+        </div>
+        <div
+            class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"
+        >
+        </div>
+
+        <!-- Subtle geometric elements -->
+        <div
+            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
+        >
+        </div>
+        <div
+            class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full"
+        >
+        </div>
     </div>
 </section>
 
 <style>
+    /* Ensure proper viewport fit */
+    section {
+        min-height: 100vh;
+        min-height: 100dvh; /* Dynamic viewport height for mobile */
+    }
+
     /* Enhanced floating particles */
     .floating-particles {
         position: absolute;
@@ -210,6 +222,26 @@ import { Image } from "astro:assets";
     /* Enhanced button glow effects */
     .group:hover {
         filter: brightness(1.1);
+    }
+
+    /* Responsive improvements */
+    @media (max-height: 800px) {
+        .hero-logo {
+            max-height: 35vh;
+        }
+    }
+
+    @media (max-height: 600px) {
+        .hero-content {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .hero-logo {
+            max-height: 30vh;
+        }
+        p {
+            font-size: 1rem;
+        }
     }
 
     /* Smooth scroll behavior */
