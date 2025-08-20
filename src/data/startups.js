@@ -103,7 +103,7 @@ export const startups = {
     id: "corepilot",
     name: "CorePilot  ",
     logo: "/startup_corepilot.png",
-    url: " https://corepilotcloud.com",
+    url: "https://corepilot.com",
     description:
       "AI-powered Enterprise Resource Planning (ERP) platform specifically designed to streamline and automate workflows within the aviation aftermarket. ",
     speakerId: "",
