@@ -32,13 +32,15 @@ const CTOSpeakers = getSpeakersByGroup("cto");
                 {
                     Object.values(featuredSpeakers).map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="aspect-w-1 aspect-h-1 bg-dark-200">
-                                <img
-                                    src={speaker.image}
-                                    alt={speaker.name}
-                                    class="w-full h-full object-cover"
-                                    loading="lazy"
-                                />
+                            <div class="flex justify-center pt-6">
+                                <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+                                    <img
+                                        src={speaker.image}
+                                        alt={speaker.name}
+                                        class="w-full h-full object-cover object-top"
+                                        loading="lazy"
+                                    />
+                                </div>
                             </div>
 
                             <div class="p-6">
@@ -81,13 +83,15 @@ const CTOSpeakers = getSpeakersByGroup("cto");
                 {
                     Object.values(regularSpeakers).map((speaker) => (
                         <div class="speaker-card bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="aspect-w-1 aspect-h-1 bg-dark-200">
-                                <img
-                                    src={speaker.image}
-                                    alt={speaker.name}
-                                    class="w-full h-full object-cover"
-                                    loading="lazy"
-                                />
+                            <div class="flex justify-center pt-6">
+                                <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+                                    <img
+                                        src={speaker.image}
+                                        alt={speaker.name}
+                                        class="w-full h-full object-cover object-top"
+                                        loading="lazy"
+                                    />
+                                </div>
                             </div>
 
                             <div class="p-6">
@@ -127,13 +131,15 @@ const CTOSpeakers = getSpeakersByGroup("cto");
                 {
                     CTOSpeakers.map((speaker) => (
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="aspect-w-1 aspect-h-1 bg-dark-200">
-                                <img
-                                    src={speaker.image}
-                                    alt={speaker.name}
-                                    class="w-full h-full object-cover"
-                                    loading="lazy"
-                                />
+                            <div class="flex justify-center pt-6">
+                                <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+                                    <img
+                                        src={speaker.image}
+                                        alt={speaker.name}
+                                        class="w-full h-full object-cover object-top"
+                                        loading="lazy"
+                                    />
+                                </div>
                             </div>
 
                             <div class="p-6">

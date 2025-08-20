@@ -3,27 +3,28 @@ import { Image } from "astro:assets";
 ---
 
 <section
-    class="relative bg-gradient-to-b from-sky-500 via-sky-700 to-sky-700 text-white overflow-hidden min-h-screen flex items-center"
+    class="relative bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 text-white overflow-hidden h-screen flex items-center"
 >
-    <!-- Animated background pattern -->
-    <div class="absolute inset-0 overflow-hidden opacity-10">
-        <div class="absolute -inset-[10px] z-0" aria-hidden="true">
-            <div class="ruby-grid"></div>
+    <!-- Clean background -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent"
+        >
         </div>
     </div>
 
     <div
-        class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 2xl:py-8 py-4 relative z-10"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex items-center"
     >
-        <div class="flex flex-col items-center text-center">
+        <div
+            class="hero-content flex flex-col items-center text-center w-full py-8"
+        >
             <!-- logo -->
-            <div
-                class="w-full relative flex items-center justify-center py-4 md:py-12 lg:py-4 2xl:py-8"
-            >
+            <div class="w-full relative flex items-center justify-center mb-6">
                 <img
                     src="/hero.png"
                     alt="San Francisco Ruby Conference 2025"
-                    class="object-contain w-full md:w-3/4 lg:w-1/2"
+                    class="hero-logo object-contain w-full max-w-xl md:max-w-2xl lg:max-w-3xl h-auto max-h-[40vh]"
                     loading="lazy"
                 />
             </div>
@@ -33,37 +34,68 @@ import { Image } from "astro:assets";
       </h1>-->
 
             <p
-                class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-4"
+                class="text-xl md:text-2xl font-medium split-text text-cloud-100 mb-4 max-w-2xl"
             >
                 Building the Future with Ruby
             </p>
 
-            <p class="text-lg md:text-xl split-text text-cloud-100 mb-4">
+            <p
+                class="text-lg md:text-xl split-text text-cloud-100/90 mb-8 font-light tracking-wide"
+            >
                 November 19-20, 2025 • Fort Mason, San Francisco
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
                 <a
                     href="/speakers"
-                    class="inline-flex items-center justify-center px-8 py-3 bg-transparent border border-cloud-100 text-cloud-100 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                    class="group inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold shadow-xl transition-all duration-500 transform hover:shadow-2xl hover:shadow-white/20 hover:scale-105 hover:bg-white/20 hover:border-white/50"
                 >
-                    Full program
+                    <span
+                        class="mr-2 group-hover:mr-3 transition-all duration-300"
+                        >Full program</span
+                    >
+                    <svg
+                        class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"></path>
+                    </svg>
                 </a>
 
                 <a
                     href="https://lu.ma/sfrubyconf2025"
-                    class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                    class="group inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 border-2 border-ruby-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-500 transform hover:shadow-2xl hover:shadow-ruby-500/30 hover:scale-105 hover:from-ruby-400 hover:to-pink-400"
                 >
-                    Get a ticket
+                    <span
+                        class="mr-2 group-hover:mr-3 transition-all duration-300"
+                        >Get a ticket</span
+                    >
+                    <svg
+                        class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
+                        ></path>
+                    </svg>
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Decorative wave divider -->
-    <div
-        class="absolute bottom-0 left-0 right-0 h-16 bg-cloud-50 text-sky-700 overflow-hidden"
-    >
+    <!-- Simple cloud-shaped transition -->
+    <div class="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
         <svg
             preserveAspectRatio="none"
             viewBox="0 0 1200 120"
@@ -71,96 +103,50 @@ import { Image } from "astro:assets";
             class="absolute bottom-0 w-full h-full"
         >
             <path
-                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                fill="currentColor"></path>
+                d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
+                fill="#f8fafc"></path>
         </svg>
     </div>
 </section>
 
-<script>
-    import anime from "animejs";
-
-    // Initialize animations
-    function initializeAnimations() {
-        // Split text animation
-        document.querySelectorAll(".split-text").forEach((element) => {
-            const text = element.textContent || "";
-            element.textContent = "";
-
-            // Split text into words
-            const words = text.split(" ");
-
-            words.forEach((word, wordIndex) => {
-                // Create a container for the word
-                const wordContainer = document.createElement("span");
-                wordContainer.className = "word";
-                wordContainer.style.display = "inline-block";
-
-                // Split word into characters
-                word.split("").forEach((char) => {
-                    const charSpan = document.createElement("span");
-                    charSpan.className = "char";
-                    charSpan.textContent = char;
-                    charSpan.style.opacity = "0";
-                    charSpan.style.transform = "translateY(20px)";
-                    charSpan.style.display = "inline-block";
-                    wordContainer.appendChild(charSpan);
-                });
-
-                element.appendChild(wordContainer);
-
-                // Add space after word (except last word)
-                if (wordIndex < words.length - 1) {
-                    const spaceSpan = document.createElement("span");
-                    spaceSpan.className = "space";
-                    spaceSpan.innerHTML = "&nbsp;";
-                    spaceSpan.style.display = "inline-block";
-                    element.appendChild(spaceSpan);
-                }
-            });
-        });
-
-        // Animate text
-        anime
-            .timeline({
-                easing: "easeOutExpo",
-            })
-            .add({
-                targets: ".ruby-logo",
-                scale: [0, 1],
-                opacity: [0, 1],
-                duration: 1000,
-            })
-            .add(
-                {
-                    targets: ".split-text .char",
-                    opacity: [0, 1],
-                    translateY: [20, 0],
-                    duration: 800,
-                    delay: anime.stagger(20),
-                },
-                "-=400",
-            )
-            .add(
-                {
-                    targets: ".register-btn",
-                    scale: [0.9, 1],
-                    opacity: [0, 1],
-                    duration: 600,
-                },
-                "-=400",
-            );
-
-        // Ruby grid animation
-        anime({
-            targets: ".ruby-grid div",
-            scale: [
-                { value: 0.1, duration: 500, easing: "easeOutSine" },
-                { value: 1, duration: 1000, easing: "easeInOutQuad" },
-            ],
-            delay: anime.stagger(200, { grid: [12, 12], from: "center" }),
-            loop: true,
-            direction: "alternate",
-        });
+<style>
+    /* Ensure proper viewport fit */
+    section {
+        min-height: 100vh;
+        min-height: 100dvh; /* Dynamic viewport height for mobile */
     }
+
+    /* Enhanced button glow effects */
+    .group:hover {
+        filter: brightness(1.1);
+    }
+
+    /* Responsive improvements */
+    @media (max-height: 800px) {
+        .hero-logo {
+            max-height: 35vh;
+        }
+    }
+
+    @media (max-height: 600px) {
+        .hero-content {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .hero-logo {
+            max-height: 30vh;
+        }
+        p {
+            font-size: 1rem;
+        }
+    }
+
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+<script>
+    // No animations - content visible immediately
 </script>

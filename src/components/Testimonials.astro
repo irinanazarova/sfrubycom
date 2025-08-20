@@ -1,4 +1,5 @@
 ---
+
 const testimonials = [
   {
     quote: "Truly the best meetup in SF. Had a great time tonight!",
@@ -15,10 +16,27 @@ const testimonials = [
 ];
 ---
 
-<section class="py-20 bg-dark-50">
+<section id="monthly-meetup" class="py-20 bg-dark-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-display font-bold text-dark-900">Brought to you by the SF Ruby Meetup</h2>
+      <div class="inline-block">
+        <a href="#monthly-meetup" class="group">
+          <h2
+            class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-dark-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-ruby-600"
+          >
+            Monthly Meetup
+          </h2>
+        </a>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto"
+        >
+        </div>
+      </div>
+      <p
+        class="mt-4 text-xl text-dark-600 max-w-4xl mx-auto leading-relaxed font-light"
+      >
+        Brought to you by the SF Ruby Meetup
+      </p>
     </div>
     <div class="text-center mt-12">
         The Ruby community in the SF Bay area is full of energy today: we gather 70-100 people at the <a href="https://lu.ma/sfruby" target="_blank" class="underline">SF Ruby meetup</a> every month for deep technical talks and conversations. Check out talk recordings at <a href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup" target="_blank" class="underline">Ruby Events</a>.

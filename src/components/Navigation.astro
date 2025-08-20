@@ -10,92 +10,160 @@ const navItems = [
 
 <header class="fixed w-full z-50 transition-all duration-300 bg-transparent">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
+        <div class="flex justify-between items-center h-20">
             <a
                 href="/"
-                class="font-display font-bold text-xl md:text-2xl text-ruby-500"
+                class="font-display font-bold text-xl md:text-2xl text-ruby-500 transition-transform duration-200 hover:scale-105"
             >
                 <img
                     src="/sfruby_letters_black.png"
-                    class="object-contain w-24 h-10"
+                    class="object-contain w-28 h-12"
                 />
             </a>
 
             <!-- Desktop navigation -->
-            <nav class="hidden md:flex items-center space-x-8">
+            <nav class="hidden md:flex items-center space-x-10">
                 {
                     navItems.map((item) => (
                         <a
                             href={item.href}
-                            class="font-medium text-cloud-900 hover:text-ruby-400 transition-colors duration-200"
+                            class="relative font-semibold text-dark-700 hover:text-ruby-500 transition-all duration-300 group"
                         >
                             {item.name}
+                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-ruby-500 to-pink-500 transition-all duration-300 group-hover:w-full" />
                         </a>
                     ))
                 }
-                <!-- <a
-          href="#newsletter"
-          class="px-4 py-2 rounded-md bg-ruby-500 text-cloud-500 font-medium hover:bg-ruby-600 transition-colors duration-200"
-        >
-          Sign up
-        </a>-->
+                <a
+                    href="https://lu.ma/sfrubyconf2025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-6 py-2.5 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:from-ruby-400 hover:to-pink-400"
+                >
+                    Get Tickets
+                </a>
             </nav>
 
             <!-- Mobile menu button -->
             <button
                 id="mobile-menu-button"
-                class="md:hidden flex items-center text-sky-800"
+                class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-dark-200/20 text-dark-700 hover:bg-ruby-50 hover:text-ruby-600 transition-all duration-300"
             >
                 <svg
+                    id="menu-icon"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    stroke-width="2"
                     stroke="currentColor"
-                    class="w-6 h-6"
+                    class="w-5 h-5 transition-transform duration-300"
                 >
                     <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
                 </svg>
+                <svg
+                    id="close-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-5 h-5 hidden transition-transform duration-300"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
             </button>
         </div>
     </div>
+</header>
 
-    <!-- Mobile navigation -->
-    <div
-        id="mobile-menu"
-        class="hidden md:hidden bg-cloud-100 shadow-lg absolute w-full"
-    >
-        <div class="px-2 pt-2 pb-3 space-y-1">
+<!-- Mobile navigation -->
+<div
+    id="mobile-menu"
+    class="hidden md:hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-lg shadow-2xl border-t border-dark-100/20 z-40"
+>
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="space-y-2">
             {
                 navItems.map((item) => (
                     <a
                         href={item.href}
-                        class="block px-3 py-2 rounded-md text-base font-medium text-sky-800 hover:text-ruby-500 hover:bg-ruby-50 transition-all duration-200"
+                        class="flex items-center px-4 py-3 rounded-xl text-lg font-semibold text-dark-700 hover:text-ruby-600 hover:bg-gradient-to-r hover:from-ruby-50 hover:to-pink-50 transition-all duration-300 group"
                     >
-                        {item.name}
+                        <span class="flex-1">{item.name}</span>
+                        <svg
+                            class="w-5 h-5 text-ruby-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"
+                            />
+                        </svg>
                     </a>
                 ))
             }
-            <!--<a
+            <div class="pt-4 mt-4 border-t border-dark-100">
+                <a
+                    href="https://lu.ma/sfrubyconf2025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-center px-6 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-bold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-102 hover:shadow-xl"
+                >
+                    <span>Get Tickets</span>
+                    <svg
+                        class="w-5 h-5 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        ></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--<a
         href="/#newsletter"
         class="block px-3 py-2 rounded-md text-base font-medium bg-ruby-500 text-cloud-500 hover:bg-ruby-600"
       >
         Sign up
       </a>-->
-        </div>
-    </div>
-</header>
+</div>
 
 <script>
     // Mobile menu toggle
     const mobileMenuButton = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.getElementById("menu-icon");
+    const closeIcon = document.getElementById("close-icon");
 
     mobileMenuButton?.addEventListener("click", () => {
-        mobileMenu?.classList.toggle("hidden");
+        const isHidden = mobileMenu?.classList.contains("hidden");
+
+        if (isHidden) {
+            mobileMenu?.classList.remove("hidden");
+            menuIcon?.classList.add("hidden");
+            closeIcon?.classList.remove("hidden");
+        } else {
+            mobileMenu?.classList.add("hidden");
+            menuIcon?.classList.remove("hidden");
+            closeIcon?.classList.add("hidden");
+        }
     });
 
     // Close mobile menu when clicking outside
@@ -109,6 +177,8 @@ const navItems = [
             !mobileMenu.contains(target)
         ) {
             mobileMenu.classList.add("hidden");
+            menuIcon?.classList.remove("hidden");
+            closeIcon?.classList.add("hidden");
         }
     });
 
@@ -118,16 +188,20 @@ const navItems = [
         if (window.scrollY > 50) {
             header?.classList.remove("bg-transparent");
             header?.classList.add(
-                "bg-cloud-500/95",
-                "backdrop-blur-sm",
-                "shadow-md",
+                "bg-white/95",
+                "backdrop-blur-lg",
+                "shadow-lg",
+                "border-b",
+                "border-dark-100/20",
             );
         } else {
             header?.classList.add("bg-transparent");
             header?.classList.remove(
-                "bg-cloud-500/95",
-                "backdrop-blur-sm",
-                "shadow-md",
+                "bg-white/95",
+                "backdrop-blur-lg",
+                "shadow-lg",
+                "border-b",
+                "border-dark-100/20",
             );
         }
     });

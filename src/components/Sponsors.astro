@@ -1,91 +1,66 @@
 ---
-const tiers = [
-    {
-        name: "Pickaxe ⛏️",
-        sponsors: [
-            {
-                name: "Chime",
-                logo: "/sponsor_chime.png",
-                url: "https://www.chime.com",
-            },
-            {
-                name: "Bolt.new by Stackblitz",
-                logo: "/sponsor_boltnew.png",
-                url: "https://www.bolt.new",
-            },
-        ],
-    },
-    {
-        name: "Ruby",
-        sponsors: [
-            {
-                name: "Gusto",
-                logo: "/sponsor_gusto.png",
-                url: "https://www.gusto.com",
-            },
-            {
-                name: "Temporal",
-                logo: "/sponsor_temporal.png",
-                url: "https://temporal.io/",
-            },
-        ],
-    },
-    {
-        name: "Emerald",
-        sponsors: [
-            {
-                name: "Scout Monitoring",
-                logo: "/sponsor_scout.png",
-                url: "https://scoutapm.com/",
-            },
-            {
-                name: "typesense",
-                logo: "/sponsor_typesense.png",
-                url: "https://typesense.org/",
-            },
-            {
-                name: "Cedarcode",
-                logo: "/sponsor_cedarcode.png",
-                url: "https://www.cedarcode.com/",
-            },
-            {
-                name: "Planet Argon",
-                logo: "/sponsor_planetargon.png",
-                url: "https://www.planetargon.com/",
-            },
-        ],
-    },
-];
+import { getSponsorsForComponent, organizers } from "../data/sponsors.js";
+
+const tiers = getSponsorsForComponent();
 ---
 
-<section id="sponsors" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2
-                class="text-3xl md:text-4xl font-display font-bold text-dark-900"
+<section
+    id="sponsors"
+    class="py-32 bg-gradient-to-b from-white to-cloud-50 relative overflow-hidden"
+>
+    <!-- Subtle background pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div
+            class="absolute top-20 right-20 w-32 h-32 bg-ruby-400 rounded-full filter blur-xl"
+        >
+        </div>
+        <div
+            class="absolute bottom-40 left-20 w-24 h-24 bg-sky-400 rounded-full filter blur-xl"
+        >
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-20">
+            <div class="inline-block">
+                <a href="#sponsors" class="group">
+                    <h2
+                        class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-dark-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-ruby-600"
+                    >
+                        Our Sponsors
+                    </h2>
+                </a>
+                <div
+                    class="w-24 h-1 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto"
+                >
+                </div>
+            </div>
+            <p
+                class="mt-4 text-xl text-dark-600 max-w-4xl mx-auto leading-relaxed font-light"
             >
-                Our Sponsors
-            </h2>
-            <p class="mt-4 text-xl text-dark-600 max-w-3xl mx-auto">
                 These amazing companies help make the San Francisco Ruby
                 Conference possible
             </p>
         </div>
 
-        <div class="space-y-16">
+        <div class="space-y-20">
             {
                 tiers.map((tier) => (
                     <div>
-                        <h3 class="text-center text-2xl font-bold text-dark-800 mb-8 font-display">
-                            {tier.name}{" "}
-                            <span class="text-ruby-500">Sponsors</span>
-                        </h3>
+                        <div class="text-center mb-12">
+                            <h3 class="text-3xl md:text-4xl font-display font-bold text-dark-900 mb-2">
+                                {tier.name}{" "}
+                                <span class="bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent">
+                                    Sponsors
+                                </span>
+                            </h3>
+                            <div class="w-16 h-0.5 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto mt-2" />
+                        </div>
 
                         <div class="flex flex-wrap justify-center gap-8 items-center">
                             {tier.sponsors.map((sponsor) => (
                                 <a
                                     href={sponsor.url}
-                                    class={`block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 ${sponsor.logo ? "bg-white hover:shadow-lg" : "border-dashed border-dark-300 hover:border-ruby-500"}`}
+                                    class={`group block p-8 rounded-xl transition-all duration-300 transform hover:scale-105 ${sponsor.logo ? "bg-white shadow-md hover:shadow-xl border border-dark-100 hover:border-ruby-200" : "border-2 border-dashed border-dark-300 hover:border-ruby-500 bg-white/50"}`}
                                     target={sponsor.logo ? "_blank" : "_self"}
                                     rel={
                                         sponsor.logo
@@ -93,18 +68,23 @@ const tiers = [
                                             : ""
                                     }
                                 >
-                                    {sponsor.logo ? (
-                                        <img
-                                            src={sponsor.logo}
-                                            alt={sponsor.name}
-                                            class={`h-12 w-auto ${tier.name === "Pickaxe ⛏️" ? "md:h-32" : tier.name === "Ruby" ? "md:h-24" : "md:h-16"}`}
-                                            loading="lazy"
-                                        />
-                                    ) : (
-                                        <div class="flex items-center justify-center h-16 w-48 text-dark-500 font-medium">
-                                            {sponsor.name}
-                                        </div>
+                                    {sponsor.logo && (
+                                        <div class="absolute inset-0 bg-gradient-to-br from-ruby-500/0 via-ruby-500/0 to-ruby-500/0 group-hover:from-ruby-500/5 group-hover:via-ruby-500/10 group-hover:to-ruby-500/20 transition-all duration-300 rounded-xl" />
                                     )}
+                                    <div class="relative">
+                                        {sponsor.logo ? (
+                                            <img
+                                                src={sponsor.logo}
+                                                alt={sponsor.name}
+                                                class={`h-12 w-auto filter transition-all duration-300 ${tier.name === "Pickaxe ⛏️" ? "md:h-32" : tier.name === "Ruby" ? "md:h-24" : "md:h-16"}`}
+                                                loading="lazy"
+                                            />
+                                        ) : (
+                                            <div class="flex items-center justify-center h-16 w-48 text-dark-500 font-medium">
+                                                {sponsor.name}
+                                            </div>
+                                        )}
+                                    </div>
                                 </a>
                             ))}
                         </div>
@@ -112,37 +92,64 @@ const tiers = [
                 ))
             }
         </div>
-        <div class="py-16">
+        <div class="py-20">
             <div>
-                <h3
-                    class="text-center text-2xl font-bold text-dark-800 mb-8 font-display"
-                >
-                    ⚡️ Organizer ⚡️
-                </h3>
+                <div class="text-center mb-12">
+                    <h3
+                        class="text-3xl md:text-4xl font-display font-bold text-dark-900 mb-2"
+                    >
+                        Organizer
+                    </h3>
+                    <div
+                        class="w-16 h-0.5 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto mt-2"
+                    >
+                    </div>
+                </div>
 
                 <div class="flex flex-wrap justify-center gap-8 items-center">
-                    <a
-                        href="https://evilmartians.com"
-                        class="block p-6 border rounded-lg transition-all duration-300 transform hover:scale-105 bg-white hover:shadow-lg"
-                        target="_blank"
-                    >
-                        <img
-                            src="/evilmartians.png"
-                            alt="Evil Martians"
-                            class="h-24 md:h-48 w-auto"
-                            loading="lazy"
-                        />
-                    </a>
+                    {
+                        Object.values(organizers).map((organizer) => (
+                            <a
+                                href={organizer.url}
+                                class="group block p-8 rounded-xl border border-dark-100 transition-all duration-300 transform hover:scale-105 bg-white shadow-md hover:shadow-xl hover:border-ruby-200"
+                                target="_blank"
+                            >
+                                <div class="absolute inset-0 bg-gradient-to-br from-ruby-500/0 via-ruby-500/0 to-ruby-500/0 group-hover:from-ruby-500/5 group-hover:via-ruby-500/10 group-hover:to-ruby-500/20 transition-all duration-300 rounded-xl" />
+                                <div class="relative">
+                                    <img
+                                        src={organizer.logo}
+                                        alt={organizer.name}
+                                        class="h-24 md:h-48 w-auto filter transition-all duration-300"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </a>
+                        ))
+                    }
                 </div>
             </div>
         </div>
 
-        <div class="text-center">
+        <div class="text-center mt-20">
             <a
                 href="/sponsors"
-                class="inline-flex items-center justify-center px-8 py-3 bg-ruby-500 border border-ruby-500 text-cloud-50 rounded-md font-medium shadow-md transition-all duration-300 transform hover:shadow-glow hover:scale-105"
+                class="group inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 border-2 border-ruby-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-500 transform hover:shadow-2xl hover:shadow-ruby-500/30 hover:scale-105 hover:from-ruby-400 hover:to-pink-400"
             >
-                Become a Sponsor
+                <span class="mr-2 group-hover:mr-3 transition-all duration-300"
+                    >Become a Sponsor</span
+                >
+                <svg
+                    class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"></path>
+                </svg>
             </a>
         </div>
     </div>
