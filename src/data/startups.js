@@ -129,6 +129,36 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
+  coracomputer: {
+    id: "coracomputer",
+    name: "Coracomputer",
+    logo: "/startup_coracomputer.png",
+    url: "https://cora.computer/",
+    description:
+      "AI-powered email agent that triages, drafts, and responds to messages autonomously, letting you manage your inbox with minimal effort.",
+    speakerId: "",
+    demoTime: "",
+  },
+  terminalwire: {
+    id: "terminalwire",
+    name: "Terminalwire",
+    logo: "/startup_terminalwire.png",
+    url: "https://terminalwire.com",
+    description:
+      "Developer tool for building and deploying modern, web-integrated command-line interfaces: Terminalwire streams server-side commands to users’ terminals with seamless cross-platform support, authentication, and instant updates.",
+    speakerId: "",
+    demoTime: "",
+  },
+  softwarecom: {
+    id: "softwarecom",
+    name: "Software.com",
+    logo: "/startup_softwarecom.png",
+    url: "https://software.com/",
+    description:
+      "AI-driven analytics platform for engineering teams that automates developer productivity insights, uncovers bottlenecks, and benchmarks GenAI impact—without reading source code.",
+    speakerId: "",
+    demoTime: "",
+  },
 };
 
 // Helper functions
