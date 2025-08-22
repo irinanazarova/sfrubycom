@@ -123,6 +123,13 @@ export const sponsors = {
     logo: "/sponsor_cactus.png",
     url: "https://oncactus.com",
   },
+  avo: {
+    id: "avo",
+    name: "Avo",
+    tier: "Emerald",
+    logo: "/sponsor_avo.png",
+    url: "https://avohq.io/",
+  },
 };
 
 // Special organizers
