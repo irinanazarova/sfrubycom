@@ -29,7 +29,7 @@ export const sponsorTiers = [
       "2 complimentary conference tickets",
     ],
     available: 10,
-    claimed: 2,
+    claimed: 3,
   },
   {
     name: "Emerald",
@@ -102,6 +102,13 @@ export const sponsors = {
     logo: "/sponsor_temporal.png",
     url: "https://temporal.io/",
   },
+  avo: {
+    id: "avo",
+    name: "Avo",
+    tier: "Ruby",
+    logo: "/sponsor_avo.png",
+    url: "https://avohq.io/",
+  },
   cedarcode: {
     id: "cedarcode",
     name: "Cedarcode",
@@ -122,13 +129,6 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_cactus.png",
     url: "https://oncactus.com",
-  },
-  avo: {
-    id: "avo",
-    name: "Avo",
-    tier: "Emerald",
-    logo: "/sponsor_avo.png",
-    url: "https://avohq.io/",
   },
 };
 
