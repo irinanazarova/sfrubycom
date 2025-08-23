@@ -1,244 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { talks, getTalkWithSpeaker, speakers } from '../data/speakers.js';
+import {
+  getCompleteSchedule,
+  getTimeBlocks,
+  formatTimeRange,
+  getTrackDisplayName,
+  scheduleSlots,
+  slotAssignments,
+  talks,
+  speakers
+} from '../data/index.js';
 
-const days = [
-  {
-    date: 'November 19, 2025',
-    dayLabel: 'Day 1',
-    sessions: [
-      {
-        time: '8:00 AM',
-        endTime: '8:50 AM',
-        main: { title: 'Doors Open & Registration', speaker: '', type: 'logistics' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '8:50 AM',
-        endTime: '9:00 AM',
-        main: { title: 'Welcome & Opening Remarks', speaker: '', type: 'logistics' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '9:00 AM',
-        endTime: '9:30 AM',
-        main: { talkId: 'k1-reactive-view', type: 'keynote' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '9:40 AM',
-        endTime: '10:10 AM',
-        main: { talkId: 'm1-play-with-code', type: 'talk' },
-        track2: { talkId: 's1-cloud-data-infrastructure', type: 'talk' },
-        workshop: { talkId: 'w1-building-agents-rails', type: 'workshop' }
-      },
-      {
-        time: '10:20 AM',
-        endTime: '10:50 AM',
-        main: { talkId: 'm2-noel-tbd', type: 'talk' },
-        track2: { talkId: 's2-brandon-weaver-tbd', type: 'talk' },
-        workshop: { talkId: 'w1-building-agents-rails', type: 'workshop' }
-      },
-      {
-        time: '11:00 AM',
-        endTime: '11:30 AM',
-        main: { talkId: 'm3-realtime-collaboration', type: 'talk' },
-        track2: { talkId: 's3-performance-starts-boot', type: 'talk' },
-        workshop: { talkId: 'w1-building-agents-rails', type: 'workshop' }
-      },
-      {
-        time: '11:40 AM',
-        endTime: '1:10 PM',
-        main: { title: 'Lunch break', speaker: '', type: 'break' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '1:20 PM',
-        endTime: '1:50 PM',
-        main: { talkId: 'm4-zjit-speeding-ruby', type: 'talk' },
-        track2: { talkId: 's4-derailing-application', type: 'talk' },
-        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
-      },
-      {
-        time: '2:00 PM',
-        endTime: '2:30 PM',
-        main: { talkId: 'm5-rails-asset-pipeline', type: 'talk' },
-        track2: { talkId: 's5-peace-love-crud', type: 'talk' },
-        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
-      },
-      {
-        time: '2:40 PM',
-        endTime: '3:10 PM',
-        main: { talkId: 'm6-opensource-rails-startup', type: 'talk' },
-        track2: { talkId: 's6-ai-interface-mcp', type: 'talk' },
-        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
-      },
-      {
-        time: '3:20 PM',
-        endTime: '3:50 PM',
-        main: { talkId: 'm7-start-writing-ruby', type: 'talk' },
-        track2: { talkId: 's7-mcp-fog-inspector', type: 'talk' },
-        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
-      },
-      {
-        time: '4:10 PM',
-        endTime: '4:40 PM',
-        main: { talkId: 'k2-ruby-ai-conversation', type: 'keynote' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '4:50 PM',
-        endTime: '5:50 PM',
-        main: { talkId: 'cto-roundtable-day1', type: 'panel' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '12:20 PM',
-        endTime: '1:30 PM',
-        main: { title: 'Lunch & Networking', speaker: '', type: 'break' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '1:30 PM',
-        endTime: '2:00 PM',
-        main: { talkId: 'ruby-security-best-practices', type: 'talk' },
-        track2: { talkId: 'rails-modern-frontend', type: 'talk' },
-        workshop: { talkId: 'testing-workshop', type: 'workshop' }
-      },
-      {
-        time: '2:15 PM',
-        endTime: '2:45 PM',
-        main: { talkId: 'microservices-monoliths', type: 'talk' },
-        track2: { talkId: 'ruby-concurrency', type: 'talk' },
-        workshop: { talkId: 'testing-workshop', type: 'workshop' }
-      },
-      {
-        time: '3:00 PM',
-        endTime: '3:30 PM',
-        main: { talkId: 'ruby-devops', type: 'talk' },
-        track2: { talkId: 'rails-api-design', type: 'talk' },
-        workshop: { talkId: 'testing-workshop', type: 'workshop' }
-      },
-      {
-        time: '3:30 PM',
-        endTime: '4:00 PM',
-        main: { title: 'Coffee Break & Networking', speaker: '', type: 'break' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '4:00 PM',
-        endTime: '5:00 PM',
-        main: { talkId: 'startup-demos', type: 'demos' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '5:00 PM',
-        endTime: '6:00 PM',
-        main: { title: 'Reception & Networking', speaker: '', type: 'break' },
-        track2: null,
-        workshop: null
-      }
-    ]
-  },
-  {
-    date: 'November 20, 2025',
-    dayLabel: 'Day 2',
-    sessions: [
-      {
-        time: '8:00 AM',
-        endTime: '8:45 AM',
-        main: { title: 'Doors Open & Coffee', speaker: '', type: 'logistics' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '9:00 AM',
-        endTime: '9:30 AM',
-        main: { talkId: 'k3-rails-ai-ruby-llm', type: 'keynote' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '9:40 AM',
-        endTime: '10:10 AM',
-        main: { talkId: 'm8-code-to-customers', type: 'talk' },
-        track2: { talkId: 's8-shipping-solo-rails8', type: 'talk' },
-        workshop: { talkId: 'w3-upskill-team-rails', type: 'workshop' }
-      },
-      {
-        time: '10:20 AM',
-        endTime: '10:50 AM',
-        main: { talkId: 'm9-thin-client-approach', type: 'talk' },
-        track2: { talkId: 's9-operating-rails-deploy', type: 'talk' },
-        workshop: { talkId: 'w3-upskill-team-rails', type: 'workshop' }
-      },
-      {
-        time: '11:00 AM',
-        endTime: '11:30 AM',
-        main: { talkId: 'm10-software-design-ai', type: 'talk' },
-        track2: { talkId: 's10-debugging-gusto-scale', type: 'talk' },
-        workshop: { talkId: 'w3-upskill-team-rails', type: 'workshop' }
-      },
-      {
-        time: '11:40 AM',
-        endTime: '1:10 PM',
-        main: { title: 'Lunch & Networking', speaker: '', type: 'break' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '1:20 PM',
-        endTime: '1:50 PM',
-        main: { talkId: 'm11-opensource-business-sidekiq', type: 'talk' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '12:20 PM',
-        endTime: '1:30 PM',
-        main: { title: 'Lunch & Networking', speaker: '', type: 'break' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '2:00 PM',
-        endTime: '5:20 PM',
-        main: { talkId: 'startup-demos', type: 'demos' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '5:30 PM',
-        endTime: '6:00 PM',
-        main: { talkId: 'vc-roundtable', type: 'panel' },
-        track2: null,
-        workshop: null
-      },
-      {
-        time: '6:10 PM',
-        endTime: '6:40 PM',
-        main: { talkId: 'k4-vladimir-tbd', type: 'keynote' },
-        track2: null,
-        workshop: null
-      }
-    ]
-  }
-];
+// Get the complete schedule with all data joined
+const fullSchedule = getCompleteSchedule();
+
+// Group schedule by day
+const day1Schedule = fullSchedule.filter(slot => slot.day === 1);
+const day2Schedule = fullSchedule.filter(slot => slot.day === 2);
+
+// Get time blocks for each day
+const day1TimeBlocks = getTimeBlocks(1);
+const day2TimeBlocks = getTimeBlocks(2);
 
 // Define colors for different session types
 const sessionColors = {
   'keynote': 'bg-gradient-to-r from-ruby-500 to-pink-500 text-white border-ruby-400',
   'panel': 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-purple-400',
-  'demos': 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-green-400',
+  'demo': 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-green-400',
   'break': 'bg-gradient-to-r from-sky-400 to-blue-500 text-white border-sky-400',
   'logistics': 'bg-gray-100 text-gray-700 border-gray-200',
   'talk': 'bg-white text-gray-900 border-gray-200 hover:border-ruby-300 hover:shadow-lg',
@@ -249,55 +37,99 @@ function getSessionColor(sessionType) {
   return sessionColors[sessionType] || 'bg-white text-gray-900 border-gray-200';
 }
 
-// Helper function to get session data
-function getSessionData(session) {
-  if (!session) return null;
-
-  if (session.talkId) {
-    const talkData = getTalkWithSpeaker(session.talkId);
-    return {
-      ...session,
-      title: talkData?.title || 'TBA',
-      speaker: talkData?.speaker?.name || '',
-      talkData
-    };
-  }
-
-  return session;
+// Format time for display
+function formatTime(time) {
+  const [hours, minutes] = time.split(':').map(Number);
+  const period = hours >= 12 ? 'PM' : 'AM';
+  const displayHours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
+  return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
 }
+
+// Get track color
+function getTrackColor(track) {
+  const trackColors = {
+    'main': 'ruby',
+    'blackbox': 'sky',
+    'workshop': 'emerald'
+  };
+  return trackColors[track] || 'gray';
+}
+
+// Special time blocks (breaks, registration, etc.)
+const specialBlocks = {
+  1: [
+    { startTime: '8:00', endTime: '8:50', title: 'Doors Open & Registration', type: 'logistics' },
+    { startTime: '8:50', endTime: '9:00', title: 'Welcome & Opening Remarks', type: 'logistics' },
+    { startTime: '11:40', endTime: '13:10', title: 'Lunch Break', type: 'break' },
+  ],
+  2: [
+    { startTime: '8:00', endTime: '8:50', title: 'Doors Open & Coffee', type: 'logistics' },
+    { startTime: '11:40', endTime: '13:10', title: 'Lunch Break', type: 'break' },
+  ]
+};
+
+// Combine special blocks with time blocks
+function getCombinedTimeBlocks(day) {
+  // Get all slots for this day with complete data
+  const completeSchedule = getCompleteSchedule().filter(slot => slot.day === day);
+
+  // Group slots by start time only (not end time) to keep workshops with concurrent sessions
+  const timeGroups = new Map();
+
+  completeSchedule.forEach(slot => {
+    if (!timeGroups.has(slot.startTime)) {
+      timeGroups.set(slot.startTime, {
+        startTime: slot.startTime,
+        endTime: slot.endTime, // Use the first slot's end time as default
+        slots: []
+      });
+    }
+    timeGroups.get(slot.startTime).slots.push(slot);
+  });
+
+  const timeBlocks = Array.from(timeGroups.values());
+  const specials = specialBlocks[day] || [];
+
+  // Add special blocks to time blocks
+  specials.forEach(special => {
+    const existingBlock = timeBlocks.find(
+      block => block.startTime === special.startTime
+    );
+
+    if (!existingBlock) {
+      timeBlocks.push({
+        startTime: special.startTime,
+        endTime: special.endTime,
+        slots: [],
+        special: special
+      });
+    } else {
+      existingBlock.special = special;
+    }
+  });
+
+  // Sort by start time
+  return timeBlocks.sort((a, b) => {
+    const timeToMinutes = (time) => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+    };
+    return timeToMinutes(a.startTime) - timeToMinutes(b.startTime);
+  });
+}
+
+const day1CombinedBlocks = getCombinedTimeBlocks(1);
+const day2CombinedBlocks = getCombinedTimeBlocks(2);
+
+const days = [
+  { date: 'November 19, 2025', dayLabel: 'Day 1', blocks: day1CombinedBlocks },
+  { date: 'November 20, 2025', dayLabel: 'Day 2', blocks: day2CombinedBlocks }
+];
 ---
 
 <Layout title="Schedule - San Francisco Ruby Conference 2025">
-    <!-- Hero Section -->
-    <section class="py-32 bg-gradient-to-b from-gray-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <div class="inline-block">
-                    <a href="#schedule" class="group">
-                        <h1
-                            class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-ruby-600"
-                        >
-                            Conference Schedule
-                        </h1>
-                    </a>
-                    <div
-                        class="w-24 h-1 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto"
-                    >
-                    </div>
-                </div>
-                <p
-                    class="mt-6 text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light"
-                >
-                    Two days packed with inspiring talks, hands-on workshops, and networking opportunities
-                </p>
-            </div>
-
-
-        </div>
-    </section>
-
     <!-- Schedule Content -->
-    <section id="schedule" class="py-16 bg-white relative overflow-hidden">
+    <section id="schedule" class="pt-20 bg-white relative overflow-hidden">
         <!-- Subtle background pattern -->
         <div class="absolute inset-0 opacity-5">
             <div class="absolute top-20 right-20 w-32 h-32 bg-ruby-400 rounded-full filter blur-xl"></div>
@@ -305,11 +137,15 @@ function getSessionData(session) {
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Day Navigation -->
-            <div class="mb-16 flex justify-center">
-                <div class="bg-gray-100 rounded-xl p-2 inline-flex space-x-2">
+            <div id="dayNavigation" class="flex justify-center sticky-day-nav is-stuck">
+                <div class="bg-gray-100 rounded-xl p-2 inline-flex space-x-2 w-full sm:w-auto day-nav-container relative">
+                    <!-- Draft Version Ribbon -->
+                    <div class="absolute -right-3 -top-3 bg-blue-500 text-white px-4 py-1 rounded-full shadow-lg transform rotate-12 text-xs font-bold tracking-wide z-10 draft-ribbon">
+                        WORK IN PROGRESS
+                    </div>
                     {days.map((day, index) => (
                         <button
-                            class={`schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 ${
+                            class={`schedule-tab px-4 sm:px-8 py-3 sm:py-4 rounded-lg font-medium transition-all duration-300 flex-1 sm:flex-initial ${
                                 index === 0
                                     ? 'bg-ruby-500 text-white shadow-md'
                                     : 'text-gray-700 hover:bg-white hover:shadow-sm'
@@ -317,8 +153,8 @@ function getSessionData(session) {
                             data-index={index}
                             style="display: block; visibility: visible;"
                         >
-                            <div class="font-display font-bold">{day.dayLabel}</div>
-                            <div class="text-sm opacity-90">{day.date}</div>
+                            <div class="font-display font-bold text-sm sm:text-base">{day.dayLabel}</div>
+                            <div class="text-xs sm:text-sm opacity-90">{day.date.replace('November ', 'Nov ')}</div>
                         </button>
                     ))}
                 </div>
@@ -332,325 +168,790 @@ function getSessionData(session) {
                         data-index={dayIndex}
                         style={dayIndex === 0 ? "display: block; visibility: visible;" : "display: none;"}
                     >
-                        <!-- Day Header -->
-                        <div class="text-center mb-12">
-                            <h2 class="text-3xl font-display font-bold text-gray-900 mb-2">
-                                {day.dayLabel}
-                            </h2>
-                            <p class="text-gray-600 text-lg">{day.date}</p>
-                        </div>
+
 
                         <!-- Schedule Grid -->
                         <div class="space-y-8">
-                        <!-- Desktop Column Headers -->
-                        <div class="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
-                            <div class="lg:col-span-2"></div>
-                            <div class="lg:col-span-10">
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div class="text-center">
-                                        <h4 class="font-display font-bold text-ruby-600 text-sm tracking-wide mb-2">MAIN STAGE</h4>
-                                        <div class="w-8 h-0.5 bg-ruby-500 rounded-full mx-auto"></div>
-                                    </div>
-                                    <div class="text-center">
-                                        <h4 class="font-display font-bold text-sky-600 text-sm tracking-wide mb-2">BLACKBOX THEATER</h4>
-                                        <div class="w-8 h-0.5 bg-sky-500 rounded-full mx-auto"></div>
-                                    </div>
-                                    <div class="text-center">
-                                        <h4 class="font-display font-bold text-emerald-600 text-sm tracking-wide mb-2">WORKSHOPS STUDIO</h4>
-                                        <div class="w-8 h-0.5 bg-emerald-500 rounded-full mx-auto"></div>
+                            <!-- Desktop Column Headers -->
+                            <div class="hidden md:grid grid-cols-12 gap-4 mb-8">
+                                <div class="col-span-2"></div>
+                                <div class="col-span-10">
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div class="text-center">
+                                            <h4 class="font-display font-bold text-ruby-600 text-sm tracking-wide mb-2">MAIN STAGE</h4>
+                                            <div class="w-8 h-0.5 bg-ruby-500 rounded-full mx-auto"></div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h4 class="font-display font-bold text-sky-600 text-sm tracking-wide mb-2">BLACKBOX THEATER</h4>
+                                            <div class="w-8 h-0.5 bg-sky-500 rounded-full mx-auto"></div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h4 class="font-display font-bold text-emerald-600 text-sm tracking-wide mb-2">WORKSHOP STUDIO</h4>
+                                            <div class="w-8 h-0.5 bg-emerald-500 rounded-full mx-auto"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                            {day.sessions.map((session) => (
-                                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                                    <!-- Time Column -->
-                                    <div class="lg:col-span-2">
-                                        <div class="text-center lg:text-left sticky top-24">
-                                            <div class="font-display font-bold text-gray-900 text-xl mb-1">
-                                                {session.time}
-                                            </div>
-                                            <div class="text-gray-500 text-sm">
-                                                to {session.endTime}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Sessions Column -->
-                                    <div class="lg:col-span-10">
-                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                            <!-- Main Stage -->
-                                            <div class="md:col-span-1">
-                                                {(() => {
-                                                    const sessionData = getSessionData(session.main);
-                                                    if (!sessionData) return null;
-
-                                                    return (
-                                                        <div
-                                                            class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${getSessionColor(sessionData.type)}`}
-                                                            style="display: block; visibility: visible;"
-                                                        >
-                                                            <div class="mb-3 md:hidden">
-                                                                <span class="px-3 py-1 bg-ruby-100 text-ruby-700 text-xs font-medium rounded-full">
-                                                                    Main Stage
-                                                                </span>
-                                                            </div>
-                                                            <h3 class="font-bold text-lg mb-2 leading-tight">
-                                                                {sessionData.title}
-                                                            </h3>
-                                                            {sessionData.speaker && (
-                                                                <p class="text-sm opacity-80 mb-3">
-                                                                    {sessionData.speaker}
-                                                                </p>
-                                                            )}
-                                                            {sessionData.talkData?.description && (
-                                                                <p class="text-sm opacity-70 line-clamp-3">
-                                                                    {sessionData.talkData.description}
-                                                                </p>
-                                                            )}
-                                                        </div>
-                                                    );
-                                                })()}
+                            {day.blocks.map((block, blockIndex) => {
+                                // Check if this is a special block (break, registration, etc.)
+                                if (block.special) {
+                                    return (
+                                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+                                            <!-- Time Column -->
+                                            <div class="lg:col-span-2">
+                                                <div class="text-center lg:text-left sticky top-24">
+                                                    <div class="font-display font-bold text-gray-900 text-xl mb-1">
+                                                        {formatTime(block.startTime)}
+                                                    </div>
+                                                    <div class="text-gray-500 text-sm">
+                                                        to {formatTime(block.endTime)}
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <!-- Blackbox Theater -->
-                                            <div class="md:col-span-1">
-                                                {(() => {
-                                                    const sessionData = getSessionData(session.track2);
-                                                    if (!sessionData) return (
-                                                        <div class="p-6 rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-center min-h-[140px]">
-                                                            <span class="text-gray-400 text-sm">No session</span>
-                                                        </div>
-                                                    );
-
-                                                    return (
-                                                        <div
-                                                            class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${getSessionColor(sessionData.type)}`}
-                                                            style="display: block; visibility: visible;"
-                                                        >
-                                                            <div class="mb-3 md:hidden">
-                                                                <span class="px-3 py-1 bg-sky-100 text-sky-700 text-xs font-medium rounded-full">
-                                                                    Blackbox Theater
-                                                                </span>
-                                                            </div>
-                                                            <h3 class="font-bold text-lg mb-2 leading-tight">
-                                                                {sessionData.title}
-                                                            </h3>
-                                                            {sessionData.speaker && (
-                                                                <p class="text-sm opacity-80 mb-3">
-                                                                    {sessionData.speaker}
-                                                                </p>
-                                                            )}
-                                                            {sessionData.talkData?.description && (
-                                                                <p class="text-sm opacity-70 line-clamp-3">
-                                                                    {sessionData.talkData.description}
-                                                                </p>
-                                                            )}
-                                                        </div>
-                                                    );
-                                                })()}
-                                            </div>
-
-                                            <!-- Workshops Studio -->
-                                            <div class="md:col-span-1">
-                                                {(() => {
-                                                    const sessionData = getSessionData(session.workshop);
-                                                    if (!sessionData) return (
-                                                        <div class="p-6 rounded-lg border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-center min-h-[140px]">
-                                                            <span class="text-gray-400 text-sm">No workshop</span>
-                                                        </div>
-                                                    );
-
-                                                    // Handle multiple speakers for workshops
-                                                    let speakerNames = '';
-                                                    if (sessionData.talkData && sessionData.talkData.speakerId) {
-                                                        if (Array.isArray(sessionData.talkData.speakerId)) {
-                                                            const speakersList = sessionData.talkData.speakerId.map(id => speakers?.[id]?.name).filter(Boolean);
-                                                            if (speakersList.length > 1) {
-                                                                speakerNames = speakersList.slice(0, -1).join(', ') + ' & ' + speakersList[speakersList.length - 1];
-                                                            } else if (speakersList.length === 1) {
-                                                                speakerNames = speakersList[0];
-                                                            }
-                                                        } else {
-                                                            speakerNames = speakers?.[sessionData.talkData.speakerId]?.name || '';
-                                                        }
-                                                    } else if (sessionData.speaker) {
-                                                        speakerNames = sessionData.speaker;
-                                                    }
-
-                                                    return (
-                                                        <div
-                                                            class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${getSessionColor(sessionData.type)}`}
-                                                            style="display: block; visibility: visible;"
-                                                        >
-                                                            <div class="mb-3 md:hidden">
-                                                                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
-                                                                    Workshops Studio
-                                                                </span>
-                                                            </div>
-                                                            <h3 class="font-bold text-lg mb-2 leading-tight">
-                                                                {sessionData.title}
-                                                            </h3>
-                                                            {speakerNames && (
-                                                                <p class="text-sm opacity-80 mb-3">
-                                                                    {speakerNames}
-                                                                </p>
-                                                            )}
-                                                            {sessionData.talkData?.description && (
-                                                                <p class="text-sm opacity-70 line-clamp-3 mb-4">
-                                                                    {sessionData.talkData.description}
-                                                                </p>
-                                                            )}
-                                                            {sessionData.talkData?.lumaId && (
-                                                                <a
-                                                                    href={`https://lu.ma/${sessionData.talkData.lumaId}`}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    class="inline-block px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition-colors duration-200"
-                                                                >
-                                                                    Sign Up
-                                                                </a>
-                                                            )}
-                                                        </div>
-                                                    );
-                                                })()}
+                                            <!-- Special Block Content -->
+                                            <div class="lg:col-span-10">
+                                                <div class={`p-6 rounded-lg border-2 transition-all duration-300 ${getSessionColor(block.special.type)}`}>
+                                                    <h3 class="font-bold text-xl text-center">
+                                                        {block.special.title}
+                                                    </h3>
+                                                </div>
                                             </div>
                                         </div>
+                                    );
+                                }
+
+                                // Regular session blocks
+                                const mainSlot = block.slots.find(s => s.track === 'main');
+                                const blackboxSlot = block.slots.find(s => s.track === 'blackbox');
+                                const workshopSlot = block.slots.find(s => s.track === 'workshop');
+
+                                // Skip if this is a keynote or panel (they span all tracks)
+                                const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'demo') && !blackboxSlot && !workshopSlot;
+
+                                return (
+                                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+                                        <!-- Time Column -->
+                                        <div class="lg:col-span-2">
+                                            <div class="text-center lg:text-left sticky top-24">
+                                                <div class="font-display font-bold text-gray-900 text-xl mb-1">
+                                                    {formatTime(block.startTime)}
+                                                </div>
+                                                <div class="text-gray-500 text-sm">
+                                                    to {formatTime(block.endTime)}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sessions Column -->
+                                        <div class="lg:col-span-10">
+                                            {isFullWidth ? (
+                                                // Full-width session (keynote, panel, demo)
+                                                <div
+                                                    class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${getSessionColor(mainSlot.type)}`}
+                                                    data-talk-id={mainSlot.talk?.id}
+                                                    data-slot-id={mainSlot.id}
+                                                >
+                                                    {mainSlot.talk && (
+                                                        <>
+                                                            <h3 class="font-bold text-xl mb-2 leading-tight">
+                                                                {mainSlot.talk.title}
+                                                            </h3>
+                                                            {mainSlot.speakers && mainSlot.speakers.length > 0 && (
+                                                                <p class="text-sm opacity-90 mb-3">
+                                                                    {mainSlot.speakers.map(s => s.name).join(', ')}
+                                                                </p>
+                                                            )}
+                                                            {mainSlot.talk.description && (
+                                                                <p class="text-sm opacity-80 line-clamp-3">
+                                                                    {mainSlot.talk.description}
+                                                                </p>
+                                                            )}
+                                                        </>
+                                                    )}
+                                                </div>
+                                            ) : (
+                                                // Multi-track sessions
+                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                    {/* Main Stage */}
+                                                    <div>
+                                                        {mainSlot && mainSlot.talk ? (
+                                                            <div
+                                                                class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${getSessionColor(mainSlot.type)}`}
+                                                                data-talk-id={mainSlot.talk.id}
+                                                                data-slot-id={mainSlot.id}
+                                                            >
+                                                                <div class="mb-3 md:hidden">
+                                                                    <span class="px-3 py-1 bg-ruby-100 text-ruby-700 text-xs font-medium rounded-full">
+                                                                        Main Stage
+                                                                    </span>
+                                                                </div>
+                                                                <h3 class="font-bold text-lg mb-2 leading-tight">
+                                                                    {mainSlot.talk.title}
+                                                                </h3>
+                                                                {mainSlot.speakers && mainSlot.speakers.length > 0 && (
+                                                                    <p class="text-sm text-gray-600 mb-2">
+                                                                        {mainSlot.speakers.map(s => s.name).join(', ')}
+                                                                    </p>
+                                                                )}
+                                                                {mainSlot.talk.description && (
+                                                                    <p class="text-sm text-gray-500 line-clamp-3">
+                                                                        {mainSlot.talk.description}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div class="hidden md:block"></div>
+                                                        )}
+                                                    </div>
+
+                                                    {/* Blackbox Theater */}
+                                                    <div>
+                                                        {blackboxSlot && blackboxSlot.talk ? (
+                                                            <div
+                                                                class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${getSessionColor('talk')}`}
+                                                                data-talk-id={blackboxSlot.talk.id}
+                                                                data-slot-id={blackboxSlot.id}
+                                                            >
+                                                                <div class="mb-3 md:hidden">
+                                                                    <span class="px-3 py-1 bg-sky-100 text-sky-700 text-xs font-medium rounded-full">
+                                                                        Blackbox Theater
+                                                                    </span>
+                                                                </div>
+                                                                <h3 class="font-bold text-lg mb-2 leading-tight">
+                                                                    {blackboxSlot.talk.title}
+                                                                </h3>
+                                                                {blackboxSlot.speakers && blackboxSlot.speakers.length > 0 && (
+                                                                    <p class="text-sm text-gray-600 mb-2">
+                                                                        {blackboxSlot.speakers.map(s => s.name).join(', ')}
+                                                                    </p>
+                                                                )}
+                                                                {blackboxSlot.talk.description && (
+                                                                    <p class="text-sm text-gray-500 line-clamp-3">
+                                                                        {blackboxSlot.talk.description}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div class="hidden md:block"></div>
+                                                        )}
+                                                    </div>
+
+                                                    {/* Workshop Studio */}
+                                                    <div>
+                                                        {workshopSlot && workshopSlot.talk ? (
+                                                            <div
+                                                                class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${getSessionColor('workshop')}`}
+                                                                data-talk-id={workshopSlot.talk.id}
+                                                                data-slot-id={workshopSlot.id}
+                                                            >
+                                                                <div class="mb-3 md:hidden">
+                                                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
+                                                                        Workshop Studio
+                                                                    </span>
+                                                                </div>
+                                                                <div class="flex items-center gap-2 mb-2">
+                                                                    <h3 class="font-bold text-lg leading-tight">
+                                                                        {workshopSlot.talk.title}
+                                                                    </h3>
+                                                                </div>
+                                                                <p class="text-xs text-emerald-600 mb-2">
+                                                                    {formatTime(workshopSlot.startTime)} - {formatTime(workshopSlot.endTime)}
+                                                                </p>
+                                                                {workshopSlot.speakers && workshopSlot.speakers.length > 0 && (
+                                                                    <p class="text-sm text-gray-600 mb-2">
+                                                                        {workshopSlot.speakers.map(s => s.name).join(', ')}
+                                                                    </p>
+                                                                )}
+                                                                {workshopSlot.talk.maxParticipants && (
+                                                                    <p class="text-xs text-emerald-600 mb-2">
+                                                                        Max {workshopSlot.talk.maxParticipants} participants
+                                                                    </p>
+                                                                )}
+                                                                {workshopSlot.talk.description && (
+                                                                    <p class="text-sm text-gray-500 line-clamp-3">
+                                                                        {workshopSlot.talk.description}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        ) : (
+                                                            <div></div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 ))}
             </div>
+        </div>
+    </section>
 
-            <!-- Schedule Notes -->
-            <div class="mt-16 bg-gray-50 rounded-xl p-8">
-                <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
-                    Important Notes
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-600">
-                    <div>
-                        <h4 class="font-semibold text-gray-900 mb-2">📍 Location</h4>
-                        <p>Fort Mason Center for Arts & Culture<br/>2 Marina Blvd, San Francisco, CA 94123</p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-900 mb-2">🎫 Workshops</h4>
-                        <p>Separate registration required for hands-on workshops. Limited capacity.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-900 mb-2">☕ Refreshments</h4>
-                        <p>Coffee, lunch, and snacks are included with your conference ticket.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-900 mb-2">📱 Updates</h4>
-                        <p>Follow <a href="https://x.com/sfruby" class="text-ruby-600 hover:text-ruby-700">@sfruby</a> for any schedule changes or announcements.</p>
-                    </div>
+    <!-- Legend -->
+    <section class="pt-12 pb-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-display font-bold text-gray-900">Session Types</h3>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-gradient-to-r from-ruby-500 to-pink-500 rounded"></div>
+                    <span class="text-sm text-gray-700">Keynote</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-white border-2 border-gray-200 rounded"></div>
+                    <span class="text-sm text-gray-700">Talk</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-emerald-50 border-2 border-emerald-200 rounded"></div>
+                    <span class="text-sm text-gray-700">Workshop</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-gradient-to-r from-purple-500 to-indigo-500 rounded"></div>
+                    <span class="text-sm text-gray-700">Panel</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded"></div>
+                    <span class="text-sm text-gray-700">Demo</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-16 bg-gradient-to-r from-ruby-500 to-pink-500">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 class="text-3xl font-display font-bold text-white mb-4">
-                Ready to Join Us?
-            </h3>
-            <p class="text-xl text-ruby-100 mb-8">
-                Don't miss out on two incredible days of Ruby learning and networking
-            </p>
-            <a
-                href="https://lu.ma/sfrubyconf2025"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center px-10 py-4 bg-white text-ruby-600 rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105"
-            >
-                <span class="mr-2">Get Your Ticket</span>
-                <svg
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-                    ></path>
-                </svg>
-            </a>
+    <!-- Talk Detail Modal -->
+    <div id="talkModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Background backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+
+        <!-- Modal panel -->
+        <div class="flex min-h-screen items-center justify-center p-4">
+            <div class="relative w-full max-w-4xl transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all">
+                <!-- Close button -->
+                <button id="closeModal" class="absolute right-4 top-4 z-10 rounded-lg bg-white/90 p-2 hover:bg-gray-100 transition-colors">
+                    <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Modal content -->
+                <div id="modalContent" class="max-h-[90vh] overflow-y-auto">
+                    <!-- Content will be dynamically inserted here -->
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
 </Layout>
 
-<script>
-    // Handle tab switching
-    const tabs = document.querySelectorAll('.schedule-tab');
-    const contents = document.querySelectorAll('.schedule-content');
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Update tab styling
-            tabs.forEach(t => {
-                t.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 text-gray-700 hover:bg-white hover:shadow-sm';
-            });
-
-            tab.className = 'schedule-tab px-8 py-4 rounded-lg font-medium transition-all duration-300 bg-ruby-500 text-white shadow-md';
-
-            // Show selected content
-            const index = tab.getAttribute('data-index');
-            contents.forEach(content => {
-                if (content.getAttribute('data-index') === index) {
-                    content.style.display = 'block';
-                    content.style.visibility = 'visible';
-                } else {
-                    content.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // Smooth scroll for anchor links
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener("click", function (e) {
-                e.preventDefault();
-                const href = this.getAttribute("href");
-                if (href && href !== "#") {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                        });
-                    }
-                }
-            });
-        });
-    });
-</script>
-
+<!-- Modal Styles -->
 <style>
-    /* Ensure proper display */
-    .schedule-tab,
-    .schedule-content {
-        visibility: visible !important;
-    }
-
-    /* Line clamp utility for text truncation */
-    .line-clamp-3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
+    .modal-open {
         overflow: hidden;
     }
 
-    /* Smooth transitions */
+    #talkModal {
+        backdrop-filter: blur(4px);
+    }
+
+    #talkModal.showing {
+        display: block;
+    }
+
+    .speaker-card {
+        transition: all 0.3s ease;
+    }
+
+    .speaker-card:hover {
+        transform: translateY(-2px);
+    }
+</style>
+
+<style>
+    .schedule-tab, .schedule-content {
+        transition: all 0.3s ease;
+    }
+
+    .line-clamp-3 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
     .transition-all {
         transition-property: all;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    /* Sticky day navigation styles - always sticky */
+    .sticky-day-nav {
+        position: fixed;
+        top: 5rem; /* Height of main navigation */
+        left: 0;
+        right: 0;
+        z-index: 40; /* Below main navigation's z-50 */
+        background: white;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Draft ribbon styles */
+    .draft-ribbon {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5), 0 2px 4px -1px rgba(59, 130, 246, 0.3);
+        animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse-subtle {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.9;
+        }
+    }
+
+    .sticky-day-nav .day-nav-container {
+        margin: 0 auto;
+        max-width: 80rem;
+        padding: 0 1rem;
+    }
+
+    /* Mobile responsive styles */
+    @media (max-width: 640px) {
+        .sticky-day-nav {
+            top: 4rem; /* Slightly less on mobile - 64px */
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .sticky-day-nav .schedule-tab {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .sticky-day-nav .schedule-tab div:first-child {
+            font-size: 0.875rem;
+        }
+
+        .sticky-day-nav .schedule-tab div:last-child {
+            font-size: 0.75rem;
+        }
+
+        /* Adjust draft ribbon for mobile */
+        .draft-ribbon {
+            right: -8px;
+            top: -8px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.625rem;
+            transform: rotate(8deg);
+        }
+    }
 </style>
+
+<script>
+    import { talks, speakers, scheduleSlots, slotAssignments } from '../data/index.js';
+
+    // Tab switching functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.schedule-tab');
+        const contents = document.querySelectorAll('.schedule-content');
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                // Smooth scroll to the section
+                const targetContent = contents[index];
+                const mainNav = document.querySelector('header.fixed');
+                const mainNavHeight = mainNav ? mainNav.offsetHeight : 80;
+                const scrollTarget = targetContent.offsetTop - dayNav.offsetHeight - mainNavHeight - 20;
+                window.scrollTo({
+                    top: scrollTarget,
+                    behavior: 'smooth'
+                });
+
+                // Update tabs
+                tabs.forEach((t, i) => {
+                    if (i === index) {
+                        t.classList.add('bg-ruby-500', 'text-white', 'shadow-md');
+                        t.classList.remove('text-gray-700', 'hover:bg-white', 'hover:shadow-sm');
+                    } else {
+                        t.classList.remove('bg-ruby-500', 'text-white', 'shadow-md');
+                        t.classList.add('text-gray-700', 'hover:bg-white', 'hover:shadow-sm');
+                    }
+                });
+
+                // Update content
+                contents.forEach((content, i) => {
+                    if (i === index) {
+                        content.style.display = 'block';
+                        content.style.visibility = 'visible';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Get references for navigation
+        const dayNav = document.getElementById('dayNavigation');
+        const mainNav = document.querySelector('header.fixed');
+        const mainNavHeight = mainNav ? mainNav.offsetHeight : 80;
+
+        // Set the top position dynamically based on main nav height
+        if (mainNav) {
+            dayNav.style.top = `${mainNav.offsetHeight}px`;
+        }
+
+        // Add padding to all day contents to account for sticky nav
+        const allDayContents = document.querySelectorAll('.schedule-content');
+        allDayContents.forEach(content => {
+            content.style.paddingTop = `${dayNav.offsetHeight + 20}px`;
+        });
+
+        // Scroll spy for day sections
+        const dayContents = document.querySelectorAll('.schedule-content');
+        const dayTabs = document.querySelectorAll('.schedule-tab');
+
+        // Create observers for each day section
+        const scrollSpyObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+
+                        // Update tabs to show current day
+                        dayTabs.forEach((tab, i) => {
+                            if (i === index) {
+                                tab.classList.add('bg-ruby-500', 'text-white', 'shadow-md');
+                                tab.classList.remove('text-gray-700', 'hover:bg-white', 'hover:shadow-sm');
+                            } else {
+                                tab.classList.remove('bg-ruby-500', 'text-white', 'shadow-md');
+                                tab.classList.add('text-gray-700', 'hover:bg-white', 'hover:shadow-sm');
+                            }
+                        });
+                    }
+                });
+            },
+            {
+                rootMargin: '-180px 0px -70% 0px', /* Adjusted for main nav + sticky nav */
+                threshold: 0
+            }
+        );
+
+        // Observe all day content sections
+        dayContents.forEach(content => {
+            scrollSpyObserver.observe(content);
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('talkModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+
+        // Function to format time
+        function formatTime(time) {
+            const [hours, minutes] = time.split(':').map(Number);
+            const period = hours >= 12 ? 'PM' : 'AM';
+            const displayHours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
+            return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+        }
+
+        // Function to get track display name
+        function getTrackDisplayName(track) {
+            const trackNames = {
+                main: 'Main Stage',
+                blackbox: 'Blackbox Theater',
+                workshop: 'Workshop Studio'
+            };
+            return trackNames[track] || track;
+        }
+
+        // Function to open modal with talk details
+        function openTalkModal(talkId, slotId) {
+            const talk = talks[talkId];
+            const slot = scheduleSlots[slotId];
+
+            if (!talk) return;
+
+            // Get speakers data
+            const speakerData = [];
+            if (talk.speakers && Array.isArray(talk.speakers)) {
+                talk.speakers.forEach(speakerId => {
+                    if (speakers[speakerId]) speakerData.push(speakers[speakerId]);
+                });
+            } else if (talk.speakerIds && Array.isArray(talk.speakerIds)) {
+                talk.speakerIds.forEach(speakerId => {
+                    if (speakers[speakerId]) speakerData.push(speakers[speakerId]);
+                });
+            } else if (talk.speakerId && speakers[talk.speakerId]) {
+                speakerData.push(speakers[talk.speakerId]);
+            }
+
+            // Build modal HTML
+            let modalHTML = `
+                <div class="relative">
+                    <!-- Header with track color -->
+                    <div class="bg-gradient-to-r ${
+                        talk.type === 'keynote' ? 'from-ruby-500 to-pink-500' :
+                        talk.type === 'workshop' ? 'from-emerald-500 to-green-500' :
+                        talk.type === 'panel' ? 'from-purple-500 to-indigo-500' :
+                        talk.type === 'demo' ? 'from-green-500 to-emerald-500' :
+                        'from-gray-500 to-gray-600'
+                    } p-8 text-white">
+                        <div class="max-w-3xl">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                                    ${talk.type.charAt(0).toUpperCase() + talk.type.slice(1)}
+                                </span>
+                                ${slot ? `
+                                    <span class="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
+                                        ${getTrackDisplayName(slot.track)}
+                                    </span>
+                                ` : ''}
+                                ${talk.status === 'tentative' ? `
+                                    <span class="px-3 py-1 bg-yellow-400/30 rounded-full text-sm font-medium">
+                                        Tentative
+                                    </span>
+                                ` : ''}
+                            </div>
+                            <h2 class="text-3xl font-bold mb-4">${talk.title}</h2>
+                            ${slot ? `
+                                <div class="flex items-center gap-4 text-white/90">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                        <span>Day ${slot.day}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span>${formatTime(slot.startTime)} - ${formatTime(slot.endTime)}</span>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-8">
+                        <!-- Description -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">About this ${talk.type}</h3>
+                            <div class="prose prose-lg max-w-none text-gray-700">
+                                ${talk.description ? talk.description.split('\n').map(p => `<p>${p}</p>`).join('') : 'Description coming soon.'}
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        ${talk.tags && talk.tags.length > 0 ? `
+                            <div class="mb-8">
+                                <div class="flex flex-wrap gap-2">
+                                    ${talk.tags.map(tag => `
+                                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                                            #${tag}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+
+                        ${talk.link ? `
+                          <div class="mb-8"> <a href="${talk.link}" target="_blank" rel="noopener noreferrer"
+                           class="inline-block mt-4 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition-colors">
+                            Sign Up for Workshop
+                            </a>
+                          </div>
+                        ` : ''}
+
+                        <!-- Speakers -->
+                        ${speakerData.length > 0 ? `
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-gray-900 mb-6">
+                                    ${talk.type === 'panel' ? (speakerData.length > 1 ? 'Panelists' : 'Panelist') : (speakerData.length > 1 ? 'Speakers' : 'Speaker')}
+                                </h3>
+                                <div class="space-y-6">
+                                    ${speakerData.map(speaker => `
+                                        <div class="speaker-card bg-gray-50 rounded-lg p-6">
+                                            <div class="flex items-start gap-6">
+                                                ${speaker.image ? `
+                                                    <img src="${speaker.image}" alt="${speaker.name}"
+                                                         class="w-24 h-24 rounded-full object-cover flex-shrink-0">
+                                                ` : `
+                                                    <div class="w-24 h-24 rounded-full bg-gradient-to-br from-ruby-400 to-pink-400 flex items-center justify-center flex-shrink-0">
+                                                        <span class="text-white text-2xl font-bold">
+                                                            ${speaker.name.split(' ').map(n => n[0]).join('')}
+                                                        </span>
+                                                    </div>
+                                                `}
+                                                <div class="flex-1">
+                                                    <h4 class="text-lg font-bold text-gray-900">${speaker.name}</h4>
+                                                    ${speaker.role ? `
+                                                        <p class="text-gray-600 mb-1">${speaker.role}</p>
+                                                    ` : ''}
+                                                    ${speaker.company ? `
+                                                        <p class="text-gray-600 mb-3">${speaker.company}</p>
+                                                    ` : ''}
+                                                    ${speaker.bio ? `
+                                                        <p class="text-gray-700 mb-4">${speaker.bio}</p>
+                                                    ` : ''}
+                                                    <div class="flex gap-3">
+                                                        ${speaker.twitter ? `
+                                                            <a href="https://twitter.com/${speaker.twitter}" target="_blank" rel="noopener noreferrer"
+                                                               class="text-gray-600 hover:text-ruby-600 transition-colors">
+                                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                                                </svg>
+                                                            </a>
+                                                        ` : ''}
+                                                        ${speaker.github ? `
+                                                            <a href="https://github.com/${speaker.github}" target="_blank" rel="noopener noreferrer"
+                                                               class="text-gray-600 hover:text-ruby-600 transition-colors">
+                                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                                                </svg>
+                                                            </a>
+                                                        ` : ''}
+                                                        ${speaker.linkedin ? `
+                                                            <a href="https://linkedin.com/in/${speaker.linkedin}" target="_blank" rel="noopener noreferrer"
+                                                               class="text-gray-600 hover:text-ruby-600 transition-colors">
+                                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                                                </svg>
+                                                            </a>
+                                                        ` : ''}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Workshop specific info -->
+                        ${talk.type === 'workshop' ? `
+                            <div class="bg-emerald-50 border-2 border-emerald-200 rounded-lg p-6 mb-8">
+                                <h3 class="text-lg font-bold text-emerald-900 mb-3">Workshop Details</h3>
+                                ${talk.duration ? `
+                                    <p class="text-emerald-700 mb-2">
+                                        <strong>Duration:</strong> ${talk.duration} minutes
+                                    </p>
+                                ` : ''}
+                                ${talk.maxParticipants ? `
+                                    <p class="text-emerald-700 mb-2">
+                                        <strong>Max Participants:</strong> ${talk.maxParticipants}
+                                    </p>
+                                ` : ''}
+                                ${talk.prerequisites && talk.prerequisites.length > 0 ? `
+                                    <div class="text-emerald-700">
+                                        <strong>Prerequisites:</strong>
+                                        <ul class="list-disc list-inside mt-1">
+                                            ${talk.prerequisites.map(pre => `<li>${pre}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                ` : ''}
+
+                            </div>
+                        ` : ''}
+
+                        <!-- Share section -->
+                        <div class="border-t pt-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-gray-600">Share this talk:</span>
+                                    <button onclick="copyTalkLink('${talkId}')" class="text-gray-600 hover:text-ruby-600 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modalContent.innerHTML = modalHTML;
+            modal.classList.add('showing');
+            document.body.classList.add('modal-open');
+
+            // Update URL hash
+            window.location.hash = talkId;
+        }
+
+        // Function to close modal
+        function closeTalkModal() {
+            modal.classList.remove('showing');
+            document.body.classList.remove('modal-open');
+
+            // Clear URL hash
+            history.pushState('', document.title, window.location.pathname + window.location.search);
+        }
+
+        // Function to copy talk link
+        window.copyTalkLink = function(talkId) {
+            const url = `${window.location.origin}${window.location.pathname}#${talkId}`;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        };
+
+        // Add click handlers to all talk cards
+        document.querySelectorAll('[data-talk-id]').forEach(card => {
+            card.addEventListener('click', () => {
+                const talkId = card.dataset.talkId;
+                const slotId = card.dataset.slotId;
+                openTalkModal(talkId, slotId);
+            });
+        });
+
+        // Close modal handlers
+        closeModal.addEventListener('click', closeTalkModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target === modal.firstElementChild) {
+                closeTalkModal();
+            }
+        });
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('showing')) {
+                closeTalkModal();
+            }
+        });
+
+        // Handle hash on page load
+        if (window.location.hash) {
+            const talkId = window.location.hash.substring(1);
+            // Find the slot for this talk
+            const slotId = Object.entries(slotAssignments).find(([_, id]) => id === talkId)?.[0];
+            if (slotId) {
+                setTimeout(() => openTalkModal(talkId, slotId), 100);
+            }
+        }
+
+        // Handle hash changes
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash) {
+                const talkId = window.location.hash.substring(1);
+                const slotId = Object.entries(slotAssignments).find(([_, id]) => id === talkId)?.[0];
+                if (slotId && !modal.classList.contains('showing')) {
+                    openTalkModal(talkId, slotId);
+                }
+            } else if (modal.classList.contains('showing')) {
+                closeTalkModal();
+            }
+        });
+    });
+</script>

@@ -3,15 +3,15 @@
 
 export const talks = {
   // KEYNOTES
-  "reactive-view-rails": {
-    id: "reactive-view-rails",
-    title: "Reactive View: the view layer for ambitious Rails startups",
+  "reaction-view": {
+    id: "reaction-view",
+    title: "ReActionView: An ActionView-Compatible ERB Engine",
     speakerId: "marco-roth",
     description:
-      "Explore how to build reactive, modern view layers for Rails applications that scale with your startup's ambitions.",
+      "This talk is the conclusion of a journey I’ve been sharing throughout 2025. At RubyKaigi, I introduced Herb: a new HTML-aware ERB parser and tooling ecosystem. At RailsConf, I released developer tools built on Herb, including a formatter, linter, and language server, alongside a vision for modernizing and improving the Rails view layer.",
     type: "keynote",
     status: "confirmed",
-    tags: ["rails", "frontend", "startups"],
+    tags: ["rails", "frontend"],
   },
   "ruby-ai-conversation": {
     id: "ruby-ai-conversation",
@@ -25,10 +25,9 @@ export const talks = {
   },
   "rails-ai-ruby-llm": {
     id: "rails-ai-ruby-llm",
-    title: "Rails for AI with Ruby LLM",
+    title: "Ruby LLM",
     speakerId: "carmine-paolino",
-    description:
-      "Explore how to integrate AI capabilities into Rails applications using Ruby LLM.",
+    description: "Talk details to be updated.",
     type: "keynote",
     status: "confirmed",
     tags: ["rails", "ai", "llm"],
@@ -39,7 +38,7 @@ export const talks = {
     speakerId: "vladimir-dementyev",
     description: "Topic to be announced.",
     type: "keynote",
-    status: "tentative",
+    status: "confirmed",
     tags: [],
   },
 
@@ -110,16 +109,6 @@ export const talks = {
     status: "confirmed",
     tags: ["ruby", "design", "architecture", "paradigms"],
   },
-  "matt-brictson-talk": {
-    id: "matt-brictson-talk",
-    title: "TBD",
-    speakerId: "matt-brictson",
-    description: "Topic to be announced.",
-    type: "talk",
-    track: "main",
-    status: "tentative",
-    tags: [],
-  },
   "technical-marketing": {
     id: "technical-marketing",
     title:
@@ -186,7 +175,7 @@ export const talks = {
     description: "Topic to be announced.",
     type: "talk",
     track: "blackbox",
-    status: "tentative",
+    status: "confirmed",
     tags: [],
   },
   "performance-starts-at-boot": {
@@ -215,7 +204,7 @@ export const talks = {
   "ai-interface-mcp-rails": {
     id: "ai-interface-mcp-rails",
     title: "AI Interface in 5 Minutes - Model Context Protocol on Rails",
-    speakerId: "pawel-strzalkowski",
+    speakerId: "pawel",
     description:
       "This talk delivers a low-risk, high-value AI strategy that applies to any Rails app, new or old. It proves the ecosystem's power to modernize existing assets in the AI era without the need for expensive rewrites. It teaches one of the key aspects of the modern AI tech stack, giving a competitive advantage.\n\nI'm a CTO, a veteran Rails developer and a vetted conference speaker. My expertise on a similar topic is validated by my upcoming talks at Rails World and EuRuKo this year. I'm excited to bring this timely material to the US community",
     type: "talk",
@@ -226,7 +215,7 @@ export const talks = {
   "mcp-fog-ruby-inspector": {
     id: "mcp-fog-ruby-inspector",
     title: "The MCP Fog Made Me Do It: A Ruby Inspector's Unexpected Journey",
-    speakerId: "enrique-carlos-mogollan",
+    speakerId: "enrique-mogollan",
     description:
       'MCP is still pretty foggy for most developers, and Ruby shouldn\'t be left out of the AI tooling party. This story shows how a simple "let me figure this out" project can accidentally become something fun and interesting to share. I\'ve been learning about MCP, from the official ruby SDK, and stumbled onto this idea of self-generating UI interfaces. If you\'ve ever stared a new project and wondered "how do I even start?", this talk is one example from foggy confusion to sunshine moment of "holy smokes, I didn\'t know that was possible." Besides, Ruby deserves a seat at the AI table.',
     type: "talk",
@@ -279,10 +268,10 @@ export const talks = {
     status: "confirmed",
     tags: ["debugging", "scale", "production", "rails"],
   },
-  "andrew-lee-talk": {
-    id: "andrew-lee-talk",
+  "tbd-2": {
+    id: "tbd-2",
     title: "TBD",
-    speakerId: "andrew-lee",
+    speakerId: "tbd",
     description: "Topic to be announced.",
     type: "talk",
     track: "blackbox",
@@ -299,13 +288,14 @@ export const talks = {
       "Hands-on workshop for building AI agents using Rails framework and modern AI tools.",
     type: "workshop",
     duration: 110, // minutes
-    maxParticipants: 30,
+    maxParticipants: 48,
     prerequisites: [
       "Basic Rails knowledge",
       "Laptop with Ruby/Rails installed",
     ],
     status: "confirmed",
     tags: ["ai", "agents", "rails", "hands-on"],
+    link: "https://lu.ma/ygn5m3pm",
   },
   "inertia-rails-workshop": {
     id: "inertia-rails-workshop",
@@ -314,30 +304,32 @@ export const talks = {
     description:
       "Inertia.js solves a huge pain point for server side MVC frameworks: clean integration with rich client-side libraries like React, Vue, and Svelte. Inertia Rails allows both sides of this equation to shine. The Rails code looks almost exactly like vanilla Rails code (without the view layer), which keeps existing Rails teams productive. On the client, Inertia Rails takes away a lot of the headaches in gluing React and Rails together: session based auth, server side global state management, and Inertia form submissions make life much easier on teams.",
     type: "workshop",
-    duration: 150, // minutes
-    maxParticipants: 40,
+    duration: 110, // minutes
+    maxParticipants: 48,
     prerequisites: [
       "Rails experience",
       "Basic React/Vue/Svelte knowledge helpful",
     ],
     status: "confirmed",
     tags: ["inertia", "rails", "frontend", "spa"],
+    link: "https://lu.ma/67m5dqr1",
   },
   "upskill-diving-into-rails": {
     id: "upskill-diving-into-rails",
     title: "Upskill Your Team by Diving into Rails itself & other Gems",
-    speakerId: "kasper-timm-hansen",
+    speakerId: "kasper",
     description:
       "There's a ton of untapped potential in Rails and other gem source for upskilling that teams aren't leveraging because they don't know how. And there's almost no content showing how.\n\nThis problem hurts Ruby open source, because teams don't know how to contribute or make gems (exposure to real open source code is the first step IMO).\n\nI've given several Rails source deep-dive workshops over Zoom that 70+ people have attended. I've shown a live-demo of this on stage at RailsConf that attendees raved about.",
     type: "workshop",
     duration: 110, // minutes
-    maxParticipants: 50,
+    maxParticipants: 48,
     prerequisites: [
       "Intermediate Rails knowledge",
       "Familiarity with Ruby gems",
     ],
     status: "confirmed",
     tags: ["rails", "open-source", "gems", "learning"],
+    link: "https://lu.ma/jxv24vkp",
   },
   "noel-rappin-workshop": {
     id: "noel-rappin-workshop",
@@ -345,11 +337,12 @@ export const talks = {
     speakerId: "noel-rappin",
     description: "Topic to be announced.",
     type: "workshop",
-    duration: 140, // minutes
-    maxParticipants: 30,
+    duration: 110, // minutes
+    maxParticipants: 48,
     prerequisites: [],
-    status: "tentative",
+    status: "confirmed",
     tags: [],
+    link: "https://lu.ma/ekzvr472",
   },
 
   // PANELS & SPECIAL SESSIONS
@@ -359,7 +352,7 @@ export const talks = {
     description: "A roundtable discussion with CTOs from the Ruby community.",
     type: "panel",
     moderator: null,
-    panelists: [],
+    speakerIds: ["edward-kim"],
     status: "confirmed",
     tags: ["leadership", "cto", "discussion"],
   },
@@ -370,7 +363,7 @@ export const talks = {
       "A roundtable discussion with venture capitalists interested in Ruby-based startups.",
     type: "panel",
     moderator: null,
-    panelists: [],
+    speakerIds: [],
     status: "confirmed",
     tags: ["vc", "startups", "funding"],
   },
@@ -380,7 +373,7 @@ export const talks = {
     description:
       "Live demonstrations from innovative startups building with Ruby and Rails.",
     type: "demo",
-    participants: 10,
+    speakerIds: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
   },
@@ -390,7 +383,7 @@ export const talks = {
     description:
       "Live demonstrations from innovative startups building with Ruby and Rails.",
     type: "demo",
-    participants: 10,
+    speakerIds: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
   },

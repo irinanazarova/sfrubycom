@@ -283,7 +283,7 @@ export const scheduleSlots = {
 // This allows flexible assignment of talks to slots
 export const slotAssignments = {
   // DAY 1 ASSIGNMENTS
-  K1: "reactive-view-rails",
+  K1: "reaction-view",
   M1: "play-with-code",
   S1: "derailing-our-application",
   W1: "building-agents-rails",
@@ -298,7 +298,7 @@ export const slotAssignments = {
   S5: "ai-interface-mcp-rails",
   M6: "start-writing-ruby",
   S6: "mcp-fog-ruby-inspector",
-  M7: "matt-brictson-talk",
+  M7: "debugging-gusto-scale",
   S7: "cloud-data-infrastructure-ruby",
   K2: "ruby-ai-conversation",
   CTO_ROUNDTABLE: "cto-roundtable",
@@ -306,14 +306,13 @@ export const slotAssignments = {
   // DAY 2 ASSIGNMENTS
   K3: "rails-ai-ruby-llm",
   M8: "technical-marketing",
-  S8: "shipping-solo-rails8",
+  S9: "shipping-solo-rails8",
   W3: "upskill-diving-into-rails",
   M9: "thin-client-approach",
-  S9: "operating-rails-production",
+  S8: "operating-rails-production",
   M10: "software-design-ai-world",
-  S10: "debugging-gusto-scale",
   M11: "opensource-business-sidekiq",
-  S11: "andrew-lee-talk",
+  S11: "tbd",
   W4: "noel-rappin-workshop",
   STARTUP_DEMOS_1: "startup-demos-session1",
   STARTUP_DEMOS_2: "startup-demos-session2",
