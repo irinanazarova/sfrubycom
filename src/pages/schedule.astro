@@ -33,12 +33,12 @@ const sessionColors = {
   'workshop': 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:border-emerald-300 hover:shadow-lg'
 };
 
-function getSessionColor(sessionType) {
-  return sessionColors[sessionType] || 'bg-white text-gray-900 border-gray-200';
+function getSessionColor(sessionType: string) {
+  return sessionColors[sessionType as keyof typeof sessionColors] || 'bg-white text-gray-900 border-gray-200';
 }
 
 // Format time for display
-function formatTime(time) {
+function formatTime(time: string) {
   const [hours, minutes] = time.split(':').map(Number);
   const period = hours >= 12 ? 'PM' : 'AM';
   const displayHours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
@@ -46,8 +46,8 @@ function formatTime(time) {
 }
 
 // Get track color
-function getTrackColor(track) {
-  const trackColors = {
+function getTrackColor(track: string) {
+  const trackColors: Record<string, string> = {
     'main': 'ruby',
     'blackbox': 'sky',
     'workshop': 'emerald'
@@ -69,7 +69,7 @@ const specialBlocks = {
 };
 
 // Combine special blocks with time blocks
-function getCombinedTimeBlocks(day) {
+function getCombinedTimeBlocks(day: number) {
   // Get all slots for this day with complete data
   const completeSchedule = getCompleteSchedule().filter(slot => slot.day === day);
 
@@ -88,10 +88,10 @@ function getCombinedTimeBlocks(day) {
   });
 
   const timeBlocks = Array.from(timeGroups.values());
-  const specials = specialBlocks[day] || [];
+  const specials = specialBlocks[day as keyof typeof specialBlocks] || [];
 
   // Add special blocks to time blocks
-  specials.forEach(special => {
+  specials.forEach((special: any) => {
     const existingBlock = timeBlocks.find(
       block => block.startTime === special.startTime
     );
@@ -110,7 +110,7 @@ function getCombinedTimeBlocks(day) {
 
   // Sort by start time
   return timeBlocks.sort((a, b) => {
-    const timeToMinutes = (time) => {
+    const timeToMinutes = (time: string) => {
       const [hours, minutes] = time.split(':').map(Number);
       return hours * 60 + minutes;
     };
@@ -223,9 +223,9 @@ const days = [
                                 }
 
                                 // Regular session blocks
-                                const mainSlot = block.slots.find(s => s.track === 'main');
-                                const blackboxSlot = block.slots.find(s => s.track === 'blackbox');
-                                const workshopSlot = block.slots.find(s => s.track === 'workshop');
+                                const mainSlot = block.slots.find((s: any) => s.track === 'main');
+                                const blackboxSlot = block.slots.find((s: any) => s.track === 'blackbox');
+                                const workshopSlot = block.slots.find((s: any) => s.track === 'workshop');
 
                                 // Skip if this is a keynote or panel (they span all tracks)
                                 const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'demo') && !blackboxSlot && !workshopSlot;
@@ -260,7 +260,7 @@ const days = [
                                                             </h3>
                                                             {mainSlot.speakers && mainSlot.speakers.length > 0 && (
                                                                 <p class="text-sm opacity-90 mb-3">
-                                                                    {mainSlot.speakers.map(s => s.name).join(', ')}
+                                                                    {mainSlot.speakers.map((s: any) => s.name).join(', ')}
                                                                 </p>
                                                             )}
                                                             {mainSlot.talk.description && (
@@ -292,7 +292,7 @@ const days = [
                                                                 </h3>
                                                                 {mainSlot.speakers && mainSlot.speakers.length > 0 && (
                                                                     <p class="text-sm text-gray-600 mb-2">
-                                                                        {mainSlot.speakers.map(s => s.name).join(', ')}
+                                                                        {mainSlot.speakers.map((s: any) => s.name).join(', ')}
                                                                     </p>
                                                                 )}
                                                                 {mainSlot.talk.description && (
@@ -324,7 +324,7 @@ const days = [
                                                                 </h3>
                                                                 {blackboxSlot.speakers && blackboxSlot.speakers.length > 0 && (
                                                                     <p class="text-sm text-gray-600 mb-2">
-                                                                        {blackboxSlot.speakers.map(s => s.name).join(', ')}
+                                                                        {blackboxSlot.speakers.map((s: any) => s.name).join(', ')}
                                                                     </p>
                                                                 )}
                                                                 {blackboxSlot.talk.description && (
@@ -361,7 +361,7 @@ const days = [
                                                                 </p>
                                                                 {workshopSlot.speakers && workshopSlot.speakers.length > 0 && (
                                                                     <p class="text-sm text-gray-600 mb-2">
-                                                                        {workshopSlot.speakers.map(s => s.name).join(', ')}
+                                                                        {workshopSlot.speakers.map((s: any) => s.name).join(', ')}
                                                                     </p>
                                                                 )}
                                                                 {workshopSlot.talk.maxParticipants && (
@@ -426,18 +426,11 @@ const days = [
     <!-- Talk Detail Modal -->
     <div id="talkModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <!-- Background backdrop -->
-        <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
+        <div id="modalBackdrop" class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
 
         <!-- Modal panel -->
         <div class="flex min-h-screen items-center justify-center p-4">
-            <div class="relative w-full max-w-4xl transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all">
-                <!-- Close button -->
-                <button id="closeModal" class="absolute right-4 top-4 z-10 rounded-lg bg-white/90 p-2 hover:bg-gray-100 transition-colors">
-                    <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-
+            <div id="modalPanel" class="relative w-full max-w-4xl transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all">
                 <!-- Modal content -->
                 <div id="modalContent" class="max-h-[90vh] overflow-y-auto">
                     <!-- Content will be dynamically inserted here -->
@@ -565,9 +558,10 @@ const days = [
         tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
                 // Smooth scroll to the section
-                const targetContent = contents[index];
-                const mainNav = document.querySelector('header.fixed');
+                const targetContent = contents[index] as HTMLElement;
+                const mainNav = document.querySelector('header.fixed') as HTMLElement;
                 const mainNavHeight = mainNav ? mainNav.offsetHeight : 80;
+                const dayNav = document.getElementById('dayNavigation') as HTMLElement;
                 const scrollTarget = targetContent.offsetTop - dayNav.offsetHeight - mainNavHeight - 20;
                 window.scrollTo({
                     top: scrollTarget,
@@ -587,30 +581,34 @@ const days = [
 
                 // Update content
                 contents.forEach((content, i) => {
+                    const contentEl = content as HTMLElement;
                     if (i === index) {
-                        content.style.display = 'block';
-                        content.style.visibility = 'visible';
+                        contentEl.style.display = 'block';
+                        contentEl.style.visibility = 'visible';
                     } else {
-                        content.style.display = 'none';
+                        contentEl.style.display = 'none';
                     }
                 });
             });
         });
 
         // Get references for navigation
-        const dayNav = document.getElementById('dayNavigation');
-        const mainNav = document.querySelector('header.fixed');
+        const dayNav = document.getElementById('dayNavigation') as HTMLElement;
+        const mainNav = document.querySelector('header.fixed') as HTMLElement;
         const mainNavHeight = mainNav ? mainNav.offsetHeight : 80;
 
         // Set the top position dynamically based on main nav height
-        if (mainNav) {
+        if (mainNav && dayNav) {
             dayNav.style.top = `${mainNav.offsetHeight}px`;
         }
 
         // Add padding to all day contents to account for sticky nav
         const allDayContents = document.querySelectorAll('.schedule-content');
         allDayContents.forEach(content => {
-            content.style.paddingTop = `${dayNav.offsetHeight + 20}px`;
+            const contentEl = content as HTMLElement;
+            if (dayNav) {
+                contentEl.style.paddingTop = `${dayNav.offsetHeight + 20}px`;
+            }
         });
 
         // Scroll spy for day sections
@@ -622,7 +620,7 @@ const days = [
             (entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const index = parseInt(entry.target.dataset.index);
+                        const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
 
                         // Update tabs to show current day
                         dayTabs.forEach((tab, i) => {
@@ -651,10 +649,9 @@ const days = [
         // Modal functionality
         const modal = document.getElementById('talkModal');
         const modalContent = document.getElementById('modalContent');
-        const closeModal = document.getElementById('closeModal');
 
         // Function to format time
-        function formatTime(time) {
+        function formatTime(time: string) {
             const [hours, minutes] = time.split(':').map(Number);
             const period = hours >= 12 ? 'PM' : 'AM';
             const displayHours = hours > 12 ? hours - 12 : hours === 0 ? 12 : hours;
@@ -662,39 +659,46 @@ const days = [
         }
 
         // Function to get track display name
-        function getTrackDisplayName(track) {
+        function getTrackDisplayName(track: string) {
             const trackNames = {
                 main: 'Main Stage',
                 blackbox: 'Blackbox Theater',
                 workshop: 'Workshop Studio'
             };
-            return trackNames[track] || track;
+            return trackNames[track as keyof typeof trackNames] || track;
         }
 
         // Function to open modal with talk details
-        function openTalkModal(talkId, slotId) {
-            const talk = talks[talkId];
-            const slot = scheduleSlots[slotId];
+        function openTalkModal(talkId: string, slotId: string) {
+            const talk = (talks as any)[talkId];
+            const slot = (scheduleSlots as any)[slotId];
 
             if (!talk) return;
 
             // Get speakers data
             const speakerData = [];
             if (talk.speakers && Array.isArray(talk.speakers)) {
-                talk.speakers.forEach(speakerId => {
-                    if (speakers[speakerId]) speakerData.push(speakers[speakerId]);
+                talk.speakers.forEach((speakerId: string) => {
+                    if ((speakers as any)[speakerId]) speakerData.push((speakers as any)[speakerId]);
                 });
             } else if (talk.speakerIds && Array.isArray(talk.speakerIds)) {
-                talk.speakerIds.forEach(speakerId => {
-                    if (speakers[speakerId]) speakerData.push(speakers[speakerId]);
+                talk.speakerIds.forEach((speakerId: string) => {
+                    if ((speakers as any)[speakerId]) speakerData.push((speakers as any)[speakerId]);
                 });
-            } else if (talk.speakerId && speakers[talk.speakerId]) {
-                speakerData.push(speakers[talk.speakerId]);
+            } else if (talk.speakerId && (speakers as any)[talk.speakerId]) {
+                speakerData.push((speakers as any)[talk.speakerId]);
             }
 
             // Build modal HTML
             let modalHTML = `
                 <div class="relative">
+                    <!-- Close button -->
+                    <button id="modalCloseBtn" class="absolute right-4 top-4 z-10 rounded-lg bg-white/90 p-2 hover:bg-gray-100 transition-colors">
+                        <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+
                     <!-- Header with track color -->
                     <div class="bg-gradient-to-r ${
                         talk.type === 'keynote' ? 'from-ruby-500 to-pink-500' :
@@ -745,7 +749,7 @@ const days = [
                         <div class="mb-8">
                             <h3 class="text-xl font-bold text-gray-900 mb-4">About this ${talk.type}</h3>
                             <div class="prose prose-lg max-w-none text-gray-700">
-                                ${talk.description ? talk.description.split('\n').map(p => `<p>${p}</p>`).join('') : 'Description coming soon.'}
+                                ${talk.description ? talk.description.split('\n').map((p: string) => `<p>${p}</p>`).join('') : 'Description coming soon.'}
                             </div>
                         </div>
 
@@ -753,7 +757,7 @@ const days = [
                         ${talk.tags && talk.tags.length > 0 ? `
                             <div class="mb-8">
                                 <div class="flex flex-wrap gap-2">
-                                    ${talk.tags.map(tag => `
+                                    ${talk.tags.map((tag: string) => `
                                         <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
                                             #${tag}
                                         </span>
@@ -778,7 +782,7 @@ const days = [
                                     ${talk.type === 'panel' ? (speakerData.length > 1 ? 'Panelists' : 'Panelist') : (speakerData.length > 1 ? 'Speakers' : 'Speaker')}
                                 </h3>
                                 <div class="space-y-6">
-                                    ${speakerData.map(speaker => `
+                                    ${speakerData.map((speaker: any) => `
                                         <div class="speaker-card bg-gray-50 rounded-lg p-6">
                                             <div class="flex items-start gap-6">
                                                 ${speaker.image ? `
@@ -787,7 +791,7 @@ const days = [
                                                 ` : `
                                                     <div class="w-24 h-24 rounded-full bg-gradient-to-br from-ruby-400 to-pink-400 flex items-center justify-center flex-shrink-0">
                                                         <span class="text-white text-2xl font-bold">
-                                                            ${speaker.name.split(' ').map(n => n[0]).join('')}
+                                                            ${speaker.name.split(' ').map((n: string) => n[0]).join('')}
                                                         </span>
                                                     </div>
                                                 `}
@@ -854,7 +858,7 @@ const days = [
                                     <div class="text-emerald-700">
                                         <strong>Prerequisites:</strong>
                                         <ul class="list-disc list-inside mt-1">
-                                            ${talk.prerequisites.map(pre => `<li>${pre}</li>`).join('')}
+                                            ${talk.prerequisites.map((pre: string) => `<li>${pre}</li>`).join('')}
                                         </ul>
                                     </div>
                                 ` : ''}
@@ -882,17 +886,29 @@ const days = [
                 </div>
             `;
 
-            modalContent.innerHTML = modalHTML;
-            modal.classList.add('showing');
+            if (modalContent) modalContent.innerHTML = modalHTML;
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('showing');
+            }
             document.body.classList.add('modal-open');
 
             // Update URL hash
             window.location.hash = talkId;
+
+            // Attach close button handler to the newly created button
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+            if (modalCloseBtn) {
+                modalCloseBtn.addEventListener('click', closeTalkModal);
+            }
         }
 
         // Function to close modal
         function closeTalkModal() {
-            modal.classList.remove('showing');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('showing');
+            }
             document.body.classList.remove('modal-open');
 
             // Clear URL hash
@@ -900,7 +916,7 @@ const days = [
         }
 
         // Function to copy talk link
-        window.copyTalkLink = function(talkId) {
+        (window as any).copyTalkLink = function(talkId: string) {
             const url = `${window.location.origin}${window.location.pathname}#${talkId}`;
             navigator.clipboard.writeText(url).then(() => {
                 alert('Link copied to clipboard!');
@@ -908,25 +924,30 @@ const days = [
         };
 
         // Add click handlers to all talk cards
-        document.querySelectorAll('[data-talk-id]').forEach(card => {
-            card.addEventListener('click', () => {
-                const talkId = card.dataset.talkId;
-                const slotId = card.dataset.slotId;
-                openTalkModal(talkId, slotId);
+        // Attach event listeners
+        document.querySelectorAll('[data-talk-id]').forEach(button => {
+            button.addEventListener('click', () => {
+                const talkId = (button as HTMLElement).dataset.talkId;
+                const slotId = (button as HTMLElement).dataset.slotId;
+                if (talkId && slotId) openTalkModal(talkId, slotId);
             });
         });
 
-        // Close modal handlers
-        closeModal.addEventListener('click', closeTalkModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target === modal.firstElementChild) {
-                closeTalkModal();
-            }
-        });
+        // Close modal handlers - click outside modal to close
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+                const modalPanel = document.getElementById('modalPanel');
+                // Close if clicked on modal backdrop or outside the modal panel
+                if (target === modal || target.id === 'modalBackdrop' || (modalPanel && !modalPanel.contains(target))) {
+                    closeTalkModal();
+                }
+            });
+        }
 
         // ESC key to close modal
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('showing')) {
+            if (e.key === 'Escape' && modal && modal.classList.contains('showing')) {
                 closeTalkModal();
             }
         });
@@ -935,7 +956,7 @@ const days = [
         if (window.location.hash) {
             const talkId = window.location.hash.substring(1);
             // Find the slot for this talk
-            const slotId = Object.entries(slotAssignments).find(([_, id]) => id === talkId)?.[0];
+            const slotId = Object.entries(slotAssignments as any).find(([_, id]) => id === talkId)?.[0];
             if (slotId) {
                 setTimeout(() => openTalkModal(talkId, slotId), 100);
             }
@@ -945,11 +966,11 @@ const days = [
         window.addEventListener('hashchange', () => {
             if (window.location.hash) {
                 const talkId = window.location.hash.substring(1);
-                const slotId = Object.entries(slotAssignments).find(([_, id]) => id === talkId)?.[0];
-                if (slotId && !modal.classList.contains('showing')) {
+                const slotId = Object.entries(slotAssignments as any).find(([_, id]) => id === talkId)?.[0];
+                if (slotId && modal && !modal.classList.contains('showing')) {
                     openTalkModal(talkId, slotId);
                 }
-            } else if (modal.classList.contains('showing')) {
+            } else if (modal && modal.classList.contains('showing')) {
                 closeTalkModal();
             }
         });
