@@ -9,45 +9,94 @@ const days = [
     sessions: [
       {
         time: '8:00 AM',
-        endTime: '8:45 AM',
+        endTime: '8:50 AM',
         main: { title: 'Doors Open & Registration', speaker: '', type: 'logistics' },
         track2: null,
         workshop: null
       },
       {
-        time: '9:00 AM',
-        endTime: '9:20 AM',
+        time: '8:50 AM',
+        endTime: '9:00 AM',
         main: { title: 'Welcome & Opening Remarks', speaker: '', type: 'logistics' },
         track2: null,
         workshop: null
       },
       {
-        time: '9:35 AM',
-        endTime: '10:05 AM',
-        main: { talkId: 'future-of-ruby', type: 'keynote' },
+        time: '9:00 AM',
+        endTime: '9:30 AM',
+        main: { talkId: 'k1-reactive-view', type: 'keynote' },
         track2: null,
         workshop: null
       },
       {
+        time: '9:40 AM',
+        endTime: '10:10 AM',
+        main: { talkId: 'm1-play-with-code', type: 'talk' },
+        track2: { talkId: 's1-cloud-data-infrastructure', type: 'talk' },
+        workshop: { talkId: 'w1-building-agents-rails', type: 'workshop' }
+      },
+      {
         time: '10:20 AM',
         endTime: '10:50 AM',
-        main: { talkId: 'scaling-rails', type: 'talk' },
-        track2: { talkId: 'ruby-performance-yjit', type: 'talk' },
-        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
+        main: { talkId: 'm2-noel-tbd', type: 'talk' },
+        track2: { talkId: 's2-brandon-weaver-tbd', type: 'talk' },
+        workshop: { talkId: 'w1-building-agents-rails', type: 'workshop' }
       },
       {
-        time: '11:05 AM',
-        endTime: '11:35 AM',
-        main: { talkId: 'ai-powered-ruby', type: 'talk' },
-        track2: { talkId: 'advanced-testing', type: 'talk' },
-        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
+        time: '11:00 AM',
+        endTime: '11:30 AM',
+        main: { talkId: 'm3-realtime-collaboration', type: 'talk' },
+        track2: { talkId: 's3-performance-starts-boot', type: 'talk' },
+        workshop: { talkId: 'w1-building-agents-rails', type: 'workshop' }
       },
       {
-        time: '11:50 AM',
-        endTime: '12:20 PM',
-        main: { talkId: 'ruby-production-patterns', type: 'talk' },
-        track2: { talkId: 'hotwire-stimulus', type: 'talk' },
-        workshop: { talkId: 'building-modern-rails-apis', type: 'workshop' }
+        time: '11:40 AM',
+        endTime: '1:10 PM',
+        main: { title: 'Lunch break', speaker: '', type: 'break' },
+        track2: null,
+        workshop: null
+      },
+      {
+        time: '1:20 PM',
+        endTime: '1:50 PM',
+        main: { talkId: 'm4-zjit-speeding-ruby', type: 'talk' },
+        track2: { talkId: 's4-derailing-application', type: 'talk' },
+        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
+      },
+      {
+        time: '2:00 PM',
+        endTime: '2:30 PM',
+        main: { talkId: 'm5-rails-asset-pipeline', type: 'talk' },
+        track2: { talkId: 's5-peace-love-crud', type: 'talk' },
+        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
+      },
+      {
+        time: '2:40 PM',
+        endTime: '3:10 PM',
+        main: { talkId: 'm6-opensource-rails-startup', type: 'talk' },
+        track2: { talkId: 's6-ai-interface-mcp', type: 'talk' },
+        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
+      },
+      {
+        time: '3:20 PM',
+        endTime: '3:50 PM',
+        main: { talkId: 'm7-start-writing-ruby', type: 'talk' },
+        track2: { talkId: 's7-mcp-fog-inspector', type: 'talk' },
+        workshop: { talkId: 'w2-inertia-rails-workshop', type: 'workshop' }
+      },
+      {
+        time: '4:10 PM',
+        endTime: '4:40 PM',
+        main: { talkId: 'k2-ruby-ai-conversation', type: 'keynote' },
+        track2: null,
+        workshop: null
+      },
+      {
+        time: '4:50 PM',
+        endTime: '5:50 PM',
+        main: { talkId: 'cto-roundtable-day1', type: 'panel' },
+        track2: null,
+        workshop: null
       },
       {
         time: '12:20 PM',
@@ -113,36 +162,43 @@ const days = [
       },
       {
         time: '9:00 AM',
-        endTime: '9:20 AM',
-        main: { title: 'Day 2 Welcome', speaker: '', type: 'logistics' },
+        endTime: '9:30 AM',
+        main: { talkId: 'k3-rails-ai-ruby-llm', type: 'keynote' },
         track2: null,
         workshop: null
       },
       {
-        time: '9:35 AM',
-        endTime: '10:05 AM',
-        main: { talkId: 'ruby-future-keynote', type: 'keynote' },
-        track2: null,
-        workshop: null
+        time: '9:40 AM',
+        endTime: '10:10 AM',
+        main: { talkId: 'm8-code-to-customers', type: 'talk' },
+        track2: { talkId: 's8-shipping-solo-rails8', type: 'talk' },
+        workshop: { talkId: 'w3-upskill-team-rails', type: 'workshop' }
       },
       {
         time: '10:20 AM',
         endTime: '10:50 AM',
-        main: { talkId: 'rails-7-features', type: 'talk' },
-        track2: { talkId: 'ruby-gems-deep-dive', type: 'talk' },
-        workshop: { talkId: 'performance-workshop', type: 'workshop' }
+        main: { talkId: 'm9-thin-client-approach', type: 'talk' },
+        track2: { talkId: 's9-operating-rails-deploy', type: 'talk' },
+        workshop: { talkId: 'w3-upskill-team-rails', type: 'workshop' }
       },
       {
-        time: '11:05 AM',
-        endTime: '11:35 AM',
-        main: { talkId: 'database-optimization', type: 'talk' },
-        track2: { talkId: 'ruby-metaprogramming', type: 'talk' },
-        workshop: { talkId: 'performance-workshop', type: 'workshop' }
+        time: '11:00 AM',
+        endTime: '11:30 AM',
+        main: { talkId: 'm10-software-design-ai', type: 'talk' },
+        track2: { talkId: 's10-debugging-gusto-scale', type: 'talk' },
+        workshop: { talkId: 'w3-upskill-team-rails', type: 'workshop' }
       },
       {
-        time: '11:50 AM',
-        endTime: '12:20 PM',
-        main: { talkId: 'cto-panel', type: 'panel' },
+        time: '11:40 AM',
+        endTime: '1:10 PM',
+        main: { title: 'Lunch & Networking', speaker: '', type: 'break' },
+        track2: null,
+        workshop: null
+      },
+      {
+        time: '1:20 PM',
+        endTime: '1:50 PM',
+        main: { talkId: 'm11-opensource-business-sidekiq', type: 'talk' },
         track2: null,
         workshop: null
       },
@@ -154,37 +210,23 @@ const days = [
         workshop: null
       },
       {
-        time: '1:30 PM',
-        endTime: '2:00 PM',
-        main: { talkId: 'ruby-community', type: 'talk' },
-        track2: { talkId: 'rails-deployment', type: 'talk' },
-        workshop: { talkId: 'ai-workshop', type: 'workshop' }
-      },
-      {
-        time: '2:15 PM',
-        endTime: '2:45 PM',
-        main: { talkId: 'open-source-sustainability', type: 'talk' },
-        track2: { talkId: 'ruby-debugging', type: 'talk' },
-        workshop: { talkId: 'ai-workshop', type: 'workshop' }
-      },
-      {
-        time: '3:00 PM',
-        endTime: '3:30 PM',
-        main: { title: 'Coffee Break & Networking', speaker: '', type: 'break' },
+        time: '2:00 PM',
+        endTime: '5:20 PM',
+        main: { talkId: 'startup-demos', type: 'demos' },
         track2: null,
         workshop: null
       },
       {
-        time: '3:30 PM',
-        endTime: '4:00 PM',
-        main: { talkId: 'ruby-reflection', type: 'keynote' },
+        time: '5:30 PM',
+        endTime: '6:00 PM',
+        main: { talkId: 'vc-roundtable', type: 'panel' },
         track2: null,
         workshop: null
       },
       {
-        time: '4:00 PM',
-        endTime: '4:15 PM',
-        main: { title: 'Closing Remarks & Thank You', speaker: '', type: 'logistics' },
+        time: '6:10 PM',
+        endTime: '6:40 PM',
+        main: { talkId: 'k4-vladimir-tbd', type: 'keynote' },
         track2: null,
         workshop: null
       }
