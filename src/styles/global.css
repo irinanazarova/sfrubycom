@@ -1,15 +1,32 @@
 @font-face {
-  font-family: 'Martian Grotesk';
-  font-display: swap;
-  src: url('/fonts/MartianGrotesk.woff2') format('woff2');
-  font-weight: 100 800;
-  font-stretch: 150%;
+    font-family: "Martian Grotesk";
+    font-display: swap;
+    src: url("/fonts/MartianGrotesk.woff2") format("woff2");
+    font-weight: 100 800;
+    font-stretch: 150%;
 }
 
 @font-face {
-  font-family: 'Martian Mono';
-  font-display: swap;
-  src: url('/fonts/MartianMono.woff2') format('woff2');
-  font-weight: 100 800;
-  /*font-stretch: 75% 150%;*/
+    font-family: "Martian Mono";
+    font-display: swap;
+    src: url("/fonts/MartianMono.woff2") format("woff2");
+    font-weight: 100 800;
+    /*font-stretch: 75% 150%;*/
+}
+
+/* Smooth scrolling with offset for fixed header */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* Account for fixed navigation header */
+}
+
+/* Ensure proper focus visibility for accessibility */
+:focus-visible {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+}
+
+/* Prevent horizontal scroll on mobile */
+body {
+    overflow-x: hidden;
 }

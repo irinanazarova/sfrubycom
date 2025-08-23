@@ -19,11 +19,12 @@ const {
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="image/png" href="/favicon.png" sizes="96x96" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" sizes="96x96" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
+        <meta name="theme-color" content="#dc2626" />
         <title>{title}</title>
 
         <!-- Preload critical assets -->
@@ -72,6 +73,11 @@ const {
             src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
         ></script>
         <script>
+            declare global {
+                interface Window {
+                    plausible: any;
+                }
+            }
             window.plausible =
                 window.plausible ||
                 function () {
@@ -96,15 +102,22 @@ const {
             // Add smooth scrolling for anchor links
             document.addEventListener("DOMContentLoaded", () => {
                 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-                    anchor.addEventListener("click", function (e) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute("href");
-                        if (targetId !== "#") {
-                            document.querySelector(targetId)?.scrollIntoView({
-                                behavior: "smooth",
-                            });
-                        }
-                    });
+                    anchor.addEventListener(
+                        "click",
+                        function (this: HTMLAnchorElement, e: Event) {
+                            e.preventDefault();
+                            const targetId = this.getAttribute("href");
+                            if (targetId && targetId !== "#") {
+                                const target = document.querySelector(targetId);
+                                if (target) {
+                                    target.scrollIntoView({
+                                        behavior: "smooth",
+                                        block: "start",
+                                    });
+                                }
+                            }
+                        },
+                    );
                 });
             });
         </script>

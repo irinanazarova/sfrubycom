@@ -48,6 +48,8 @@ const navItems = [
             <!-- Mobile menu button -->
             <button
                 id="mobile-menu-button"
+                aria-label="Toggle mobile menu"
+                aria-expanded="false"
                 class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-dark-200/20 text-dark-700 hover:bg-ruby-50 hover:text-ruby-600 transition-all duration-300"
             >
                 <svg
@@ -160,10 +162,12 @@ const navItems = [
             mobileMenu?.classList.remove("hidden");
             menuIcon?.classList.add("hidden");
             closeIcon?.classList.remove("hidden");
+            mobileMenuButton?.setAttribute("aria-expanded", "true");
         } else {
             mobileMenu?.classList.add("hidden");
             menuIcon?.classList.remove("hidden");
             closeIcon?.classList.add("hidden");
+            mobileMenuButton?.setAttribute("aria-expanded", "false");
         }
     });
 
@@ -180,6 +184,7 @@ const navItems = [
             mobileMenu.classList.add("hidden");
             menuIcon?.classList.remove("hidden");
             closeIcon?.classList.add("hidden");
+            mobileMenuButton?.setAttribute("aria-expanded", "false");
         }
     });
 

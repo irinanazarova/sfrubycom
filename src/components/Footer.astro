@@ -36,7 +36,7 @@ const footerLinks = [
     },
 ];
 
-const socialLinks = [
+const socialLinks: Array<{ name: string; href: string; icon: string }> = [
     // { name: 'Twitter', href: 'https://twitter.com/sfrubconf', icon: 'twitter' },
     // { name: 'GitHub', href: 'https://github.com/sfrubconf', icon: 'github' },
     // { name: 'LinkedIn', href: 'https://linkedin.com/company/sfrubconf', icon: 'linkedin' }
@@ -60,7 +60,7 @@ const socialLinks = [
                     </div>
                 </div>
                 <p class="mt-2 text-sky-300 text-sm">
-                    November&nbsp;19&#8209;20,&nbsp;2025
+                    November 19-20, 2025
                     <br />Fort Mason Center
                     <br />2 Marina Blvd
                     <br />San Francisco, CA 94123
@@ -116,8 +116,8 @@ const socialLinks = [
             </div>
 
             <div class="text-sky-400 text-sm">
-                &copy; {currentYear} Evil Martians Inc. for San Francisco Ruby Conference.
-                All rights reserved.
+                &copy; {currentYear} San Francisco Ruby Conference. Organized by
+                Evil Martians Inc. All rights reserved.
             </div>
         </div>
     </div>

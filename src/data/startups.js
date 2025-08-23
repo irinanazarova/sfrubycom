@@ -169,6 +169,16 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
+  superconductor: {
+    id: "superconductor",
+    name: "Superconductor",
+    logo: "/startup_superconductor.png",
+    url: "https://www.superconductor.dev/",
+    description:
+      "Superconductor lets you run many coding agents in parallel, with a live browser preview for each one, on desktop or mobile. Launch many agents for each ticket to boost your productivity.",
+    speakerId: "",
+    demoTime: "",
+  },
 };
 
 // Helper functions

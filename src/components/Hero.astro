@@ -25,7 +25,7 @@ import { Image } from "astro:assets";
                     src="/hero.png"
                     alt="San Francisco Ruby Conference 2025"
                     class="hero-logo object-contain w-full max-w-xl md:max-w-2xl lg:max-w-3xl h-auto max-h-[40vh]"
-                    loading="lazy"
+                    loading="eager"
                 />
             </div>
 
@@ -139,11 +139,6 @@ import { Image } from "astro:assets";
         p {
             font-size: 1rem;
         }
-    }
-
-    /* Smooth scroll behavior */
-    html {
-        scroll-behavior: smooth;
     }
 </style>
 

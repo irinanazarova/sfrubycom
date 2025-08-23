@@ -62,7 +62,7 @@ const randomSpeakers = regularSpeakers
                             <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 filter grayscale hover:grayscale-0">
                                 <img
                                     src={speaker.image}
-                                    alt={speaker.name}
+                                    alt={`Photo of ${speaker.name}`}
                                     class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                                     loading="lazy"
                                 />
@@ -98,7 +98,7 @@ const randomSpeakers = regularSpeakers
                                     )}
                             </h3>
                             <p class="text-ruby-600 font-medium leading-relaxed">
-                                {speaker.title || speaker.role}
+                                {(speaker as any).title || speaker.role}
                             </p>
                             <p class="text-dark-600 text-sm font-medium tracking-wide">
                                 {speaker.company}
@@ -123,7 +123,7 @@ const randomSpeakers = regularSpeakers
                             <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 filter grayscale hover:grayscale-0">
                                 <img
                                     src={speaker.image}
-                                    alt={speaker.name}
+                                    alt={`Photo of ${speaker.name}`}
                                     class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                                     loading="lazy"
                                 />
@@ -159,7 +159,7 @@ const randomSpeakers = regularSpeakers
                                     )}
                             </h3>
                             <p class="text-ruby-600 font-medium leading-relaxed">
-                                {speaker.title || speaker.role}
+                                {(speaker as any).title || speaker.role}
                             </p>
                             <p class="text-dark-600 text-sm font-medium tracking-wide">
                                 {speaker.company}

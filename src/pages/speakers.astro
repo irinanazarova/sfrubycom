@@ -36,7 +36,7 @@ const CTOSpeakers = getSpeakersByGroup("cto");
                                 <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
                                     <img
                                         src={speaker.image}
-                                        alt={speaker.name}
+                                        alt={`Photo of ${speaker.name}`}
                                         class="w-full h-full object-cover object-top"
                                         loading="lazy"
                                     />
@@ -87,7 +87,7 @@ const CTOSpeakers = getSpeakersByGroup("cto");
                                 <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
                                     <img
                                         src={speaker.image}
-                                        alt={speaker.name}
+                                        alt={`Photo of ${speaker.name}`}
                                         class="w-full h-full object-cover object-top"
                                         loading="lazy"
                                     />
@@ -135,7 +135,7 @@ const CTOSpeakers = getSpeakersByGroup("cto");
                                 <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
                                     <img
                                         src={speaker.image}
-                                        alt={speaker.name}
+                                        alt={`Photo of ${speaker.name}`}
                                         class="w-full h-full object-cover object-top"
                                         loading="lazy"
                                     />
@@ -186,7 +186,7 @@ const CTOSpeakers = getSpeakersByGroup("cto");
 
     <script>
         // Shuffle function for client-side randomization
-        function shuffleArray(array) {
+        function shuffleArray(array: any[]) {
             const shuffled = [...array];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
