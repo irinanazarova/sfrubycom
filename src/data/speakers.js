@@ -405,6 +405,16 @@ export const speakers = {
     bio: "André thinks Ruby is pretty neat. He's been using Ruby since 2003, Rails since 2004, and on the Bundler team since 2009, and wrote _The Ruby Way_ (3rd Ed.) in 2015. These days, he's a principal engineer for hire at cloudcity.io while building tools to make on-call better at sunchaser.io.",
     group: "speaker",
   },
+  "jose-valim": {
+    id: "jose-valim",
+    name: "José Valim",
+    company: "Tidewave",
+    role: "Founder",
+    image: "/speaker_jose.jpg",
+    socials: ["https://x.com/josevalim", "https://github.com/josevalim"],
+    bio: "José Valim is the creator of the Elixir programming language and Chief Adoption Officer at Dashbit, the company behind Tidewave and Livebook. A former Rails Core team member, José authored Crafting Rails Applications, received a Ruby Hero award, and contributed to several open source projects.",
+    group: "speaker",
+  },
 };
 
 // Helper functions

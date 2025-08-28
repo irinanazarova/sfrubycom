@@ -87,11 +87,14 @@ const successStories = [
                     <p class="text-dark-600 mb-4">
                         See the most exciting demos from our past events
                     </p>
-                    <button
-                        class="px-6 py-2 bg-ruby-500 text-white rounded-md hover:bg-ruby-600 transition-colors duration-200"
+                    <a
+                        href="https://www.youtube.com/@sfruby"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block px-6 py-2 bg-ruby-500 text-white rounded-md hover:bg-ruby-600 transition-colors duration-200"
                     >
-                        Watch Video
-                    </button>
+                        Watch Videos
+                    </a>
                 </div>
             </div>
         </div>
@@ -214,7 +217,8 @@ const successStories = [
                                                 {startup.demoTime}
                                             </span>
                                             <span class="block text-xs text-ruby-500 bg-ruby-50 px-2 py-1 rounded">
-                                                {startup.category}
+                                                {(startup as any).category ||
+                                                    "Demo"}
                                             </span>
                                         </div>
                                     </div>

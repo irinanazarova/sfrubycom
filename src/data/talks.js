@@ -268,15 +268,16 @@ export const talks = {
     status: "confirmed",
     tags: ["debugging", "scale", "production", "rails"],
   },
-  "tbd-2": {
-    id: "tbd-2",
-    title: "TBD",
-    speakerId: "tbd",
-    description: "Topic to be announced.",
+
+  "navigating-language-evolution": {
+    id: "navigating-language-evolution",
+    title: "Navigating programming language evolution in the AI era",
+    speakerId: "jose-valim",
+    description:
+      "As AI becomes increasingly integrated into software development, we find ourselves facing questions about how our programming languages and tools should evolve - questions that don't yet have clear answers. Rather than prescribing solutions, this talk explores the open questions and possible directions that developers and tooling authors should be grappling with.",
     type: "talk",
-    track: "blackbox",
-    status: "tentative",
-    tags: [],
+    status: "confirmed",
+    tags: ["programming languages", "ai"],
   },
 
   // WORKSHOPS
@@ -343,6 +344,17 @@ export const talks = {
     status: "confirmed",
     tags: [],
     link: "https://lu.ma/ekzvr472",
+  },
+  "open-mic": {
+    id: "open-mic",
+    title: "Open Mic",
+    description:
+      "Our tradition at SF Ruby is a session where anyone can grab a mic for a couple minutes to share their announcements, news, or ask  a question.",
+    type: "panel",
+    moderator: null,
+    speakerIds: [],
+    status: "confirmed",
+    tags: ["open mic"],
   },
 
   // PANELS & SPECIAL SESSIONS

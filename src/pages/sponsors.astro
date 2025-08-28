@@ -231,7 +231,7 @@ const currentSponsors = getSponsorsForSponsorsPage();
       <div class="p-6">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-xl font-bold text-dark-900" id="modalTitle"></h3>
-          <button onclick="window.closeBenefitsModal()" class="text-dark-400 hover:text-dark-600">
+          <button id="closeModalBtn" class="text-dark-400 hover:text-dark-600">
             ✕
           </button>
         </div>
@@ -254,7 +254,7 @@ const currentSponsors = getSponsorsForSponsorsPage();
 
     const tier = sponsorTiers.find(t => t.name === tierName);
 
-    if (tier) {
+    if (tier && modal && modalTitle && benefitsList) {
       modalTitle.textContent = `${tier.name} Tier Benefits`;
       benefitsList.innerHTML = tier.benefits
         .map(benefit => `<li class="flex items-start">
@@ -271,17 +271,28 @@ const currentSponsors = getSponsorsForSponsorsPage();
 
   function closeBenefitsModal() {
     const modal = document.getElementById('benefitsModal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.style.overflow = '';
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
   }
 
   // Close modal when clicking outside
-  document.getElementById('benefitsModal').addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) {
-      closeBenefitsModal();
-    }
-  });
+  const benefitsModal = document.getElementById('benefitsModal');
+  if (benefitsModal) {
+    benefitsModal.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeBenefitsModal();
+      }
+    });
+  }
+
+  // Close modal button handler
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeBenefitsModal);
+  }
 
   // Close modal on escape key
   document.addEventListener('keydown', (e) => {
