@@ -429,8 +429,8 @@ const days = [
         <div id="modalBackdrop" class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
 
         <!-- Modal panel -->
-        <div class="flex min-h-screen items-center justify-center p-4">
-            <div id="modalPanel" class="relative w-full max-w-4xl transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all">
+        <div class="flex min-h-screen items-center justify-center p-2 sm:p-4">
+            <div id="modalPanel" class="relative w-full max-w-5xl transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all">
                 <!-- Modal content -->
                 <div id="modalContent" class="max-h-[90vh] overflow-y-auto">
                     <!-- Content will be dynamically inserted here -->
@@ -543,6 +543,15 @@ const days = [
             padding: 0.25rem 0.75rem;
             font-size: 0.625rem;
             transform: rotate(8deg);
+        }
+
+        /* Better modal padding on mobile */
+        #modalContent {
+            max-height: 95vh;
+        }
+
+        #modalContent > div > div:last-child {
+            padding: 1.5rem;
         }
     }
 </style>
@@ -693,7 +702,7 @@ const days = [
             let modalHTML = `
                 <div class="relative">
                     <!-- Close button -->
-                    <button id="modalCloseBtn" class="absolute right-4 top-4 z-10 rounded-lg bg-white/90 p-2 hover:bg-gray-100 transition-colors">
+                    <button id="modalCloseBtn" class="absolute right-2 top-2 sm:right-4 sm:top-4 z-10 rounded-lg bg-white/90 p-1.5 sm:p-2 hover:bg-gray-100 transition-colors">
                         <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
@@ -706,7 +715,7 @@ const days = [
                         talk.type === 'panel' ? 'from-purple-500 to-indigo-500' :
                         talk.type === 'demo' ? 'from-green-500 to-emerald-500' :
                         'from-gray-500 to-gray-600'
-                    } p-8 text-white">
+                    } p-6 sm:p-8 text-white">
                         <div class="max-w-3xl">
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
@@ -723,7 +732,7 @@ const days = [
                                     </span>
                                 ` : ''}
                             </div>
-                            <h2 class="text-3xl font-bold mb-4">${talk.title}</h2>
+                            <h2 class="text-2xl sm:text-3xl font-bold mb-4">${talk.title}</h2>
                             ${slot ? `
                                 <div class="flex items-center gap-4 text-white/90">
                                     <div class="flex items-center gap-2">
@@ -744,7 +753,7 @@ const days = [
                     </div>
 
                     <!-- Content -->
-                    <div class="p-8">
+                    <div class="p-6 sm:p-8">
                         <!-- Description -->
                         <div class="mb-8">
                             <h3 class="text-xl font-bold text-gray-900 mb-4">About this ${talk.type}</h3>
@@ -783,19 +792,19 @@ const days = [
                                 </h3>
                                 <div class="space-y-6">
                                     ${speakerData.map((speaker: any) => `
-                                        <div class="speaker-card bg-gray-50 rounded-lg p-6">
-                                            <div class="flex items-start gap-6">
+                                        <div class="speaker-card bg-gray-50 rounded-lg p-4 sm:p-6">
+                                            <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
                                                 ${speaker.image ? `
                                                     <img src="${speaker.image}" alt="${speaker.name}"
-                                                         class="w-24 h-24 rounded-full object-cover flex-shrink-0">
+                                                         class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover flex-shrink-0 mx-auto sm:mx-0">
                                                 ` : `
-                                                    <div class="w-24 h-24 rounded-full bg-gradient-to-br from-ruby-400 to-pink-400 flex items-center justify-center flex-shrink-0">
-                                                        <span class="text-white text-2xl font-bold">
+                                                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-ruby-400 to-pink-400 flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
+                                                        <span class="text-white text-xl sm:text-2xl font-bold">
                                                             ${speaker.name.split(' ').map((n: string) => n[0]).join('')}
                                                         </span>
                                                     </div>
                                                 `}
-                                                <div class="flex-1">
+                                                <div class="flex-1 w-full text-center sm:text-left">
                                                     <h4 class="text-lg font-bold text-gray-900">${speaker.name}</h4>
                                                     ${speaker.role ? `
                                                         <p class="text-gray-600 mb-1">${speaker.role}</p>
@@ -804,9 +813,9 @@ const days = [
                                                         <p class="text-gray-600 mb-3">${speaker.company}</p>
                                                     ` : ''}
                                                     ${speaker.bio ? `
-                                                        <p class="text-gray-700 mb-4">${speaker.bio}</p>
+                                                        <p class="text-gray-700 mb-4 text-sm sm:text-base">${speaker.bio}</p>
                                                     ` : ''}
-                                                    <div class="flex gap-3">
+                                                    <div class="flex gap-3 justify-center sm:justify-start">
                                                         ${speaker.twitter ? `
                                                             <a href="https://twitter.com/${speaker.twitter}" target="_blank" rel="noopener noreferrer"
                                                                class="text-gray-600 hover:text-ruby-600 transition-colors">
