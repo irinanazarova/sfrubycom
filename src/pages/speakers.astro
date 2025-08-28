@@ -5,20 +5,9 @@ import { speakers, getSpeakersByGroup } from "../data/speakers.js";
 import { talks } from "../data/talks.js";
 
 // Get speakers by group - returns arrays of speaker objects
-const featuredSpeakersArray = getSpeakersByGroup("featured");
-const regularSpeakersArray = getSpeakersByGroup("speaker");
+const featuredSpeakers = getSpeakersByGroup("featured");
+const regularSpeakers = getSpeakersByGroup("speaker");
 const CTOSpeakers = getSpeakersByGroup("cto");
-
-// Convert arrays to objects keyed by speaker ID for easier lookup
-const featuredSpeakers = {};
-featuredSpeakersArray.forEach((speaker) => {
-    featuredSpeakers[speaker.id] = speaker;
-});
-
-const regularSpeakers = {};
-regularSpeakersArray.forEach((speaker) => {
-    regularSpeakers[speaker.id] = speaker;
-});
 
 // Build a speaker-to-talks index for O(1) lookups
 const speakerToTalksIndex = new Map();
@@ -69,85 +58,90 @@ function getTalksBySpeakerId(speakerId) {
                 Keynote Speakers
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {
-                    Object.entries(featuredSpeakers).map(
-                        ([speakerId, speaker]) => {
-                            const speakerTalks = getTalksBySpeakerId(
-                                speaker.id,
-                            );
-                            return (
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                    <div class="flex justify-center pt-6">
-                                        <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
-                                            <img
-                                                src={speaker.image}
-                                                alt={`Photo of ${speaker.name}`}
-                                                class="w-full h-full object-cover object-top"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div class="p-6">
-                                        <h3 class="font-bold text-xl text-dark-900">
-                                            {speaker.name}
-                                        </h3>
-                                        <p class="text-ruby-500 font-display font-medium mt-2">
-                                            {speaker.company}
-                                        </p>
-                                        <p class="text-dark-500 text-sm mb-2">
-                                            {speaker.role}
-                                        </p>
-
-                                        <p class="text-dark-600 text-sm mb-4">
-                                            {speaker.bio}
-                                        </p>
-
-                                        {speakerTalks.length > 0 && (
-                                            <div class="mb-4 pt-3 border-t border-gray-200">
-                                                <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
-                                                    Talk
-                                                    {speakerTalks.length > 1
-                                                        ? "s"
-                                                        : ""}
-                                                </p>
-                                                {speakerTalks.map((talk) => (
-                                                    <a
-                                                        href={`/schedule#${talk.id}`}
-                                                        class="group inline-flex items-start gap-2 text-ruby-600 hover:text-ruby-700 text-sm font-medium mb-2 transition-colors"
-                                                    >
-                                                        <svg
-                                                            class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                        >
-                                                            <path
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                                            />
-                                                        </svg>
-                                                        <span class="break-words">
-                                                            {talk.title}
-                                                        </span>
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
-
-                                        <div class="flex space-x-4">
-                                            {speaker.socials.map((url) => (
-                                                <SocialLink url={url} />
-                                            ))}
-                                        </div>
+                    featuredSpeakers.map((speaker) => {
+                        const speakerTalks = getTalksBySpeakerId(speaker.id);
+                        return (
+                            <div class="group bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                                <!-- Full width on desktop, centered circle on mobile -->
+                                <div class="hidden sm:block w-full aspect-[0.8] overflow-hidden">
+                                    <img
+                                        src={speaker.image}
+                                        alt={`Photo of ${speaker.name}`}
+                                        class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div class="sm:hidden flex justify-center pt-6">
+                                    <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+                                        <img
+                                            src={speaker.image}
+                                            alt={`Photo of ${speaker.name}`}
+                                            class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                            loading="lazy"
+                                        />
                                     </div>
                                 </div>
-                            );
-                        },
-                    )
+
+                                <div class="p-6">
+                                    <h3 class="font-bold text-xl text-dark-900">
+                                        {speaker.name}
+                                    </h3>
+                                    <p class="text-ruby-500 font-display font-medium mt-2">
+                                        {speaker.company}
+                                    </p>
+                                    <p class="text-dark-500 text-sm mb-2">
+                                        {speaker.role}
+                                    </p>
+
+                                    <p class="text-dark-600 text-sm mb-4">
+                                        {speaker.bio}
+                                    </p>
+
+                                    {speakerTalks.length > 0 && (
+                                        <div class="mb-4 pt-3 border-t border-gray-200">
+                                            <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
+                                                Talk
+                                                {speakerTalks.length > 1
+                                                    ? "s"
+                                                    : ""}
+                                            </p>
+                                            {speakerTalks.map((talk) => (
+                                                <a
+                                                    href={`/schedule#${talk.id}`}
+                                                    class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
+                                                >
+                                                    <svg
+                                                        class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                                        />
+                                                    </svg>
+                                                    <span class="break-words">
+                                                        {talk.title}
+                                                    </span>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <div class="flex space-x-4">
+                                        {speaker.socials.map((url) => (
+                                            <SocialLink url={url} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })
                 }
             </div>
         </div>
@@ -160,86 +154,91 @@ function getTalksBySpeakerId(speakerId) {
 
             <div
                 id="regular-speakers-grid"
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
             >
                 {
-                    Object.entries(regularSpeakers).map(
-                        ([speakerId, speaker]) => {
-                            const speakerTalks = getTalksBySpeakerId(
-                                speaker.id,
-                            );
-                            return (
-                                <div class="speaker-card bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                    <div class="flex justify-center pt-6">
-                                        <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
-                                            <img
-                                                src={speaker.image}
-                                                alt={`Photo of ${speaker.name}`}
-                                                class="w-full h-full object-cover object-top"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div class="p-6">
-                                        <h3 class="font-bold text-xl text-dark-900">
-                                            {speaker.name}
-                                        </h3>
-                                        <p class="text-ruby-500 font-display font-medium mt-2">
-                                            {speaker.company}
-                                        </p>
-                                        <p class="text-dark-500 text-sm mb-2">
-                                            {speaker.role}
-                                        </p>
-
-                                        <p class="text-dark-600 text-sm mb-4">
-                                            {speaker.bio}
-                                        </p>
-
-                                        {speakerTalks.length > 0 && (
-                                            <div class="mb-4 pt-3 border-t border-gray-200">
-                                                <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
-                                                    Talk
-                                                    {speakerTalks.length > 1
-                                                        ? "s"
-                                                        : ""}
-                                                </p>
-                                                {speakerTalks.map((talk) => (
-                                                    <a
-                                                        href={`/schedule#${talk.id}`}
-                                                        class="group inline-flex items-start gap-2 text-ruby-600 hover:text-ruby-700 text-sm font-medium mb-2 transition-colors"
-                                                    >
-                                                        <svg
-                                                            class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                        >
-                                                            <path
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                                            />
-                                                        </svg>
-                                                        <span class="break-words">
-                                                            {talk.title}
-                                                        </span>
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
-
-                                        <div class="flex space-x-4">
-                                            {speaker.socials.map((url) => (
-                                                <SocialLink url={url} />
-                                            ))}
-                                        </div>
+                    regularSpeakers.map((speaker) => {
+                        const speakerTalks = getTalksBySpeakerId(speaker.id);
+                        return (
+                            <div class="group speaker-card bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                                <!-- Full width on desktop, centered circle on mobile -->
+                                <div class="hidden sm:block w-full aspect-[0.8] overflow-hidden">
+                                    <img
+                                        src={speaker.image}
+                                        alt={`Photo of ${speaker.name}`}
+                                        class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div class="sm:hidden flex justify-center pt-6">
+                                    <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+                                        <img
+                                            src={speaker.image}
+                                            alt={`Photo of ${speaker.name}`}
+                                            class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                            loading="lazy"
+                                        />
                                     </div>
                                 </div>
-                            );
-                        },
-                    )
+
+                                <div class="p-6">
+                                    <h3 class="font-bold text-xl text-dark-900">
+                                        {speaker.name}
+                                    </h3>
+                                    <p class="text-ruby-500 font-display font-medium mt-2">
+                                        {speaker.company}
+                                    </p>
+                                    <p class="text-dark-500 text-sm mb-2">
+                                        {speaker.role}
+                                    </p>
+
+                                    <p class="text-dark-600 text-sm mb-4">
+                                        {speaker.bio}
+                                    </p>
+
+                                    {speakerTalks.length > 0 && (
+                                        <div class="mb-4 pt-3 border-t border-gray-200">
+                                            <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
+                                                Talk
+                                                {speakerTalks.length > 1
+                                                    ? "s"
+                                                    : ""}
+                                            </p>
+                                            {speakerTalks.map((talk) => (
+                                                <a
+                                                    href={`/schedule#${talk.id}`}
+                                                    class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
+                                                >
+                                                    <svg
+                                                        class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                                        />
+                                                    </svg>
+                                                    <span class="break-words">
+                                                        {talk.title}
+                                                    </span>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <div class="flex space-x-4">
+                                        {speaker.socials.map((url) => (
+                                            <SocialLink url={url} />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })
                 }
             </div>
         </div>
@@ -250,7 +249,7 @@ function getTalksBySpeakerId(speakerId) {
                 CTO Panel
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {
                     CTOSpeakers.map((speaker) => {
                         // CTO speakers are part of the CTO Roundtable
@@ -261,13 +260,22 @@ function getTalksBySpeakerId(speakerId) {
                                     talk.title.toLowerCase().includes("cto")),
                         );
                         return (
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                <div class="flex justify-center pt-6">
+                            <div class="group bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                                <!-- Full width on desktop, centered circle on mobile -->
+                                <div class="hidden sm:block w-full aspect-[0.8] overflow-hidden">
+                                    <img
+                                        src={speaker.image}
+                                        alt={`Photo of ${speaker.name}`}
+                                        class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div class="sm:hidden flex justify-center pt-6">
                                     <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
                                         <img
                                             src={speaker.image}
                                             alt={`Photo of ${speaker.name}`}
-                                            class="w-full h-full object-cover object-top"
+                                            class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
                                             loading="lazy"
                                         />
                                     </div>
@@ -295,7 +303,7 @@ function getTalksBySpeakerId(speakerId) {
                                             </p>
                                             <a
                                                 href={`/schedule#${ctoPanelTalk.id}`}
-                                                class="group inline-flex items-start gap-2 text-ruby-600 hover:text-ruby-700 text-sm font-medium mb-2 transition-colors"
+                                                class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
                                             >
                                                 <svg
                                                     class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
