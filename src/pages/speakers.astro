@@ -175,9 +175,7 @@ allSpeakers.sort((a, b) => {
                                         </div>
                                     ) : speakerTalks.length > 0 ? (
                                         <div class="mb-4 pt-3 border-t border-gray-200">
-                                            <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
-                                                Talk{speakerTalks.length > 1 ? "s" : ""}
-                                            </p>
+
                                             {speakerTalks.map((talk) => (
                                                 <a
                                                     href={`/schedule#${talk.id}`}
