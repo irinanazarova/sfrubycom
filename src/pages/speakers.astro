@@ -1,13 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SocialLink from "../components/SocialLink.astro";
-import { speakers, getSpeakersByGroup } from "../data/speakers.js";
+import { speakers } from "../data/speakers.js";
 import { talks } from "../data/talks.js";
+import { startups } from "../data/startups.js";
 
-// Get speakers by group - returns arrays of speaker objects
-const featuredSpeakers = getSpeakersByGroup("featured");
-const regularSpeakers = getSpeakersByGroup("speaker");
-const CTOSpeakers = getSpeakersByGroup("cto");
+// Get all speakers as an array with their status
+const allSpeakers = Object.entries(speakers).map(([id, speaker]) => ({
+    ...speaker,
+    id,
+}));
 
 // Build a speaker-to-talks index for O(1) lookups
 const speakerToTalksIndex = new Map();
@@ -37,6 +39,33 @@ Object.values(talks).forEach((talk) => {
 function getTalksBySpeakerId(speakerId) {
     return speakerToTalksIndex.get(speakerId) || [];
 }
+
+// Helper function to get speaker status badge
+function getSpeakerBadge(speaker) {
+    if (speaker.group === "featured") {
+        return { text: "Keynote", color: "bg-gradient-to-r from-ruby-500 to-pink-500" };
+    }
+    if (speaker.group === "cto") {
+        return { text: "CTO Panel", color: "bg-gradient-to-r from-purple-500 to-indigo-500" };
+    }
+    // Check if speaker is associated with a startup demo
+    const speakerStartup = Object.values(startups).find(startup =>
+        startup.founders?.some(founder => founder.toLowerCase().includes(speaker.name.toLowerCase()))
+    );
+    if (speakerStartup) {
+        return { text: "Startup Demo", color: "bg-gradient-to-r from-emerald-500 to-green-500" };
+    }
+    return null;
+}
+
+// Sort speakers: featured first, then CTO, then regular, then alphabetically by name
+allSpeakers.sort((a, b) => {
+    const orderMap = { featured: 0, cto: 1, speaker: 2 };
+    const orderA = orderMap[a.group] ?? 3;
+    const orderB = orderMap[b.group] ?? 3;
+    if (orderA !== orderB) return orderA - orderB;
+    return a.name.localeCompare(b.name);
+});
 ---
 
 <Layout title="Speakers - San Francisco Ruby Conference 2025">
@@ -52,215 +81,35 @@ function getTalksBySpeakerId(speakerId) {
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Featured speakers section -->
+        <!-- All speakers in one grid -->
         <div class="mb-16">
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
-                Keynote Speakers
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {
-                    featuredSpeakers.map((speaker) => {
-                        const speakerTalks = getTalksBySpeakerId(speaker.id);
-                        return (
-                            <div class="group bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                <!-- Full width on desktop, centered circle on mobile -->
-                                <div class="hidden sm:block w-full aspect-[0.8] overflow-hidden">
-                                    <img
-                                        src={speaker.image}
-                                        alt={`Photo of ${speaker.name}`}
-                                        class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div class="sm:hidden flex justify-center pt-6">
-                                    <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
-                                        <img
-                                            src={speaker.image}
-                                            alt={`Photo of ${speaker.name}`}
-                                            class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div class="p-6">
-                                    <h3 class="font-bold text-xl text-dark-900">
-                                        {speaker.name}
-                                    </h3>
-                                    <p class="text-ruby-500 font-display font-medium mt-2">
-                                        {speaker.company}
-                                    </p>
-                                    <p class="text-dark-500 text-sm mb-2">
-                                        {speaker.role}
-                                    </p>
-
-                                    <p class="text-dark-600 text-sm mb-4">
-                                        {speaker.bio}
-                                    </p>
-
-                                    {speakerTalks.length > 0 && (
-                                        <div class="mb-4 pt-3 border-t border-gray-200">
-                                            <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
-                                                Talk
-                                                {speakerTalks.length > 1
-                                                    ? "s"
-                                                    : ""}
-                                            </p>
-                                            {speakerTalks.map((talk) => (
-                                                <a
-                                                    href={`/schedule#${talk.id}`}
-                                                    class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
-                                                >
-                                                    <svg
-                                                        class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                                        />
-                                                    </svg>
-                                                    <span class="break-words">
-                                                        {talk.title}
-                                                    </span>
-                                                </a>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    <div class="flex space-x-4">
-                                        {speaker.socials.map((url) => (
-                                            <SocialLink url={url} />
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
-            </div>
-        </div>
-
-        <!-- Regular speakers section -->
-        <div class="mb-16">
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
-                Speakers
+                All Speakers
             </h2>
 
             <div
-                id="regular-speakers-grid"
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+                id="speakers-grid"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8"
             >
                 {
-                    regularSpeakers.map((speaker) => {
+                    allSpeakers.map((speaker) => {
                         const speakerTalks = getTalksBySpeakerId(speaker.id);
-                        return (
-                            <div class="group speaker-card bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                <!-- Full width on desktop, centered circle on mobile -->
-                                <div class="hidden sm:block w-full aspect-[0.8] overflow-hidden">
-                                    <img
-                                        src={speaker.image}
-                                        alt={`Photo of ${speaker.name}`}
-                                        class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div class="sm:hidden flex justify-center pt-6">
-                                    <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
-                                        <img
-                                            src={speaker.image}
-                                            alt={`Photo of ${speaker.name}`}
-                                            class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div class="p-6">
-                                    <h3 class="font-bold text-xl text-dark-900">
-                                        {speaker.name}
-                                    </h3>
-                                    <p class="text-ruby-500 font-display font-medium mt-2">
-                                        {speaker.company}
-                                    </p>
-                                    <p class="text-dark-500 text-sm mb-2">
-                                        {speaker.role}
-                                    </p>
-
-                                    <p class="text-dark-600 text-sm mb-4">
-                                        {speaker.bio}
-                                    </p>
-
-                                    {speakerTalks.length > 0 && (
-                                        <div class="mb-4 pt-3 border-t border-gray-200">
-                                            <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
-                                                Talk
-                                                {speakerTalks.length > 1
-                                                    ? "s"
-                                                    : ""}
-                                            </p>
-                                            {speakerTalks.map((talk) => (
-                                                <a
-                                                    href={`/schedule#${talk.id}`}
-                                                    class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
-                                                >
-                                                    <svg
-                                                        class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                                        />
-                                                    </svg>
-                                                    <span class="break-words">
-                                                        {talk.title}
-                                                    </span>
-                                                </a>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    <div class="flex space-x-4">
-                                        {speaker.socials.map((url) => (
-                                            <SocialLink url={url} />
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
-            </div>
-        </div>
-
-        <!-- CTO Panel section -->
-        <div class="mb-16">
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
-                CTO Panel
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {
-                    CTOSpeakers.map((speaker) => {
-                        // CTO speakers are part of the CTO Roundtable
-                        const ctoPanelTalk = Object.values(talks).find(
-                            (talk) =>
+                        const badge = getSpeakerBadge(speaker);
+                        const ctoPanelTalk = speaker.group === "cto" ?
+                            Object.values(talks).find(talk =>
                                 talk.id === "cto-roundtable" ||
-                                (talk.title &&
-                                    talk.title.toLowerCase().includes("cto")),
-                        );
+                                (talk.title && talk.title.toLowerCase().includes("cto"))
+                            ) : null;
+
                         return (
-                            <div class="group bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="group speaker-card bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl relative">
+                                {/* Status Badge */}
+                                {badge && (
+                                    <div class={`absolute top-3 right-3 z-10 px-3 py-1 ${badge.color} text-white text-xs font-semibold rounded-full shadow-lg`}>
+                                        {badge.text}
+                                    </div>
+                                )}
+
                                 <!-- Full width on desktop, centered circle on mobile -->
                                 <div class="hidden sm:block w-full aspect-[0.8] overflow-hidden">
                                     <img
@@ -296,7 +145,8 @@ function getTalksBySpeakerId(speakerId) {
                                         {speaker.bio}
                                     </p>
 
-                                    {ctoPanelTalk && (
+                                    {/* Show talks for non-CTO speakers or CTO panel link for CTO speakers */}
+                                    {speaker.group === "cto" && ctoPanelTalk ? (
                                         <div class="mb-4 pt-3 border-t border-gray-200">
                                             <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
                                                 Panel
@@ -323,7 +173,36 @@ function getTalksBySpeakerId(speakerId) {
                                                 </span>
                                             </a>
                                         </div>
-                                    )}
+                                    ) : speakerTalks.length > 0 ? (
+                                        <div class="mb-4 pt-3 border-t border-gray-200">
+                                            <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
+                                                Talk{speakerTalks.length > 1 ? "s" : ""}
+                                            </p>
+                                            {speakerTalks.map((talk) => (
+                                                <a
+                                                    href={`/schedule#${talk.id}`}
+                                                    class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
+                                                >
+                                                    <svg
+                                                        class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                                        />
+                                                    </svg>
+                                                    <span class="break-words">
+                                                        {talk.title}
+                                                    </span>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    ) : null}
 
                                     <div class="flex space-x-4">
                                         {speaker.socials.map((url) => (
@@ -353,30 +232,5 @@ function getTalksBySpeakerId(speakerId) {
         </div>
     </div>
 
-    <script>
-        // Shuffle function for client-side randomization
-        function shuffleArray(array: any[]) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
 
-        // Shuffle regular speakers on page load
-        document.addEventListener("DOMContentLoaded", function () {
-            const grid = document.getElementById("regular-speakers-grid");
-            if (grid) {
-                const cards = Array.from(
-                    grid.querySelectorAll(".speaker-card"),
-                );
-                const shuffledCards = shuffleArray(cards);
-
-                // Clear the grid and append shuffled cards
-                grid.innerHTML = "";
-                shuffledCards.forEach((card) => grid.appendChild(card));
-            }
-        });
-    </script>
 </Layout>
