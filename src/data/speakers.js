@@ -143,7 +143,7 @@ export const speakers = {
       "https://bsky.app/profile/chaelcodes.bsky.social",
       "https://ruby.social/@ChaelCodes",
     ],
-    bio: "Rachael wants to share the joy and beauty of programming through programming games and regular open-source streams on Twitch. She's been a software engineer since 2012, 3x Team Lead, and manages a few small open-source projects.",
+    bio: "Rachael has been livestreaming open-source contributions and programming games on Twitch since 2019. This journey led her to voice-acting in indie programming game, One Dreamer, building an app for meeting friends at conferences, MeetAnother.day, and contributing to Rails, forem, GitLab, Ruby For Good, and many other projects.",
     group: "speaker",
   },
   "alan-ridlehoover": {
