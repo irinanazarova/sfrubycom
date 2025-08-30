@@ -814,10 +814,6 @@ const days = [
                 talk.speakers.forEach((speakerId: string) => {
                     if ((speakers as any)[speakerId]) speakerData.push((speakers as any)[speakerId]);
                 });
-            } else if (talk.speakerIds && Array.isArray(talk.speakerIds)) {
-                talk.speakerIds.forEach((speakerId: string) => {
-                    if ((speakers as any)[speakerId]) speakerData.push((speakers as any)[speakerId]);
-                });
             } else if (talk.speakerId && (speakers as any)[talk.speakerId]) {
                 speakerData.push((speakers as any)[talk.speakerId]);
             }

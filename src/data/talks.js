@@ -34,7 +34,7 @@ export const talks = {
   },
   "vladimir-dementyev-keynote": {
     id: "vladimir-dementyev-keynote",
-    title: "TBD",
+    title: "",
     speakerId: "vladimir-dementyev",
     description: "Topic to be announced.",
     type: "keynote",
@@ -58,7 +58,7 @@ export const talks = {
     id: "opensource-rails-startup",
     title: "How to open-source your Rails startup",
     speakerId: "sam-poder",
-    description:
+    descritption:
       "As Rails developers, we develop on the shoulders of giants. We can do what we can do because of the work of thousands of open source contributors; I want to encourage more developers to give back through open sourcing their work.\n\nThis also isn't a subject talked about often and having just taken a codebase from open to closed source, I can offer a unique perspective. I remember struggling with a lack of resources of the subject when we started the project. Hopefully this talk can make it easier for the next person who open sources their codebase.",
     type: "talk",
     track: "main",
@@ -170,7 +170,7 @@ export const talks = {
   },
   "brandon-weaver-talk": {
     id: "brandon-weaver-talk",
-    title: "TBD",
+    title: "",
     speakerId: "brandon-weaver",
     description: "Topic to be announced.",
     type: "talk",
@@ -334,7 +334,7 @@ export const talks = {
   },
   "noel-rappin-workshop": {
     id: "noel-rappin-workshop",
-    title: "TBD",
+    title: "",
     speakerId: "noel-rappin",
     description: "Topic to be announced.",
     type: "workshop",
@@ -352,7 +352,7 @@ export const talks = {
       "Our tradition at SF Ruby is a session where anyone can grab a mic for a couple minutes to share their announcements, news, or ask  a question.",
     type: "panel",
     moderator: null,
-    speakerIds: [],
+    speakers: [],
     status: "confirmed",
     tags: ["open mic"],
   },
@@ -364,7 +364,7 @@ export const talks = {
     description: "A roundtable discussion with CTOs from the Ruby community.",
     type: "panel",
     moderator: null,
-    speakerIds: ["edward-kim"],
+    speakers: ["edward-kim"],
     status: "confirmed",
     tags: ["leadership", "cto", "discussion"],
   },
@@ -375,7 +375,7 @@ export const talks = {
       "A roundtable discussion with venture capitalists interested in Ruby-based startups.",
     type: "panel",
     moderator: null,
-    speakerIds: [],
+    speakers: [],
     status: "confirmed",
     tags: ["vc", "startups", "funding"],
   },
@@ -385,7 +385,7 @@ export const talks = {
     description:
       "Live demonstrations from innovative startups building with Ruby and Rails.",
     type: "demo",
-    speakerIds: [],
+    speakers: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
   },
@@ -395,7 +395,7 @@ export const talks = {
     description:
       "Live demonstrations from innovative startups building with Ruby and Rails.",
     type: "demo",
-    speakerIds: [],
+    speakers: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
   },
@@ -475,7 +475,14 @@ export function validateTalk(talk) {
       errors.push("Workshop must have max participants");
   }
 
-  if (!talk.speakerId && !talk.speakers) {
+  // Allow panels, demos, and open mic sessions to have empty speakers (they might be TBD)
+  const allowEmptySpeakers =
+    ["panel", "demo"].includes(talk.type) || talk.id === "open-mic";
+  if (
+    !allowEmptySpeakers &&
+    !talk.speakerId &&
+    (!talk.speakers || talk.speakers.length === 0)
+  ) {
     errors.push("Talk must have at least one speaker");
   }
 
@@ -507,3 +514,21 @@ export const TRACKS = {
   BLACKBOX: "blackbox",
   WORKSHOP: "workshop",
 };
+
+// Helper function to get talks by speaker ID
+// Handles talks with single speaker (speakerId) or multiple speakers (speakers array)
+export function getTalksBySpeakerId(speakerId) {
+  return Object.values(talks).filter((talk) => {
+    // Check single speaker field
+    if (talk.speakerId === speakerId) {
+      return true;
+    }
+
+    // Check multiple speakers array
+    if (talk.speakers && Array.isArray(talk.speakers)) {
+      return talk.speakers.includes(speakerId);
+    }
+
+    return false;
+  });
+}
