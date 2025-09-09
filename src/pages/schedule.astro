@@ -17,10 +17,12 @@ const fullSchedule = getCompleteSchedule();
 // Group schedule by day
 const day1Schedule = fullSchedule.filter(slot => slot.day === 1);
 const day2Schedule = fullSchedule.filter(slot => slot.day === 2);
+const day3Schedule = fullSchedule.filter(slot => slot.day === 3);
 
 // Get time blocks for each day
 const day1TimeBlocks = getTimeBlocks(1);
 const day2TimeBlocks = getTimeBlocks(2);
+const day3TimeBlocks = getTimeBlocks(3);
 
 // Define colors for different session types
 const sessionColors = {
@@ -120,10 +122,12 @@ function getCombinedTimeBlocks(day: number) {
 
 const day1CombinedBlocks = getCombinedTimeBlocks(1);
 const day2CombinedBlocks = getCombinedTimeBlocks(2);
+const day3CombinedBlocks = getCombinedTimeBlocks(3);
 
 const days = [
   { date: 'November 19, 2025', dayLabel: 'Day 1', blocks: day1CombinedBlocks },
-  { date: 'November 20, 2025', dayLabel: 'Day 2', blocks: day2CombinedBlocks }
+  { date: 'November 20, 2025', dayLabel: 'Day 2', blocks: day2CombinedBlocks },
+  { date: 'November 21, 2025', dayLabel: 'Day 3', blocks: day3CombinedBlocks }
 ];
 ---
 
@@ -1109,7 +1113,7 @@ const days = [
                 const specialId = (block as HTMLElement).dataset.specialId;
                 const specialType = (block as HTMLElement).dataset.specialType;
                 if (specialType === 'break' && specialId) {
-                    const day = specialId.includes('day1') ? 1 : 2;
+                    const day = specialId.includes('day1') ? 1 : (specialId.includes('day2') ? 2 : 3);
                     openLunchModal(day);
                 }
             });

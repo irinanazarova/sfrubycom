@@ -277,6 +277,30 @@ export const scheduleSlots = {
     track: "main",
     type: "keynote",
   },
+  U1: {
+    id: "U1",
+    day: 3,
+    startTime: "9:00",
+    endTime: "13:00",
+    track: "main",
+    type: "talk",
+  },
+  U2: {
+    id: "U2",
+    day: 3,
+    startTime: "17:00",
+    endTime: "20:00",
+    track: "main",
+    type: "talk",
+  },
+  U3: {
+    id: "U3",
+    day: 3,
+    startTime: "10:00",
+    endTime: "17:00",
+    track: "blackbox",
+    type: "talk",
+  },
 };
 
 // Mapping of slots to talks
@@ -319,6 +343,11 @@ export const slotAssignments = {
   STARTUP_DEMOS_2: "startup-demos-session2",
   VC_ROUNDTABLE: "vc-roundtable",
   K4: "vladimir-dementyev-keynote",
+
+  // DAY 3 ASSIGNMENTS
+  U1: "unofficial-event-1",
+  U2: "unofficial-event-2",
+  U3: "unofficial-event-3",
 };
 
 // Helper functions

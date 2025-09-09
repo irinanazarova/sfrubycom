@@ -42,7 +42,6 @@ export const talks = {
     tags: [],
   },
 
-  // MAIN TRACK TALKS
   "play-with-code": {
     id: "play-with-code",
     title: "Play with your code",
@@ -50,7 +49,6 @@ export const talks = {
     description:
       "Why are programming games more fun than our day jobs? We're going to dig into this exact question and see what lessons we can learn from them, and how we can bring it back to our developer experience. Also, we're going to talk about some rad programming games you should play!",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["developer-experience", "learning", "fun"],
   },
@@ -61,7 +59,6 @@ export const talks = {
     descritption:
       "As Rails developers, we develop on the shoulders of giants. We can do what we can do because of the work of thousands of open source contributors; I want to encourage more developers to give back through open sourcing their work.\n\nThis also isn't a subject talked about often and having just taken a codebase from open to closed source, I can offer a unique perspective. I remember struggling with a lack of resources of the subject when we started the project. Hopefully this talk can make it easier for the next person who open sources their codebase.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["open-source", "startups", "community"],
   },
@@ -72,7 +69,6 @@ export const talks = {
     description:
       "I toyed around with asset handling a lot in the last 4 years. I started in the pre-webpacker era, and came all the way to importmaps, esbuild and vite.\n\nI ship a gem (Avo), which is used in hundreds of different applications with different asset pipeline configurations, and use several techniques to ship my assets.\nNow I'm developing a plugin system and have hit all the roadblocks I can hit and have a better understanding of how things work.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["rails", "assets", "gems", "frontend"],
   },
@@ -83,7 +79,6 @@ export const talks = {
     description:
       "Since Rails 7.2 enabled YJIT by default, it has been widely adopted by the Ruby community, delivering a 10-20% speedup in various production workloads. To enhance Ruby's speed even further, we're developing the next generation of YJIT for Ruby 3.5: ZJIT. In this talk, we'll delve into the exciting future of Ruby performance that ZJIT will unlock.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["performance", "ruby", "jit", "optimization"],
   },
@@ -94,7 +89,6 @@ export const talks = {
     description:
       "Real-time collaboration is a powerful tool for web apps, but difficult to implement. Most Ruby developers lack CRDT exposure and collaborative software challenges like conflict resolution and distributed consistency. This talk shows how to leverage Rails while adding sophisticated collaborative features using AnyCable to boost ActionCable performance and Yjs to simplify collaborative editing.\nI've specifically been implementing this approach in a production Rails setting, giving me a solid perspective on the challenges involved.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["rails", "realtime", "websockets", "collaboration"],
   },
@@ -105,7 +99,6 @@ export const talks = {
     description:
       "We are writing our Ruby code wrongly. We're using classes as the unit of design; we needn't, and we shouldn't. We use design patterns as recipes; they're largely irrelevant. We come up with arcane project structures and convoluted deployment systems; we needn't.\n\nFor the last half-decade, I've been writing Ruby very differently to my previous style. Almost no classes. Creating structure as it grows, rather than before I start. Drastically cutting down dependencies. The result: my code seems drastically easier to write, maintain, and reuse.\n\nI'd like the opportunity the spread the word.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["ruby", "design", "architecture", "paradigms"],
   },
@@ -117,7 +110,6 @@ export const talks = {
     description:
       "Too many brilliant Rails developers build great products and then quit when customers don't appear.\nThey're missing one skill: marketing. I want to change that.\nThe Rails renaissance is here (huge thanks to Evil Martians!), and I believe helping Rails builders become successful entrepreneurs is crucial for our community's future. This might be the conference's most impactful talk.\nWhy me? I'm a technical founder who's built three startups and now coach technical founders on marketing. I've lived this journey and help others navigate it daily.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["marketing", "startups", "entrepreneurship", "business"],
   },
@@ -128,7 +120,6 @@ export const talks = {
     description:
       "This presentation will discuss a novel approach to CLI development, where the command line arguments are passed to an endpoint instead of being parsed by the client program, and the advantages and disadvantages doing so. It will discuss the development of a new command line argument parsing library, cross compiling client line programs, and how this approach enabled usage of the CLI without installation, by integrating support for it into a web application.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["cli", "architecture", "tools"],
   },
@@ -139,7 +130,6 @@ export const talks = {
     description:
       "Ruby devs, like all devs, are nervous about their worth in an AI world. This talk gives them reason to be optimistic, & will start to open for them a vista in which they are enhanced by AI rather than being replaced.\n\nFor 10+ years I've spoken, written, & thought deeply about software design. For the last 6 months I've worked with code assistants to see what they can do in real Rails codebases - not new projects or toy apps. I've got some initial conclusions that are worth sharing widely.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["ai", "design", "future", "career"],
   },
@@ -150,7 +140,6 @@ export const talks = {
     description:
       "Learn how to build a successful open source business model from the creator of Sidekiq.",
     type: "talk",
-    track: "main",
     status: "confirmed",
     tags: ["open-source", "business", "sidekiq"],
   },
@@ -164,19 +153,18 @@ export const talks = {
     description:
       "Successful Rails apps tend to become massive monoliths over time. Our's is no exception. Our team is over 1000 engineers. Our codebase is over 4 million lines of Ruby.\n\nBut, Rails doesn't tell you how to manage that many developers working on that large a codebase. So, we're encouraging modularization and boundaries within our codebase. Our approach is lightweight and actually producing results.\n\nWe're the right ones to talk about this because we're the one's issuing the guidance internally.",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["architecture", "monolith", "modularization", "scale"],
   },
   "brandon-weaver-talk": {
     id: "brandon-weaver-talk",
-    title: "",
+    title: "Rails Expertise, Distilled: AI Agents That Get Your Monolith",
     speakerId: "brandon-weaver",
-    description: "Topic to be announced.",
+    description:
+      "New developers face months of unproductive confusion when dropped into massive codebases they can't navigate or understand. What if they could get instant answers about how systems work, identify what code needs changing, and understand complex business logic without waiting for help? This talk demonstrates how Rails' built-in introspection transforms into expert AI tools that understand your specific codebase, making institutional knowledge accessible 24/7. Instead of 3-month ramp-ups, developers contribute meaningfully in days while the entire team stays productive.",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
-    tags: [],
+    tags: ["ai", "agents", "business logic", "monolith"],
   },
   "performance-starts-at-boot": {
     id: "performance-starts-at-boot",
@@ -185,7 +173,6 @@ export const talks = {
     description:
       "Everyone can better understand how their Ruby code performs, regardless of whether they're using Rails or Hanami or just scripting with Ruby. As applications grow, I frequently see inside-out application performance work ignored or unacceptably tolerated (\"that's just the way it is [sigh]\").",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["performance", "optimization", "ruby"],
   },
@@ -197,7 +184,6 @@ export const talks = {
     description:
       "This talk matters because we are enduring death by a thousand quiet cuts. The world asks us to go faster while our spirits beg us to slow down. Emotional exhaustion has become the norm, but it doesn't have to be. I built Peace of Mind not just with Rails, but with urgency and heart. As a newer dev and RailsConf Scholar, I've lived the tension between burnout and beauty. Choosing peace...in our work, our lives, and our code creates ripples. It starts with one. One you. One me.",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["wellness", "burnout", "ai", "personal"],
   },
@@ -208,7 +194,6 @@ export const talks = {
     description:
       "This talk delivers a low-risk, high-value AI strategy that applies to any Rails app, new or old. It proves the ecosystem's power to modernize existing assets in the AI era without the need for expensive rewrites. It teaches one of the key aspects of the modern AI tech stack, giving a competitive advantage.\n\nI'm a CTO, a veteran Rails developer and a vetted conference speaker. My expertise on a similar topic is validated by my upcoming talks at Rails World and EuRuKo this year. I'm excited to bring this timely material to the US community",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["ai", "mcp", "rails", "integration"],
   },
@@ -219,7 +204,6 @@ export const talks = {
     description:
       'MCP is still pretty foggy for most developers, and Ruby shouldn\'t be left out of the AI tooling party. This story shows how a simple "let me figure this out" project can accidentally become something fun and interesting to share. I\'ve been learning about MCP, from the official ruby SDK, and stumbled onto this idea of self-generating UI interfaces. If you\'ve ever stared a new project and wondered "how do I even start?", this talk is one example from foggy confusion to sunshine moment of "holy smokes, I didn\'t know that was possible." Besides, Ruby deserves a seat at the AI table.',
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["ai", "mcp", "tools", "learning"],
   },
@@ -230,8 +214,6 @@ export const talks = {
     description:
       "Ruby isn't just for web development. Discover why Ruby is a great choice for building and automating modern cloud data infrastructure. Learn real-world lessons from BemiDB, a data analytics platform. You'll gain practical skills and be inspired to leverage Ruby for your next infrastructure project!",
     type: "talk",
-    track: "blackbox",
-    status: "confirmed",
     tags: ["infrastructure", "cloud", "data", "devops"],
   },
   "shipping-solo-rails8": {
@@ -242,7 +224,6 @@ export const talks = {
     description:
       "This talk shows what Ruby and Rails do best: enabling solo developers to build meaningful, user-focused apps with speed, clarity, and joy. I've spent 15 years in the NGO and social impact space, where I've seen huge amounts of money wasted on overbuilt tech that communities didn't need. I'm now using Rails 8, open-source tools, and user-driven design to build DADA — a real product for a deeply underserved audience. I'm living proof that Ruby still empowers builders to move fast, stay lean, and create software that actually helps people.",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["rails8", "solo-developer", "social-impact", "product"],
   },
@@ -253,7 +234,6 @@ export const talks = {
     description:
       "Running a web service requires you to do so many things that aren't included in any programming books or tutorials. We need more developers able to ship services that work, rather than expecting each developer to figure out the entire list by trial and error, one at a time, by themselves. Blog posts with individual tips about isolated problems don't cut it either, because no one is creating a field survey or a checklist of the overall process and making sure developers are aware of and ready for what they'll face in production.",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["devops", "production", "operations", "deployment"],
   },
@@ -264,7 +244,6 @@ export const talks = {
     description:
       "Real-world strategies for debugging large-scale Rails applications at Gusto.",
     type: "talk",
-    track: "blackbox",
     status: "confirmed",
     tags: ["debugging", "scale", "production", "rails"],
   },
@@ -399,6 +378,36 @@ export const talks = {
     status: "confirmed",
     tags: ["startups", "demos", "products"],
   },
+  "unofficial-event-1": {
+    id: "unofficial-event-1",
+    title: "Community Event #1: claim it!",
+    description:
+      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please reach out to us over email or Slack to feature your community event.",
+    type: "talk",
+    speakers: [],
+    status: "tentative",
+    tags: ["hike"],
+  },
+  "unofficial-event-2": {
+    id: "unofficial-event-2",
+    title: "Community Event #2: claim it!",
+    description:
+      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please reach out to us over email or Slack to feature your community event.",
+    type: "talk",
+    speakers: [],
+    status: "tentative",
+    tags: ["hike"],
+  },
+  "unofficial-event-3": {
+    id: "unofficial-event-3",
+    title: "Community Event #3: claim it!",
+    description:
+      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please reach out to us over email or Slack to feature your community event.",
+    type: "talk",
+    speakers: [],
+    status: "tentative",
+    tags: ["hike"],
+  },
 };
 
 // Helper functions
@@ -408,10 +417,6 @@ export function getTalk(talkId) {
 
 export function getTalksByType(type) {
   return Object.values(talks).filter((talk) => talk.type === type);
-}
-
-export function getTalksByTrack(track) {
-  return Object.values(talks).filter((talk) => talk.track === track);
 }
 
 export function getTalksByStatus(status) {
