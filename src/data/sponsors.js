@@ -13,7 +13,7 @@ export const sponsorTiers = [
       "5 complimentary conference tickets",
     ],
     available: 5,
-    claimed: 2,
+    claimed: 3,
   },
   {
     name: "Ruby",
@@ -74,26 +74,19 @@ export const sponsors = {
     logo: "/sponsor_boltnew.png",
     url: "https://www.bolt.new",
   },
+  cisco: {
+    id: "cisco",
+    name: "Cisco",
+    tier: "Pickaxe ⛏️",
+    logo: "/sponsor_cisco.png",
+    url: "https://www.cisco.com",
+  },
   gusto: {
     id: "gusto",
     name: "Gusto",
     tier: "Ruby",
     logo: "/sponsor_gusto.png",
     url: "https://www.gusto.com",
-  },
-  scout: {
-    id: "scout",
-    name: "Scout Monitoring",
-    tier: "Emerald",
-    logo: "/sponsor_scout.png",
-    url: "https://scoutapm.com/",
-  },
-  typesense: {
-    id: "typesense",
-    name: "typesense",
-    tier: "Emerald",
-    logo: "/sponsor_typesense.png",
-    url: "https://typesense.org/",
   },
   temporal: {
     id: "temporal",
@@ -108,6 +101,20 @@ export const sponsors = {
     tier: "Ruby",
     logo: "/sponsor_avo.png",
     url: "https://avohq.io/",
+  },
+  scout: {
+    id: "scout",
+    name: "Scout Monitoring",
+    tier: "Emerald",
+    logo: "/sponsor_scout.png",
+    url: "https://scoutapm.com/",
+  },
+  typesense: {
+    id: "typesense",
+    name: "typesense",
+    tier: "Emerald",
+    logo: "/sponsor_typesense.png",
+    url: "https://typesense.org/",
   },
   cedarcode: {
     id: "cedarcode",
