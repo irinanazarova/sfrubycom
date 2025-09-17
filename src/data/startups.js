@@ -149,26 +149,6 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
-  softwarecom: {
-    id: "softwarecom",
-    name: "Software.com",
-    logo: "/startup_softwarecom.png",
-    url: "https://software.com/",
-    description:
-      "AI-driven analytics platform for engineering teams that automates developer productivity insights, uncovers bottlenecks, and benchmarks GenAI impact—without reading source code.",
-    speakerId: "",
-    demoTime: "",
-  },
-  softwarecom: {
-    id: "softwarecom",
-    name: "Software.com",
-    logo: "/startup_softwarecom.png",
-    url: "https://software.com/",
-    description:
-      "AI-driven analytics platform for engineering teams that automates developer productivity insights, uncovers bottlenecks, and benchmarks GenAI impact—without reading source code.",
-    speakerId: "",
-    demoTime: "",
-  },
   superconductor: {
     id: "superconductor",
     name: "Superconductor",
@@ -176,6 +156,16 @@ export const startups = {
     url: "https://www.superconductor.dev/",
     description:
       "Superconductor lets you run many coding agents in parallel, with a live browser preview for each one, on desktop or mobile. Launch many agents for each ticket to boost your productivity.",
+    speakerId: "",
+    demoTime: "",
+  },
+  aisquared: {
+    id: "aisquared",
+    name: "AI Squared",
+    logo: "/startup_aisquared.png",
+    url: "https://github.com/Multiwoven/multiwoven",
+    description:
+      "Open-source reverse ETL platform to activate warehouse data into SaaS apps. One-click self-hosting, customizable connectors, and built for modern data teams.",
     speakerId: "",
     demoTime: "",
   },
