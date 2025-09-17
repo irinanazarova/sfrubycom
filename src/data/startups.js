@@ -169,6 +169,16 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
+  recognize: {
+    id: "recognize",
+    name: "Recognize",
+    logo: "/startup_recognize.png",
+    url: "https://recognizeapp.com/",
+    description:
+      "Employee recognition and rewards program that is high-impact, affordable, and easy to launch. Even for frontline teams across multiple locations.",
+    speakerId: "",
+    demoTime: "",
+  },
 };
 
 // Helper functions
