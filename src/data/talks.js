@@ -311,11 +311,12 @@ export const talks = {
     tags: ["rails", "open-source", "gems", "learning"],
     link: "https://lu.ma/jxv24vkp",
   },
-  "noel-rappin-workshop": {
-    id: "noel-rappin-workshop",
-    title: "",
+  "dynamic-ruby-toolkit-workshop": {
+    id: "dynamic-ruby-toolkit-workshop",
+    title: "The Dynamic Ruby Toolkit",
     speakerId: "noel-rappin",
-    description: "Topic to be announced.",
+    description:
+      "Ruby rewards thinking about types with a dynamic mindset instead of a static one. In this workshop, we’ll show how use Ruby’s dynamism to your advantage. From the humble comment to runtime type checking, from tests to debugging techniques, from data management to true object-oriented design, this workshop will give you the tools you need to bring out Ruby’s full power.",
     type: "workshop",
     duration: 110, // minutes
     maxParticipants: 48,
@@ -343,7 +344,7 @@ export const talks = {
     description: "A roundtable discussion with CTOs from the Ruby community.",
     type: "panel",
     moderator: null,
-    speakers: ["edward-kim"],
+    speakers: ["edward-kim", "ryan-king"],
     status: "confirmed",
     tags: ["leadership", "cto", "discussion"],
   },

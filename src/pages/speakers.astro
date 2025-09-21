@@ -97,8 +97,7 @@ allSpeakers.sort((a, b) => {
                         const badge = getSpeakerBadge(speaker);
                         const ctoPanelTalk = speaker.group === "cto" ?
                             Object.values(talks).find(talk =>
-                                talk.id === "cto-roundtable" ||
-                                (talk.title && talk.title.toLowerCase().includes("cto"))
+                                talk.id === "cto-roundtable"
                             ) : null;
 
                         return (

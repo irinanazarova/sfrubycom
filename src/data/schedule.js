@@ -338,7 +338,7 @@ export const slotAssignments = {
   M11: "opensource-business-sidekiq",
   S10: "opensource-rails-startup",
   S11: "open-mic",
-  W4: "noel-rappin-workshop",
+  W4: "dynamic-ruby-toolkit-workshop",
   STARTUP_DEMOS_1: "startup-demos-session1",
   STARTUP_DEMOS_2: "startup-demos-session2",
   VC_ROUNDTABLE: "vc-roundtable",
