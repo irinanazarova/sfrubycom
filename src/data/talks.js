@@ -115,7 +115,7 @@ export const talks = {
   },
   "thin-client-approach": {
     id: "thin-client-approach",
-    title: "The Thin Client Approach",
+    title: "The Thin CLIent Approach",
     speakerId: "jeremy-evans",
     description:
       "This presentation will discuss a novel approach to CLI development, where the command line arguments are passed to an endpoint instead of being parsed by the client program, and the advantages and disadvantages doing so. It will discuss the development of a new command line argument parsing library, cross compiling client line programs, and how this approach enabled usage of the CLI without installation, by integrating support for it into a web application.",
