@@ -25,9 +25,10 @@ export const talks = {
   },
   "rails-ai-ruby-llm": {
     id: "rails-ai-ruby-llm",
-    title: "Ruby LLM",
+    title: "RubyLLM: One API, One Person, One Machine for AI",
     speakerId: "carmine-paolino",
-    description: "Talk details to be updated.",
+    description:
+      "The Merchants of Complexity have sold the AI world a lie. You need their frameworks. Their SDKs. Their enterprise architectures. Bullshit. AI today is just API calls. That's it. And when the game becomes building products instead of training models, complexity is death and simplicity is everything. Rails proved it. <br><br> RubyLLM: one API for every model, every vendor. One developer on one machine serving thousands. While Python developers debug their 14-line \"Hello World,\" we're shipping. Ruby's time in AI isn't coming - it's here.",
     type: "keynote",
     status: "confirmed",
     tags: ["rails", "ai", "llm"],

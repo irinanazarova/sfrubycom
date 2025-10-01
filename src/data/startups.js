@@ -188,6 +188,26 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
+  ubicloud: {
+    id: "ubicloud",
+    name: "Ubicloud",
+    logo: "/startup_ubicloud.png",
+    url: "https://ubicloud.com/",
+    description:
+      "Open source alternative to AWS. Ubicloud provides cloud services on bare metal providers, such as Hetzner, Leaseweb, or AWS Bare Metal.",
+    speakerId: "",
+    demoTime: "",
+  },
+  chatwithwork: {
+    id: "chatwithwork",
+    name: "Chatwithwork",
+    logo: "/startup_chatwithwork.png",
+    url: "https://chatwithwork.com/",
+    description:
+      "Finally, a way to find that thing buried in your work accounts, and to write more with what you find. Pulls context from Gmail, Drive, Docs, Sheets, Calendar, and Presentations to draft emails and documents. Built with Rails 8, RubyLLM and the Async stack.",
+    speakerId: "",
+    demoTime: "",
+  },
 };
 
 // Helper functions
