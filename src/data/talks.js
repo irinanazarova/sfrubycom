@@ -56,7 +56,7 @@ export const talks = {
     id: "opensource-rails-startup",
     title: "How to open-source your Rails startup",
     speakerId: "sam-poder",
-    descritption:
+    description:
       "As Rails developers, we develop on the shoulders of giants. We can do what we can do because of the work of thousands of open source contributors; I want to encourage more developers to give back through open sourcing their work.\n\nThis also isn't a subject talked about often and having just taken a codebase from open to closed source, I can offer a unique perspective. I remember struggling with a lack of resources of the subject when we started the project. Hopefully this talk can make it easier for the next person who open sources their codebase.",
     type: "talk",
     status: "confirmed",
