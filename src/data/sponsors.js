@@ -29,7 +29,7 @@ export const sponsorTiers = [
       "2 complimentary conference tickets",
     ],
     available: 10,
-    claimed: 3,
+    claimed: 5,
   },
   {
     name: "Emerald",
@@ -42,7 +42,7 @@ export const sponsorTiers = [
       "1 complimentary conference ticket",
     ],
     available: 15,
-    claimed: 5,
+    claimed: 9,
   },
 ];
 
@@ -95,6 +95,20 @@ export const sponsors = {
     logo: "/sponsor_temporal.png",
     url: "https://temporal.io/",
   },
+  intercom: {
+    id: "intercom",
+    name: "Avo",
+    tier: "Ruby",
+    logo: "/sponsor_intercom.png",
+    url: "https://intercom.com",
+  },
+  omada: {
+    id: "omada",
+    name: "Omada",
+    tier: "Ruby",
+    logo: "/sponsor_omada.png",
+    url: "https://omada.com",
+  },
   avo: {
     id: "avo",
     name: "Avo",
@@ -136,6 +150,27 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_cactus.png",
     url: "https://oncactus.com",
+  },
+  tidewave: {
+    id: "tidewave",
+    name: "Tidewave AI",
+    tier: "Emerald",
+    logo: "/sponsor_tidewave.png",
+    url: "https://tidewave.ai",
+  },
+  visuality: {
+    id: "visuality",
+    name: "Visuality",
+    tier: "Emerald",
+    logo: "/sponsor_visuality.png",
+    url: "https://www.visuality.pl/",
+  },
+  ubicloud: {
+    id: "ubicloud",
+    name: "Ubicloud",
+    tier: "Emerald",
+    logo: "/sponsor_ubicloud.png",
+    url: "https://ubicloud.com",
   },
 };
 

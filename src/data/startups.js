@@ -179,6 +179,15 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
+  fin: {
+    id: "fin",
+    name: "Fin by Intercom",
+    logo: "/startup_fin.png",
+    url: "https://fin.ai/",
+    description: "The #1 AI Agent for customer service",
+    speakerId: "",
+    demoTime: "",
+  },
 };
 
 // Helper functions
