@@ -107,7 +107,7 @@ export const sponsors = {
     name: "Omada",
     tier: "Ruby",
     logo: "/sponsor_omada.png",
-    url: "https://omada.com",
+    url: "https://omadahealth.com",
   },
   avo: {
     id: "avo",
