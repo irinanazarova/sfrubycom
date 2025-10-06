@@ -384,7 +384,7 @@ export const talks = {
     id: "unofficial-event-1",
     title: "Community Event #1: claim it!",
     description:
-      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please reach out to us over email or Slack to feature your community event.",
+      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please fill out this form https://forms.gle/zXXAFA59aQSDjdz59 or reach out to conference@sfruby.com to add your community event.",
     type: "talk",
     speakers: [],
     status: "tentative",
@@ -394,7 +394,7 @@ export const talks = {
     id: "unofficial-event-2",
     title: "Community Event #2: claim it!",
     description:
-      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please reach out to us over email or Slack to feature your community event.",
+      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please fill out this form https://forms.gle/zXXAFA59aQSDjdz59 or reach out to conference@sfruby.com to add your community event.",
     type: "talk",
     speakers: [],
     status: "tentative",
@@ -404,7 +404,7 @@ export const talks = {
     id: "unofficial-event-3",
     title: "Community Event #3: claim it!",
     description:
-      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please reach out to us over email or Slack to feature your community event.",
+      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please fill out this form https://forms.gle/zXXAFA59aQSDjdz59 or reach out to conference@sfruby.com to add your community event.",
     type: "talk",
     speakers: [],
     status: "tentative",

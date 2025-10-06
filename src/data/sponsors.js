@@ -14,6 +14,7 @@ export const sponsorTiers = [
     ],
     available: 5,
     claimed: 3,
+    stripelink: "",
   },
   {
     name: "Ruby",
@@ -30,6 +31,7 @@ export const sponsorTiers = [
     ],
     available: 10,
     claimed: 5,
+    stripelink: "https://buy.stripe.com/bJe8wP3V26m9bgk2M5e7m02",
   },
   {
     name: "Emerald",
@@ -43,6 +45,7 @@ export const sponsorTiers = [
     ],
     available: 15,
     claimed: 9,
+    stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
   },
 ];
 

@@ -153,6 +153,15 @@ const currentSponsors = getSponsorsForSponsorsPage();
                   >
                     {tier.claimed === tier.available ? 'Sold Out' : 'Contact Us'}
                   </a>
+                  {tier.stripelink && tier.stripelink !== '' && (
+                    <a
+                      href={tier.stripelink}
+                      class="inline-block px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 bg-ruby-500 text-white hover:bg-ruby-600"
+                    >
+                      Send Payment
+                    </a>
+                  )}
+
                 </td>
               </tr>
             ))}
