@@ -44,7 +44,7 @@ export const sponsorTiers = [
       "1 complimentary conference ticket",
     ],
     available: 15,
-    claimed: 9,
+    claimed: 10,
     stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
   },
 ];
@@ -174,6 +174,13 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_ubicloud.png",
     url: "https://ubicloud.com",
+  },
+  uscreen: {
+    id: "uscreen",
+    name: "Uscreen",
+    tier: "Emerald",
+    logo: "/sponsor_uscreen.png",
+    url: "https://www.uscreen.tv/",
   },
 };
 
