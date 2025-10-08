@@ -19,6 +19,3 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
-
-# Bluesky AT Protocol
-.well-known/atproto-did
