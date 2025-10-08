@@ -157,8 +157,8 @@ export const talks = {
     status: "confirmed",
     tags: ["architecture", "monolith", "modularization", "scale"],
   },
-  "brandon-weaver-talk": {
-    id: "brandon-weaver-talk",
+  "rails-expertise-distilled": {
+    id: "rails-expertise-distilled",
     title: "Rails Expertise, Distilled: AI Agents That Get Your Monolith",
     speakerId: "brandon-weaver",
     description:
