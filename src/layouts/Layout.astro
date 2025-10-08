@@ -121,44 +121,5 @@ const {
                 });
             });
         </script>
-
-        <script>
-            // Add smooth scrolling for anchor links with offset for fixed header
-            document.addEventListener("DOMContentLoaded", () => {
-                document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-                    anchor.addEventListener(
-                        "click",
-                        function (this: HTMLAnchorElement, e: Event) {
-                            e.preventDefault();
-                            const targetId = this.getAttribute("href");
-                            if (targetId && targetId !== "#") {
-                                const target = document.querySelector(targetId);
-                                if (target) {
-                                    // Get the fixed header height (80px for h-20 in Tailwind)
-                                    let headerOffset = 80;
-
-                                    // For newsletter section, reduce offset to scroll more so the header is visible
-                                    // The section has py-32 (128px padding top), so we want to scroll past some of it
-                                    if (targetId === "#newsletter") {
-                                        headerOffset = -40; // This will scroll 40px past the section start, into the padding
-                                    }
-
-                                    const elementPosition =
-                                        target.getBoundingClientRect().top +
-                                        window.pageYOffset;
-                                    const offsetPosition =
-                                        elementPosition - headerOffset;
-
-                                    window.scrollTo({
-                                        top: offsetPosition,
-                                        behavior: "smooth",
-                                    });
-                                }
-                            }
-                        },
-                    );
-                });
-            });
-        </script>
     </body>
 </html>
