@@ -182,6 +182,13 @@ export const sponsors = {
     logo: "/sponsor_uscreen.png",
     url: "https://www.uscreen.tv/",
   },
+  superconductor: {
+    id: "superconductor",
+    name: "Superconductor",
+    tier: "Emerald",
+    logo: "/sponsor_superconductor.png",
+    url: "https://www.superconductor.dev/",
+  },
 };
 
 // Special organizers
