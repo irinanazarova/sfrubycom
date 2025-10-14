@@ -52,6 +52,21 @@ const startups = getAllStartups();
                                 <p class="text-sm text-dark-600 text-center leading-relaxed flex-grow mb-4">
                                     {startup.description}
                                 </p>
+                                {startup.isYC && (
+                                    <div class="mb-4">
+                                        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 border border-orange-200 rounded-full">
+                                            <img
+                                                src="/yc_icon.png"
+                                                alt="Y Combinator"
+                                                class="w-4 h-4"
+                                                title="Y Combinator Company"
+                                            />
+                                            <span class="text-xs font-medium text-orange-700">
+                                                YC Backed
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
                                 {speaker && speaker.name && (
                                     <div class="mt-4 pt-3 border-t border-dark-100 w-full">
                                         <div class="flex flex-col items-center text-xs text-dark-500">
