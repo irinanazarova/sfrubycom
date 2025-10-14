@@ -16,6 +16,7 @@ export const startups = {
     url: "https://getlago.com",
     description:
       "Open-source platform for metering, billing, and usage-based pricing. Flexible, self-hosted, developer-first. YC-backed.",
+    isYC: true,
     speakerId: "",
     demoTime: "",
   },
@@ -26,6 +27,7 @@ export const startups = {
     url: "https://www.stepful.com",
     description:
       "Online healthcare training for entry-level roles in four months. Tech-driven, accessible to those with a high school diploma.",
+    isYC: true,
     speakerId: "",
     demoTime: "",
   },
@@ -65,7 +67,7 @@ export const startups = {
     logo: "/startup_nexhealth.png",
     url: "https://nexhealth.com",
     description:
-      "Patient experience platform that streamlines the entire healthcare journey. A Series C startup with $1b valuation, NexHealth serves 15,000 practices in North America, with almost 150 third-party developers building on top of it.",
+      "Accelerating innovation in healthcare with our universal API, powered by the Synchronizer. Used by tens of thousands of practices in North America, and hundreds of startups building with us. We're a healthtech unicorn!",
     speakerId: "",
     demoTime: "",
   },
@@ -76,6 +78,7 @@ export const startups = {
     url: "https://usesimple.ai",
     description:
       "Simple AI makes it easy to build and deploy enterprise-grade phone agents in days, not weeks. Iconic businesses use us for sales calls, customer support, leads qualification, and more. YC-backed.",
+    isYC: true,
     speakerId: "",
     demoTime: "",
   },
@@ -195,6 +198,7 @@ export const startups = {
     url: "https://ubicloud.com/",
     description:
       "Open source alternative to AWS. Ubicloud provides cloud services on bare metal providers, such as Hetzner, Leaseweb, or AWS Bare Metal.",
+    isYC: true,
     speakerId: "",
     demoTime: "",
   },
