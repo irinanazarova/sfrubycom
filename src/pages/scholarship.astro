@@ -211,8 +211,8 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const days = Math.floor(hours / 24);
 
-        if (hours < 6) {
-            countdownEl.textContent = '(Due soon)';
+        if (hours < 3) {
+            countdownEl.textContent = '(Due in a couple of hours)';
         } else if (days > 0) {
             countdownEl.textContent = `(${days} day${days !== 1 ? 's' : ''} left)`;
         } else {
