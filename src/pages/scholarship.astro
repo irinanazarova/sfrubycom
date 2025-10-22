@@ -30,7 +30,7 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
                 <p class="text-dark-700 leading-relaxed mb-6">
                     This is your chance to meet inspiring Ruby and Rails engineers, learn from industry leaders, and connect with the vibrant community that keeps Ruby thriving.
                 </p>
-                <div>
+                <div class="flex items-center gap-2">
                     <a
                         href={SCHOLARSHIP_APPLICATION_URL}
                         target="_blank"
@@ -39,6 +39,7 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
                     >
                         Apply Now
                     </a>
+                    <span id="countdown" class="text-xs text-dark-600"></span>
                 </div>
             </div>
         </section>
@@ -190,3 +191,36 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
         </section>
     </div>
 </Layout>
+
+<script>
+    function updateCountdown() {
+        const deadline = new Date('2025-10-25T23:59:59-07:00'); // October 25th, 2025 at 11:59 PM PT
+        const now = new Date();
+        const diff = deadline.getTime() - now.getTime();
+
+        const countdownEl = document.getElementById('countdown');
+        if (!countdownEl) return;
+
+        if (diff <= 0) {
+            // Deadline has passed, but we'll still encourage applications in
+            // case we want to accept late ones.
+            countdownEl.textContent = '(Due soon)';
+            return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const days = Math.floor(hours / 24);
+
+        if (hours < 6) {
+            countdownEl.textContent = '(Due soon)';
+        } else if (days > 0) {
+            countdownEl.textContent = `(${days} day${days !== 1 ? 's' : ''} left)`;
+        } else {
+            countdownEl.textContent = `(${hours} hour${hours !== 1 ? 's' : ''} left)`;
+        }
+    }
+
+    // Update immediately and then every minute
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+</script>
