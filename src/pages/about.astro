@@ -177,35 +177,78 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                 <h2 class="text-2xl font-display font-bold text-dark-900">
                     Dining Options
                 </h2>
-                <a
-                    class="inline-flex items-center px-4 py-2 bg-ruby-500 text-white rounded-md font-medium hover:bg-ruby-600 transition-colors"
-                >
-                    Full Dining Guide: coming soon
-                    <!--<svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="w-4 h-4 ml-2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                        ></path>
-                    </svg>-->
-                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 bg-gray-50 border border-dark-200 rounded-lg gap-6 mb-6">
+
+                <div class="flex items-center gap-2 md:col-span-3 p-6 pb-0">
+                    <h3 class="font-bold text-dark-900">Food Trucks Onsite</h3>
+                    <DistanceBadge
+                        distance="0 min"
+                        type="walk"
+                        color="green"
+                    />
+                </div>
+
+                <div class="px-6">
+                    <p class="text-dark-600 text-sm mb-3">
+                        <strong>Cielito Lindo</strong>
+                    </p>
+                    <ul class="space-y-2 text-dark-600 text-sm">
+                        <li>
+                            • Taco Plate $13.99
+                        </li>
+                        <li>
+                            • Burrito Bowl $15.99
+                        </li>
+                        <li>
+                            • Baja Fish Tacos $15.99
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="px-6">
+                    <ul class="space-y-2 text-dark-600 text-sm">
+                        <li>
+                            • Dim Sum Platter $16.00
+                        </li>
+                        <li>
+                            • Vegetable Chow Mein $14.00
+                        </li>
+                        <li>
+                            • General Chicken Rice $14.00
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="px-6">
+                    <ul class="space-y-2 text-dark-600 text-sm">
+                        <li>
+                            • Power Rice Bowl $18.00
+                        </li>
+                        <li>
+                            • Power Wrap $17.00
+                        </li>
+                        <li>
+                            • Mediterranean Salad $17.00
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex items-center gap-2 md:col-span-3 p-6 pt-0">
+                    <a href="/food-truck-menu.pdf" target="_blank" rel="noopener" class="underline">See the menu</a>
+                </div>
+
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
-                        <h3 class="font-bold text-dark-900">At the Venue</h3>
+                        <h3 class="font-bold text-dark-900">Next to the Venue</h3>
                         <DistanceBadge
-                            distance="0 min"
+                            distance="2-5 min"
                             type="walk"
-                            color="green"
+                            color="purple"
                         />
                     </div>
                     <ul class="space-y-2 text-dark-600 text-sm">
