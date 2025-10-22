@@ -425,6 +425,20 @@ export const speakers = {
     bio: "José Valim is the creator of the Elixir programming language and Chief Adoption Officer at Dashbit, the company behind Tidewave and Livebook. A former Rails Core team member, José authored Crafting Rails Applications, received a Ruby Hero award, and contributed to several open source projects.",
     group: "speaker",
   },
+  "eugene-kenny": {
+    id: "eugene-kenny",
+    name: "Eugene Kenny",
+    company: "Intercom",
+    role: "Rails Committer & Staff Product Engineer",
+    image: "/speaker_eugene.jpg",
+    socials: [
+      "https://x.com/eugeneius",
+      "https://github.com/eugeneius",
+      "https://www.linkedin.com/in/eugenekenny/",
+    ],
+    bio: "Eugene Kenny is a Rails committer, and a Staff Product Engineer at Intercom, where he helps steward Intercom’s two million line Rails monolith in production. He’s led critical upgrades and platform improvements, from major Rails upgrades to database architecture and CI/CD pipelines. As an active contributor to Rails, he brings lessons from operating at scale back to the framework itself.",
+    group: "speaker",
+  },
 };
 
 // Helper functions

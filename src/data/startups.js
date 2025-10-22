@@ -187,7 +187,8 @@ export const startups = {
     name: "Fin by Intercom",
     logo: "/startup_fin.png",
     url: "https://fin.ai/",
-    description: "The #1 AI Agent for customer service",
+    description:
+      "In ten minutes, see Fin, Intercom’s AI support agent, resolve frontline questions with instant, human-quality answers across chat, email, voice, and social. It learns from your procedures, docs, and policies, and keeps your tone of voice. We will show the Fin AI Engine in action. It clarifies intent, retrieves the right knowledge, and validates responses to reduce hallucinations. Accuracy and reliability scale with you. For builders, we will cover setup that is often under an hour, precise control with Guidance, Tasks, and Workflows, actionable Insights, and integrations with Intercom’s Customer Service Suite or your existing help desk.",
     speakerId: "",
     demoTime: "",
   },
@@ -209,6 +210,16 @@ export const startups = {
     url: "https://chatwithwork.com/",
     description:
       "Finally, a way to find that thing buried in your work accounts, and to write more with what you find. Pulls context from Gmail, Drive, Docs, Sheets, Calendar, and Presentations to draft emails and documents. Built with Rails 8, RubyLLM and the Async stack.",
+    speakerId: "",
+    demoTime: "",
+  },
+  thatch: {
+    id: "thatch",
+    name: "Thatch",
+    logo: "/startup_thatch.png",
+    url: "https://thatch.com/",
+    description:
+      "Thatch makes it easy to give your team great healthcare. You set a budget, and your employees spend it the way that works best for them.",
     speakerId: "",
     demoTime: "",
   },

@@ -47,16 +47,30 @@ export const sponsorTiers = [
     claimed: 10,
     stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
   },
+  {
+    name: "Reception",
+    price: "Special",
+    description: "Exclusive sponsorship of the evening reception.",
+    benefits: [
+      "Exclusive branding at the reception event",
+      "Logo on conference website and printed materials",
+      "Special acknowledgment during the reception",
+      "Social media recognition",
+      "2 complimentary conference tickets",
+    ],
+    available: 1,
+    claimed: 1,
+    stripelink: "",
+  },
 ];
 
 // Special sponsorship opportunities
 export const specialOpportunities = [
   {
-    name: "Reception Sponsor",
-    price: "TBD",
+    name: "Reception",
     description: "Exclusive sponsorship of the evening reception on Day 1.",
     available: 1,
-    claimed: 0,
+    claimed: 1,
   },
 ];
 
@@ -118,6 +132,13 @@ export const sponsors = {
     tier: "Ruby",
     logo: "/sponsor_avo.png",
     url: "https://avohq.io/",
+  },
+  thatch: {
+    id: "thatch",
+    name: "Thatch",
+    tier: "Ruby",
+    logo: "/sponsor_thatch.png",
+    url: "https://thatch.com/",
   },
   scout: {
     id: "scout",
@@ -188,6 +209,13 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_superconductor.png",
     url: "https://www.superconductor.dev/",
+  },
+  gitbutler: {
+    id: "gitbutler",
+    name: "GitButler",
+    tier: "Reception",
+    logo: "/sponsor_gitbutler.png",
+    url: "https://gitbutler.com",
   },
 };
 
