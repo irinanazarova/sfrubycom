@@ -259,6 +259,16 @@ export const talks = {
     status: "confirmed",
     tags: ["programming languages", "ai"],
   },
+  "scaling-rails-to-two-million": {
+    id: "scaling-rails-to-two-million",
+    title: "Scaling Rails to two million MySQL requests per second",
+    speakerId: "eugene-kenny",
+    description:
+      "I whistle stop tour of various patterns and techniques Intercom's monolith used to go from rails new intercom  to comfortably scaling to over two million MySQL requests per second. Expect practical takeaways on replication, sharding, caching, connection routing, and upgrade strategy, plus the bumps and trade‑offs we hit along the way. ",
+    type: "talk",
+    status: "confirmed",
+    tags: ["scale", "mysql", "database", "performance"],
+  },
 
   // WORKSHOPS
   "building-agents-rails": {
