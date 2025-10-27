@@ -223,15 +223,16 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
-  thatch: {
-    id: "thatch",
-    name: "Thatch",
-    logo: "/startup_thatch.png",
-    url: "https://thatch.com/",
+  finta: {
+    id: "finta",
+    name: "Finta",
+    logo: "/startup_finta.png",
+    url: "https://www.finta.com/",
     description:
-      "Thatch makes it easy to give your team great healthcare. You set a budget, and your employees spend it the way that works best for them.",
+      "Finta is the new default for startups to handle accounting and taxes. Within 10 minutes, you get automated bookkeeping, effortless tax filing, and real‑time insights. ",
     speakerId: "",
     demoTime: "",
+    isYC: true,
   },
 };
 

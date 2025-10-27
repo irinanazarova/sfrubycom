@@ -140,6 +140,13 @@ export const sponsors = {
     logo: "/sponsor_thatch.png",
     url: "https://thatch.com/",
   },
+  finta: {
+    id: "finta",
+    name: "Finta",
+    tier: "Ruby",
+    logo: "/sponsor_finta.png",
+    url: "https://finta.com/",
+  },
   scout: {
     id: "scout",
     name: "Scout Monitoring",

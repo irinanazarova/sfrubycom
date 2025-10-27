@@ -285,6 +285,14 @@ export const scheduleSlots = {
     track: "main",
     type: "keynote",
   },
+  AFTERPARTY: {
+    id: "AFTERPARTY",
+    day: 1,
+    startTime: "17:30",
+    endTime: "20:30",
+    track: "main",
+    type: "social",
+  },
   U1: {
     id: "U1",
     day: 3,
@@ -334,6 +342,7 @@ export const slotAssignments = {
   S7: "cloud-data-infrastructure-ruby",
   K2: "ruby-ai-conversation",
   CTO_ROUNDTABLE: "cto-roundtable",
+  AFTERPARTY: "gitbutler-afterparty",
 
   // DAY 2 ASSIGNMENTS
   K3: "rails-ai-ruby-llm",

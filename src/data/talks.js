@@ -390,6 +390,18 @@ export const talks = {
     status: "confirmed",
     tags: ["startups", "demos", "products"],
   },
+  "gitbutler-afterparty": {
+    id: "gitbutler-afterparty",
+    title: "🎉 GitButler Afterparty 🍻",
+    description:
+      "Join us at San Francisco Brewing Co. (3150 Polk St, San Francisco, CA 94109) for an evening of food, drinks, and great conversations with fellow Rubyists! Sponsored by our Ruby friends from GitButler!",
+    type: "social",
+    speakers: [],
+    status: "confirmed",
+    tags: ["social", "networking", "afterparty"],
+    venue: "San Francisco Brewing Co.",
+    address: "3150 Polk St, San Francisco, CA 94109",
+  },
   "unofficial-event-1": {
     id: "unofficial-event-1",
     title: "Community Event #1: claim it!",

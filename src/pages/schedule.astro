@@ -30,6 +30,7 @@ const sessionColors = {
   'panel': 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-purple-400',
   'demo': 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-green-400',
   'break': 'bg-gradient-to-r from-sky-400 to-blue-500 text-white border-sky-400',
+  'social': 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-purple-400',
   'logistics': 'bg-gray-100 text-gray-700 border-gray-200',
   'talk': 'bg-white text-gray-900 border-gray-200 hover:border-ruby-300 hover:shadow-lg',
   'workshop': 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:border-emerald-300 hover:shadow-lg'
@@ -838,6 +839,7 @@ const days = [
                         talk.type === 'workshop' ? 'from-emerald-500 to-green-500' :
                         talk.type === 'panel' ? 'from-purple-500 to-indigo-500' :
                         talk.type === 'demo' ? 'from-green-500 to-emerald-500' :
+                        talk.type === 'social' ? 'from-purple-500 to-indigo-500' :
                         'from-gray-500 to-gray-600'
                     } p-6 sm:p-8 text-white">
                         <div class="max-w-3xl">
@@ -858,7 +860,7 @@ const days = [
                             </div>
                             <h2 class="text-2xl sm:text-3xl font-bold mb-4">${talk.title}</h2>
                             ${slot ? `
-                                <div class="flex items-center gap-4 text-white/90">
+                                <div class="flex flex-wrap items-center gap-4 text-white/90">
                                     <div class="flex items-center gap-2">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -870,6 +872,18 @@ const days = [
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                         <span>${formatTime(slot.startTime)} - ${formatTime(slot.endTime)}</span>
+                                    </div>
+                                </div>
+                            ` : ''}
+                            ${talk.venue || talk.address ? `
+                                <div class="flex items-start gap-2 text-white/90 mt-3">
+                                    <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <div>
+                                        ${talk.venue ? `<div class="font-semibold">${talk.venue}</div>` : ''}
+                                        ${talk.address ? `<div class="text-sm">${talk.address}</div>` : ''}
                                     </div>
                                 </div>
                             ` : ''}
