@@ -76,7 +76,7 @@ const tiers = getSponsorsForComponent();
                                             <img
                                                 src={sponsor.logo}
                                                 alt={sponsor.name}
-                                                class={`h-12 w-auto filter transition-all duration-300 ${tier.name === "Pickaxe ⛏️" ? "md:h-32" : tier.name === "Ruby" ? "md:h-24" : "md:h-16"}`}
+                                                class={`h-12 w-auto filter transition-all duration-300 ${tier.name === "Pickaxe ⛏️" ? "md:h-32" : tier.name === "Ruby" || tier.name === "Reception" ? "md:h-24" : "md:h-16"}`}
                                                 loading="lazy"
                                             />
                                         ) : (

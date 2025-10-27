@@ -34,6 +34,21 @@ export const sponsorTiers = [
     stripelink: "https://buy.stripe.com/bJe8wP3V26m9bgk2M5e7m02",
   },
   {
+    name: "Reception",
+    price: "Special",
+    description: "Exclusive sponsorship of the evening reception.",
+    benefits: [
+      "Exclusive branding at the reception event",
+      "Logo on conference website and printed materials",
+      "Special acknowledgment during the reception",
+      "Social media recognition",
+      "2 complimentary conference tickets",
+    ],
+    available: 1,
+    claimed: 1,
+    stripelink: "",
+  },
+  {
     name: "Emerald",
     price: "$3,000",
     description: "Strong presence with quality branding and networking.",
@@ -48,19 +63,16 @@ export const sponsorTiers = [
     stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
   },
   {
-    name: "Reception",
+    name: "Travel",
     price: "Special",
-    description: "Exclusive sponsorship of the evening reception.",
+    description: "Supporting speakers' travel to the conference.",
     benefits: [
-      "Exclusive branding at the reception event",
       "Logo on conference website and printed materials",
-      "Special acknowledgment during the reception",
       "Social media recognition",
-      "2 complimentary conference tickets",
+      "Special acknowledgment",
     ],
-    available: 1,
-    claimed: 1,
-    stripelink: "",
+    available: 5,
+    claimed: 2,
   },
 ];
 
@@ -182,13 +194,6 @@ export const sponsors = {
     logo: "/sponsor_cactus.png",
     url: "https://oncactus.com",
   },
-  tidewave: {
-    id: "tidewave",
-    name: "Tidewave AI",
-    tier: "Emerald",
-    logo: "/sponsor_tidewave.png",
-    url: "https://tidewave.ai",
-  },
   visuality: {
     id: "visuality",
     name: "Visuality",
@@ -216,6 +221,20 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_superconductor.png",
     url: "https://www.superconductor.dev/",
+  },
+  tidewave: {
+    id: "tidewave",
+    name: "Tidewave AI",
+    tier: "Travel",
+    logo: "/sponsor_tidewave.png",
+    url: "https://tidewave.ai",
+  },
+  hackclub: {
+    id: "hackclub",
+    name: "Hack Club",
+    tier: "Travel",
+    logo: "/sponsor_hackclub.png",
+    url: "https://hackclub.com",
   },
   gitbutler: {
     id: "gitbutler",

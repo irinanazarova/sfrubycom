@@ -30,7 +30,7 @@ const sessionColors = {
   'panel': 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-purple-400',
   'demo': 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-green-400',
   'break': 'bg-gradient-to-r from-sky-400 to-blue-500 text-white border-sky-400',
-  'social': 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white border-purple-400',
+  'social': 'gitbutler-gradient text-white border-[oklch(0.5325_0.1109_183.03)]',
   'logistics': 'bg-gray-100 text-gray-700 border-gray-200',
   'talk': 'bg-white text-gray-900 border-gray-200 hover:border-ruby-300 hover:shadow-lg',
   'workshop': 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:border-emerald-300 hover:shadow-lg'
@@ -492,6 +492,16 @@ const days = [
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* GitButler gradient for social events */
+    .gitbutler-gradient {
+        background: linear-gradient(to right, oklch(0.5325 0.1109 183.03), oklch(0.633 0.0862 189.64));
+        border-color: oklch(0.5325 0.1109 183.03) !important;
+    }
+
+    .gitbutler-gradient * {
+        color: white !important;
+    }
+
     /* Sticky day navigation styles - always sticky */
     .sticky-day-nav {
         position: fixed;
@@ -834,14 +844,17 @@ const days = [
                     </button>
 
                     <!-- Header with track color -->
-                    <div class="bg-gradient-to-r ${
+                    <div class="${
+                        talk.type === 'social' ? '' : 'bg-gradient-to-r'
+                    } ${
                         talk.type === 'keynote' ? 'from-ruby-500 to-pink-500' :
                         talk.type === 'workshop' ? 'from-emerald-500 to-green-500' :
                         talk.type === 'panel' ? 'from-purple-500 to-indigo-500' :
                         talk.type === 'demo' ? 'from-green-500 to-emerald-500' :
-                        talk.type === 'social' ? 'from-purple-500 to-indigo-500' :
+                        talk.type === 'social' ? '' :
                         'from-gray-500 to-gray-600'
-                    } p-6 sm:p-8 text-white">
+                    } p-6 sm:p-8 text-white"
+                    style="${talk.type === 'social' ? 'background: linear-gradient(to right, oklch(0.5325 0.1109 183.03), oklch(0.633 0.0862 189.64)); border-color: oklch(0.5325 0.1109 183.03);' : ''}">
                         <div class="max-w-3xl">
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
