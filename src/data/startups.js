@@ -9,7 +9,7 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
-  lago: {
+  /*lago: {
     id: "lago",
     name: "Lago",
     logo: "/startup_lago.png",
@@ -19,7 +19,7 @@ export const startups = {
     isYC: true,
     speakerId: "",
     demoTime: "",
-  },
+  },*/
   stepful: {
     id: "stepful",
     name: "Stepful",
@@ -210,6 +210,16 @@ export const startups = {
     url: "https://chatwithwork.com/",
     description:
       "Finally, a way to find that thing buried in your work accounts, and to write more with what you find. Pulls context from Gmail, Drive, Docs, Sheets, Calendar, and Presentations to draft emails and documents. Built with Rails 8, RubyLLM and the Async stack.",
+    speakerId: "",
+    demoTime: "",
+  },
+  thatch: {
+    id: "thatch",
+    name: "Thatch",
+    logo: "/startup_thatch.png",
+    url: "https://thatch.com/",
+    description:
+      "Thatch makes it easy to give your team great healthcare. You set a budget, and your employees spend it the way that works best for them.",
     speakerId: "",
     demoTime: "",
   },

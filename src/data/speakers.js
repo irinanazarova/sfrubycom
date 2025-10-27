@@ -382,14 +382,14 @@ export const speakers = {
     id: "dave-thomas",
     name: "Dave Thomas",
     company: "Pragmatic Programmers, LLC",
-    role: "Nuisance",
+    role: "Legend",
     image: "/speaker_dave.jpg",
     socials: [
       "https://github.com/pragdave",
       "https://bsky.app/profile/pragdave.bsky.social",
       "https://twitter.com/pragdave",
     ],
-    bio: "Dave Thomas is likely the oldest living Ruby developer.",
+    bio: "Dave Thomas is likely the oldest living Ruby developer. Note from organizers: Dave is a legend, see https://en.wikipedia.org/wiki/Dave_Thomas_(programmer)",
     group: "speaker",
   },
   "sam-poder": {
