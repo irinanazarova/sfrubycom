@@ -159,6 +159,13 @@ export const sponsors = {
     logo: "/sponsor_finta.png",
     url: "https://finta.com/",
   },
+  gitbutler: {
+    id: "gitbutler",
+    name: "GitButler",
+    tier: "Reception",
+    logo: "/sponsor_gitbutler.png",
+    url: "https://gitbutler.com",
+  },
   scout: {
     id: "scout",
     name: "Scout Monitoring",
@@ -222,6 +229,13 @@ export const sponsors = {
     logo: "/sponsor_superconductor.png",
     url: "https://www.superconductor.dev/",
   },
+  companycam: {
+    id: "companycam",
+    name: "CompanyCam",
+    tier: "Emerald",
+    logo: "/sponsor_companycam.png",
+    url: "https://www.companycam.com/",
+  },
   tidewave: {
     id: "tidewave",
     name: "Tidewave AI",
@@ -235,13 +249,6 @@ export const sponsors = {
     tier: "Travel",
     logo: "/sponsor_hackclub.png",
     url: "https://hackclub.com",
-  },
-  gitbutler: {
-    id: "gitbutler",
-    name: "GitButler",
-    tier: "Reception",
-    logo: "/sponsor_gitbutler.png",
-    url: "https://gitbutler.com",
   },
 };
 

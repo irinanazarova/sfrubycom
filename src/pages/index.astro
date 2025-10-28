@@ -29,19 +29,66 @@ import Testimonials from "../components/Testimonials.astro";
                         </span>
                     </p>
 
-                    <!-- Ultra-minimal YouTube embed for your index.astro -->
-                    <div class="my-12 max-w-4xl mx-auto">
-                        <div
-                            class="relative rounded-xl overflow-hidden shadow-2xl bg-black"
-                            style="padding-bottom: 56.25%;"
-                        >
-                            <iframe
-                                src="https://www.youtube-nocookie.com/embed/m2P9PZwi8W4?autoplay=1&mute=1=0&controls=0&modestbranding=1&rel=0&showinfo=0&fs=0&iv_load_policy=3&disablekb=1&loop=1&playlist=m2P9PZwi8W4&enablejsapi=1"
-                                class="absolute inset-0 w-full h-full"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-                                title="San Francisco Ruby Conference"
-                                style="border: none;"></iframe>
+                    <!-- 3-card layout: 2 YouTube videos and 1 image -->
+                    <div class="my-12 max-w-7xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- YouTube Video 1 -->
+                            <div
+                                class="rounded-xl overflow-hidden shadow-xl bg-black hover:shadow-2xl transition-shadow duration-300"
+                            >
+                                <div
+                                    class="relative"
+                                    style="padding-bottom: 56.25%;"
+                                >
+                                    <iframe
+                                        src="https://www.youtube-nocookie.com/embed/m2P9PZwi8W4?controls=1&modestbranding=1&rel=0"
+                                        class="absolute inset-0 w-full h-full"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        title="Video 1"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+
+                            <!-- YouTube Video 2 -->
+                            <div
+                                class="rounded-xl overflow-hidden shadow-xl bg-black hover:shadow-2xl transition-shadow duration-300"
+                            >
+                                <div
+                                    class="relative"
+                                    style="padding-bottom: 56.25%;"
+                                >
+                                    <iframe
+                                        src="https://www.youtube-nocookie.com/embed/6auuFzHKMY4?controls=1&modestbranding=1&rel=0"
+                                        class="absolute inset-0 w-full h-full"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                        title="Video 2"
+                                        style="border: none;"></iframe>
+                                </div>
+                            </div>
+
+                            <!-- Image with Link -->
+                            <a
+                                href="https://newsletter.pragmaticengineer.com/i/168396454/most-loved-languages"
+                                class="block rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <div
+                                    class="relative bg-gradient-to-br from-ruby-500 to-pink-500"
+                                    style="padding-bottom: 56.25%;"
+                                >
+                                    <img
+                                        src="/pragmatic_survey2025.png"
+                                        alt="Pragmatic Engineer Survey 2025"
+                                        class="absolute inset-0 w-full h-full object-cover"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </a>
                         </div>
                     </div>
 
