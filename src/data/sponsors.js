@@ -30,7 +30,7 @@ export const sponsorTiers = [
       "2 complimentary conference tickets",
     ],
     available: 10,
-    claimed: 5,
+    claimed: 7,
     stripelink: "https://buy.stripe.com/bJe8wP3V26m9bgk2M5e7m02",
   },
   {
@@ -59,7 +59,7 @@ export const sponsorTiers = [
       "1 complimentary conference ticket",
     ],
     available: 15,
-    claimed: 10,
+    claimed: 11,
     stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
   },
   {
@@ -235,6 +235,13 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_companycam.png",
     url: "https://www.companycam.com/",
+  },
+  wyeworks: {
+    id: "wyeworks",
+    name: "Wyeworks",
+    tier: "Emerald",
+    logo: "/sponsor_wyeworks.png",
+    url: "https://www.wyeworks.com/",
   },
   tidewave: {
     id: "tidewave",

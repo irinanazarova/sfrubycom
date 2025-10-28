@@ -1,23 +1,25 @@
 // Central export point for all conference data
 // This makes imports cleaner and provides a single source of truth
 
-export * from './speakers.js';
-export * from './talks.js';
-export * from './schedule.js';
-export * from './sponsors.js';
-export * from './startups.js';
+export * from "./speakers.js";
+export * from "./talks.js";
+export * from "./schedule.js";
+export * from "./sponsors.js";
+export * from "./startups.js";
+export * from "./jobs.js";
 
 // Re-export commonly used functions with clearer names
-export { getTalk } from './talks.js';
-export { getSpeaker } from './speakers.js';
-export { getSlot } from './schedule.js';
+export { getTalk } from "./talks.js";
+export { getSpeaker } from "./speakers.js";
+export { getSlot } from "./schedule.js";
 
 // Combined data helpers
-import { talks } from './talks.js';
-import { speakers } from './speakers.js';
-import { scheduleSlots, slotAssignments } from './schedule.js';
-import { sponsors } from './sponsors.js';
-import { startups } from './startups.js';
+import { talks } from "./talks.js";
+import { speakers } from "./speakers.js";
+import { scheduleSlots, slotAssignments } from "./schedule.js";
+import { sponsors } from "./sponsors.js";
+import { startups } from "./startups.js";
+import { jobs } from "./jobs.js";
 
 /**
  * Get complete schedule with all data joined
@@ -26,39 +28,43 @@ import { startups } from './startups.js';
  */
 export function getCompleteSchedule(day = null) {
   const slots = day
-    ? Object.values(scheduleSlots).filter(slot => slot.day === day)
+    ? Object.values(scheduleSlots).filter((slot) => slot.day === day)
     : Object.values(scheduleSlots);
 
-  return slots.map(slot => {
-    const talkId = slotAssignments[slot.id];
-    const talk = talkId ? talks[talkId] : null;
+  return slots
+    .map((slot) => {
+      const talkId = slotAssignments[slot.id];
+      const talk = talkId ? talks[talkId] : null;
 
-    let speakerDetails = [];
-    if (talk) {
-      if (talk.speakers && Array.isArray(talk.speakers)) {
-        speakerDetails = talk.speakers.map(id => speakers[id]).filter(Boolean);
-      } else if (talk.speakerId) {
-        const speaker = speakers[talk.speakerId];
-        if (speaker) speakerDetails = [speaker];
+      let speakerDetails = [];
+      if (talk) {
+        if (talk.speakers && Array.isArray(talk.speakers)) {
+          speakerDetails = talk.speakers
+            .map((id) => speakers[id])
+            .filter(Boolean);
+        } else if (talk.speakerId) {
+          const speaker = speakers[talk.speakerId];
+          if (speaker) speakerDetails = [speaker];
+        }
       }
-    }
 
-    return {
-      ...slot,
-      talk,
-      speakers: speakerDetails
-    };
-  }).sort((a, b) => {
-    // Sort by day, then by start time
-    if (a.day !== b.day) return a.day - b.day;
+      return {
+        ...slot,
+        talk,
+        speakers: speakerDetails,
+      };
+    })
+    .sort((a, b) => {
+      // Sort by day, then by start time
+      if (a.day !== b.day) return a.day - b.day;
 
-    const timeToMinutes = (time) => {
-      const [hours, minutes] = time.split(':').map(Number);
-      return hours * 60 + minutes;
-    };
+      const timeToMinutes = (time) => {
+        const [hours, minutes] = time.split(":").map(Number);
+        return hours * 60 + minutes;
+      };
 
-    return timeToMinutes(a.startTime) - timeToMinutes(b.startTime);
-  });
+      return timeToMinutes(a.startTime) - timeToMinutes(b.startTime);
+    });
 }
 
 /**
@@ -71,7 +77,7 @@ export function getTalksWithSlots() {
   Object.entries(slotAssignments).forEach(([slotId, talkId]) => {
     talkSlotMap[talkId] = {
       ...talks[talkId],
-      slot: scheduleSlots[slotId]
+      slot: scheduleSlots[slotId],
     };
   });
 
@@ -85,10 +91,10 @@ export function getTalksWithSlots() {
 export function getSpeakersWithSchedule() {
   const speakerSchedule = {};
 
-  Object.values(speakers).forEach(speaker => {
+  Object.values(speakers).forEach((speaker) => {
     speakerSchedule[speaker.id] = {
       ...speaker,
-      talks: []
+      talks: [],
     };
   });
 
@@ -100,7 +106,7 @@ export function getSpeakersWithSchedule() {
       const talkWithSlot = { ...talk, slot };
 
       if (talk.speakers && Array.isArray(talk.speakers)) {
-        talk.speakers.forEach(speakerId => {
+        talk.speakers.forEach((speakerId) => {
           if (speakerSchedule[speakerId]) {
             speakerSchedule[speakerId].talks.push(talkWithSlot);
           }
@@ -122,11 +128,11 @@ export function getConferenceStats() {
   const assignedTalks = new Set(Object.values(slotAssignments));
   const speakersWithTalks = new Set();
 
-  assignedTalks.forEach(talkId => {
+  assignedTalks.forEach((talkId) => {
     const talk = talks[talkId];
     if (talk) {
       if (talk.speakers && Array.isArray(talk.speakers)) {
-        talk.speakers.forEach(id => speakersWithTalks.add(id));
+        talk.speakers.forEach((id) => speakersWithTalks.add(id));
       } else if (talk.speakerId) {
         speakersWithTalks.add(talk.speakerId);
       }
@@ -145,24 +151,33 @@ export function getConferenceStats() {
     totalStartups: Object.keys(startups).length,
 
     byType: {
-      keynotes: Object.values(talks).filter(t => t.type === 'keynote').length,
-      talks: Object.values(talks).filter(t => t.type === 'talk').length,
-      workshops: Object.values(talks).filter(t => t.type === 'workshop').length,
-      panels: Object.values(talks).filter(t => t.type === 'panel').length,
-      demos: Object.values(talks).filter(t => t.type === 'demo').length,
+      keynotes: Object.values(talks).filter((t) => t.type === "keynote").length,
+      talks: Object.values(talks).filter((t) => t.type === "talk").length,
+      workshops: Object.values(talks).filter((t) => t.type === "workshop")
+        .length,
+      panels: Object.values(talks).filter((t) => t.type === "panel").length,
+      demos: Object.values(talks).filter((t) => t.type === "demo").length,
     },
 
     byTrack: {
-      main: Object.values(scheduleSlots).filter(s => s.track === 'main').length,
-      blackbox: Object.values(scheduleSlots).filter(s => s.track === 'blackbox').length,
-      workshop: Object.values(scheduleSlots).filter(s => s.track === 'workshop').length,
+      main: Object.values(scheduleSlots).filter((s) => s.track === "main")
+        .length,
+      blackbox: Object.values(scheduleSlots).filter(
+        (s) => s.track === "blackbox",
+      ).length,
+      workshop: Object.values(scheduleSlots).filter(
+        (s) => s.track === "workshop",
+      ).length,
     },
 
     byStatus: {
-      confirmed: Object.values(talks).filter(t => t.status === 'confirmed').length,
-      tentative: Object.values(talks).filter(t => t.status === 'tentative').length,
-      cancelled: Object.values(talks).filter(t => t.status === 'cancelled').length,
-    }
+      confirmed: Object.values(talks).filter((t) => t.status === "confirmed")
+        .length,
+      tentative: Object.values(talks).filter((t) => t.status === "tentative")
+        .length,
+      cancelled: Object.values(talks).filter((t) => t.status === "cancelled")
+        .length,
+    },
   };
 }
 
@@ -177,22 +192,22 @@ export function searchConferenceData(query) {
     talks: [],
     speakers: [],
     sponsors: [],
-    startups: []
+    startups: [],
   };
 
   // Search talks
-  Object.values(talks).forEach(talk => {
+  Object.values(talks).forEach((talk) => {
     if (
       talk.title?.toLowerCase().includes(lowerQuery) ||
       talk.description?.toLowerCase().includes(lowerQuery) ||
-      talk.tags?.some(tag => tag.toLowerCase().includes(lowerQuery))
+      talk.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
     ) {
       results.talks.push(talk);
     }
   });
 
   // Search speakers
-  Object.values(speakers).forEach(speaker => {
+  Object.values(speakers).forEach((speaker) => {
     if (
       speaker.name?.toLowerCase().includes(lowerQuery) ||
       speaker.bio?.toLowerCase().includes(lowerQuery) ||
@@ -204,7 +219,7 @@ export function searchConferenceData(query) {
   });
 
   // Search sponsors
-  Object.values(sponsors).forEach(sponsor => {
+  Object.values(sponsors).forEach((sponsor) => {
     if (
       sponsor.name?.toLowerCase().includes(lowerQuery) ||
       sponsor.description?.toLowerCase().includes(lowerQuery)
@@ -214,7 +229,7 @@ export function searchConferenceData(query) {
   });
 
   // Search startups
-  Object.values(startups).forEach(startup => {
+  Object.values(startups).forEach((startup) => {
     if (
       startup.name?.toLowerCase().includes(lowerQuery) ||
       startup.description?.toLowerCase().includes(lowerQuery) ||
@@ -234,5 +249,6 @@ export {
   scheduleSlots,
   slotAssignments,
   sponsors,
-  startups
+  startups,
+  jobs,
 };
