@@ -239,8 +239,8 @@ const days = [
                                 const blackboxSlot = block.slots.find((s: any) => s.track === 'blackbox');
                                 const workshopSlot = block.slots.find((s: any) => s.track === 'workshop');
 
-                                // Skip if this is a keynote or panel (they span all tracks)
-                                const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'demo') && !blackboxSlot && !workshopSlot;
+                                // Skip if this is a keynote, panel, or social event (they span all tracks)
+                                const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'demo' || mainSlot.type === 'social') && !blackboxSlot && !workshopSlot;
 
                                 return (
                                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
@@ -267,7 +267,7 @@ const days = [
                                                 >
                                                     {mainSlot.talk && (
                                                         <>
-                                                            <h3 class="font-bold text-xl mb-2 leading-tight">
+                                                            <h3 class={`font-bold mb-2 leading-tight ${mainSlot.type === 'social' ? 'text-3xl md:text-4xl' : 'text-xl'}`}>
                                                                 {mainSlot.talk.title}
                                                             </h3>
                                                             {mainSlot.speakers && mainSlot.speakers.length > 0 && (
@@ -276,7 +276,7 @@ const days = [
                                                                 </p>
                                                             )}
                                                             {mainSlot.talk.description && (
-                                                                <p class="text-sm opacity-80 line-clamp-3">
+                                                                <p class={`opacity-80 line-clamp-3 ${mainSlot.type === 'social' ? 'text-lg' : 'text-sm'}`}>
                                                                     {mainSlot.talk.description}
                                                                 </p>
                                                             )}
