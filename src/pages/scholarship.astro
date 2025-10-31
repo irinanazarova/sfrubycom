@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 
 const SCHOLARSHIP_APPLICATION_URL = "https://forms.fillout.com/t/hQfwLxhe9zus";
 const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
+const PRIORITY_DEADLINE = "2025-11-08T23:59:59-08:00";
+const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
 ---
 
 <Layout
@@ -84,10 +86,10 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
             </h2>
             <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-6">
                 <p class="text-dark-700 mb-3">
-                    <strong>Apply by October 25th. Applications are reviewed on a rolling basis.</strong>
+                    <strong>Applications are reviewed on a rolling basis. Priority given to applications submitted by {PRIORITY_DEADLINE_DISPLAY}.</strong>
                 </p>
                 <p class="text-dark-700">
-                    We plan to finalize scholar selections by October 25th, so don't wait — it only takes a few minutes to apply!
+                    Don't wait — it only takes a few minutes to apply!
                 </p>
             </div>
         </section>
@@ -143,7 +145,7 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
 
                 <div class="bg-white border border-slate-200 rounded-lg p-6">
                     <h3 class="font-bold text-dark-900 mb-2">When will I hear back?</h3>
-                    <p class="text-dark-700">Applications are reviewed on a rolling basis. You'll hear back shortly after October 25th.</p>
+                    <p class="text-dark-700">Applications are reviewed on a rolling basis. Priority is given to applications submitted by {PRIORITY_DEADLINE_DISPLAY}.</p>
                 </div>
 
                 <div class="bg-white border border-slate-200 rounded-lg p-6">
@@ -192,11 +194,11 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
     </div>
 </Layout>
 
-<script>
+<script define:vars={{ PRIORITY_DEADLINE }}>
     function updateCountdown() {
-        const deadline = new Date('2025-10-25T23:59:59-07:00'); // October 25th, 2025 at 11:59 PM PT
+        const priorityDeadline = new Date(PRIORITY_DEADLINE);
         const now = new Date();
-        const diff = deadline.getTime() - now.getTime();
+        const diff = priorityDeadline.getTime() - now.getTime();
 
         const countdownEl = document.getElementById('countdown');
         if (!countdownEl) return;
@@ -212,11 +214,11 @@ const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
         const days = Math.floor(hours / 24);
 
         if (hours < 3) {
-            countdownEl.textContent = '(Due in a couple of hours)';
+            countdownEl.textContent = '(Priority deadline in a couple of hours)';
         } else if (days > 0) {
-            countdownEl.textContent = `(${days} day${days !== 1 ? 's' : ''} left)`;
+            countdownEl.textContent = `(${days} day${days !== 1 ? 's' : ''} until priority deadline)`;
         } else {
-            countdownEl.textContent = `(${hours} hour${hours !== 1 ? 's' : ''} left)`;
+            countdownEl.textContent = `(${hours} hour${hours !== 1 ? 's' : ''} until priority deadline)`;
         }
     }
 
