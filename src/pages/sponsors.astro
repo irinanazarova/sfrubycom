@@ -20,78 +20,21 @@ const currentSponsors = getSponsorsForSponsorsPage();
   </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Current sponsors section -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-display font-bold text-dark-900 text-center mb-8">Confirmed Sponsors</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        {currentSponsors.map((sponsor) => (
-          <a
-            href={sponsor.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex flex-col items-center bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-          >
-              <div class="text-sm font-medium text-dark-500 mb-4">{sponsor.tier} Sponsor</div>
-            <div class="h-16 flex items-center justify-center mb-4">
-              <img
-                src={sponsor.logo}
-                alt={`${sponsor.name} logo`}
-                class="max-h-full max-w-full object-contain"
-                loading="lazy"
-              />
-            </div>
-            <!-- <div class="font-bold text-lg text-dark-900">{sponsor.name}</div>-->
-          </a>
-        ))}
-      </div>
-    </div>
 
     <!-- Why sponsor section -->
     <div class="mb-16 bg-dark-50 rounded-lg p-8">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">Why Sponsor the San Francisco Ruby Conference?</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div class="bg-white p-6 rounded-lg shadow-sm">
-            <!-- <div class="w-12 h-12 rounded-full bg-ruby-100 flex items-center justify-center mb-4">
-              <span class="text-ruby-500 text-xl">👥</span>
-            </div>-->
-            <h3 class="font-bold text-dark-900 mb-2">Talent</h3>
-            <p class="text-dark-600">
-        Connect with ~600 of the brightest Ruby developers, based in SF and traveling from everywhere.
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-lg shadow-sm">
-            <!-- <div class="w-12 h-12 rounded-full bg-ruby-100 flex items-center justify-center mb-4">
-              <span class="text-ruby-500 text-xl">🎯</span>
-            </div>-->
-            <h3 class="font-bold text-dark-900 mb-2">Brand</h3>
-            <p class="text-dark-600">
-              Showcase your brand to the audience and the wider Ruby community.
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-lg shadow-sm">
-            <!-- <div class="w-12 h-12 rounded-full bg-ruby-100 flex items-center justify-center mb-4">
-              <span class="text-ruby-500 text-xl">🤝</span>
-            </div>-->
-            <h3 class="font-bold text-dark-900 mb-2">Community</h3>
-            <p class="text-dark-600">
-              Support the future of the Ruby and Rails ecosystem.
-            </p>
-          </div>
-        </div>
-
         <div class="text-center">
           <p class="text-dark-600 mb-6">
-            San Francisco Ruby Conference brings together developers and engineering leaders from companies like GitHub, Cisco, Stripe, Figma, and founders of the hottest Bay Area starups.
+            San Francisco Ruby Conference brings together developers from Chime, Gusto, Cisco, Shopify, One Medical, Intercom and many more, and the hottest new Ruby startups like bolt.new, and Fin AI.
           </p>
 
           <div class="flex flex-wrap justify-center gap-4">
             <div class="bg-white py-2 px-4 rounded-md shadow-sm">
-              <div class="text-2xl font-bold text-ruby-500">600</div>
+              <div class="text-2xl font-bold text-ruby-500">500</div>
               <div class="text-dark-600 text-sm">Attendees</div>
             </div>
             <div class="bg-white py-2 px-4 rounded-md shadow-sm">
@@ -218,6 +161,35 @@ const currentSponsors = getSponsorsForSponsorsPage();
         <a href="/contact" class="inline-block w-full px-4 py-2 bg-ruby-500 text-white text-center font-medium rounded-md transition-all duration-300 transform hover:scale-105 duration-200">
           Contact Us About This Tier
         </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Current sponsors section -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-display font-bold text-dark-900 text-center mb-8">Confirmed Sponsors</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {currentSponsors.map((sponsor) => (
+          <a
+            href={sponsor.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex flex-col items-center bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+          >
+              <div class="text-sm font-medium text-dark-500 mb-4">{sponsor.tier} Sponsor</div>
+            <div class="h-16 flex items-center justify-center mb-4">
+              <img
+                src={sponsor.logo}
+                alt={`${sponsor.name} logo`}
+                class="max-h-full max-w-full object-contain"
+                loading="lazy"
+              />
+            </div>
+            <!-- <div class="font-bold text-lg text-dark-900">{sponsor.name}</div>-->
+          </a>
+        ))}
       </div>
     </div>
   </div>
