@@ -287,6 +287,7 @@ export const talks = {
     status: "confirmed",
     tags: ["ai", "agents", "rails", "hands-on"],
     link: "https://lu.ma/ygn5m3pm",
+    linkText: "Sign Up for Workshop",
   },
   "inertia-rails-workshop": {
     id: "inertia-rails-workshop",
@@ -304,6 +305,7 @@ export const talks = {
     status: "confirmed",
     tags: ["inertia", "rails", "frontend", "spa"],
     link: "https://lu.ma/67m5dqr1",
+    linkText: "Sign Up for Workshop",
   },
   "upskill-diving-into-rails": {
     id: "upskill-diving-into-rails",
@@ -321,6 +323,7 @@ export const talks = {
     status: "confirmed",
     tags: ["rails", "open-source", "gems", "learning"],
     link: "https://lu.ma/jxv24vkp",
+    linkText: "Sign Up for Workshop",
   },
   "dynamic-ruby-toolkit-workshop": {
     id: "dynamic-ruby-toolkit-workshop",
@@ -335,6 +338,7 @@ export const talks = {
     status: "confirmed",
     tags: [],
     link: "https://lu.ma/ekzvr472",
+    linkText: "Sign Up for Workshop",
   },
   "open-mic": {
     id: "open-mic",
@@ -402,35 +406,30 @@ export const talks = {
     venue: "San Francisco Brewing Co.",
     address: "3150 Polk St, San Francisco, CA 94109",
   },
-  "unofficial-event-1": {
-    id: "unofficial-event-1",
-    title: "Community Event #1: claim it!",
+  "ruby-hackathon-angellist": {
+    id: "ruby-hackathon-angellist",
+    title: "Hack Day at AngelList",
     description:
-      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please fill out this form https://forms.gle/zXXAFA59aQSDjdz59 or reach out to conference@sfruby.com to add your community event.",
+      "Join us for a full-day Hack Day at AngelList! Work on Ruby projects, collaborate with fellow Rubyists, and build something amazing. Whether you're working on open source contributions, personal projects, or just want to learn from others, this is the perfect opportunity to code together. All skill levels welcome!",
     type: "talk",
     speakers: [],
-    status: "tentative",
-    tags: ["hike"],
+    status: "confirmed",
+    tags: ["hackathon", "community", "coding"],
+    venue: "AngelList",
+    link: "https://lu.ma/sfrubyconf25hackday",
+    linkText: "Sign Up",
   },
-  "unofficial-event-2": {
-    id: "unofficial-event-2",
-    title: "Community Event #2: claim it!",
+  "community-day-placeholder": {
+    id: "community-day-placeholder",
+    title: "Community Day Event: claim it!",
     description:
-      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please fill out this form https://forms.gle/zXXAFA59aQSDjdz59 or reach out to conference@sfruby.com to add your community event.",
+      "Day 3 is open to unofficial community events like hikes, museum walks, tours of the city, and more. Share your event idea and join fellow Rubyists for a day of community activities!",
     type: "talk",
     speakers: [],
     status: "tentative",
-    tags: ["hike"],
-  },
-  "unofficial-event-3": {
-    id: "unofficial-event-3",
-    title: "Community Event #3: claim it!",
-    description:
-      "Day 3 is open to unofficial community events like hikes, museums walks, tours of the city etc. Please fill out this form https://forms.gle/zXXAFA59aQSDjdz59 or reach out to conference@sfruby.com to add your community event.",
-    type: "talk",
-    speakers: [],
-    status: "tentative",
-    tags: ["hike"],
+    tags: ["community"],
+    link: "https://forms.gle/W3reGgxKUV1mb7Z39",
+    linkText: "Submit an Event",
   },
 };
 

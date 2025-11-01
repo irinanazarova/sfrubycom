@@ -297,25 +297,43 @@ export const scheduleSlots = {
     id: "U1",
     day: 3,
     startTime: "9:00",
-    endTime: "13:00",
+    endTime: "12:00",
     track: "main",
-    type: "talk",
   },
   U2: {
     id: "U2",
     day: 3,
-    startTime: "17:00",
-    endTime: "20:00",
+    startTime: "13:00",
+    endTime: "16:00",
     track: "main",
-    type: "talk",
   },
   U3: {
     id: "U3",
     day: 3,
-    startTime: "10:00",
-    endTime: "17:00",
+    startTime: "17:00",
+    endTime: "21:00",
+    track: "main",
+  },
+  U1_b: {
+    id: "U1_b",
+    day: 3,
+    startTime: "9:00",
+    endTime: "12:00",
     track: "blackbox",
-    type: "talk",
+  },
+  U2_b: {
+    id: "U2_b",
+    day: 3,
+    startTime: "13:00",
+    endTime: "16:00",
+    track: "blackbox",
+  },
+  U3_b: {
+    id: "U3_b",
+    day: 3,
+    startTime: "17:00",
+    endTime: "21:00",
+    track: "blackbox",
   },
 };
 
@@ -363,9 +381,12 @@ export const slotAssignments = {
   K4: "vladimir-dementyev-keynote",
 
   // DAY 3 ASSIGNMENTS
-  U1: "unofficial-event-1",
-  U2: "unofficial-event-2",
-  U3: "unofficial-event-3",
+  U1: "ruby-hackathon-angellist",
+  U2: "ruby-hackathon-angellist",
+  U3: "community-day-placeholder",
+  U1_b: "community-day-placeholder",
+  U2_b: "community-day-placeholder",
+  U3_b: "community-day-placeholder",
 };
 
 // Helper functions
