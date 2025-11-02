@@ -406,6 +406,31 @@ export const talks = {
     venue: "San Francisco Brewing Co.",
     address: "3150 Polk St, San Francisco, CA 94109",
   },
+  "lucas-film-walk": {
+    id: "lucas-film-walk",
+    title: "Yoda Fountain and Star Wars museum",
+    description:
+      "Join us for a short walk through Presidio to the Lucasfilm lobby: we'll see the Yoda Fountain, and a small museum: life sized Darth Vader costume, original lightsabers, and other props.",
+    type: "social",
+    speakers: [],
+    status: "confirmed",
+    tags: ["social"],
+    venue: "Lucasfilm",
+    address: "1110 Gorgas Ave, San Francisco, CA 94129",
+  },
+  "ruby-hackathon-angellist": {
+    id: "ruby-hackathon-angellist",
+    title: "Hack Day at AngelList",
+    description:
+      "Join us for a full-day Hack Day at AngelList! Work on Ruby projects, collaborate with fellow Rubyists, and build something amazing. Whether you're working on open source contributions, personal projects, or just want to learn from others, this is the perfect opportunity to code together. All skill levels welcome!",
+    type: "talk",
+    speakers: [],
+    status: "confirmed",
+    tags: ["hackathon", "community", "coding"],
+    venue: "AngelList",
+    link: "https://lu.ma/sfrubyconf25hackday",
+    linkText: "Sign Up",
+  },
   "ruby-hackathon-angellist": {
     id: "ruby-hackathon-angellist",
     title: "Hack Day at AngelList",

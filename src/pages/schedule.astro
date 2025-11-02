@@ -323,11 +323,13 @@ const days = [
                                                                 data-talk-id={mainSlot.talk.id}
                                                                 data-slot-id={mainSlot.id}
                                                             >
-                                                                <div class="mb-3 md:hidden">
-                                                                    <span class="px-3 py-1 bg-ruby-100 text-ruby-700 text-xs font-medium rounded-full">
-                                                                        Main Stage
-                                                                    </span>
-                                                                </div>
+                                                                {day.dayLabel !== 'Day 3' && (
+                                                                    <div class="mb-3 md:hidden">
+                                                                        <span class="px-3 py-1 bg-ruby-100 text-ruby-700 text-xs font-medium rounded-full">
+                                                                            Main Stage
+                                                                        </span>
+                                                                    </div>
+                                                                )}
                                                                 <h3 class="font-bold text-lg mb-2 leading-tight">
                                                                     {mainSlot.talk.title}
                                                                 </h3>
@@ -355,11 +357,13 @@ const days = [
                                                                 data-talk-id={blackboxSlot.talk.id}
                                                                 data-slot-id={blackboxSlot.id}
                                                             >
-                                                                <div class="mb-3 md:hidden">
-                                                                    <span class="px-3 py-1 bg-sky-100 text-sky-700 text-xs font-medium rounded-full">
-                                                                        Blackbox Theater
-                                                                    </span>
-                                                                </div>
+                                                                {day.dayLabel !== 'Day 3' && (
+                                                                    <div class="mb-3 md:hidden">
+                                                                        <span class="px-3 py-1 bg-sky-100 text-sky-700 text-xs font-medium rounded-full">
+                                                                            Blackbox Theater
+                                                                        </span>
+                                                                    </div>
+                                                                )}
                                                                 <h3 class="font-bold text-lg mb-2 leading-tight">
                                                                     {blackboxSlot.talk.title}
                                                                 </h3>
@@ -387,11 +391,14 @@ const days = [
                                                                 data-talk-id={workshopSlot.talk.id}
                                                                 data-slot-id={workshopSlot.id}
                                                             >
-                                                                <div class="mb-3 md:hidden">
-                                                                    <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
-                                                                        Workshop Studio
-                                                                    </span>
-                                                                </div>
+                                                                {day.dayLabel !== 'Day 3' && (
+                                                                    <div class="mb-3 md:hidden">
+                                                                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
+                                                                            Workshop Studio
+                                                                        </span>
+                                                                    </div>
+                                                                )}
+                                                                <p class="text-xs text-emerald-600 mb-2">
                                                                 <div class="flex items-center gap-2 mb-2">
                                                                     <h3 class="font-bold text-lg leading-tight">
                                                                         {workshopSlot.talk.title}

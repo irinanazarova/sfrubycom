@@ -293,6 +293,14 @@ export const scheduleSlots = {
     track: "main",
     type: "social",
   },
+  U0: {
+    id: "U0",
+    day: 3,
+    startTime: "8:00",
+    endTime: "8:40",
+    track: "blackbox",
+    type: "social",
+  },
   U1: {
     id: "U1",
     day: 3,
@@ -381,6 +389,7 @@ export const slotAssignments = {
   K4: "vladimir-dementyev-keynote",
 
   // DAY 3 ASSIGNMENTS
+  U0: "lucas-film-walk",
   U1: "ruby-hackathon-angellist",
   U2: "ruby-hackathon-angellist",
   U3: "community-day-placeholder",
