@@ -33,11 +33,11 @@ export const talks = {
     status: "confirmed",
     tags: ["rails", "ai", "llm"],
   },
-  "vladimir-dementyev-keynote": {
-    id: "vladimir-dementyev-keynote",
-    title: "",
+  "rails-x-keynote": {
+    id: "rails-x-keynote",
+    title: "Rails X",
     speakerId: "vladimir-dementyev",
-    description: "Topic to be announced.",
+    description: "The mysterious Rails X. Stay tuned!",
     type: "keynote",
     status: "confirmed",
     tags: [],
@@ -238,15 +238,16 @@ export const talks = {
     status: "confirmed",
     tags: ["devops", "production", "operations", "deployment"],
   },
-  "debugging-gusto-scale": {
-    id: "debugging-gusto-scale",
-    title: "Debugging Gusto at scale",
-    speakerId: "ngan-pham",
+  "pack-it-up-gusto": {
+    id: "pack-it-up-gusto",
+    title:
+      "Pack It Up: Why Packwerk Can’t Save Your Messy Rails App (But You Can)",
+    speakerId: "stephan-hagemann",
     description:
-      "Real-world strategies for debugging large-scale Rails applications at Gusto.",
+      "Packwerk promised modularity in a gem install — but good architecture doesn’t come from `bundle add`. We’ll look at how Packwerk’s story reflects deeper truths about software design, organizational habits, and how we sometimes ask our tools to do our growing for us. This is a call to arms (and to our love of the craft) for teams that want to scale Rails applications by scaling their understanding first.",
     type: "talk",
     status: "confirmed",
-    tags: ["debugging", "scale", "production", "rails"],
+    tags: ["modularization", "scale", "production", "rails"],
   },
 
   "navigating-language-evolution": {
@@ -359,7 +360,7 @@ export const talks = {
     description: "A roundtable discussion with CTOs from the Ruby community.",
     type: "panel",
     moderator: null,
-    speakers: ["edward-kim", "ryan-king"],
+    speakers: ["ryan-king"],
     status: "confirmed",
     tags: ["leadership", "cto", "discussion"],
   },

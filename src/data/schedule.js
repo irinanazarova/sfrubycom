@@ -364,7 +364,7 @@ export const slotAssignments = {
   S5: "ai-interface-mcp-rails",
   M6: "start-writing-ruby",
   S6: "mcp-fog-ruby-inspector",
-  M7: "debugging-gusto-scale",
+  M7: "pack-it-up-gusto",
   S7: "cloud-data-infrastructure-ruby",
   K2: "ruby-ai-conversation",
   CTO_ROUNDTABLE: "cto-roundtable",
@@ -386,7 +386,7 @@ export const slotAssignments = {
   STARTUP_DEMOS_1: "startup-demos-session1",
   STARTUP_DEMOS_2: "startup-demos-session2",
   VC_ROUNDTABLE: "vc-roundtable",
-  K4: "vladimir-dementyev-keynote",
+  K4: "rails-x-keynote",
 
   // DAY 3 ASSIGNMENTS
   U0: "lucas-film-walk",

@@ -18,7 +18,7 @@ export const speakers = {
     role: "Head of Backend",
     image: "/speaker_vova.jpg",
     socials: ["https://github.com/palkan", "https://x.com/palkan_tula"],
-    bio: "A mathematician who found his happiness in programming Ruby and Erlang, contributing to open source and being an Evil Martian. Author of AnyCable, TestProf, Action Policy and many yet unknown ukulele melodies.",
+    bio: 'A mathematician who found his happiness in programming Ruby and Erlang, contributing to open source and being an Evil Martian. Author of AnyCable and "Layered Design for Ruby on Rails applications", as well as TestProf, Action Policy and many yet unknown ukulele melodies.',
     group: "featured",
   },
   "marco-roth": {
@@ -51,18 +51,14 @@ export const speakers = {
     bio: "Obie Fernandez is a Ruby and Rails pioneer, and best-selling author of The Rails Way. With three decades in software and a string of successful startups—including Hashrocket and Andela—he's helped shape the Rails community from the start. Obie now leads AI and developer experience initiatives at Shopify, and still finds time to DJ and make music in Mexico City.",
     group: "featured",
   },
-  "ngan-pham": {
-    id: "ngan-pham",
-    name: "Ngan Pham",
+  "stephan-hagemann": {
+    id: "stephan-hagemann",
+    name: "Stephan Hagemann",
     company: "Gusto",
-    role: "Software Engineer",
-    image: "/speaker_ngan.jpg",
-    socials: [
-      "https://github.com/ngan",
-      "https://x.com/nganpham",
-      "https://www.linkedin.com/in/nganpham63",
-    ],
-    bio: "Ngan is a prolific open source contributor and Rubyist with a knack for scaling systems and building strong engineering teams. He's known for mentoring developers and sharing insights on everything from Rails architecture to developer happiness. Outside of work he loves traveling with his family.",
+    role: "Head of Developer Productivity",
+    image: "/speaker_stephan.jpg",
+    socials: ["https://www.linkedin.com/in/stephan-hagemann/"],
+    bio: 'Stephan Hagemann leads the charge on modularization and building robust systems that stand the test of time. Author of "Component-based Rails Applications" and "Gradual Modularization for Ruby and Rail", Stephan is pushing Ruby to new levels of performance and maintainability through thoughtful package structures and architectures.',
     group: "speaker",
   },
   "takashi-kokubun": {
@@ -181,16 +177,6 @@ export const speakers = {
     socials: ["https://github.com/BrandonShar", "https://x.com/brandonshar"],
     bio: "Brandon is a full-stack developer currently leading AI product engineering at ezCater. He's the co-author of Inertia Rails and Inertia Django and is passionate about product-focused development, batteries included frameworks, and changeable code. Currently hooked on MCP servers, AI-coding tools, and runDisney races.",
     group: "speaker",
-  },
-  "edward-kim": {
-    id: "edward-kim",
-    name: "Edward Kim",
-    company: "Gusto",
-    role: "Co-founder and CTO",
-    image: "/speaker_edward.jpg",
-    socials: ["https://x.com/edawerd", "https://www.linkedin.com/in/edawerd/"],
-    bio: "Edward leads the long-term technology roadmap for Gusto, including major platform initiatives such as Artificial Intelligence. He also empowers Security and IT. Before co-founding Gusto, Edward was the CEO and co-founder of Picwing, a Y Combinator startup and photo-printing platform. Edward holds bachelor's and master's degrees in Electrical Engineering from Stanford University.",
-    group: "cto",
   },
   "ryan-king": {
     id: "ryan-king",
@@ -342,7 +328,7 @@ export const speakers = {
       "https://www.linkedin.com/in/colleen-schnettler/",
       "https://github.com/leenyburger",
     ],
-    bio: "Colleen is a Rails dev, AI consultant, and startup founder. She built Simple File Upload and HelloQuery (a TinySeed-backed startup), then started SaaS Marketing Gym to help technical founders grow. When she's not building or teaching, she's climbing mountains because they're the only thing that won't pivot.",
+    bio: "Colleen is a Rails developer, AI consultant, and startup founder. She runs Simple File Upload and built HelloQuery, and now coaches technical founders on all things business and marketing. Talking startup strategy is her favorite thing ever (hence the coaching), and she’s always down to swap ideas or troubleshoot your latest GTM puzzle.",
     group: "speaker",
   },
   "sarah-mei": {
