@@ -37,9 +37,7 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                     <p class="text-dark-600 text-sm mb-3">
                         9:00 AM - 6:00 PM each day
                     </p>
-                    <p class="text-dark-600 text-sm">
-                        Plus unofficial evening events
-                    </p>
+                    <p class="text-dark-600 text-sm">Plus evening events</p>
                 </div>
                 <div class="bg-white border border-sky-200 rounded-lg p-6">
                     <h3 class="font-bold text-sky-600 text-lg mb-2">
@@ -49,7 +47,7 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         November 21, 2025
                     </p>
                     <p class="text-dark-600 text-sm mb-3">
-                        Unofficial community activities
+                        Community activities
                     </p>
                     <p class="text-dark-600 text-sm">
                         Indoor meetups, museum visits, cozy gatherings, and more
@@ -104,7 +102,6 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                     loading="lazy"
                 />
             </div>
-            
         </section>
 
         <!-- 2. Plan Your Local Commute -->
@@ -179,15 +176,12 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 bg-gray-50 border border-dark-200 rounded-lg gap-6 mb-6">
-
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 bg-gray-50 border border-dark-200 rounded-lg gap-6 mb-6"
+            >
                 <div class="flex items-center gap-2 md:col-span-3 p-6 pb-0">
                     <h3 class="font-bold text-dark-900">Food Trucks Onsite</h3>
-                    <DistanceBadge
-                        distance="0 min"
-                        type="walk"
-                        color="green"
-                    />
+                    <DistanceBadge distance="0 min" type="walk" color="green" />
                 </div>
 
                 <div class="px-6">
@@ -195,56 +189,44 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         <strong>Cielito Lindo</strong>
                     </p>
                     <ul class="space-y-2 text-dark-600 text-sm">
-                        <li>
-                            • Taco Plate $13.99
-                        </li>
-                        <li>
-                            • Burrito Bowl $15.99
-                        </li>
-                        <li>
-                            • Baja Fish Tacos $15.99
-                        </li>
+                        <li>• Taco Plate $13.99</li>
+                        <li>• Burrito Bowl $15.99</li>
+                        <li>• Baja Fish Tacos $15.99</li>
                     </ul>
                 </div>
 
                 <div class="px-6">
                     <ul class="space-y-2 text-dark-600 text-sm">
-                        <li>
-                            • Dim Sum Platter $16.00
-                        </li>
-                        <li>
-                            • Vegetable Chow Mein $14.00
-                        </li>
-                        <li>
-                            • General Chicken Rice $14.00
-                        </li>
+                        <li>• Dim Sum Platter $16.00</li>
+                        <li>• Vegetable Chow Mein $14.00</li>
+                        <li>• General Chicken Rice $14.00</li>
                     </ul>
                 </div>
 
                 <div class="px-6">
                     <ul class="space-y-2 text-dark-600 text-sm">
-                        <li>
-                            • Power Rice Bowl $18.00
-                        </li>
-                        <li>
-                            • Power Wrap $17.00
-                        </li>
-                        <li>
-                            • Mediterranean Salad $17.00
-                        </li>
+                        <li>• Power Rice Bowl $18.00</li>
+                        <li>• Power Wrap $17.00</li>
+                        <li>• Mediterranean Salad $17.00</li>
                     </ul>
                 </div>
 
                 <div class="flex items-center gap-2 md:col-span-3 p-6 pt-0">
-                    <a href="/food-truck-menu.pdf" target="_blank" rel="noopener" class="underline">See the menu</a>
+                    <a
+                        href="/food-truck-menu.pdf"
+                        target="_blank"
+                        rel="noopener"
+                        class="underline">See the menu</a
+                    >
                 </div>
-
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
-                        <h3 class="font-bold text-dark-900">Next to the Venue</h3>
+                        <h3 class="font-bold text-dark-900">
+                            Next to the Venue
+                        </h3>
                         <DistanceBadge
                             distance="2-5 min"
                             type="walk"
@@ -539,7 +521,7 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                 Get Involved
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div
                     class="bg-purple-50 border border-purple-200 rounded-lg p-6 text-center"
                 >
@@ -548,34 +530,15 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                         Host a Community Day Event
                     </h3>
                     <p class="text-dark-600 text-sm mb-4">
-                        Organize a walk, indoor meetup, museum tour, or cozy
-                        gathering for November 21. We'll help promote it!
+                        Organize a walk, museum tour, or cozy gathering on
+                        November 21. We'll add it to Schedule!
                     </p>
                     <a
-                        href="https://join.slack.com/t/sf-ruby/shared_invite/zt-327ylyio2-N10OGtkl~QSt0jnIxDXmZg"
+                        href="https://forms.gle/7BBYK28BRkgXZdZF8"
                         target="_blank"
                         class="inline-block px-4 py-2 bg-purple-500 text-white rounded-md text-sm font-medium hover:bg-purple-600 transition-colors"
                     >
-                        Join Slack
-                    </a>
-                </div>
-
-                <div
-                    class="bg-green-50 border border-green-200 rounded-lg p-6 text-center"
-                >
-                    <div class="text-4xl mb-4">🙋‍♀️</div>
-                    <h3 class="font-bold text-dark-900 mb-3">
-                        Volunteer to Help
-                    </h3>
-                    <p class="text-dark-600 text-sm mb-4">
-                        Help with registration, speaker support, logistics, or
-                        community activities. Great way to meet people!
-                    </p>
-                    <a
-                        href="/contact"
-                        class="inline-block px-4 py-2 bg-green-500 text-white rounded-md text-sm font-medium hover:bg-green-600 transition-colors"
-                    >
-                        Volunteer
+                        Submit an Event
                     </a>
                 </div>
 
@@ -597,6 +560,63 @@ import WeatherWidget from "../components/WeatherWidget.astro";
                     >
                         Learn About Sponsoring
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bring your film camera -->
+        <section>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                📸 Let's Make Memories!
+            </h2>
+
+            <div class="bg-dark-50 rounded-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                    <div>
+                        <h3 class="font-bold text-dark-900 mb-4">
+                            Bring your film camera:
+                        </h3>
+                        <ul class="space-y-2 text-dark-600">
+                            <li>Bring your 35 mm camera</li>
+                            <li>Get a roll of film in the Film Corner</li>
+                            <li>Take photos of people at the event</li>
+                            <li>Bring us the film back</li>
+                            <li>
+                                We develop and publish scans on the conference
+                                website
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Org team -->
+        <section>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                🙋‍♀️ Meet the org team
+            </h2>
+
+            <div class="bg-dark-50 rounded-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                    <div>
+                        <h3 class="font-bold text-dark-900 mb-4">
+                            Here're the main organizers and responsibilities:
+                        </h3>
+                        <ul class="space-y-2 text-dark-600">
+                            <li>
+                                Maple Ong, Cameron Dutro, Noel Rappin, Vladimir
+                                Dementyev: Program Committee
+                            </li>
+                            <li>Aurelie Verrot: Speakers</li>
+                            <li>Steven Ancheta: Volunteers</li>
+                            <li>Gary Tou: Scholarship Program</li>
+                            <li>Aleksander Berdiugin: Vendors</li>
+                            <li>Amanda Kinney: Vendors</li>
+                            <li>Anton Lovchikov, Yaroslav Lozhkin: Design</li>
+                            <li>Vladimir Dementyev: Software</li>
+                            <li>Irina Nazarova: Host</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
