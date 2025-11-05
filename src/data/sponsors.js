@@ -59,7 +59,7 @@ export const sponsorTiers = [
       "1 complimentary conference ticket",
     ],
     available: 15,
-    claimed: 11,
+    claimed: 12,
     stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
   },
   {
@@ -242,6 +242,13 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_wyeworks.png",
     url: "https://www.wyeworks.com/",
+  },
+  beyondfinance: {
+    id: "beyondfinance",
+    name: "Beyond Finance",
+    tier: "Emerald",
+    logo: "/sponsor_beyondfinance.png",
+    url: "https://www.beyondfinance.com/",
   },
   tidewave: {
     id: "tidewave",

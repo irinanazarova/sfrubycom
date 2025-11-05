@@ -1,5 +1,16 @@
 // Job postings data
 export const jobs = {
+  "engineering-manager-beyondfinance": {
+    id: "engineering-manager-beyondfinance",
+    title: "Engineering Manager - Servicing",
+    sponsorId: "beyondfinance",
+    location: "Chicago, IL (Hybrid - 2 days/week in office)",
+    type: "Full-time",
+    description:
+      "Lead a team of 3-5 engineers working in a Ruby on Rails stack to design and build all the back end support needed for core features of Beyond Finance's debt negotiation platform. Work with Ruby on Rails, PostgreSQL, and AWS to build internal-facing APIs, asynchronous backend processing, and third-party integrations. Lead technical planning and roadmap delivery, mentor engineers, and work with the leadership team to produce and deliver the engineering roadmap. 5+ years of experience building and deploying scalable applications in the cloud required, with hands-on expertise in Ruby on Rails. $175k-$195k base salary + annual bonus.",
+    url: "https://job-boards.greenhouse.io/beyondfinance/jobs/7317522",
+    postedDate: "2025-01-04",
+  },
   "founding-engineer-finta": {
     id: "founding-engineer-finta",
     title: "Founding Engineer",
