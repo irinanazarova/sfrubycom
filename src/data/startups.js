@@ -41,7 +41,7 @@ export const startups = {
     speakerId: "",
     demoTime: "",
   },
-  binti: {
+  /*binti: {
     id: "binti",
     name: "Binti",
     logo: "/startup_binti.png",
@@ -50,7 +50,7 @@ export const startups = {
       "Mission-driven tech company using software to help children find families, streamlining foster/adoption, and has helped over 110,000 families.",
     speakerId: "",
     demoTime: "",
-  },
+  },*/
   suppli: {
     id: "suppli",
     name: "Suppli",
@@ -188,7 +188,7 @@ export const startups = {
     logo: "/startup_fin.png",
     url: "https://fin.ai/",
     description:
-      "In ten minutes, see Fin, Intercom’s AI support agent, resolve frontline questions with instant, human-quality answers across chat, email, voice, and social. It learns from your procedures, docs, and policies, and keeps your tone of voice. We will show the Fin AI Engine in action. It clarifies intent, retrieves the right knowledge, and validates responses to reduce hallucinations. Accuracy and reliability scale with you. For builders, we will cover setup that is often under an hour, precise control with Guidance, Tasks, and Workflows, actionable Insights, and integrations with Intercom’s Customer Service Suite or your existing help desk.",
+      "See Fin, Intercom's AI support agent, resolve customer questions with human-quality answers across chat, email, voice, and social. Learns from your docs and policies while keeping your tone. We'll demo the Fin AI Engine: intent clarification, knowledge retrieval, and response validation to reduce hallucinations. Quick setup, precise control with Guidance and Workflows, and seamless integrations.",
     speakerId: "",
     demoTime: "",
   },

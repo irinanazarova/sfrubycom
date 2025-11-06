@@ -1,0 +1,159 @@
+---
+// Featured cloud cards to showcase
+const cloudCards = [
+    {
+        name: "Sushmita Pua",
+        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NDU3LCJwdXIiOiJibG9iX2lkIn19--cb93a4312555e1f8281654d98897b25a146dbbdf/sfruby_cloud-sushmita-pua.png",
+        alt: "SF Ruby Cloud Card - Sushmita Pua",
+    },
+    {
+        name: "Bart Agapinan",
+        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NDQ5LCJwdXIiOiJibG9iX2lkIn19--4e8a70964e972b65ff3796ec5a6d1588e427a6e0/sfruby_cloud-bart-agapinan.png",
+        alt: "SF Ruby Cloud Card - Bart Agapinan",
+    },
+    {
+        name: "Yang Chung",
+        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MzU3LCJwdXIiOiJibG9iX2lkIn19--870ec6b8dc14a9454bd6955991a22d31a854833a/sfruby_cloud-yang-chung.png",
+        alt: "SF Ruby Cloud Card - Yang Chung",
+    },
+    {
+        name: "Miles Georgi",
+        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MzA2LCJwdXIiOiJibG9iX2lkIn19--2b801400bf7914bc0528492a1cdef15fb6863629/sfruby_cloud-miles-georgi.png",
+        alt: "SF Ruby Cloud Card - Miles Georgi",
+    },
+];
+---
+
+<section
+    id="cloud-cards"
+    class="py-32 bg-gradient-to-b from-sky-50 to-cloud-50 relative overflow-hidden"
+>
+    <!-- Subtle background elements with cloud theme -->
+    <div class="absolute inset-0 opacity-5">
+        <div
+            class="absolute top-20 left-1/4 w-48 h-48 bg-sky-300 rounded-full filter blur-3xl"
+        >
+        </div>
+        <div
+            class="absolute bottom-20 right-1/4 w-40 h-40 bg-ruby-300 rounded-full filter blur-3xl"
+        >
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 w-36 h-36 bg-sky-200 rounded-full filter blur-2xl"
+        >
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-20">
+            <div class="inline-block mb-6">
+                <a href="#cloud-cards" class="group">
+                    <h2
+                        class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-dark-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-sky-600"
+                    >
+                        Join us in the clouds!
+                    </h2>
+                </a>
+                <div
+                    class="w-24 h-1 bg-gradient-to-r from-sky-500 to-ruby-500 rounded-full mx-auto"
+                >
+                </div>
+            </div>
+            <p
+                class="text-xl md:text-2xl text-dark-600 max-w-4xl mx-auto leading-relaxed font-light"
+            >
+                See who is already in the clouds! Join in and create your own
+                Cloud Card!
+            </p>
+        </div>
+
+        <!-- Cloud Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            {
+                cloudCards.map((card, index) => (
+                    <div
+                        class="group cloud-card"
+                        style={`animation-delay: ${index * 150}ms`}
+                    >
+                        <a
+                            href="https://clouds.sfruby.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="block relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2"
+                        >
+                            <div class="relative bg-gradient-to-br from-sky-100 to-cloud-100">
+                                <img
+                                    src={card.image}
+                                    alt={card.alt}
+                                    class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                                    loading="lazy"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            </div>
+                        </a>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Call to Action -->
+        <div class="flex flex-col items-center text-center">
+            <a
+                href="https://clouds.sfruby.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-sky-500 to-ruby-500 border-2 border-sky-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:shadow-sky-500/30 hover:scale-105 hover:from-sky-400 hover:to-ruby-400"
+            >
+                <svg
+                    class="w-5 h-5 mr-2 group-hover:mr-3 transition-all duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                    ></path>
+                </svg>
+                <span class="transition-all duration-300"
+                    >See All Cloud Cards</span
+                >
+                <svg
+                    class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    ></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .cloud-card {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Enhanced hover effects */
+    .cloud-card:hover {
+        z-index: 10;
+    }
+</style>
