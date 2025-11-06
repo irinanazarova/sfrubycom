@@ -339,7 +339,7 @@ export const scheduleSlots = {
     day: 3,
     startTime: "9:00",
     endTime: "12:00",
-    track: "workshop",
+    track: "blackbox",
     type: "social",
   },
   HACKDAY: {
