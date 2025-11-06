@@ -687,11 +687,14 @@ const days = [
 
         // Add padding to all day contents to account for sticky nav
         const allDayContents = document.querySelectorAll('.schedule-content');
-        allDayContents.forEach(content => {
-            const contentEl = content as HTMLElement;
-            if (dayNav) {
-                contentEl.style.paddingTop = `${dayNav.offsetHeight + 20}px`;
-            }
+        requestAnimationFrame(() => {
+            allDayContents.forEach(content => {
+                const contentEl = content as HTMLElement;
+                if (dayNav) {
+                    const padding = Math.max(dayNav.offsetHeight + 20, 120); // Minimum 120px fallback
+                    contentEl.style.paddingTop = `${padding}px`;
+                }
+            });
         });
 
         // Scroll spy for day sections
