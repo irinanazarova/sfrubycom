@@ -101,6 +101,7 @@ export const startups = {
       "AI-powered business assistant that answers, qualifies, and follows up with every lead around the clock—so you never miss a customer, call, or opportunity. ",
     speakerId: "",
     demoTime: "",
+    isYC: true,
   },
   corepilot: {
     id: "corepilot",

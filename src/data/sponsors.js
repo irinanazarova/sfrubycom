@@ -72,7 +72,7 @@ export const sponsorTiers = [
       "Special acknowledgment",
     ],
     available: 5,
-    claimed: 2,
+    claimed: 3,
   },
 ];
 
@@ -263,6 +263,13 @@ export const sponsors = {
     tier: "Travel",
     logo: "/sponsor_hackclub.png",
     url: "https://hackclub.com",
+  },
+  ezcater: {
+    id: "ezcater",
+    name: "ezCater",
+    tier: "Travel",
+    logo: "/sponsor_ezcater.png",
+    url: "https://ezcater.com",
   },
 };
 
