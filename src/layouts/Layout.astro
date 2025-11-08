@@ -6,11 +6,13 @@ import "../styles/global.css";
 export interface Props {
     title?: string;
     description?: string;
+    preloadHeroImage?: boolean;
 }
 
 const {
     title = "San Francisco Ruby Conference 2025",
     description = "Join us for the San Francisco Ruby Conference 2025: Building the Future with Ruby. November 19-20 at Fort Mason, San Francisco.",
+    preloadHeroImage = false,
 } = Astro.props;
 ---
 
@@ -48,7 +50,16 @@ const {
             as="image"
             fetchpriority="high"
         />
-        <link rel="preload" href="/hero.png" as="image" fetchpriority="high" />
+        {
+            preloadHeroImage && (
+                <link
+                    rel="preload"
+                    href="/hero.png"
+                    as="image"
+                    fetchpriority="high"
+                />
+            )
+        }
 
         <!-- Open Graph / Social Media -->
         <meta property="og:type" content="website" />

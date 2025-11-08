@@ -235,6 +235,26 @@ export const startups = {
     demoTime: "",
     isYC: true,
   },
+  angellist: {
+    id: "angellist",
+    name: "AngelList",
+    logo: "/startup_angellist.png",
+    url: "https://angellist.com",
+    description:
+      "AngelList is the platform for startups—connecting founders with investors, talent, and resources to build and scale companies.",
+    speakerId: "",
+    demoTime: "",
+  },
+  planetscale: {
+    id: "planetscale",
+    name: "PlanetScale",
+    logo: "/startup_planetscale.png",
+    url: "https://planetscale.com",
+    description:
+      "The database platform for developers. PlanetScale provides MySQL-compatible serverless database with built-in scaling, branching, and non-blocking schema changes.",
+    speakerId: "",
+    demoTime: "",
+  },
 };
 
 // Helper functions
@@ -264,4 +284,10 @@ export function getStartupsForDisplay() {
   return Object.values(startups).sort((a, b) => {
     return a.demoTime.localeCompare(b.demoTime);
   });
+}
+
+// Get multiple startups by their IDs
+export function getStartupsByIds(ids) {
+  if (!ids || !Array.isArray(ids)) return [];
+  return ids.map((id) => startups[id]).filter(Boolean);
 }

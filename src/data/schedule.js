@@ -337,8 +337,8 @@ export const scheduleSlots = {
   BIKE1: {
     id: "BIKE1",
     day: 3,
-    startTime: "9:00",
-    endTime: "12:00",
+    startTime: "9:30",
+    endTime: "13:00",
     track: "blackbox",
     type: "social",
   },

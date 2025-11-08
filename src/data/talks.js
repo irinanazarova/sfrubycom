@@ -379,8 +379,8 @@ export const talks = {
   "startup-demos-day1": {
     id: "startup-demos-day1",
     title: "Ruby Startup Demos",
-    description: "Recognize, Fin by Intercom, Thatch, AngelList, PlanetScale",
     type: "demo",
+    startupIds: ["recognize", "fin", "thatch", "angellist", "planetscale"],
     speakers: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
@@ -388,8 +388,8 @@ export const talks = {
   "startup-demos-day2-main-part1": {
     id: "startup-demos-day2-main-part1",
     title: "Ruby Startup Demos",
-    description: "Bolt.new, Stepful, NexHealth, Simple AI, Sixfold",
     type: "demo",
+    startupIds: ["bolt_new", "stepful", "nexhealth", "simple_ai", "sixfold"],
     speakers: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
@@ -397,8 +397,8 @@ export const talks = {
   "startup-demos-day2-main-part2": {
     id: "startup-demos-day2-main-part2",
     title: "Ruby Startup Demos",
-    description: "Cactus, Superconductor, AI Squared, Ubicloud, Finta",
     type: "demo",
+    startupIds: ["cactus", "superconductor", "aisquared", "ubicloud", "finta"],
     speakers: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
@@ -406,8 +406,8 @@ export const talks = {
   "startup-demos-day2-blackbox-part1": {
     id: "startup-demos-day2-blackbox-part1",
     title: "Ruby Startup Demos",
-    description: "AccessGrid, Suppli, Tend Cash, SunChaser.io",
     type: "demo",
+    startupIds: ["accessgrid", "suppli", "tend", "sunchaser"],
     speakers: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
@@ -415,8 +415,8 @@ export const talks = {
   "startup-demos-day2-blackbox-part2": {
     id: "startup-demos-day2-blackbox-part2",
     title: "Ruby Startup Demos",
-    description: "Cora Computer, Terminalwire, Chatwithwork",
     type: "demo",
+    startupIds: ["coracomputer", "terminalwire", "chatwithwork"],
     speakers: [],
     status: "confirmed",
     tags: ["startups", "demos", "products"],
@@ -475,16 +475,16 @@ export const talks = {
   },
   "golden-gate-bike-tour": {
     id: "golden-gate-bike-tour",
-    title: "Golden Gate Bridge Bike Tour (Guided)",
+    title: "Golden Gate Bridge Bike Tour & Alcatraz Ferry Ride",
     description:
-      "This group would sign up for a 9am-Noon bike tour slot (possibly 10am-1pm depending on the availability) with Blazing Saddles - cost is $72 for regular bike and $90 for an electric bike, and it includes an 8-mile bike ride to Sausalito and a ferry ride on the way back, so good bang for the buck. I've contacted the company and confirmed they could handle a large group if there was a lot of interest (eg more than 20 people). It would be leaving from their Hyde Park location near Fisherman's wharf. Apparently you can keep the bike rental for up to 24 hours as well.",
+      "This 8-mile guided tour with Blazing Saddles will run from 10am-1pm. We'll leave from the bike shop 3 blocks away from the conference center. It includes stops at the Presidio and a ride across the Golden Gate Bridge over to Sausalito, followed by a 30-minute ferry ride back which goes right past Alcatraz and drops you off at Pier 41 near Fisherman's Wharf.\n\nYou can choose from electric or regular bike and the rental comes with helmet, lock, etc and you can keep the bike for up to 24 hours.\n\nTotal cost with rental, ferry ride, and tax is $94.71 for regular bike or $116.55 for electric bike. That price includes a 20% booking discount when you book online.\n\nRead the Luma event description for more details and or email the organizer kane@fixture.media with any questions.",
     type: "social",
     speakers: [],
     status: "confirmed",
     tags: ["community", "sports", "biking", "tours"],
     venue: "Blazing Saddles - Hyde Park location",
     address: "Near Fisherman's Wharf, San Francisco, CA",
-    link: "https://www.blazingsaddles.com/san-francisco/routes-and-tours/bike-the-bridge-electric",
+    link: "https://luma.com/n1reh5hj",
     linkText: "Learn More & Book",
   },
   "morning-fort-run": {

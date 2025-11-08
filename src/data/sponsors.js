@@ -30,7 +30,7 @@ export const sponsorTiers = [
       "2 complimentary conference tickets",
     ],
     available: 10,
-    claimed: 7,
+    claimed: 8,
     stripelink: "https://buy.stripe.com/bJe8wP3V26m9bgk2M5e7m02",
   },
   {
@@ -59,7 +59,7 @@ export const sponsorTiers = [
       "1 complimentary conference ticket",
     ],
     available: 15,
-    claimed: 12,
+    claimed: 14,
     stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
   },
   {
@@ -159,6 +159,13 @@ export const sponsors = {
     logo: "/sponsor_finta.png",
     url: "https://finta.com/",
   },
+  angellist: {
+    id: "angellist",
+    name: "AngelList",
+    tier: "Ruby",
+    logo: "/sponsor_angellist.png",
+    url: "https://angellist.com",
+  },
   gitbutler: {
     id: "gitbutler",
     name: "GitButler",
@@ -249,6 +256,20 @@ export const sponsors = {
     tier: "Emerald",
     logo: "/sponsor_beyondfinance.png",
     url: "https://www.beyondfinance.com/",
+  },
+  binti: {
+    id: "binti",
+    name: "Binti",
+    tier: "Emerald",
+    logo: "/sponsor_binti.png",
+    url: "https://binti.com",
+  },
+  saeloun: {
+    id: "saeloun",
+    name: "Saeloun",
+    tier: "Emerald",
+    logo: "/sponsor_saeloun.png",
+    url: "https://www.saeloun.com/",
   },
   tidewave: {
     id: "tidewave",

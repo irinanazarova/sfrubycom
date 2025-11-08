@@ -10,6 +10,7 @@ import {
   talks,
   speakers
 } from '../data/index.js';
+import { startups, getStartupsByIds } from '../data/startups.js';
 
 // Get the complete schedule with all data joined
 const fullSchedule = getCompleteSchedule();
@@ -304,7 +305,21 @@ const days = [
                                                                     {mainSlot.speakers.map((s: any) => s.name).join(', ')}
                                                                 </p>
                                                             )}
-                                                            {mainSlot.talk.description && (
+                                                            {mainSlot.talk.type === 'demo' && mainSlot.talk.startupIds && (
+                                                                <div class="grid grid-cols-3 sm:grid-cols-5 gap-3 mt-4">
+                                                                    {getStartupsByIds(mainSlot.talk.startupIds).map((startup: any) => (
+                                                                        <div class="bg-white/20 rounded-lg p-2 flex items-center justify-center" title={startup.name}>
+                                                                            <img
+                                                                                src={startup.logo}
+                                                                                alt={startup.name}
+                                                                                class="w-full h-auto max-h-8 object-contain filter brightness-0 invert opacity-90"
+                                                                                loading="lazy"
+                                                                            />
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                            {mainSlot.talk.type !== 'demo' && mainSlot.talk.description && (
                                                                 <p class={`opacity-80 line-clamp-3 ${mainSlot.type === 'social' ? 'text-lg' : 'text-sm'}`}>
                                                                     {mainSlot.talk.description}
                                                                 </p>
@@ -338,7 +353,21 @@ const days = [
                                                                         {mainSlot.speakers.map((s: any) => s.name).join(', ')}
                                                                     </p>
                                                                 )}
-                                                                {mainSlot.talk.description && (
+                                                                {mainSlot.talk.type === 'demo' && mainSlot.talk.startupIds && (
+                                                                    <div class="grid grid-cols-2 gap-2 mt-3">
+                                                                        {getStartupsByIds(mainSlot.talk.startupIds).map((startup: any) => (
+                                                                            <div class="bg-gray-100 rounded p-1.5 flex items-center justify-center" title={startup.name}>
+                                                                                <img
+                                                                                    src={startup.logo}
+                                                                                    alt={startup.name}
+                                                                                    class="w-full h-auto max-h-6 object-contain"
+                                                                                    loading="lazy"
+                                                                                />
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
+                                                                {mainSlot.talk.type !== 'demo' && mainSlot.talk.description && (
                                                                     <p class="text-sm text-gray-500 line-clamp-3">
                                                                         {mainSlot.talk.description}
                                                                     </p>
@@ -372,7 +401,21 @@ const days = [
                                                                         {blackboxSlot.speakers.map((s: any) => s.name).join(', ')}
                                                                     </p>
                                                                 )}
-                                                                {blackboxSlot.talk.description && (
+                                                                {blackboxSlot.talk.type === 'demo' && blackboxSlot.talk.startupIds && (
+                                                                    <div class="grid grid-cols-2 gap-2 mt-3">
+                                                                        {getStartupsByIds(blackboxSlot.talk.startupIds).map((startup: any) => (
+                                                                            <div class="bg-gray-100 rounded p-1.5 flex items-center justify-center" title={startup.name}>
+                                                                                <img
+                                                                                    src={startup.logo}
+                                                                                    alt={startup.name}
+                                                                                    class="w-full h-auto max-h-6 object-contain"
+                                                                                    loading="lazy"
+                                                                                />
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                )}
+                                                                {blackboxSlot.talk.type !== 'demo' && blackboxSlot.talk.description && (
                                                                     <p class="text-sm text-gray-500 line-clamp-3">
                                                                         {blackboxSlot.talk.description}
                                                                     </p>
@@ -398,7 +441,6 @@ const days = [
                                                                         </span>
                                                                     </div>
                                                                 )}
-                                                                <p class="text-xs text-emerald-600 mb-2">
                                                                 <div class="flex items-center gap-2 mb-2">
                                                                     <h3 class="font-bold text-lg leading-tight">
                                                                         {workshopSlot.talk.title}
@@ -616,6 +658,7 @@ const days = [
 
 <script>
     import { talks, speakers, scheduleSlots, slotAssignments } from '../data/index.js';
+    import { startups } from '../data/startups.js';
 
     // Tab switching functionality
     document.addEventListener('DOMContentLoaded', () => {
@@ -888,6 +931,11 @@ const days = [
                 speakerData.push((speakers as any)[talk.speakerId]);
             }
 
+            // Get startup data for demo sessions
+            const startupData = talk.type === 'demo' && talk.startupIds
+                ? talk.startupIds.map((id: string) => (startups as any)[id]).filter(Boolean)
+                : [];
+
             // Build modal HTML
             let modalHTML = `
                 <div class="relative">
@@ -960,13 +1008,50 @@ const days = [
 
                     <!-- Content -->
                     <div class="p-6 sm:p-8">
-                        <!-- Description -->
-                        <div class="mb-8">
-                            <h3 class="text-xl font-bold text-gray-900 mb-4">About this ${talk.type}</h3>
-                            <div class="prose prose-lg max-w-none text-gray-700">
-                                ${talk.description ? talk.description.split('\n').map((p: string) => `<p>${p}</p>`).join('') : 'Description coming soon.'}
+                        <!-- Startup Demos -->
+                        ${startupData.length > 0 ? `
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-gray-900 mb-6">Featured Startups</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    ${startupData.map((startup: any) => {
+                                        const name = String(startup.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                                        const desc = String(startup.description || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                                        return `
+                                        <a href="${startup.url}" target="_blank" rel="noopener noreferrer"
+                                           class="group bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-all duration-300 hover:shadow-lg border border-gray-200 hover:border-emerald-300">
+                                            <div class="flex items-start gap-4">
+                                                <div class="flex-shrink-0 w-16 h-16 bg-white rounded-lg p-2 flex items-center justify-center shadow-sm">
+                                                    <img src="${startup.logo}" alt="${name}"
+                                                         class="w-full h-full object-contain" />
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <h4 class="font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors flex items-center gap-2">
+                                                        ${name}
+                                                        ${startup.isYC ? `
+                                                            <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-orange-100 border border-orange-200 rounded text-xs font-medium text-orange-700">
+                                                                <img src="/yc_icon.png" alt="YC" class="w-3 h-3" />
+                                                                YC
+                                                            </span>
+                                                        ` : ''}
+                                                    </h4>
+                                                    <p class="text-sm text-gray-600">${desc}</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    `}).join('')}
+                                </div>
                             </div>
-                        </div>
+                        ` : ''}
+
+                        <!-- Description -->
+                        ${talk.description ? `
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">About this ${talk.type}</h3>
+                                <div class="prose prose-lg max-w-none text-gray-700 space-y-4">
+                                    ${talk.description.split('\n').map((p: string) => `<p class="mb-4">${p}</p>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
 
                         <!-- Tags -->
                         ${talk.tags && talk.tags.length > 0 ? `
@@ -1031,7 +1116,7 @@ const days = [
                                                     ` : ''}
                                                     ${speaker.socials && speaker.socials.length > 0 ? `
                                                         <div class="flex gap-3 justify-center sm:justify-start">
-                                                            ${speaker.socials.map((url) => {
+                                                            ${speaker.socials.map((url: string) => {
                                                                 // Detect social platform from URL
                                                                 if (url.includes('twitter.com') || url.includes('x.com')) {
                                                                     return `
