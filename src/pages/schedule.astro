@@ -11,6 +11,10 @@ import {
   speakers
 } from '../data/index.js';
 import { startups, getStartupsByIds } from '../data/startups.js';
+import TalkModal from '../components/schedule/TalkModal.astro';
+import ScheduleTabs from '../components/schedule/ScheduleTabs.astro';
+import { formatTime as utilFormatTime, timeToMinutes } from '../utils/schedule/formatTime';
+import { getSessionColor as utilGetSessionColor, getTrackDisplayName as utilGetTrackDisplayName } from '../utils/schedule/constants';
 
 // Get the complete schedule with all data joined
 const fullSchedule = getCompleteSchedule();
@@ -127,9 +131,9 @@ const day2CombinedBlocks = getCombinedTimeBlocks(2);
 const day3CombinedBlocks = getCombinedTimeBlocks(3);
 
 const days = [
-  { date: 'November 19, 2025', dayLabel: 'Day 1', blocks: day1CombinedBlocks },
-  { date: 'November 20, 2025', dayLabel: 'Day 2', blocks: day2CombinedBlocks },
-  { date: 'November 21, 2025', dayLabel: 'Day 3', blocks: day3CombinedBlocks }
+  { date: 'November 19, 2025', dayLabel: 'Day 1', dayNumber: 1, blocks: day1CombinedBlocks },
+  { date: 'November 20, 2025', dayLabel: 'Day 2', dayNumber: 2, blocks: day2CombinedBlocks },
+  { date: 'November 21, 2025', dayLabel: 'Day 3', dayNumber: 3, blocks: day3CombinedBlocks }
 ];
 ---
 
@@ -142,66 +146,44 @@ const days = [
             <div class="absolute bottom-40 left-20 w-24 h-24 bg-sky-400 rounded-full filter blur-xl"></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Day Navigation -->
-            <div id="dayNavigation" class="flex justify-center sticky-day-nav is-stuck">
-                <div class="bg-gray-100 rounded-xl p-2 inline-flex space-x-2 w-full sm:w-auto day-nav-container relative">
-                    <!-- Draft Version Ribbon -->
-                    <div class="absolute -right-3 -top-3 bg-blue-500 text-white px-4 py-1 rounded-full shadow-lg transform rotate-12 text-xs font-bold tracking-wide z-10 draft-ribbon">
-                        Submit an event!
+            <!-- Venue Map (Collapsible) -->
+            <details class="venue-map-details mb-6">
+                <summary class="venue-map-summary">
+                    <div class="flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-ruby-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="text-lg font-display font-bold text-gray-900">Venue Map</span>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-500 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
                     </div>
-                    {days.map((day, index) => (
-                        <button
-                            class={`schedule-tab px-4 sm:px-8 py-3 sm:py-4 rounded-lg font-medium transition-all duration-300 flex-1 sm:flex-initial ${
-                                index === 0
-                                    ? 'bg-ruby-500 text-white shadow-md'
-                                    : 'text-gray-700 hover:bg-white hover:shadow-sm'
-                            }`}
-                            data-index={index}
-                            style="display: block; visibility: visible;"
-                        >
-                            <div class="font-display font-bold text-sm sm:text-base">{day.dayLabel}</div>
-                            <div class="text-xs sm:text-sm opacity-90">{day.date.replace('November ', 'Nov ')}</div>
-                        </button>
-                    ))}
+                </summary>
+                <div class="venue-map-content mt-4">
+                    <img
+                        src="/venue-map.png"
+                        alt="Fort Mason Conference Center Venue Map"
+                        class="w-full h-auto rounded-lg shadow-lg border border-gray-200"
+                        loading="lazy"
+                    />
                 </div>
-            </div>
+            </details>
+
+            <!-- Day Navigation -->
+            <ScheduleTabs days={days} />
 
             <!-- Schedule Days -->
-            <div class="space-y-8">
+            <div class="space-y-8 mt-4">
                 {days.map((day, dayIndex) => (
                     <div
                         class="schedule-content"
+                        id={`day${day.dayNumber}`}
                         data-index={dayIndex}
-                        style={dayIndex === 0 ? "display: block; visibility: visible;" : "display: none;"}
                     >
 
-                        {/* Day 3 Submit Event CTA */}
-                        {dayIndex === 2 && (
-                            <div class="mb-8 text-center">
-                                <div class="inline-block p-8 bg-gradient-to-r from-ruby-50 to-pink-50 rounded-xl border-2 border-ruby-200">
-                                    <h3 class="text-2xl font-bold text-gray-900 mb-4">
-                                        Want to organize a community event?
-                                    </h3>
-                                    <p class="text-gray-700 mb-6 max-w-2xl mx-auto">
-                                        Day 3 is open for unofficial community events like hikes, museum walks, and city tours. Submit your event idea!
-                                    </p>
-                                    <a
-                                        href="https://forms.gle/W3reGgxKUV1mb7Z39"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-ruby-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
-                                    >
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                        </svg>
-                                        Submit Your Event
-                                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        )}
 
                         <!-- Schedule Grid -->
                         <div class="space-y-8">
@@ -513,43 +495,116 @@ const days = [
         </div>
     </section>
 
-    <!-- Talk Detail Modal -->
-    <div id="talkModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <!-- Background backdrop -->
-        <div id="modalBackdrop" class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity"></div>
-
-        <!-- Modal panel -->
-        <div class="flex min-h-screen items-center justify-center p-2 sm:p-4">
-            <div id="modalPanel" class="relative w-full max-w-5xl transform overflow-hidden rounded-xl bg-white shadow-2xl transition-all">
-                <!-- Modal content -->
-                <div id="modalContent" class="max-h-[90vh] overflow-y-auto">
-                    <!-- Content will be dynamically inserted here -->
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Talk Detail Modal (Native Dialog) -->
+    <TalkModal />
 </Layout>
 
-<!-- Modal Styles -->
 <style>
-    .modal-open {
-        overflow: hidden;
-    }
-
-    #talkModal {
-        backdrop-filter: blur(4px);
-    }
-
-    #talkModal.showing {
-        display: block;
-    }
-
     .speaker-card {
         transition: all 0.3s ease;
     }
 
     .speaker-card:hover {
         transform: translateY(-2px);
+    }
+
+    /* CSS-based tab content switching using :target */
+    .schedule-content {
+        display: none;
+    }
+
+    /* Show Day 1 by default (no hash) */
+    .schedule-content[id="day1"] {
+        display: block;
+    }
+
+    /* Show targeted day */
+    .schedule-content:target {
+        display: block;
+    }
+
+    /* Hide Day 1 when another day is targeted */
+    #day2:target ~ * #day1,
+    #day3:target ~ * #day1 {
+        display: none;
+    }
+
+    /* Prevent scroll-to-target behavior */
+    .schedule-content {
+        scroll-margin-top: -9999px;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Venue Map Collapsible Styles */
+    .venue-map-details {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 0.75rem;
+        padding: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .venue-map-details:hover {
+        border-color: #dc2626;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .venue-map-details[open] {
+        border-color: #dc2626;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .venue-map-summary {
+        list-style: none;
+        user-select: none;
+    }
+
+    .venue-map-summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .venue-map-summary::marker {
+        display: none;
+    }
+
+    /* Rotate chevron when open */
+    .venue-map-details[open] .chevron {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
+
+    .chevron {
+        transition: transform 0.3s ease;
+    }
+
+    .venue-map-content {
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 640px) {
+        .venue-map-details {
+            padding: 0.75rem;
+        }
+
+        .venue-map-summary span {
+            font-size: 1rem;
+        }
     }
 </style>
 
@@ -728,17 +783,7 @@ const days = [
             dayNav.style.top = `${mainNav.offsetHeight}px`;
         }
 
-        // Add padding to all day contents to account for sticky nav
-        const allDayContents = document.querySelectorAll('.schedule-content');
-        requestAnimationFrame(() => {
-            allDayContents.forEach(content => {
-                const contentEl = content as HTMLElement;
-                if (dayNav) {
-                    const padding = Math.max(dayNav.offsetHeight + 20, 120); // Minimum 120px fallback
-                    contentEl.style.paddingTop = `${padding}px`;
-                }
-            });
-        });
+
 
         // Scroll spy for day sections
         const dayContents = document.querySelectorAll('.schedule-content');
@@ -775,9 +820,8 @@ const days = [
             scrollSpyObserver.observe(content);
         });
 
-        // Modal functionality
-        const modal = document.getElementById('talkModal');
-        const modalContent = document.getElementById('modalContent');
+        // Modal functionality - using native dialog
+        const modal = document.getElementById('talkModal') as HTMLDialogElement;
 
         // Function to format time
         function formatTime(time: string) {
@@ -887,21 +931,9 @@ const days = [
                     </div>
                 `;
 
-                const modalContent = document.getElementById('modalContent');
-                const modal = document.getElementById('talkModal');
-
-                if (modalContent) modalContent.innerHTML = modalHTML;
-                if (modal) {
-                    modal.classList.remove('hidden');
-                    modal.classList.add('showing');
-                }
-                document.body.classList.add('modal-open');
-
-                // Attach close button handler
-                const modalCloseBtn = document.getElementById('modalCloseBtn');
-                if (modalCloseBtn) {
-                    modalCloseBtn.addEventListener('click', closeTalkModal);
-            }
+                // Use native dialog API
+                (window as any).setTalkModalContent(modalHTML);
+                (window as any).openTalkModal();
             }
 
         // Function to get track display name
@@ -1227,33 +1259,17 @@ const days = [
                 </div>
             `;
 
-            if (modalContent) modalContent.innerHTML = modalHTML;
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('showing');
-            }
-            document.body.classList.add('modal-open');
+            // Use native dialog API
+            (window as any).setTalkModalContent(modalHTML);
+            (window as any).openTalkModal();
 
             // Update URL hash
-            window.location.hash = talkId;
-
-            // Attach close button handler to the newly created button
-            const modalCloseBtn = document.getElementById('modalCloseBtn');
-            if (modalCloseBtn) {
-                modalCloseBtn.addEventListener('click', closeTalkModal);
-            }
+            history.pushState(null, '', `#${talkId}`);
         }
 
-        // Function to close modal
+        // Function to close modal - uses native dialog
         function closeTalkModal() {
-            if (modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('showing');
-            }
-            document.body.classList.remove('modal-open');
-
-            // Clear URL hash
-            history.pushState('', document.title, window.location.pathname + window.location.search);
+            (window as any).closeTalkModal();
         }
 
         // Function to copy talk link
@@ -1286,24 +1302,7 @@ const days = [
             });
         });
 
-        // Close modal handlers - click outside modal to close
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                const target = e.target as HTMLElement;
-                const modalPanel = document.getElementById('modalPanel');
-                // Close if clicked on modal backdrop or outside the modal panel
-                if (target === modal || target.id === 'modalBackdrop' || (modalPanel && !modalPanel.contains(target))) {
-                    closeTalkModal();
-                }
-            });
-        }
-
-        // ESC key to close modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal && modal.classList.contains('showing')) {
-                closeTalkModal();
-            }
-        });
+        // Native dialog handles ESC key and backdrop clicks automatically
 
         // Handle hash on page load
         if (window.location.hash) {
@@ -1320,10 +1319,10 @@ const days = [
             if (window.location.hash) {
                 const talkId = window.location.hash.substring(1);
                 const slotId = Object.entries(slotAssignments as any).find(([_, id]) => id === talkId)?.[0];
-                if (slotId && modal && !modal.classList.contains('showing')) {
+                if (slotId && modal && !modal.open) {
                     openTalkModal(talkId, slotId);
                 }
-            } else if (modal && modal.classList.contains('showing')) {
+            } else if (modal && modal.open) {
                 closeTalkModal();
             }
         });

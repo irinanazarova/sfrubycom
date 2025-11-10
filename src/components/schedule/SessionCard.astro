@@ -1,0 +1,77 @@
+---
+/**
+ * SessionCard - Reusable component for displaying individual session cards
+ * Handles different session types (talks, workshops, keynotes, demos, etc.)
+ */
+import { getSessionColor } from '../../utils/schedule/constants';
+import { getStartupsByIds } from '../../data/startups';
+
+interface Props {
+  talk: any;
+  slot: any;
+  speakers?: any[];
+  showTrackBadge?: boolean;
+  trackName?: string;
+}
+
+const { talk, slot, speakers = [], showTrackBadge = false, trackName } = Astro.props;
+
+// Get startup data for demo sessions
+const startupLogos = talk?.type === 'demo' && talk?.startupIds
+  ? getStartupsByIds(talk.startupIds)
+  : [];
+---
+
+<div
+    class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${getSessionColor(talk?.type || 'talk')}`}
+    data-talk-id={talk?.id}
+    data-slot-id={slot?.id}
+>
+    {showTrackBadge && trackName && (
+        <div class="mb-3 md:hidden">
+            <span class="px-3 py-1 bg-opacity-20 bg-white text-current text-xs font-medium rounded-full">
+                {trackName}
+            </span>
+        </div>
+    )}
+
+    <h3 class="font-bold text-lg mb-2 leading-tight">
+        {talk?.title || 'Untitled Session'}
+    </h3>
+
+    {speakers && speakers.length > 0 && (
+        <p class="text-sm opacity-90 mb-2">
+            {speakers.map((s: any) => s.name).join(', ')}
+        </p>
+    )}
+
+    {/* Show startup logos for demo sessions */}
+    {talk?.type === 'demo' && startupLogos.length > 0 && (
+        <div class="grid grid-cols-2 gap-2 mt-3">
+            {startupLogos.map((startup: any) => (
+                <div class="bg-gray-100 rounded p-1.5 flex items-center justify-center" title={startup.name}>
+                    <img
+                        src={startup.logo}
+                        alt={startup.name}
+                        class="w-full h-auto max-h-6 object-contain"
+                        loading="lazy"
+                    />
+                </div>
+            ))}
+        </div>
+    )}
+
+    {/* Show description for non-demo sessions */}
+    {talk?.type !== 'demo' && talk?.description && (
+        <p class="text-sm opacity-80 line-clamp-3">
+            {talk.description}
+        </p>
+    )}
+
+    {/* Workshop-specific info */}
+    {talk?.type === 'workshop' && talk?.maxParticipants && (
+        <p class="text-xs mt-2 font-medium">
+            Max {talk.maxParticipants} participants
+        </p>
+    )}
+</div>

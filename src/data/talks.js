@@ -437,20 +437,7 @@ export const talks = {
     id: "ruby-hackathon-angellist",
     title: "Hack Day at AngelList",
     description:
-      "Join us for a full-day Hack Day at AngelList! Work on Ruby projects, collaborate with fellow Rubyists, and build something amazing. Whether you're working on open source contributions, personal projects, or just want to learn from others, this is the perfect opportunity to code together. All skill levels welcome!",
-    type: "talk",
-    speakers: [],
-    status: "confirmed",
-    tags: ["hackathon", "community", "coding"],
-    venue: "AngelList",
-    link: "https://lu.ma/sfrubyconf25hackday",
-    linkText: "Sign Up",
-  },
-  "ruby-hackathon-angellist": {
-    id: "ruby-hackathon-angellist",
-    title: "Hack Day at AngelList",
-    description:
-      "Join us for a full-day Hack Day at AngelList! Work on Ruby projects, collaborate with fellow Rubyists, and build something amazing. Whether you're working on open source contributions, personal projects, or just want to learn from others, this is the perfect opportunity to code together. All skill levels welcome!",
+      "Join us for a full-day Hack Day at AngelList - doors open from 9am, official Hack Day from 10 am to 4pm! Work on Ruby projects, collaborate with fellow Rubyists, and build something amazing. Whether you're working on open source contributions, personal projects, or just want to learn from others, this is the perfect opportunity to code together. All skill levels welcome!",
     type: "talk",
     speakers: [],
     status: "confirmed",
