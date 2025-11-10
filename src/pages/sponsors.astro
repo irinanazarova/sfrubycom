@@ -71,45 +71,64 @@ const currentSponsors = getSponsorsForSponsorsPage();
           </thead>
           <tbody class="bg-white divide-y divide-dark-200">
             {sponsorTiers.map((tier) => (
-              <tr>
+              <tr class={tier.active ? '' : 'opacity-50 bg-dark-50'}>
                 <td class="px-4 py-4 whitespace-nowrap">
-                  <div class="font-bold text-dark-900">{tier.name}</div>
+                  <div class={`font-bold ${tier.active ? 'text-dark-900' : 'text-dark-500'}`}>
+                    {tier.name}
+                    {tier.active && (
+                      <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                        Available
+                      </span>
+                    )}
+                    {!tier.active && (
+                      <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600">
+                        Closed
+                      </span>
+                    )}
+                  </div>
                 </td>
-                <td class="px-4 py-4 whitespace-nowrap text-dark-900">{tier.price}</td>
+                <td class={`px-4 py-4 whitespace-nowrap ${tier.active ? 'text-dark-900' : 'text-dark-500'}`}>{tier.price}</td>
                 <td class="px-4 py-4">
-                  <div class="text-sm text-dark-600 line-clamp-2">{tier.description}</div>
+                  <div class={`text-sm line-clamp-2 ${tier.active ? 'text-dark-600' : 'text-dark-400'}`}>{tier.description}</div>
                   <button
-                    class="text-ruby-500 hover:text-ruby-600 text-sm mt-1"
+                    class={`text-sm mt-1 ${tier.active ? 'text-ruby-500 hover:text-ruby-600' : 'text-dark-400'}`}
                     onclick={`window.showBenefits('${tier.name}')`}
                   >
                     View benefits
                   </button>
                 </td>
                 <td class="px-4 py-4 whitespace-nowrap">
-                  <div class="text-sm text-dark-600">
+                  <div class={`text-sm ${tier.active ? 'text-dark-600' : 'text-dark-400'}`}>
                     {tier.claimed}/{tier.available} claimed
                   </div>
                 </td>
                 <td class="px-4 py-4 whitespace-nowrap text-right">
-                  <a
-                    href="/contact"
-                    class={`inline-block px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                      tier.claimed === tier.available
-                        ? 'bg-dark-100 text-dark-400 cursor-not-allowed'
-                        : 'bg-ruby-500 text-white hover:bg-ruby-600'
-                    }`}
-                  >
-                    {tier.claimed === tier.available ? 'Sold Out' : 'Contact Us'}
-                  </a>
-                  {tier.stripelink && tier.stripelink !== '' && (
-                    <a
-                      href={tier.stripelink}
-                      class="inline-block px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 bg-ruby-500 text-white hover:bg-ruby-600"
-                    >
-                      Send Payment
-                    </a>
+                  {tier.active ? (
+                    <>
+                      <a
+                        href="/contact"
+                        class={`inline-block px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
+                          tier.claimed === tier.available
+                            ? 'bg-dark-100 text-dark-400 cursor-not-allowed'
+                            : 'bg-ruby-500 text-white hover:bg-ruby-600'
+                        }`}
+                      >
+                        {tier.claimed === tier.available ? 'Sold Out' : 'Contact Us'}
+                      </a>
+                      {tier.stripelink && tier.stripelink !== '' && (
+                        <a
+                          href={tier.stripelink}
+                          class="inline-block px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 bg-ruby-500 text-white hover:bg-ruby-600 ml-2"
+                        >
+                          Send Payment
+                        </a>
+                      )}
+                    </>
+                  ) : (
+                    <span class="inline-block px-4 py-2 rounded-md text-sm font-medium bg-dark-100 text-dark-400 cursor-not-allowed">
+                      Not Available
+                    </span>
                   )}
-
                 </td>
               </tr>
             ))}

@@ -1,5 +1,41 @@
 // Sponsor tier definitions
 export const sponsorTiers = [
+  // ACTIVE TIERS - Accepting new sponsors (9 days before conference)
+  {
+    name: "Post Production",
+    price: "$7,000",
+    description:
+      "Sponsor conference recordings and reach attendees through video content.",
+    benefits: [
+      "Embedded logo on conference recordings",
+      "Link to sponsor in description of conference recordings",
+      "Job Postings promoted to attendees through Job Board",
+      "Logo on conference website and printed materials",
+      "Social media recognition",
+      "1 complimentary conference ticket",
+    ],
+    available: 5,
+    claimed: 0,
+    stripelink: "",
+    active: true,
+  },
+  {
+    name: "Emerald",
+    price: "$3,000",
+    description: "Strong presence with quality branding and networking.",
+    benefits: [
+      "Logo on conference website and printed materials",
+      "Sponsor acknowledgment during opening remarks",
+      "Social media recognition",
+      "1 complimentary conference ticket",
+    ],
+    available: 18,
+    claimed: 14,
+    stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
+    active: true,
+  },
+
+  // INACTIVE TIERS - No longer accepting new sponsors
   {
     name: "Pickaxe ⛏️",
     price: "$15,000",
@@ -15,6 +51,7 @@ export const sponsorTiers = [
     available: 5,
     claimed: 3,
     stripelink: "",
+    active: false,
   },
   {
     name: "Ruby",
@@ -32,23 +69,7 @@ export const sponsorTiers = [
     available: 10,
     claimed: 8,
     stripelink: "https://buy.stripe.com/bJe8wP3V26m9bgk2M5e7m02",
-  },
-  {
-    name: "Post Production",
-    price: "$7,000",
-    description:
-      "Sponsor conference recordings and reach attendees through video content.",
-    benefits: [
-      "Embedded logo on conference recordings",
-      "Link to sponsor in description of conference recordings",
-      "Job Postings promoted to attendees through Job Board",
-      "Logo on conference website and printed materials",
-      "Social media recognition",
-      "1 complimentary conference ticket",
-    ],
-    available: 5,
-    claimed: 0,
-    stripelink: "",
+    active: false,
   },
   {
     name: "Reception",
@@ -64,20 +85,7 @@ export const sponsorTiers = [
     available: 1,
     claimed: 1,
     stripelink: "",
-  },
-  {
-    name: "Emerald",
-    price: "$3,000",
-    description: "Strong presence with quality branding and networking.",
-    benefits: [
-      "Logo on conference website and printed materials",
-      "Sponsor acknowledgment during opening remarks",
-      "Social media recognition",
-      "1 complimentary conference ticket",
-    ],
-    available: 15,
-    claimed: 14,
-    stripelink: "https://buy.stripe.com/eVqeVd1MUh0NckofyRe7m03",
+    active: false,
   },
   {
     name: "Travel",
@@ -90,6 +98,7 @@ export const sponsorTiers = [
     ],
     available: 5,
     claimed: 3,
+    active: false,
   },
 ];
 
