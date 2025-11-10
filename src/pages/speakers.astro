@@ -4,12 +4,30 @@ import SocialLink from "../components/SocialLink.astro";
 import { speakers } from "../data/speakers.js";
 import { talks } from "../data/talks.js";
 import { startups } from "../data/startups.js";
+import { getSpeakerOGMetadata, truncateDescription } from "../utils/og";
 
 // Get all speakers as an array with their status
 const allSpeakers = Object.entries(speakers).map(([id, speaker]) => ({
     ...speaker,
     id,
 }));
+
+// Check if we have a hash parameter for a specific speaker
+const hash = Astro.url.hash.replace('#', '');
+const targetSpeaker = hash ? (speakers as any)[hash] : null;
+
+// Generate page-specific OG metadata
+// For speakers page, we use a dedicated OG image showing speaker collage
+const ogMetadata = {
+    title: "Speakers - San Francisco Ruby Conference 2025",
+    description: "Meet our amazing speakers at San Francisco Ruby Conference 2025. Industry leaders from Shopify, Cisco, Gusto, and more sharing their expertise.",
+    ogImage: "/sfruby_og.jpg", // TODO: Create /og_speakers.jpg with speaker photos collage
+    ogUrl: "https://sfruby.com/speakers",
+};
+
+// Note: Hash-based deep linking (#speaker-id) doesn't work reliably for social previews
+// because hash fragments are client-side only. Social crawlers don't send them to the server.
+// To implement speaker-specific OG images, create dedicated pages: /speakers/[id].astro
 
 // Build a speaker-to-talks index for O(1) lookups
 const speakerToTalksIndex = new Map();
@@ -68,7 +86,12 @@ allSpeakers.sort((a, b) => {
 });
 ---
 
-<Layout title="Speakers - San Francisco Ruby Conference 2025">
+<Layout
+    title={ogMetadata.title}
+    description={ogMetadata.description}
+    ogImage={ogMetadata.ogImage}
+    ogUrl={ogMetadata.ogUrl}
+>
     <div class="bg-gradient-to-b from-ruby-100 to-ruby-700 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl md:text-4xl font-display font-bold text-center">

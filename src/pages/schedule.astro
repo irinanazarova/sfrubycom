@@ -15,6 +15,20 @@ import TalkModal from '../components/schedule/TalkModal.astro';
 import ScheduleTabs from '../components/schedule/ScheduleTabs.astro';
 import { formatTime as utilFormatTime, timeToMinutes } from '../utils/schedule/formatTime';
 import { getSessionColor as utilGetSessionColor, getTrackDisplayName as utilGetTrackDisplayName } from '../utils/schedule/constants';
+import { getTalkOGMetadata, truncateDescription } from '../utils/og';
+
+// Generate page-specific OG metadata
+// For schedule page, we use a dedicated OG image showing the schedule
+const ogMetadata = {
+    title: "Schedule - San Francisco Ruby Conference 2025",
+    description: "Full conference schedule for San Francisco Ruby Conference 2025. November 19-20 at Fort Mason, featuring talks, workshops, and keynotes from industry leaders.",
+    ogImage: "/sfruby_og.jpg", // TODO: Create /og_schedule.jpg with schedule preview/calendar
+    ogUrl: "https://sfruby.com/schedule",
+};
+
+// Note: Hash-based deep linking (#talk-id) doesn't work reliably for social previews
+// because hash fragments are client-side only. Social crawlers don't send them to the server.
+// To implement talk-specific OG images, create dedicated pages: /schedule/[id].astro or /talks/[id].astro
 
 // Get the complete schedule with all data joined
 const fullSchedule = getCompleteSchedule();
@@ -137,7 +151,12 @@ const days = [
 ];
 ---
 
-<Layout title="Schedule - San Francisco Ruby Conference 2025">
+<Layout
+    title={ogMetadata.title}
+    description={ogMetadata.description}
+    ogImage={ogMetadata.ogImage}
+    ogUrl={ogMetadata.ogUrl}
+>
     <!-- Schedule Content -->
     <section id="schedule" class="pt-20 bg-white relative overflow-hidden">
         <!-- Invisible anchor points at the top to prevent scroll-to-bottom -->

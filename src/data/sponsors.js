@@ -34,6 +34,23 @@ export const sponsorTiers = [
     stripelink: "https://buy.stripe.com/bJe8wP3V26m9bgk2M5e7m02",
   },
   {
+    name: "Post Production",
+    price: "$7,000",
+    description:
+      "Sponsor conference recordings and reach attendees through video content.",
+    benefits: [
+      "Embedded logo on conference recordings",
+      "Link to sponsor in description of conference recordings",
+      "Job Postings promoted to attendees through Job Board",
+      "Logo on conference website and printed materials",
+      "Social media recognition",
+      "1 complimentary conference ticket",
+    ],
+    available: 5,
+    claimed: 0,
+    stripelink: "",
+  },
+  {
     name: "Reception",
     price: "Special",
     description: "Exclusive sponsorship of the evening reception.",

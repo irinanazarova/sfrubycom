@@ -7,13 +7,24 @@ export interface Props {
     title?: string;
     description?: string;
     preloadHeroImage?: boolean;
+    ogImage?: string;
+    ogUrl?: string;
+    ogType?: string;
 }
 
 const {
     title = "San Francisco Ruby Conference 2025",
     description = "Join us for the San Francisco Ruby Conference 2025: Building the Future with Ruby. November 19-20 at Fort Mason, San Francisco.",
     preloadHeroImage = false,
+    ogImage = "/sfruby_og.jpg",
+    ogUrl = Astro.url.href,
+    ogType = "website",
 } = Astro.props;
+
+// Ensure ogImage is absolute URL for social media
+const absoluteOgImage = ogImage.startsWith("http")
+    ? ogImage
+    : `https://sfruby.com${ogImage}`;
 ---
 
 <!doctype html>
@@ -62,21 +73,20 @@ const {
         }
 
         <!-- Open Graph / Social Media -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://sfruby.com" />
+        <meta property="og:type" content={ogType} />
+        <meta property="og:url" content={ogUrl} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content="/sfruby_og.jpg" />
+        <meta property="og:image" content={absoluteOgImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://sfruby.com" />
+        <meta property="twitter:url" content={ogUrl} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
-        <meta
-            property="twitter:image"
-            content="https://sfruby.com/sfruby_og.jpg"
-        />
+        <meta property="twitter:image" content={absoluteOgImage} />
 
         <script
             defer
