@@ -272,6 +272,8 @@ export const talks = {
     tags: ["social", "networking", "afterparty"],
     venue: "San Francisco Brewing Co.",
     address: "3150 Polk St, San Francisco, CA 94109",
+    link: "https://luma.com/881j9e2l",
+    linkText: "Sign up and Join",
   },
   "scaling-rails-to-two-million": {
     id: "scaling-rails-to-two-million",
