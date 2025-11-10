@@ -140,6 +140,11 @@ const days = [
 <Layout title="Schedule - San Francisco Ruby Conference 2025">
     <!-- Schedule Content -->
     <section id="schedule" class="pt-20 bg-white relative overflow-hidden">
+        <!-- Invisible anchor points at the top to prevent scroll-to-bottom -->
+        <div id="day1" class="day-anchor"></div>
+        <div id="day2" class="day-anchor"></div>
+        <div id="day3" class="day-anchor"></div>
+
         <!-- Subtle background pattern -->
         <div class="absolute inset-0 opacity-5">
             <div class="absolute top-20 right-20 w-32 h-32 bg-ruby-400 rounded-full filter blur-xl"></div>
@@ -180,7 +185,7 @@ const days = [
                 {days.map((day, dayIndex) => (
                     <div
                         class="schedule-content"
-                        id={`day${day.dayNumber}`}
+                        data-day={`day${day.dayNumber}`}
                         data-index={dayIndex}
                     >
 
@@ -508,30 +513,55 @@ const days = [
         transform: translateY(-2px);
     }
 
+    /* Invisible anchor points for hash navigation */
+    .day-anchor {
+        position: absolute;
+        top: -5rem; /* Offset for main navigation */
+        left: 0;
+        width: 1px;
+        height: 1px;
+        visibility: hidden;
+        pointer-events: none;
+        scroll-margin-top: 5rem; /* Account for fixed header */
+    }
+
     /* CSS-based tab content switching using :target */
     .schedule-content {
         display: none;
     }
 
     /* Show Day 1 by default (no hash) */
-    .schedule-content[id="day1"] {
+    .schedule-content[data-day="day1"] {
         display: block;
     }
 
-    /* Show targeted day */
-    .schedule-content:target {
+    /* Show targeted day content when anchor is targeted */
+    #day1:target ~ * .schedule-content[data-day="day1"] {
         display: block;
     }
 
-    /* Hide Day 1 when another day is targeted */
-    #day2:target ~ * #day1,
-    #day3:target ~ * #day1 {
+    #day2:target ~ * .schedule-content[data-day="day2"] {
+        display: block;
+    }
+
+    #day3:target ~ * .schedule-content[data-day="day3"] {
+        display: block;
+    }
+
+    /* Hide other days when a specific day is targeted */
+    #day1:target ~ * .schedule-content[data-day="day2"],
+    #day1:target ~ * .schedule-content[data-day="day3"] {
         display: none;
     }
 
-    /* Prevent scroll-to-target behavior */
-    .schedule-content {
-        scroll-margin-top: -9999px;
+    #day2:target ~ * .schedule-content[data-day="day1"],
+    #day2:target ~ * .schedule-content[data-day="day3"] {
+        display: none;
+    }
+
+    #day3:target ~ * .schedule-content[data-day="day1"],
+    #day3:target ~ * .schedule-content[data-day="day2"] {
+        display: none;
     }
 
     /* Smooth scroll behavior */
@@ -720,20 +750,28 @@ const days = [
         const tabs = document.querySelectorAll('.schedule-tab');
         const contents = document.querySelectorAll('.schedule-content');
 
-        const switchToDay = (index: number) => {
-            // Update URL hash
-            window.location.hash = `day${index + 1}`;
+        const switchToDay = (index: number, preventScroll = false) => {
+            // Update URL hash without triggering scroll
+            if (preventScroll) {
+                history.replaceState(null, '', `#day${index + 1}`);
+            } else {
+                window.location.hash = `day${index + 1}`;
+            }
 
-            // Smooth scroll to the section
-            const targetContent = contents[index] as HTMLElement;
-            const mainNav = document.querySelector('header.fixed') as HTMLElement;
-            const mainNavHeight = mainNav ? mainNav.offsetHeight : 80;
-            const dayNav = document.getElementById('dayNavigation') as HTMLElement;
-            const scrollTarget = targetContent.offsetTop - dayNav.offsetHeight - mainNavHeight - 20;
-            window.scrollTo({
-                top: scrollTarget,
-                behavior: 'smooth'
-            });
+            // Don't scroll - let CSS handle the display, or scroll to top of schedule
+            if (!preventScroll) {
+                const scheduleSection = document.getElementById('schedule');
+                const mainNav = document.querySelector('header.fixed') as HTMLElement;
+                const mainNavHeight = mainNav ? mainNav.offsetHeight : 80;
+
+                if (scheduleSection) {
+                    const scrollTarget = scheduleSection.offsetTop - mainNavHeight;
+                    window.scrollTo({
+                        top: scrollTarget,
+                        behavior: 'smooth'
+                    });
+                }
+            }
 
             // Update tabs
             tabs.forEach((t, i) => {
@@ -764,12 +802,22 @@ const days = [
             });
         });
 
-        // Check URL hash on page load and switch to that day
+        // Check URL hash on page load and switch to that day without scrolling
         const hash = window.location.hash;
         if (hash && hash.match(/^#day[123]$/)) {
             const dayIndex = parseInt(hash.replace('#day', '')) - 1;
             if (dayIndex >= 0 && dayIndex < tabs.length) {
-                switchToDay(dayIndex);
+                // Update tabs without scrolling on initial load
+                tabs.forEach((t, i) => {
+                    if (i === dayIndex) {
+                        t.classList.add('bg-ruby-500', 'text-white', 'shadow-md');
+                        t.classList.remove('text-gray-700', 'hover:bg-white', 'hover:shadow-sm');
+                    } else {
+                        t.classList.remove('bg-ruby-500', 'text-white', 'shadow-md');
+                        t.classList.add('text-gray-700', 'hover:bg-white', 'hover:shadow-sm');
+                    }
+                });
+                // CSS will handle showing the correct day via :target
             }
         }
 
