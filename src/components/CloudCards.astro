@@ -3,22 +3,22 @@
 const cloudCards = [
     {
         name: "Sushmita Pua",
-        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NDU3LCJwdXIiOiJibG9iX2lkIn19--cb93a4312555e1f8281654d98897b25a146dbbdf/sfruby_cloud-sushmita-pua.png",
+        image: "cloudcard_sushimta.png",
         alt: "SF Ruby Cloud Card - Sushmita Pua",
     },
     {
         name: "Bart Agapinan",
-        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6NDQ5LCJwdXIiOiJibG9iX2lkIn19--4e8a70964e972b65ff3796ec5a6d1588e427a6e0/sfruby_cloud-bart-agapinan.png",
+        image: "cloudcard_bart.png",
         alt: "SF Ruby Cloud Card - Bart Agapinan",
     },
     {
         name: "Yang Chung",
-        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MzU3LCJwdXIiOiJibG9iX2lkIn19--870ec6b8dc14a9454bd6955991a22d31a854833a/sfruby_cloud-yang-chung.png",
+        image: "cloudcard_yang.png",
         alt: "SF Ruby Cloud Card - Yang Chung",
     },
     {
         name: "Miles Georgi",
-        image: "https://clouds.sfruby.com/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MzA2LCJwdXIiOiJibG9iX2lkIn19--2b801400bf7914bc0528492a1cdef15fb6863629/sfruby_cloud-miles-georgi.png",
+        image: "cloudcard_miles.png",
         alt: "SF Ruby Cloud Card - Miles Georgi",
     },
 ];
@@ -81,14 +81,14 @@ const cloudCards = [
                             rel="noopener noreferrer"
                             class="block relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2"
                         >
-                            <div class="relative bg-gradient-to-br from-sky-100 to-cloud-100">
+                            <div class="relative bg-gradient-to-br from-sky-100 to-cloud-100 overflow-hidden">
                                 <img
                                     src={card.image}
                                     alt={card.alt}
-                                    class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                                    class="w-full h-auto object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-105"
                                     loading="lazy"
                                 />
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-sky-500/20 via-transparent to-ruby-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                             </div>
                         </a>
                     </div>
@@ -141,19 +141,32 @@ const cloudCards = [
 <style>
     .cloud-card {
         opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.6s ease-out forwards;
+        transform: translateY(30px) scale(0.95);
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        will-change: transform, opacity;
     }
 
     @keyframes fadeInUp {
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
     }
 
-    /* Enhanced hover effects */
+    /* Enhanced hover effects with pure CSS */
     .cloud-card:hover {
         z-index: 10;
+    }
+
+    /* Smooth image visibility and scaling on hover */
+    .cloud-card img {
+        backface-visibility: hidden;
+        transform-origin: center center;
+    }
+
+    /* Optimize performance with GPU acceleration */
+    .cloud-card a {
+        will-change: transform;
+        transform: translateZ(0);
     }
 </style>
