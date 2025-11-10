@@ -16,7 +16,7 @@ export const sponsorTiers = [
     ],
     available: 5,
     claimed: 0,
-    stripelink: "",
+    stripelink: "https://buy.stripe.com/8x2bJ18bi9ylacgeuNe7m04",
     active: true,
   },
   {
