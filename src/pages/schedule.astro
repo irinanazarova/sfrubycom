@@ -902,8 +902,8 @@ const days = [
         function openLunchModal(day: number) {
                 const modalHTML = `
                     <div class="relative">
-                        <!-- Close button -->
-                        <button id="modalCloseBtn" class="absolute right-2 top-2 sm:right-4 sm:top-4 z-10 rounded-lg bg-white/90 p-1.5 sm:p-2 hover:bg-gray-100 transition-colors">
+                        <!-- Close button - sticky on mobile for better accessibility -->
+                        <button id="modalCloseBtn" class="sticky top-0 right-0 float-right sm:absolute sm:right-4 sm:top-4 z-50 rounded-lg bg-white/95 backdrop-blur-sm p-2 sm:p-2 hover:bg-gray-100 transition-colors shadow-lg m-2 sm:m-0">
                             <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
@@ -998,9 +998,19 @@ const days = [
                     </div>
                 `;
 
-                // Use native dialog API
-                (window as any).setTalkModalContent(modalHTML);
-                (window as any).openTalkModal();
+                // Use native dialog API with retry logic
+                function tryOpenLunchModal(retries = 5) {
+                    if (typeof (window as any).setTalkModalContent === 'function' &&
+                        typeof (window as any).showTalkModal === 'function') {
+                        (window as any).setTalkModalContent(modalHTML);
+                        (window as any).showTalkModal();
+                    } else if (retries > 0) {
+                        setTimeout(() => tryOpenLunchModal(retries - 1), 50);
+                    } else {
+                        console.error('Modal functions not available for lunch modal');
+                    }
+                }
+                tryOpenLunchModal();
             }
 
         // Function to get track display name
@@ -1015,10 +1025,17 @@ const days = [
 
         // Function to open modal with talk details
         function openTalkModal(talkId: string, slotId: string) {
+            console.log('openTalkModal called:', { talkId, slotId });
+
             const talk = (talks as any)[talkId];
             const slot = (scheduleSlots as any)[slotId];
 
-            if (!talk) return;
+            if (!talk) {
+                console.error('Talk not found:', talkId);
+                return;
+            }
+
+            console.log('Talk found:', talk);
 
             // Get speakers data
             const speakerData = [];
@@ -1038,8 +1055,8 @@ const days = [
             // Build modal HTML
             let modalHTML = `
                 <div class="relative">
-                    <!-- Close button -->
-                    <button id="modalCloseBtn" class="absolute right-2 top-2 sm:right-4 sm:top-4 z-10 rounded-lg bg-white/90 p-1.5 sm:p-2 hover:bg-gray-100 transition-colors">
+                    <!-- Close button - sticky on mobile for better accessibility -->
+                    <button id="modalCloseBtn" class="sticky top-0 right-0 float-right sm:absolute sm:right-4 sm:top-4 z-50 rounded-lg bg-white/95 backdrop-blur-sm p-2 sm:p-2 hover:bg-gray-100 transition-colors shadow-lg m-2 sm:m-0">
                         <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
@@ -1326,9 +1343,27 @@ const days = [
                 </div>
             `;
 
-            // Use native dialog API
-            (window as any).setTalkModalContent(modalHTML);
-            (window as any).openTalkModal();
+            // Use native dialog API with retry logic for Safari
+            function tryOpenModal(retries = 5) {
+                if (typeof (window as any).setTalkModalContent === 'function' &&
+                    typeof (window as any).showTalkModal === 'function') {
+                    (window as any).setTalkModalContent(modalHTML);
+                    console.log('Modal content set');
+                    (window as any).showTalkModal();
+                    console.log('Modal opened');
+                } else if (retries > 0) {
+                    console.log(`Modal functions not ready, retrying... (${retries} attempts left)`);
+                    setTimeout(() => tryOpenModal(retries - 1), 50);
+                } else {
+                    console.error('Modal functions not available after retries', {
+                        setTalkModalContent: typeof (window as any).setTalkModalContent,
+                        showTalkModal: typeof (window as any).showTalkModal
+                    });
+                    alert('Unable to open modal. Please refresh the page and try again.');
+                }
+            }
+
+            tryOpenModal();
 
             // Update URL hash
             history.pushState(null, '', `#${talkId}`);
@@ -1336,7 +1371,7 @@ const days = [
 
         // Function to close modal - uses native dialog
         function closeTalkModal() {
-            (window as any).closeTalkModal();
+            (window as any).hideTalkModal();
         }
 
         // Function to copy talk link
@@ -1347,26 +1382,44 @@ const days = [
             });
         };
 
-        // Add click handlers to all talk cards
-        // Attach event listeners
-        document.querySelectorAll('[data-talk-id]').forEach(button => {
-            button.addEventListener('click', () => {
-                const talkId = (button as HTMLElement).dataset.talkId;
-                const slotId = (button as HTMLElement).dataset.slotId;
-                if (talkId && slotId) openTalkModal(talkId, slotId);
-            });
-        });
+        // Add click handlers using event delegation for better Safari compatibility
+        // This ensures clicks work even on hidden Day 3 content
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
 
-        // Add click handlers to special blocks (like lunch)
-        document.querySelectorAll('[data-special-id]').forEach(block => {
-            block.addEventListener('click', () => {
-                const specialId = (block as HTMLElement).dataset.specialId;
-                const specialType = (block as HTMLElement).dataset.specialType;
+            // Ignore clicks from inside the modal itself
+            const modal = document.getElementById('talkModal');
+            if (modal && modal.contains(target)) {
+                console.log('Click inside modal, ignoring');
+                return;
+            }
+
+            // Handle talk card clicks (including nested elements)
+            const talkCard = target.closest('[data-talk-id]') as HTMLElement;
+            if (talkCard) {
+                const talkId = talkCard.dataset.talkId;
+                const slotId = talkCard.dataset.slotId;
+                console.log('Talk card clicked:', { talkId, slotId, element: talkCard });
+                if (talkId && slotId) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openTalkModal(talkId, slotId);
+                    return;
+                }
+            }
+
+            // Handle special block clicks (like lunch)
+            const specialBlock = target.closest('[data-special-id]') as HTMLElement;
+            if (specialBlock) {
+                const specialId = specialBlock.dataset.specialId;
+                const specialType = specialBlock.dataset.specialType;
                 if (specialType === 'break' && specialId) {
+                    e.preventDefault();
                     const day = specialId.includes('day1') ? 1 : (specialId.includes('day2') ? 2 : 3);
                     openLunchModal(day);
+                    return;
                 }
-            });
+            }
         });
 
         // Native dialog handles ESC key and backdrop clicks automatically

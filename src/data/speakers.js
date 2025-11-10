@@ -178,16 +178,6 @@ export const speakers = {
     bio: "Brandon is a full-stack developer currently leading AI product engineering at ezCater. He's the co-author of Inertia Rails and Inertia Django and is passionate about product-focused development, batteries included frameworks, and changeable code. Currently hooked on MCP servers, AI-coding tools, and runDisney races.",
     group: "speaker",
   },
-  "ryan-king": {
-    id: "ryan-king",
-    name: "Ryan King",
-    company: "Chime Financial",
-    role: "Co-founder",
-    image: "/speaker_ryan.jpg",
-    socials: ["https://www.linkedin.com/in/ryanaking/"],
-    bio: "Ryan King is the co-founder of Chime and has served in varying positions overseeing the company’s product and technology organizations. Ryan was previously VP of engineering at Plaxo until its acquisition by Comcast, and then worked at Comcast Silicon Valley Innovation Center as chief technology officer and vice president. He also held senior engineering roles at Liberate Technologies and Microsoft. Ryan earned a B.S. in computer science & engineering from UCLA and an M.S. in computer science from Stanford University.",
-    group: "cto",
-  },
   "noel-rappin": {
     id: "noel-rappin",
     name: "Noel Rappin",
