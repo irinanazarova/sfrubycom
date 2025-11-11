@@ -1,4 +1,6 @@
 // Job postings data
+import { getSponsor } from "./sponsors.js";
+
 export const jobs = {
   "engineering-manager-beyondfinance": {
     id: "engineering-manager-beyondfinance",
@@ -143,6 +145,17 @@ export const jobs = {
     url: "https://careers.chime.com/en/jobs/8141073002/senior-software-engineer-application-and-language-frameworks/",
     postedDate: "2025-01-13",
   },
+  "senior-software-engineer-rails-boltnew": {
+    id: "senior-software-engineer-rails-boltnew",
+    title: "Senior Software Engineer (Ruby on Rails)",
+    sponsorId: "bolt-new",
+    location: "Remote",
+    type: "Full-time",
+    description:
+      "StackBlitz is hiring a Senior Software Engineer (Ruby on Rails) to help build bolt.new, the AI-powered full-stack web development agent. You'll work on the Rails backend that powers bolt.new's cloud infrastructure, enabling developers to build, run, and deploy full-stack applications directly in the browser. Join a team that's revolutionizing how developers interact with AI to build web applications. Strong Ruby on Rails experience required, along with expertise in building scalable backend systems.",
+    url: "https://job-boards.greenhouse.io/stackblitz/jobs/4006004009?gh_src=fk3cln2c9us",
+    postedDate: "2025-01-13",
+  },
 };
 
 // Helper functions
@@ -159,8 +172,33 @@ export function getJobsBySponsor(sponsorId) {
 }
 
 export function getSortedJobs() {
+  // Define tier priority (higher number = higher priority)
+  const tierPriority = {
+    "Pickaxe ⛏️": 5,
+    Ruby: 4,
+    "Post Production": 4, // Same price as Ruby
+    Reception: 4, // Premium tier, same level as Ruby
+    Emerald: 3,
+    Travel: 1,
+  };
+
   return Object.values(jobs).sort((a, b) => {
-    // Sort by posted date, newest first
+    // Get sponsor tiers
+    const sponsorA = getSponsor(a.sponsorId);
+    const sponsorB = getSponsor(b.sponsorId);
+
+    const tierA = sponsorA?.tier || "";
+    const tierB = sponsorB?.tier || "";
+
+    const priorityA = tierPriority[tierA] || 0;
+    const priorityB = tierPriority[tierB] || 0;
+
+    // First sort by tier priority (higher tier first)
+    if (priorityA !== priorityB) {
+      return priorityB - priorityA;
+    }
+
+    // If same tier, sort by posted date (newest first)
     return new Date(b.postedDate) - new Date(a.postedDate);
   });
 }
