@@ -1,0 +1,225 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="WiFi Information - San Francisco Ruby Conference 2025"
+    description="WiFi access information and guidelines for SF Ruby Conference 2025 attendees."
+>
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-b from-ruby-100 to-ruby-700 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1
+                class="text-3xl md:text-4xl font-display font-bold text-center mb-4"
+            >
+                WiFi—let's keep this working for everyone
+            </h1>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        <!-- Situation Block -->
+        <section>
+            <div class="prose prose-lg max-w-none">
+                <p class="text-dark-700 leading-relaxed">
+                    Our venue WiFi is limited: 150 Mbps, 500 devices (DHCP
+                    leases), ~450 of us, no access to network management.
+                    Workshops, speakers and international travelers get
+                    priority.
+                </p>
+            </div>
+        </section>
+
+        <!-- How to Help Section -->
+        <section>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                Here's how we need you to cooperate:
+            </h2>
+
+            <div class="bg-white border border-dark-200 rounded-lg p-6">
+                <ul class="text-dark-700 space-y-3">
+                    <li>
+                        • Use WiFi in workshops, if you're speaking, traveling
+                        internationally, or if you really need it.
+                    </li>
+                    <li>
+                        • Connect one device only (phone or laptop, not both)
+                    </li>
+                    <li>• Disconnect when you're done (see below for how)</li>
+                    <li>• Reconnect only as needed</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- How to Disconnect Section -->
+        <section>
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
+                How to disconnect (release the network):
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white border border-dark-200 rounded-lg p-6">
+                    <h3 class="font-bold text-dark-900 mb-3">iOS:</h3>
+                    <p class="text-dark-700 text-sm leading-relaxed">
+                        Settings → WiFi → Tap "SFRuby" → <strong
+                            >Forget This Network</strong
+                        >
+                    </p>
+                </div>
+
+                <div class="bg-white border border-dark-200 rounded-lg p-6">
+                    <h3 class="font-bold text-dark-900 mb-3">Android:</h3>
+                    <p class="text-dark-700 text-sm leading-relaxed">
+                        Settings → Network & internet → WiFi → Tap "SFRuby" → <strong
+                            >Forget</strong
+                        >
+                    </p>
+                </div>
+
+                <div class="bg-white border border-dark-200 rounded-lg p-6">
+                    <h3 class="font-bold text-dark-900 mb-3">macOS:</h3>
+                    <p class="text-dark-700 text-sm leading-relaxed">
+                        System Settings → Wi-Fi → Details (SFRuby) → <strong
+                            >Forget This Network</strong
+                        >
+                    </p>
+                </div>
+
+                <div class="bg-white border border-dark-200 rounded-lg p-6">
+                    <h3 class="font-bold text-dark-900 mb-3">Windows:</h3>
+                    <p class="text-dark-700 text-sm leading-relaxed">
+                        Settings → Network & Internet → Wi-Fi → Manage known
+                        networks → SFRuby → <strong>Forget</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Confirmation Block -->
+        <section id="credentials-section">
+            <div class="bg-white border border-dark-200 rounded-lg p-8">
+                <div class="space-y-6">
+                    <label class="flex items-start cursor-pointer group">
+                        <input
+                            type="checkbox"
+                            id="wifi-agreement"
+                            class="mt-1 h-5 w-5 text-ruby-500 border-dark-300 rounded focus:ring-ruby-500 cursor-pointer"
+                        />
+                        <span
+                            class="ml-4 text-dark-700 select-none leading-relaxed"
+                        >
+                            I understand and will use WiFi responsibly as
+                            described.
+                        </span>
+                    </label>
+
+                    <button
+                        id="show-credentials-btn"
+                        disabled
+                        class="inline-block px-6 py-3 bg-ruby-500 text-white font-medium rounded-md hover:bg-ruby-600 transition-colors duration-200 disabled:bg-dark-300 disabled:cursor-not-allowed"
+                    >
+                        Show WiFi credentials
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Credentials Block (Hidden by default) -->
+        <section id="credentials-reveal" class="hidden">
+            <div
+                class="bg-white border border-ruby-200 rounded-lg shadow-sm p-8 animate-fade-in"
+            >
+                <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
+                    WiFi Credentials
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="bg-dark-50 rounded-lg p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-dark-600 mb-2 uppercase tracking-wide"
+                                >
+                                    Network Name
+                                </label>
+                                <div
+                                    class="text-2xl font-mono font-bold text-ruby-600"
+                                >
+                                    SFRuby
+                                </div>
+                            </div>
+
+                            <div>
+                                <label
+                                    class="block text-sm font-bold text-dark-600 mb-2 uppercase tracking-wide"
+                                >
+                                    Password
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <code
+                                        class="text-xl font-mono font-bold text-dark-900"
+                                    >
+                                        ruby2025conf
+                                    </code>
+                                    <button
+                                        onclick="navigator.clipboard.writeText('ruby2025conf')"
+                                        class="px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-md hover:bg-ruby-600 transition-colors duration-200"
+                                        title="Copy password"
+                                    >
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-amber-50 border border-amber-200 rounded-lg p-4"
+                    >
+                        <p class="text-amber-800 text-sm font-medium">
+                            <strong>Reminder:</strong> Please disconnect when done.
+                            See instructions above.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Links -->
+        <section class="text-center">
+            <p class="text-dark-600">
+                Questions? <a
+                    href="/contact"
+                    class="text-ruby-500 hover:text-ruby-600 font-medium underline"
+                    >Reach out to us</a
+                >.
+            </p>
+        </section>
+    </div>
+</Layout>
+
+<script>
+    const checkbox = document.getElementById(
+        "wifi-agreement",
+    ) as HTMLInputElement;
+    const button = document.getElementById(
+        "show-credentials-btn",
+    ) as HTMLButtonElement;
+    const credentialsSection = document.getElementById("credentials-reveal");
+
+    checkbox?.addEventListener("change", () => {
+        if (button) {
+            button.disabled = !checkbox.checked;
+        }
+    });
+
+    button?.addEventListener("click", () => {
+        if (credentialsSection) {
+            credentialsSection.classList.remove("hidden");
+            credentialsSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    });
+</script>
