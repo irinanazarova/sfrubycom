@@ -1,6 +1,22 @@
 // Schedule slots definition with timing and track information
 export const scheduleSlots = {
   // DAY 1 SLOTS
+  REG1: {
+    id: "REG1",
+    day: 1,
+    startTime: "8:00",
+    endTime: "8:50",
+    track: "main",
+    type: "logistics",
+  },
+  WELCOME1: {
+    id: "WELCOME1",
+    day: 1,
+    startTime: "8:50",
+    endTime: "9:00",
+    track: "main",
+    type: "logistics",
+  },
   K1: {
     id: "K1",
     day: 1,
@@ -65,7 +81,14 @@ export const scheduleSlots = {
     track: "blackbox",
     type: "talk",
   },
-  // Lunch break 11:40 - 13:10
+  LUNCH1: {
+    id: "LUNCH1",
+    day: 1,
+    startTime: "11:40",
+    endTime: "13:10",
+    track: "main",
+    type: "break",
+  },
   M4: {
     id: "M4",
     day: 1,
@@ -165,6 +188,14 @@ export const scheduleSlots = {
   },
 
   // DAY 2 SLOTS
+  REG2: {
+    id: "REG2",
+    day: 2,
+    startTime: "8:00",
+    endTime: "8:50",
+    track: "main",
+    type: "logistics",
+  },
   K3: {
     id: "K3",
     day: 2,
@@ -229,7 +260,14 @@ export const scheduleSlots = {
     track: "blackbox",
     type: "talk",
   },
-  // Lunch break 11:40 - 13:10
+  LUNCH2: {
+    id: "LUNCH2",
+    day: 2,
+    startTime: "11:40",
+    endTime: "13:10",
+    track: "main",
+    type: "break",
+  },
   M11: {
     id: "M11",
     day: 2,
@@ -370,6 +408,8 @@ export const scheduleSlots = {
 // This allows flexible assignment of talks to slots
 export const slotAssignments = {
   // DAY 1 ASSIGNMENTS
+  REG1: "doors-registration-day1",
+  WELCOME1: "welcome-remarks-day1",
   K1: "reaction-view",
   M1: "play-with-code",
   S1: "derailing-our-application",
@@ -378,6 +418,7 @@ export const slotAssignments = {
   S2: "rails-expertise-distilled",
   M3: "rails-asset-pipeline",
   S3: "performance-starts-at-boot",
+  LUNCH1: "lunch-day1",
   M4: "zjit-ruby-performance",
   S4: "peace-love-crud",
   W2: "inertia-rails-workshop",
@@ -392,6 +433,7 @@ export const slotAssignments = {
   AFTERPARTY: "gitbutler-afterparty",
 
   // DAY 2 ASSIGNMENTS
+  REG2: "doors-coffee-day2",
   K3: "ruby-ai-conversation",
   M8: "technical-marketing",
   S8: "operating-rails-production",
@@ -400,6 +442,7 @@ export const slotAssignments = {
   S9: "shipping-solo-rails8",
   M10: "software-design-ai-world",
   S10: "opensource-rails-startup",
+  LUNCH2: "lunch-day2",
   M11: "opensource-business-sidekiq",
   S11: "open-mic",
   M12: "scaling-rails-to-two-million",

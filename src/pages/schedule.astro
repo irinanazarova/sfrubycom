@@ -77,20 +77,7 @@ function getTrackColor(track: string) {
   return trackColors[track] || 'gray';
 }
 
-// Special time blocks (breaks, registration, etc.)
-const specialBlocks = {
-  1: [
-    { startTime: '8:00', endTime: '8:50', title: 'Doors Open & Registration', type: 'logistics' },
-    { startTime: '8:50', endTime: '9:00', title: 'Welcome & Opening Remarks', type: 'logistics' },
-    { startTime: '11:40', endTime: '13:10', title: 'Lunch', type: 'break', id: 'lunch-day1' },
-  ],
-  2: [
-    { startTime: '8:00', endTime: '8:50', title: 'Doors Open & Coffee', type: 'logistics' },
-    { startTime: '11:40', endTime: '13:10', title: 'Lunch', type: 'break', id: 'lunch-day2' },
-  ]
-};
-
-// Combine special blocks with time blocks
+// Get time blocks with all schedule data
 function getCombinedTimeBlocks(day: number) {
   // Get all slots for this day with complete data
   const completeSchedule = getCompleteSchedule().filter(slot => slot.day === day);
@@ -110,25 +97,6 @@ function getCombinedTimeBlocks(day: number) {
   });
 
   const timeBlocks = Array.from(timeGroups.values());
-  const specials = specialBlocks[day as keyof typeof specialBlocks] || [];
-
-  // Add special blocks to time blocks
-  specials.forEach((special: any) => {
-    const existingBlock = timeBlocks.find(
-      block => block.startTime === special.startTime
-    );
-
-    if (!existingBlock) {
-      timeBlocks.push({
-        startTime: special.startTime,
-        endTime: special.endTime,
-        slots: [],
-        special: special
-      });
-    } else {
-      existingBlock.special = special;
-    }
-  });
 
   // Sort by start time
   return timeBlocks.sort((a, b) => {
@@ -235,48 +203,13 @@ const days = [
                             )}
 
                             {day.blocks.map((block, blockIndex) => {
-                                // Check if this is a special block (break, registration, etc.)
-                                if (block.special) {
-                                    return (
-                                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-                                            <!-- Time Column -->
-                                            <div class="lg:col-span-2">
-                                                <div class="text-center lg:text-left sticky top-24">
-                                                    <div class="font-display font-bold text-gray-900 text-xl mb-1">
-                                                        {formatTime(block.startTime)}
-                                                    </div>
-                                                    <div class="text-gray-500 text-sm">
-                                                        to {formatTime(block.endTime)}
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Special Block Content -->
-                                            <div class="lg:col-span-10">
-                                                <div class={`p-6 rounded-lg border-2 transition-all duration-300 ${block.special.type === 'break' ? 'transform hover:scale-105 cursor-pointer' : ''} ${getSessionColor(block.special.type)}`}
-                                                     data-special-id={block.special.id}
-                                                     data-special-type={block.special.type}>
-                                                    <h3 class="font-bold text-xl text-center">
-                                                        {block.special.title}
-                                                    </h3>
-                                                    {block.special.description && (
-                                                        <p class="text-center text-sm text-gray-600 mt-2">
-                                                            {block.special.description}
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                }
-
                                 // Regular session blocks
                                 const mainSlot = block.slots.find((s: any) => s.track === 'main');
                                 const blackboxSlot = block.slots.find((s: any) => s.track === 'blackbox');
                                 const workshopSlot = block.slots.find((s: any) => s.track === 'workshop');
 
-                                // Skip if this is a keynote, panel, or social event (they span all tracks)
-                                const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'demo' || mainSlot.type === 'social') && !blackboxSlot && !workshopSlot;
+                                // Skip if this is a keynote, panel, social event, break, or logistics (they span all tracks)
+                                const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'demo' || mainSlot.type === 'social' || mainSlot.type === 'break' || mainSlot.type === 'logistics') && !blackboxSlot && !workshopSlot;
 
                                 return (
                                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
@@ -1408,17 +1341,13 @@ const days = [
                 }
             }
 
-            // Handle special block clicks (like lunch)
-            const specialBlock = target.closest('[data-special-id]') as HTMLElement;
-            if (specialBlock) {
-                const specialId = specialBlock.dataset.specialId;
-                const specialType = specialBlock.dataset.specialType;
-                if (specialType === 'break' && specialId) {
-                    e.preventDefault();
-                    const day = specialId.includes('day1') ? 1 : (specialId.includes('day2') ? 2 : 3);
-                    openLunchModal(day);
-                    return;
-                }
+            // Handle lunch break clicks (open custom lunch modal)
+            const talkId = talkCard?.dataset.talkId;
+            if (talkId && (talkId === 'lunch-day1' || talkId === 'lunch-day2')) {
+                e.preventDefault();
+                const day = talkId === 'lunch-day1' ? 1 : 2;
+                openLunchModal(day);
+                return;
             }
         });
 

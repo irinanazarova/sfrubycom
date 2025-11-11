@@ -26,7 +26,7 @@ const navItems = [
             </a>
 
             <!-- Desktop navigation -->
-            <nav class="hidden md:flex items-center space-x-10 ml-8 lg:ml-12">
+            <nav class="hidden lg:flex items-center space-x-10 ml-8 lg:ml-12">
                 {
                     navItems.map((item) => (
                         <a
@@ -53,7 +53,7 @@ const navItems = [
                 id="mobile-menu-button"
                 aria-label="Toggle mobile menu"
                 aria-expanded="false"
-                class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-dark-200/20 text-dark-700 hover:bg-ruby-50 hover:text-ruby-600 transition-all duration-300"
+                class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-dark-200/20 text-dark-700 hover:bg-ruby-50 hover:text-ruby-600 transition-all duration-300"
             >
                 <svg
                     id="menu-icon"
@@ -91,7 +91,7 @@ const navItems = [
 <!-- Mobile navigation -->
 <div
     id="mobile-menu"
-    class="hidden md:hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-lg shadow-2xl border-t border-dark-100/20 z-40"
+    class="hidden lg:hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-lg shadow-2xl border-t border-dark-100/20 z-40"
 >
     <div class="max-w-7xl mx-auto px-4 py-6">
         <div class="space-y-2">

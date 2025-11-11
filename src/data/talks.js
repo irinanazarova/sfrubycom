@@ -500,6 +500,53 @@ export const talks = {
     link: "https://forms.gle/W3reGgxKUV1mb7Z39",
     linkText: "Submit an Event",
   },
+  "lunch-day1": {
+    id: "lunch-day1",
+    title: "Lunch",
+    description:
+      "🚚 Off The Grid Food Trucks\n\nPick up lunch from our curated selection of Off The Grid food trucks, conveniently parked right in front of the venue at Fort Mason.\n\nWe've arranged for a fantastic variety of local San Francisco vendors to provide diverse cuisine options. The trucks will be stationed on the street level, just outside the main entrance.\n\nDietary Options Available:\n🥗 Vegetarian\n🌱 Vegan\n🐟 Pescatarian\n🌾 Gluten-Free\n\nPlease Note:\nLunch is not included in your conference ticket. Food trucks accept cash and card payments. We recommend budgeting $15-20 for a meal.\n\nPro Tips:\n• Beat the rush by going early or late in the lunch window\n• Enjoy your meal at the Fort Mason picnic areas with bay views",
+    type: "break",
+    speakers: [],
+    status: "confirmed",
+    tags: [],
+  },
+  "lunch-day2": {
+    id: "lunch-day2",
+    title: "Lunch",
+    description:
+      "🚚 Off The Grid Food Trucks\n\nPick up lunch from our curated selection of Off The Grid food trucks, conveniently parked right in front of the venue at Fort Mason.\n\nWe've arranged for a fantastic variety of local San Francisco vendors to provide diverse cuisine options. The trucks will be stationed on the street level, just outside the main entrance.\n\nDietary Options Available:\n🥗 Vegetarian\n🌱 Vegan\n🐟 Pescatarian\n🌾 Gluten-Free\n\nPlease Note:\nLunch is not included in your conference ticket. Food trucks accept cash and card payments. We recommend budgeting $15-20 for a meal.\n\nPro Tips:\n• Beat the rush by going early or late in the lunch window\n• Enjoy your meal at the Fort Mason picnic areas with bay views",
+    type: "break",
+    speakers: [],
+    status: "confirmed",
+    tags: [],
+  },
+  "doors-registration-day1": {
+    id: "doors-registration-day1",
+    title: "Doors Open & Registration",
+    description: "Welcome! Pick up your badge and swag bag.",
+    type: "logistics",
+    speakers: [],
+    status: "confirmed",
+    tags: [],
+  },
+  "welcome-remarks-day1": {
+    id: "welcome-remarks-day1",
+    title: "Welcome & Opening Remarks",
+    description: "Conference kickoff and welcome from organizers.",
+    type: "logistics",
+    speakers: [],
+    status: "confirmed",
+    tags: [],
+  },
+  "doors-coffee-day2": {
+    id: "doors-coffee-day2",
+    title: "Doors Open & Coffee",
+    description: "Good morning! Grab some coffee and get ready for day 2.",
+    type: "logistics",
+    speakers: [],
+    status: "confirmed",
+    tags: [],
+  },
 };
 
 // Helper functions
@@ -596,6 +643,8 @@ export const TALK_TYPES = {
   WORKSHOP: "workshop",
   PANEL: "panel",
   DEMO: "demo",
+  BREAK: "break",
+  LOGISTICS: "logistics",
 };
 
 // Export talk status for consistency
