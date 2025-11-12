@@ -1049,9 +1049,20 @@ const days = [
             }
 
             // Get startup data for demo sessions
-            const startupData = talk.type === 'demo' && talk.startupIds
-                ? talk.startupIds.map((id: string) => (startups as any)[id]).filter(Boolean)
-                : [];
+            let startupData = [];
+            if (talk.type === 'demo') {
+                if (talk.startupIds) {
+                    // Batched demo with multiple startups
+                    startupData = talk.startupIds.map((id: string) => (startups as any)[id]).filter(Boolean);
+                } else if (talk.speakerId) {
+                    // Individual demo - find startup by speaker
+                    const allStartups = Object.values(startups as any);
+                    const startup = allStartups.find((s: any) => s.speakerId === talk.speakerId);
+                    if (startup) {
+                        startupData = [startup];
+                    }
+                }
+            }
 
             // Build modal HTML
             let modalHTML = `
@@ -1125,8 +1136,51 @@ const days = [
 
                     <!-- Content -->
                     <div class="p-6 sm:p-8">
-                        <!-- Startup Demos -->
-                        ${startupData.length > 0 ? `
+                        <!-- Startup Info for Individual Demos -->
+                        ${talk.type === 'demo' && startupData.length === 1 ? `
+                            <div class="mb-8 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200">
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">About the Startup</h3>
+                                ${startupData.map((startup: any) => {
+                                    const name = String(startup.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                                    const desc = String(startup.description || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                                    return `
+                                    <div class="flex flex-col sm:flex-row items-start gap-6">
+                                        <a href="${startup.url}" target="_blank" rel="noopener noreferrer"
+                                           class="flex-shrink-0 group">
+                                            <div class="w-24 h-24 bg-white rounded-xl p-4 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-amber-200 hover:border-amber-300">
+                                                <img src="${startup.logo}" alt="${name}"
+                                                     class="w-full h-full object-contain" />
+                                            </div>
+                                        </a>
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2 mb-3">
+                                                <a href="${startup.url}" target="_blank" rel="noopener noreferrer"
+                                                   class="font-bold text-xl text-gray-900 hover:text-amber-600 transition-colors">
+                                                    ${name}
+                                                </a>
+                                                ${startup.isYC ? `
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-orange-100 border border-orange-200 rounded-md text-xs font-medium text-orange-700">
+                                                        <img src="/yc_icon.png" alt="YC" class="w-3 h-3" />
+                                                        YC
+                                                    </span>
+                                                ` : ''}
+                                            </div>
+                                            <p class="text-gray-700 mb-4">${desc}</p>
+                                            <a href="${startup.url}" target="_blank" rel="noopener noreferrer"
+                                               class="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium group">
+                                                Visit Website
+                                                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                `}).join('')}
+                            </div>
+                        ` : ''}
+
+                        <!-- Startup Demos (Batched) -->
+                        ${startupData.length > 1 ? `
                             <div class="mb-8">
                                 <h3 class="text-xl font-bold text-gray-900 mb-6">Featured Startups</h3>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">

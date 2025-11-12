@@ -3,6 +3,33 @@ import { getAllStartups } from "../data/startups.js";
 import { getSpeaker } from "../data/speakers.js";
 
 const startups = getAllStartups();
+
+// Map startup IDs to their demo talk IDs
+const startupToDemoMap: Record<string, string> = {
+    bolt_new: "bolt-new-demo",
+    stepful: "stepful-demo",
+    accessgrid: "accessgrid-demo",
+    suppli: "suppli-demo",
+    nexhealth: "nexhealth-demo",
+    simple_ai: "simple-ai-demo",
+    sixfold: "sixfold-demo",
+    cactus: "cactus-demo",
+    tend: "tend-demo",
+    sunchaser: "sunchaser-demo",
+    coracomputer: "coracomputer-demo",
+    terminalwire: "terminalwire-demo",
+    superconductor: "superconductor-demo",
+    aisquared: "aisquared-demo",
+    recognize: "recognize-demo",
+    fin: "fin-demo",
+    ubicloud: "ubicloud-demo",
+    chatwithwork: "chatwithwork-demo",
+    thatch: "thatch-demo",
+    finta: "finta-demo",
+    angellist: "angellist-demo",
+    planetscale: "planetscale-demo",
+    llamapress: "llamapress-demo",
+};
 ---
 
 <section id="startup-demos" class="py-20 bg-dark-50">
@@ -33,11 +60,16 @@ const startups = getAllStartups();
             {
                 startups.map((startup) => {
                     const speaker = getSpeaker(startup.speakerId);
+                    const demoTalkId = startupToDemoMap[startup.id];
+                    const scheduleLink = demoTalkId
+                        ? `/schedule#${demoTalkId}`
+                        : startup.url;
+                    const isExternal = !demoTalkId;
                     return (
                         <a
-                            href={startup.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href={scheduleLink}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
                             class="group bg-white rounded-xl p-8 transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-sm border border-gray-100 hover:border-ruby-200 h-full"
                         >
                             <div class="flex flex-col items-center h-full min-h-[280px]">
