@@ -419,10 +419,10 @@ export const speakers = {
     id: "alex-kalderimis",
     name: "Alex Kalderimis",
     company: "Bolt.new",
-    role: "Founder",
-    image: "/speaker_placeholder.jpg",
+    role: "Senior Software Engineer",
+    image: "/speaker_alex_kalderimis.jpg",
     socials: [],
-    bio: "Placeholder bio",
+    bio: "Alex Kalderimis builds at Bolt.new—backend, workflows, developer tools. Senior engineer, focused on SaaS and automation. Career spans open-source contribution, platform architecture, and making life easier for engineering teams.",
     group: "startup",
   },
   "wyatt-ades": {

@@ -209,7 +209,7 @@ const days = [
                                 const workshopSlot = block.slots.find((s: any) => s.track === 'workshop');
 
                                 // Skip if this is a keynote, panel, social event, break, or logistics (they span all tracks)
-                                const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'demo' || mainSlot.type === 'social' || mainSlot.type === 'break' || mainSlot.type === 'logistics') && !blackboxSlot && !workshopSlot;
+                                const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'social' || mainSlot.type === 'break' || mainSlot.type === 'logistics') && !blackboxSlot && !workshopSlot;
 
                                 return (
                                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
