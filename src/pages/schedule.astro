@@ -1214,8 +1214,8 @@ const days = [
                             </div>
                         ` : ''}
 
-                        <!-- Description -->
-                        ${talk.description ? `
+                        <!-- Description (only for non-demo talks or batched demos) -->
+                        ${talk.description && (talk.type !== 'demo' || startupData.length > 1) ? `
                             <div class="mb-8">
                                 <h3 class="text-xl font-bold text-gray-900 mb-4">About this ${talk.type}</h3>
                                 <div class="prose prose-lg max-w-none text-gray-700 space-y-4">
