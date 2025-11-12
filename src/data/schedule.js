@@ -333,6 +333,14 @@ export const scheduleSlots = {
     track: "main",
     type: "talk",
   },
+  S12: {
+    id: "S12",
+    day: 2,
+    startTime: "14:00",
+    endTime: "14:30",
+    track: "blackbox",
+    type: "talk",
+  },
 
   // DAY 2 STARTUP DEMOS (Main Track - Part 1)
   D2M1: {
@@ -598,6 +606,7 @@ export const slotAssignments = {
   LUNCH2: "lunch-day2",
   M11: "opensource-business-sidekiq",
   S11: "open-mic",
+  S12: "open-mic-2",
   M12: "scaling-rails-to-two-million",
   W4: "dynamic-ruby-toolkit-workshop",
 

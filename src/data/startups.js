@@ -259,7 +259,7 @@ export const startups = {
     id: "llamapress",
     name: "llamapress",
     logo: "/startup_llamapress.png",
-    url: "https://llamapress.com",
+    url: "https://llamapress.ai/",
     description: "AI-powered content platform built with Ruby on Rails.",
     speakerId: "kody-kendall",
     demoTime: "",

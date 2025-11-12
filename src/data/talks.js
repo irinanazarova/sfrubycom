@@ -213,7 +213,7 @@ export const talks = {
     title: "Building Cloud Data Infrastructure with Ruby",
     speakerId: "evgeny-li",
     description:
-      "Ruby isn't just for web development. Discover why Ruby is a great choice for building and automating modern cloud data infrastructure. Learn real-world lessons from BemiDB, a data analytics platform. You'll gain practical skills and be inspired to leverage Ruby for your next infrastructure project!",
+      "Ruby isn't just for web development. Discover why Ruby is a great choice for building and automating modern cloud data infrastructure. Learn real-world lessons from Bemi AI, an agentic data platform. You'll gain practical skills and be inspired to leverage Ruby for your next infrastructure project!",
     type: "talk",
     tags: ["infrastructure", "cloud", "data", "devops"],
   },
@@ -359,6 +359,17 @@ export const talks = {
   "open-mic": {
     id: "open-mic",
     title: "Open Mic",
+    description:
+      "Our tradition at SF Ruby is a session where anyone can grab a mic for a couple minutes to share their announcements, news, or ask  a question.",
+    type: "panel",
+    moderator: null,
+    speakers: [],
+    status: "confirmed",
+    tags: ["open mic"],
+  },
+  "open-mic-2": {
+    id: "open-mic-2",
+    title: "Open Mic 2",
     description:
       "Our tradition at SF Ruby is a session where anyone can grab a mic for a couple minutes to share their announcements, news, or ask  a question.",
     type: "panel",
