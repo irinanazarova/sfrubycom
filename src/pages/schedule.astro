@@ -204,9 +204,17 @@ const days = [
 
                             {day.blocks.map((block, blockIndex) => {
                                 // Regular session blocks
-                                const mainSlot = block.slots.find((s: any) => s.track === 'main');
-                                const blackboxSlot = block.slots.find((s: any) => s.track === 'blackbox');
-                                const workshopSlot = block.slots.find((s: any) => s.track === 'workshop');
+                                const mainSlots = block.slots.filter((s: any) => s.track === 'main');
+                                const blackboxSlots = block.slots.filter((s: any) => s.track === 'blackbox');
+                                const workshopSlots = block.slots.filter((s: any) => s.track === 'workshop');
+
+                                const mainSlot = mainSlots[0];
+                                const blackboxSlot = blackboxSlots[0];
+                                const workshopSlot = workshopSlots[0];
+
+                                // Check if all slots in this block are demos
+                                const allMainDemos = mainSlots.length > 0 && mainSlots.every((s: any) => s.type === 'demo');
+                                const allBlackboxDemos = blackboxSlots.length > 0 && blackboxSlots.every((s: any) => s.type === 'demo');
 
                                 // Skip if this is a keynote, panel, social event, break, or logistics (they span all tracks)
                                 const isFullWidth = mainSlot && (mainSlot.type === 'keynote' || mainSlot.type === 'panel' || mainSlot.type === 'social' || mainSlot.type === 'break' || mainSlot.type === 'logistics') && !blackboxSlot && !workshopSlot;
@@ -271,7 +279,30 @@ const days = [
                                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                     {/* Main Stage */}
                                                     <div>
-                                                        {mainSlot && mainSlot.talk ? (
+                                                        {allMainDemos && mainSlots.length > 1 ? (
+                                                            // Multiple demos in same time slot - compact display
+                                                            <div class={`rounded-lg border-2 overflow-hidden ${getSessionColor('demo')}`}>
+                                                                <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2">
+                                                                    <h3 class="font-bold text-sm">Startup Demos</h3>
+                                                                </div>
+                                                                <div class="divide-y divide-gray-200">
+                                                                    {mainSlots.map((slot: any) => (
+                                                                        <div
+                                                                            class="p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+                                                                            data-talk-id={slot.talk?.id}
+                                                                            data-slot-id={slot.id}
+                                                                        >
+                                                                            <h4 class="font-semibold text-sm mb-1">{slot.talk?.title}</h4>
+                                                                            {slot.speakers && slot.speakers.length > 0 && (
+                                                                                <p class="text-xs text-gray-600">
+                                                                                    {slot.speakers.map((s: any) => s.name).join(', ')}
+                                                                                </p>
+                                                                            )}
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        ) : mainSlot && mainSlot.talk ? (
                                                             <div
                                                                 class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${getSessionColor(mainSlot.type)}`}
                                                                 data-talk-id={mainSlot.talk.id}
@@ -319,7 +350,30 @@ const days = [
 
                                                     {/* Blackbox Theater */}
                                                     <div>
-                                                        {blackboxSlot && blackboxSlot.talk ? (
+                                                        {allBlackboxDemos && blackboxSlots.length > 1 ? (
+                                                            // Multiple demos in same time slot - compact display
+                                                            <div class={`rounded-lg border-2 overflow-hidden ${getSessionColor('demo')}`}>
+                                                                <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2">
+                                                                    <h3 class="font-bold text-sm">Startup Demos</h3>
+                                                                </div>
+                                                                <div class="divide-y divide-gray-200">
+                                                                    {blackboxSlots.map((slot: any) => (
+                                                                        <div
+                                                                            class="p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+                                                                            data-talk-id={slot.talk?.id}
+                                                                            data-slot-id={slot.id}
+                                                                        >
+                                                                            <h4 class="font-semibold text-sm mb-1">{slot.talk?.title}</h4>
+                                                                            {slot.speakers && slot.speakers.length > 0 && (
+                                                                                <p class="text-xs text-gray-600">
+                                                                                    {slot.speakers.map((s: any) => s.name).join(', ')}
+                                                                                </p>
+                                                                            )}
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        ) : blackboxSlot && blackboxSlot.talk ? (
                                                             <div
                                                                 class={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:scale-105 cursor-pointer ${getSessionColor('talk')}`}
                                                                 data-talk-id={blackboxSlot.talk.id}
@@ -600,6 +654,20 @@ const days = [
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+    }
+
+    /* Compact demo styling */
+    .demo-compact-list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .demo-compact-item {
+        transition: background-color 0.2s ease;
+    }
+
+    .demo-compact-item:hover {
+        background-color: #f9fafb;
     }
 
     .transition-all {
