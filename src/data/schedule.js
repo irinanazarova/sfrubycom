@@ -162,10 +162,43 @@ export const scheduleSlots = {
     type: "talk",
   },
 
-  DEMOS_D1M: {
-    id: "DEMOS_D1M",
+  // DAY 1 STARTUP DEMOS (Main Track)
+  D1M1: {
+    id: "D1M1",
     day: 1,
     startTime: "16:00",
+    endTime: "16:10",
+    track: "main",
+    type: "demo",
+  },
+  D1M2: {
+    id: "D1M2",
+    day: 1,
+    startTime: "16:10",
+    endTime: "16:20",
+    track: "main",
+    type: "demo",
+  },
+  D1M3: {
+    id: "D1M3",
+    day: 1,
+    startTime: "16:20",
+    endTime: "16:30",
+    track: "main",
+    type: "demo",
+  },
+  D1M4: {
+    id: "D1M4",
+    day: 1,
+    startTime: "16:30",
+    endTime: "16:40",
+    track: "main",
+    type: "demo",
+  },
+  D1M5: {
+    id: "D1M5",
+    day: 1,
+    startTime: "16:40",
     endTime: "16:50",
     track: "main",
     type: "demo",
@@ -300,38 +333,151 @@ export const scheduleSlots = {
     track: "main",
     type: "talk",
   },
-  DEMOS_D2Ma: {
-    id: "DEMOS_D2Ma",
+
+  // DAY 2 STARTUP DEMOS (Main Track - Part 1)
+  D2M1: {
+    id: "D2M1",
     day: 2,
     startTime: "14:40",
+    endTime: "14:50",
+    track: "main",
+    type: "demo",
+  },
+  D2M2: {
+    id: "D2M2",
+    day: 2,
+    startTime: "14:50",
+    endTime: "15:00",
+    track: "main",
+    type: "demo",
+  },
+  D2M3: {
+    id: "D2M3",
+    day: 2,
+    startTime: "15:00",
+    endTime: "15:10",
+    track: "main",
+    type: "demo",
+  },
+  D2M4: {
+    id: "D2M4",
+    day: 2,
+    startTime: "15:10",
+    endTime: "15:20",
+    track: "main",
+    type: "demo",
+  },
+  D2M5: {
+    id: "D2M5",
+    day: 2,
+    startTime: "15:20",
     endTime: "15:30",
     track: "main",
     type: "demo",
   },
-  DEMOS_D2Ba: {
-    id: "DEMOS_D2Ba",
+
+  // DAY 2 STARTUP DEMOS (Blackbox Track - Part 1)
+  D2B1: {
+    id: "D2B1",
     day: 2,
     startTime: "14:40",
-    endTime: "15:30",
+    endTime: "14:50",
     track: "blackbox",
     type: "demo",
   },
-  DEMOS_D2Mb: {
-    id: "DEMOS_D2Mb",
+  D2B2: {
+    id: "D2B2",
+    day: 2,
+    startTime: "14:50",
+    endTime: "15:00",
+    track: "blackbox",
+    type: "demo",
+  },
+  D2B3: {
+    id: "D2B3",
+    day: 2,
+    startTime: "15:00",
+    endTime: "15:10",
+    track: "blackbox",
+    type: "demo",
+  },
+  D2B4: {
+    id: "D2B4",
+    day: 2,
+    startTime: "15:10",
+    endTime: "15:20",
+    track: "blackbox",
+    type: "demo",
+  },
+
+  // DAY 2 STARTUP DEMOS (Main Track - Part 2)
+  D2M6: {
+    id: "D2M6",
     day: 2,
     startTime: "15:40",
+    endTime: "15:50",
+    track: "main",
+    type: "demo",
+  },
+  D2M7: {
+    id: "D2M7",
+    day: 2,
+    startTime: "15:50",
+    endTime: "16:00",
+    track: "main",
+    type: "demo",
+  },
+  D2M8: {
+    id: "D2M8",
+    day: 2,
+    startTime: "16:00",
+    endTime: "16:10",
+    track: "main",
+    type: "demo",
+  },
+  D2M9: {
+    id: "D2M9",
+    day: 2,
+    startTime: "16:10",
+    endTime: "16:20",
+    track: "main",
+    type: "demo",
+  },
+  D2M10: {
+    id: "D2M10",
+    day: 2,
+    startTime: "16:20",
     endTime: "16:30",
     track: "main",
     type: "demo",
   },
-  DEMOS_D2Bb: {
-    id: "DEMOS_D2Bb",
+
+  // DAY 2 STARTUP DEMOS (Blackbox Track - Part 2)
+  D2B5: {
+    id: "D2B5",
     day: 2,
     startTime: "15:40",
-    endTime: "16:30",
+    endTime: "15:50",
     track: "blackbox",
     type: "demo",
   },
+  D2B6: {
+    id: "D2B6",
+    day: 2,
+    startTime: "15:50",
+    endTime: "16:00",
+    track: "blackbox",
+    type: "demo",
+  },
+  D2B7: {
+    id: "D2B7",
+    day: 2,
+    startTime: "16:00",
+    endTime: "16:10",
+    track: "blackbox",
+    type: "demo",
+  },
+
   OUT: {
     id: "OUT",
     day: 2,
@@ -428,7 +574,14 @@ export const slotAssignments = {
   S6: "mcp-fog-ruby-inspector",
   M7: "pack-it-up-gusto",
   S7: "cloud-data-infrastructure-ruby",
-  DEMOS_D1M: "startup-demos-day1",
+
+  // Day 1 Individual Startup Demos
+  D1M1: "recognize-demo",
+  D1M2: "fin-demo",
+  D1M3: "thatch-demo",
+  D1M4: "angellist-demo",
+  D1M5: "planetscale-demo",
+
   K2: "rails-ai-ruby-llm",
   AFTERPARTY: "gitbutler-afterparty",
 
@@ -447,10 +600,32 @@ export const slotAssignments = {
   S11: "open-mic",
   M12: "scaling-rails-to-two-million",
   W4: "dynamic-ruby-toolkit-workshop",
-  DEMOS_D2Ma: "startup-demos-day2-main-part1",
-  DEMOS_D2Ba: "startup-demos-day2-blackbox-part1",
-  DEMOS_D2Mb: "startup-demos-day2-main-part2",
-  DEMOS_D2Bb: "startup-demos-day2-blackbox-part2",
+
+  // Day 2 Individual Startup Demos - Main Track Part 1
+  D2M1: "bolt-new-demo",
+  D2M2: "stepful-demo",
+  D2M3: "nexhealth-demo",
+  D2M4: "simple-ai-demo",
+  D2M5: "sixfold-demo",
+
+  // Day 2 Individual Startup Demos - Blackbox Track Part 1
+  D2B1: "accessgrid-demo",
+  D2B2: "suppli-demo",
+  D2B3: "tend-demo",
+  D2B4: "sunchaser-demo",
+
+  // Day 2 Individual Startup Demos - Main Track Part 2
+  D2M6: "cactus-demo",
+  D2M7: "superconductor-demo",
+  D2M8: "aisquared-demo",
+  D2M9: "ubicloud-demo",
+  D2M10: "finta-demo",
+
+  // Day 2 Individual Startup Demos - Blackbox Track Part 2
+  D2B5: "coracomputer-demo",
+  D2B6: "terminalwire-demo",
+  D2B7: "chatwithwork-demo",
+
   OUT: "thank-you",
   K4: "rails-x-keynote",
 

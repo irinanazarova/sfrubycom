@@ -423,6 +423,238 @@ export const talks = {
     status: "confirmed",
     tags: ["startups", "demos", "products"],
   },
+
+  // INDIVIDUAL STARTUP DEMOS
+  "bolt-new-demo": {
+    id: "bolt-new-demo",
+    title: "Bolt.new Demo",
+    speakerId: "alex-berger",
+    description:
+      "AI-native browser tool for building and deploying full-stack web apps with zero code. Launched 2024; $40M ARR in 5 months.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai"],
+  },
+  "stepful-demo": {
+    id: "stepful-demo",
+    title: "Stepful Demo",
+    speakerId: "wyatt-ades",
+    description:
+      "Online healthcare training for entry-level roles in four months. Tech-driven, accessible to those with a high school diploma.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "healthcare", "yc"],
+  },
+  "accessgrid-demo": {
+    id: "accessgrid-demo",
+    title: "AccessGrid Demo",
+    speakerId: "auston-bunsen",
+    description:
+      "API for issuing NFC keys for Apple and Google Wallet for startups, access control integrators, and large enterprises.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "api"],
+  },
+  "suppli-demo": {
+    id: "suppli-demo",
+    title: "Suppli Demo",
+    speakerId: "david-paluy",
+    description:
+      "Suppli provides digital payments and accounts receivable (AR) software solutions for construction materials supply and distribution sector.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "fintech"],
+  },
+  "nexhealth-demo": {
+    id: "nexhealth-demo",
+    title: "NexHealth Demo",
+    speakerId: "matt-duszynski",
+    description:
+      "Accelerating innovation in healthcare with our universal API, powered by the Synchronizer. Used by tens of thousands of practices in North America, and hundreds of startups building with us. We're a healthtech unicorn!",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "healthcare", "api"],
+  },
+  "simple-ai-demo": {
+    id: "simple-ai-demo",
+    title: "Simple AI Demo",
+    speakerId: "zach-kamran",
+    description:
+      "Simple AI makes it easy to build and deploy enterprise-grade phone agents in days, not weeks. Iconic businesses use us for sales calls, customer support, leads qualification, and more. YC-backed.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai", "yc"],
+  },
+  "sixfold-demo": {
+    id: "sixfold-demo",
+    title: "Sixfold Demo",
+    speakerId: "brian-moseley",
+    description:
+      "Insurtech startup that utilizes generative AI to optimize insurance underwriting processes.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai", "insurtech"],
+  },
+  "cactus-demo": {
+    id: "cactus-demo",
+    title: "Cactus Demo",
+    speakerId: "avinash-joshi",
+    description:
+      "AI-powered business assistant that answers, qualifies, and follows up with every lead around the clock—so you never miss a customer, call, or opportunity.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai", "yc"],
+  },
+  "tend-demo": {
+    id: "tend-demo",
+    title: "Tend Cash Demo",
+    speakerId: "james-kerr",
+    description:
+      "Tend is for people with full lives who need clear visibility of their finances without the burden of traditional budgeting.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "fintech"],
+  },
+  "sunchaser-demo": {
+    id: "sunchaser-demo",
+    title: "SunChaser.io Demo",
+    speakerId: "andre-arko",
+    description:
+      "Collaborative on-call management tool for engineering teams, integrating seamlessly with Slack and PagerDuty to automate shift coverage and streamline incident response.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "devtools"],
+  },
+  "coracomputer-demo": {
+    id: "coracomputer-demo",
+    title: "Cora Computer Demo",
+    speakerId: "kieran-klaassen",
+    description:
+      "AI-powered email agent that triages, drafts, and responds to messages autonomously, letting you manage your inbox with minimal effort.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai"],
+  },
+  "terminalwire-demo": {
+    id: "terminalwire-demo",
+    title: "Terminalwire Demo",
+    speakerId: "brad-gessler",
+    description:
+      "Developer tool for building and deploying modern, web-integrated command-line interfaces: Terminalwire streams server-side commands to users' terminals with seamless cross-platform support, authentication, and instant updates.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "devtools"],
+  },
+  "superconductor-demo": {
+    id: "superconductor-demo",
+    title: "Superconductor Demo",
+    speakerId: "arjun-singh",
+    description:
+      "Superconductor lets you run many coding agents in parallel, with a live browser preview for each one, on desktop or mobile. Launch many agents for each ticket to boost your productivity.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai", "devtools"],
+  },
+  "aisquared-demo": {
+    id: "aisquared-demo",
+    title: "AI Squared Demo",
+    speakerId: "nagendra-dhanakeerthi",
+    description:
+      "Open-source reverse ETL platform to activate warehouse data into SaaS apps. One-click self-hosting, customizable connectors, and built for modern data teams.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "data", "opensource"],
+  },
+  "recognize-demo": {
+    id: "recognize-demo",
+    title: "Recognize Demo",
+    speakerId: "peter-phillips",
+    description:
+      "Employee recognition and rewards program that is high-impact, affordable, and easy to launch. Even for frontline teams across multiple locations.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "hr"],
+  },
+  "fin-demo": {
+    id: "fin-demo",
+    title: "Fin by Intercom Demo",
+    speakerId: "ryan-sherlock",
+    description:
+      "See Fin, Intercom's AI support agent, resolve customer questions with human-quality answers across chat, email, voice, and social. Learns from your docs and policies while keeping your tone. We'll demo the Fin AI Engine: intent clarification, knowledge retrieval, and response validation to reduce hallucinations. Quick setup, precise control with Guidance and Workflows, and seamless integrations.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai"],
+  },
+  "ubicloud-demo": {
+    id: "ubicloud-demo",
+    title: "Ubicloud Demo",
+    speakerId: "dan-farina",
+    description:
+      "Open source alternative to AWS. Ubicloud provides cloud services on bare metal providers, such as Hetzner, Leaseweb, or AWS Bare Metal.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "cloud", "opensource", "yc"],
+  },
+  "chatwithwork-demo": {
+    id: "chatwithwork-demo",
+    title: "Chatwithwork Demo",
+    speakerId: "carmine-paolino",
+    description:
+      "Finally, a way to find that thing buried in your work accounts, and to write more with what you find. Pulls context from Gmail, Drive, Docs, Sheets, Calendar, and Presentations to draft emails and documents. Built with Rails 8, RubyLLM and the Async stack.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai", "rails"],
+  },
+  "thatch-demo": {
+    id: "thatch-demo",
+    title: "Thatch Demo",
+    speakerId: "bart-de-water",
+    description:
+      "Thatch makes it easy to give your team great healthcare. You set a budget, and your employees spend it the way that works best for them.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "healthcare"],
+  },
+  "angellist-demo": {
+    id: "angellist-demo",
+    title: "AngelList Demo",
+    speakerId: "harsohail-brar",
+    description:
+      "AngelList is the platform for startups—connecting founders with investors, talent, and resources to build and scale companies.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products"],
+  },
+  "finta-demo": {
+    id: "finta-demo",
+    title: "Finta Demo",
+    speakerId: "andy-wang",
+    description:
+      "Finta is the new default for startups to handle accounting and taxes. Within 10 minutes, you get automated bookkeeping, effortless tax filing, and real‑time insights.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "fintech", "yc"],
+  },
+  "planetscale-demo": {
+    id: "planetscale-demo",
+    title: "PlanetScale Demo",
+    speakerId: "sam-lambert",
+    description:
+      "The database platform for developers. PlanetScale provides MySQL-compatible serverless database with built-in scaling, branching, and non-blocking schema changes.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "database"],
+  },
+  "llamapress-demo": {
+    id: "llamapress-demo",
+    title: "llamapress Demo",
+    speakerId: "kody-kendall",
+    description: "AI-powered content platform built with Ruby on Rails.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai", "rails"],
+  },
+
   "lucas-film-walk": {
     id: "lucas-film-walk",
     title: "Yoda Fountain and Star Wars museum",

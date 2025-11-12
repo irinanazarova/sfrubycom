@@ -6,7 +6,7 @@ export const startups = {
     url: "https://bolt.new",
     description:
       "AI-native browser tool for building and deploying full-stack web apps with zero code. Launched 2024; $40M ARR in 5 months.",
-    speakerId: "",
+    speakerId: "alex-berger",
     demoTime: "",
   },
   /*lago: {
@@ -28,7 +28,7 @@ export const startups = {
     description:
       "Online healthcare training for entry-level roles in four months. Tech-driven, accessible to those with a high school diploma.",
     isYC: true,
-    speakerId: "",
+    speakerId: "wyatt-ades",
     demoTime: "",
   },
   accessgrid: {
@@ -38,7 +38,7 @@ export const startups = {
     url: "https://accessgrid.com",
     description:
       "API for issuing NFC keys for Apple and Google Wallet for startups, access control integrators, and large enterprises.",
-    speakerId: "",
+    speakerId: "auston-bunsen",
     demoTime: "",
   },
   /*binti: {
@@ -58,7 +58,7 @@ export const startups = {
     url: "https://gosuppli.com",
     description:
       "Suppli provides digital payments and accounts receivable (AR) software solutions for construction materials supply and distribution sector.",
-    speakerId: "",
+    speakerId: "david-paluy",
     demoTime: "",
   },
   nexhealth: {
@@ -68,7 +68,7 @@ export const startups = {
     url: "https://nexhealth.com",
     description:
       "Accelerating innovation in healthcare with our universal API, powered by the Synchronizer. Used by tens of thousands of practices in North America, and hundreds of startups building with us. We're a healthtech unicorn!",
-    speakerId: "",
+    speakerId: "matt-duszynski",
     demoTime: "",
   },
   simple_ai: {
@@ -79,7 +79,7 @@ export const startups = {
     description:
       "Simple AI makes it easy to build and deploy enterprise-grade phone agents in days, not weeks. Iconic businesses use us for sales calls, customer support, leads qualification, and more. YC-backed.",
     isYC: true,
-    speakerId: "",
+    speakerId: "zach-kamran",
     demoTime: "",
   },
   sixfold: {
@@ -89,7 +89,7 @@ export const startups = {
     url: "https://sixfold.ai",
     description:
       "Insurtech startup that utilizes generative AI to optimize insurance underwriting processes. ",
-    speakerId: "",
+    speakerId: "brian-moseley",
     demoTime: "",
   },
   cactus: {
@@ -99,7 +99,7 @@ export const startups = {
     url: "https://oncactus.com",
     description:
       "AI-powered business assistant that answers, qualifies, and follows up with every lead around the clock—so you never miss a customer, call, or opportunity. ",
-    speakerId: "",
+    speakerId: "avinash-joshi",
     demoTime: "",
     isYC: true,
   },
@@ -120,7 +120,7 @@ export const startups = {
     url: "https://tend.cash",
     description:
       "Tend is for people with full lives who need clear visibility of their finances without the burden of traditional budgeting.",
-    speakerId: "",
+    speakerId: "james-kerr",
     demoTime: "",
   },
   sunchaser: {
@@ -130,7 +130,7 @@ export const startups = {
     url: "https://sunchaser.io",
     description:
       "Collaborative on-call management tool for engineering teams, integrating seamlessly with Slack and PagerDuty to automate shift coverage and streamline incident response.",
-    speakerId: "",
+    speakerId: "andre-arko",
     demoTime: "",
   },
   coracomputer: {
@@ -140,7 +140,7 @@ export const startups = {
     url: "https://cora.computer/",
     description:
       "AI-powered email agent that triages, drafts, and responds to messages autonomously, letting you manage your inbox with minimal effort.",
-    speakerId: "",
+    speakerId: "kieran-klaassen",
     demoTime: "",
   },
   terminalwire: {
@@ -149,8 +149,8 @@ export const startups = {
     logo: "/startup_terminalwire.png",
     url: "https://terminalwire.com",
     description:
-      "Developer tool for building and deploying modern, web-integrated command-line interfaces: Terminalwire streams server-side commands to users’ terminals with seamless cross-platform support, authentication, and instant updates.",
-    speakerId: "",
+      "Developer tool for building and deploying modern, web-integrated command-line interfaces: Terminalwire streams server-side commands to users' terminals with seamless cross-platform support, authentication, and instant updates.",
+    speakerId: "brad-gessler",
     demoTime: "",
   },
   superconductor: {
@@ -160,7 +160,7 @@ export const startups = {
     url: "https://www.superconductor.dev/",
     description:
       "Superconductor lets you run many coding agents in parallel, with a live browser preview for each one, on desktop or mobile. Launch many agents for each ticket to boost your productivity.",
-    speakerId: "",
+    speakerId: "arjun-singh",
     demoTime: "",
   },
   aisquared: {
@@ -170,7 +170,7 @@ export const startups = {
     url: "https://github.com/Multiwoven/multiwoven",
     description:
       "Open-source reverse ETL platform to activate warehouse data into SaaS apps. One-click self-hosting, customizable connectors, and built for modern data teams.",
-    speakerId: "",
+    speakerId: "nagendra-dhanakeerthi",
     demoTime: "",
   },
   recognize: {
@@ -180,7 +180,7 @@ export const startups = {
     url: "https://recognizeapp.com/",
     description:
       "Employee recognition and rewards program that is high-impact, affordable, and easy to launch. Even for frontline teams across multiple locations.",
-    speakerId: "",
+    speakerId: "peter-phillips",
     demoTime: "",
   },
   fin: {
@@ -190,7 +190,7 @@ export const startups = {
     url: "https://fin.ai/",
     description:
       "See Fin, Intercom's AI support agent, resolve customer questions with human-quality answers across chat, email, voice, and social. Learns from your docs and policies while keeping your tone. We'll demo the Fin AI Engine: intent clarification, knowledge retrieval, and response validation to reduce hallucinations. Quick setup, precise control with Guidance and Workflows, and seamless integrations.",
-    speakerId: "",
+    speakerId: "ryan-sherlock",
     demoTime: "",
   },
   ubicloud: {
@@ -201,7 +201,7 @@ export const startups = {
     description:
       "Open source alternative to AWS. Ubicloud provides cloud services on bare metal providers, such as Hetzner, Leaseweb, or AWS Bare Metal.",
     isYC: true,
-    speakerId: "",
+    speakerId: "dan-farina",
     demoTime: "",
   },
   chatwithwork: {
@@ -211,7 +211,7 @@ export const startups = {
     url: "https://chatwithwork.com/",
     description:
       "Finally, a way to find that thing buried in your work accounts, and to write more with what you find. Pulls context from Gmail, Drive, Docs, Sheets, Calendar, and Presentations to draft emails and documents. Built with Rails 8, RubyLLM and the Async stack.",
-    speakerId: "",
+    speakerId: "carmine-paolino",
     demoTime: "",
   },
   thatch: {
@@ -221,7 +221,7 @@ export const startups = {
     url: "https://thatch.com/",
     description:
       "Thatch makes it easy to give your team great healthcare. You set a budget, and your employees spend it the way that works best for them.",
-    speakerId: "",
+    speakerId: "bart-de-water",
     demoTime: "",
   },
   finta: {
@@ -231,7 +231,7 @@ export const startups = {
     url: "https://www.finta.com/",
     description:
       "Finta is the new default for startups to handle accounting and taxes. Within 10 minutes, you get automated bookkeeping, effortless tax filing, and real‑time insights. ",
-    speakerId: "",
+    speakerId: "andy-wang",
     demoTime: "",
     isYC: true,
   },
@@ -242,7 +242,7 @@ export const startups = {
     url: "https://angellist.com",
     description:
       "AngelList is the platform for startups—connecting founders with investors, talent, and resources to build and scale companies.",
-    speakerId: "",
+    speakerId: "harsohail-brar",
     demoTime: "",
   },
   planetscale: {
@@ -252,7 +252,16 @@ export const startups = {
     url: "https://planetscale.com",
     description:
       "The database platform for developers. PlanetScale provides MySQL-compatible serverless database with built-in scaling, branching, and non-blocking schema changes.",
-    speakerId: "",
+    speakerId: "sam-lambert",
+    demoTime: "",
+  },
+  llamapress: {
+    id: "llamapress",
+    name: "llamapress",
+    logo: "/startup_llamapress.png",
+    url: "https://llamapress.com",
+    description: "AI-powered content platform built with Ruby on Rails.",
+    speakerId: "kody-kendall",
     demoTime: "",
   },
 };
