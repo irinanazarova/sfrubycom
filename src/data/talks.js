@@ -428,7 +428,7 @@ export const talks = {
   "bolt-new-demo": {
     id: "bolt-new-demo",
     title: "Bolt.new Demo",
-    speakerId: "alex-berger",
+    speakerId: "alex-kalderimis",
     description:
       "AI-native browser tool for building and deploying full-stack web apps with zero code. Launched 2024; $40M ARR in 5 months.",
     type: "demo",

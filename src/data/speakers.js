@@ -415,9 +415,9 @@ export const speakers = {
     bio: "Eugene Kenny is a Rails committer, and a Staff Product Engineer at Intercom, where he helps steward Intercom's two million line Rails monolith in production. He's led critical upgrades and platform improvements, from major Rails upgrades to database architecture and CI/CD pipelines. As an active contributor to Rails, he brings lessons from operating at scale back to the framework itself.",
     group: "speaker",
   },
-  "alex-berger": {
-    id: "alex-berger",
-    name: "Alex Berger",
+  "alex-kalderimis": {
+    id: "alex-kalderimis",
+    name: "Alex Kalderimis",
     company: "Bolt.new",
     role: "Founder",
     image: "/speaker_placeholder.jpg",
