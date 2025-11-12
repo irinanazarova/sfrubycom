@@ -462,7 +462,7 @@ export const speakers = {
     role: "Head of Sync",
     image: "/speaker_matt.jpg",
     socials: ["https://x.com/bsdzunk"],
-    bio: "Matt has been building with Ruby and Rails for over a decade, and is currently leading the Synchronizer engineering team NexHealth. A Houston native and recent San Francisco transplant, he and his wife are enjoying the west coast with their two cats.",
+    bio: "Matt has been building with Ruby and Rails for over a decade, and is currently leading the Synchronizer engineering team at NexHealth. A Houston native and recent San Francisco transplant, he and his wife are enjoying the west coast with their two cats.",
     group: "startup",
   },
   "zach-kamran": {
@@ -618,7 +618,7 @@ export const speakers = {
       "https://x.com/samlambert",
       "https://www.linkedin.com/in/isamlambert/",
     ],
-    bio: "Sam Lambert is CEO at PlanetScale, building databases that run at hyperscale and never go down. Before PlanetScale, he scaled engineering and launched GitHub Actions at GitHub, leading teams to support hundreds of millions of developers worldwide. Previous stops include engineering for traffic and video at Facebook. He invests in dev tools and infra, and still believes great software comes from knowing what builders need—and shipping that relentlessly. Based in San Francisco.",
+    bio: "Sam Lambert is the CEO at PlanetScale, building the world’s most scalable database platform for Vitess, MySQL, and Postgres. Previously Sam was Vice President of Engineering at GitHub, where he was responsible for scaling the company and culture to the world’s largest platform for developers with over 100 million users. He is passionate about developer experience and delivering high quality software at scale.",
     group: "startup",
   },
   "kody-kendall": {
