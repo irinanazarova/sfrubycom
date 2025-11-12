@@ -436,8 +436,8 @@ export const talks = {
   },
 
   // INDIVIDUAL STARTUP DEMOS
-  "bolt-new-demo": {
-    id: "bolt-new-demo",
+  "bolt_new-demo": {
+    id: "bolt_new-demo",
     title: "Bolt.new Demo",
     speakerId: "alex-kalderimis",
     description:
@@ -486,8 +486,8 @@ export const talks = {
     status: "confirmed",
     tags: ["startups", "demos", "products", "healthcare", "api"],
   },
-  "simple-ai-demo": {
-    id: "simple-ai-demo",
+  "simple_ai-demo": {
+    id: "simple_ai-demo",
     title: "Simple AI Demo",
     speakerId: "zach-kamran",
     description:

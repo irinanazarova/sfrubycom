@@ -619,10 +619,10 @@ export const slotAssignments = {
   W4: "dynamic-ruby-toolkit-workshop",
 
   // Day 2 Individual Startup Demos - Main Track Part 1
-  D2M1: "bolt-new-demo",
+  D2M1: "bolt_new-demo",
   D2M2: "stepful-demo",
   D2M3: "nexhealth-demo",
-  D2M4: "simple-ai-demo",
+  D2M4: "simple_ai-demo",
   D2M5: "sixfold-demo",
 
   // Day 2 Individual Startup Demos - Blackbox Track Part 1
