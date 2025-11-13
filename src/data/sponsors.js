@@ -192,6 +192,13 @@ export const sponsors = {
     logo: "/sponsor_angellist.png",
     url: "https://angellist.com",
   },
+  planetscale: {
+    id: "planetscale",
+    name: "PlanetScale",
+    tier: "Ruby",
+    logo: "/sponsor_planetscale.png",
+    url: "https://planetscale.com",
+  },
   gitbutler: {
     id: "gitbutler",
     name: "GitButler",
