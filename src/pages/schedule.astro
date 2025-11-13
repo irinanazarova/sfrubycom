@@ -288,11 +288,11 @@ const days = [
                                                                 <div class="divide-y divide-gray-200">
                                                                     {mainSlots.map((slot: any) => (
                                                                         <div
-                                                                            class="p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+                                                                            class="group p-3 hover:bg-gray-50 transition-colors cursor-pointer"
                                                                             data-talk-id={slot.talk?.id}
                                                                             data-slot-id={slot.id}
                                                                         >
-                                                                            <h4 class="font-semibold text-sm mb-1">{slot.talk?.title}</h4>
+                                                                            <h4 class="font-semibold text-sm mb-1 group-hover:text-gray-600">{slot.talk?.title}</h4>
                                                                             {slot.speakers && slot.speakers.length > 0 && (
                                                                                 <p class="text-xs text-gray-600">
                                                                                     {slot.speakers.map((s: any) => s.name).join(', ')}
@@ -359,11 +359,11 @@ const days = [
                                                                 <div class="divide-y divide-gray-200">
                                                                     {blackboxSlots.map((slot: any) => (
                                                                         <div
-                                                                            class="p-3 hover:bg-gray-50 transition-colors cursor-pointer"
+                                                                            class="group p-3 hover:bg-gray-50 transition-colors cursor-pointer"
                                                                             data-talk-id={slot.talk?.id}
                                                                             data-slot-id={slot.id}
                                                                         >
-                                                                            <h4 class="font-semibold text-sm mb-1">{slot.talk?.title}</h4>
+                                                                            <h4 class="font-semibold text-sm mb-1 group-hover:text-gray-600">{slot.talk?.title}</h4>
                                                                             {slot.speakers && slot.speakers.length > 0 && (
                                                                                 <p class="text-xs text-gray-600">
                                                                                     {slot.speakers.map((s: any) => s.name).join(', ')}
