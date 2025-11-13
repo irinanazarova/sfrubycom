@@ -103,7 +103,7 @@
             max-height: 100vh;
             /* Add padding for iOS safe areas on mobile */
             padding-top: max(env(safe-area-inset-top), 1rem);
-            padding-bottom: env(safe-area-inset-bottom);
+            padding-bottom: max(env(safe-area-inset-bottom), 2rem);
         }
     }
 
@@ -190,10 +190,14 @@
 
                 document.body.classList.add("modal-open");
 
-                // Scroll modal content to top when opening
-                if (modalContent) {
-                    modalContent.scrollTop = 0;
-                }
+                // Scroll modal content to top when opening - use setTimeout for iOS Safari
+                setTimeout(() => {
+                    if (modalContent) {
+                        modalContent.scrollTop = 0;
+                        // Force reflow to ensure scroll happens
+                        void modalContent.offsetHeight;
+                    }
+                }, 100);
 
                 console.log("TalkModal: Modal should now be visible", {
                     hasOpenAttr: modal.hasAttribute("open"),
@@ -264,6 +268,13 @@
             }
 
             modalContent.innerHTML = html;
+
+            // Scroll to top after setting content
+            setTimeout(() => {
+                modalContent.scrollTop = 0;
+                // Force reflow to ensure scroll happens
+                void modalContent.offsetHeight;
+            }, 50);
 
             // Attach close button handler to newly created button
             const closeBtn = modalContent.querySelector("#modalCloseBtn");
