@@ -33,12 +33,14 @@
         left: 0;
         right: 0;
         bottom: 0;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: var(--modal-viewport-height);
+        min-height: 100vh;
         padding: 0;
         margin: 0;
         border: none;
-        background: transparent;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
         z-index: 9999;
         /* Hide by default */
         opacity: 0;
@@ -58,7 +60,14 @@
         background: rgba(0, 0, 0, 0.75);
         backdrop-filter: blur(4px);
         animation: fadeIn 0.2s ease-out;
-        z-index: 9998;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: var(--modal-viewport-height);
+        min-height: 100vh;
     }
 
     .modal-panel {
