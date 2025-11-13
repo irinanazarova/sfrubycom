@@ -189,6 +189,12 @@
                 }
 
                 document.body.classList.add("modal-open");
+
+                // Scroll modal content to top when opening
+                if (modalContent) {
+                    modalContent.scrollTop = 0;
+                }
+
                 console.log("TalkModal: Modal should now be visible", {
                     hasOpenAttr: modal.hasAttribute("open"),
                     openProp: modal.open,
