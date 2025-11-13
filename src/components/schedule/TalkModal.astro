@@ -14,6 +14,17 @@
 </dialog>
 
 <style>
+    /* CSS variables for dynamic viewport height */
+    :root {
+        --modal-viewport-height: 100vh;
+    }
+
+    @supports (height: 100dvh) {
+        :root {
+            --modal-viewport-height: 100dvh;
+        }
+    }
+
     .talk-modal {
         /* Force dialog to appear - Safari fix */
         display: block;
@@ -92,16 +103,20 @@
         .modal-panel {
             width: 100vw;
             max-width: 100vw;
-            max-height: 100vh;
+            height: var(--modal-viewport-height);
             border-radius: 0;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            transform: none;
         }
 
         .modal-content {
-            max-height: 100vh;
-            /* Add padding for iOS safe areas on mobile */
+            height: var(--modal-viewport-height);
+            padding: 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-content > div {
             padding-top: max(env(safe-area-inset-top), 1rem);
             padding-bottom: max(env(safe-area-inset-bottom), 2rem);
         }
@@ -190,14 +205,12 @@
 
                 document.body.classList.add("modal-open");
 
-                // Scroll modal content to top when opening - use setTimeout for iOS Safari
-                setTimeout(() => {
+                // Scroll modal content to top when opening - use requestAnimationFrame for reliability
+                requestAnimationFrame(() => {
                     if (modalContent) {
                         modalContent.scrollTop = 0;
-                        // Force reflow to ensure scroll happens
-                        void modalContent.offsetHeight;
                     }
-                }, 100);
+                });
 
                 console.log("TalkModal: Modal should now be visible", {
                     hasOpenAttr: modal.hasAttribute("open"),
@@ -269,12 +282,8 @@
 
             modalContent.innerHTML = html;
 
-            // Scroll to top after setting content
-            setTimeout(() => {
-                modalContent.scrollTop = 0;
-                // Force reflow to ensure scroll happens
-                void modalContent.offsetHeight;
-            }, 50);
+            // Immediate scroll to ensure starting position
+            modalContent.scrollTop = 0;
 
             // Attach close button handler to newly created button
             const closeBtn = modalContent.querySelector("#modalCloseBtn");
