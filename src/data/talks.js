@@ -389,52 +389,6 @@ export const talks = {
     tags: ["thank you"],
   },
 
-  "startup-demos-day1": {
-    id: "startup-demos-day1",
-    title: "Ruby Startup Demos",
-    type: "demo",
-    startupIds: ["recognize", "fin", "thatch", "angellist", "planetscale"],
-    speakers: [],
-    status: "confirmed",
-    tags: ["startups", "demos", "products"],
-  },
-  "startup-demos-day2-main-part1": {
-    id: "startup-demos-day2-main-part1",
-    title: "Ruby Startup Demos",
-    type: "demo",
-    startupIds: ["bolt_new", "stepful", "nexhealth", "simple_ai", "sixfold"],
-    speakers: [],
-    status: "confirmed",
-    tags: ["startups", "demos", "products"],
-  },
-  "startup-demos-day2-main-part2": {
-    id: "startup-demos-day2-main-part2",
-    title: "Ruby Startup Demos",
-    type: "demo",
-    startupIds: ["cactus", "superconductor", "aisquared", "ubicloud", "finta"],
-    speakers: [],
-    status: "confirmed",
-    tags: ["startups", "demos", "products"],
-  },
-  "startup-demos-day2-blackbox-part1": {
-    id: "startup-demos-day2-blackbox-part1",
-    title: "Ruby Startup Demos",
-    type: "demo",
-    startupIds: ["accessgrid", "suppli", "tend", "sunchaser"],
-    speakers: [],
-    status: "confirmed",
-    tags: ["startups", "demos", "products"],
-  },
-  "startup-demos-day2-blackbox-part2": {
-    id: "startup-demos-day2-blackbox-part2",
-    title: "Ruby Startup Demos",
-    type: "demo",
-    startupIds: ["coracomputer", "terminalwire", "chatwithwork"],
-    speakers: [],
-    status: "confirmed",
-    tags: ["startups", "demos", "products"],
-  },
-
   // INDIVIDUAL STARTUP DEMOS
   "bolt_new-demo": {
     id: "bolt_new-demo",
@@ -629,7 +583,7 @@ export const talks = {
   "angellist-demo": {
     id: "angellist-demo",
     title: "AngelList Demo",
-    speakerId: "harsohail-brar",
+    speakerId: "chamod-gamage",
     description:
       "AngelList is the platform for startups—connecting founders with investors, talent, and resources to build and scale companies.",
     type: "demo",
@@ -664,6 +618,16 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "rails"],
+  },
+  "temporal-demo": {
+    id: "temporal-demo",
+    title: "Temporal Demo",
+    speakerId: "tom-wheeler",
+    description:
+      "Demo of Temporal - the open source platform for building reliable distributed systems using durable execution. Learn how Temporal helps developers build resilient applications that can survive failures and ensure critical workflows complete successfully.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["demos", "distributed-systems", "devtools", "sponsor"],
   },
 
   "lucas-film-walk": {

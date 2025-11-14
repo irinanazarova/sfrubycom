@@ -588,14 +588,14 @@ export const speakers = {
     bio: "Bart de Water builds at Thatch—software for smarter, more flexible health benefits. Before Thatch, he scaled Shopify Payments, contributing core engineering from Montréal and leading product reliability for merchants worldwide. At Thatch, Bart drives platform architecture and analytics, focusing on approachable UX and cost transparency for US employers. Dutch by birth, Canadian by choice, he ships code, drinks coffee, and make healthcare work for teams.",
     group: "startup",
   },
-  "harsohail-brar": {
-    id: "harsohail-brar",
-    name: "Harsohail Brar",
+  "chamod-gamage": {
+    id: "chamod-gamage",
+    name: "Chamod Gamage",
     company: "AngelList",
-    role: "Senior Software Engineer",
-    image: "/speaker_harsohail.jpg",
-    socials: ["https://www.linkedin.com/in/harsohailbrar/"],
-    bio: "Harsohail Brar is senior software engineer at AngelList, focused on building core financial and banking infrastructure. Previously, he shipped payment interfaces at Modern Treasury and led technical projects with Code the Change YYC, including work on Ruby for Good—delivering SMS tools for nonprofits serving foster youth. His experience spans backend systems at Cenovus Energy and internships at Amazon. Harsohail holds a degree from the University of Calgary, with a track record in reliability, product UX, and fintech for social impact. Based in San Francisco.",
+    role: "Software Engineer",
+    image: "/speaker_chamod.jpg",
+    socials: ["https://x.com/og_chamod"],
+    bio: "Chamod Gamage is a software engineer at AngelList focused on building infrastructure and user experiences for fund accounting and financial reporting powering over $100B in venture assets. Previously, he built payment event processing systems at Modern Treasury, developed financial tools for startups at On Deck, and led technical projects at UW Blueprint for nonprofit and social impact products. His work spans automating venture fund operations, architecting data systems that support large-scale financial workflows, and building developer tooling. He holds a degree in Systems Design Engineering from the University of Waterloo. Based in San Francisco.",
     group: "startup",
   },
   "andy-wang": {
@@ -628,8 +628,19 @@ export const speakers = {
     role: "Founder",
     image: "/speaker_kody_kendall.jpg",
     socials: ["https://www.linkedin.com/in/kodykendall/"],
-    bio: "Kody Kendall is founder and CEO at LlamaPress AI—AI tools for web development, built in San Francisco. He leads product and engineering, focusing on agents that generate, preview, and ship production web pages and rails apps with large language models. Previously built Field Rocket, holds a CS degree and a Master’s in Business Creation from the University of Utah. Big on open source, bootstrapping, and making AI practical for indie builders and teams.",
+    bio: "Kody Kendall is founder and CEO at LlamaPress AI—AI tools for web development, built in San Francisco. He leads product and engineering, focusing on agents that generate, preview, and ship production web pages and rails apps with large language models. Previously built Field Rocket, holds a CS degree and a Master's in Business Creation from the University of Utah. Big on open source, bootstrapping, and making AI practical for indie builders and teams.",
     group: "startup",
+  },
+  "tom-wheeler": {
+    id: "tom-wheeler",
+    name: "Tom Wheeler",
+    title: "Principal Developer Advocate",
+    company: "Temporal Technologies",
+    role: "Principal Developer Advocate",
+    image: "/speaker_tom_wheeler.jpg",
+    socials: [],
+    bio: "Tom Wheeler is a Principal Developer Advocate at Temporal Technologies with over 25 years of experience in software engineering and technical education across the financial, healthcare, aerospace, and tech industries. He is a founding member of the education team at Temporal, where he focuses on teaching developers about building reliable distributed systems using durable execution.",
+    group: "speaker",
   },
 };
 

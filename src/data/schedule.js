@@ -309,10 +309,18 @@ export const scheduleSlots = {
     track: "main",
     type: "talk",
   },
+  S11_TEMPORAL: {
+    id: "S11_TEMPORAL",
+    day: 2,
+    startTime: "13:20",
+    endTime: "13:30",
+    track: "blackbox",
+    type: "demo",
+  },
   S11: {
     id: "S11",
     day: 2,
-    startTime: "13:20",
+    startTime: "13:30",
     endTime: "13:50",
     track: "blackbox",
     type: "talk",
@@ -593,7 +601,7 @@ export const slotAssignments = {
 
   // Day 1 Individual Startup Demos
   D1M1: "recognize-demo",
-  D1M2: "fin-demo",
+  D1M2: "stepful-demo",
   D1M3: "thatch-demo",
   D1M4: "angellist-demo",
   D1M5: "planetscale-demo",
@@ -613,6 +621,7 @@ export const slotAssignments = {
   S10: "opensource-rails-startup",
   LUNCH2: "lunch-day2",
   M11: "opensource-business-sidekiq",
+  S11_TEMPORAL: "temporal-demo",
   S11: "open-mic",
   S12: "open-mic-2",
   M12: "scaling-rails-to-two-million",
@@ -620,7 +629,7 @@ export const slotAssignments = {
 
   // Day 2 Individual Startup Demos - Main Track Part 1
   D2M1: "bolt_new-demo",
-  D2M2: "stepful-demo",
+  D2M2: "fin-demo",
   D2M3: "nexhealth-demo",
   D2M4: "simple_ai-demo",
   D2M5: "sixfold-demo",

@@ -242,7 +242,7 @@ export const startups = {
     url: "https://angellist.com",
     description:
       "AngelList is the platform for startups—connecting founders with investors, talent, and resources to build and scale companies.",
-    speakerId: "harsohail-brar",
+    speakerId: "chamod-gamage",
     demoTime: "",
   },
   planetscale: {
