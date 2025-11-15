@@ -639,7 +639,7 @@ export const speakers = {
     role: "Principal Developer Advocate",
     image: "/speaker_tom_wheeler.jpg",
     socials: [],
-    bio: "Tom Wheeler is a Principal Developer Advocate at Temporal Technologies with over 25 years of experience in software engineering and technical education across the financial, healthcare, aerospace, and tech industries. He is a founding member of the education team at Temporal, where he focuses on teaching developers about building reliable distributed systems using durable execution.",
+    bio: "Alternating between software engineering and technical education roles, Tom Wheeler's career spans nearly 30 years in the financial, healthcare, defense, and tech industries. Prior to joining Temporal in 2022, he created training courses at Cloudera, developed aerospace engineering software at Object Computing, helped design and implement a distributed system for high-volume data processing at WebMD, and wrote some of the earliest web applications at brokerage firm A.G. Edwards.",
     group: "speaker",
   },
   "ryan-odonnell": {
