@@ -425,6 +425,14 @@ export const scheduleSlots = {
     track: "blackbox",
     type: "demo",
   },
+  D2B5: {
+    id: "D2B5",
+    day: 2,
+    startTime: "14:40",
+    endTime: "15:30",
+    track: "blackbox",
+    type: "demo",
+  },
 
   // DAY 2 STARTUP DEMOS (Main Track - Part 2)
   D2M6: {
@@ -469,14 +477,6 @@ export const scheduleSlots = {
   },
 
   // DAY 2 STARTUP DEMOS (Blackbox Track - Part 2)
-  D2B5: {
-    id: "D2B5",
-    day: 2,
-    startTime: "15:40",
-    endTime: "16:30",
-    track: "blackbox",
-    type: "demo",
-  },
   D2B6: {
     id: "D2B6",
     day: 2,
@@ -495,6 +495,14 @@ export const scheduleSlots = {
   },
   D2B8: {
     id: "D2B8",
+    day: 2,
+    startTime: "15:40",
+    endTime: "16:30",
+    track: "blackbox",
+    type: "demo",
+  },
+  D2B9: {
+    id: "D2B9",
     day: 2,
     startTime: "15:40",
     endTime: "16:30",
@@ -616,7 +624,7 @@ export const slotAssignments = {
   S8: "operating-rails-production",
   W3: "upskill-diving-into-rails",
   M9: "thin-client-approach",
-  S9: "shipping-solo-rails8",
+  S9: "boltnew-cto-fireside-chat",
   M10: "software-design-ai-world",
   S10: "opensource-rails-startup",
   LUNCH2: "lunch-day2",
@@ -639,6 +647,7 @@ export const slotAssignments = {
   D2B2: "suppli-demo",
   D2B3: "tend-demo",
   D2B4: "sunchaser-demo",
+  D2B5: "cleary-demo",
 
   // Day 2 Individual Startup Demos - Main Track Part 2
   D2M6: "cactus-demo",
@@ -648,10 +657,10 @@ export const slotAssignments = {
   D2M10: "finta-demo",
 
   // Day 2 Individual Startup Demos - Blackbox Track Part 2
-  D2B5: "coracomputer-demo",
-  D2B6: "terminalwire-demo",
-  D2B7: "llamapress-demo",
-  D2B8: "chatwithwork-demo",
+  D2B6: "coracomputer-demo",
+  D2B7: "terminalwire-demo",
+  D2B8: "llamapress-demo",
+  D2B9: "chatwithwork-demo",
 
   OUT: "thank-you",
   K4: "rails-x-keynote",

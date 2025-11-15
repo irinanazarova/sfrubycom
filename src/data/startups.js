@@ -264,6 +264,16 @@ export const startups = {
     speakerId: "kody-kendall",
     demoTime: "",
   },
+  cleary: {
+    id: "cleary",
+    name: "Cleary",
+    logo: "/startup_cleary.png",
+    url: "https://gocleary.com/",
+    description:
+      "AI-powered HR platform transforming how companies support and engage their employees. Cleary helps HR teams resolve up to 40% of HR tickets instantly.",
+    speakerId: "ryan-odonnell",
+    demoTime: "",
+  },
 };
 
 // Helper functions

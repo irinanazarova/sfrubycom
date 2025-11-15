@@ -217,16 +217,15 @@ export const talks = {
     type: "talk",
     tags: ["infrastructure", "cloud", "data", "devops"],
   },
-  "shipping-solo-rails8": {
-    id: "shipping-solo-rails8",
-    title:
-      "Shipping Solo with Rails 8: Building Dada the African Menopause Companion",
-    speakerId: "naijeria-toweett",
+  "boltnew-cto-fireside-chat": {
+    id: "boltnew-cto-fireside-chat",
+    title: "Fireside chat with the co-founder and CTO of bolt.new Albert Pai",
+    speakers: ["albert-pai", "irina-nazarova"],
     description:
-      "This talk shows what Ruby and Rails do best: enabling solo developers to build meaningful, user-focused apps with speed, clarity, and joy. I've spent 15 years in the NGO and social impact space, where I've seen huge amounts of money wasted on overbuilt tech that communities didn't need. I'm now using Rails 8, open-source tools, and user-driven design to build DADA — a real product for a deeply underserved audience. I'm living proof that Ruby still empowers builders to move fast, stay lean, and create software that actually helps people.",
+      "Irina Nazarova sits down with Albert Pai, Co-founder and CTO of Bolt.new, to talk about building one of the fastest-growing startups in code generation—what worked, what didn’t, and how Ruby and Rails shaped the path.",
     type: "talk",
     status: "confirmed",
-    tags: ["rails8", "solo-developer", "social-impact", "product"],
+    tags: ["startups", "ai", "product"],
   },
   "operating-rails-production": {
     id: "operating-rails-production",
@@ -393,7 +392,7 @@ export const talks = {
   "bolt_new-demo": {
     id: "bolt_new-demo",
     title: "Bolt.new Demo",
-    speakerId: "alex-kalderimis",
+    speakers: ["alex-kalderimis", "albert-pai"],
     description:
       "AI-native browser tool for building and deploying full-stack web apps with zero code. Launched 2024; $40M ARR in 5 months.",
     type: "demo",
@@ -615,6 +614,16 @@ export const talks = {
     title: "llamapress Demo",
     speakerId: "kody-kendall",
     description: "AI-powered content platform built with Ruby on Rails.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai", "rails"],
+  },
+  "cleary-demo": {
+    id: "cleary-demo",
+    title: "Cleary Demo",
+    speakerId: "ryan-odonnell",
+    description:
+      "AI-powered HR platform transforming how companies support and engage their employees. Cleary helps HR teams resolve up to 40% of HR tickets instantly.",
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "rails"],

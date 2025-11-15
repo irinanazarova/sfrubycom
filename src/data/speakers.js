@@ -642,6 +642,43 @@ export const speakers = {
     bio: "Tom Wheeler is a Principal Developer Advocate at Temporal Technologies with over 25 years of experience in software engineering and technical education across the financial, healthcare, aerospace, and tech industries. He is a founding member of the education team at Temporal, where he focuses on teaching developers about building reliable distributed systems using durable execution.",
     group: "speaker",
   },
+  "ryan-odonnell": {
+    id: "ryan-odonnell",
+    name: "Ryan O'Donnell",
+    title: "Co-founder and CTO",
+    company: "Cleary",
+    title: "Co-founder and CTO",
+    image: "/speaker_ryan_odonnell.jpg",
+    socials: ["https://x.com/ryanjodonnell"],
+    bio: "At Cleary Ryan is redefining how enterprise HR teams harness AI to drive employee engagement and digital culture, drawing on his experiences building internal tools at Twitter and co-founding Peer (acquired by Twitter), as well as his lifelong passion for competitive strategy honed playing StarCraft and Magic: The Gathering, which he credits for his fast-shipping.",
+    group: "speaker",
+  },
+  "albert-pai": {
+    id: "albert-pai",
+    name: "Albert Pai",
+    title: "CTO",
+    company: "bolt.new",
+    role: "CTO",
+    image: "/speaker_albert_pai.jpg",
+    socials: ["https://x.com/iamalbertpai"],
+    bio: "Co-founder and CTO of StackBlitz, where he pioneered WebContainers, that serves as the foundation for their AI-powered coding agent, Bolt.new. Albert chose Ruby on Rails as backend for Stackblitz. Before revolutionizing in-browser development, Pai was the co-founder and CTO of the acquired online learning platform Thinkster. Albert is based in San Francisco.",
+    group: "speaker",
+  },
+  "irina-nazarova": {
+    id: "irina-nazarova",
+    name: "Irina Nazarova",
+    title: "CEO",
+    company: "Evil Martians",
+    role: "CEO",
+    image: "/speaker_irina.jpg",
+    socials: [
+      "https://x.com/inazarova",
+      "https://bsky.app/profile/inazarova.bsky.social",
+      "https://www.linkedin.com/in/nonconstant/",
+    ],
+    bio: "CEO at Evil Martians, co-founder of AnyCable and organizer of the SF Ruby meetup and conference, Irina's passion is to support and champion startups on Rails. A fan of Ruby, open source, and long walks in San Francisco.",
+    group: "speaker",
+  },
 };
 
 // Helper functions
