@@ -180,7 +180,7 @@ export const startups = {
     url: "https://recognizeapp.com/",
     description:
       "Employee recognition and rewards program that is high-impact, affordable, and easy to launch. Even for frontline teams across multiple locations.",
-    speakerId: "peter-phillips",
+    speakerId: "peter-philips",
     demoTime: "",
   },
   fin: {

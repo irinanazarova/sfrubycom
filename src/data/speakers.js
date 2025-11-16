@@ -548,9 +548,9 @@ export const speakers = {
     bio: "Nagendra is a Rubyist turned entrepreneur, passionate about building AI and data platforms. A 2X founder, he created Multiwoven, an open-source Reverse ETL project on Rails acquired by AI Squared, where he now leads engineering. He enjoys exploring tech and good coffee.",
     group: "startup",
   },
-  "peter-phillips": {
-    id: "peter-phillips",
-    name: "Peter Phillips",
+  "peter-philips": {
+    id: "peter-philips",
+    name: "Peter Philips",
     company: "Recognize",
     role: "Founder and CTO",
     image: "/speaker_peter.jpg",
