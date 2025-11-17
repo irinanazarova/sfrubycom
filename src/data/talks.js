@@ -136,7 +136,7 @@ export const talks = {
   },
   "opensource-business-sidekiq": {
     id: "opensource-business-sidekiq",
-    title: "Open source as a business with Sidekiq",
+    title: "Sidekiq: Open Source, Business and the Future",
     speakerId: "mike-perham",
     description:
       "Learn how to build a successful open source business model from the creator of Sidekiq.",
