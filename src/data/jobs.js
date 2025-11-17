@@ -156,6 +156,86 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/stackblitz/jobs/4006004009?gh_src=fk3cln2c9us",
     postedDate: "2025-01-13",
   },
+  "staff-software-engineer-gusto": {
+    id: "staff-software-engineer-gusto",
+    title: "Staff Software Engineer",
+    sponsorId: "gusto",
+    location:
+      "San Francisco, CA; Los Angeles, CA; Denver, CO; New York, NY; Remote; Ontario, CAN - Remote",
+    type: "Full-time",
+    description:
+      "Architect, build, and test Gusto's product suite that spans across Payroll, Benefits, HR, Time, Tax Credits, and more. Mentor other engineers to help solve some of the hardest technical problems out there in very complex domains and at a large scale. Help scale one of the largest Ruby/Rails and Javascript/React applications in the world. Collaborate with Product Management and Design teams to understand customer pain points, come up with solutions, and then prototype, iterate, and launch daily. Build a product that our customers genuinely love.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/5034679",
+    postedDate: "2025-01-16",
+  },
+  "principal-software-engineer-growth-gusto": {
+    id: "principal-software-engineer-growth-gusto",
+    title: "Principal Software Engineer, Growth",
+    sponsorId: "gusto",
+    location: "San Francisco, Seattle, Denver, New York City",
+    type: "Full-time",
+    description:
+      "Operate at the intersection of Growth systems, AI capabilities, and platform evolution to help unlock Gusto's next phase of sustainable revenue growth. Accelerate Gusto's revenue growth by providing 1.) an acquisition platform for driving visitors and leads, 2.) an onboarding platform for converting leads to customers, and 3.) upsell systems for expansion efforts. Work in an exciting phase of rebuilding our Revenue Systems stack, which will be key in unlocking Gusto's next phase of growth.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7180147",
+    postedDate: "2025-01-16",
+  },
+  "principal-software-engineer-pay-group-gusto": {
+    id: "principal-software-engineer-pay-group-gusto",
+    title: "Principal Software Engineer - Pay Group",
+    sponsorId: "gusto",
+    location:
+      "Remote, San Francisco, Seattle, Los Angeles, Toronto, New York, Denver",
+    type: "Full-time",
+    description:
+      "Function as a Technical Lead across multiple teams in Pay Group Engineering, helping us keep engineers unblocked. Design, build, and test the foundation that supports compliant payroll for millions of people. Help scale one of the largest Ruby/Rails and TypeScript/React applications in the world. Collaborate on complex and ambiguous problems with partnerships from Engineering, Product Management, Design, Data Science, Compliance, Operations, and other cross-functional teams. Mentor and grow fellow engineers working to create holistic and scalable solutions.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7027020",
+    postedDate: "2025-01-16",
+  },
+  "senior-staff-software-engineer-pay-group-gusto": {
+    id: "senior-staff-software-engineer-pay-group-gusto",
+    title: "Senior Staff Software Engineer - Pay Group",
+    sponsorId: "gusto",
+    location:
+      "San Francisco, Los Angeles, Seattle, Denver, Toronto, New York City, Remote",
+    type: "Full-time",
+    description:
+      "Design, build, and test the foundation that supports compliant payroll for millions of people. Help scale one of the largest Ruby/Rails and TypeScript/React applications in the world. Collaborate on ambiguous problems with partnerships from Engineering, Product Management, Design, and other cross-functional teams. Build the software platform that powers multiple 1st and 3rd party products and serves millions of businesses. Mentor and grow fellow engineers working to create holistic and scalable solutions.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/5933602",
+    postedDate: "2025-01-16",
+  },
+  "staff-software-engineer-san-francisco-gusto": {
+    id: "staff-software-engineer-san-francisco-gusto",
+    title: "Staff Software Engineer",
+    sponsorId: "gusto",
+    location: "San Francisco",
+    type: "Full-time",
+    description:
+      "Join seasoned engineers working on customer-facing products, developing features and iterating across our platform. As a Gusto Software Engineer at this level, you'll oversee projects end-to-end by influencing initial feature specs, building backend APIs, writing frontend code, and overseeing ongoing improvements for deployed features. If you're interested in building elegant software with far-reaching effects in our modern economy, join us!",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/5034679",
+    postedDate: "2025-01-16",
+  },
+  "staff-applied-ai-scientist-gusto": {
+    id: "staff-applied-ai-scientist-gusto",
+    title: "Staff Applied AI Scientist",
+    sponsorId: "gusto",
+    location: "Remote",
+    type: "Full-time",
+    description:
+      "We're looking for at least 6+ years of software engineering experience (Python, Ruby or Java), 8+ years of ML experience, and 3+ years designing and shipping Gen AI models. Proven ability to design and prototype AI solutions quickly. Experience working on AI agent systems to automate end to end workflows. Experience building, deploying and maintaining LLM-based applications in production.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7307124",
+    postedDate: "2025-01-16",
+  },
+  "staff-applied-ai-engineer-gusto": {
+    id: "staff-applied-ai-engineer-gusto",
+    title: "Staff Applied AI Engineer",
+    sponsorId: "gusto",
+    location: "Remote",
+    type: "Full-time",
+    description:
+      "We're looking for at least 8+ years of software engineering experience (Python, Ruby, or Java), with 5+ years focused on building and deploying ML or GenAI systems. Ability to build and scale complex AI systems from prototype to production. Experience building and maintaining robust AI agent systems and orchestration in a production setting. Deep experience with the full lifecycle of LLM applications: building, deploying, monitoring, and maintaining them in a production cloud environment. Strong knowledge of MLOps principles, CI/CD for models, containerization, and vector databases.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7307128",
+    postedDate: "2025-01-16",
+  },
 };
 
 // Helper functions
