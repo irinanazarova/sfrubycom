@@ -241,7 +241,7 @@ export const startups = {
     logo: "/startup_angellist.png",
     url: "https://angellist.com",
     description:
-      "AngelList is the platform for startups—connecting founders with investors, talent, and resources to build and scale companies.",
+      "AngelList builds the software investors use to fund world-changing startups.",
     speakerId: "chamod-gamage",
     demoTime: "",
   },

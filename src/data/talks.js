@@ -584,7 +584,7 @@ export const talks = {
     title: "AngelList Demo",
     speakerId: "chamod-gamage",
     description:
-      "AngelList is the platform for startups—connecting founders with investors, talent, and resources to build and scale companies.",
+      "AngelList builds the software investors use to fund world-changing startups.",
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products"],

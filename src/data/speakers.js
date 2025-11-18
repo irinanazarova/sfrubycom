@@ -40,8 +40,8 @@ export const speakers = {
     id: "obie-fernandez",
     name: "Obie Fernandez",
     title: "Author of the Rails Way. Creator of Roast",
-    company: "Shopify",
-    role: "Principal Engineer",
+    company: "Kickass Consulting",
+    role: "Consultant/Fractional CTO",
     image: "/speaker_obie.jpg",
     socials: [
       "https://github.com/obie",
