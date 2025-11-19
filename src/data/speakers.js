@@ -535,7 +535,7 @@ export const speakers = {
     role: "Founder",
     image: "/speaker_arjun.jpg",
     socials: ["https://www.linkedin.com/in/arjun-singh-629216105/"],
-    bio: "Arjun Singh builds platforms for developers. Now co-founder of Superconductor—parallel coding agents and live cloud previews, straight to GitHub. Previously led at Volition, focused on opening up AI-powered tooling for the next billion creators. His work is about making hard workflows simple, from launch to merge.",
+    bio: "Arjun is the cofounder and CEO of Superconductor, which lets you control AI coding agents from your browser, phone, GitHub, or Slack, with live app previews of each agent's changes.  He's been working with Rails since 2006, and previously founded Gradescope, which is a (Rails-based) AI grading platform used by millions of professors and students worldwide, and was acquired by Turnitin in 2018.",
     group: "startup",
   },
   "nagendra-dhanakeerthi": {
