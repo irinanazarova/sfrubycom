@@ -58,7 +58,7 @@ export const speakers = {
     role: "Head of Developer Productivity",
     image: "/speaker_stephan.jpg",
     socials: ["https://www.linkedin.com/in/stephan-hagemann/"],
-    bio: 'Stephan Hagemann leads the charge on modularization and building robust systems that stand the test of time. Author of "Component-based Rails Applications" and "Gradual Modularization for Ruby and Rail", Stephan is pushing Ruby to new levels of performance and maintainability through thoughtful package structures and architectures.',
+    bio: 'Stephan Hagemann leads the charge on modularization and building robust systems that stand the test of time. Author of "Component-based Rails Applications" and "Gradual Modularization for Ruby and Rails", Stephan is pushing Ruby to new levels of performance and maintainability through thoughtful package structures and architectures.',
     group: "speaker",
   },
   "takashi-kokubun": {
