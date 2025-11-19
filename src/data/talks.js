@@ -5,7 +5,7 @@ export const talks = {
   // KEYNOTES
   "reaction-view": {
     id: "reaction-view",
-    title: "ReActionView: An ActionView-Compatible ERB Engine",
+    title: "“Herb to ReActionView: A New Foundation for the View Layer",
     speakerId: "marco-roth",
     description:
       "This talk is the conclusion of a journey I’ve been sharing throughout 2025. At RubyKaigi, I introduced Herb: a new HTML-aware ERB parser and tooling ecosystem. At RailsConf, I released developer tools built on Herb, including a formatter, linter, and language server, alongside a vision for modernizing and improving the Rails view layer.",
