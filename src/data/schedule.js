@@ -509,6 +509,14 @@ export const scheduleSlots = {
     track: "blackbox",
     type: "demo",
   },
+  D2B10: {
+    id: "D2B10",
+    day: 2,
+    startTime: "15:40",
+    endTime: "16:30",
+    track: "blackbox",
+    type: "demo",
+  },
 
   OUT: {
     id: "OUT",
@@ -661,6 +669,7 @@ export const slotAssignments = {
   D2B7: "terminalwire-demo",
   D2B8: "llamapress-demo",
   D2B9: "chatwithwork-demo",
+  D2B10: "bemi-demo",
 
   OUT: "thank-you",
   K4: "rails-x-keynote",
