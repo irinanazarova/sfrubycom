@@ -15,7 +15,7 @@ const ticketTiers = [
             "Priority access to workshops",
         ],
         featured: true,
-        available: true,
+        available: false,
     },
     {
         name: "Regular",
@@ -40,7 +40,7 @@ const ticketTiers = [
             "Lunch and refreshments",
         ],
         featured: false,
-        available: true,
+        available: false,
     },
 ];
 ---
@@ -58,21 +58,15 @@ const ticketTiers = [
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Countdown and promotional message -->
+        <!-- Sold out message -->
         <div
-            class="max-w-3xl mx-auto bg-dark-50 rounded-lg p-6 mb-12 text-center"
+            class="max-w-3xl mx-auto bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-12 text-center"
         >
-            <p class="font-medium text-dark-800 mb-2">
-                Early Bird Registration Ends In
+            <p class="font-bold text-red-800 mb-2 text-2xl">
+                All Tickets Sold Out
             </p>
-            <div
-                id="countdown"
-                class="text-3xl font-mono font-bold text-ruby-500 mb-2"
-            >
-                99 days, 23:59:59
-            </div>
-            <p class="text-dark-600">
-                Don't miss out on our best pricing - register today!
+            <p class="text-red-700">
+                Thank you for your interest! All tickets for the conference have been sold.
             </p>
         </div>
 
@@ -125,31 +119,15 @@ const ticketTiers = [
 
                             <div class="mt-6">
                                 <button
-                                    class={`w-full py-2 rounded-md font-medium transition-colors duration-200 ${
-                                        tier.available
-                                            ? tier.featured
-                                                ? "bg-ruby-500 hover:bg-ruby-600 text-white"
-                                                : "bg-dark-800 hover:bg-dark-900 text-white"
-                                            : "bg-dark-100 text-dark-400 cursor-not-allowed"
-                                    }`}
-                                    disabled={!tier.available}
+                                    class="w-full py-2 rounded-md font-medium transition-colors duration-200 bg-dark-100 text-dark-400 cursor-not-allowed"
+                                    disabled
                                 >
-                                    {tier.available
-                                        ? "Register Now"
-                                        : "Coming Soon"}
+                                    Sold Out
                                 </button>
 
-                                {tier.featured && tier.available && (
-                                    <p class="text-center text-sm text-dark-500 mt-2">
-                                        Limited tickets available at this price
-                                    </p>
-                                )}
-
-                                {!tier.available && (
-                                    <p class="text-center text-sm text-dark-500 mt-2">
-                                        Available starting October 1, 2025
-                                    </p>
-                                )}
+                                <p class="text-center text-sm text-dark-500 mt-2">
+                                    All tickets have been sold
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -318,35 +296,4 @@ const ticketTiers = [
         });
     });
 
-    // Countdown timer
-    function updateCountdown() {
-        const targetDate = new Date("2025-10-01T23:59:59");
-        const now = new Date();
-        const difference = targetDate.getTime() - now.getTime();
-
-        if (difference <= 0) {
-            const countdownEl = document.getElementById("countdown");
-            if (countdownEl) {
-                countdownEl.textContent = "Early bird pricing has ended";
-            }
-            return;
-        }
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        );
-        const minutes = Math.floor(
-            (difference % (1000 * 60 * 60)) / (1000 * 60),
-        );
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        const countdownEl = document.getElementById("countdown");
-        if (countdownEl) {
-            countdownEl.textContent = `${days} days, ${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-        }
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
 </script>
