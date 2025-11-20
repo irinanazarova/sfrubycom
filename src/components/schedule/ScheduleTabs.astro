@@ -187,7 +187,7 @@ const { days } = Astro.props;
 
         // Update active tab based on current hash
         function updateActiveTab() {
-            const hash = window.location.hash || "#day1";
+            const hash = window.location.hash || "#day2";
             tabs.forEach((tab) => {
                 if ((tab as HTMLAnchorElement).getAttribute("href") === hash) {
                     tab.classList.add("active");
