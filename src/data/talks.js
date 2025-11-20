@@ -628,6 +628,16 @@ export const talks = {
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "rails"],
   },
+  "bemi-demo": {
+    id: "bemi-demo",
+    title: "Bemi AI Demo",
+    speakerId: "evgeny-li",
+    description:
+      "Platform for building AI agents that handle customer requests 24/7 via email and SMS. Bemi AI saves hours of manual work with agents that help diagnose, resolve, and respond automatically.",
+    type: "demo",
+    status: "confirmed",
+    tags: ["startups", "demos", "products", "ai"],
+  },
   "temporal-demo": {
     id: "temporal-demo",
     title: "Temporal Demo",

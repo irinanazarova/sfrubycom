@@ -274,6 +274,16 @@ export const startups = {
     speakerId: "ryan-odonnell",
     demoTime: "",
   },
+  bemi: {
+    id: "bemi",
+    name: "Bemi AI",
+    logo: "/startup_bemi.png",
+    url: "https://bemi.ai",
+    description:
+      "Platform for building AI agents that handle customer requests 24/7 via email and SMS. Bemi AI saves hours of manual work with agents that help diagnose, resolve, and respond automatically.",
+    speakerId: "evgeny-li",
+    demoTime: "",
+  },
 };
 
 // Helper functions
