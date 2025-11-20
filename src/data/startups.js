@@ -123,13 +123,13 @@ export const startups = {
     speakerId: "james-kerr",
     demoTime: "",
   },
-  sunchaser: {
-    id: "sunchaser",
-    name: "Sunchaser",
-    logo: "/startup_sunchaser.png",
-    url: "https://sunchaser.io",
+  spinel: {
+    id: "spinel",
+    name: "Spinel",
+    logo: "/startup_spinel.png",
+    url: "https://spinel.coop",
     description:
-      "Collaborative on-call management tool for engineering teams, integrating seamlessly with Slack and PagerDuty to automate shift coverage and streamline incident response.",
+      "Spinel offers retainers to multiply the productivity of your team, and makes next-generation developer tools for everyone. Use rv.dev to install Ruby in 1 second flat, and never worry about OpenSSL breaking Ruby again.",
     speakerId: "andre-arko",
     demoTime: "",
   },

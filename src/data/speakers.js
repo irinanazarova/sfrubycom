@@ -381,14 +381,14 @@ export const speakers = {
   "andre-arko": {
     id: "andre-arko",
     name: "André Arko",
-    company: "SunChaser.io",
+    company: "Spinel",
     role: "Founder",
     image: "/speaker_andre.jpg",
     socials: [
       "https://bsky.app/profile/indirect.io",
       "https://github.com/indirect",
     ],
-    bio: "André thinks Ruby is pretty neat. He's been using Ruby since 2003, Rails since 2004, and on the Bundler team since 2009, and wrote _The Ruby Way_ (3rd Ed.) in 2015. These days, he's a principal engineer for hire at cloudcity.io while building tools to make on-call better at sunchaser.io.",
+    bio: "André thinks Ruby is pretty neat. He's been using Ruby since 2003, Rails since 2004, and on the Bundler team since 2009, and wrote _The Ruby Way_ (3rd Ed.) in 2015. These days, he's a principal engineer for hire at cloudcity.io while building rv.dev.",
     group: "speaker",
   },
   "jose-valim": {

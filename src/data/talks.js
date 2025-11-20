@@ -479,12 +479,12 @@ export const talks = {
     status: "confirmed",
     tags: ["startups", "demos", "products", "fintech"],
   },
-  "sunchaser-demo": {
-    id: "sunchaser-demo",
-    title: "SunChaser.io Demo",
+  "spinel-demo": {
+    id: "spinel-demo",
+    title: "Spinel Demo",
     speakerId: "andre-arko",
     description:
-      "Collaborative on-call management tool for engineering teams, integrating seamlessly with Slack and PagerDuty to automate shift coverage and streamline incident response.",
+      "Spinel offers retainers to multiply the productivity of your team, and makes next-generation developer tools for everyone. Use rv.dev to install Ruby in 1 second flat, and never worry about OpenSSL breaking Ruby again.",
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "devtools"],

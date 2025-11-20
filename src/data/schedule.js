@@ -654,7 +654,7 @@ export const slotAssignments = {
   D2B1: "accessgrid-demo",
   D2B2: "suppli-demo",
   D2B3: "tend-demo",
-  D2B4: "sunchaser-demo",
+  D2B4: "spinel-demo",
   D2B5: "cleary-demo",
 
   // Day 2 Individual Startup Demos - Main Track Part 2

@@ -160,8 +160,7 @@ export const jobs = {
     id: "staff-software-engineer-gusto",
     title: "Staff Software Engineer",
     sponsorId: "gusto",
-    location:
-      "San Francisco, CA; Denver, CO;",
+    location: "San Francisco, CA; Denver, CO;",
     type: "Full-time",
     description:
       "Architect, build, and test Gusto's product suite that spans across Payroll, Benefits, HR, Time, Tax Credits, and more. Mentor other engineers to help solve some of the hardest technical problems out there in very complex domains and at a large scale. Help scale one of the largest Ruby/Rails and Javascript/React applications in the world. Collaborate with Product Management and Design teams to understand customer pain points, come up with solutions, and then prototype, iterate, and launch daily. Build a product that our customers genuinely love.",
@@ -192,7 +191,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/5933602?gh_src=ih272kl21us",
     postedDate: "2025-01-16",
   },
-
 
   /*
   "principal-software-engineer-growth-gusto": {
