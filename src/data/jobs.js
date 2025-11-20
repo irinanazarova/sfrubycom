@@ -252,7 +252,7 @@ export const jobs = {
       "We're looking for at least 8+ years of software engineering experience (Python, Ruby, or Java), with 5+ years focused on building and deploying ML or GenAI systems. Ability to build and scale complex AI systems from prototype to production. Experience building and maintaining robust AI agent systems and orchestration in a production setting. Deep experience with the full lifecycle of LLM applications: building, deploying, monitoring, and maintaining them in a production cloud environment. Strong knowledge of MLOps principles, CI/CD for models, containerization, and vector databases.",
     url: "https://job-boards.greenhouse.io/gusto/jobs/7307128",
     postedDate: "2025-01-16",
-    },*/,
+    },*/
 };
 
 // Helper functions
