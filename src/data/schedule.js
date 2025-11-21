@@ -574,20 +574,6 @@ export const scheduleSlots = {
     track: "main",
     type: "social",
   },
-  U3: {
-    id: "U3",
-    day: 3,
-    startTime: "17:00",
-    endTime: "21:00",
-    track: "main",
-  },
-  U3_b: {
-    id: "U3_b",
-    day: 3,
-    startTime: "17:00",
-    endTime: "21:00",
-    track: "blackbox",
-  },
 };
 
 // Mapping of slots to talks
@@ -680,8 +666,6 @@ export const slotAssignments = {
   U0: "lucas-film-walk",
   BIKE1: "golden-gate-bike-tour",
   HACKDAY: "ruby-hackathon-angellist",
-  U3: "community-day-placeholder",
-  U3_b: "community-day-placeholder",
 };
 
 // Helper functions

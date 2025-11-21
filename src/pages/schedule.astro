@@ -469,6 +469,28 @@ const days = [
                                 );
                             })}
                         </div>
+
+                        {/* Community Day CTA - Only on Day 3 */}
+                        {day.dayNumber === 3 && (
+                            <div class="mt-12 bg-gradient-to-r from-purple-50 to-indigo-50 border-2 border-purple-200 rounded-xl p-6 sm:p-8">
+                                <div>
+                                        <h3 class="text-xl font-bold text-purple-900 mb-2">Host a Community Day Event</h3>
+                                        <p class="text-purple-700 mb-4">
+                                            Want to organize a meetup, workshop, or activity for the Ruby community on Day 3?
+                                            We have slots available for community-led events.
+                                        </p>
+                                        <a
+                                            href="https://forms.gle/W3reGgxKUV1mb7Z39" target="_blank" rel="noopener noreferrer"
+                                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors"
+                                        >
+                                            Claim a Slot
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                            </svg>
+                                        </a>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>
