@@ -33,15 +33,7 @@ const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
                     This is your chance to meet inspiring Ruby and Rails engineers, learn from industry leaders, and connect with the vibrant community that keeps Ruby thriving.
                 </p>
                 <div class="flex items-center gap-2">
-                    <a
-                        href={SCHOLARSHIP_APPLICATION_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-block text-ruby-600 font-medium text-sm underline hover:text-ruby-700 transition-colors duration-200"
-                    >
-                        Apply Now
-                    </a>
-                    <span id="countdown" class="text-xs text-dark-600"></span>
+                    <span id="countdown" class="text-sm text-dark-600 font-medium"></span>
                 </div>
             </div>
         </section>
@@ -82,14 +74,11 @@ const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
         <!-- Timeline -->
         <section>
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
-                ⏰ Apply Now — Deadline Approaching!
+                ⏰ Applications Closed
             </h2>
-            <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-6">
-                <p class="text-dark-700 mb-3">
-                    <strong>Applications are reviewed on a rolling basis. Priority given to applications submitted by {PRIORITY_DEADLINE_DISPLAY}.</strong>
-                </p>
+            <div class="bg-gradient-to-r from-slate-50 to-gray-50 border border-slate-200 rounded-lg p-6">
                 <p class="text-dark-700">
-                    Don't wait — it only takes a few minutes to apply!
+                    <strong>Applications for the 2025 scholarship program have closed.</strong> Thank you to everyone who applied!
                 </p>
             </div>
         </section>
@@ -103,14 +92,11 @@ const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
                 <p class="text-lg mb-6 opacity-90">
                     Grab your free ticket to an unforgettable Ruby experience!
                 </p>
-                <a
-                    href={SCHOLARSHIP_APPLICATION_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-block bg-white text-ruby-600 font-semibold py-3 px-8 rounded-lg hover:bg-ruby-50 transition-colors duration-200"
+                <span
+                    class="inline-block bg-white/80 text-ruby-800 font-semibold py-3 px-8 rounded-lg cursor-not-allowed"
                 >
-                    Apply for Scholarship
-                </a>
+                    Applications Closed
+                </span>
                 <p class="text-sm mt-4 opacity-75">
                     Questions? Email us at <a href={`mailto:${SCHOLARSHIP_EMAIL}`} class="underline">{SCHOLARSHIP_EMAIL}</a>
                 </p>
@@ -177,18 +163,15 @@ const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
 
         <!-- Small CTA -->
         <section class="text-center">
-            <div class="bg-white border border-ruby-200 rounded-lg p-6">
+            <div class="bg-white border border-slate-200 rounded-lg p-6">
                 <p class="text-dark-700 mb-4">
-                    Ready to join the Ruby community in San Francisco?
+                    Applications for the 2025 scholarship program have closed.
                 </p>
-                <a
-                    href={SCHOLARSHIP_APPLICATION_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-block bg-ruby-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-ruby-700 transition-colors duration-200"
+                <span
+                    class="inline-block bg-slate-300 text-slate-500 font-semibold py-2 px-6 rounded-lg cursor-not-allowed"
                 >
-                    Apply Now
-                </a>
+                    Applications Closed
+                </span>
             </div>
         </section>
     </div>
@@ -204,9 +187,7 @@ const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
         if (!countdownEl) return;
 
         if (diff <= 0) {
-            // Deadline has passed, but we'll still encourage applications in
-            // case we want to accept late ones.
-            countdownEl.textContent = '(Due soon)';
+            countdownEl.textContent = '(Applications closed)';
             return;
         }
 
