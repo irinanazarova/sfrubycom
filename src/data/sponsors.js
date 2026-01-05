@@ -325,6 +325,13 @@ export const sponsors = {
     logo: "/sponsor_ezcater.png",
     url: "https://ezcater.com",
   },
+  mux: {
+    id: "mux",
+    name: "Mux",
+    tier: "Post Production",
+    logo: "/sponsor_mux.png",
+    url: "https://mux.com",
+  },
 };
 
 // Special organizers
