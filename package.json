@@ -1,22 +1,24 @@
 {
-  "name": "sf-ruby-conference",
+  "name": "sfruby-community",
   "type": "module",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "./node_modules/.bin/astro dev",
-    "build": "./node_modules/.bin/astro build",
-    "preview": "./node_modules/.bin/astro preview",
-    "astro": "./node_modules/.bin/astro"
+    "dev": "astro dev",
+    "fetch-data": "node scripts/fetch-sheets.js && node scripts/fetch-luma-events.js",
+    "build": "npm run fetch-data && astro build",
+    "build:dev": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "animejs": "^3.2.2",
-    "astro": "^5.8.0",
-    "astro-embed": "^0.9.1"
+    "astro": "^5.8.0"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
+    "@types/node": "^20.0.0",
     "tailwindcss": "^3.4.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.0.0"
   }
 }

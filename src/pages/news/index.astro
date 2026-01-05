@@ -1,0 +1,178 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NewsCard from "../../components/NewsCard.astro";
+import Filters from "../../components/Filters.astro";
+
+import newsData from "../../content/news.json";
+import type { NewsItem } from "../../utils/types";
+
+const news = newsData as NewsItem[];
+
+// Get unique categories
+const categories = [...new Set(news.map((n) => n.category))].sort();
+
+const filters = [
+    {
+        id: "category",
+        label: "Category",
+        options: [
+            { value: "all", label: "All Categories" },
+            ...categories.map((cat) => ({
+                value: cat.toLowerCase(),
+                label: cat,
+            })),
+        ],
+    },
+];
+---
+
+<BaseLayout
+    title="Ruby Startup News - SF Ruby"
+    description="Stay updated with the latest Ruby startup news, funding rounds, releases, and community events."
+>
+    <section class="pt-28 pb-12 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Ruby Startup News
+                </h1>
+                <p class="text-lg text-gray-600">
+                    The latest from the Ruby ecosystem: funding rounds, product
+                    launches, and community updates.
+                </p>
+            </div>
+
+            <Filters filters={filters} searchPlaceholder="Search news..." />
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                id="news-grid"
+            >
+                {
+                    news.map((item) => (
+                        <div
+                            data-filterable
+                            data-search={`${item.headline} ${item.summary} ${item.startupName} ${item.source}`}
+                            data-category={item.category.toLowerCase()}
+                        >
+                            <NewsCard news={item} />
+                        </div>
+                    ))
+                }
+            </div>
+
+            {
+                news.length === 0 && (
+                    <div class="text-center py-12">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                            <svg
+                                class="w-8 h-8 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">
+                            No news yet
+                        </h3>
+                        <p class="text-gray-500">
+                            Check back soon for Ruby startup updates.
+                        </p>
+                    </div>
+                )
+            }
+
+            <div id="no-results" class="hidden text-center py-12">
+                <div
+                    class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center"
+                >
+                    <svg
+                        class="w-8 h-8 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        ></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">
+                    No news matches your search
+                </h3>
+                <p class="text-gray-500">
+                    Try adjusting your filters or search terms.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                Get news in your inbox
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Subscribe to our weekly newsletter for Ruby startup updates.
+            </p>
+            <a
+                href="https://sfruby.substack.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+                Subscribe to Newsletter
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    ></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+</BaseLayout>
+
+<script>
+    function updateNoResults() {
+        const items = document.querySelectorAll("[data-filterable]");
+        const noResults = document.getElementById("no-results");
+
+        let visibleCount = 0;
+        items.forEach((item) => {
+            if ((item as HTMLElement).style.display !== "none") {
+                visibleCount++;
+            }
+        });
+
+        if (noResults) {
+            noResults.classList.toggle("hidden", visibleCount > 0);
+        }
+    }
+
+    const observer = new MutationObserver(updateNoResults);
+    document.querySelectorAll("[data-filterable]").forEach((item) => {
+        observer.observe(item, {
+            attributes: true,
+            attributeFilter: ["style"],
+        });
+    });
+</script>

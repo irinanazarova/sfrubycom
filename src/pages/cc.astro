@@ -1,51 +1,61 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 const blocks = [
-  {
-    header: 'Be Respectful',
-    text: 'Treat everyone with respect, kindness, and consideration.'
-  },
-  {
-    header: 'No Harassment',
-    text: 'Harassment, discrimination, or inappropriate behavior of any kind will not be tolerated.'
-  },
-  {
-    header: 'Speak Up',
-    text: 'If you see or experience any issues, please contact conference staff immediately.'
-  }
+    {
+        header: "Be Respectful",
+        text: "Treat everyone with respect, kindness, and consideration.",
+    },
+    {
+        header: "No Harassment",
+        text: "Harassment, discrimination, or inappropriate behavior of any kind will not be tolerated.",
+    },
+    {
+        header: "Speak Up",
+        text: "If you see or experience any issues, please contact conference staff immediately.",
+    },
 ];
 ---
 
 <Layout title="Code of Conduct - San Francisco Ruby Conference 2025">
-  <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-display font-bold text-center">Code of Conduct</h1>
-      <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-        San Francisco Ruby Conference 2025
-      </p>
-    </div>
-  </div>
-  
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    
-    <div class="bg-dark-50 rounded-lg p-8">
-      <h2 class="text-2xl font-display font-bold text-dark-900 mb-6"></h2>
-      
-      <div class="space-y-4">
-        {blocks.map((block) => (
-          <div class="bg-white p-6 rounded-lg shadow-sm">
-            <h3 class="font-bold text-dark-900 mb-2">{block.header}</h3>
-            <p class="text-dark-600">{block.text}</p>
-          </div>
-        ))}
-      </div>
+    <div
+        class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white pt-32 pb-16"
+    >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl md:text-4xl font-display font-bold text-center">
+                Code of Conduct
+            </h1>
+            <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
+                San Francisco Ruby Conference 2025
+            </p>
+        </div>
     </div>
 
-    <div class="mt-16 text-center">
-      <h2 class="text-2xl font-display font-bold text-dark-900 mb-4"></h2>
-      <p class="text-dark-600 mb-2">Let’s work together to create a welcoming and inclusive environment for all.</p>
-      <p class="text-dark-600"></p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-dark-50 rounded-lg p-8">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6"></h2>
+
+            <div class="space-y-4">
+                {
+                    blocks.map((block) => (
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="font-bold text-dark-900 mb-2">
+                                {block.header}
+                            </h3>
+                            <p class="text-dark-600">{block.text}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <div class="mt-16 text-center">
+            <h2 class="text-2xl font-display font-bold text-dark-900 mb-4"></h2>
+            <p class="text-dark-600 mb-2">
+                Let’s work together to create a welcoming and inclusive
+                environment for all.
+            </p>
+            <p class="text-dark-600"></p>
+        </div>
     </div>
-  </div>
 </Layout>

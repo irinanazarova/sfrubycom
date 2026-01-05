@@ -9,13 +9,18 @@ import DistanceBadge from "../components/DistanceBadge.astro";
     description="Complete dining guide for SF Ruby Conference 2025 attendees, featuring restaurants, cafes, and bars near Fort Mason and throughout San Francisco."
 >
     <!-- Hero Section -->
-    <div class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white py-16">
+    <div
+        class="bg-gradient-to-b from-ruby-500 to-ruby-700 text-white pt-32 pb-16"
+    >
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+            <h1
+                class="text-3xl md:text-4xl font-display font-bold text-center mb-4"
+            >
                 Dining Guide
             </h1>
             <p class="text-xl text-center max-w-3xl mx-auto">
-                Discover the best food and drinks near Fort Mason and around San Francisco
+                Discover the best food and drinks near Fort Mason and around San
+                Francisco
             </p>
         </div>
     </div>
@@ -29,7 +34,7 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 </h2>
                 <DistanceBadge distance="0 min" type="walk" color="green" />
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <FoodVenue
                     name="Equator Coffee"
@@ -61,14 +66,22 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 <h2 class="text-2xl font-display font-bold text-dark-900">
                     🚶 Close By
                 </h2>
-                <DistanceBadge distance="5-20 min walk" type="walk" color="blue" />
+                <DistanceBadge
+                    distance="5-20 min walk"
+                    type="walk"
+                    color="blue"
+                />
             </div>
 
             <div class="space-y-8">
                 <!-- Breakfast -->
                 <div>
-                    <h3 class="font-bold text-lg text-dark-900 mb-4">🥞 Breakfast & Coffee</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">
+                        🥞 Breakfast & Coffee
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
                         <FoodVenue
                             name="Reveille Coffee"
                             type=""
@@ -95,8 +108,12 @@ import DistanceBadge from "../components/DistanceBadge.astro";
 
                 <!-- Lunch -->
                 <div>
-                    <h3 class="font-bold text-lg text-dark-900 mb-4">🍜 Lunch</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">
+                        🍜 Lunch
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
                         <FoodVenue
                             name="Komeya no Bento"
                             type=""
@@ -137,8 +154,12 @@ import DistanceBadge from "../components/DistanceBadge.astro";
 
                 <!-- Bars -->
                 <div>
-                    <h3 class="font-bold text-lg text-dark-900 mb-4">🍷 Bars & Evening</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">
+                        🍷 Bars & Evening
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
                         <FoodVenue
                             name="Bar Darling"
                             type=""
@@ -164,15 +185,27 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 <h2 class="text-2xl font-display font-bold text-dark-900">
                     🌆 In the Area
                 </h2>
-                <DistanceBadge distance="20-40 min walk" type="walk" color="amber" />
-                <DistanceBadge distance="10-15 min" type="transit" color="purple" />
+                <DistanceBadge
+                    distance="20-40 min walk"
+                    type="walk"
+                    color="amber"
+                />
+                <DistanceBadge
+                    distance="10-15 min"
+                    type="transit"
+                    color="purple"
+                />
             </div>
 
             <div class="space-y-8">
                 <!-- Coffee -->
                 <div>
-                    <h3 class="font-bold text-lg text-dark-900 mb-4">☕ Specialty Coffee</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">
+                        ☕ Specialty Coffee
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
                         <FoodVenue
                             name="Coffee Movement"
                             type=""
@@ -199,8 +232,12 @@ import DistanceBadge from "../components/DistanceBadge.astro";
 
                 <!-- Breakfast & Brunch -->
                 <div>
-                    <h3 class="font-bold text-lg text-dark-900 mb-4">🥞 Breakfast & Brunch</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">
+                        🥞 Breakfast & Brunch
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
                         <FoodVenue
                             name="Camino Alto"
                             type=""
@@ -227,8 +264,12 @@ import DistanceBadge from "../components/DistanceBadge.astro";
 
                 <!-- Lunch & Dinner -->
                 <div>
-                    <h3 class="font-bold text-lg text-dark-900 mb-4">🍽️ Lunch & Dinner</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">
+                        🍽️ Lunch & Dinner
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
                         <FoodVenue
                             name="Swan Oyster Depot"
                             type=""
@@ -276,8 +317,12 @@ import DistanceBadge from "../components/DistanceBadge.astro";
 
                 <!-- Bars & Nightlife -->
                 <div>
-                    <h3 class="font-bold text-lg text-dark-900 mb-4">🍸 Bars & Nightlife</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <h3 class="font-bold text-lg text-dark-900 mb-4">
+                        🍸 Bars & Nightlife
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    >
                         <FoodVenue
                             name="Trick Dog"
                             type=""
@@ -309,15 +354,22 @@ import DistanceBadge from "../components/DistanceBadge.astro";
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
                 🗺️ Food Neighborhoods Worth Exploring
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
-                        <h3 class="font-bold text-dark-900">Mission District</h3>
-                        <DistanceBadge distance="25 min" type="transit" color="purple" />
+                        <h3 class="font-bold text-dark-900">
+                            Mission District
+                        </h3>
+                        <DistanceBadge
+                            distance="25 min"
+                            type="transit"
+                            color="purple"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm mb-3">
-                        Best burritos in the city, trendy restaurants, and vibrant street art. Don't miss Dolores Park!
+                        Best burritos in the city, trendy restaurants, and
+                        vibrant street art. Don't miss Dolores Park!
                     </p>
                     <p class="text-dark-500 text-xs">
                         <strong>Must-try:</strong> La Taqueria, Tartine, Bi-Rite Creamery
@@ -326,40 +378,61 @@ import DistanceBadge from "../components/DistanceBadge.astro";
 
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
-                        <h3 class="font-bold text-dark-900">North Beach (Little Italy)</h3>
-                        <DistanceBadge distance="15 min" type="walk" color="blue" />
+                        <h3 class="font-bold text-dark-900">
+                            North Beach (Little Italy)
+                        </h3>
+                        <DistanceBadge
+                            distance="15 min"
+                            type="walk"
+                            color="blue"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm mb-3">
-                        Historic Italian neighborhood with authentic restaurants, cafes, and the famous City Lights Bookstore.
+                        Historic Italian neighborhood with authentic
+                        restaurants, cafes, and the famous City Lights
+                        Bookstore.
                     </p>
                     <p class="text-dark-500 text-xs">
-                        <strong>Must-try:</strong> Tony's Little Star, Mama's, Caffe Trieste
+                        <strong>Must-try:</strong> Tony's Little Star, Mama's, Caffe
+                        Trieste
                     </p>
                 </div>
 
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
                         <h3 class="font-bold text-dark-900">Chinatown</h3>
-                        <DistanceBadge distance="20 min" type="transit" color="purple" />
+                        <DistanceBadge
+                            distance="20 min"
+                            type="transit"
+                            color="purple"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm mb-3">
-                        Authentic dim sum, tea shops, and the oldest Chinatown in North America.
+                        Authentic dim sum, tea shops, and the oldest Chinatown
+                        in North America.
                     </p>
                     <p class="text-dark-500 text-xs">
-                        <strong>Must-try:</strong> Z&Y Restaurant, Golden Dragon, Red Blossom Tea
+                        <strong>Must-try:</strong> Z&Y Restaurant, Golden Dragon,
+                        Red Blossom Tea
                     </p>
                 </div>
 
                 <div class="bg-white border border-dark-200 rounded-lg p-6">
                     <div class="flex items-center gap-2 mb-3">
                         <h3 class="font-bold text-dark-900">Ferry Building</h3>
-                        <DistanceBadge distance="15 min" type="transit" color="purple" />
+                        <DistanceBadge
+                            distance="15 min"
+                            type="transit"
+                            color="purple"
+                        />
                     </div>
                     <p class="text-dark-600 text-sm mb-3">
-                        Gourmet food hall with local vendors, farmers market (Tues/Thu/Sat), and bay views.
+                        Gourmet food hall with local vendors, farmers market
+                        (Tues/Thu/Sat), and bay views.
                     </p>
                     <p class="text-dark-500 text-xs">
-                        <strong>Must-try:</strong> Blue Bottle Coffee, Acme Bread, Cowgirl Creamery
+                        <strong>Must-try:</strong> Blue Bottle Coffee, Acme Bread,
+                        Cowgirl Creamery
                     </p>
                 </div>
             </div>
@@ -370,10 +443,12 @@ import DistanceBadge from "../components/DistanceBadge.astro";
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
                 🌱 Dietary Restrictions & Special Diets
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <h3 class="font-bold text-green-800 mb-3">🌱 Vegetarian/Vegan</h3>
+                    <h3 class="font-bold text-green-800 mb-3">
+                        🌱 Vegetarian/Vegan
+                    </h3>
                     <ul class="space-y-1 text-green-700 text-sm">
                         <li>• Greens Restaurant (vegetarian fine dining)</li>
                         <li>• Loving Hut (vegan Asian cuisine)</li>
@@ -392,8 +467,12 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     </ul>
                 </div>
 
-                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                    <h3 class="font-bold text-purple-800 mb-3">🥩 Halal/Kosher</h3>
+                <div
+                    class="bg-purple-50 border border-purple-200 rounded-lg p-4"
+                >
+                    <h3 class="font-bold text-purple-800 mb-3">
+                        🥩 Halal/Kosher
+                    </h3>
                     <ul class="space-y-1 text-purple-700 text-sm">
                         <li>• Sunrise Deli (Middle Eastern halal)</li>
                         <li>• Aslam's Rasoi (Pakistani halal)</li>
@@ -409,20 +488,24 @@ import DistanceBadge from "../components/DistanceBadge.astro";
             <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
                 💡 Dining Tips for Conference Attendees
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <h3 class="font-bold text-dark-900 mb-3">🕐 Timing</h3>
                     <ul class="space-y-2 text-dark-600 text-sm">
                         <li>• Lunch rush: 12-1:30 PM (plan accordingly)</li>
                         <li>• Many cafes close early (3-4 PM)</li>
-                        <li>• Dinner reservations recommended for popular spots</li>
+                        <li>
+                            • Dinner reservations recommended for popular spots
+                        </li>
                         <li>• Happy hour: typically 4-6 PM</li>
                     </ul>
                 </div>
-                
+
                 <div>
-                    <h3 class="font-bold text-dark-900 mb-3">💳 Payment & Tipping</h3>
+                    <h3 class="font-bold text-dark-900 mb-3">
+                        💳 Payment & Tipping
+                    </h3>
                     <ul class="space-y-2 text-dark-600 text-sm">
                         <li>• Most places accept cards, some cash-only</li>
                         <li>• Standard tip: 18-20% for table service</li>

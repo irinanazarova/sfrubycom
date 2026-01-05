@@ -1,0 +1,100 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+export interface Props {
+    title?: string;
+    description?: string;
+    ogImage?: string;
+    ogUrl?: string;
+    ogType?: string;
+}
+
+const {
+    title = "SF Ruby - Where Ruby Startups Are Born",
+    description = "Join the SF Ruby community: monthly meetups, talks, jobs, and the annual conference. Connect with founders and engineers building with Ruby.",
+    ogImage = "/sfruby_og.jpg",
+    ogUrl = Astro.url.href,
+    ogType = "website",
+} = Astro.props;
+
+const absoluteOgImage = ogImage.startsWith("http")
+    ? ogImage
+    : `https://sfruby.com${ogImage}`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/favicon-96x96.png"
+            sizes="96x96"
+        />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+        <meta name="theme-color" content="#dc2626" />
+        <title>{title}</title>
+
+        <link
+            rel="preload"
+            href="/fonts/MartianGrotesk.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/fonts/MartianMono.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+
+        <meta property="og:type" content={ogType} />
+        <meta property="og:url" content={ogUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={absoluteOgImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={ogUrl} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={absoluteOgImage} />
+
+        <script
+            defer
+            data-domain="sfruby.com"
+            src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
+        ></script>
+        <script is:inline>
+            window.plausible =
+                window.plausible ||
+                function () {
+                    (window.plausible.q = window.plausible.q || []).push(
+                        arguments,
+                    );
+                };
+        </script>
+    </head>
+    <body
+        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col"
+    >
+        <Header />
+
+        <main class="flex-grow">
+            <slot />
+        </main>
+
+        <Footer />
+    </body>
+</html>

@@ -1,0 +1,117 @@
+---
+import Badge from "./Badge.astro";
+import { formatDate } from "../utils/helpers";
+
+interface Job {
+    id: string;
+    title: string;
+    sponsorId: string;
+    location: string;
+    type: string;
+    description: string;
+    url: string;
+    postedDate: string;
+    // Enriched from sponsor
+    companyName?: string;
+    companyLogo?: string;
+    tier?: string;
+}
+
+interface Props {
+    job: Job;
+}
+
+const { job } = Astro.props;
+
+const isFeatured = job.tier === "Pickaxe ⛏️" || job.tier === "Ruby";
+---
+
+<div
+    class={`bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-ruby-200 transition-all duration-300 group ${isFeatured ? "ring-2 ring-ruby-500 ring-opacity-50" : ""}`}
+>
+    {
+        isFeatured && (
+            <div class="mb-3">
+                <Badge variant="ruby">Featured</Badge>
+            </div>
+        )
+    }
+    <div class="flex items-start gap-4">
+        {
+            job.companyLogo && (
+                <div class="flex-shrink-0 w-14 h-14 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
+                    <img
+                        src={job.companyLogo}
+                        alt={job.companyName}
+                        class="w-full h-full object-contain p-1"
+                        loading="lazy"
+                    />
+                </div>
+            )
+        }
+        <div class="flex-1 min-w-0">
+            <h3
+                class="font-semibold text-gray-900 mb-1 group-hover:text-ruby-500 transition-colors"
+            >
+                {job.title}
+            </h3>
+            <p class="text-gray-600 text-sm mb-2">
+                {job.companyName}
+            </p>
+            <p class="text-gray-500 text-sm line-clamp-2 mb-3">
+                {job.description}
+            </p>
+
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <Badge variant="default">{job.type}</Badge>
+                <Badge variant="outline">{job.location}</Badge>
+                <Badge variant="ruby">Ruby/Rails</Badge>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div
+                    class="flex flex-wrap items-center gap-3 text-xs text-gray-500"
+                >
+                    <span class="flex items-center gap-1">
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            ></path>
+                        </svg>
+                        Posted {formatDate(job.postedDate)}
+                    </span>
+                </div>
+
+                <a
+                    href={job.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-lg hover:bg-ruby-600 transition-colors"
+                >
+                    Apply
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        ></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

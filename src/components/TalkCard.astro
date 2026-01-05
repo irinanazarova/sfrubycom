@@ -1,0 +1,92 @@
+---
+import Badge from "./Badge.astro";
+import { getSpeaker } from "../data/speakers.js";
+
+interface Talk {
+    id: string;
+    title: string;
+    speakerId?: string;
+    speakers?: string[];
+    description?: string;
+    type: string;
+    status?: string;
+    tags?: string[];
+}
+
+interface Props {
+    talk: Talk;
+}
+
+const { talk } = Astro.props;
+
+// Get speaker names
+let speakerNames = "";
+if (talk.speakerId) {
+    const speaker = getSpeaker(talk.speakerId);
+    speakerNames = speaker?.name || "";
+} else if (talk.speakers && talk.speakers.length > 0) {
+    speakerNames = talk.speakers
+        .map((id) => getSpeaker(id)?.name || "")
+        .filter(Boolean)
+        .join(", ");
+}
+
+// Get type badge color
+function getTypeBadge(type: string) {
+    switch (type) {
+        case "keynote":
+            return "ruby";
+        case "workshop":
+            return "success";
+        case "demo":
+            return "outline";
+        default:
+            return "default";
+    }
+}
+---
+
+<div
+    class="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-ruby-200 transition-all duration-300 group"
+>
+    <div class="p-5">
+        <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <Badge variant={getTypeBadge(talk.type)}>{talk.type}</Badge>
+            {
+                talk.status === "confirmed" && (
+                    <span class="text-xs text-green-600">Confirmed</span>
+                )
+            }
+        </div>
+
+        <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2">
+            {talk.title}
+        </h3>
+
+        {
+            speakerNames && (
+                <p class="text-sm text-gray-600 mb-2">{speakerNames}</p>
+            )
+        }
+
+        {
+            talk.description && (
+                <p class="text-sm text-gray-500 line-clamp-3 mb-3">
+                    {talk.description}
+                </p>
+            )
+        }
+
+        {
+            talk.tags && talk.tags.length > 0 && (
+                <div class="flex flex-wrap gap-1">
+                    {talk.tags.slice(0, 3).map((tag) => (
+                        <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</div>

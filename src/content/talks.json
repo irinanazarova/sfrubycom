@@ -1,0 +1,93 @@
+[
+  {
+    "id": "rails-8-whats-new",
+    "title": "What's New in Rails 8",
+    "speakerNames": "DHH",
+    "speakerSocial": "https://twitter.com/dhh",
+    "abstract": "A deep dive into Rails 8's major features including Solid Queue, Solid Cache, Kamal 2, and the new default development experience.",
+    "duration": 45,
+    "event": "SF Ruby Conference 2025",
+    "youtubeLink": "https://youtube.com/watch?v=example1",
+    "slidesLink": "https://speakerdeck.com/dhh/rails-8",
+    "date": "2025-11-19",
+    "topicTags": ["Rails", "Rails 8", "Performance"]
+  },
+  {
+    "id": "scaling-ruby-at-gusto",
+    "title": "Scaling Ruby at Gusto: Lessons from 10+ Years",
+    "speakerNames": "Mike Smith",
+    "speakerSocial": "https://linkedin.com/in/mikesmith",
+    "abstract": "How Gusto grew from startup to one of the largest Rails applications, including architecture decisions, performance wins, and team scaling.",
+    "duration": 35,
+    "event": "SF Ruby Conference 2025",
+    "youtubeLink": "https://youtube.com/watch?v=example2",
+    "slidesLink": "",
+    "date": "2025-11-19",
+    "topicTags": ["Scaling", "Architecture", "Rails"]
+  },
+  {
+    "id": "ruby-llm-ai-agents",
+    "title": "Building AI Agents with Ruby LLM",
+    "speakerNames": "Carmine Paolino",
+    "speakerSocial": "https://twitter.com/carminepao",
+    "abstract": "Learn how to build production-ready AI agents using Ruby LLM, with practical examples from Chatwithwork.",
+    "duration": 40,
+    "event": "SF Ruby Conference 2025",
+    "youtubeLink": "https://youtube.com/watch?v=example3",
+    "slidesLink": "https://speakerdeck.com/carmine/ruby-llm",
+    "date": "2025-11-20",
+    "topicTags": ["AI", "LLM", "Ruby LLM", "Agents"]
+  },
+  {
+    "id": "hotwire-stimulus-turbo",
+    "title": "Modern Rails Frontend with Hotwire",
+    "speakerNames": "Marco Roth",
+    "speakerSocial": "https://twitter.com/marcoroth_",
+    "abstract": "Master Stimulus and Turbo to build reactive interfaces without JavaScript fatigue. Real-world patterns from production apps.",
+    "duration": 35,
+    "event": "SF Ruby Conference 2025",
+    "youtubeLink": "https://youtube.com/watch?v=example4",
+    "slidesLink": "",
+    "date": "2025-11-20",
+    "topicTags": ["Hotwire", "Stimulus", "Turbo", "Frontend"]
+  },
+  {
+    "id": "zjit-ruby-performance",
+    "title": "ZJIT: The Future of Ruby Performance",
+    "speakerNames": "Alan Wu",
+    "speakerSocial": "https://twitter.com/alanwusx",
+    "abstract": "Deep dive into Shopify's ZJIT project and what it means for Ruby's performance future.",
+    "duration": 40,
+    "event": "SF Ruby Conference 2025",
+    "youtubeLink": "https://youtube.com/watch?v=example5",
+    "slidesLink": "",
+    "date": "2025-11-19",
+    "topicTags": ["Performance", "JIT", "Ruby Internals"]
+  },
+  {
+    "id": "testing-at-scale",
+    "title": "Testing at Scale: CI Strategies for Large Rails Apps",
+    "speakerNames": "Sarah Johnson",
+    "speakerSocial": "https://linkedin.com/in/sarahjohnson",
+    "abstract": "How to keep your test suite fast and reliable as your Rails app grows to millions of lines of code.",
+    "duration": 30,
+    "event": "SF Ruby Meetup December 2025",
+    "youtubeLink": "https://youtube.com/watch?v=example6",
+    "slidesLink": "",
+    "date": "2025-12-10",
+    "topicTags": ["Testing", "CI/CD", "DevOps"]
+  },
+  {
+    "id": "ruby-startups-2025",
+    "title": "State of Ruby Startups 2025",
+    "speakerNames": "Irina Nazarova",
+    "speakerSocial": "https://twitter.com/irina_nazarova",
+    "abstract": "Research findings from the Startups on Rails project: how Ruby startups are winning in 2025.",
+    "duration": 25,
+    "event": "SF Ruby Conference 2025",
+    "youtubeLink": "https://youtube.com/watch?v=example7",
+    "slidesLink": "https://speakerdeck.com/irina/ruby-startups-2025",
+    "date": "2025-11-20",
+    "topicTags": ["Startups", "Research", "Community"]
+  }
+]

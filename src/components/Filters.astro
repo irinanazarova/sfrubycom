@@ -1,0 +1,165 @@
+---
+interface FilterOption {
+    value: string;
+    label: string;
+}
+
+interface FilterGroup {
+    id: string;
+    label: string;
+    options: FilterOption[];
+}
+
+interface Props {
+    filters: FilterGroup[];
+    searchPlaceholder?: string;
+    showSearch?: boolean;
+}
+
+const { filters, searchPlaceholder = "Search...", showSearch = true } = Astro.props;
+---
+
+<div class="filters-container bg-white rounded-xl border border-gray-200 p-4 mb-8">
+    <div class="flex flex-col lg:flex-row gap-4">
+        {showSearch && (
+            <div class="flex-1">
+                <div class="relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder={searchPlaceholder}
+                        class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-ruby-500 focus:border-transparent transition-all"
+                    />
+                </div>
+            </div>
+        )}
+
+        <div class="flex flex-wrap gap-3">
+            {filters.map((filter) => (
+                <div class="relative">
+                    <select
+                        id={`filter-${filter.id}`}
+                        data-filter={filter.id}
+                        class="appearance-none bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 pr-10 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-ruby-500 focus:border-transparent cursor-pointer hover:bg-gray-100 transition-all"
+                    >
+                        {filter.options.map((option) => (
+                            <option value={option.value}>{option.label}</option>
+                        ))}
+                    </select>
+                    <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+            ))}
+
+            <button
+                id="clear-filters"
+                class="hidden px-4 py-2.5 text-sm font-medium text-ruby-500 hover:text-ruby-600 hover:bg-ruby-50 rounded-lg transition-all"
+            >
+                Clear filters
+            </button>
+        </div>
+    </div>
+
+    <div id="results-count" class="mt-4 text-sm text-gray-500 hidden">
+        Showing <span id="visible-count">0</span> results
+    </div>
+</div>
+
+<script>
+    function initFilters() {
+        const searchInput = document.getElementById('search-input') as HTMLInputElement;
+        const filterSelects = document.querySelectorAll('[data-filter]') as NodeListOf<HTMLSelectElement>;
+        const clearButton = document.getElementById('clear-filters');
+        const resultsCount = document.getElementById('results-count');
+        const visibleCount = document.getElementById('visible-count');
+        const items = document.querySelectorAll('[data-filterable]');
+
+        function applyFilters() {
+            const searchTerm = searchInput?.value.toLowerCase() || '';
+            const activeFilters: Record<string, string> = {};
+
+            filterSelects.forEach(select => {
+                const filterName = select.dataset.filter;
+                if (filterName && select.value) {
+                    activeFilters[filterName] = select.value;
+                }
+            });
+
+            let visibleItems = 0;
+            let hasActiveFilters = searchTerm.length > 0;
+
+            items.forEach(item => {
+                const element = item as HTMLElement;
+                let visible = true;
+
+                // Search filter
+                if (searchTerm) {
+                    const searchableText = element.dataset.search?.toLowerCase() || element.textContent?.toLowerCase() || '';
+                    if (!searchableText.includes(searchTerm)) {
+                        visible = false;
+                    }
+                }
+
+                // Dropdown filters
+                Object.entries(activeFilters).forEach(([filterName, filterValue]) => {
+                    if (filterValue && filterValue !== 'all') {
+                        hasActiveFilters = true;
+                        const itemValue = element.dataset[filterName]?.toLowerCase() || '';
+
+                        // Handle special cases
+                        if (filterName === 'hiring') {
+                            const isHiring = element.dataset.hiring === 'true';
+                            if (filterValue === 'yes' && !isHiring) visible = false;
+                        } else if (filterName === 'rubyPercentage') {
+                            const percentage = parseInt(element.dataset.rubyPercentage || '0', 10);
+                            if (filterValue === '0-50' && percentage > 50) visible = false;
+                            if (filterValue === '50-80' && (percentage < 50 || percentage > 80)) visible = false;
+                            if (filterValue === '80-100' && percentage < 80) visible = false;
+                        } else {
+                            if (filterValue !== 'all' && itemValue !== filterValue.toLowerCase()) {
+                                visible = false;
+                            }
+                        }
+                    }
+                });
+
+                element.style.display = visible ? '' : 'none';
+                if (visible) visibleItems++;
+            });
+
+            // Update UI
+            if (clearButton) {
+                clearButton.classList.toggle('hidden', !hasActiveFilters);
+            }
+
+            if (resultsCount && visibleCount) {
+                resultsCount.classList.remove('hidden');
+                visibleCount.textContent = String(visibleItems);
+            }
+        }
+
+        // Event listeners
+        searchInput?.addEventListener('input', applyFilters);
+        filterSelects.forEach(select => select.addEventListener('change', applyFilters));
+
+        clearButton?.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            filterSelects.forEach(select => select.value = 'all');
+            applyFilters();
+        });
+
+        // Initial count
+        if (resultsCount && visibleCount) {
+            visibleCount.textContent = String(items.length);
+            resultsCount.classList.remove('hidden');
+        }
+    }
+
+    // Run on page load and after view transitions
+    document.addEventListener('DOMContentLoaded', initFilters);
+    document.addEventListener('astro:page-load', initFilters);
+</script>

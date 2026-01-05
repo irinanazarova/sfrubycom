@@ -5,13 +5,14 @@ export const talks = {
   // KEYNOTES
   "reaction-view": {
     id: "reaction-view",
-    title: "“Herb to ReActionView: A New Foundation for the View Layer",
+    title: "Herb to ReActionView: A New Foundation for the View Layer",
     speakerId: "marco-roth",
     description:
       "This talk is the conclusion of a journey I’ve been sharing throughout 2025. At RubyKaigi, I introduced Herb: a new HTML-aware ERB parser and tooling ecosystem. At RailsConf, I released developer tools built on Herb, including a formatter, linter, and language server, alongside a vision for modernizing and improving the Rails view layer.",
     type: "keynote",
     status: "confirmed",
     tags: ["rails", "frontend"],
+    youtubeId: "L7WpwtqHn_g",
   },
   "ruby-ai-conversation": {
     id: "ruby-ai-conversation",
@@ -32,6 +33,7 @@ export const talks = {
     type: "keynote",
     status: "confirmed",
     tags: ["rails", "ai", "llm"],
+    youtubeId: "y535u1EWqAg",
   },
   "rails-x-keynote": {
     id: "rails-x-keynote",
@@ -41,6 +43,7 @@ export const talks = {
     type: "keynote",
     status: "confirmed",
     tags: [],
+    youtubeId: "hP4SkKH4IsA",
   },
 
   "play-with-code": {
@@ -52,6 +55,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["developer-experience", "learning", "fun"],
+    youtubeId: "ltYep_SOjNg",
   },
   "opensource-rails-startup": {
     id: "opensource-rails-startup",
@@ -72,6 +76,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["rails", "assets", "gems", "frontend"],
+    youtubeId: "AFpbFXPBs3w",
   },
   "zjit-ruby-performance": {
     id: "zjit-ruby-performance",
@@ -82,6 +87,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["performance", "ruby", "jit", "optimization"],
+    youtubeId: "XSdBCKepWHM",
   },
   "realtime-collaboration-rails": {
     id: "realtime-collaboration-rails",
@@ -92,6 +98,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["rails", "realtime", "websockets", "collaboration"],
+    youtubeId: "J68QOBLEItY",
   },
   "start-writing-ruby": {
     id: "start-writing-ruby",
@@ -102,6 +109,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["ruby", "design", "architecture", "paradigms"],
+    youtubeId: "sjuCiIdMe_4",
   },
   "technical-marketing": {
     id: "technical-marketing",
@@ -113,6 +121,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["marketing", "startups", "entrepreneurship", "business"],
+    youtubeId: "xP86mvtqEh0",
   },
   "thin-client-approach": {
     id: "thin-client-approach",
@@ -123,6 +132,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["cli", "architecture", "tools"],
+    youtubeId: "JmmtO8vChyA",
   },
   "software-design-ai-world": {
     id: "software-design-ai-world",
@@ -133,6 +143,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["ai", "design", "future", "career"],
+    youtubeId: "gTHmwQviVI8",
   },
   "opensource-business-sidekiq": {
     id: "opensource-business-sidekiq",
@@ -143,6 +154,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["open-source", "business", "sidekiq"],
+    youtubeId: "4H5V6gnG9Oo",
   },
 
   // BLACKBOX THEATER TALKS
@@ -247,6 +259,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["modularization", "scale", "production", "rails"],
+    youtubeId: "py_vjWTmAwg",
   },
 
   "navigating-language-evolution": {
@@ -258,6 +271,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["programming languages", "ai"],
+    youtubeId: "ydkP8yB9ozg",
   },
 
   "gitbutler-afterparty": {
@@ -283,6 +297,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["scale", "mysql", "database", "performance"],
+    youtubeId: "Xc8OYnIci3E",
   },
 
   // WORKSHOPS
@@ -386,6 +401,7 @@ export const talks = {
     speakers: ["irina-nazarova"],
     status: "confirmed",
     tags: ["thank you"],
+    youtubeId: "Fx-AgNTMIRU",
   },
 
   // INDIVIDUAL STARTUP DEMOS
@@ -398,6 +414,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai"],
+    youtubeId: "zXbAWkUueUM",
   },
   "stepful-demo": {
     id: "stepful-demo",
@@ -408,6 +425,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "healthcare", "yc"],
+    youtubeId: "GoFbMl3TBmw",
   },
   "accessgrid-demo": {
     id: "accessgrid-demo",
@@ -438,6 +456,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "healthcare", "api"],
+    youtubeId: "21hf1Ue1o6I",
   },
   "simple_ai-demo": {
     id: "simple_ai-demo",
@@ -448,6 +467,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "yc"],
+    youtubeId: "Bl7Dq6aYidE",
   },
   "sixfold-demo": {
     id: "sixfold-demo",
@@ -458,6 +478,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "insurtech"],
+    youtubeId: "L91KPH6f_q8",
   },
   "cactus-demo": {
     id: "cactus-demo",
@@ -468,6 +489,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "yc"],
+    youtubeId: "kdVAm_yzqpE",
   },
   "tend-demo": {
     id: "tend-demo",
@@ -518,6 +540,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "devtools"],
+    youtubeId: "P8myd01GxAA",
   },
   "aisquared-demo": {
     id: "aisquared-demo",
@@ -528,6 +551,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "data", "opensource"],
+    youtubeId: "A3smrePJj4M",
   },
   "recognize-demo": {
     id: "recognize-demo",
@@ -538,6 +562,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "hr"],
+    youtubeId: "Ou7CGuQUy6Q",
   },
   "fin-demo": {
     id: "fin-demo",
@@ -548,6 +573,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai"],
+    youtubeId: "5MepvHfFXgk",
   },
   "ubicloud-demo": {
     id: "ubicloud-demo",
@@ -558,6 +584,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "cloud", "opensource", "yc"],
+    youtubeId: "rhmINL-nK5o",
   },
   "chatwithwork-demo": {
     id: "chatwithwork-demo",
@@ -578,6 +605,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "healthcare"],
+    youtubeId: "7M4dzK9wY7I",
   },
   "angellist-demo": {
     id: "angellist-demo",
@@ -588,6 +616,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products"],
+    youtubeId: "931PpANN8bs",
   },
   "finta-demo": {
     id: "finta-demo",
@@ -598,6 +627,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "fintech", "yc"],
+    youtubeId: "FDHtRONY4kk",
   },
   "planetscale-demo": {
     id: "planetscale-demo",
@@ -608,6 +638,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "database"],
+    youtubeId: "WxdB4sg2eIM",
   },
   "llamapress-demo": {
     id: "llamapress-demo",
@@ -763,6 +794,7 @@ export const talks = {
     speakers: [],
     status: "confirmed",
     tags: [],
+    youtubeId: "Nhe8FXbN0p0",
   },
   "doors-coffee-day2": {
     id: "doors-coffee-day2",

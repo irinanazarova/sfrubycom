@@ -1,0 +1,86 @@
+---
+import type { Meetup } from "../utils/types";
+import Badge from "./Badge.astro";
+import { formatDate, formatTime, isFuture } from "../utils/helpers";
+
+interface Props {
+    meetup: Meetup;
+    compact?: boolean;
+}
+
+const { meetup, compact = false } = Astro.props;
+
+const isUpcoming = isFuture(meetup.date);
+
+const typeLabels: Record<string, string> = {
+    meetup: "Meetup",
+    talks: "Talks",
+    workshop: "Workshop",
+    conference: "Conference",
+    social: "Social",
+};
+---
+
+<a
+    href={meetup.lumaUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class:list={[
+        "block bg-white rounded-xl border p-6 hover:shadow-lg transition-all duration-300 group",
+        isUpcoming ? "border-ruby-200 bg-gradient-to-br from-white to-ruby-50/30" : "border-gray-200"
+    ]}
+>
+    <div class="flex items-start justify-between gap-4 mb-3">
+        <div class="flex items-center gap-2">
+            <Badge variant={isUpcoming ? "ruby" : "default"}>
+                {typeLabels[meetup.type] || meetup.type}
+            </Badge>
+            {isUpcoming && (
+                <Badge variant="success">Upcoming</Badge>
+            )}
+        </div>
+        {meetup.registeredCount > 0 && (
+            <span class="text-xs text-gray-500 flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {meetup.registeredCount}
+            </span>
+        )}
+    </div>
+
+    <h3 class="font-semibold text-gray-900 mb-2 group-hover:text-ruby-500 transition-colors line-clamp-2">
+        {meetup.title}
+    </h3>
+
+    {!compact && (
+        <p class="text-gray-600 text-sm line-clamp-2 mb-4">{meetup.description}</p>
+    )}
+
+    <div class="flex flex-col gap-2 text-sm text-gray-500">
+        <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>{formatDate(meetup.date)} at {formatTime(meetup.time)}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="truncate">{meetup.location}</span>
+        </div>
+    </div>
+
+    {isUpcoming && (
+        <div class="mt-4 pt-4 border-t border-gray-100">
+            <span class="inline-flex items-center gap-1 text-ruby-500 font-medium text-sm group-hover:gap-2 transition-all">
+                Register Now
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </span>
+        </div>
+    )}
+</a>

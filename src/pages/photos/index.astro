@@ -1,0 +1,274 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllPhotoAlbums, getPhotoAlbumsByEvent, getEvent, getAllEvents, GCS_PHOTO_BASE } from "../../data/events.js";
+
+// Get all albums grouped by event
+const events = getAllEvents();
+const albumsByEvent = events.map(event => ({
+    event,
+    albums: getPhotoAlbumsByEvent(event.id)
+})).filter(group => group.albums.length > 0);
+
+// Get featured albums for hero
+const allAlbums = getAllPhotoAlbums();
+const featuredAlbum = allAlbums.find(album => album.featured);
+
+// Count total photos
+const totalPhotos = allAlbums.reduce((sum, a) => sum + (a.photoCount || 0), 0);
+---
+
+<BaseLayout
+    title="Photos - SF Ruby"
+    description="Browse photos from the SF Ruby Conference 2025 and the SF Ruby meetups."
+>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-purple-900 to-ruby-900 overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    Photo Gallery
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8">
+                    Browse photos from the SF Ruby Conference 2025 and the SF Ruby meetups.
+                </p>
+
+                <!-- Stats -->
+                <div class="flex flex-wrap gap-8">
+                    <div>
+                        <div class="text-3xl font-bold text-white">{allAlbums.length}</div>
+                        <div class="text-sm text-gray-400">Albums</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-purple-400">{totalPhotos}</div>
+                        <div class="text-sm text-gray-400">Photos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Album Gallery -->
+    {featuredAlbum && (
+        <section class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-1 h-8 bg-purple-500 rounded-full"></div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                            {featuredAlbum.title}
+                        </h2>
+                        <p class="text-gray-600">
+                            {featuredAlbum.description}
+                            {featuredAlbum.author && <span class="text-gray-500"> — by {featuredAlbum.author}</span>}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Photo Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {featuredAlbum.photos.map((photo, index) => (
+                        <button
+                            class="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100 cursor-pointer group photo-item"
+                            data-album={featuredAlbum.id}
+                            data-index={index}
+                            data-src={`${GCS_PHOTO_BASE}/${featuredAlbum.id}/${photo}`}
+                        >
+                            <img
+                                src={`${GCS_PHOTO_BASE}/${featuredAlbum.id}/${photo}`}
+                                alt={`Conference photo ${index + 1}`}
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                loading="lazy"
+                            />
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )}
+
+    <!-- Other Albums -->
+    {allAlbums.filter(a => !a.featured).map((album) => {
+        const event = getEvent(album.eventId);
+        return (
+            <section class="py-12 bg-gray-50 border-t border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-1 h-8 bg-gray-400 rounded-full"></div>
+                        <div>
+                            <h2 class="text-xl md:text-2xl font-bold text-gray-900">
+                                {album.title}
+                            </h2>
+                            <p class="text-sm text-gray-500">
+                                {album.description}
+                                {album.author && <span> — by {album.author}</span>}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Photo Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {album.photos.map((photo, index) => (
+                            <button
+                                class="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100 cursor-pointer group photo-item"
+                                data-album={album.id}
+                                data-index={index}
+                                data-src={`${GCS_PHOTO_BASE}/${album.id}/${photo}`}
+                            >
+                                <img
+                                    src={`${GCS_PHOTO_BASE}/${album.id}/${photo}`}
+                                    alt={`Conference photo ${index + 1}`}
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                    loading="lazy"
+                                />
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    })}
+
+    <!-- Contribute CTA -->
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                Have photos to share?
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Did you capture great moments at SF Ruby Conference?
+                We'd love to add your photos to our collection!
+            </p>
+            <a
+                href="mailto:photos@sfruby.com"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-ruby-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+                Share your photos
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center">
+        <!-- Close button -->
+        <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white z-10 p-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <!-- Previous button -->
+        <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10 p-2">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <!-- Next button -->
+        <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white z-10 p-2">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+        <!-- Image container -->
+        <div class="flex items-center justify-center w-full h-full p-16">
+            <img id="lightbox-image" src="" alt="Photo" class="max-w-full max-h-full object-contain" />
+        </div>
+
+        <!-- Counter -->
+        <div id="lightbox-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm"></div>
+    </div>
+</BaseLayout>
+
+<script>
+    // Collect all photos for lightbox navigation
+    const photoItems = document.querySelectorAll('.photo-item');
+    const allPhotos: string[] = [];
+
+    photoItems.forEach((item) => {
+        const src = item.getAttribute('data-src');
+        if (src) allPhotos.push(src);
+    });
+
+    let currentIndex = 0;
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    function openLightbox(index: number) {
+        currentIndex = index;
+        updateLightbox();
+        lightbox?.classList.remove('hidden');
+        lightbox?.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox?.classList.add('hidden');
+        lightbox?.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+
+    function updateLightbox() {
+        if (lightboxImage && allPhotos[currentIndex]) {
+            lightboxImage.src = allPhotos[currentIndex];
+        }
+        if (lightboxCounter) {
+            lightboxCounter.textContent = `${currentIndex + 1} / ${allPhotos.length}`;
+        }
+    }
+
+    function showNext() {
+        currentIndex = (currentIndex + 1) % allPhotos.length;
+        updateLightbox();
+    }
+
+    function showPrev() {
+        currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length;
+        updateLightbox();
+    }
+
+    // Event listeners
+    photoItems.forEach((item, index) => {
+        item.addEventListener('click', () => openLightbox(index));
+    });
+
+    closeBtn?.addEventListener('click', closeLightbox);
+    prevBtn?.addEventListener('click', showPrev);
+    nextBtn?.addEventListener('click', showNext);
+
+    // Close on background click
+    lightbox?.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox?.classList.contains('flex')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+    });
+</script>

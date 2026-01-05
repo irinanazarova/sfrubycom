@@ -1,28 +1,81 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<Layout title="Page Not Found - San Francisco Ruby Conference 2025">
-  <div class="min-h-screen flex items-center justify-center bg-white px-4">
-    <div class="text-center">
-      <div class="mx-auto w-40 h-40 mb-8">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full opacity-50">
-          <path d="M50 0L97.5528 25V75L50 100L2.44717 75V25L50 0Z" fill="#e0115f"/>
-          <path d="M50 20L79.3893 35V65L50 80L20.6107 65V35L50 20Z" fill="#FF385C"/>
-          <path d="M50 40L64.6447 47.5V62.5L50 70L35.3553 62.5V47.5L50 40Z" fill="#FF6B81"/>
-        </svg>
-      </div>
-      <h1 class="text-6xl font-display font-bold text-dark-900 mb-4">404</h1>
-      <p class="text-xl text-dark-600 mb-8">Oops! The page you're looking for doesn't exist.</p>
-      <a 
-        href="/" 
-        class="inline-flex items-center px-6 py-3 bg-ruby-500 text-white font-medium rounded-md hover:bg-ruby-600 transition-colors duration-200"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-        </svg>
-        Return to Homepage
-      </a>
-    </div>
-  </div>
-</Layout>
+<BaseLayout
+    title="Page Not Found - SF Ruby"
+    description="The page you're looking for doesn't exist."
+>
+    <section
+        class="pt-32 pb-20 bg-gradient-to-br from-gray-50 to-white min-h-[60vh] flex items-center"
+    >
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-8">
+                <span
+                    class="text-8xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                    >404</span
+                >
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Page not found
+            </h1>
+
+            <p class="text-lg text-gray-600 mb-8">
+                The page you're looking for doesn't exist or has been moved.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                    href="/"
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                    <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                        ></path>
+                    </svg>
+                    Back to Home
+                </a>
+                <a
+                    href="/community"
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-all duration-300"
+                >
+                    Join Community
+                </a>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <p class="text-gray-500 text-sm">
+                    Looking for something specific? Try these:
+                </p>
+                <div class="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+                    <a
+                        href="/startups"
+                        class="text-ruby-500 hover:text-ruby-600">Startups</a
+                    >
+                    <a href="/jobs" class="text-ruby-500 hover:text-ruby-600"
+                        >Jobs</a
+                    >
+                    <a href="/talks" class="text-ruby-500 hover:text-ruby-600"
+                        >Talks</a
+                    >
+                    <a href="/news" class="text-ruby-500 hover:text-ruby-600"
+                        >News</a
+                    >
+                    <a href="/about" class="text-ruby-500 hover:text-ruby-600"
+                        >About</a
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

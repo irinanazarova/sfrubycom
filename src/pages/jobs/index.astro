@@ -1,0 +1,246 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getSortedJobs } from "../../data/jobs.js";
+import { getSponsor } from "../../data/sponsors.js";
+
+// Get jobs and enrich with sponsor info
+const rawJobs = getSortedJobs();
+const jobs = rawJobs.map((job) => {
+    const sponsor = getSponsor(job.sponsorId);
+    return {
+        ...job,
+        companyName: sponsor?.name || job.sponsorId,
+        companyLogo: sponsor?.logo || null,
+        tier: sponsor?.tier || null,
+    };
+});
+---
+
+<BaseLayout
+    title="Ruby Jobs - SF Ruby"
+    description="Find your next Ruby opportunity. Browse job openings from our amazing conference sponsors and Ruby companies."
+>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    Ruby Jobs
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8">
+                    Find your next opportunity at Ruby startups and companies in the SF Bay Area and beyond.
+                </p>
+
+                <!-- Stats -->
+                <div class="flex flex-wrap gap-8 mb-8">
+                    <div>
+                        <div class="text-3xl font-bold text-white">{jobs.length}</div>
+                        <div class="text-sm text-gray-400">Open Positions</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-emerald-400">{new Set(jobs.map(j => j.sponsorId)).size}</div>
+                        <div class="text-sm text-gray-400">Companies Hiring</div>
+                    </div>
+                </div>
+
+                <a
+                    href="mailto:irina@evilmartians.com?subject=Post%20a%20Job%20on%20SF%20Ruby"
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ruby-600 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Post a Job
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Listing Section -->
+    <section class="py-20 bg-gradient-to-b from-white to-cloud-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {jobs.length > 0 ? (
+                <div class="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+                    {jobs.map((job) => (
+                        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="p-8">
+                                <!-- Company Logo -->
+                                {job.companyLogo && (
+                                    <div class="mb-6">
+                                        <img
+                                            src={job.companyLogo}
+                                            alt={job.companyName}
+                                            class="h-12 w-auto object-contain"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                )}
+
+                                <!-- Job Details -->
+                                <div>
+                                    <div class="mb-4">
+                                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                                            {job.title}
+                                        </h2>
+                                        <div class="flex flex-wrap gap-3 text-sm text-gray-600">
+                                            {job.location && (
+                                                <span class="flex items-center gap-1">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    </svg>
+                                                    {job.location}
+                                                </span>
+                                            )}
+                                            {job.type && (
+                                                <span class="flex items-center gap-1">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                    {job.type}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div class="prose prose-lg max-w-none text-gray-700 mb-6">
+                                        <p>{job.description}</p>
+                                    </div>
+
+                                    <a
+                                        href={job.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-ruby-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+                                    >
+                                        View Job Details
+                                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <!-- Empty State -->
+                <div class="text-center py-20">
+                    <div class="inline-block p-12 bg-white rounded-xl shadow-lg border-2 border-gray-100">
+                        <svg class="w-20 h-20 text-ruby-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Job Board Coming Soon!</h3>
+                        <p class="text-lg text-gray-600 max-w-md mx-auto mb-8">
+                            Our sponsors will be posting exciting Ruby opportunities here. Be the first to know!
+                        </p>
+                        <a
+                            href="/jobs/post"
+                            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-ruby-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+                        >
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Post Your Ruby Job
+                        </a>
+                    </div>
+                </div>
+            )}
+        </div>
+    </section>
+
+    <!-- Why Post Section -->
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    Why post on SF Ruby?
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 bg-ruby-100 rounded-xl flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-6 h-6 text-ruby-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">
+                        Targeted Audience
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        Reach Ruby developers actively engaged in the SF
+                        community.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 bg-ruby-100 rounded-xl flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-6 h-6 text-ruby-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">
+                        3 Month Visibility
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        Your job stays visible for 90 days with no recurring
+                        fees.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 bg-ruby-100 rounded-xl flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-6 h-6 text-ruby-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">
+                        Quality Candidates
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        Access senior engineers and founders in the Ruby
+                        ecosystem.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

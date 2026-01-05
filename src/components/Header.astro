@@ -1,0 +1,265 @@
+---
+const navItems = [
+    { name: "Startups", href: "/startups" },
+    { name: "Talks", href: "/talks" },
+    { name: "Jobs", href: "/jobs" },
+    { name: "Photos", href: "/photos" },
+    { name: "About", href: "/about" },
+];
+---
+
+<header
+    class="fixed w-full z-50 transition-all duration-300 bg-transparent"
+    id="main-header"
+>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <a
+                href="/"
+                class="font-display font-bold text-xl md:text-2xl transition-transform duration-200 hover:scale-105"
+            >
+                <img
+                    src="/sfruby_letters_white.png"
+                    alt="SF Ruby"
+                    class="header-logo-white object-contain w-28 h-12"
+                />
+                <img
+                    src="/sfruby_letters_black.png"
+                    alt="SF Ruby"
+                    class="header-logo-dark object-contain w-28 h-12 hidden"
+                />
+            </a>
+
+            <nav class="hidden lg:flex items-center space-x-8">
+                {
+                    navItems.map((item) => (
+                        <a
+                            href={item.href}
+                            class="nav-link relative font-medium text-white/90 hover:text-white transition-all duration-300 group"
+                        >
+                            {item.name}
+                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-ruby-500 to-pink-500 transition-all duration-300 group-hover:w-full" />
+                        </a>
+                    ))
+                }
+                <a
+                    href="https://lu.ma/sfruby"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-5 py-2.5 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                >
+                    Join Meetup
+                </a>
+            </nav>
+
+            <button
+                id="mobile-menu-button"
+                aria-label="Toggle mobile menu"
+                aria-expanded="false"
+                class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+            >
+                <svg
+                    id="menu-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                </svg>
+                <svg
+                    id="close-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-5 h-5 hidden"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div
+    id="mobile-menu"
+    class="hidden lg:hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-lg shadow-2xl border-t border-gray-100/20 z-40"
+>
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="space-y-2">
+            {
+                navItems.map((item) => (
+                    <a
+                        href={item.href}
+                        class="flex items-center px-4 py-3 rounded-xl text-lg font-medium text-gray-700 hover:text-ruby-600 hover:bg-gradient-to-r hover:from-ruby-50 hover:to-pink-50 transition-all duration-300 group"
+                    >
+                        <span class="flex-1">{item.name}</span>
+                        <svg
+                            class="w-5 h-5 text-ruby-400 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5l7 7-7 7"
+                            />
+                        </svg>
+                    </a>
+                ))
+            }
+            <div class="pt-4 mt-4 border-t border-gray-100">
+                <a
+                    href="https://lu.ma/sfruby"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-center px-6 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-bold rounded-xl shadow-lg transition-all duration-300"
+                >
+                    <span>Join Meetup</span>
+                    <svg
+                        class="w-5 h-5 ml-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        ></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.getElementById("menu-icon");
+    const closeIcon = document.getElementById("close-icon");
+    const header = document.getElementById("main-header");
+    const logoWhite = document.querySelector(".header-logo-white");
+    const logoDark = document.querySelector(".header-logo-dark");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    mobileMenuButton?.addEventListener("click", () => {
+        const isHidden = mobileMenu?.classList.contains("hidden");
+
+        if (isHidden) {
+            mobileMenu?.classList.remove("hidden");
+            menuIcon?.classList.add("hidden");
+            closeIcon?.classList.remove("hidden");
+            mobileMenuButton?.setAttribute("aria-expanded", "true");
+        } else {
+            mobileMenu?.classList.add("hidden");
+            menuIcon?.classList.remove("hidden");
+            closeIcon?.classList.add("hidden");
+            mobileMenuButton?.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    document.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        if (
+            mobileMenu &&
+            !mobileMenu.classList.contains("hidden") &&
+            mobileMenuButton &&
+            !mobileMenuButton.contains(target) &&
+            !mobileMenu.contains(target)
+        ) {
+            mobileMenu.classList.add("hidden");
+            menuIcon?.classList.remove("hidden");
+            closeIcon?.classList.add("hidden");
+            mobileMenuButton?.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    function updateHeaderStyle() {
+        if (window.scrollY > 50) {
+            // Scrolled - white background, dark text
+            header?.classList.remove("bg-transparent");
+            header?.classList.add(
+                "bg-white/95",
+                "backdrop-blur-lg",
+                "shadow-lg",
+                "border-b",
+                "border-gray-100/20",
+            );
+            logoWhite?.classList.add("hidden");
+            logoDark?.classList.remove("hidden");
+            navLinks.forEach((link) => {
+                link.classList.remove("text-white/90", "hover:text-white");
+                link.classList.add("text-gray-700", "hover:text-ruby-500");
+            });
+            // Update mobile button for scrolled state
+            mobileMenuButton?.classList.remove(
+                "bg-white/10",
+                "border-white/20",
+                "text-white",
+                "hover:bg-white/20",
+            );
+            mobileMenuButton?.classList.add(
+                "bg-white/10",
+                "border-gray-200/20",
+                "text-gray-700",
+                "hover:bg-ruby-50",
+                "hover:text-ruby-600",
+            );
+        } else {
+            // At top - transparent background, white text
+            header?.classList.add("bg-transparent");
+            header?.classList.remove(
+                "bg-white/95",
+                "backdrop-blur-lg",
+                "shadow-lg",
+                "border-b",
+                "border-gray-100/20",
+            );
+            logoWhite?.classList.remove("hidden");
+            logoDark?.classList.add("hidden");
+            navLinks.forEach((link) => {
+                link.classList.add("text-white/90", "hover:text-white");
+                link.classList.remove("text-gray-700", "hover:text-ruby-500");
+            });
+            // Update mobile button for top state
+            mobileMenuButton?.classList.add(
+                "bg-white/10",
+                "border-white/20",
+                "text-white",
+                "hover:bg-white/20",
+            );
+            mobileMenuButton?.classList.remove(
+                "border-gray-200/20",
+                "text-gray-700",
+                "hover:bg-ruby-50",
+                "hover:text-ruby-600",
+            );
+        }
+    }
+
+    // Run on load and scroll
+    updateHeaderStyle();
+    window.addEventListener("scroll", updateHeaderStyle);
+</script>
+
+<style is:global>
+    /* Prevent body scroll when modal is open */
+    body.modal-open {
+        overflow: hidden;
+    }
+</style>

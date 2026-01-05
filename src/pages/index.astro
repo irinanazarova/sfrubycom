@@ -1,197 +1,1118 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import KeyTopics from "../components/KeyTopics.astro";
-import SpeakersHighlight from "../components/SpeakersHighlight.astro";
-import StartupDemos from "../components/StartupDemos.astro";
-import CloudCards from "../components/CloudCards.astro";
-import Sponsors from "../components/Sponsors.astro";
-import Newsletter from "../components/Newsletter.astro";
-import Testimonials from "../components/Testimonials.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import StartupCard from "../components/StartupCard.astro";
+import StartupModal from "../components/StartupModal.astro";
+import MeetupCard from "../components/MeetupCard.astro";
+import ResourceCard from "../components/ResourceCard.astro";
+import Button from "../components/Button.astro";
+
+import { getAllStartups, startups as startupsData } from "../data/startups.js";
+import { getTalk, talks } from "../data/talks.js";
+import { getJobsBySponsor, getSortedJobs } from "../data/jobs.js";
+import { getAllPhotoAlbums, GCS_PHOTO_BASE } from "../data/events.js";
+import { getSponsor } from "../data/sponsors.js";
+import { getSpeaker } from "../data/speakers.js";
+
+// Try to load meetups from content if available
+let meetups = [];
+try {
+    const meetupsModule = await import("../content/meetups.json");
+    meetups = meetupsModule.default || [];
+} catch (e) {
+    // No meetups data available
+}
+
+const allStartups = getAllStartups();
+
+// Filter out hidden startups (CorePilot cancelled)
+const visibleStartups = allStartups.filter((s) => s.id !== "corepilot");
+
+// Sort startups: those with demo videos first (same as /startups page)
+const startups = visibleStartups.sort((a, b) => {
+    const aDemoTalk = getTalk(`${a.id}-demo`);
+    const bDemoTalk = getTalk(`${b.id}-demo`);
+    const aHasVideo = a.youtubeId || aDemoTalk?.youtubeId;
+    const bHasVideo = b.youtubeId || bDemoTalk?.youtubeId;
+
+    if (aHasVideo && !bHasVideo) return -1;
+    if (!aHasVideo && bHasVideo) return 1;
+    return 0;
+});
+
+// Get next upcoming meetup
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const upcomingMeetups = meetups
+    .filter((m) => new Date(m.date) >= today)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+const nextMeetup = upcomingMeetups[0];
+
+// Get featured startups (first 8)
+const featuredStartups = startups.slice(0, 8);
+
+const startupCount = startups.length;
+
+// Map startup IDs to sponsor IDs for job lookup
+const startupToSponsorMap: Record<string, string> = {
+    bolt_new: "bolt-new",
+    finta: "finta",
+    thatch: "thatch",
+};
+
+// Build enhanced startups data with jobs info and source URLs for modal
+const enhancedStartupsData: Record<string, any> = {};
+for (const [id, startup] of Object.entries(startupsData)) {
+    const sponsorId = startupToSponsorMap[id];
+    const startupJobs = sponsorId ? getJobsBySponsor(sponsorId) : [];
+    const demoTalk = getTalk(`${id}-demo`);
+    enhancedStartupsData[id] = {
+        ...startup,
+        jobs: startupJobs,
+        youtubeId: startup.youtubeId || demoTalk?.youtubeId || null,
+        fundingUrl: startup.fundingUrl || null,
+        valuationUrl: startup.valuationUrl || null,
+        newsUrl: startup.newsUrl || null,
+    };
+}
+
+// Get featured jobs (first 4)
+const allJobs = getSortedJobs();
+const featuredJobs = allJobs.slice(0, 4).map((job) => ({
+    ...job,
+    sponsor: getSponsor(job.sponsorId),
+}));
+const jobCount = allJobs.length;
+
+// Get featured talks with videos (first 4) and include speaker info
+const talksWithVideos = Object.values(talks)
+    .filter((talk: any) => talk.youtubeId && talk.type !== "demo")
+    .slice(0, 4)
+    .map((talk: any) => ({
+        ...talk,
+        speaker: talk.speakerId ? getSpeaker(talk.speakerId) : null,
+    }));
+
+// Get photo albums
+const photoAlbums = getAllPhotoAlbums();
+const featuredPhotos = photoAlbums.slice(0, 4);
+const totalPhotoCount = photoAlbums.reduce(
+    (sum, album) => sum + album.photoCount,
+    0,
+);
 ---
 
-<Layout preloadHeroImage={true}>
-    <main class="scroll-smooth">
-        <Hero />
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/favicon-96x96.png"
+            sizes="96x96"
+        />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta
+            name="description"
+            content="Join the SF Ruby community: monthly meetups, talks, jobs, and the annual conference. Connect with founders and engineers building with Ruby."
+        />
+        <meta name="theme-color" content="#dc2626" />
+        <title>SF Ruby - Where Ruby Startups Grow</title>
 
-        <!-- Introduction section -->
-        <section id="intro" class="py-32 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <p
-                        class="mb-12 text-2xl md:text-3xl font-light text-dark-700 max-w-4xl mx-auto leading-relaxed"
+        <link
+            rel="preload"
+            href="/fonts/MartianGrotesk.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/fonts/MartianMono.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:title"
+            content="SF Ruby - Where Ruby Startups Grow"
+        />
+        <meta
+            property="og:description"
+            content="Let's build the new generation of Ruby success stories. Join the SF Ruby community: monthly meetups, and the annual conference. Connect with founders and engineers building with Ruby."
+        />
+        <meta property="og:image" content="https://sfruby.com/sfruby_og.jpg" />
+
+        <script
+            defer
+            data-domain="sfruby.com"
+            src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
+        ></script>
+    </head>
+    <body
+        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col"
+    >
+        <Header />
+
+        <main class="flex-grow">
+            <!-- Hero Section with Blue Gradient -->
+            <section
+                class="relative bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 text-white overflow-hidden min-h-[90vh] flex items-center"
+            >
+                <!-- Background effects -->
+                <div class="absolute inset-0 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"
                     >
-                        SF Ruby and Evil Martians are excited to invite you to
-                        our premier event: <br />the
-                        <span
-                            class="bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent font-semibold"
+                    </div>
+                    <div
+                        class="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl"
+                    >
+                    </div>
+                    <div
+                        class="absolute bottom-40 right-20 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl"
+                    >
+                    </div>
+                </div>
+
+                <div
+                    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20"
+                >
+                    <div class="max-w-4xl mx-auto text-center">
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
                         >
-                            San Francisco Ruby Conference
-                        </span>
-                    </p>
+                            Let's build the new generation of Ruby success
+                            stories!
+                        </h1>
 
-                    <!-- 3-card layout: 2 YouTube videos and 1 image -->
-                    <div class="my-12 max-w-7xl mx-auto">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <!-- YouTube Video 1 -->
-                            <div
-                                class="rounded-xl overflow-hidden shadow-xl bg-black hover:shadow-2xl transition-shadow duration-300"
-                            >
-                                <div
-                                    class="relative"
-                                    style="padding-bottom: 56.25%;"
-                                >
-                                    <iframe
-                                        src="https://www.youtube-nocookie.com/embed/m2P9PZwi8W4?controls=1&modestbranding=1&rel=0"
-                                        class="absolute inset-0 w-full h-full"
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen
-                                        title="Video 1"
-                                        style="border: none;"></iframe>
-                                </div>
-                            </div>
-
-                            <!-- YouTube Video 2 -->
-                            <div
-                                class="rounded-xl overflow-hidden shadow-xl bg-black hover:shadow-2xl transition-shadow duration-300"
-                            >
-                                <div
-                                    class="relative"
-                                    style="padding-bottom: 56.25%;"
-                                >
-                                    <iframe
-                                        src="https://www.youtube-nocookie.com/embed/6auuFzHKMY4?controls=1&modestbranding=1&rel=0"
-                                        class="absolute inset-0 w-full h-full"
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen
-                                        title="Video 2"
-                                        style="border: none;"></iframe>
-                                </div>
-                            </div>
-
-                            <!-- Image with Link -->
+                        <div
+                            class="flex flex-col sm:flex-row gap-4 justify-center"
+                        >
                             <a
-                                href="https://newsletter.pragmaticengineer.com/i/168396454/most-loved-languages"
-                                class="block rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                                href="https://lu.ma/sfruby"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 border-2 border-ruby-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:shadow-ruby-500/30 hover:scale-105"
                             >
-                                <div
-                                    class="relative bg-gradient-to-br from-ruby-500 to-pink-500"
-                                    style="padding-bottom: 56.25%;"
+                                Join next meetup
+                                <svg
+                                    class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
                                 >
-                                    <img
-                                        src="/pragmatic_survey2025.png"
-                                        alt="Pragmatic Engineer Survey 2025"
-                                        class="absolute inset-0 w-full h-full object-cover"
-                                        loading="lazy"
-                                    />
-                                </div>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </a>
+                            <a
+                                href="/talks"
+                                class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 hover:bg-white/20 hover:border-white/50"
+                            >
+                                Explore videos
+                                <svg
+                                    class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="space-y-8">
-                        <p
-                            class="text-lg md:text-xl text-dark-600 max-w-4xl mx-auto leading-relaxed font-light tracking-wide"
+                <!-- Cloud-shaped transition to next section -->
+                <div
+                    class="absolute bottom-0 left-0 right-0 h-20 overflow-hidden"
+                >
+                    <svg
+                        preserveAspectRatio="none"
+                        viewBox="0 0 1200 120"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="absolute bottom-0 w-full h-full"
+                    >
+                        <path
+                            d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
+                            fill="#f8fafc"></path>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- What's Happening Section -->
+            {
+                nextMeetup && (
+                    <section class="py-20 bg-slate-50">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="text-center mb-12">
+                                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                    SF Ruby Community
+                                </h2>
+                                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                                    Let's build the new generation of Ruby
+                                    success stories! Join the SF Ruby monthly
+                                    meetups, and the annual conference. Connect
+                                    with founders and engineers building with
+                                    Ruby. Hire and find an amazing job. Make
+                                    friends for life!
+                                </p>
+                            </div>
+
+                            <div class="max-w-xl mx-auto">
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
+                                    Next Event
+                                </h3>
+                                <MeetupCard meetup={nextMeetup} />
+                                <div class="mt-4 text-center">
+                                    <a
+                                        href="https://forms.gle/EZLqENWd5VjiLduq8"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-2 text-gray-600 hover:text-ruby-500 transition-colors"
+                                    >
+                                        <svg
+                                            class="w-4 h-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                            />
+                                        </svg>
+                                        Submit a talk for the next meetup
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                )
+            }
+
+            <!-- Startup Gallery Section -->
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
                         >
-                            We're gathering <span
-                                class="font-semibold text-dark-800"
-                                >~450 Rubyists</span
-                            > in San Francisco: where new Ruby dreams are born every
-                            day. Three unforgettable days await, where you'll connect
-                            with ambitious founders of new Ruby startups like bolt.new
-                            and YC startups, and engineers scaling the big Ruby success
-                            stories like <a
-                                href="/schedule#dynamic-ruby-toolkit-workshop"
-                                class="font-semibold text-dark-800">Chime</a
-                            >, <a
-                                href="/schedule#debugging-gusto-scale"
-                                class="font-semibold text-dark-800">Gusto</a
-                            >, <a
-                                href="/schedule#derailing-our-application"
-                                class="font-semibold text-dark-800">Cisco</a
-                            >, <a
-                                href="/schedule#zjit-ruby-performance"
-                                class="font-semibold text-dark-800">Shopify</a
-                            >, <a
-                                href="/schedule#rails-expertise-distilled"
-                                class="font-semibold text-dark-800"
-                                >One Medical</a
-                            >, Intercom. You'll meet authors of open source
-                            shaping what's next for Ruby and Rails, like <a
-                                href="/schedule#reaction-view"
-                                class="font-semibold text-dark-800"
-                                >Marco Roth</a
-                            > and <a
-                                href="/schedule#rails-ai-ruby-llm"
-                                class="font-semibold text-dark-800"
-                                >Carmine Paolino</a
-                            >, as well as big stars like <a
-                                href="/schedule#navigating-language-evolution"
-                                class="font-semibold text-dark-800"
-                                >José Valim</a
-                            >, <a
-                                href="/schedule#thin-client-approach"
-                                class="font-semibold text-dark-800"
-                                >Jeremy Evans</a
-                            >, <a
-                                href="/schedule#start-writing-ruby"
-                                class="font-semibold text-dark-800"
-                                >Dave Thomas</a
-                            > and <a
-                                href="/schedule#vladimir-dementyev-keynote"
-                                class="font-semibold text-dark-800"
-                                >Vladimir Dementiev</a
-                            >.
-                        </p>
-                        <p
-                            class="text-lg md:text-xl text-dark-600 max-w-4xl mx-auto leading-relaxed font-light tracking-wide"
-                        >
-                            Demos from the fast-paced <a
-                                href="#startup-demos"
-                                class="font-semibold text-dark-800"
-                                >Ruby startups</a
-                            >, hands-on workshops on <a
-                                href="/schedule#inertia-rails-workshop"
-                                class="font-semibold text-dark-800"
-                                >Inertia Rails</a
-                            >, <a
-                                href="/schedule#building-agents-rails"
-                                class="font-semibold text-dark-800"
-                                >building AI Agents</a
-                            >, <a
-                                href="/schedule#dynamic-ruby-toolkit-workshop"
-                                class="font-semibold text-dark-800"
-                                >dynamic Ruby types</a
-                            >, <a
-                                href="/schedule#upskill-diving-into-rails"
-                                class="font-semibold text-dark-800"
-                                >team upskill</a
-                            >, and deep conversations in the hallway track. Join
-                            a creative, generous, and unapologetically
-                            mischievous Ruby community. This is where you
-                            belong!
+                            Ruby startups shipping today
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            {startupCount} startups in the SF Bay Area building with
+                            Ruby.
                         </p>
                     </div>
+
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                    >
+                        {
+                            featuredStartups.map((startup) => {
+                                const sponsorId =
+                                    startupToSponsorMap[startup.id];
+                                const hasJobs = sponsorId
+                                    ? getJobsBySponsor(sponsorId).length > 0
+                                    : false;
+                                return (
+                                    <StartupCard
+                                        startup={startup}
+                                        compact
+                                        hasJobs={hasJobs}
+                                    />
+                                );
+                            })
+                        }
+                    </div>
+
+                    <div class="mt-10 text-center">
+                        <Button href="/startups" variant="secondary">
+                            View all startups
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </Button>
+                    </div>
                 </div>
+            </section>
+
+            <!-- Talks Section -->
+            <section class="py-20 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                        >
+                            Watch the Talks
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Conference keynotes, meetup presentations, and
+                            startup demos.
+                        </p>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                    >
+                        {
+                            talksWithVideos.map((talk: any) => (
+                                <a
+                                    href={`/talks?talk=${talk.id}#${talk.id}`}
+                                    class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+                                >
+                                    <div class="aspect-video bg-gray-900 relative overflow-hidden">
+                                        <img
+                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
+                                            alt={talk.title}
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                            <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
+                                                <svg
+                                                    class="w-5 h-5 text-ruby-500 ml-1"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors">
+                                            {talk.title}
+                                        </h3>
+                                        {talk.speaker && (
+                                            <p class="text-sm text-gray-500 mt-1">
+                                                {talk.speaker.name}
+                                            </p>
+                                        )}
+                                    </div>
+                                </a>
+                            ))
+                        }
+                    </div>
+
+                    <div class="mt-10 text-center">
+                        <Button href="/talks" variant="secondary">
+                            View all talks
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </Button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Jobs Section -->
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                        >
+                            Ruby Jobs
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            {jobCount} open positions at Ruby startups and companies.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {
+                            featuredJobs.map((job) => (
+                                <a
+                                    href={job.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="group flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300"
+                                >
+                                    {job.sponsor?.logo && (
+                                        <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-2 flex-shrink-0 border border-gray-200">
+                                            <img
+                                                src={job.sponsor.logo}
+                                                alt={job.sponsor.name}
+                                                class="max-w-full max-h-full object-contain"
+                                            />
+                                        </div>
+                                    )}
+                                    <div class="flex-grow min-w-0">
+                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors truncate">
+                                            {job.title}
+                                        </h3>
+                                        <p class="text-sm text-gray-500">
+                                            {job.sponsor?.name} · {job.location}
+                                        </p>
+                                    </div>
+                                    <svg
+                                        class="w-5 h-5 text-gray-400 group-hover:text-ruby-500 flex-shrink-0 transition-colors"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                        />
+                                    </svg>
+                                </a>
+                            ))
+                        }
+                    </div>
+
+                    <div class="mt-10 text-center">
+                        <Button href="/jobs" variant="secondary">
+                            View all jobs
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </Button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Photos Section -->
+            <section class="py-20 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                        >
+                            Photos
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            {totalPhotoCount} photos from SF Ruby Conference 2025.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {
+                            featuredPhotos.map((album) => (
+                                <a
+                                    href={`/photos#${album.id}`}
+                                    class="group block aspect-square rounded-xl overflow-hidden relative"
+                                >
+                                    <img
+                                        src={album.coverPhoto}
+                                        alt={album.title}
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                    />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <div class="absolute bottom-3 left-3 right-3">
+                                            <p class="text-white text-sm font-medium">
+                                                {album.title}
+                                            </p>
+                                            <p class="text-white/70 text-xs">
+                                                {album.photoCount} photos
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            ))
+                        }
+                    </div>
+
+                    <div class="mt-10 text-center">
+                        <Button href="/photos" variant="secondary">
+                            View all photos
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </Button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Links Section -->
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                        >
+                            Join the Community
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Connect with Ruby developers in San Francisco and
+                            beyond.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                        <a
+                            href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-6 py-3 bg-[#4A154B] text-white rounded-xl font-medium hover:bg-[#3e1240] transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"
+                                ></path>
+                            </svg>
+                            Join SF Ruby Slack
+                        </a>
+                        <a
+                            href="https://sfruby.substack.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-6 py-3 bg-[#FF6719] text-white rounded-xl font-medium hover:bg-[#e55a14] transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"
+                                ></path>
+                            </svg>
+                            Newsletter
+                        </a>
+                        <a
+                            href="https://x.com/sfrubyconf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-6 py-3 bg-black text-white rounded-xl font-medium hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                                ></path>
+                            </svg>
+                            Twitter
+                        </a>
+                        <a
+                            href="https://bsky.app/profile/sfruby.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-6 py-3 bg-[#0085FF] text-white rounded-xl font-medium hover:bg-[#0070d6] transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"
+                                ></path>
+                            </svg>
+                            Bluesky
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/company/sfrubyconf/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-6 py-3 bg-[#0A66C2] text-white rounded-xl font-medium hover:bg-[#084d94] transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                                ></path>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <a
+                            href="https://www.rubyevents.org/events"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-6 py-3 bg-ruby-500 text-white rounded-xl font-medium hover:bg-ruby-600 transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                ></path>
+                            </svg>
+                            Ruby Events
+                        </a>
+                        <a
+                            href="https://forms.gle/EZLqENWd5VjiLduq8"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-3 px-6 py-3 bg-gray-700 text-white rounded-xl font-medium hover:bg-gray-600 transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                ></path>
+                            </svg>
+                            Submit a Talk
+                        </a>
+                        <a
+                            href="https://lu.ma/sfruby"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                                ></path>
+                            </svg>
+                            Sign up on Luma
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hosts Section -->
+            <section class="py-20 bg-white border-t border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                        >
+                            Our Amazing Hosts
+                        </h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            These companies open their doors to the Ruby
+                            community every month.
+                        </p>
+                    </div>
+
+                    <div
+                        class="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-12"
+                    >
+                        <a
+                            href="https://github.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/host_github.png"
+                                alt="GitHub"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://chime.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/sponsor_chime.png"
+                                alt="Chime"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://sentry.io"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/host_sentry.png"
+                                alt="Sentry"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://meraki.cisco.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/sponsor_cisco.png"
+                                alt="Cisco Meraki"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://newrelic.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/host_newrelic.png"
+                                alt="New Relic"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://productboard.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/host_productboard.png"
+                                alt="Productboard"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://figma.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/host_figma.png"
+                                alt="Figma"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://intercom.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/sponsor_intercom.png"
+                                alt="Intercom"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://angellist.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/sponsor_angellist.png"
+                                alt="AngelList"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://planetscale.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/sponsor_planetscale.png"
+                                alt="PlanetScale"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://binti.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/sponsor_binti.png"
+                                alt="Binti"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://withpersona.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/host_persona.png"
+                                alt="Persona"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                        <a
+                            href="https://academia.edu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                        >
+                            <img
+                                src="/host_academia.png"
+                                alt="Academia.edu"
+                                class="h-8 md:h-10 w-auto"
+                            />
+                        </a>
+                    </div>
+
+                    <div class="text-center">
+                        <a
+                            href="mailto:conference@sfruby.com?subject=Host%20SF%20Ruby%20Meetup"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
+                        >
+                            Become a host
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="py-20 bg-gradient-to-r from-ruby-500 to-pink-500">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                        Ready to join the Ruby community?
+                    </h2>
+                    <p class="text-xl text-ruby-100 mb-10 max-w-2xl mx-auto">
+                        Whether you're a founder, engineer, or Ruby enthusiast,
+                        there's a place for you here.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-ruby-500 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                        >
+                            Join Slack
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                        <a
+                            href="/sponsor-2026"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300"
+                        >
+                            Sponsor 2026
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Startup Modal -->
+        <StartupModal />
+
+        <Footer />
+    </body>
+</html>
+
+<script define:vars={{ enhancedStartupsData }}>
+    // Modal functionality for startup cards
+    function buildModalContent(startup) {
+        let videoHtml = "";
+        if (startup.youtubeId) {
+            videoHtml = `
+                <div class="mb-6">
+                    <div class="aspect-video rounded-xl overflow-hidden bg-black">
+                        <iframe
+                            src="https://www.youtube.com/embed/${startup.youtubeId}"
+                            title="${startup.name} Demo"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="w-full h-full"
+                        ></iframe>
+                    </div>
+                </div>
+            `;
+        }
+
+        let factsHtml = "";
+        if (startup.funding || startup.valuation || startup.news) {
+            const fundingHtml = startup.funding
+                ? startup.fundingUrl
+                    ? `<a href="${startup.fundingUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-ruby-500 underline">${startup.funding}</a>`
+                    : startup.funding
+                : null;
+            const valuationHtml = startup.valuation
+                ? startup.valuationUrl
+                    ? `<a href="${startup.valuationUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-ruby-500 underline">${startup.valuation}</a>`
+                    : startup.valuation
+                : null;
+            const newsHtml = startup.news
+                ? startup.newsUrl
+                    ? `<a href="${startup.newsUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-ruby-500 underline">${startup.news}</a>`
+                    : startup.news
+                : null;
+
+            factsHtml = `
+                <div class="mb-6 p-4 bg-gray-50 rounded-xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        ${fundingHtml ? `<div><span class="text-gray-500">Funding:</span> <span class="font-medium text-gray-900">${fundingHtml}</span></div>` : ""}
+                        ${valuationHtml ? `<div><span class="text-gray-500">Valuation:</span> <span class="font-medium text-gray-900">${valuationHtml}</span></div>` : ""}
+                        ${newsHtml ? `<div class="md:col-span-2"><span class="text-gray-500">Latest:</span> <span class="text-gray-700">${newsHtml}</span></div>` : ""}
+                    </div>
+                </div>
+            `;
+        }
+
+        let jobsHtml = "";
+        if (startup.jobs && startup.jobs.length > 0) {
+            const jobsList = startup.jobs
+                .map(
+                    (job) => `
+                <a href="${job.applyUrl || "#"}" target="_blank" rel="noopener noreferrer"
+                   class="block p-3 bg-white border border-gray-200 rounded-lg hover:border-ruby-300 hover:shadow-sm transition-all">
+                    <div class="font-medium text-gray-900">${job.title}</div>
+                    <div class="text-sm text-gray-500">${job.location || "Remote"}</div>
+                </a>
+            `,
+                )
+                .join("");
+
+            jobsHtml = `
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        Open Positions
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">Hiring</span>
+                    </h4>
+                    <div class="space-y-2">${jobsList}</div>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="p-6">
+                <button id="startupModalCloseBtn" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center p-2 flex-shrink-0">
+                        <img src="${startup.logo}" alt="${startup.name}" class="max-w-full max-h-full object-contain" />
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">${startup.name}</h3>
+                        <p class="text-gray-600">${startup.description}</p>
+                        ${startup.isYC ? '<span class="inline-block mt-2 px-2 py-0.5 bg-orange-100 text-orange-700 text-xs font-medium rounded">YC Backed</span>' : ""}
+                    </div>
+                </div>
+                ${videoHtml}
+                ${factsHtml}
+                ${jobsHtml}
+                <a href="${startup.url}" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 text-ruby-500 hover:text-ruby-600 font-medium">
+                    Visit website
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
             </div>
-        </section>
+        `;
+    }
 
-        <SpeakersHighlight />
-
-        <StartupDemos />
-
-        <CloudCards />
-
-        <KeyTopics />
-
-        <Testimonials />
-
-        <Sponsors />
-
-        <Newsletter />
-    </main>
-</Layout>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Handle startup card clicks - use StartupModal component functions
+        document.querySelectorAll("[data-startup-id]").forEach((card) => {
+            card.addEventListener("click", (e) => {
+                e.preventDefault();
+                const startupId = card.getAttribute("data-startup-id");
+                const startup = enhancedStartupsData[startupId];
+                if (
+                    startup &&
+                    window.setStartupModalContent &&
+                    window.showStartupModal
+                ) {
+                    window.setStartupModalContent(buildModalContent(startup));
+                    window.showStartupModal();
+                }
+            });
+        });
+    });
+</script>

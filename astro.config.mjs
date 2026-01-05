@@ -1,30 +1,16 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import { defineConfig } from "astro/config";
+import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
+  site: "https://sfruby.com",
+  output: "static",
   integrations: [tailwind()],
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: "auto",
   },
   vite: {
-    esbuild: {
-      target: 'es2020'
-    },
-    optimizeDeps: {
-      include: ['animejs']
-    },
     build: {
       cssCodeSplit: true,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'anime': ['animejs'],
-          }
-        }
-      }
     },
-    ssr: {
-      noExternal: ['animejs']
-    }
-  }
+  },
 });

@@ -1,0 +1,781 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TalkModal from "../../components/TalkModal.astro";
+import { talks, getAllTags } from "../../data/talks.js";
+import { slotAssignments } from "../../data/schedule.js";
+import { getSpeaker, speakers } from "../../data/speakers.js";
+
+// Get all conference talk IDs from schedule assignments
+const conferenceTalkIds = new Set(Object.values(slotAssignments));
+
+// Get all talks as array and separate by event type
+const allTalks = Object.values(talks);
+
+// IDs to exclude from display
+const excludedTalkIds = new Set(["hack-day-angellist", "community-day-placeholder"]);
+
+// Conference talks (those in the schedule) - filter to keynotes, talks, workshops
+const conferenceTalks = allTalks.filter(
+    (talk) =>
+        conferenceTalkIds.has(talk.id) &&
+        ["keynote", "talk", "workshop", "panel"].includes(talk.type) &&
+        !excludedTalkIds.has(talk.id)
+);
+
+// Startup demos - type "demo" with videos, sorted by recording
+const startupDemos = allTalks
+    .filter((talk) => talk.type === "demo")
+    .sort((a: any, b: any) => {
+        if (a.youtubeId && !b.youtubeId) return -1;
+        if (!a.youtubeId && b.youtubeId) return 1;
+        return 0;
+    });
+
+// Separate keynotes from regular talks for better display
+// Sort each category with recordings first
+const sortByRecording = (a: any, b: any) => {
+    if (a.youtubeId && !b.youtubeId) return -1;
+    if (!a.youtubeId && b.youtubeId) return 1;
+    return 0;
+};
+
+const keynotes = conferenceTalks
+    .filter((talk) => talk.type === "keynote")
+    .sort(sortByRecording);
+const regularTalks = conferenceTalks
+    .filter((talk) => talk.type === "talk")
+    .sort(sortByRecording);
+const workshops = conferenceTalks
+    .filter((talk) => talk.type === "workshop")
+    .sort(sortByRecording);
+
+// Talks with videos (including demos)
+const talksWithVideos = [...conferenceTalks, ...startupDemos].filter((talk) => talk.youtubeId);
+const demosWithVideos = startupDemos.filter((talk) => talk.youtubeId);
+
+// Helper to get speaker info
+function getTalkSpeakers(talk) {
+    if (talk.speakerId) {
+        const speaker = getSpeaker(talk.speakerId);
+        return speaker ? [speaker] : [];
+    }
+    if (talk.speakers && talk.speakers.length > 0) {
+        return talk.speakers.map((id) => getSpeaker(id)).filter(Boolean);
+    }
+    return [];
+}
+
+// Format description - remove HTML and limit length for cards
+function formatDescription(desc, maxLength = 200) {
+    if (!desc) return "";
+    // Remove HTML tags
+    const clean = desc.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    return clean;
+}
+
+// Build enhanced talks data with speaker info for modal (including demos)
+const enhancedTalksData: Record<string, any> = {};
+for (const talk of [...conferenceTalks, ...startupDemos]) {
+    const talkSpeakers = getTalkSpeakers(talk);
+    enhancedTalksData[talk.id] = {
+        ...talk,
+        speakers: talkSpeakers,
+    };
+}
+---
+
+<BaseLayout
+    title="Ruby Talks & Sessions - SF Ruby"
+    description="Watch talks from SF Ruby Conference 2025 and community meetups. Learn from the best Ruby and Rails developers."
+>
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    Talks & Sessions
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8">
+                    Watch recordings from SF Ruby Conference and monthly meetups. Learn from the best in the Ruby community.
+                </p>
+
+                <!-- Stats -->
+                <div class="flex flex-wrap gap-8">
+                    <div>
+                        <div class="text-3xl font-bold text-white">{talksWithVideos.length}</div>
+                        <div class="text-sm text-gray-400">Recordings</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-ruby-400">{keynotes.length}</div>
+                        <div class="text-sm text-gray-400">Keynotes</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-amber-400">{demosWithVideos.length}</div>
+                        <div class="text-sm text-gray-400">Startup Demos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conference Keynotes -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-1 h-8 bg-ruby-500 rounded-full"></div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                        SF Ruby Conference 2025 - Keynotes
+                    </h2>
+                </div>
+                <a
+                    href="https://www.rubyevents.org/events/sfruby-2025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-sm text-ruby-500 hover:text-ruby-600 font-medium"
+                >
+                    Watch on Ruby Events
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {keynotes.map((talk) => {
+                    const speakers = getTalkSpeakers(talk);
+                    return (
+                        <div
+                            class="talk-card group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-ruby-200 transition-all duration-300 cursor-pointer"
+                            data-talk-id={talk.id}
+                        >
+                            <!-- YouTube Preview -->
+                            {talk.youtubeId ? (
+                                <div class="block relative aspect-video bg-gray-900 overflow-hidden">
+                                    <img
+                                        src={`https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`}
+                                        alt={talk.title}
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        loading="lazy"
+                                    />
+                                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                        <div class="w-16 h-16 bg-ruby-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                            <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="absolute top-3 left-3">
+                                        <span class="px-3 py-1 bg-ruby-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                                            Keynote
+                                        </span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <span class="px-3 py-1 bg-ruby-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                                            Keynote
+                                        </span>
+                                        <p class="text-gray-400 mt-3 text-sm">Recording coming soon</p>
+                                    </div>
+                                </div>
+                            )}
+
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-ruby-600 transition-colors">
+                                    {talk.title}
+                                </h3>
+
+                                {speakers.length > 0 && (
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div class="flex -space-x-2">
+                                            {speakers.map((speaker) => (
+                                                speaker.image && (
+                                                    <img
+                                                        src={speaker.image}
+                                                        alt={speaker.name}
+                                                        class="w-10 h-10 rounded-full border-2 border-white object-cover"
+                                                    />
+                                                )
+                                            ))}
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-900">
+                                                {speakers.map(s => s.name).join(", ")}
+                                            </p>
+                                            {speakers[0]?.company && (
+                                                <p class="text-sm text-gray-500">{speakers[0].company}</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                <p class="text-gray-600 leading-relaxed line-clamp-3">
+                                    {formatDescription(talk.description)}
+                                </p>
+
+                                {talk.tags && talk.tags.length > 0 && (
+                                    <div class="flex flex-wrap gap-2 mt-4">
+                                        {talk.tags.slice(0, 4).map((tag) => (
+                                            <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    </section>
+
+    <!-- Conference Talks -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-1 h-8 bg-ruby-500 rounded-full"></div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                    Conference Talks
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {regularTalks.map((talk) => {
+                    const speakers = getTalkSpeakers(talk);
+                    return (
+                        <div
+                            class="talk-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-ruby-200 transition-all duration-300 cursor-pointer"
+                            data-talk-id={talk.id}
+                        >
+                            <!-- YouTube Preview -->
+                            {talk.youtubeId ? (
+                                <div class="block relative aspect-video bg-gray-900 overflow-hidden">
+                                    <img
+                                        src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
+                                        alt={talk.title}
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        loading="lazy"
+                                    />
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                        <div class="w-12 h-12 bg-ruby-500/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                            <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div class="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                                    <p class="text-gray-400 text-sm">Recording coming soon</p>
+                                </div>
+                            )}
+
+                            <div class="p-5">
+                                <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-ruby-600 transition-colors">
+                                    {talk.title}
+                                </h3>
+
+                                {speakers.length > 0 && (
+                                    <div class="flex items-center gap-2 mb-3">
+                                        {speakers[0]?.image && (
+                                            <img
+                                                src={speakers[0].image}
+                                                alt={speakers[0].name}
+                                                class="w-8 h-8 rounded-full object-cover"
+                                            />
+                                        )}
+                                        <p class="text-sm text-gray-600">
+                                            {speakers.map(s => s.name).join(", ")}
+                                        </p>
+                                    </div>
+                                )}
+
+                                <p class="text-sm text-gray-500 line-clamp-3 mb-3">
+                                    {formatDescription(talk.description, 150)}
+                                </p>
+
+                                {talk.tags && talk.tags.length > 0 && (
+                                    <div class="flex flex-wrap gap-1.5">
+                                        {talk.tags.slice(0, 3).map((tag) => (
+                                            <span class="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    </section>
+
+    <!-- Startup Demos -->
+    {startupDemos.length > 0 && (
+        <section class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-1 h-8 bg-amber-500 rounded-full"></div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                        Startup Demos
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {startupDemos.map((talk) => {
+                        const speakers = getTalkSpeakers(talk);
+                        return (
+                            <div
+                                class="talk-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-amber-200 transition-all duration-300 cursor-pointer"
+                                data-talk-id={talk.id}
+                            >
+                                {talk.youtubeId ? (
+                                    <div class="block relative aspect-video bg-gray-900 overflow-hidden">
+                                        <img
+                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
+                                            alt={talk.title}
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
+                                        />
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                            <div class="w-12 h-12 bg-amber-500/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                                <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M8 5v14l11-7z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="absolute top-3 left-3">
+                                            <span class="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                                                Demo
+                                            </span>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div class="aspect-video bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center">
+                                        <div class="text-center">
+                                            <span class="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                                                Demo
+                                            </span>
+                                            <p class="text-amber-600 mt-3 text-sm">Recording coming soon</p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div class="p-5">
+                                    <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors">
+                                        {talk.title}
+                                    </h3>
+
+                                    {speakers.length > 0 && (
+                                        <div class="flex items-center gap-2 mb-3">
+                                            {speakers[0]?.image && (
+                                                <img
+                                                    src={speakers[0].image}
+                                                    alt={speakers[0].name}
+                                                    class="w-8 h-8 rounded-full object-cover"
+                                                />
+                                            )}
+                                            <p class="text-sm text-gray-600">
+                                                {speakers.map(s => s.name).join(", ")}
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    <p class="text-sm text-gray-500 line-clamp-3">
+                                        {formatDescription(talk.description, 150)}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    )}
+
+    <!-- Workshops -->
+    {workshops.length > 0 && (
+        <section class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-1 h-8 bg-emerald-500 rounded-full"></div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                        Workshops
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {workshops.map((talk) => {
+                        const speakers = getTalkSpeakers(talk);
+                        return (
+                            <div class="group bg-gradient-to-br from-emerald-50 to-white rounded-xl border border-emerald-100 p-6 hover:shadow-lg hover:border-emerald-200 transition-all duration-300">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full mb-2">
+                                            Workshop
+                                        </span>
+                                        <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                                            {talk.title}
+                                        </h3>
+
+                                        {speakers.length > 0 && (
+                                            <div class="flex items-center gap-2 mb-3">
+                                                <div class="flex -space-x-1">
+                                                    {speakers.slice(0, 3).map((speaker) => (
+                                                        speaker.image && (
+                                                            <img
+                                                                src={speaker.image}
+                                                                alt={speaker.name}
+                                                                class="w-7 h-7 rounded-full border-2 border-white object-cover"
+                                                            />
+                                                        )
+                                                    ))}
+                                                </div>
+                                                <p class="text-sm text-gray-600">
+                                                    {speakers.map(s => s.name).join(", ")}
+                                                </p>
+                                            </div>
+                                        )}
+
+                                        <p class="text-gray-600 text-sm leading-relaxed">
+                                            {formatDescription(talk.description)}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    )}
+
+    <!-- Meetup Talks -->
+    <section class="py-12 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-1 h-8 bg-sky-500 rounded-full"></div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                        Meetup Talks
+                    </h2>
+                </div>
+                <a
+                    href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-sm text-sky-500 hover:text-sky-600 font-medium"
+                >
+                    Watch on Ruby Events
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 p-8 text-center">
+                <div class="w-16 h-16 mx-auto mb-4 bg-sky-100 rounded-full flex items-center justify-center">
+                    <svg class="w-8 h-8 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">
+                    Watch on Ruby Events
+                </h3>
+                <p class="text-gray-500 max-w-md mx-auto mb-6">
+                    Recordings from our monthly SF Ruby meetups are available on Ruby Events,
+                    the community platform for Ruby conference and meetup videos.
+                </p>
+                <a
+                    href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-sky-500 text-white font-semibold rounded-lg hover:bg-sky-600 transition-all duration-300"
+                >
+                    Browse Meetup Recordings
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CFP CTA -->
+    <section class="py-16 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                Want to give a talk?
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+                We're always looking for speakers. Submit a talk proposal for
+                our next meetup.
+            </p>
+            <a
+                href="https://forms.gle/EZLqENWd5VjiLduq8"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+                Submit a Talk
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    ></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Talk Modal -->
+    <TalkModal />
+</BaseLayout>
+
+<script define:vars={{ enhancedTalksData }}>
+    // Make talks data available to the modal
+    window.talksData = enhancedTalksData;
+</script>
+
+<script>
+    // Wait for DOM and modal to be ready
+    function initTalkCards() {
+        const cards = document.querySelectorAll(".talk-card");
+
+        cards.forEach((card) => {
+            card.addEventListener("click", (e) => {
+                e.preventDefault();
+                const talkId = card.getAttribute("data-talk-id");
+                if (!talkId) return;
+
+                const talk = (window as any).talksData[talkId];
+                if (!talk) return;
+
+                // Build modal content
+                const modalHtml = buildTalkModalContent(talk);
+
+                // Show modal
+                if (typeof (window as any).setTalkModalContent === "function") {
+                    (window as any).setTalkModalContent(modalHtml);
+                    (window as any).showTalkModal();
+                }
+            });
+        });
+    }
+
+    function buildTalkModalContent(talk: any): string {
+        // Build YouTube video section
+        let videoHtml = "";
+        if (talk.youtubeId) {
+            videoHtml = `
+                <div class="mb-6">
+                    <div class="relative aspect-video rounded-xl overflow-hidden bg-black shadow-lg">
+                        <iframe
+                            src="https://www.youtube.com/embed/${talk.youtubeId}?autoplay=1"
+                            title="${talk.title}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="absolute inset-0 w-full h-full"
+                        ></iframe>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Build speakers section
+        let speakersHtml = "";
+        if (talk.speakers && talk.speakers.length > 0) {
+            const speakersList = talk.speakers.map((speaker: any) => `
+                <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                    ${speaker.image ? `
+                        <img
+                            src="${speaker.image}"
+                            alt="${speaker.name}"
+                            class="w-16 h-16 rounded-full object-cover ring-2 ring-white shadow-md flex-shrink-0"
+                        />
+                    ` : `
+                        <div class="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                    `}
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-gray-900">${speaker.name}</p>
+                        ${speaker.role || speaker.title ? `<p class="text-sm text-gray-600">${speaker.role || speaker.title}</p>` : ""}
+                        ${speaker.company ? `<p class="text-sm text-gray-500">${speaker.company}</p>` : ""}
+                        ${speaker.bio ? `<p class="text-sm text-gray-600 mt-2 line-clamp-3">${speaker.bio}</p>` : ""}
+                        <div class="flex gap-3 mt-2">
+                            ${speaker.twitter ? `
+                                <a href="https://twitter.com/${speaker.twitter}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                    </svg>
+                                </a>
+                            ` : ""}
+                            ${speaker.github ? `
+                                <a href="https://github.com/${speaker.github}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                </a>
+                            ` : ""}
+                            ${speaker.linkedin ? `
+                                <a href="${speaker.linkedin}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                </a>
+                            ` : ""}
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+
+            speakersHtml = `
+                <div class="mb-6">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                        ${talk.speakers.length > 1 ? "Speakers" : "Speaker"}
+                    </h3>
+                    <div class="space-y-3">
+                        ${speakersList}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Build tags section
+        let tagsHtml = "";
+        if (talk.tags && talk.tags.length > 0) {
+            const tagsList = talk.tags.map((tag: string) => `
+                <span class="text-xs px-2.5 py-1 bg-gray-100 text-gray-600 rounded-full">${tag}</span>
+            `).join("");
+            tagsHtml = `
+                <div class="flex flex-wrap gap-2 mb-6">
+                    ${tagsList}
+                </div>
+            `;
+        }
+
+        // Get talk type badge
+        const typeColors: Record<string, string> = {
+            keynote: "bg-ruby-500 text-white",
+            talk: "bg-sky-500 text-white",
+            workshop: "bg-emerald-500 text-white",
+            panel: "bg-purple-500 text-white",
+        };
+        const typeColor = typeColors[talk.type] || "bg-gray-500 text-white";
+        const typeBadge = `<span class="px-2.5 py-1 text-xs font-semibold ${typeColor} rounded-full uppercase">${talk.type}</span>`;
+
+        // Clean description (remove HTML tags)
+        const cleanDescription = talk.description
+            ? talk.description.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
+            : "";
+
+        return `
+            <div class="p-6 sm:p-8">
+                <!-- Close button -->
+                <button
+                    id="talkModalCloseBtn"
+                    class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors z-10"
+                    aria-label="Close modal"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Video Player -->
+                ${videoHtml}
+
+                <!-- Header -->
+                <div class="mb-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        ${typeBadge}
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">${talk.title}</h2>
+                </div>
+
+                <!-- Tags -->
+                ${tagsHtml}
+
+                <!-- Description -->
+                ${cleanDescription ? `
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">About this talk</h3>
+                        <p class="text-gray-700 leading-relaxed">${cleanDescription}</p>
+                    </div>
+                ` : ""}
+
+                <!-- Speakers -->
+                ${speakersHtml}
+
+                <!-- Watch on YouTube link -->
+                ${talk.youtubeId ? `
+                    <div class="pt-4 border-t border-gray-100">
+                        <a
+                            href="https://www.youtube.com/watch?v=${talk.youtubeId}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-ruby-500 hover:text-ruby-600 font-medium"
+                        >
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            Watch on YouTube
+                        </a>
+                    </div>
+                ` : ""}
+            </div>
+        `;
+    }
+
+    // Check URL for talk parameter and open modal
+    function checkUrlForTalk() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const talkId = urlParams.get("talk");
+
+        if (talkId) {
+            const talk = (window as any).talksData[talkId];
+            if (talk && typeof (window as any).setTalkModalContent === "function") {
+                const modalHtml = buildTalkModalContent(talk);
+                (window as any).setTalkModalContent(modalHtml);
+                (window as any).showTalkModal();
+            }
+        }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+            initTalkCards();
+            // Small delay to ensure modal is ready
+            setTimeout(checkUrlForTalk, 100);
+        });
+    } else {
+        initTalkCards();
+        setTimeout(checkUrlForTalk, 100);
+    }
+</script>

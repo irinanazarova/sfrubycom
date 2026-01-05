@@ -1,0 +1,65 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/conference-2025"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/register"
+  to = "https://lu.ma/sfruby"
+  status = 301
+
+[[redirects]]
+  from = "/speakers"
+  to = "/talks"
+  status = 301
+
+[[redirects]]
+  from = "/schedule"
+  to = "/talks"
+  status = 301
+
+[[redirects]]
+  from = "/sponsors"
+  to = "/sponsor-2026"
+  status = 301
+
+[[redirects]]
+  from = "/startup-demos"
+  to = "/startups"
+  status = 301
+
+# SPA fallback for 404
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

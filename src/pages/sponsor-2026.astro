@@ -1,0 +1,413 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/favicon-96x96.png"
+            sizes="96x96"
+        />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta
+            name="description"
+            content="Sponsor the SF Ruby Conference 2026 and connect with 450+ Ruby developers, founders, and engineers in San Francisco."
+        />
+        <meta name="theme-color" content="#dc2626" />
+        <title>Sponsor SF Ruby 2026 - SF Ruby</title>
+
+        <link
+            rel="preload"
+            href="/fonts/MartianGrotesk.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/fonts/MartianMono.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Sponsor SF Ruby 2026 - SF Ruby" />
+        <meta
+            property="og:description"
+            content="Sponsor the SF Ruby Conference 2026 and connect with 450+ Ruby developers, founders, and engineers in San Francisco."
+        />
+        <meta property="og:image" content="https://sfruby.com/sfruby_og.jpg" />
+
+        <script
+            defer
+            data-domain="sfruby.com"
+            src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
+        ></script>
+    </head>
+    <body
+        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col"
+    >
+        <Header />
+
+        <main class="flex-grow">
+            <!-- Hero Section with Dark Background -->
+            <section
+                class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden"
+            >
+                <!-- Background effects -->
+                <div class="absolute inset-0 overflow-hidden">
+                    <div
+                        class="absolute top-20 left-10 w-72 h-72 bg-ruby-500/10 rounded-full blur-3xl"
+                    >
+                    </div>
+                    <div
+                        class="absolute bottom-20 right-20 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"
+                    >
+                    </div>
+                </div>
+
+                <div
+                    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+                >
+                    <div class="text-center">
+                        <h1
+                            class="text-4xl md:text-5xl font-bold text-white mb-4"
+                        >
+                            Sponsor SF Ruby 2026
+                        </h1>
+                        <p class="text-xl text-gray-300">
+                            Connect with the Ruby community at our annual
+                            conference and monthly meetups.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Section -->
+            <section class="py-16 bg-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- 2025 Stats -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 p-8 mb-12"
+                    >
+                        <h2
+                            class="text-xl font-bold text-gray-900 mb-6 text-center"
+                        >
+                            2025 in Numbers
+                        </h2>
+                        <div
+                            class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
+                        >
+                            <div>
+                                <div
+                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                >
+                                    450+
+                                </div>
+                                <div class="text-gray-600 text-sm mt-1">
+                                    Conference Attendees
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                >
+                                    25+
+                                </div>
+                                <div class="text-gray-600 text-sm mt-1">
+                                    Startup Demos
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                >
+                                    40+
+                                </div>
+                                <div class="text-gray-600 text-sm mt-1">
+                                    Speakers
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                >
+                                    400+
+                                </div>
+                                <div class="text-gray-600 text-sm mt-1">
+                                    Slack Members
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Why Sponsor -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 p-8 mb-12"
+                    >
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">
+                            Why Sponsor?
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
+                                >
+                                    <svg
+                                        class="w-5 h-5 text-ruby-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">
+                                        Targeted Audience
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Reach senior engineers and founders
+                                        actively building with Ruby.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
+                                >
+                                    <svg
+                                        class="w-5 h-5 text-ruby-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">
+                                        Hiring Pipeline
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Connect with Ruby talent at the
+                                        conference and job board.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
+                                >
+                                    <svg
+                                        class="w-5 h-5 text-ruby-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">
+                                        Demo Opportunity
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Showcase your product to the Ruby
+                                        startup community.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
+                                >
+                                    <svg
+                                        class="w-5 h-5 text-ruby-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">
+                                        Community Support
+                                    </h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Support the Ruby ecosystem and show your
+                                        commitment to the community.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2025 Sponsors -->
+                    <div
+                        class="bg-white rounded-2xl border border-gray-200 p-8 mb-12"
+                    >
+                        <h2
+                            class="text-xl font-bold text-gray-900 mb-6 text-center"
+                        >
+                            2025 Sponsors
+                        </h2>
+                        <div
+                            class="flex flex-wrap justify-center items-center gap-8 opacity-75"
+                        >
+                            <!-- Pickaxe tier -->
+                            <img
+                                src="/sponsor_chime.png"
+                                alt="Chime"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_boltnew.png"
+                                alt="Bolt.new"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_cisco.png"
+                                alt="Cisco"
+                                class="h-8 object-contain"
+                            />
+                            <!-- Ruby tier -->
+                            <img
+                                src="/sponsor_gusto.png"
+                                alt="Gusto"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_temporal.png"
+                                alt="Temporal"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_intercom.png"
+                                alt="Intercom"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_omada.png"
+                                alt="Omada"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_avo.png"
+                                alt="Avo"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_thatch.png"
+                                alt="Thatch"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_finta.png"
+                                alt="Finta"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_angellist.png"
+                                alt="AngelList"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_planetscale.png"
+                                alt="PlanetScale"
+                                class="h-8 object-contain"
+                            />
+                            <!-- Reception -->
+                            <img
+                                src="/sponsor_gitbutler.png"
+                                alt="GitButler"
+                                class="h-8 object-contain"
+                            />
+                            <!-- Travel -->
+                            <img
+                                src="/sponsor_tidewave.png"
+                                alt="Tidewave AI"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_hackclub.png"
+                                alt="Hack Club"
+                                class="h-8 object-contain"
+                            />
+                            <img
+                                src="/sponsor_ezcater.png"
+                                alt="ezCater"
+                                class="h-8 object-contain"
+                            />
+                        </div>
+                        <p class="text-center text-gray-500 mt-6">and more</p>
+                    </div>
+
+                    <!-- Contact -->
+                    <div
+                        class="bg-gradient-to-br from-ruby-50 to-pink-50 rounded-2xl border border-ruby-100 p-8 text-center"
+                    >
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">
+                            Interested in sponsoring?
+                        </h2>
+                        <p class="text-gray-600 mb-6">
+                            Get in touch and we'll share sponsorship options for
+                            2026.
+                        </p>
+                        <a
+                            href="mailto:irina@evilmartians.com?subject=SF%20Ruby%202026%20Sponsorship"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                        >
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                ></path>
+                            </svg>
+                            irina@evilmartians.com
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <Footer />
+    </body>
+</html>

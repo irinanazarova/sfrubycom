@@ -1,0 +1,82 @@
+[
+  {
+    "id": "bolt-new-40m-arr",
+    "date": "2025-12-15",
+    "headline": "Bolt.new reaches $40M ARR in 5 months",
+    "summary": "The AI-powered development tool built on Rails hits explosive growth, becoming one of the fastest-growing Ruby startups ever.",
+    "link": "https://techcrunch.com/bolt-new-growth",
+    "category": "Funding",
+    "startupName": "Bolt.new",
+    "source": "TechCrunch"
+  },
+  {
+    "id": "rails-8-released",
+    "date": "2025-11-07",
+    "headline": "Rails 8 officially released with major performance improvements",
+    "summary": "The latest version of Ruby on Rails brings Solid Queue, Solid Cache, and significant speed improvements out of the box.",
+    "link": "https://rubyonrails.org/2025/11/7/rails-8",
+    "category": "Release",
+    "startupName": "",
+    "source": "Rails Blog"
+  },
+  {
+    "id": "gusto-ipo-rumors",
+    "date": "2025-11-20",
+    "headline": "Gusto reportedly exploring 2026 IPO",
+    "summary": "The payroll giant built on Rails is considering going public, which would be a landmark moment for the Ruby ecosystem.",
+    "link": "https://bloomberg.com/gusto-ipo",
+    "category": "Press",
+    "startupName": "Gusto",
+    "source": "Bloomberg"
+  },
+  {
+    "id": "sf-ruby-conf-2025-recap",
+    "date": "2025-11-21",
+    "headline": "SF Ruby Conference 2025 breaks attendance records",
+    "summary": "Over 450 Rubyists gathered at Fort Mason for the largest Ruby conference on the West Coast, featuring talks from Matz and DHH.",
+    "link": "https://sfruby.substack.com/conf-2025-recap",
+    "category": "Event",
+    "startupName": "",
+    "source": "SF Ruby Newsletter"
+  },
+  {
+    "id": "thatch-series-a",
+    "date": "2025-10-15",
+    "headline": "Thatch raises $38M Series A for health benefits platform",
+    "summary": "The Ruby-powered startup modernizing health benefits for startups secures major funding round led by Andreessen Horowitz.",
+    "link": "https://techcrunch.com/thatch-series-a",
+    "category": "Funding",
+    "startupName": "Thatch",
+    "source": "TechCrunch"
+  },
+  {
+    "id": "ubicloud-open-source",
+    "date": "2025-10-01",
+    "headline": "Ubicloud open sources its Ruby-based cloud platform",
+    "summary": "The AWS alternative makes its control plane code available to the community, built primarily in Ruby.",
+    "link": "https://github.com/ubicloud/ubicloud",
+    "category": "Release",
+    "startupName": "Ubicloud",
+    "source": "GitHub"
+  },
+  {
+    "id": "ruby-most-loved-2025",
+    "date": "2025-09-15",
+    "headline": "Ruby ranks in top 5 most loved languages in 2025 survey",
+    "summary": "The Pragmatic Engineer survey shows Ruby developers remain among the happiest, with strong job satisfaction scores.",
+    "link": "https://newsletter.pragmaticengineer.com/survey-2025",
+    "category": "Press",
+    "startupName": "",
+    "source": "Pragmatic Engineer"
+  },
+  {
+    "id": "nexhealth-unicorn",
+    "date": "2025-08-20",
+    "headline": "NexHealth reaches unicorn status with $1B+ valuation",
+    "summary": "The healthcare API platform built on Rails joins the unicorn club after explosive growth in the healthtech sector.",
+    "link": "https://forbes.com/nexhealth-unicorn",
+    "category": "Funding",
+    "startupName": "NexHealth",
+    "source": "Forbes"
+  }
+]
