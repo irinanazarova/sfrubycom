@@ -405,7 +405,7 @@ export const startups = {
     id: "bemi",
     name: "Bemi AI",
     logo: "/startup_bemi.png",
-    url: "https://bemi.ai",
+    url: "https://bemi.io",
     description:
       "Platform for building AI agents that handle customer requests 24/7 via email and SMS. Bemi AI saves hours of manual work with agents that help diagnose, resolve, and respond automatically.",
     speakerId: "evgeny-li",
@@ -428,7 +428,7 @@ export function getStartup(startupId) {
 
 export function getStartupsByCategory(category) {
   return Object.values(startups).filter(
-    (startup) => startup.category === category,
+    (startup) => startup.category === category
   );
 }
 
