@@ -8,13 +8,11 @@ export const startups = {
       "AI-native browser tool for building and deploying full-stack web apps with zero code. Launched 2024; $40M ARR in 5 months.",
     speakerId: "alex-kalderimis",
     demoTime: "",
-    founded: 2024,
+    founded: 2017,
     funding: "$135M total",
-    fundingUrl:
-      "https://techcrunch.com/2025/01/23/stackblitz-maker-of-bolt-new-raises-105-million/",
+    fundingUrl: "https://sacra.com/c/bolt-new/",
     valuation: "$700M",
-    valuationUrl:
-      "https://www.bloomberg.com/news/articles/2025-01-21/ai-speech-to-code-startup-stackblitz-is-in-talks-for-a-700-million-valuation",
+    valuationUrl: "https://sacra.com/c/bolt-new/",
     news: "Raised $105M Series B in Jan 2025, grew to 7M+ users",
     newsUrl: "https://x.com/boltdotnew/status/1882106655258894390",
   },

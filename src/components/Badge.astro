@@ -1,26 +1,78 @@
 ---
+/**
+ * Badge Component
+ *
+ * A small label component for tags, status indicators, and metadata.
+ *
+ * @example Basic usage:
+ * <Badge>New</Badge>
+ *
+ * @example With variant:
+ * <Badge variant="success">Hiring</Badge>
+ * <Badge variant="yc">YC</Badge>
+ *
+ * @example Different sizes:
+ * <Badge size="xs">Small</Badge>
+ * <Badge size="sm">Standard</Badge>
+ * <Badge size="md">Large</Badge>
+ */
+
 interface Props {
-    variant?: "default" | "ruby" | "success" | "warning" | "info" | "outline";
-    size?: "sm" | "md";
+    variant?:
+        | "default"
+        | "ruby"
+        | "success"
+        | "warning"
+        | "info"
+        | "outline"
+        // Special variants for common use cases
+        | "yc" // Y Combinator badge
+        | "hiring" // Job indicator
+        | "featured" // Featured/highlight
+        | "tier"; // Sponsor tier
+    size?: "xs" | "sm" | "md";
+    class?: string;
 }
 
-const { variant = "default", size = "sm" } = Astro.props;
+const { variant = "default", size = "sm", class: className = "" } = Astro.props;
 
-const variants = {
+const variants: Record<string, string> = {
+    // Standard variants
     default: "bg-gray-100 text-gray-700",
     ruby: "bg-ruby-100 text-ruby-700",
-    success: "bg-green-100 text-green-700",
+    success: "bg-emerald-100 text-emerald-700",
     warning: "bg-amber-100 text-amber-700",
     info: "bg-blue-100 text-blue-700",
     outline: "bg-transparent border border-gray-300 text-gray-600",
+
+    // Special variants
+    yc: "bg-orange-500 text-white font-bold",
+    hiring: "bg-emerald-500 text-white font-bold",
+    featured: "bg-ruby-500 text-white font-bold",
+    tier: "bg-amber-400 text-amber-900 font-bold",
 };
 
-const sizes = {
-    sm: "text-xs px-2 py-0.5",
-    md: "text-sm px-2.5 py-1",
+// Standardized sizes
+const sizes: Record<string, string> = {
+    xs: "text-xs px-2 py-0.5", // Compact: YC, Hiring badges
+    sm: "text-xs px-3 py-1", // Standard: Talk types, tags
+    md: "text-sm px-4 py-1.5", // Prominent: Featured badges
 };
+
+// Font weight (some variants override with font-bold)
+const fontWeight = ["yc", "hiring", "featured", "tier"].includes(variant)
+    ? ""
+    : "font-medium";
 ---
 
-<span class:list={["inline-flex items-center font-medium rounded-full", variants[variant], sizes[size]]}>
+<span
+    class:list={[
+        "inline-flex items-center rounded-full",
+        fontWeight,
+        variants[variant],
+        sizes[size],
+        className,
+    ]}
+>
     <slot />
 </span>

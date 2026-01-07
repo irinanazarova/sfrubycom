@@ -1,4 +1,17 @@
 ---
+/**
+ * StartupCard Component
+ *
+ * A clean, focused card for displaying startup information.
+ * The entire card is clickable and opens a modal with full details.
+ *
+ * Design principles:
+ * - Clean and minimal - avoid visual clutter
+ * - Key info at a glance: logo, name, speaker, funding
+ * - Subtle indicators (demo available, hiring)
+ * - News/details saved for the modal
+ */
+
 import { getSpeaker } from "../data/speakers";
 import { getTalk } from "../data/talks";
 
@@ -43,42 +56,55 @@ if (!youtubeId) {
 ---
 
 <div
-    class="startup-card group relative bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl hover:shadow-ruby-500/10 hover:border-ruby-200 hover:-translate-y-1"
+    class="startup-card group relative bg-white rounded-2xl border border-gray-100 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-gray-200 hover:-translate-y-0.5"
     data-startup-id={startup.id}
 >
-    <!-- Header: Logo (consistent for all cards) -->
-    <div
-        class="relative bg-gradient-to-br from-slate-50 to-slate-100 p-6 pb-10"
-    >
-        <!-- Badges - top left -->
-        <div class="absolute top-3 left-3 flex gap-1.5 z-10">
-            {
-                startup.isYC && (
-                    <span class="px-2 py-0.5 bg-orange-500 text-white text-xs font-bold rounded-md shadow-sm">
-                        YC
-                    </span>
-                )
-            }
+    <!-- Header: Badges row -->
+    <div class="flex items-center justify-between px-4 pt-3 pb-2">
+        <div class="flex gap-1.5">
             {
                 startup.valuation && (
-                    <span class="px-2 py-0.5 bg-amber-400 text-amber-900 text-xs font-bold rounded-md shadow-sm">
+                    <span class="px-2 py-0.5 bg-amber-400 text-amber-900 text-xs font-bold rounded-md">
                         {startup.valuation}
                     </span>
                 )
             }
             {
                 hasJobs && (
-                    <span class="px-2 py-0.5 bg-emerald-500 text-white text-xs font-bold rounded-md shadow-sm">
+                    <span class="px-2 py-0.5 bg-emerald-500 text-white text-xs font-bold rounded-md">
                         Hiring
                     </span>
                 )
             }
+            {
+                startup.isYC && (
+                    <span class="px-2 py-0.5 bg-orange-500 text-white text-xs font-bold rounded-md">
+                        YC
+                    </span>
+                )
+            }
         </div>
+        {
+            youtubeId && (
+                <div class="flex items-center gap-1 px-2 py-0.5 bg-gray-100 rounded-full">
+                    <svg
+                        class="w-3 h-3 text-gray-500"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span class="text-xs text-gray-500">Demo</span>
+                </div>
+            )
+        }
+    </div>
 
-        <!-- Logo - full width, natural height -->
+    <!-- Logo centered -->
+    <div class="px-4 py-3">
         {
             startup.logo && (
-                <div class="flex items-center justify-center h-12 group-hover:scale-105 transition-transform">
+                <div class="flex items-center justify-center h-10 group-hover:scale-105 transition-transform">
                     <img
                         src={startup.logo}
                         alt={startup.name}
@@ -88,123 +114,56 @@ if (!youtubeId) {
                 </div>
             )
         }
-
-        <!-- Speaker photo - positioned at bottom, overlapping into content -->
-        {
-            speaker?.image && (
-                <div class="absolute -bottom-10 left-5">
-                    <img
-                        src={speaker.image}
-                        alt={speaker.name}
-                        class="w-20 h-20 rounded-full object-cover ring-4 ring-white shadow-lg"
-                        loading="lazy"
-                    />
-                </div>
-            )
-        }
     </div>
 
     <!-- Content section -->
-    <div class={`p-5 ${speaker?.image ? "pt-12" : "pt-5"}`}>
-        <!-- Name and speaker info -->
-        <div class="mb-4">
-            <h3
-                class="font-bold text-lg text-gray-900 group-hover:text-ruby-600 transition-colors"
-            >
-                {startup.name}
-            </h3>
-            {
-                speaker && (
-                    <p class="text-sm text-gray-500 mt-0.5">{speaker.name}</p>
-                )
-            }
-        </div>
+    <div class="px-4 pb-4 pt-2">
+        <!-- Speaker row -->
+        {
+            speaker && (
+                <div class="flex items-center gap-2 mb-3">
+                    {speaker.image && (
+                        <img
+                            src={speaker.image}
+                            alt={speaker.name}
+                            class="w-8 h-8 rounded-full object-cover ring-2 ring-gray-100"
+                            loading="lazy"
+                        />
+                    )}
+                    <span class="text-sm text-gray-600">{speaker.name}</span>
+                </div>
+            )
+        }
+
+        <!-- Name -->
+        <h3
+            class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors mb-2"
+        >
+            {startup.name}
+        </h3>
 
         <!-- Key Facts Row -->
-        <div class="flex items-center gap-6 mb-4">
-            {
-                startup.founded && (
-                    <div>
-                        <div class="text-sm font-bold text-gray-900">
-                            {startup.founded}
-                        </div>
-                        <div class="text-xs text-gray-400">Founded</div>
-                    </div>
-                )
-            }
-            {
-                startup.funding && (
-                    <div>
-                        <div class="text-sm font-bold text-emerald-600">
-                            {startup.funding}
-                        </div>
-                        <div class="text-xs text-gray-400">Raised</div>
-                    </div>
-                )
-            }
-        </div>
-
-        <!-- Watch Demo indicator -->
         {
-            youtubeId && (
-                <div class="flex items-center gap-2 mb-4 p-3 bg-ruby-50 rounded-xl">
-                    <div class="w-8 h-8 bg-ruby-500 rounded-full flex items-center justify-center flex-shrink-0">
-                        <svg
-                            class="w-4 h-4 text-white ml-0.5"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                    </div>
-                    <span class="text-sm font-medium text-ruby-700">
-                        Watch Demo
-                    </span>
+            (startup.founded || startup.funding) && (
+                <div class="flex items-center gap-3 text-sm">
+                    {startup.founded && (
+                        <span class="text-gray-500">
+                            Est.{" "}
+                            <span class="font-medium text-gray-700">
+                                {startup.founded}
+                            </span>
+                        </span>
+                    )}
+                    {startup.funding && (
+                        <span class="text-gray-500">
+                            <span class="font-medium text-emerald-600">
+                                {startup.funding}
+                            </span>{" "}
+                            raised
+                        </span>
+                    )}
                 </div>
             )
         }
-
-        <!-- News/highlight -->
-        {
-            startup.news && (
-                <div class="flex items-start gap-2 p-3 bg-sky-50 rounded-xl">
-                    <svg
-                        class="w-4 h-4 text-sky-500 mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
-                    <p class="text-xs text-sky-800 leading-relaxed">
-                        {startup.news}
-                    </p>
-                </div>
-            )
-        }
-
-        <!-- View details link -->
-        <div class="mt-4 flex items-center justify-end">
-            <span
-                class="inline-flex items-center text-sm text-ruby-500 font-medium group-hover:text-ruby-600"
-            >
-                Learn more
-                <svg
-                    class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-            </span>
-        </div>
     </div>
 </div>

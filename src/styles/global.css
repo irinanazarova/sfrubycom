@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design System Tokens */
+@import "./design-tokens.css";
+
 @font-face {
     font-family: "Martian Grotesk";
     font-display: swap;
