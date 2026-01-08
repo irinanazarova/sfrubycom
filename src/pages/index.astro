@@ -8,6 +8,7 @@ import MeetupCard from "../components/MeetupCard.astro";
 import ResourceCard from "../components/ResourceCard.astro";
 import Button from "../components/Button.astro";
 import SocialLink from "../components/SocialLink.astro";
+import EmailModal from "../components/EmailModal.astro";
 
 import { getAllStartups, startups as startupsData } from "../data/startups.js";
 import { getTalk, talks } from "../data/talks.js";
@@ -270,58 +271,103 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                 </div>
             </section>
 
-            <!-- What's Happening Section -->
+            <!-- Next Meetup Section -->
             {
                 nextMeetup && (
                     <section class="py-20 bg-slate-50">
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div class="text-center mb-12">
-                                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                                    SF Ruby Community
-                                </h2>
-                                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                                    Let's build the new generation of Ruby
-                                    success stories! Join the SF Ruby monthly
-                                    meetups, and the annual conference. Connect
-                                    with founders and engineers building with
-                                    Ruby. Hire and find an amazing job. Make
-                                    friends for life!
-                                </p>
-                            </div>
+                            <div class="max-w-4xl mx-auto">
+                                <!-- Section header -->
+                                <div class="text-center mb-8">
+                                    <span class="inline-block px-4 py-1.5 bg-ruby-100 text-ruby-700 text-sm font-semibold rounded-full mb-4">
+                                        Monthly Meetup
+                                    </span>
+                                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                        Join the Next SF Ruby Meetup
+                                    </h2>
+                                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                                        Connect with founders and engineers building with Ruby.
+                                        Learn, share, and make friends for life!
+                                    </p>
+                                </div>
 
-                            <div class="max-w-xl mx-auto">
-                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                                    Next Event
-                                </h3>
-                                <MeetupCard meetup={nextMeetup} />
-                                <div class="mt-4 text-center">
+                                <!-- Meetup card - more prominent -->
+                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
+                                    <div class="bg-gradient-to-r from-ruby-500 to-pink-500 px-6 py-3">
+                                        <span class="text-white font-semibold">Next Event</span>
+                                    </div>
+                                    <div class="p-6">
+                                        <MeetupCard meetup={nextMeetup} />
+                                    </div>
+                                </div>
+
+                                <!-- Three CTAs -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <!-- Sign up -->
+                                    <a
+                                        href="https://lu.ma/sfruby"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="group flex items-center gap-4 p-5 bg-white rounded-xl border-2 border-gray-200 hover:border-ruby-400 hover:shadow-lg transition-all duration-300"
+                                    >
+                                        <div class="w-12 h-12 bg-ruby-100 rounded-xl flex items-center justify-center group-hover:bg-ruby-500 transition-colors">
+                                            <svg class="w-6 h-6 text-ruby-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">Sign up</h3>
+                                            <p class="text-sm text-gray-500">RSVP on Luma</p>
+                                        </div>
+                                    </a>
+
+                                    <!-- Submit a talk -->
                                     <a
                                         href="https://forms.gle/EZLqENWd5VjiLduq8"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-2 text-gray-600 hover:text-ruby-500 transition-colors"
+                                        class="group flex items-center gap-4 p-5 bg-white rounded-xl border-2 border-gray-200 hover:border-ruby-400 hover:shadow-lg transition-all duration-300"
                                     >
-                                        <svg
-                                            class="w-4 h-4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                            />
-                                        </svg>
-                                        Submit a talk for the next meetup
+                                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center group-hover:bg-amber-500 transition-colors">
+                                            <svg class="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">Submit a talk</h3>
+                                            <p class="text-sm text-gray-500">Share your knowledge</p>
+                                        </div>
                                     </a>
+
+                                    <!-- Host the meetup -->
+                                    <button
+                                        data-email-modal="host-meetup"
+                                        class="group flex items-center gap-4 p-5 bg-white rounded-xl border-2 border-gray-200 hover:border-ruby-400 hover:shadow-lg transition-all duration-300 text-left w-full"
+                                    >
+                                        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:bg-emerald-500 transition-colors">
+                                            <svg class="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">Host the meetup</h3>
+                                            <p class="text-sm text-gray-500">Open your office</p>
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </section>
                 )
             }
+
+            <!-- Email Modal for hosting -->
+            <EmailModal
+                id="host-meetup"
+                email="irina@evilmartians.com"
+                subject="Host SF Ruby Meetup"
+                title="Host an SF Ruby Meetup"
+            />
 
             <!-- Startup Gallery Section -->
             <section class="py-20 bg-white">
@@ -879,8 +925,8 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     </div>
 
                     <div class="text-center">
-                        <a
-                            href="mailto:conference@sfruby.com?subject=Host%20SF%20Ruby%20Meetup"
+                        <button
+                            data-email-modal="host-meetup"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
                         >
                             Become a host
@@ -896,7 +942,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                     stroke-width="2"
                                     d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                             </svg>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </section>

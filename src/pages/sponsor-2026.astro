@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import EmailModal from "../components/EmailModal.astro";
 import "../styles/global.css";
 ---
 
@@ -384,8 +385,8 @@ import "../styles/global.css";
                             Get in touch and we'll share sponsorship options for
                             2026.
                         </p>
-                        <a
-                            href="mailto:irina@evilmartians.com?subject=SF%20Ruby%202026%20Sponsorship"
+                        <button
+                            data-email-modal="sponsor-2026"
                             class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                         >
                             <svg
@@ -401,12 +402,19 @@ import "../styles/global.css";
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                                 ></path>
                             </svg>
-                            irina@evilmartians.com
-                        </a>
+                            Contact Us
+                        </button>
                     </div>
                 </div>
             </section>
         </main>
+
+        <EmailModal
+            id="sponsor-2026"
+            email="irina@evilmartians.com"
+            subject="SF Ruby 2026 Sponsorship"
+            title="Sponsor SF Ruby 2026"
+        />
 
         <Footer />
     </body>

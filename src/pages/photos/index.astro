@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import EmailModal from "../../components/EmailModal.astro";
 import { getAllPhotoAlbums, getPhotoAlbumsByEvent, getEvent, getAllEvents, GCS_PHOTO_BASE } from "../../data/events.js";
 
 // Get all albums grouped by event
@@ -143,8 +144,8 @@ const totalPhotos = allAlbums.reduce((sum, a) => sum + (a.photoCount || 0), 0);
                 Did you capture great moments at SF Ruby Conference?
                 We'd love to add your photos to our collection!
             </p>
-            <a
-                href="mailto:conference@sfruby.com"
+            <button
+                data-email-modal="share-photos"
                 class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-ruby-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
                 Share your photos
@@ -161,7 +162,7 @@ const totalPhotos = allAlbums.reduce((sum, a) => sum + (a.photoCount || 0), 0);
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     ></path>
                 </svg>
-            </a>
+            </button>
         </div>
     </section>
 
@@ -196,6 +197,13 @@ const totalPhotos = allAlbums.reduce((sum, a) => sum + (a.photoCount || 0), 0);
         <!-- Counter -->
         <div id="lightbox-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm"></div>
     </div>
+
+    <EmailModal
+        id="share-photos"
+        email="conference@sfruby.com"
+        subject="Share Photos from SF Ruby"
+        title="Share Your Photos"
+    />
 </BaseLayout>
 
 <script>

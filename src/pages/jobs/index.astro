@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import EmailModal from "../../components/EmailModal.astro";
 import { getSortedJobs } from "../../data/jobs.js";
 import { getSponsor } from "../../data/sponsors.js";
 
@@ -48,15 +49,15 @@ const jobs = rawJobs.map((job) => {
                     </div>
                 </div>
 
-                <a
-                    href="mailto:irina@evilmartians.com?subject=Post%20a%20Job%20on%20SF%20Ruby"
+                <button
+                    data-email-modal="post-job"
                     class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ruby-600 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
                 >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
                     Post a Job
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -244,4 +245,11 @@ const jobs = rawJobs.map((job) => {
             </div>
         </div>
     </section>
+
+    <EmailModal
+        id="post-job"
+        email="irina@evilmartians.com"
+        subject="Post a Job on SF Ruby"
+        title="Post a Job"
+    />
 </BaseLayout>
