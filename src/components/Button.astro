@@ -37,6 +37,8 @@ interface Props {
     class?: string;
     /** Remove hover scale effect */
     noScale?: boolean;
+    /** Allow any data-* attributes */
+    [key: `data-${string}`]: string | undefined;
 }
 
 const {
@@ -46,6 +48,7 @@ const {
     external = false,
     class: className = "",
     noScale = false,
+    ...rest
 } = Astro.props;
 
 const Tag = href ? "a" : "button";
@@ -94,6 +97,7 @@ const scaleClass = noScale ? "" : "hover:scale-105";
         sizes[size],
         className,
     ]}
+    {...rest}
 >
     <slot />
 </Tag>
