@@ -227,7 +227,9 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     The signature SF Ruby color. Use ruby-500 for primary
                     actions and branding.
                 </p>
-                <div class="grid grid-cols-5 md:grid-cols-11 gap-2">
+                <div
+                    class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-11 gap-2"
+                >
                     <div class="space-y-2">
                         <div class="h-16 rounded-lg bg-ruby-50"></div>
                         <p class="text-xs text-center font-mono">50</p>
@@ -289,7 +291,9 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     For text, backgrounds, and borders. Gray-900 for headings,
                     gray-600 for body text.
                 </p>
-                <div class="grid grid-cols-5 md:grid-cols-10 gap-2">
+                <div
+                    class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-2"
+                >
                     <div class="space-y-2">
                         <div
                             class="h-16 rounded-lg bg-gray-50 border border-gray-200"
@@ -1181,7 +1185,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     </div>
                     <div class="p-4 bg-gray-900 rounded-xl overflow-x-auto">
                         <p class="text-xs text-gray-400 mb-2">CSS Classes</p>
-                        <code class="text-xs text-emerald-400 whitespace-pre"
+                        <code
+                            class="text-xs text-emerald-400 whitespace-pre-wrap break-all"
                             >bg-white rounded-xl border border-gray-200 p-6
                             transition-all duration-300 hover:shadow-lg
                             hover:border-ruby-200</code
@@ -1215,7 +1220,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     </div>
                     <div class="p-4 bg-gray-900 rounded-xl overflow-x-auto">
                         <p class="text-xs text-gray-400 mb-2">CSS Classes</p>
-                        <code class="text-xs text-emerald-400 whitespace-pre"
+                        <code
+                            class="text-xs text-emerald-400 whitespace-pre-wrap break-all"
                             >bg-white rounded-2xl border border-gray-100
                             overflow-hidden transition-all duration-300
                             hover:shadow-2xl hover:-translate-y-1</code
@@ -1247,7 +1253,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
 
                 <div class="mb-8 p-4 bg-gray-900 rounded-xl">
                     <p class="text-xs text-gray-400 mb-2">Usage</p>
-                    <code class="text-xs text-emerald-400 whitespace-pre"
+                    <code
+                        class="text-xs text-emerald-400 whitespace-pre-wrap break-words"
                         >&lt;!-- Add modal component --&gt; &lt;EmailModal
                         id="contact" email="hello@example.com" subject="Hello"
                         title="Get in Touch" /&gt; &lt;!-- Trigger with button
@@ -1353,7 +1360,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     <ul class="text-sm text-gray-300 space-y-1">
                         <li>
                             • Fixed position with <code class="text-emerald-400"
-                                >z-50</code>
+                                >z-50</code
+                            >
                         </li>
                         <li>
                             • Scroll-triggered background: transparent → white
@@ -1494,7 +1502,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 <div class="p-4 bg-gray-900 rounded-xl">
                     <p class="text-xs text-gray-400 mb-2">
                         File: <code class="text-emerald-400"
-                            >src/components/Hero.astro</code>
+                            >src/components/Hero.astro</code
+                        >
                     </p>
                     <p class="text-sm text-gray-300">
                         Full-height section with sky-to-indigo gradient and
@@ -1550,7 +1559,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 <div class="p-4 bg-gray-900 rounded-xl">
                     <p class="text-xs text-gray-400 mb-2">
                         File: <code class="text-emerald-400"
-                            >src/components/Newsletter.astro</code>
+                            >src/components/Newsletter.astro</code
+                        >
                     </p>
                     <p class="text-sm text-gray-300">
                         Used on the homepage to drive social follows and
@@ -1630,7 +1640,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 <div class="p-4 bg-gray-900 rounded-xl">
                     <p class="text-xs text-gray-400 mb-2">
                         File: <code class="text-emerald-400"
-                            >src/components/Sponsors.astro</code>
+                            >src/components/Sponsors.astro</code
+                        >
                     </p>
                     <p class="text-sm text-gray-300">
                         Pulls sponsor data from <code class="text-emerald-400"
@@ -1693,7 +1704,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 <div class="p-4 bg-gray-900 rounded-xl">
                     <p class="text-xs text-gray-400 mb-2">
                         File: <code class="text-emerald-400"
-                            >src/components/CloudCards.astro</code>
+                            >src/components/CloudCards.astro</code
+                        >
                     </p>
                     <p class="text-sm text-gray-300">
                         Cards animate in with staggered <code
@@ -1750,7 +1762,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     >
                         <p class="text-xs text-gray-400 mb-2">
                             File: <code class="text-emerald-400"
-                                >src/components/Testimonials.astro</code>
+                                >src/components/Testimonials.astro</code
+                            >
                         </p>
                         <p class="text-sm text-gray-300">
                             Grid layout with quote icon, blockquote, and author
@@ -1829,7 +1842,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                 <div class="p-4 bg-gray-900 rounded-xl">
                     <p class="text-xs text-gray-400 mb-2">
                         File: <code class="text-emerald-400"
-                            >src/components/KeyTopics.astro</code>
+                            >src/components/KeyTopics.astro</code
+                        >
                     </p>
                     <p class="text-sm text-gray-300">
                         4-column responsive grid with custom icons for each
@@ -2116,12 +2130,14 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     <div class="p-4 bg-gray-900 rounded-xl">
                         <p class="text-xs text-gray-400 mb-2">
                             File: <code class="text-emerald-400"
-                                >src/components/StartupCard.astro</code>
+                                >src/components/StartupCard.astro</code
+                            >
                         </p>
                         <p class="text-sm text-gray-300 mb-3">
                             Props: <code class="text-emerald-400">startup</code> object,
                             <code class="text-emerald-400">compact</code>, <code
-                                class="text-emerald-400">hasJobs</code>
+                                class="text-emerald-400">hasJobs</code
+                            >
                         </p>
                         <p class="text-sm text-gray-300">
                             Badges shown based on data: valuation (tier),
@@ -2185,7 +2201,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     <div class="p-4 bg-gray-900 rounded-xl">
                         <p class="text-xs text-gray-400 mb-2">
                             File: <code class="text-emerald-400"
-                                >src/components/JobCard.astro</code>
+                                >src/components/JobCard.astro</code
+                            >
                         </p>
                         <p class="text-sm text-gray-300 mb-3">
                             Props: <code class="text-emerald-400">job</code> object
@@ -2245,7 +2262,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     <div class="p-4 bg-gray-900 rounded-xl">
                         <p class="text-xs text-gray-400 mb-2">
                             File: <code class="text-emerald-400"
-                                >src/components/MeetupCard.astro</code>
+                                >src/components/MeetupCard.astro</code
+                            >
                         </p>
                         <p class="text-sm text-gray-300 mb-3">
                             Props: <code class="text-emerald-400">meetup</code> object,
@@ -2297,7 +2315,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     <div class="p-4 bg-gray-900 rounded-xl">
                         <p class="text-xs text-gray-400 mb-2">
                             File: <code class="text-emerald-400"
-                                >src/components/TalkCard.astro</code>
+                                >src/components/TalkCard.astro</code
+                            >
                         </p>
                         <p class="text-sm text-gray-300 mb-3">
                             Props: <code class="text-emerald-400">talk</code> object
@@ -2352,7 +2371,8 @@ import DistanceBadge from "../components/DistanceBadge.astro";
                     <div class="p-4 bg-gray-900 rounded-xl">
                         <p class="text-xs text-gray-400 mb-2">
                             File: <code class="text-emerald-400"
-                                >src/components/NewsCard.astro</code>
+                                >src/components/NewsCard.astro</code
+                            >
                         </p>
                         <p class="text-sm text-gray-300 mb-3">
                             Props: <code class="text-emerald-400">news</code> object
