@@ -2,11 +2,16 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import TalkModal from "../../components/TalkModal.astro";
 import { talks, getAllTags } from "../../data/talks.js";
-import { slotAssignments } from "../../data/schedule.js";
+import { slotAssignments, scheduleSlots } from "../../data/schedule.js";
 import { getSpeaker, speakers } from "../../data/speakers.js";
 
-// Get all conference talk IDs from schedule assignments
-const conferenceTalkIds = new Set(Object.values(slotAssignments));
+// Get only Day 1 & Day 2 conference talk IDs from schedule assignments (exclude Day 3 community events)
+const day1And2SlotIds = Object.keys(scheduleSlots).filter(
+    (slotId) => scheduleSlots[slotId].day <= 2
+);
+const conferenceTalkIds = new Set(
+    day1And2SlotIds.map((slotId) => slotAssignments[slotId]).filter(Boolean)
+);
 
 // Get all talks as array and separate by event type
 const allTalks = Object.values(talks);

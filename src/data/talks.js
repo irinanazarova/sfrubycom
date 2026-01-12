@@ -66,6 +66,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["open-source", "startups", "community"],
+    youtubeId: "Y_J84x5ePUs",
   },
   "rails-asset-pipeline": {
     id: "rails-asset-pipeline",
@@ -168,6 +169,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["architecture", "monolith", "modularization", "scale"],
+    youtubeId: "-H1GZjECTsU",
   },
   "rails-expertise-distilled": {
     id: "rails-expertise-distilled",
@@ -178,6 +180,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["ai", "agents", "business logic", "monolith"],
+    youtubeId: "-x9Ir3FakDY",
   },
   "performance-starts-at-boot": {
     id: "performance-starts-at-boot",
@@ -188,6 +191,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["performance", "optimization", "ruby"],
+    youtubeId: "FIipSavS5qo",
   },
   "peace-love-crud": {
     id: "peace-love-crud",
@@ -199,6 +203,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["wellness", "burnout", "ai", "personal"],
+    youtubeId: "Cq4sWAf-d5U",
   },
   "ai-interface-mcp-rails": {
     id: "ai-interface-mcp-rails",
@@ -209,6 +214,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["ai", "mcp", "rails", "integration"],
+    youtubeId: "9Ij63xgLHE4",
   },
   "mcp-fog-ruby-inspector": {
     id: "mcp-fog-ruby-inspector",
@@ -219,6 +225,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["ai", "mcp", "tools", "learning"],
+    youtubeId: "3u72MBYDRFA",
   },
   "cloud-data-infrastructure-ruby": {
     id: "cloud-data-infrastructure-ruby",
@@ -227,7 +234,9 @@ export const talks = {
     description:
       "Ruby isn't just for web development. Discover why Ruby is a great choice for building and automating modern cloud data infrastructure. Learn real-world lessons from Bemi AI, an agentic data platform. You'll gain practical skills and be inspired to leverage Ruby for your next infrastructure project!",
     type: "talk",
+    status: "confirmed",
     tags: ["infrastructure", "cloud", "data", "devops"],
+    youtubeId: "tE_gTgnoLw8",
   },
   "boltnew-cto-fireside-chat": {
     id: "boltnew-cto-fireside-chat",
@@ -238,6 +247,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["startups", "ai", "product"],
+    youtubeId: "pzA1Q8sBwcA",
   },
   "operating-rails-production": {
     id: "operating-rails-production",
@@ -248,6 +258,7 @@ export const talks = {
     type: "talk",
     status: "confirmed",
     tags: ["devops", "production", "operations", "deployment"],
+    youtubeId: "2h2XEyOM6lg",
   },
   "pack-it-up-gusto": {
     id: "pack-it-up-gusto",
@@ -380,6 +391,7 @@ export const talks = {
     speakers: [],
     status: "confirmed",
     tags: ["open mic"],
+    youtubeId: "QeC8VfRj-5M",
   },
   "open-mic-2": {
     id: "open-mic-2",
@@ -436,6 +448,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "api"],
+    youtubeId: "LK0CmY72U9w",
   },
   "suppli-demo": {
     id: "suppli-demo",
@@ -446,6 +459,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "fintech"],
+    youtubeId: "nfeEQBmeirg",
   },
   "nexhealth-demo": {
     id: "nexhealth-demo",
@@ -500,6 +514,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "fintech"],
+    youtubeId: "WItgAAtvJhc",
   },
   "spinel-demo": {
     id: "spinel-demo",
@@ -510,6 +525,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "devtools"],
+    youtubeId: "F6dwuKszqWs",
   },
   "coracomputer-demo": {
     id: "coracomputer-demo",
@@ -520,6 +536,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai"],
+    youtubeId: "FNWAKyTX4Uo",
   },
   "terminalwire-demo": {
     id: "terminalwire-demo",
@@ -530,6 +547,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "devtools"],
+    youtubeId: "ExICQ7RDT0E",
   },
   "superconductor-demo": {
     id: "superconductor-demo",
@@ -595,6 +613,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "rails"],
+    youtubeId: "H0XwqkQfiIM",
   },
   "thatch-demo": {
     id: "thatch-demo",
@@ -648,6 +667,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "rails"],
+    youtubeId: "Po-k0sddd0Y",
   },
   "cleary-demo": {
     id: "cleary-demo",
@@ -658,6 +678,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai", "rails"],
+    youtubeId: "nJ6oxetPDMY",
   },
   "bemi-demo": {
     id: "bemi-demo",
@@ -668,6 +689,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["startups", "demos", "products", "ai"],
+    youtubeId: "3s6Je3wTXqE",
   },
   "temporal-demo": {
     id: "temporal-demo",
@@ -678,6 +700,7 @@ export const talks = {
     type: "demo",
     status: "confirmed",
     tags: ["demos", "distributed-systems", "devtools", "sponsor"],
+    youtubeId: "JvCQgUcQNps",
   },
 
   "lucas-film-walk": {
