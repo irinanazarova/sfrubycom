@@ -814,7 +814,7 @@ export const talks = {
     title: "Welcome & Opening Remarks",
     description: "Conference kickoff and welcome from organizers.",
     type: "talk",
-    speakers: ["irina-nazarova"],
+    speakers: ["irina-nazarova", "brittany-martin"],
     status: "confirmed",
     tags: [],
     youtubeId: "Nhe8FXbN0p0",

@@ -679,6 +679,20 @@ export const speakers = {
     bio: "CEO at Evil Martians, co-founder of AnyCable and organizer of the SF Ruby meetup and conference, Irina's passion is to support and champion startups on Rails. A fan of Ruby, open source, and long walks in San Francisco.",
     group: "speaker",
   },
+  "brittany-martin": {
+    id: "brittany-martin",
+    name: "Brittany Martin",
+    title: "Conference MC",
+    company: "Opendoor",
+    role: "Staff Software Engineer",
+    image: "/speaker_brittany.jpg",
+    socials: [
+      "https://x.com/BrittJMartin",
+      "https://www.linkedin.com/in/brittjmartin/",
+    ],
+    bio: "Brittany Martin is a Staff Software Engineer at Opendoor and former host of The Ruby on Rails Podcast. She's passionate about the Ruby community and has been sharing stories from Ruby developers for years. Brittany served as the Main Stage MC for SF Ruby Conference 2025.",
+    group: "speaker",
+  },
 };
 
 // Helper functions
