@@ -683,14 +683,11 @@ export const speakers = {
     id: "brittany-martin",
     name: "Brittany Martin",
     title: "Conference MC",
-    company: "Opendoor",
-    role: "Staff Software Engineer",
+    company: "RoadRunner",
+    role: "Software Engineering Manager",
     image: "/speaker_brittany.jpg",
-    socials: [
-      "https://x.com/BrittJMartin",
-      "https://www.linkedin.com/in/brittjmartin/",
-    ],
-    bio: "Brittany Martin is a Staff Software Engineer at Opendoor and former host of The Ruby on Rails Podcast. She's passionate about the Ruby community and has been sharing stories from Ruby developers for years. Brittany served as the Main Stage MC for SF Ruby Conference 2025.",
+    socials: ["https://www.linkedin.com/in/brittanyjmartin1/"],
+    bio: "Brittany Martin is a Software Engineering Manager at RoadRunner and former host of The Ruby on Rails Podcast. She's passionate about the Ruby community and has been sharing stories from Ruby developers for years. Brittany served as the Main Stage MC for SF Ruby Conference 2025.",
     group: "speaker",
   },
 };
