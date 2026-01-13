@@ -681,13 +681,13 @@ export const speakers = {
   },
   "brittany-martin": {
     id: "brittany-martin",
-    name: "Brittany Martin",
+    name: "Brittany Martin Springer",
     title: "Conference MC",
     company: "RoadRunner",
     role: "Software Engineering Manager",
     image: "/speaker_brittany.jpg",
     socials: ["https://www.linkedin.com/in/brittanyjmartin1/"],
-    bio: "Brittany Martin is a Software Engineering Manager at RoadRunner and former host of The Ruby on Rails Podcast. She's passionate about the Ruby community and has been sharing stories from Ruby developers for years. Brittany served as the Main Stage MC for SF Ruby Conference 2025.",
+    bio: "Brittany Martin Springer is a Software Engineering Manager at RoadRunner and former host of The Ruby on Rails Podcast. She's passionate about the Ruby community and has been sharing stories from Ruby developers for years. Brittany served as the Main Stage MC for SF Ruby Conference 2025.",
     group: "speaker",
   },
 };
