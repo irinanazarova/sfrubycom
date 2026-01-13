@@ -142,6 +142,15 @@ if (!youtubeId) {
             {startup.name}
         </h3>
 
+        <!-- Short pitch -->
+        {
+            startup.description && (
+                <p class="text-sm text-gray-600 line-clamp-2 mb-3">
+                    {startup.description}
+                </p>
+            )
+        }
+
         <!-- Key Facts Row -->
         {
             (startup.founded || startup.funding) && (
