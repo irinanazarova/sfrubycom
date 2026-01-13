@@ -49,7 +49,15 @@ const keynotes = conferenceTalks
     .sort(sortByRecording);
 const regularTalks = conferenceTalks
     .filter((talk) => talk.type === "talk")
-    .sort(sortByRecording);
+    .sort((a: any, b: any) => {
+        // Welcome remarks always first
+        if (a.id === "welcome-remarks-day1") return -1;
+        if (b.id === "welcome-remarks-day1") return 1;
+        // Then sort by recording
+        if (a.youtubeId && !b.youtubeId) return -1;
+        if (!a.youtubeId && b.youtubeId) return 1;
+        return 0;
+    });
 const workshops = conferenceTalks
     .filter((talk) => talk.type === "workshop")
     .sort(sortByRecording);
