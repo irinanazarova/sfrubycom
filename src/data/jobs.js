@@ -1,5 +1,6 @@
 // Job postings data
 import { getSponsor } from "./sponsors.js";
+import { getStartup } from "./startups.js";
 
 export const jobs = {
   "engineering-manager-beyondfinance": {
@@ -251,6 +252,19 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/7307128",
     postedDate: "2025-01-16",
     },*/
+  // Startup jobs (from Ruby startups, not sponsors)
+  "senior-rails-ai-engineer-cactus": {
+    id: "senior-rails-ai-engineer-cactus",
+    title: "Senior Ruby on Rails + AI Engineer",
+    startupId: "cactus",
+    location: "San Mateo, CA (In-person)",
+    type: "Full-time",
+    salary: "$120K - $150K + equity",
+    description:
+      "Cactus is a YC-backed seed-stage startup building the 24/7 AI copilot for home services companies. Work closely with the CTO to develop features for our Ruby on Rails monolith with voice orchestration capabilities. Looking for engineers with expertise building web applications end-to-end with Ruby on Rails, proficiency in full-stack fundamentals (HTTP, HTML, JavaScript, CSS), and ideally AI implementation experience. Must be a self-starter able to independently architect, build, and deploy features.",
+    url: "https://www.ycombinator.com/companies/oncactus/jobs/EQeRwos-senior-ruby-on-rails-ai-engineer",
+    postedDate: "2025-01-13",
+  },
 };
 
 // Helper functions
@@ -278,9 +292,9 @@ export function getSortedJobs() {
   };
 
   return Object.values(jobs).sort((a, b) => {
-    // Get sponsor tiers
-    const sponsorA = getSponsor(a.sponsorId);
-    const sponsorB = getSponsor(b.sponsorId);
+    // Get sponsor tiers (sponsor jobs have priority over startup jobs)
+    const sponsorA = a.sponsorId ? getSponsor(a.sponsorId) : null;
+    const sponsorB = b.sponsorId ? getSponsor(b.sponsorId) : null;
 
     const tierA = sponsorA?.tier || "";
     const tierB = sponsorB?.tier || "";

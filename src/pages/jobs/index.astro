@@ -3,18 +3,40 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import EmailModal from "../../components/EmailModal.astro";
 import { getSortedJobs } from "../../data/jobs.js";
 import { getSponsor } from "../../data/sponsors.js";
+import { getStartup } from "../../data/startups.js";
 
-// Get jobs and enrich with sponsor info
+// Get jobs and enrich with sponsor or startup info
 const rawJobs = getSortedJobs();
 const jobs = rawJobs.map((job) => {
-    const sponsor = getSponsor(job.sponsorId);
-    return {
-        ...job,
-        companyName: sponsor?.name || job.sponsorId,
-        companyLogo: sponsor?.logo || null,
-        tier: sponsor?.tier || null,
-    };
+    // Check if this is a sponsor job or startup job
+    if (job.sponsorId) {
+        const sponsor = getSponsor(job.sponsorId);
+        return {
+            ...job,
+            companyName: sponsor?.name || job.sponsorId,
+            companyLogo: sponsor?.logo || null,
+            tier: sponsor?.tier || null,
+            isStartup: false,
+        };
+    } else if (job.startupId) {
+        const startup = getStartup(job.startupId);
+        return {
+            ...job,
+            companyName: startup?.name || job.startupId,
+            companyLogo: startup?.logo || null,
+            tier: null,
+            isStartup: true,
+            isYC: startup?.isYC || false,
+        };
+    }
+    return job;
 });
+
+// Count unique companies (both sponsors and startups)
+const uniqueCompanies = new Set([
+    ...jobs.filter(j => j.sponsorId).map(j => j.sponsorId),
+    ...jobs.filter(j => j.startupId).map(j => j.startupId),
+]);
 ---
 
 <BaseLayout
@@ -44,7 +66,7 @@ const jobs = rawJobs.map((job) => {
                         <div class="text-sm text-gray-400">Open Positions</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-bold text-emerald-400">{new Set(jobs.map(j => j.sponsorId)).size}</div>
+                        <div class="text-3xl font-bold text-emerald-400">{uniqueCompanies.size}</div>
                         <div class="text-sm text-gray-400">Companies Hiring</div>
                     </div>
                 </div>
@@ -70,17 +92,22 @@ const jobs = rawJobs.map((job) => {
                     {jobs.map((job) => (
                         <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                             <div class="p-8">
-                                <!-- Company Logo -->
-                                {job.companyLogo && (
-                                    <div class="mb-6">
+                                <!-- Company Logo and Badges -->
+                                <div class="flex items-center gap-3 mb-6">
+                                    {job.companyLogo && (
                                         <img
                                             src={job.companyLogo}
                                             alt={job.companyName}
                                             class="h-12 w-auto object-contain"
                                             loading="lazy"
                                         />
-                                    </div>
-                                )}
+                                    )}
+                                    {job.isYC && (
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700">
+                                            YC-backed
+                                        </span>
+                                    )}
+                                </div>
 
                                 <!-- Job Details -->
                                 <div>
@@ -104,6 +131,14 @@ const jobs = rawJobs.map((job) => {
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                                     </svg>
                                                     {job.type}
+                                                </span>
+                                            )}
+                                            {job.salary && (
+                                                <span class="flex items-center gap-1 text-emerald-600 font-medium">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                    {job.salary}
                                                 </span>
                                             )}
                                         </div>
