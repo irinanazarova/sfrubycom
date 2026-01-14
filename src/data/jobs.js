@@ -263,7 +263,7 @@ export const jobs = {
     description:
       "Cactus is a YC-backed seed-stage startup building the 24/7 AI copilot for home services companies. Work closely with the CTO to develop features for our Ruby on Rails monolith with voice orchestration capabilities. Looking for engineers with expertise building web applications end-to-end with Ruby on Rails, proficiency in full-stack fundamentals (HTTP, HTML, JavaScript, CSS), and ideally AI implementation experience. Must be a self-starter able to independently architect, build, and deploy features.",
     url: "https://www.ycombinator.com/companies/oncactus/jobs/EQeRwos-senior-ruby-on-rails-ai-engineer",
-    postedDate: "2025-01-13",
+    postedDate: "2026-01-13",
   },
 };
 
