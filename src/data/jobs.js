@@ -281,33 +281,8 @@ export function getJobsBySponsor(sponsorId) {
 }
 
 export function getSortedJobs() {
-  // Define tier priority (higher number = higher priority)
-  const tierPriority = {
-    "Pickaxe ⛏️": 5,
-    Ruby: 4,
-    "Post Production": 4, // Same price as Ruby
-    Reception: 4, // Premium tier, same level as Ruby
-    Emerald: 3,
-    Travel: 1,
-  };
-
+  // Sort by posted date (newest first)
   return Object.values(jobs).sort((a, b) => {
-    // Get sponsor tiers (sponsor jobs have priority over startup jobs)
-    const sponsorA = a.sponsorId ? getSponsor(a.sponsorId) : null;
-    const sponsorB = b.sponsorId ? getSponsor(b.sponsorId) : null;
-
-    const tierA = sponsorA?.tier || "";
-    const tierB = sponsorB?.tier || "";
-
-    const priorityA = tierPriority[tierA] || 0;
-    const priorityB = tierPriority[tierB] || 0;
-
-    // First sort by tier priority (higher tier first)
-    if (priorityA !== priorityB) {
-      return priorityB - priorityA;
-    }
-
-    // If same tier, sort by posted date (newest first)
     return new Date(b.postedDate) - new Date(a.postedDate);
   });
 }
