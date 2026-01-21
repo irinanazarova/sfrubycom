@@ -145,12 +145,13 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
     <section id="keynotes" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
-                <div class="flex items-center gap-3">
+                <a href="#keynotes" class="flex items-center gap-3 group">
                     <div class="w-1 h-8 bg-ruby-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">
                         SF Ruby Conference 2025 - Keynotes
+                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
                     </h2>
-                </div>
+                </a>
                 <a
                     href="https://www.rubyevents.org/events/sfruby-2025"
                     target="_blank"
@@ -296,12 +297,13 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
     {workshops.length > 0 && (
         <section id="workshops" class="py-12 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center gap-3 mb-8">
+                <a href="#workshops" class="flex items-center gap-3 mb-8 group">
                     <div class="w-1 h-8 bg-emerald-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
                         Workshops
+                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
                     </h2>
-                </div>
+                </a>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {workshops.map((talk) => {
@@ -382,12 +384,13 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
     <!-- Conference Talks -->
     <section id="talks" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-3 mb-8">
+            <a href="#talks" class="flex items-center gap-3 mb-8 group">
                 <div class="w-1 h-8 bg-ruby-500 rounded-full"></div>
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">
                     Conference Talks
+                    <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
                 </h2>
-            </div>
+            </a>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {regularTalks.map((talk) => {
@@ -465,12 +468,13 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
     {startupDemos.length > 0 && (
         <section id="demos" class="py-12 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center gap-3 mb-8">
+                <a href="#demos" class="flex items-center gap-3 mb-8 group">
                     <div class="w-1 h-8 bg-amber-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">
                         Startup Demos
+                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
                     </h2>
-                </div>
+                </a>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     {startupDemos.map((talk) => {
@@ -548,12 +552,13 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
     <section id="meetups" class="py-12 bg-gray-50 border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
-                <div class="flex items-center gap-3">
+                <a href="#meetups" class="flex items-center gap-3 group">
                     <div class="w-1 h-8 bg-sky-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-sky-600 transition-colors">
                         Meetup Talks
+                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
                     </h2>
-                </div>
+                </a>
                 <a
                     href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup"
                     target="_blank"
