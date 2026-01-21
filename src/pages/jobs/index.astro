@@ -110,7 +110,7 @@ const uniqueCompanies = new Set([
     {companies.length > 0 && (
         <nav class="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
+                <div class="flex flex-wrap items-center gap-2 py-3">
                     {companies.map((company) => (
                         <a
                             href={`#${company.companyId}`}
