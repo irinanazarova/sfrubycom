@@ -262,7 +262,15 @@
         // Handle ESC key
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && modal.open) {
-                closeModal();
+                // Use URL-aware close if available, otherwise regular close
+                if (
+                    typeof (window as any).closeTalkModalAndUpdateUrl ===
+                    "function"
+                ) {
+                    (window as any).closeTalkModalAndUpdateUrl();
+                } else {
+                    closeModal();
+                }
             }
         });
 
@@ -276,7 +284,15 @@
                 ".modal-panel",
             ) as HTMLElement;
             if (modalPanel && !modalPanel.contains(e.target as Node)) {
-                closeModal();
+                // Use URL-aware close if available, otherwise regular close
+                if (
+                    typeof (window as any).closeTalkModalAndUpdateUrl ===
+                    "function"
+                ) {
+                    (window as any).closeTalkModalAndUpdateUrl();
+                } else {
+                    closeModal();
+                }
             }
         });
 

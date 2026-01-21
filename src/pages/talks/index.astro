@@ -683,19 +683,40 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
                 const talkId = card.getAttribute("data-talk-id");
                 if (!talkId) return;
 
-                const talk = (window as any).talksData[talkId];
-                if (!talk) return;
-
-                // Build modal content
-                const modalHtml = buildTalkModalContent(talk);
-
-                // Show modal
-                if (typeof (window as any).setTalkModalContent === "function") {
-                    (window as any).setTalkModalContent(modalHtml);
-                    (window as any).showTalkModal();
-                }
+                openTalkModal(talkId);
             });
         });
+    }
+
+    function openTalkModal(talkId: string) {
+        const talk = (window as any).talksData[talkId];
+        if (!talk) return;
+
+        // Update URL with talk parameter (without page reload)
+        const url = new URL(window.location.href);
+        url.searchParams.set("talk", talkId);
+        window.history.pushState({ talkId }, "", url.toString());
+
+        // Build modal content
+        const modalHtml = buildTalkModalContent(talk);
+
+        // Show modal
+        if (typeof (window as any).setTalkModalContent === "function") {
+            (window as any).setTalkModalContent(modalHtml);
+            (window as any).showTalkModal();
+        }
+    }
+
+    function closeTalkModalAndUpdateUrl() {
+        // Remove talk parameter from URL
+        const url = new URL(window.location.href);
+        url.searchParams.delete("talk");
+        window.history.pushState({}, "", url.toString());
+
+        // Close the modal
+        if (typeof (window as any).hideTalkModal === "function") {
+            (window as any).hideTalkModal();
+        }
     }
 
     function buildTalkModalContent(talk: any): string {
@@ -833,6 +854,7 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
                 <!-- Close button -->
                 <button
                     id="talkModalCloseBtn"
+                    onclick="if(window.closeTalkModalAndUpdateUrl) window.closeTalkModalAndUpdateUrl();"
                     class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors z-10"
                     aria-label="Close modal"
                 >
@@ -915,8 +937,21 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
                 (window as any).setTalkModalContent(modalHtml);
                 (window as any).showTalkModal();
             }
+        } else {
+            // No talk in URL, make sure modal is closed
+            if (typeof (window as any).hideTalkModal === "function") {
+                (window as any).hideTalkModal();
+            }
         }
     }
+
+    // Handle browser back/forward buttons
+    window.addEventListener("popstate", () => {
+        checkUrlForTalk();
+    });
+
+    // Export close function for use in modal
+    (window as any).closeTalkModalAndUpdateUrl = closeTalkModalAndUpdateUrl;
 
     // Initialize when DOM is ready
     if (document.readyState === "loading") {
