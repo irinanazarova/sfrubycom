@@ -15,6 +15,7 @@ const jobs = rawJobs.map((job) => {
             ...job,
             companyName: sponsor?.name || job.sponsorId,
             companyLogo: sponsor?.logo || null,
+            companyId: job.sponsorId,
             tier: sponsor?.tier || null,
             isStartup: false,
         };
@@ -24,6 +25,7 @@ const jobs = rawJobs.map((job) => {
             ...job,
             companyName: startup?.name || job.startupId,
             companyLogo: startup?.logo || null,
+            companyId: job.startupId,
             tier: null,
             isStartup: true,
             isYC: startup?.isYC || false,
@@ -31,6 +33,26 @@ const jobs = rawJobs.map((job) => {
     }
     return job;
 });
+
+// Group jobs by company
+const jobsByCompany = jobs.reduce((acc, job) => {
+    const companyId = job.companyId;
+    if (!acc[companyId]) {
+        acc[companyId] = {
+            companyId,
+            companyName: job.companyName,
+            companyLogo: job.companyLogo,
+            isStartup: job.isStartup,
+            isYC: job.isYC,
+            jobs: []
+        };
+    }
+    acc[companyId].jobs.push(job);
+    return acc;
+}, {});
+
+// Convert to array and sort by number of jobs (most jobs first)
+const companies = Object.values(jobsByCompany).sort((a, b) => b.jobs.length - a.jobs.length);
 
 // Count unique companies (both sponsors and startups)
 const uniqueCompanies = new Set([
@@ -84,84 +106,123 @@ const uniqueCompanies = new Set([
         </div>
     </section>
 
-    <!-- Jobs Listing Section -->
-    <section class="py-20 bg-gradient-to-b from-white to-cloud-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {jobs.length > 0 ? (
-                <div class="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
-                    {jobs.map((job) => (
-                        <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                            <div class="p-8">
-                                <!-- Company Logo and Badges -->
-                                <div class="flex items-center gap-3 mb-6">
-                                    {job.companyLogo && (
-                                        <img
-                                            src={job.companyLogo}
-                                            alt={job.companyName}
-                                            class="h-12 w-auto object-contain"
-                                            loading="lazy"
-                                        />
-                                    )}
-                                    {job.isYC && (
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700">
-                                            YC-backed
-                                        </span>
-                                    )}
-                                </div>
+    <!-- Navigation Menu -->
+    {companies.length > 0 && (
+        <nav class="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
+                    {companies.map((company) => (
+                        <a
+                            href={`#${company.companyId}`}
+                            class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-ruby-600 hover:bg-ruby-50 transition-colors whitespace-nowrap"
+                        >
+                            {company.companyLogo ? (
+                                <img
+                                    src={company.companyLogo}
+                                    alt={company.companyName}
+                                    class="h-5 w-5 object-contain"
+                                />
+                            ) : (
+                                <div class="w-2 h-2 bg-ruby-500 rounded-full"></div>
+                            )}
+                            {company.companyName}
+                            <span class="text-xs text-gray-400">({company.jobs.length})</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </nav>
+    )}
 
-                                <!-- Job Details -->
-                                <div>
-                                    <div class="mb-4">
-                                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                                            {job.title}
-                                        </h2>
-                                        <div class="flex flex-wrap gap-3 text-sm text-gray-600">
-                                            {job.location && (
-                                                <span class="flex items-center gap-1">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+    <!-- Jobs Listing Section -->
+    <section class="py-12 bg-gradient-to-b from-white to-cloud-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {companies.length > 0 ? (
+                <div class="space-y-16 max-w-4xl mx-auto">
+                    {companies.map((company) => (
+                        <section id={company.companyId} class="scroll-mt-32">
+                            <!-- Company Header -->
+                            <a href={`#${company.companyId}`} class="flex items-center gap-4 mb-8 group">
+                                <div class="w-1 h-10 bg-ruby-500 rounded-full"></div>
+                                {company.companyLogo && (
+                                    <img
+                                        src={company.companyLogo}
+                                        alt={company.companyName}
+                                        class="h-10 w-auto object-contain"
+                                    />
+                                )}
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">
+                                    {company.companyName}
+                                    <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-2 transition-opacity">#</span>
+                                </h2>
+                                {company.isYC && (
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700">
+                                        YC-backed
+                                    </span>
+                                )}
+                            </a>
+
+                            <!-- Jobs for this company -->
+                            <div class="grid grid-cols-1 gap-6">
+                                {company.jobs.map((job) => (
+                                    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                                        <div class="p-8">
+                                            <!-- Job Details -->
+                                            <div>
+                                                <div class="mb-4">
+                                                    <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">
+                                                        {job.title}
+                                                    </h3>
+                                                    <div class="flex flex-wrap gap-3 text-sm text-gray-600">
+                                                        {job.location && (
+                                                            <span class="flex items-center gap-1">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                                </svg>
+                                                                {job.location}
+                                                            </span>
+                                                        )}
+                                                        {job.type && (
+                                                            <span class="flex items-center gap-1">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                                </svg>
+                                                                {job.type}
+                                                            </span>
+                                                        )}
+                                                        {job.salary && (
+                                                            <span class="flex items-center gap-1 text-emerald-600 font-medium">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                                </svg>
+                                                                {job.salary}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                <div class="prose prose-lg max-w-none text-gray-700 mb-6">
+                                                    <p>{job.description}</p>
+                                                </div>
+
+                                                <a
+                                                    href={job.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-ruby-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+                                                >
+                                                    View Job Details
+                                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                                     </svg>
-                                                    {job.location}
-                                                </span>
-                                            )}
-                                            {job.type && (
-                                                <span class="flex items-center gap-1">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                                    </svg>
-                                                    {job.type}
-                                                </span>
-                                            )}
-                                            {job.salary && (
-                                                <span class="flex items-center gap-1 text-emerald-600 font-medium">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                    </svg>
-                                                    {job.salary}
-                                                </span>
-                                            )}
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="prose prose-lg max-w-none text-gray-700 mb-6">
-                                        <p>{job.description}</p>
-                                    </div>
-
-                                    <a
-                                        href={job.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-ruby-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
-                                    >
-                                        View Job Details
-                                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                        </svg>
-                                    </a>
-                                </div>
+                                ))}
                             </div>
-                        </div>
+                        </section>
                     ))}
                 </div>
             ) : (
