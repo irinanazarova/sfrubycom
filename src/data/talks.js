@@ -23,6 +23,13 @@ export const talks = {
     type: "keynote",
     status: "confirmed",
     tags: ["ai", "ruby", "future"],
+    noVideo: true,
+    noVideoReason: "Recording unavailable due to technical issues",
+    blogPost:
+      "https://obie.medium.com/ruby-was-ready-from-the-start-4b089b17babb",
+    blogPostTitle: "Ruby Was Ready from the Start",
+    coverImage:
+      "https://miro.medium.com/v2/resize:fit:4096/format:webp/0*MudvRlo9a_KAGA1c",
   },
   "rails-ai-ruby-llm": {
     id: "rails-ai-ruby-llm",
@@ -37,12 +44,13 @@ export const talks = {
   },
   "rails-x-keynote": {
     id: "rails-x-keynote",
-    title: "Rails X",
+    title: "Rails X: Shaping the Future of Rails Together",
     speakerId: "vladimir-dementyev",
-    description: "The mysterious Rails X. Stay tuned!",
+    description:
+      "Vladimir Dementyev explores what a future version of Rails needs to become—and who's actually building it. Drawing from community feedback, competitor analysis (yes, Laravel comes up), and years of open source maintenance at Evil Martians, this keynote examines where Rails falls short today: front-end instability, missing starter kits, lack of official UI components, and the modularization problem.<br><br>The talk covers concrete technical solutions already available (Vite Rails, Bundle Bun, Action Cable Next, Active Job continuations) and predicts what Rails must embrace: better developer tooling, AI-native features, multiple front-end options beyond Hotwire, and accessible onboarding for \"vibe coders.\"<br><br>Includes a live demo of Rails running entirely in the browser via WASM, with AI-assisted feature development through Bolt.<br><br>The conclusion: Rails X isn't waiting on core team approval. It's the messy, collaborative ecosystem the community is already building.",
     type: "keynote",
     status: "confirmed",
-    tags: [],
+    tags: ["rails", "future", "tooling", "ai"],
     youtubeId: "hP4SkKH4IsA",
   },
 
@@ -329,6 +337,7 @@ export const talks = {
     tags: ["ai", "agents", "rails", "hands-on"],
     link: "https://lu.ma/ygn5m3pm",
     linkText: "Sign Up for Workshop",
+    youtubeId: "f20j7Cmq7JI",
   },
   "inertia-rails-workshop": {
     id: "inertia-rails-workshop",
@@ -347,6 +356,7 @@ export const talks = {
     tags: ["inertia", "rails", "frontend", "spa"],
     link: "https://lu.ma/67m5dqr1",
     linkText: "Sign Up for Workshop",
+    youtubeId: "XBZcLD5xcPY",
   },
   "upskill-diving-into-rails": {
     id: "upskill-diving-into-rails",
@@ -365,6 +375,7 @@ export const talks = {
     tags: ["rails", "open-source", "gems", "learning"],
     link: "https://lu.ma/jxv24vkp",
     linkText: "Sign Up for Workshop",
+    youtubeId: "N5VpMNgbrsg",
   },
   "dynamic-ruby-toolkit-workshop": {
     id: "dynamic-ruby-toolkit-workshop",
@@ -380,6 +391,7 @@ export const talks = {
     tags: [],
     link: "https://lu.ma/ekzvr472",
     linkText: "Sign Up for Workshop",
+    youtubeId: "c0v3qj06nfc",
   },
   "open-mic": {
     id: "open-mic",
