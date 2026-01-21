@@ -79,8 +79,7 @@
         width: 95vw;
         background: white;
         border-radius: 1rem;
-        box-shadow:
-            0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         overflow: hidden;
     }
 
@@ -207,6 +206,11 @@
             if (!modal) return;
 
             try {
+                // Clear modal content to stop any playing videos
+                if (modalContent) {
+                    modalContent.innerHTML = "";
+                }
+
                 if (modal.open && typeof modal.close === "function") {
                     modal.close();
                 } else {
@@ -223,6 +227,10 @@
                 document.body.classList.remove("modal-open");
             } catch (error) {
                 console.error("TalkModal: Error closing modal:", error);
+                // Clear content even on error
+                if (modalContent) {
+                    modalContent.innerHTML = "";
+                }
                 modal.removeAttribute("open");
                 modal.style.display = "";
                 modal.style.visibility = "";
@@ -264,7 +272,9 @@
 
         // Handle backdrop click to close
         modal.addEventListener("click", (e) => {
-            const modalPanel = modal.querySelector(".modal-panel") as HTMLElement;
+            const modalPanel = modal.querySelector(
+                ".modal-panel",
+            ) as HTMLElement;
             if (modalPanel && !modalPanel.contains(e.target as Node)) {
                 closeModal();
             }
