@@ -280,6 +280,10 @@ export function getJobsBySponsor(sponsorId) {
   return Object.values(jobs).filter((job) => job.sponsorId === sponsorId);
 }
 
+export function getJobsByStartup(startupId) {
+  return Object.values(jobs).filter((job) => job.startupId === startupId);
+}
+
 export function getSortedJobs() {
   // Sort by posted date (newest first)
   return Object.values(jobs).sort((a, b) => {

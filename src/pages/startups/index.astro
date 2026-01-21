@@ -7,7 +7,11 @@ import {
     startups as startupsData,
 } from "../../data/startups.js";
 import { talks, getTalk } from "../../data/talks.js";
-import { jobs as jobsData, getJobsBySponsor } from "../../data/jobs.js";
+import {
+    jobs as jobsData,
+    getJobsBySponsor,
+    getJobsByStartup,
+} from "../../data/jobs.js";
 import { getSpeaker } from "../../data/speakers.js";
 
 const allStartups = getAllStartups();
@@ -46,7 +50,10 @@ const unicorns = startups.filter(
 const enhancedStartupsData: Record<string, any> = {};
 for (const [id, startup] of Object.entries(startupsData)) {
     const sponsorId = startupToSponsorMap[id];
-    const startupJobs = sponsorId ? getJobsBySponsor(sponsorId) : [];
+    // Get jobs from both sponsor ID (if exists) and startup ID
+    const sponsorJobs = sponsorId ? getJobsBySponsor(sponsorId) : [];
+    const directStartupJobs = getJobsByStartup(id);
+    const startupJobs = [...sponsorJobs, ...directStartupJobs];
     const demoTalk = getTalk(`${id}-demo`);
     enhancedStartupsData[id] = {
         ...startup,
