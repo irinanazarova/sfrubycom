@@ -1,0 +1,10 @@
+---
+interface Props {
+  layout?: 'centered' | 'two-column' | 'card-grid' | 'fullscreen' | 'stacked';
+  background?: 'dark' | 'gradient-pink' | 'gradient-purple' | 'gradient-yellow' | 'gradient-green';
+}
+const { layout = 'centered', background = 'dark' } = Astro.props;
+---
+<section class:list={['slide', `slide-${layout}`, `slide-bg-${background}`]}>
+  <slot />
+</section>

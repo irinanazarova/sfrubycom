@@ -1,0 +1,160 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Demo data extracted from talks.js
+const demos = [
+  { id: "bolt_new", name: "Bolt.new", youtubeId: "zXbAWkUueUM", category: "AI/DevTools", yc: false, milestone: "$40M ARR in 5 months" },
+  { id: "stepful", name: "Stepful", youtubeId: "GoFbMl3TBmw", category: "Healthcare", yc: true },
+  { id: "accessgrid", name: "AccessGrid", youtubeId: "LK0CmY72U9w", category: "Infrastructure" },
+  { id: "suppli", name: "Suppli", youtubeId: "nfeEQBmeirg", category: "Fintech" },
+  { id: "nexhealth", name: "NexHealth", youtubeId: "21hf1Ue1o6I", category: "Healthcare", milestone: "Unicorn" },
+  { id: "simple_ai", name: "Simple AI", youtubeId: "Bl7Dq6aYidE", category: "AI", yc: true },
+  { id: "sixfold", name: "Sixfold", youtubeId: "L91KPH6f_q8", category: "AI/Insurtech" },
+  { id: "cactus", name: "Cactus", youtubeId: "kdVAm_yzqpE", category: "AI", yc: true },
+  { id: "tend", name: "Tend Cash", youtubeId: "WItgAAtvJhc", category: "Fintech" },
+  { id: "spinel", name: "Spinel", youtubeId: "F6dwuKszqWs", category: "DevTools" },
+  { id: "coracomputer", name: "Cora Computer", youtubeId: "FNWAKyTX4Uo", category: "AI", special: "compound-engineering-plugin author" },
+  { id: "terminalwire", name: "Terminalwire", youtubeId: "ExICQ7RDT0E", category: "DevTools" },
+  { id: "superconductor", name: "Superconductor", youtubeId: "P8myd01GxAA", category: "AI/DevTools" },
+  { id: "aisquared", name: "AI Squared", youtubeId: "A3smrePJj4M", category: "Data/OpenSource" },
+  { id: "recognize", name: "Recognize", youtubeId: "Ou7CGuQUy6Q", category: "HR" },
+  { id: "fin", name: "Fin (Intercom)", youtubeId: "5MepvHfFXgk", category: "AI" },
+  { id: "ubicloud", name: "Ubicloud", youtubeId: "rhmINL-nK5o", category: "Infrastructure/OpenSource", yc: true },
+  { id: "chatwithwork", name: "Chatwithwork", youtubeId: "H0XwqkQfiIM", category: "AI", special: "Rails 8, RubyLLM" },
+  { id: "thatch", name: "Thatch", youtubeId: "7M4dzK9wY7I", category: "Healthcare" },
+  { id: "angellist", name: "AngelList", youtubeId: "931PpANN8bs", category: "Fintech" },
+  { id: "finta", name: "Finta", youtubeId: "FDHtRONY4kk", category: "Fintech", yc: true },
+  { id: "planetscale", name: "PlanetScale", youtubeId: "WxdB4sg2eIM", category: "Infrastructure" },
+  { id: "llamapress", name: "llamapress", youtubeId: "Po-k0sddd0Y", category: "AI" },
+  { id: "cleary", name: "Cleary", youtubeId: "nJ6oxetPDMY", category: "AI/HR" },
+  { id: "bemi", name: "Bemi AI", youtubeId: "3s6Je3wTXqE", category: "AI" },
+  { id: "temporal", name: "Temporal", youtubeId: "JvCQgUcQNps", category: "Infrastructure" },
+];
+
+const categories = [...new Set(demos.map(d => d.category))].sort();
+---
+
+<Layout title="Startups on Rails 2026 - RubyConfTH">
+  <main class="max-w-6xl mx-auto px-4 py-12">
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold text-white mb-4">Startups on Rails 2026</h1>
+      <p class="text-xl text-gray-300">RubyConfTH Bangkok - Talk Draft</p>
+      <p class="text-gray-400 mt-2">Based on SF Ruby Conference November 2025 Startup Demos</p>
+    </header>
+
+    <!-- Key Questions -->
+    <section class="mb-12 bg-gray-800 rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-white mb-4">The Questions We're Answering</h2>
+      <ol class="list-decimal list-inside space-y-2 text-gray-300">
+        <li><strong>Who</strong> is building new projects with Ruby and Rails today?</li>
+        <li><strong>Why</strong> did they choose Ruby and Rails — and how does this help them?</li>
+        <li><strong>What's missing</strong> — what can we build together for these startups to become the next Shopify, Figma, Chime?</li>
+      </ol>
+    </section>
+
+    <!-- Key References -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-4">Key References</h2>
+      <div class="grid gap-4 md:grid-cols-2">
+        <a href="https://www.youtube.com/watch?v=hP4SkKH4IsA" target="_blank" class="block bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition">
+          <h3 class="font-bold text-white">Rails X: Shaping the Future Together</h3>
+          <p class="text-gray-400 text-sm">Vladimir Dementyev's keynote on building Rails' future</p>
+        </a>
+        <a href="https://github.com/EveryInc/compound-engineering-plugin" target="_blank" class="block bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition">
+          <h3 class="font-bold text-white">compound-engineering-plugin</h3>
+          <p class="text-gray-400 text-sm">By Kieran Klaassen (Cora Computer) - Important new tool</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Startup Categories -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-4">Who's Building with Rails</h2>
+      <div class="flex flex-wrap gap-2 mb-6">
+        {categories.map(cat => (
+          <span class="px-3 py-1 bg-ruby-600 text-white text-sm rounded-full">{cat}</span>
+        ))}
+      </div>
+      <p class="text-gray-300">
+        <strong>{demos.length} startups</strong> demoed at SF Ruby Conference, spanning AI, Healthcare, Fintech, DevTools, and Infrastructure.
+      </p>
+    </section>
+
+    <!-- Milestones -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-4">Inspiring Milestones</h2>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {demos.filter(d => d.milestone).map(demo => (
+          <div class="bg-gray-800 rounded-lg p-4">
+            <h3 class="font-bold text-white">{demo.name}</h3>
+            <p class="text-ruby-400 font-semibold">{demo.milestone}</p>
+          </div>
+        ))}
+        <div class="bg-gray-800 rounded-lg p-4 border-2 border-dashed border-gray-600">
+          <h3 class="font-bold text-gray-400">More to discover...</h3>
+          <p class="text-gray-500 text-sm">From transcript analysis</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Videos Grid -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-white mb-4">All Startup Demos</h2>
+      <p class="text-gray-400 mb-6">Click to watch. Transcripts needed for analysis.</p>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {demos.map(demo => (
+          <a
+            href={`https://www.youtube.com/watch?v=${demo.youtubeId}`}
+            target="_blank"
+            class="block bg-gray-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-ruby-500 transition group"
+          >
+            <img
+              src={`https://img.youtube.com/vi/${demo.youtubeId}/mqdefault.jpg`}
+              alt={demo.name}
+              class="w-full aspect-video object-cover group-hover:opacity-80 transition"
+            />
+            <div class="p-4">
+              <div class="flex items-center gap-2 mb-1">
+                <h3 class="font-bold text-white">{demo.name}</h3>
+                {demo.yc && <span class="px-2 py-0.5 bg-orange-600 text-white text-xs rounded">YC</span>}
+              </div>
+              <p class="text-gray-400 text-sm">{demo.category}</p>
+              {demo.special && <p class="text-ruby-400 text-xs mt-1">{demo.special}</p>}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="bg-gray-800 rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-white mb-4">Next Steps</h2>
+      <ul class="space-y-2 text-gray-300">
+        <li class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded border border-gray-500 flex-shrink-0"></span>
+          Fetch YouTube transcripts for all demo videos
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded border border-gray-500 flex-shrink-0"></span>
+          Analyze transcripts for "why Rails" themes
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded border border-gray-500 flex-shrink-0"></span>
+          Research startup milestones and funding rounds
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded border border-gray-500 flex-shrink-0"></span>
+          Review compound-engineering-plugin capabilities
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded border border-gray-500 flex-shrink-0"></span>
+          Extract key points from Vladimir's Rails X keynote
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded border border-gray-500 flex-shrink-0"></span>
+          Build final content sections
+        </li>
+      </ul>
+    </section>
+  </main>
+</Layout>

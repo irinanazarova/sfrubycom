@@ -1,0 +1,893 @@
+---
+import PresentationLayout from "../../layouts/PresentationLayout.astro";
+import "../../styles/neon-rpg.css";
+---
+
+<PresentationLayout title="Presentation Lookbook - Design System">
+  <style>
+    body {
+      font-family: "Martian Mono", monospace;
+      background: var(--dark-bg);
+      color: #e2e8f0;
+    }
+
+    .lookbook {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section {
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 45, 149, 0.2);
+    }
+
+    .section-title {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .section-desc {
+      color: #808080;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .component-box {
+      background: var(--dark-card);
+      border: 1px solid var(--neon-purple);
+      padding: 1.5rem;
+    }
+
+    .component-label {
+      color: var(--neon-yellow);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .code-block {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      overflow-x: auto;
+      color: var(--neon-green);
+      white-space: pre;
+    }
+
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .usage-note {
+      background: rgba(0, 255, 255, 0.05);
+      border-left: 2px solid var(--neon-cyan);
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+      color: #b0b0b0;
+    }
+
+    .big-number {
+      font-size: 3rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    /* Demo button to trigger animations */
+    .demo-btn {
+      background: var(--neon-purple);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .anim-demo {
+      padding: 1rem;
+      background: var(--dark-card);
+      border: 1px solid var(--neon-purple);
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+  </style>
+
+  <div class="lookbook">
+    <header style="text-align: center; margin-bottom: 4rem;">
+      <h1 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 1rem;">
+        Neon RPG Design System
+      </h1>
+      <p class="text-neon-cyan">Usage Guide &amp; Reference</p>
+      <p style="color: #606060; margin-top: 1rem; font-size: 0.85rem;">
+        Styles: /src/styles/neon-rpg.css
+      </p>
+    </header>
+
+    <!-- ==================== ANIMATIONS ==================== -->
+    <section class="section">
+      <h2 class="section-title">Animations</h2>
+      <p class="section-desc">Add animation classes to any element. Combine with cards, text, or custom elements.</p>
+
+      <!-- ENTRANCE ANIMATIONS -->
+      <div class="component-box full-width" style="margin-bottom: 1.5rem;">
+        <span class="component-label">Entrance Animations (play once)</span>
+        <p style="color: #909090; font-size: 0.85rem; margin-bottom: 1rem;">
+          These play once when the element appears. Click "Replay" to see them again.
+        </p>
+
+        <div class="demo-row">
+          <div class="anim-demo" id="demo-glitch">anim-glitch</div>
+          <div class="anim-demo" id="demo-jitter">anim-jitter</div>
+          <div class="anim-demo" id="demo-blink">anim-blink-in</div>
+          <div class="anim-demo" id="demo-slide-left">anim-slide-left</div>
+          <div class="anim-demo" id="demo-scale">anim-scale-in</div>
+          <div class="anim-demo" id="demo-typewriter">anim-typewriter</div>
+          <button class="demo-btn" onclick="replayEntrance()">Replay All</button>
+        </div>
+
+        <div class="usage-note">
+          <strong>Usage:</strong> Add class directly to element<br>
+          <code><h2 class="anim-glitch">Title</h2></code><br>
+          <code><div class="rpg-card anim-slide-left">...</div></code><br><br>
+          <strong>With reveal system:</strong> Animation waits for reveal<br>
+          <code><div class="reveal-item anim-glitch">...</div></code>
+        </div>
+
+        <div class="code-block">{`<!-- Glitchy terminal boot effect -->
+<h2 class="anim-glitch">Welcome</h2>
+
+<!-- Soft jitter -->
+<p class="anim-jitter">Loading...</p>
+
+<!-- Typewriter blink -->
+<span class="anim-blink-in">Ready</span>
+
+<!-- Slide entrances -->
+<div class="anim-slide-left">From left</div>
+<div class="anim-slide-right">From right</div>
+<div class="anim-slide-up">From bottom</div>
+
+<!-- Pop effect -->
+<div class="anim-scale-in">Pop!</div>
+
+<!-- Rotate in -->
+<div class="anim-rotate-in">Spin</div>
+
+<!-- Terminal line reveal (clip-path) -->
+<p class="anim-typewriter">Loading startup data...</p>
+<p class="anim-typewriter anim-typewriter-cursor">With cursor</p>`}</div>
+      </div>
+
+      <!-- QUOTE ANIMATIONS -->
+      <div class="component-box full-width" style="margin-bottom: 1.5rem;">
+        <span class="component-label">Quote Animations (special)</span>
+        <p style="color: #909090; font-size: 0.85rem; margin-bottom: 1rem;">
+          Dramatic entrance for hero quotes. Combines blur-scale entrance with breathing glow.
+        </p>
+
+        <div class="demo-row">
+          <div class="quote-card anim-quote-dramatic" id="demo-quote-dramatic" style="padding: 1.25rem 1.25rem 1.25rem 2rem; max-width: 500px;">
+            <p style="font-style: italic; color: #d0d0d0; font-size: 1.1rem;">"Ruby makes programmers happy."</p>
+            <p style="color: #808080; margin-top: 0.5rem;">— Matz</p>
+          </div>
+          <button class="demo-btn" onclick="replayQuote()">Replay Quote</button>
+        </div>
+
+        <div class="usage-note">
+          <strong>Best for:</strong> Center-stage quotes that need maximum impact. The glow continues pulsing after entrance.
+        </div>
+
+        <div class="code-block" set:text={`<!-- Hero quote with dramatic entrance -->
+<div class="reveal-item quote-card anim-quote-dramatic p-10">
+  <p class="text-3xl italic">"Ruby makes programmers happy."</p>
+  <p class="text-gray-500 mt-4">— Matz</p>
+</div>
+
+<!-- Typewriter + cursor for terminal output -->
+<p class="reveal-item anim-typewriter anim-typewriter-cursor">
+  Loading startup data...
+</p>`}></div>
+      </div>
+
+      <!-- CONTINUOUS ANIMATIONS -->
+      <div class="component-box full-width" style="margin-bottom: 1.5rem;">
+        <span class="component-label">Continuous Animations (loop forever)</span>
+        <p style="color: #909090; font-size: 0.85rem; margin-bottom: 1rem;">
+          These loop continuously. Use sparingly to avoid distraction.
+        </p>
+
+        <div class="demo-row">
+          <div class="rpg-card anim-glow-pulse" style="padding: 1rem;">anim-glow-pulse</div>
+          <div class="rpg-card rpg-card-cyan anim-glow-pulse-cyan" style="padding: 1rem;">anim-glow-pulse-cyan</div>
+          <div class="anim-demo anim-float">anim-float</div>
+          <div class="anim-demo anim-flicker">anim-flicker</div>
+          <div class="rpg-card anim-rainbow" style="padding: 1rem;">anim-rainbow</div>
+        </div>
+
+        <div class="usage-note">
+          <strong>Best for:</strong> Hero elements, CTAs, important stats, things you want to draw attention to
+        </div>
+
+        <div class="code-block" set:text={`<!-- Breathing glow on cards -->
+<div class="rpg-card anim-glow-pulse">Important!</div>
+<div class="rpg-card rpg-card-cyan anim-glow-pulse-cyan">Also important</div>
+
+<!-- Floating effect -->
+<div class="anim-float">Floating</div>
+<div class="anim-float-delay-1">Staggered 1</div>
+<div class="anim-float-delay-2">Staggered 2</div>
+
+<!-- Neon sign flicker -->
+<span class="text-neon-magenta anim-flicker">OPEN</span>
+
+<!-- Rainbow cycling border -->
+<div class="rpg-card anim-rainbow">Special</div>
+
+<!-- Typing cursor -->
+<span class="anim-cursor">Type here</span>`}></div>
+      </div>
+
+      <!-- COMBINING ANIMATIONS -->
+      <div class="component-box full-width">
+        <span class="component-label">Combining Animations</span>
+
+        <div class="demo-row">
+          <div class="rpg-card rpg-card-green anim-slide-left" style="padding: 1rem;">
+            <span class="text-neon-green">Card + Entrance</span>
+          </div>
+          <div class="metric-card anim-scale-in" style="padding: 1rem;">
+            <div class="big-number gradient-text" style="font-size: 2rem;">42</div>
+            <div style="color: #808080; font-size: 0.8rem;">Metric + Pop</div>
+          </div>
+        </div>
+
+        <div class="code-block" set:text={`<!-- Card with entrance animation -->
+<div class="rpg-card rpg-card-green anim-slide-left">
+  Slides in from left
+</div>
+
+<!-- Metric with pop effect -->
+<div class="metric-card anim-scale-in">
+  <div class="big-number gradient-text">42</div>
+</div>
+
+<!-- Text with glitch + glow -->
+<h1 class="gradient-text anim-glitch">
+  Glitchy Gradient Title
+</h1>`}></div>
+      </div>
+    </section>
+
+    <!-- ==================== REVEAL SYSTEM ==================== -->
+    <section class="section">
+      <h2 class="section-title">Reveal System</h2>
+      <p class="section-desc">Progressive disclosure - elements appear one by one as you press arrow keys.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">How It Works</span>
+          <p style="color: #909090; font-size: 0.85rem; margin-bottom: 1rem;">
+            Elements with <code>reveal-item</code> start hidden. Press → or ↓ to reveal the next one.
+          </p>
+          <div class="code-block" set:text={`<!-- Each press reveals next item -->
+<p class="reveal-item">First</p>
+<p class="reveal-item">Second</p>
+<p class="reveal-item">Third</p>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Staggered Reveals</span>
+          <p style="color: #909090; font-size: 0.85rem; margin-bottom: 1rem;">
+            Add delay classes for cascade effect when items reveal together.
+          </p>
+          <div class="code-block" set:text={`<!-- Reveal together with stagger -->
+<div class="reveal-item">Instant</div>
+<div class="reveal-item reveal-delay-1">+0.1s</div>
+<div class="reveal-item reveal-delay-2">+0.2s</div>
+<div class="reveal-item reveal-delay-3">+0.3s</div>
+<div class="reveal-item reveal-delay-4">+0.4s</div>
+<div class="reveal-item reveal-delay-5">+0.5s</div>`}></div>
+        </div>
+
+        <div class="component-box full-width">
+          <span class="component-label">Reveal + Animation (Recommended)</span>
+          <p style="color: #909090; font-size: 0.85rem; margin-bottom: 1rem;">
+            When combined with <code>reveal-item</code>, entrance animations <strong>wait</strong> until the element is revealed.
+            This is the recommended pattern for slides.
+          </p>
+          <div class="code-block" set:text={`<!-- Animation waits for arrow press -->
+<h2 class="reveal-item anim-glitch">
+  Hidden until revealed, then glitches in
+</h2>
+
+<div class="reveal-item anim-slide-left">
+  Hidden until revealed, then slides from left
+</div>
+
+<!-- Staggered cards - each reveals and animates in sequence -->
+<div class="reveal-item rpg-card anim-scale-in">Card 1</div>
+<div class="reveal-item reveal-delay-1 rpg-card anim-scale-in">Card 2</div>
+<div class="reveal-item reveal-delay-2 rpg-card anim-scale-in">Card 3</div>
+
+<!-- Without reveal-item: animates immediately on page load -->
+<div class="anim-glitch">Animates right away</div>`}></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== COUNTER ==================== -->
+    <section class="section">
+      <h2 class="section-title">Counter Animation</h2>
+      <p class="section-desc">Animates numbers from 0 to target value. Great for metrics and stats.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">Live Demo</span>
+          <div style="text-align: center; padding: 1rem;">
+            <div class="big-number gradient-text counter" data-target="40" data-prefix="$" data-suffix="M">$0M</div>
+            <div style="color: #808080; margin-top: 0.5rem;">ARR</div>
+          </div>
+          <button class="demo-btn" onclick="replayCounter(this)" style="width: 100%; margin-top: 1rem;">Replay Counter</button>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Usage</span>
+          <div class="code-block" set:text={`<!-- Basic counter -->
+<span class="counter" data-target="100">0</span>
+
+<!-- With prefix/suffix -->
+<span class="counter"
+  data-target="40"
+  data-prefix="$"
+  data-suffix="M">$0M</span>
+
+<!-- Custom duration (ms) -->
+<span class="counter"
+  data-target="1000"
+  data-duration="2000">0</span>
+
+<!-- In a metric card -->
+<div class="metric-card">
+  <div class="big-number gradient-text
+    counter" data-target="26">0</div>
+  <div>Startups</div>
+</div>`}></div>
+        </div>
+      </div>
+
+      <div class="usage-note">
+        <strong>Note:</strong> Counter requires JavaScript. The counter script is in presentation.astro.
+        Counters auto-start when visible or can be triggered manually.
+      </div>
+    </section>
+
+    <!-- ==================== CARDS ==================== -->
+    <section class="section">
+      <h2 class="section-title">Cards</h2>
+      <p class="section-desc">RPG-style containers with neon borders and glow effects.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">rpg-card (default)</span>
+          <div class="rpg-card">
+            <h3 class="text-neon-magenta" style="margin-bottom: 0.5rem;">Primary Card</h3>
+            <p style="color: #a0a0a0;">Use for main content, key points.</p>
+          </div>
+          <div class="code-block" set:text={`<div class="rpg-card">
+  <h3 class="text-neon-magenta">Title</h3>
+  <p>Content</p>
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Color Variants</span>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div class="rpg-card rpg-card-cyan" style="padding: 0.75rem;">
+              <span class="text-neon-cyan">rpg-card-cyan</span> - Secondary
+            </div>
+            <div class="rpg-card rpg-card-green" style="padding: 0.75rem;">
+              <span class="text-neon-green">rpg-card-green</span> - Success
+            </div>
+            <div class="rpg-card rpg-card-purple" style="padding: 0.75rem;">
+              <span class="text-neon-purple">rpg-card-purple</span> - Neutral
+            </div>
+            <div class="rpg-card rpg-card-yellow" style="padding: 0.75rem;">
+              <span class="text-neon-yellow">rpg-card-yellow</span> - Warning
+            </div>
+          </div>
+          <div class="code-block" set:text={`<div class="rpg-card rpg-card-cyan">...</div>
+<div class="rpg-card rpg-card-green">...</div>
+<div class="rpg-card rpg-card-purple">...</div>
+<div class="rpg-card rpg-card-yellow">...</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">quote-card</span>
+          <div class="quote-card" style="padding: 1.25rem 1.25rem 1.25rem 2rem;">
+            <p style="font-style: italic; color: #d0d0d0;">"Ruby is designed to make programmers happy."</p>
+            <p style="color: #808080; margin-top: 0.5rem;">— Matz</p>
+          </div>
+          <div class="code-block" set:text={`<div class="quote-card">
+  <p>"Quote text"</p>
+  <p>— Attribution</p>
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">metric-card</span>
+          <div class="metric-card">
+            <div class="big-number gradient-text">$40M</div>
+            <div style="color: #808080;">ARR in 8 weeks</div>
+          </div>
+          <div class="code-block" set:text={`<div class="metric-card">
+  <div class="big-number gradient-text">
+    $40M
+  </div>
+  <div>Label</div>
+</div>`}></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TEXT ==================== -->
+    <section class="section">
+      <h2 class="section-title">Text &amp; Colors</h2>
+      <p class="section-desc">Neon text colors with automatic glow effects.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">Neon Text Classes</span>
+          <div style="font-size: 1.1rem; line-height: 2;">
+            <p class="text-neon-magenta">text-neon-magenta</p>
+            <p class="text-neon-cyan">text-neon-cyan</p>
+            <p class="text-neon-green">text-neon-green</p>
+            <p class="text-neon-yellow">text-neon-yellow</p>
+            <p class="text-neon-purple">text-neon-purple</p>
+            <p class="text-neon-orange">text-neon-orange</p>
+          </div>
+          <div class="code-block" set:text={`<p class="text-neon-magenta">...</p>
+<span class="text-neon-cyan">...</span>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Special Text</span>
+          <div style="margin-bottom: 1rem;">
+            <p class="gradient-text" style="font-size: 1.5rem; font-weight: bold;">gradient-text</p>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <p class="section-label">section-label</p>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <p class="fear-text">fear-text (magenta)</p>
+            <p class="hope-text">hope-text (green)</p>
+          </div>
+          <div class="code-block" set:text={`<h1 class="gradient-text">Big Title</h1>
+<p class="section-label">Part One</p>
+<span class="fear-text">Bad</span>
+<span class="hope-text">Good</span>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Terminal Prompts</span>
+          <div style="line-height: 2;">
+            <p class="prompt-green">Command prompt</p>
+            <p class="prompt-arrow">Arrow prompt</p>
+            <p class="prompt-warn">Warning prompt</p>
+            <p class="prompt-info">Info prompt</p>
+            <p class="prompt-question">Question prompt</p>
+            <p class="prompt-ok">Success prompt</p>
+          </div>
+          <div class="code-block" set:text={`<p class="prompt-green">$ command</p>
+<p class="prompt-arrow">> output</p>
+<p class="prompt-warn">[!] warning</p>
+<p class="prompt-info">[~] info</p>
+<p class="prompt-question">[?] ask</p>
+<p class="prompt-ok">[+] success</p>`}></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FOUNDER GRID ==================== -->
+    <section class="section">
+      <h2 class="section-title">Founder Grid</h2>
+      <p class="section-desc">Display speaker/founder photos in a responsive grid.</p>
+
+      <div class="component-box full-width">
+        <span class="component-label">Example</span>
+        <div class="founder-grid" style="max-width: 500px;">
+          <div class="founder-item">
+            <div class="founder-avatar" style="background: var(--neon-purple);"></div>
+            <span class="founder-name">Name Here</span>
+          </div>
+          <div class="founder-item">
+            <div class="founder-avatar" style="background: var(--neon-cyan);"></div>
+            <span class="founder-name">Another Name</span>
+          </div>
+          <div class="founder-item">
+            <div class="founder-avatar" style="background: var(--neon-magenta);"></div>
+            <span class="founder-name">Third Person</span>
+          </div>
+          <div class="founder-item">
+            <div class="founder-avatar" style="background: var(--neon-green);"></div>
+            <span class="founder-name">Fourth One</span>
+          </div>
+        </div>
+
+        <div class="code-block" set:text={`<div class="founder-grid">
+  <div class="founder-item">
+    <img src="/speaker_name.jpg" class="founder-avatar" />
+    <span class="founder-name">Name Here</span>
+  </div>
+  <!-- Repeat for each founder -->
+</div>`}></div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE COMPONENT ==================== -->
+    <section class="section">
+      <h2 class="section-title">Slide Component</h2>
+      <p class="section-desc">Use the <code>&lt;Slide></code> component for all slides. It handles layout and background automatically.</p>
+
+      <div class="component-grid">
+        <div class="component-box full-width">
+          <span class="component-label">Import &amp; Basic Usage</span>
+          <div class="code-block" set:text={`---
+import Slide from "../../components/Slide.astro";
+---
+
+<Slide layout="centered" background="dark">
+  <div>
+    <h2 class="reveal-item text-4xl">Title</h2>
+    <p class="reveal-item">Content</p>
+  </div>
+</Slide>`}></div>
+        </div>
+
+        <div class="component-box full-width">
+          <span class="component-label">Layout Options</span>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin: 1rem 0;">
+            <!-- centered -->
+            <div>
+              <div style="border: 1px solid var(--neon-cyan); padding: 1rem; height: 100px; display: flex; align-items: center; justify-content: center;">
+                <div style="border: 1px dashed var(--neon-magenta); padding: 0.5rem 1.5rem; text-align: center;">
+                  <div style="font-size: 0.6rem; color: #808080;">content</div>
+                </div>
+              </div>
+              <p style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem;"><code class="text-neon-cyan">centered</code></p>
+              <p style="text-align: center; font-size: 0.7rem; color: #606060;">text-align: center</p>
+            </div>
+            <!-- stacked -->
+            <div>
+              <div style="border: 1px solid var(--neon-cyan); padding: 1rem; height: 100px; display: flex; align-items: center; justify-content: center;">
+                <div style="border: 1px dashed var(--neon-magenta); padding: 0.5rem 1.5rem; text-align: left; width: 70%;">
+                  <div style="font-size: 0.6rem; color: #808080;">content</div>
+                </div>
+              </div>
+              <p style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem;"><code class="text-neon-cyan">stacked</code></p>
+              <p style="text-align: center; font-size: 0.7rem; color: #606060;">text-align: left</p>
+            </div>
+            <!-- two-column -->
+            <div>
+              <div style="border: 1px solid var(--neon-cyan); padding: 1rem; height: 100px; display: flex; align-items: center; justify-content: center;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; width: 80%;">
+                  <div style="border: 1px dashed var(--neon-magenta); padding: 0.25rem; text-align: center;">
+                    <div style="font-size: 0.5rem; color: #808080;">col 1</div>
+                  </div>
+                  <div style="border: 1px dashed var(--neon-magenta); padding: 0.25rem; text-align: center;">
+                    <div style="font-size: 0.5rem; color: #808080;">col 2</div>
+                  </div>
+                </div>
+              </div>
+              <p style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem;"><code class="text-neon-cyan">two-column</code></p>
+              <p style="text-align: center; font-size: 0.7rem; color: #606060;">grid 1fr 1fr</p>
+            </div>
+            <!-- card-grid -->
+            <div>
+              <div style="border: 1px solid var(--neon-cyan); padding: 1rem; height: 100px; display: flex; align-items: center; justify-content: center;">
+                <div style="border: 1px dashed var(--neon-magenta); padding: 0.5rem; width: 80%;">
+                  <div style="font-size: 0.6rem; color: #808080; text-align: center;">content (max-w 64rem)</div>
+                </div>
+              </div>
+              <p style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem;"><code class="text-neon-cyan">card-grid</code></p>
+              <p style="text-align: center; font-size: 0.7rem; color: #606060;">wide container</p>
+            </div>
+            <!-- fullscreen -->
+            <div>
+              <div style="border: 1px solid var(--neon-cyan); padding: 0.5rem; height: 100px; display: flex; align-items: center; justify-content: center;">
+                <div style="border: 1px dashed var(--neon-magenta); padding: 0.5rem; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                  <div style="font-size: 0.6rem; color: #808080;">100% width</div>
+                </div>
+              </div>
+              <p style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem;"><code class="text-neon-cyan">fullscreen</code></p>
+              <p style="text-align: center; font-size: 0.7rem; color: #606060;">minimal padding</p>
+            </div>
+          </div>
+          <div class="code-block" set:text={`<Slide layout="centered">...</Slide>
+<Slide layout="stacked">...</Slide>
+<Slide layout="two-column">...</Slide>
+<Slide layout="fullscreen">...</Slide>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Background Options</span>
+          <div style="font-size: 0.85rem; color: #b0b0b0; line-height: 1.8;">
+            <p><code class="text-neon-cyan">dark</code> — default dark background</p>
+            <p><code class="text-neon-pink">gradient-pink</code> — subtle pink glow</p>
+            <p><code class="text-neon-purple">gradient-purple</code> — subtle purple glow</p>
+            <p><code class="text-neon-yellow">gradient-yellow</code> — subtle yellow glow</p>
+            <p><code class="text-neon-green">gradient-green</code> — subtle green glow</p>
+          </div>
+          <div class="code-block" set:text={`<Slide background="dark">...</Slide>
+<Slide background="gradient-pink">...</Slide>
+<Slide background="gradient-purple">...</Slide>`}></div>
+        </div>
+      </div>
+
+      <div class="usage-note">
+        <strong>Note:</strong> Slides are automatically numbered by DOM order. No need for manual <code>id="slide-X"</code> attributes.
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE TEMPLATES ==================== -->
+    <section class="section">
+      <h2 class="section-title">Slide Templates</h2>
+      <p class="section-desc">Copy-paste these into presentation.astro.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">Section Title Slide</span>
+          <div class="code-block" set:text={`<Slide layout="centered" background="gradient-purple">
+  <div>
+    <p class="reveal-item section-label">
+      Part One
+    </p>
+    <h2 class="reveal-item text-5xl font-black">
+      The Big Title
+    </h2>
+  </div>
+</Slide>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Quote Slide</span>
+          <div class="code-block" set:text={`<Slide layout="stacked" background="dark">
+  <div>
+    <div class="reveal-item quote-card p-8">
+      <p class="text-2xl italic">
+        "The quote goes here."
+      </p>
+      <p class="text-gray-500 mt-6">
+        — Speaker Name
+      </p>
+    </div>
+  </div>
+</Slide>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Metrics Grid</span>
+          <div class="code-block" set:text={`<Slide layout="centered" background="dark">
+  <div>
+    <h2 class="reveal-item text-3xl mb-8">
+      By The Numbers
+    </h2>
+    <div class="reveal-item grid md:grid-cols-4 gap-4">
+      <div class="metric-card">
+        <div class="big-number gradient-text">26</div>
+        <div class="text-gray-400">Startups</div>
+      </div>
+    </div>
+  </div>
+</Slide>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Two Column (Text + Image)</span>
+          <div class="code-block" set:text={`<Slide layout="two-column" background="dark">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="reveal-item section-label">Case Study</p>
+      <h2 class="reveal-item text-4xl">Title</h2>
+      <p class="reveal-item text-gray-400">Description</p>
+    </div>
+    <div class="reveal-item">
+      <img src="/image.png" class="rounded-lg" />
+    </div>
+  </div>
+</Slide>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Cards Grid</span>
+          <div class="code-block" set:text={`<Slide layout="stacked" background="gradient-pink">
+  <div>
+    <h2 class="reveal-item text-3xl mb-8">Title</h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="reveal-item rpg-card">
+        <h3 class="text-neon-magenta">Card 1</h3>
+      </div>
+      <div class="reveal-item rpg-card-cyan">
+        <h3 class="text-neon-cyan">Card 2</h3>
+      </div>
+    </div>
+  </div>
+</Slide>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Fullscreen (Founders Grid)</span>
+          <div class="code-block" set:text={`<Slide layout="fullscreen" background="gradient-purple">
+  <div class="w-full text-center">
+    <h2 class="reveal-item text-2xl mb-8">Title</h2>
+    <div class="reveal-item founder-grid-fullscreen">
+      {founders.map(f => (
+        <div class="founder-item">
+          <img src={f.image} class="founder-avatar" />
+          <span class="founder-name">{f.name}</span>
+          <img src={f.logo} class="founder-logo" />
+        </div>
+      ))}
+    </div>
+  </div>
+</Slide>`}></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== QUICK REFERENCE ==================== -->
+    <section class="section" style="border-bottom: none;">
+      <h2 class="section-title">Quick Reference</h2>
+
+      <div class="component-box full-width">
+        <div class="code-block" style="font-size: 0.8rem;" set:text={`/* ============ CARDS ============ */
+rpg-card                    Default magenta border
+rpg-card rpg-card-cyan      Cyan variant
+rpg-card rpg-card-green     Green variant
+rpg-card rpg-card-purple    Purple variant
+rpg-card rpg-card-yellow    Yellow variant
+quote-card                  Quote with > prefix
+metric-card                 Stats display
+
+/* ============ TEXT ============ */
+text-neon-magenta/cyan/green/yellow/purple/orange
+gradient-text               Magenta→yellow gradient
+section-label               Small cyan uppercase
+fear-text / hope-text       Magenta / Green emphasis
+prompt-green/arrow/warn/info/question/ok
+
+/* ============ ANIMATIONS ============ */
+/* Entrance (play once) - WAIT for reveal if combined with reveal-item */
+anim-glitch                 Terminal boot glitch
+anim-jitter                 Soft shake
+anim-blink-in               Typewriter blink
+anim-slide-left/right/up    Slide entrances
+anim-scale-in               Pop effect
+anim-rotate-in              Rotate in
+anim-typewriter             Line reveal (clip-path, terminal output feel)
+anim-typewriter-cursor      Add blinking cursor after text
+anim-quote-dramatic         Hero quote entrance + glow pulse
+/* ^ These wait for .revealed class when on .reveal-item elements */
+
+/* Continuous (loop) */
+anim-glow-pulse             Breathing magenta glow
+anim-glow-pulse-cyan        Breathing cyan glow
+anim-float                  Float up/down
+anim-float-delay-1/2/3      Staggered float
+anim-flicker                Neon flicker
+anim-rainbow                Color cycling
+anim-cursor                 Typing cursor
+
+/* ============ REVEAL ============ */
+reveal-item                 Hidden until arrow press
+reveal-delay-1/2/3/4/5      Stagger delays (0.1s each)
+
+/* ============ COUNTER ============ */
+<span class="counter"
+  data-target="40"
+  data-prefix="$"
+  data-suffix="M"
+  data-duration="1500">$0M</span>
+
+/* ============ GRIDS ============ */
+founder-grid + founder-item + founder-avatar + founder-name
+founder-logo                Logo below founder photo (white filter)
+founder-grid-fullscreen     Larger grid for fullscreen slides
+metric-grid (auto-fit grid for metric-cards)
+
+/* ============ SLIDE COMPONENT ============ */
+import Slide from "../../components/Slide.astro";
+
+<Slide layout="..." background="...">
+  <div>...</div>
+</Slide>
+
+Layouts: centered | stacked | two-column | card-grid | fullscreen
+Backgrounds: dark | gradient-pink | gradient-purple | gradient-yellow | gradient-green`}></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Replay entrance animations
+    function replayEntrance() {
+      const demos = ['demo-glitch', 'demo-jitter', 'demo-blink', 'demo-slide-left', 'demo-scale', 'demo-typewriter'];
+      const classes = ['anim-glitch', 'anim-jitter', 'anim-blink-in', 'anim-slide-left', 'anim-scale-in', 'anim-typewriter'];
+
+      demos.forEach((id, i) => {
+        const el = document.getElementById(id);
+        el.classList.remove(classes[i]);
+        void el.offsetWidth; // Trigger reflow
+        el.classList.add(classes[i]);
+      });
+    }
+
+    // Replay quote dramatic animation
+    function replayQuote() {
+      const el = document.getElementById('demo-quote-dramatic');
+      el.classList.remove('anim-quote-dramatic');
+      void el.offsetWidth; // Trigger reflow
+      el.classList.add('anim-quote-dramatic');
+    }
+
+    // Initialize entrance demos
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('demo-glitch').classList.add('anim-glitch');
+      document.getElementById('demo-jitter').classList.add('anim-jitter');
+      document.getElementById('demo-blink').classList.add('anim-blink-in');
+      document.getElementById('demo-slide-left').classList.add('anim-slide-left');
+      document.getElementById('demo-scale').classList.add('anim-scale-in');
+      document.getElementById('demo-typewriter').classList.add('anim-typewriter');
+    });
+
+    // Counter replay
+    function replayCounter(btn) {
+      const counter = btn.parentElement.querySelector('.counter');
+      const target = parseInt(counter.dataset.target);
+      const prefix = counter.dataset.prefix || '';
+      const suffix = counter.dataset.suffix || '';
+      const duration = parseInt(counter.dataset.duration) || 1500;
+
+      let start = 0;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
+        const current = Math.round(eased * target);
+        counter.textContent = prefix + current + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+  </script>
+</PresentationLayout>

@@ -1,0 +1,873 @@
+/* ========================================
+   NEON RPG DESIGN SYSTEM
+   Retro Terminal Style for Presentations
+   ======================================== */
+
+/* ========================================
+   COLOR PALETTE - OKLCH for maximum brightness
+   ======================================== */
+:root {
+  /* OKLCH: oklch(lightness chroma hue) - brighter, more vivid than sRGB */
+  --neon-magenta: oklch(0.7 0.32 350);      /* hot pink/magenta */
+  --neon-pink: oklch(0.75 0.25 0);          /* softer pink */
+  --neon-cyan: oklch(0.9 0.18 195);         /* electric cyan */
+  --neon-cyan-dim: oklch(0.7 0.15 210);     /* muted cyan */
+  --neon-green: oklch(0.9 0.35 145);        /* terminal green */
+  --neon-green-dim: oklch(0.7 0.2 155);     /* muted green */
+  --neon-yellow: oklch(0.92 0.18 100);      /* butter yellow */
+  --neon-purple: oklch(0.72 0.18 300);      /* soft purple */
+  --neon-orange: oklch(0.8 0.2 55);         /* warm orange */
+  --dark-bg: oklch(0.12 0.04 300);          /* deep purple-black */
+  --dark-surface: oklch(0.15 0.035 300 / 0.85);
+  --dark-card: oklch(0.18 0.05 300 / 0.9);
+  --grid-color: oklch(0.7 0.32 350 / 0.03);
+}
+
+/* Fallbacks for browsers without OKLCH support */
+@supports not (color: oklch(0 0 0)) {
+  :root {
+    --neon-magenta: #ff2d95;
+    --neon-pink: #ff6ac1;
+    --neon-cyan: #00ffff;
+    --neon-cyan-dim: #0af;
+    --neon-green: #0f0;
+    --neon-green-dim: #0c6;
+    --neon-yellow: #ffe66d;
+    --neon-purple: #bd93f9;
+    --neon-orange: #ffb86c;
+    --dark-bg: #0d0221;
+    --dark-surface: rgba(13, 2, 33, 0.85);
+    --dark-card: rgba(20, 10, 50, 0.9);
+    --grid-color: rgba(255, 45, 149, 0.03);
+  }
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+/* Martian Mono for terminal aesthetic */
+@font-face {
+  font-family: "Martian Mono";
+  font-display: swap;
+  src: url("/fonts/MartianMono.woff2") format("woff2");
+  font-weight: 100 800;
+}
+
+/* Variable Grotesk for wide headings */
+@font-face {
+  font-family: "Martian Grotesk Wide";
+  font-display: swap;
+  src: url("/fonts/MartianGroteskVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 75% 200%;
+}
+
+/* ========================================
+   GRADIENT TEXT
+   ======================================== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--neon-magenta), var(--neon-pink), var(--neon-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(255, 45, 149, 0.5));
+}
+
+.gradient-text-cyan {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.5));
+}
+
+/* ========================================
+   NEON TEXT COLORS
+   ======================================== */
+.text-neon-magenta { color: var(--neon-magenta); text-shadow: 0 0 10px var(--neon-magenta); }
+.text-neon-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+.text-neon-green { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+.text-neon-yellow { color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow); }
+.text-neon-pink { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
+.text-neon-red { color: var(--neon-magenta); text-shadow: 0 0 10px var(--neon-magenta); }
+.text-neon-purple { color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple); }
+.text-neon-orange { color: var(--neon-orange); text-shadow: 0 0 10px var(--neon-orange); }
+
+.fear-text { color: var(--neon-magenta); text-shadow: 0 0 15px var(--neon-magenta); }
+.hope-text { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
+
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* ========================================
+   RPG CARDS
+   ======================================== */
+.rpg-card {
+  background: var(--dark-card);
+  border: 2px solid var(--neon-magenta);
+  box-shadow:
+    0 0 10px var(--neon-magenta),
+    0 0 20px rgba(255, 45, 149, 0.3),
+    inset 0 0 30px rgba(255, 45, 149, 0.05);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.rpg-card-cyan {
+  border-color: var(--neon-cyan);
+  box-shadow:
+    0 0 10px var(--neon-cyan),
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 0 30px rgba(0, 255, 255, 0.05);
+}
+
+.rpg-card-green {
+  border-color: var(--neon-green);
+  box-shadow:
+    0 0 10px var(--neon-green),
+    0 0 20px rgba(0, 255, 0, 0.3),
+    inset 0 0 30px rgba(0, 255, 0, 0.05);
+}
+
+.rpg-card-purple {
+  border-color: var(--neon-purple);
+  box-shadow:
+    0 0 10px var(--neon-purple),
+    0 0 20px rgba(189, 147, 249, 0.3),
+    inset 0 0 30px rgba(189, 147, 249, 0.05);
+}
+
+.rpg-card-yellow {
+  border-color: var(--neon-yellow);
+  box-shadow:
+    0 0 10px var(--neon-yellow),
+    0 0 20px rgba(255, 230, 109, 0.3),
+    inset 0 0 30px rgba(255, 230, 109, 0.05);
+}
+
+/* ========================================
+   QUOTE CARDS
+   ======================================== */
+.quote-card {
+  background: var(--dark-card);
+  border: 2px solid var(--neon-magenta);
+  box-shadow:
+    0 0 15px rgba(255, 45, 149, 0.4),
+    inset 0 0 30px rgba(255, 45, 149, 0.05);
+  position: relative;
+}
+
+.quote-card-cyan {
+  border-color: var(--neon-cyan);
+  box-shadow:
+    0 0 15px rgba(0, 255, 255, 0.4),
+    inset 0 0 30px rgba(0, 255, 255, 0.05);
+}
+
+.quote-card-green {
+  border-color: var(--neon-green-dim);
+  box-shadow:
+    0 0 15px rgba(0, 204, 102, 0.4),
+    inset 0 0 30px rgba(0, 204, 102, 0.05);
+}
+
+.quote-card::before {
+  content: '>';
+  position: absolute;
+  top: 1.25rem;
+  left: 1rem;
+  font-size: 1rem;
+  color: var(--neon-cyan);
+  font-family: "Martian Mono", monospace;
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* ========================================
+   METRIC CARDS
+   ======================================== */
+.metric-card {
+  background: var(--dark-card);
+  border: 2px solid var(--neon-purple);
+  box-shadow: 0 0 15px rgba(189, 147, 249, 0.3);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.big-number {
+  font-size: clamp(4rem, 15vw, 10rem);
+  font-weight: 900;
+  line-height: 1;
+  filter: drop-shadow(0 0 20px var(--neon-magenta));
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ========================================
+   LIST ITEMS
+   ======================================== */
+.rpg-list-item {
+  background: var(--dark-card);
+  border: 1px solid var(--neon-purple);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0 10px rgba(189, 147, 249, 0.2);
+  transition: all 0.2s ease;
+}
+
+.rpg-list-item:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.rpg-list-item-danger {
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 10px rgba(255, 45, 149, 0.2);
+}
+
+.rpg-list-item-success {
+  border-color: var(--neon-green-dim);
+  box-shadow: 0 0 10px rgba(0, 204, 102, 0.2);
+}
+
+/* ========================================
+   TERMINAL PROMPTS
+   ======================================== */
+.prompt { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+.prompt-green::before { content: '$ '; color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+.prompt-arrow::before { content: '> '; color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+.prompt-warn::before { content: '[!] '; color: var(--neon-magenta); text-shadow: 0 0 8px var(--neon-magenta); }
+.prompt-info::before { content: '[~] '; color: var(--neon-yellow); text-shadow: 0 0 8px var(--neon-yellow); }
+.prompt-question::before { content: '[?] '; color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+.prompt-ok::before { content: '[+] '; color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.neon-btn {
+  background: var(--neon-cyan);
+  color: var(--dark-bg);
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.neon-btn:hover {
+  box-shadow: 0 0 25px var(--neon-cyan), 0 0 50px rgba(0, 255, 255, 0.5);
+}
+
+.neon-btn-magenta {
+  background: var(--neon-magenta);
+  box-shadow: 0 0 15px var(--neon-magenta), 0 0 30px rgba(255, 45, 149, 0.3);
+}
+
+/* ========================================
+   CODE BLOCKS
+   ======================================== */
+.code-block, pre code {
+  font-family: "Martian Mono", monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--neon-purple);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  box-shadow: 0 0 15px rgba(189, 147, 249, 0.2);
+}
+
+pre { margin: 0; background: transparent; }
+
+/* Neon syntax theme - matches our palette */
+.hljs { background: transparent !important; color: #e2e8f0; }
+.hljs-keyword { color: var(--neon-magenta); }
+.hljs-string { color: var(--neon-green); }
+.hljs-number { color: var(--neon-orange); }
+.hljs-comment { color: #6272a4; font-style: italic; }
+.hljs-function { color: var(--neon-cyan); }
+.hljs-title { color: var(--neon-cyan); }
+.hljs-class .hljs-title { color: var(--neon-yellow); }
+.hljs-params { color: var(--neon-orange); }
+.hljs-built_in { color: var(--neon-cyan); }
+.hljs-literal { color: var(--neon-purple); }
+.hljs-attr { color: var(--neon-green); }
+.hljs-symbol { color: var(--neon-magenta); }
+.hljs-meta { color: var(--neon-pink); }
+.hljs-variable { color: var(--neon-purple); }
+.hljs-regexp { color: var(--neon-green); }
+
+/* Inline code */
+code:not(pre code) {
+  font-family: "Martian Mono", monospace;
+  background: rgba(189, 147, 249, 0.15);
+  color: var(--neon-cyan);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* ========================================
+   FOUNDER GRID
+   ======================================== */
+.founder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1rem;
+  max-width: 100%;
+}
+
+/* Full-screen variant for presentation slides */
+.founder-grid-fullscreen {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 1.5rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 2rem;
+}
+
+.founder-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--neon-purple);
+  box-shadow: 0 0 10px rgba(189, 147, 249, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Larger avatars for fullscreen grid */
+.founder-grid-fullscreen .founder-avatar {
+  width: 100px;
+  height: 100px;
+  border-width: 3px;
+}
+
+.founder-avatar:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.founder-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.founder-name {
+  font-size: 0.6rem;
+  color: var(--neon-cyan);
+  margin-top: 0.4rem;
+  max-width: 80px;
+  line-height: 1.2;
+}
+
+/* Larger names for fullscreen grid */
+.founder-grid-fullscreen .founder-name {
+  font-size: 0.85rem;
+  max-width: 120px;
+  font-weight: 500;
+}
+
+/* Company name display */
+.founder-company {
+  font-size: 0.55rem;
+  color: var(--neon-magenta);
+  margin-top: 0.2rem;
+  max-width: 120px;
+  line-height: 1.1;
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.founder-grid-fullscreen .founder-company {
+  font-size: 0.7rem;
+}
+
+/* Company logo display */
+.founder-logo {
+  width: 60px;
+  height: 24px;
+  object-fit: contain;
+  margin-top: 0.25rem;
+  filter: brightness(0) invert(1);  /* White logos on dark bg */
+  opacity: 0.8;
+}
+
+.founder-grid-fullscreen .founder-logo {
+  width: 80px;
+  height: 28px;
+}
+
+/* ========================================
+   SLIDE LAYOUTS
+   ======================================== */
+.slide-centered > :first-child { max-width: 56rem; margin-left: auto; margin-right: auto; text-align: center; }
+.slide-two-column > :first-child { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 64rem; margin-left: auto; margin-right: auto; }
+.slide-card-grid > :first-child { max-width: 64rem; margin-left: auto; margin-right: auto; }
+.slide-fullscreen { padding: 1rem; }
+.slide-fullscreen > :first-child { width: 100%; text-align: center; }
+.slide-stacked > :first-child { max-width: 56rem; margin-left: auto; margin-right: auto; }
+
+/* ========================================
+   SLIDE BACKGROUNDS - Gradient overlays via box-shadow inset (preserves ::after)
+   ======================================== */
+.slide-bg-dark { /* Base styling from .slide is sufficient */ }
+.slide-bg-gradient-pink { box-shadow: inset 0 0 200px 100px rgba(251,113,133,0.03); }
+.slide-bg-gradient-purple { box-shadow: inset 0 0 200px 100px rgba(192,132,252,0.04); }
+.slide-bg-gradient-yellow { box-shadow: inset 0 0 200px 100px rgba(253,224,71,0.03); }
+.slide-bg-gradient-green { box-shadow: inset 0 0 200px 100px rgba(74,222,128,0.03); }
+
+/* ========================================
+   ANIMATIONS - Entrance Effects
+   ======================================== */
+
+/* Glow Pulse - Breathing glow effect */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-magenta), 0 0 20px rgba(255, 45, 149, 0.3); }
+  50% { box-shadow: 0 0 20px var(--neon-magenta), 0 0 40px rgba(255, 45, 149, 0.5), 0 0 60px rgba(255, 45, 149, 0.2); }
+}
+.anim-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-pulse-slow { animation: glow-pulse 3s ease-in-out infinite; }
+
+/* Glow Pulse Cyan */
+@keyframes glow-pulse-cyan {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.2); }
+}
+.anim-glow-pulse-cyan { animation: glow-pulse-cyan 2s ease-in-out infinite; }
+
+/* Text Glow */
+@keyframes text-glow {
+  0%, 100% { text-shadow: 0 0 10px var(--neon-magenta), 0 0 20px var(--neon-magenta); }
+  50% { text-shadow: 0 0 20px var(--neon-magenta), 0 0 40px var(--neon-magenta), 0 0 60px var(--neon-magenta); }
+}
+.anim-text-glow { animation: text-glow 2s ease-in-out infinite; }
+
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.anim-float { animation: float 3s ease-in-out infinite; }
+.anim-float-delay-1 { animation: float 3s ease-in-out infinite 0.5s; }
+.anim-float-delay-2 { animation: float 3s ease-in-out infinite 1s; }
+.anim-float-delay-3 { animation: float 3s ease-in-out infinite 1.5s; }
+
+/* Slide In */
+@keyframes slide-in-left {
+  from { transform: translateX(-50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+/* Only animate when revealed OR not part of reveal system */
+.anim-slide-left.revealed,
+.anim-slide-left:not(.reveal-item) { animation: slide-in-left 0.5s ease-out forwards; }
+
+@keyframes slide-in-right {
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.anim-slide-right.revealed,
+.anim-slide-right:not(.reveal-item) { animation: slide-in-right 0.5s ease-out forwards; }
+
+@keyframes slide-in-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.anim-slide-up.revealed,
+.anim-slide-up:not(.reveal-item) { animation: slide-in-up 0.5s ease-out forwards; }
+
+/* Scale In */
+@keyframes scale-in {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.anim-scale-in.revealed,
+.anim-scale-in:not(.reveal-item) { animation: scale-in 0.4s ease-out forwards; }
+
+/* Flicker */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+.anim-flicker { animation: flicker 4s ease-in-out infinite; }
+.animate-flicker { animation: flicker 4s ease-in-out infinite; }
+
+/* Typing Cursor */
+@keyframes blink {
+  0%, 50% { border-right-color: var(--neon-green); }
+  51%, 100% { border-right-color: transparent; }
+}
+.anim-cursor {
+  border-right: 2px solid var(--neon-green);
+  padding-right: 4px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Rainbow Border */
+@keyframes rainbow-border {
+  0% { border-color: var(--neon-magenta); box-shadow: 0 0 15px var(--neon-magenta); }
+  33% { border-color: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
+  66% { border-color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green); }
+  100% { border-color: var(--neon-magenta); box-shadow: 0 0 15px var(--neon-magenta); }
+}
+.anim-rainbow { animation: rainbow-border 4s linear infinite; }
+
+/* Shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+.anim-shake { animation: shake 0.5s ease-in-out; }
+
+/* Rotate In */
+@keyframes rotate-in {
+  from { transform: rotate(-10deg) scale(0.9); opacity: 0; }
+  to { transform: rotate(0) scale(1); opacity: 1; }
+}
+.anim-rotate-in.revealed,
+.anim-rotate-in:not(.reveal-item) { animation: rotate-in 0.5s ease-out forwards; }
+
+/* Glitch Appear */
+@keyframes glitch-appear {
+  0% { opacity: 0; transform: translateX(-5px); filter: blur(4px); }
+  10% { opacity: 0.5; transform: translateX(3px); filter: blur(2px); }
+  20% { opacity: 0.3; transform: translateX(-2px); filter: blur(3px); }
+  30% { opacity: 0.7; transform: translateX(1px); filter: blur(1px); }
+  40% { opacity: 0.4; transform: translateX(-1px); filter: blur(2px); }
+  50% { opacity: 0.8; transform: translateX(2px); filter: blur(0); }
+  60% { opacity: 0.6; transform: translateX(0); filter: blur(1px); }
+  70% { opacity: 0.9; transform: translateX(-1px); filter: blur(0); }
+  80% { opacity: 1; transform: translateX(1px); filter: blur(0); }
+  90% { opacity: 0.95; transform: translateX(0); }
+  100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+.anim-glitch.revealed,
+.anim-glitch:not(.reveal-item) { animation: glitch-appear 0.4s ease-out forwards; }
+
+/* ========================================
+   TYPEWRITER - Terminal line reveal
+   ======================================== */
+@keyframes typewriter-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.anim-typewriter.revealed,
+.anim-typewriter:not(.reveal-item) {
+  animation: typewriter-reveal 1.2s steps(20) forwards;
+}
+
+/* Optional cursor after text */
+.anim-typewriter-cursor::after {
+  content: '|';
+  color: var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green);
+  animation: blink 0.7s step-end infinite;
+  margin-left: 4px;
+}
+
+/* ========================================
+   DRAMATIC QUOTE - Hero entrance with glow
+   ======================================== */
+@keyframes quote-dramatic-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+    filter: blur(4px);
+  }
+  30% {
+    opacity: 0.7;
+    transform: scale(1.02);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.anim-quote-dramatic.revealed,
+.anim-quote-dramatic:not(.reveal-item) {
+  animation:
+    quote-dramatic-enter 0.6s ease-out forwards,
+    quote-border-glow 3s ease-in-out 0.6s infinite;
+}
+
+/* Jitter Appear */
+@keyframes jitter-appear {
+  0% { opacity: 0; transform: translate(0, 0); }
+  20% { opacity: 0.5; transform: translate(-2px, 1px); }
+  40% { opacity: 0.7; transform: translate(2px, -1px); }
+  60% { opacity: 0.85; transform: translate(-1px, 0); }
+  80% { opacity: 0.95; transform: translate(1px, 0); }
+  100% { opacity: 1; transform: translate(0, 0); }
+}
+.anim-jitter.revealed,
+.anim-jitter:not(.reveal-item) { animation: jitter-appear 0.3s ease-out forwards; }
+
+/* Blink Appear */
+@keyframes blink-appear {
+  0%, 20% { opacity: 0; }
+  25% { opacity: 1; }
+  30% { opacity: 0; }
+  35%, 100% { opacity: 1; }
+}
+.anim-blink-in.revealed,
+.anim-blink-in:not(.reveal-item) { animation: blink-appear 0.5s ease-out forwards; }
+
+/* Neon Sign Flicker - like a neon sign turning on */
+@keyframes neon-sign-flicker {
+  0% { opacity: 0; filter: brightness(0.3); box-shadow: none; }
+  5% { opacity: 0.8; filter: brightness(1.2); box-shadow: 0 0 20px rgba(255, 45, 149, 0.8), inset 0 0 10px rgba(255, 45, 149, 0.3); }
+  10% { opacity: 0.2; filter: brightness(0.4); box-shadow: none; }
+  20% { opacity: 0.9; filter: brightness(1.1); box-shadow: 0 0 15px rgba(255, 45, 149, 0.6); }
+  25% { opacity: 0.1; filter: brightness(0.3); box-shadow: none; }
+  35% { opacity: 0.7; filter: brightness(1); box-shadow: 0 0 10px rgba(255, 45, 149, 0.5); }
+  50% { opacity: 1; filter: brightness(1.1); box-shadow: 0 0 20px rgba(255, 45, 149, 0.7), inset 0 0 15px rgba(255, 45, 149, 0.2); }
+  60% { opacity: 0.85; filter: brightness(0.95); box-shadow: 0 0 12px rgba(255, 45, 149, 0.5); }
+  75% { opacity: 1; filter: brightness(1.05); box-shadow: 0 0 18px rgba(255, 45, 149, 0.6), inset 0 0 12px rgba(255, 45, 149, 0.15); }
+  100% { opacity: 1; filter: brightness(1); box-shadow: 0 0 10px var(--neon-magenta), 0 0 20px rgba(255, 45, 149, 0.3), inset 0 0 30px rgba(255, 45, 149, 0.05); }
+}
+@keyframes neon-img-flicker {
+  0% { opacity: 0; filter: brightness(0.3) saturate(0); }
+  5% { opacity: 0.6; filter: brightness(1.3) saturate(1.2); }
+  10% { opacity: 0.1; filter: brightness(0.4) saturate(0.5); }
+  20% { opacity: 0.7; filter: brightness(1.1) saturate(1); }
+  25% { opacity: 0; filter: brightness(0.3) saturate(0); }
+  35% { opacity: 0.5; filter: brightness(1) saturate(0.8); }
+  50% { opacity: 0.9; filter: brightness(1.1) saturate(1); }
+  60% { opacity: 0.7; filter: brightness(0.95) saturate(0.9); }
+  75% { opacity: 0.95; filter: brightness(1.05) saturate(1); }
+  100% { opacity: 1; filter: brightness(1) saturate(1); }
+}
+/* Override reveal-item transition so animation controls opacity */
+.reveal-item.anim-neon-flicker {
+  transition: none;
+}
+.anim-neon-flicker.revealed,
+.anim-neon-flicker:not(.reveal-item) { animation: neon-sign-flicker 2s ease-out forwards; }
+.anim-neon-flicker.revealed img,
+.anim-neon-flicker:not(.reveal-item) img { animation: neon-img-flicker 2s ease-out forwards; }
+
+/* ========================================
+   AMBIENT ANIMATIONS - Slides feel alive
+   ======================================== */
+
+/* Scanline Sweep */
+@keyframes scanline-sweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Background Glow Pulse */
+@keyframes bg-glow-pulse {
+  0%, 100% { background-position: 0% 50%; filter: brightness(1); }
+  50% { background-position: 100% 50%; filter: brightness(1.02); }
+}
+
+/* Grid Flicker */
+@keyframes grid-flicker {
+  0%, 95%, 100% { opacity: 0.03; }
+  96% { opacity: 0.06; }
+  97% { opacity: 0.02; }
+  98% { opacity: 0.05; }
+}
+
+/* Card Breathe */
+@keyframes card-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Border Glow Random */
+@keyframes border-glow-random {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-magenta), 0 0 20px rgba(255, 45, 149, 0.3); }
+  25% { box-shadow: 0 0 15px var(--neon-magenta), 0 0 30px rgba(255, 45, 149, 0.4); }
+  50% { box-shadow: 0 0 8px var(--neon-magenta), 0 0 15px rgba(255, 45, 149, 0.25); }
+  75% { box-shadow: 0 0 12px var(--neon-magenta), 0 0 25px rgba(255, 45, 149, 0.35); }
+}
+
+/* Text Shimmer */
+@keyframes text-shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.1); }
+}
+
+/* Corner Glow */
+@keyframes corner-glow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Slide Glitch */
+@keyframes slide-glitch {
+  0%, 99%, 100% { transform: translate(0); filter: none; }
+  99.2% { transform: translate(-2px, 1px); filter: hue-rotate(10deg); }
+  99.4% { transform: translate(2px, -1px); filter: hue-rotate(-10deg); }
+  99.6% { transform: translate(0); filter: none; }
+}
+
+/* Neon Text Pulse */
+@keyframes neon-text-pulse {
+  0%, 100% {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 20px currentColor;
+    filter: brightness(1);
+  }
+  50% {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+    filter: brightness(1.15);
+  }
+}
+
+/* Gradient Shimmer */
+@keyframes gradient-shimmer {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+    text-shadow: 0 0 20px rgba(255, 45, 149, 0.5);
+  }
+  25% {
+    filter: brightness(1.1) saturate(1.1);
+    text-shadow: 0 0 30px rgba(255, 45, 149, 0.7);
+  }
+  50% {
+    filter: brightness(1.15) saturate(1.05);
+    text-shadow: 0 0 25px rgba(255, 230, 109, 0.6);
+  }
+  75% {
+    filter: brightness(1.05) saturate(1.1);
+    text-shadow: 0 0 35px rgba(255, 45, 149, 0.6);
+  }
+}
+
+/* Quote Border Glow */
+@keyframes quote-border-glow {
+  0%, 100% {
+    border-color: var(--neon-magenta);
+    box-shadow: inset 0 0 20px rgba(255, 45, 149, 0.1), 0 0 10px rgba(255, 45, 149, 0.3);
+  }
+  50% {
+    border-color: var(--neon-pink);
+    box-shadow: inset 0 0 30px rgba(255, 45, 149, 0.15), 0 0 20px rgba(255, 45, 149, 0.5);
+  }
+}
+
+@keyframes quote-cyan-glow {
+  0%, 100% {
+    border-color: var(--neon-cyan);
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1), 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+  50% {
+    border-color: var(--neon-cyan-dim);
+    box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.15), 0 0 20px rgba(0, 255, 255, 0.5);
+  }
+}
+
+/* Metric Glow */
+@keyframes metric-glow {
+  0%, 100% {
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 10px rgba(189, 147, 249, 0.3), inset 0 0 20px rgba(189, 147, 249, 0.05);
+  }
+  50% {
+    border-color: #c9a0ff;
+    box-shadow: 0 0 20px rgba(189, 147, 249, 0.5), inset 0 0 30px rgba(189, 147, 249, 0.1);
+  }
+}
+
+/* RPG Card Color Glows */
+@keyframes rpg-cyan-glow {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px rgba(0, 255, 255, 0.5); }
+}
+
+@keyframes rpg-green-glow {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-green), 0 0 20px rgba(0, 255, 0, 0.3); }
+  50% { box-shadow: 0 0 20px var(--neon-green), 0 0 40px rgba(0, 255, 0, 0.5); }
+}
+
+@keyframes rpg-purple-glow {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-purple), 0 0 20px rgba(189, 147, 249, 0.3); }
+  50% { box-shadow: 0 0 20px var(--neon-purple), 0 0 40px rgba(189, 147, 249, 0.5); }
+}
+
+@keyframes rpg-yellow-glow {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-yellow), 0 0 20px rgba(255, 230, 109, 0.3); }
+  50% { box-shadow: 0 0 20px var(--neon-yellow), 0 0 40px rgba(255, 230, 109, 0.5); }
+}
+
+/* List Item Glows */
+@keyframes list-item-glow {
+  0%, 100% { border-left-color: var(--neon-purple); box-shadow: -3px 0 10px rgba(189, 147, 249, 0.3); }
+  50% { border-left-color: #c9a0ff; box-shadow: -5px 0 15px rgba(189, 147, 249, 0.5); }
+}
+
+@keyframes list-danger-glow {
+  0%, 100% { border-left-color: var(--neon-magenta); box-shadow: -3px 0 10px rgba(255, 45, 149, 0.3); }
+  50% { border-left-color: var(--neon-pink); box-shadow: -5px 0 15px rgba(255, 45, 149, 0.5); }
+}
+
+@keyframes list-success-glow {
+  0%, 100% { border-left-color: var(--neon-green); box-shadow: -3px 0 10px rgba(0, 255, 0, 0.3); }
+  50% { border-left-color: var(--neon-green-dim); box-shadow: -5px 0 15px rgba(0, 255, 0, 0.5); }
+}
+
+/* Avatar Glow */
+@keyframes avatar-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(189, 147, 249, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(189, 147, 249, 0.5); }
+}
+
+/* Code Glow */
+@keyframes code-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(189, 147, 249, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(189, 147, 249, 0.4); }
+}
+
+/* ========================================
+   REVEAL DELAYS
+   ======================================== */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
