@@ -759,6 +759,385 @@ import Slide from "../../components/Slide.astro";
       </div>
     </section>
 
+    <!-- ==================== BACKGROUND PATTERNS ==================== -->
+    <section class="section">
+      <h2 class="section-title">Background Patterns</h2>
+      <p class="section-desc">Animated backgrounds for themed slides. Add to slide container.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">bg-circuit</span>
+          <div class="bg-circuit" style="height: 120px; position: relative; border-radius: 8px; overflow: hidden;">
+            <div class="circuit-chip" style="width: 40px; height: 40px;"></div>
+          </div>
+          <p style="color: #808080; font-size: 0.8rem; margin-top: 0.5rem;">CPU/tech theme</p>
+          <div class="code-block" set:text={`<div class="bg-circuit">
+  <div class="circuit-chip"></div>
+  <div class="circuit-trace h"></div>
+  <div class="circuit-node"></div>
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">bg-matrix</span>
+          <div class="bg-matrix" style="height: 120px; position: relative; border-radius: 8px; overflow: hidden;">
+            <div class="matrix-column" style="left: 20%; animation-duration: 3s;">01Ruby</div>
+            <div class="matrix-column" style="left: 60%; animation-duration: 4s; animation-delay: 0.5s;">死廃0x</div>
+          </div>
+          <p style="color: #808080; font-size: 0.8rem; margin-top: 0.5rem;">Hacker/fear theme</p>
+          <div class="code-block" set:text={`<div class="bg-matrix">
+  <div class="matrix-column" style="left: 10%; animation-duration: 8s;">01Ruby</div>
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">bg-hexagon</span>
+          <div class="bg-hexagon" style="height: 120px; position: relative; border-radius: 8px; overflow: hidden;">
+            <div class="hexagon-grid">
+              <div class="hex" style="top: 20px; left: 30px;"></div>
+              <div class="hex bright" style="top: 50px; left: 80px;"></div>
+            </div>
+          </div>
+          <p style="color: #808080; font-size: 0.8rem; margin-top: 0.5rem;">Sci-fi/futuristic</p>
+          <div class="code-block" set:text={`<div class="bg-hexagon">
+  <div class="hexagon-grid">
+    <div class="hex" style="top: 20%; left: 15%;"></div>
+    <div class="hex bright" style="top: 40%; left: 50%;"></div>
+  </div>
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">bg-network</span>
+          <div class="bg-network" style="height: 120px; position: relative; border-radius: 8px; overflow: hidden;">
+            <div class="network-container">
+              <div class="network-node" style="top: 30%; left: 20%;"></div>
+              <div class="network-node large" style="top: 60%; left: 50%;"></div>
+              <div class="network-node" style="top: 40%; right: 25%;"></div>
+            </div>
+          </div>
+          <p style="color: #808080; font-size: 0.8rem; margin-top: 0.5rem;">Connections/community</p>
+          <div class="code-block" set:text={`<div class="bg-network">
+  <div class="network-container">
+    <div class="network-node" style="top: 30%; left: 20%;"></div>
+    <div class="network-node large" style="top: 60%; left: 50%;"></div>
+  </div>
+</div>`}></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== NEON BAR CHARTS ==================== -->
+    <section class="section">
+      <h2 class="section-title">Neon Bar Charts</h2>
+      <p class="section-desc">Animated bar charts for benchmarks and metrics.</p>
+
+      <div class="component-box full-width">
+        <span class="component-label">Bar Variants</span>
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin: 1rem 0;">
+          <div class="neon-bar-container" style="height: 40px;">
+            <div class="neon-bar neon-bar-ruby" style="width: 95%;"><span class="benchmark-value" style="color: white;">Rails 8</span></div>
+          </div>
+          <div class="neon-bar-container" style="height: 40px;">
+            <div class="neon-bar neon-bar-cyan" style="width: 75%;"><span class="benchmark-value" style="color: white;">Node.js</span></div>
+          </div>
+          <div class="neon-bar-container" style="height: 40px;">
+            <div class="neon-bar neon-bar-green" style="width: 60%;"><span class="benchmark-value" style="color: white;">Django</span></div>
+          </div>
+          <div class="neon-bar-container" style="height: 40px;">
+            <div class="neon-bar neon-bar-yellow" style="width: 50%;"><span class="benchmark-value" style="color: white;">PHP</span></div>
+          </div>
+          <div class="neon-bar-container" style="height: 40px;">
+            <div class="neon-bar neon-bar-purple" style="width: 45%;"><span class="benchmark-value" style="color: white;">Spring</span></div>
+          </div>
+        </div>
+
+        <div class="code-block" set:text={`<!-- Benchmark bar chart -->
+<div class="neon-bar-container" style="height: 40px;">
+  <div class="neon-bar neon-bar-ruby" style="width: 95%;">
+    <span class="benchmark-value">Rails 8</span>
+  </div>
+</div>
+
+<!-- Bar colors: neon-bar-ruby (magenta), neon-bar-cyan, neon-bar-green, neon-bar-yellow, neon-bar-purple -->
+
+<!-- Highlighted container -->
+<div class="neon-bar-container neon-bar-container-highlight">...</div>`}></div>
+      </div>
+    </section>
+
+    <!-- ==================== AMBIENT ANIMATIONS ==================== -->
+    <section class="section">
+      <h2 class="section-title">Ambient Animations</h2>
+      <p class="section-desc">Subtle background animations that make slides feel alive. Applied automatically to cards and text.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">Card Breathing</span>
+          <p style="color: #808080; font-size: 0.85rem; margin-bottom: 1rem;">
+            Cards gently float up/down. Applied automatically to <code>rpg-card</code>, <code>quote-card</code>, <code>metric-card</code>.
+          </p>
+          <div class="code-block" set:text={`/* Automatic on cards */
+animation: card-breathe 6s ease-in-out infinite;
+
+/* Different cards get staggered delays */
+:nth-child(2) { animation-delay: 1s; }
+:nth-child(3) { animation-delay: 2s; }`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Neon Text Pulse</span>
+          <p style="color: #808080; font-size: 0.85rem; margin-bottom: 1rem;">
+            Text glows brighter/dimmer. Applied automatically to <code>text-neon-*</code> classes.
+          </p>
+          <div class="code-block" set:text={`/* Automatic on neon text */
+animation: neon-text-pulse 3s ease-in-out infinite;
+
+/* Each color gets slightly different timing
+   for organic feel */`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Gradient Shimmer</span>
+          <p style="color: #808080; font-size: 0.85rem; margin-bottom: 1rem;">
+            Gradient text shimmers. Applied automatically to <code>gradient-text</code>.
+          </p>
+          <div class="code-block" set:text={`/* Automatic on gradient-text */
+animation: gradient-shimmer 5s ease-in-out infinite;`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Border Glow</span>
+          <p style="color: #808080; font-size: 0.85rem; margin-bottom: 1rem;">
+            Cards have subtle border glow variations. Applied automatically.
+          </p>
+          <div class="code-block" set:text={`/* Color-specific glows */
+rpg-cyan-glow, rpg-green-glow, rpg-purple-glow, rpg-yellow-glow
+
+/* Quote-specific */
+quote-border-glow, quote-cyan-glow`}></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DECISION GUIDES ==================== -->
+    <section class="section">
+      <h2 class="section-title">Decision Guides</h2>
+      <p class="section-desc">When to use what.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">Animation Selection</span>
+          <div style="font-size: 0.85rem; line-height: 1.8;">
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-magenta">EMPHASIS:</span></p>
+            <ul style="color: #b0b0b0; padding-left: 1rem; margin-bottom: 1rem;">
+              <li><code>anim-glow-pulse</code> — draw attention to card</li>
+              <li><code>anim-neon-flicker</code> — neon sign turning on</li>
+              <li><code>anim-text-glow</code> — pulsing text</li>
+            </ul>
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-cyan">ENTRANCE:</span></p>
+            <ul style="color: #b0b0b0; padding-left: 1rem; margin-bottom: 1rem;">
+              <li><code>anim-glitch</code> — hacker/terminal feel</li>
+              <li><code>anim-slide-up</code> — subtle, professional</li>
+              <li><code>anim-scale-in</code> — pop for metrics</li>
+              <li><code>anim-typewriter</code> — terminal output</li>
+            </ul>
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-yellow">AVOID:</span></p>
+            <ul style="color: #808080; padding-left: 1rem;">
+              <li>Multiple looping animations on same slide</li>
+              <li>Too many entrance animations at once</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Card Selection</span>
+          <div style="font-size: 0.85rem; line-height: 1.8;">
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-magenta">rpg-card</span></p>
+            <p style="color: #808080; margin-bottom: 1rem;">Primary content, key points, main ideas</p>
+
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-cyan">rpg-card-cyan</span></p>
+            <p style="color: #808080; margin-bottom: 1rem;">Technical details, code examples, specs</p>
+
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-green">rpg-card-green</span></p>
+            <p style="color: #808080; margin-bottom: 1rem;">Success stories, positive outcomes, wins</p>
+
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-purple">metric-card</span></p>
+            <p style="color: #808080; margin-bottom: 1rem;">Statistics with big numbers</p>
+
+            <p style="margin-bottom: 0.75rem;"><span class="text-neon-yellow">quote-card</span></p>
+            <p style="color: #808080;">Attributed quotes, testimonials</p>
+          </div>
+        </div>
+
+        <div class="component-box full-width">
+          <span class="component-label">Background Selection</span>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+            <div>
+              <p class="text-neon-purple" style="margin-bottom: 0.25rem;">gradient-purple</p>
+              <p style="color: #808080; font-size: 0.8rem;">Section titles, major transitions</p>
+            </div>
+            <div>
+              <p class="text-neon-pink" style="margin-bottom: 0.25rem;">gradient-pink</p>
+              <p style="color: #808080; font-size: 0.8rem;">Fear, danger, warnings</p>
+            </div>
+            <div>
+              <p class="text-neon-green" style="margin-bottom: 0.25rem;">gradient-green</p>
+              <p style="color: #808080; font-size: 0.8rem;">Hope, success, positive</p>
+            </div>
+            <div>
+              <p class="text-neon-yellow" style="margin-bottom: 0.25rem;">gradient-yellow</p>
+              <p style="color: #808080; font-size: 0.8rem;">Insights, revelations</p>
+            </div>
+            <div>
+              <p style="color: #909090; margin-bottom: 0.25rem;">dark</p>
+              <p style="color: #808080; font-size: 0.8rem;">Default, most content slides</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== COPY-PASTE PATTERNS ==================== -->
+    <section class="section">
+      <h2 class="section-title">Copy-Paste Patterns</h2>
+      <p class="section-desc">Ready-to-use slide patterns.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">Staggered Card Reveals</span>
+          <div class="code-block" set:text={`<div class="grid md:grid-cols-3 gap-4">
+  <div class="reveal-item rpg-card anim-scale-in">
+    <h3 class="text-neon-magenta">Card 1</h3>
+  </div>
+  <div class="reveal-item reveal-delay-1 rpg-card anim-scale-in">
+    <h3 class="text-neon-cyan">Card 2</h3>
+  </div>
+  <div class="reveal-item reveal-delay-2 rpg-card anim-scale-in">
+    <h3 class="text-neon-green">Card 3</h3>
+  </div>
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Metrics Grid</span>
+          <div class="code-block" set:text={`<div class="grid md:grid-cols-4 gap-4">
+  <div class="metric-card">
+    <div class="big-number gradient-text counter"
+      data-target="50">0</div>
+    <div class="text-gray-400">Founders</div>
+  </div>
+  <div class="metric-card">
+    <div class="big-number gradient-text counter"
+      data-target="26" data-prefix="$" data-suffix="B">$0B</div>
+    <div class="text-gray-400">Valuation</div>
+  </div>
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Quote with Author Photo</span>
+          <div class="code-block" set:text={`<QuoteSlide
+  quote="The quote text goes here."
+  author="Author Name"
+  authorImage="/speaker_name.jpg"
+  context="Title, Company"
+  label="Topic"
+  color="cyan"
+  background="gradient-purple"
+  notes="Speaker notes for this slide"
+/>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Benchmark Bar Chart</span>
+          <div class="code-block" set:text={`<div class="space-y-3">
+  <div>
+    <div class="flex justify-between mb-1">
+      <span class="benchmark-label">Rails 8</span>
+      <span class="benchmark-value text-neon-magenta">95%</span>
+    </div>
+    <div class="neon-bar-container h-8">
+      <div class="neon-bar neon-bar-ruby" style="width: 95%;"></div>
+    </div>
+  </div>
+  <div>
+    <div class="flex justify-between mb-1">
+      <span class="benchmark-label">Node.js</span>
+      <span class="benchmark-value text-neon-cyan">75%</span>
+    </div>
+    <div class="neon-bar-container h-8">
+      <div class="neon-bar neon-bar-cyan" style="width: 75%;"></div>
+    </div>
+  </div>
+</div>`}></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== NEW UTILITIES ==================== -->
+    <section class="section">
+      <h2 class="section-title">New Utilities</h2>
+      <p class="section-desc">Recently added helper classes.</p>
+
+      <div class="component-grid">
+        <div class="component-box">
+          <span class="component-label">Animation Delays</span>
+          <p style="color: #808080; font-size: 0.85rem; margin-bottom: 1rem;">
+            For staggered animations without using reveal-delay.
+          </p>
+          <div class="code-block" set:text={`anim-delay-200   /* 0.2s */
+anim-delay-500   /* 0.5s */
+anim-delay-1000  /* 1s */
+anim-delay-1500  /* 1.5s */
+anim-delay-2000  /* 2s */`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Centering</span>
+          <div class="code-block" set:text={`.center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Parameterized Glow</span>
+          <p style="color: #808080; font-size: 0.85rem; margin-bottom: 1rem;">
+            Use CSS variable for any glow color.
+          </p>
+          <div class="code-block" set:text={`/* Pre-configured colors */
+anim-glow-magenta
+anim-glow-cyan
+anim-glow-green
+anim-glow-purple
+anim-glow-yellow
+anim-glow-orange
+
+/* Custom color */
+<div style="--glow-color: #ff6b00;"
+     class="animation: glow-pulse-var 2s infinite;">
+</div>`}></div>
+        </div>
+
+        <div class="component-box">
+          <span class="component-label">Extra Card Colors</span>
+          <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+            <div class="rpg-card rpg-card-rose" style="padding: 0.75rem; flex: 1;">
+              <span style="color: #fb7185;">rpg-card-rose</span>
+            </div>
+            <div class="rpg-card rpg-card-emerald" style="padding: 0.75rem; flex: 1;">
+              <span style="color: #4ade80;">rpg-card-emerald</span>
+            </div>
+          </div>
+          <div class="code-block" set:text={`<div class="rpg-card rpg-card-rose">Warning</div>
+<div class="rpg-card rpg-card-emerald">Success</div>`}></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ==================== QUICK REFERENCE ==================== -->
     <section class="section" style="border-bottom: none;">
       <h2 class="section-title">Quick Reference</h2>
@@ -770,6 +1149,8 @@ rpg-card rpg-card-cyan      Cyan variant
 rpg-card rpg-card-green     Green variant
 rpg-card rpg-card-purple    Purple variant
 rpg-card rpg-card-yellow    Yellow variant
+rpg-card rpg-card-rose      Rose/pink variant (NEW)
+rpg-card rpg-card-emerald   Emerald/green variant (NEW)
 quote-card                  Quote with > prefix
 metric-card                 Stats display
 
@@ -779,6 +1160,7 @@ gradient-text               Magenta→yellow gradient
 section-label               Small cyan uppercase
 fear-text / hope-text       Magenta / Green emphasis
 prompt-green/arrow/warn/info/question/ok
+neon-sign-cyan/magenta/green   Neon sign text (NEW)
 
 /* ============ ANIMATIONS ============ */
 /* Entrance (play once) - WAIT for reveal if combined with reveal-item */
@@ -791,20 +1173,28 @@ anim-rotate-in              Rotate in
 anim-typewriter             Line reveal (clip-path, terminal output feel)
 anim-typewriter-cursor      Add blinking cursor after text
 anim-quote-dramatic         Hero quote entrance + glow pulse
+anim-neon-flicker           Neon sign turning on
 /* ^ These wait for .revealed class when on .reveal-item elements */
 
 /* Continuous (loop) */
 anim-glow-pulse             Breathing magenta glow
 anim-glow-pulse-cyan        Breathing cyan glow
+anim-glow-magenta/cyan/green/purple/yellow/orange  (NEW parameterized)
 anim-float                  Float up/down
 anim-float-delay-1/2/3      Staggered float
 anim-flicker                Neon flicker
 anim-rainbow                Color cycling
 anim-cursor                 Typing cursor
 
+/* Animation delays (NEW) */
+anim-delay-200/500/1000/1500/2000
+
 /* ============ REVEAL ============ */
 reveal-item                 Hidden until arrow press
 reveal-delay-1/2/3/4/5      Stagger delays (0.1s each)
+
+/* ============ UTILITIES (NEW) ============ */
+center-absolute             Absolute center positioning
 
 /* ============ COUNTER ============ */
 <span class="counter"
@@ -818,6 +1208,18 @@ founder-grid + founder-item + founder-avatar + founder-name
 founder-logo                Logo below founder photo (white filter)
 founder-grid-fullscreen     Larger grid for fullscreen slides
 metric-grid (auto-fit grid for metric-cards)
+
+/* ============ BAR CHARTS ============ */
+neon-bar-container          Bar wrapper with scanlines
+neon-bar                    Bar base (add color class)
+neon-bar-ruby/cyan/green/yellow/purple  Bar colors
+neon-bar-container-highlight Pulsing highlight for winner
+
+/* ============ BACKGROUNDS ============ */
+bg-circuit                  CPU/tech circuit board
+bg-matrix                   Matrix rain effect
+bg-hexagon                  Sci-fi hexagon grid
+bg-network                  Network constellation
 
 /* ============ SLIDE COMPONENT ============ */
 import Slide from "../../components/Slide.astro";

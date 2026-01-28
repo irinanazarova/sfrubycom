@@ -1,0 +1,146 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  authorImage?: string;
+  context?: string;
+  label?: string;
+  bio?: string;
+  background?: 'dark' | 'gradient-purple';
+  color?: 'cyan' | 'magenta' | 'green';
+  notes?: string;
+}
+
+const {
+  quote,
+  author,
+  authorImage = '',
+  context = '',
+  label = '',
+  bio = '',
+  background = 'dark',
+  color = 'cyan',
+  notes
+} = Astro.props;
+
+import Slide from './Slide.astro';
+
+// Auto-size based on quote length
+const quoteLength = quote.length;
+const sizeClass = quoteLength > 150 ? 'quote-size-small' : quoteLength > 80 ? 'quote-size-medium' : 'quote-size-large';
+
+const colorClasses = {
+  cyan: {
+    border: 'border-[rgba(0,255,255,0.3)]',
+    shadow: 'shadow-[0_0_30px_rgba(0,255,255,0.2)]',
+    glow: 'neon-sign-cyan',
+    labelColor: 'text-neon-cyan'
+  },
+  magenta: {
+    border: 'border-[rgba(255,45,149,0.3)]',
+    shadow: 'shadow-[0_0_30px_rgba(255,45,149,0.2)]',
+    glow: 'neon-sign-magenta',
+    labelColor: 'text-neon-magenta'
+  },
+  green: {
+    border: 'border-[rgba(0,204,102,0.3)]',
+    shadow: 'shadow-[0_0_30px_rgba(0,204,102,0.2)]',
+    glow: 'neon-sign-green',
+    labelColor: 'text-neon-green'
+  }
+};
+
+const colorStyle = colorClasses[color];
+---
+
+<Slide layout="centered" background={background} notes={notes}>
+  <!-- Constellation Background -->
+  <div class="constellation-container">
+    <div class="star large" style="top: 15%; left: 20%; animation-delay: 0s;"></div>
+    <div class="star" style="top: 25%; left: 30%; animation-delay: 0.5s;"></div>
+    <div class="star" style="top: 10%; left: 45%; animation-delay: 1s;"></div>
+    <div class="star large" style="top: 20%; right: 25%; animation-delay: 0.3s;"></div>
+    <div class="star" style="top: 30%; right: 15%; animation-delay: 0.8s;"></div>
+    <div class="star" style="top: 70%; left: 15%; animation-delay: 1.2s;"></div>
+    <div class="star large" style="top: 80%; left: 35%; animation-delay: 0.6s;"></div>
+    <div class="star" style="top: 75%; right: 20%; animation-delay: 1.5s;"></div>
+    <div class="star" style="top: 85%; right: 35%; animation-delay: 0.2s;"></div>
+    <div class="star-line" style="top: 17%; left: 22%; width: 80px; transform: rotate(20deg);"></div>
+    <div class="star-line" style="top: 22%; left: 32%; width: 100px; transform: rotate(-35deg);"></div>
+    <div class="star-line" style="top: 78%; left: 17%; width: 120px; transform: rotate(15deg);"></div>
+  </div>
+
+  <div class="quote-slide-content relative z-10 max-w-5xl mx-auto">
+    <!-- Author Photo + Name -->
+    <div class="reveal-item flex flex-col items-center mb-6">
+      {authorImage && (
+        <div class={`w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 ${colorStyle.border} ${colorStyle.shadow} mb-3`}>
+          <img
+            src={authorImage}
+            alt={author}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      <h3 class="text-lg md:text-xl font-bold text-white">{author}</h3>
+      {context && <p class="text-gray-500 text-xs mt-1">{context}</p>}
+    </div>
+
+    <!-- Label Badge -->
+    {label && (
+      <p class={`reveal-item section-label mb-4 text-center ${colorStyle.labelColor}`}>{label}</p>
+    )}
+
+    <!-- Neon Sign Quote -->
+    <div class="reveal-item neon-sign-container">
+      <blockquote class={`neon-sign-quote ${sizeClass} ${colorStyle.glow}`}>
+        "{quote}"
+      </blockquote>
+    </div>
+
+    <!-- Optional Bio -->
+    {bio && (
+      <p class="reveal-item text-base md:text-lg text-gray-500 mt-6 max-w-3xl">
+        {bio}
+      </p>
+    )}
+  </div>
+</Slide>
+
+<style>
+  /* Component-specific styles - neon sign animations are in neon-rpg.css */
+  .quote-slide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .neon-sign-container {
+    padding: 1rem 0;
+    position: relative;
+    width: 100%;
+  }
+
+  .neon-sign-quote {
+    font-family: "Martian Grotesk Wide", system-ui, sans-serif;
+    font-stretch: 150%;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    max-width: 85vw;
+  }
+
+  /* Size variants based on quote length */
+  .quote-size-large {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+  }
+
+  .quote-size-medium {
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+  }
+
+  .quote-size-small {
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+  }
+</style>

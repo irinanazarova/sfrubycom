@@ -1,0 +1,551 @@
+---
+// Presenter View for RubyConfTH Presentation
+// Opens in a separate window, syncs with main presentation via BroadcastChannel
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presenter View | RubyConfTH 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0d0221;
+            --surface: #1a0a30;
+            --border: #2d1b4e;
+            --text: #e0e0e0;
+            --text-dim: #888;
+            --magenta: #ff2d95;
+            --cyan: #00ffff;
+            --green: #00ff00;
+            --yellow: #ffe66d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .presenter-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'SF Mono', Monaco, monospace;
+            color: var(--cyan);
+            text-shadow: 0 0 10px var(--cyan);
+        }
+
+        .timer.warning { color: var(--yellow); text-shadow: 0 0 10px var(--yellow); }
+        .timer.danger { color: var(--magenta); text-shadow: 0 0 10px var(--magenta); animation: pulse 1s infinite; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .slide-info {
+            text-align: center;
+        }
+
+        .slide-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--magenta);
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .controls button {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .controls button:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* Slides area */
+        .slides-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .current-slide-container, .next-slide-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .current-slide-container {
+            flex: 2;
+            border-color: var(--magenta);
+            box-shadow: 0 0 20px rgba(255, 45, 149, 0.2);
+        }
+
+        .next-slide-container {
+            flex: 1;
+            opacity: 0.7;
+        }
+
+        .slide-label {
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.3);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .slide-label.current { color: var(--magenta); }
+        .slide-label.next { color: var(--cyan); }
+
+        .slide-frame-wrapper {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 2rem);
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        .slide-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1920px;
+            height: 1080px;
+            border: none;
+            background: var(--bg);
+            pointer-events: none;
+            transform-origin: center center;
+            transition: opacity 0.15s ease-out;
+            /* transform set by JS: translate(-50%, -50%) scale(X) */
+        }
+
+        .slide-frame.loading {
+            opacity: 0.3;
+        }
+
+        .slide-frame.ready {
+            opacity: 1;
+        }
+
+        /* Notes area */
+        .notes-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .notes-container {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .notes-title {
+            font-size: 0.9rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notes-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .notes-content .highlight {
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        /* Reveal progress */
+        .reveal-progress {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .reveal-progress-title {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .reveal-dots {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .reveal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .reveal-dot.revealed {
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0.5rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        kbd {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+        }
+
+        /* Connection status */
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.disconnected {
+            background: var(--magenta);
+        }
+    </style>
+</head>
+<body>
+    <div class="presenter-layout">
+        <!-- Header -->
+        <header class="header">
+            <div class="connection-status">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-text">Connected</span>
+            </div>
+
+            <div class="slide-info">
+                <div class="slide-number">
+                    Slide <span id="current-num">1</span> / <span id="total-num">62</span>
+                </div>
+                <div class="progress-text">
+                    <span id="revealed-count">0</span> / <span id="total-reveals">0</span> reveals
+                </div>
+            </div>
+
+            <div class="timer" id="timer">00:00:00</div>
+
+            <div class="controls">
+                <button onclick="resetTimer()">Reset Timer</button>
+                <button onclick="requestSync()">Sync</button>
+            </div>
+        </header>
+
+        <!-- Slides -->
+        <div class="slides-area">
+            <div class="current-slide-container">
+                <div class="slide-label current">Current Slide</div>
+                <div class="slide-frame-wrapper" id="current-wrapper">
+                    <iframe
+                        id="current-frame"
+                        class="slide-frame ready"
+                        src="/rubyconfth/?preview=1&slide=1&revealed=0"
+                        scrolling="no"
+                    ></iframe>
+                </div>
+            </div>
+            <div class="next-slide-container">
+                <div class="slide-label next">Next Slide</div>
+                <div class="slide-frame-wrapper" id="next-wrapper">
+                    <iframe
+                        id="next-frame"
+                        class="slide-frame ready"
+                        src="/rubyconfth/?preview=1&slide=2&revealed=all"
+                        scrolling="no"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="notes-area">
+            <div class="notes-container">
+                <div class="notes-title">Speaker Notes</div>
+                <div class="notes-content" id="notes-content"></div>
+            </div>
+
+            <div class="reveal-progress">
+                <div class="reveal-progress-title">Reveal Progress</div>
+                <div class="reveal-dots" id="reveal-dots"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span><kbd>→</kbd> / <kbd>Space</kbd> Next</span>
+            <span><kbd>←</kbd> Previous</span>
+            <span><kbd>B</kbd> Black screen</span>
+            <span><kbd>PageDown</kbd> / <kbd>PageUp</kbd> Clicker</span>
+        </footer>
+    </div>
+
+    <script>
+        // BroadcastChannel for sync
+        const channel = new BroadcastChannel('presentation-sync');
+
+        // State
+        let currentSlide = -1;  // Start at -1 so first update always refreshes iframes
+        let revealedCount = 0;
+        let totalReveals = 0;
+        let timerStart = Date.now();
+        let timerRunning = true;
+
+        // Elements
+        const currentFrame = document.getElementById('current-frame');
+        const nextFrame = document.getElementById('next-frame');
+        const currentWrapper = document.getElementById('current-wrapper');
+        const nextWrapper = document.getElementById('next-wrapper');
+        const currentNumEl = document.getElementById('current-num');
+        const totalNumEl = document.getElementById('total-num');
+        const revealedCountEl = document.getElementById('revealed-count');
+        const totalRevealsEl = document.getElementById('total-reveals');
+        const notesContent = document.getElementById('notes-content');
+        const revealDots = document.getElementById('reveal-dots');
+        const timerEl = document.getElementById('timer');
+        const statusDot = document.getElementById('status-dot');
+        const statusText = document.getElementById('status-text');
+
+        // Scale iframes to fit their containers and center them
+        function scaleIframes() {
+            [currentWrapper, nextWrapper].forEach(wrapper => {
+                if (!wrapper) return;
+                const iframe = wrapper.querySelector('iframe');
+                if (!iframe) return;
+
+                const wrapperWidth = wrapper.clientWidth;
+                const wrapperHeight = wrapper.clientHeight;
+                const scale = Math.min(wrapperWidth / 1920, wrapperHeight / 1080);
+                // Center with translate, then scale
+                iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
+            });
+        }
+
+        // Scale on load and resize (wait for layout to complete)
+        requestAnimationFrame(() => {
+            scaleIframes();
+            // Also rescale after iframes load
+            currentFrame.addEventListener('load', scaleIframes);
+            nextFrame.addEventListener('load', scaleIframes);
+        });
+        window.addEventListener('resize', scaleIframes);
+
+        // Handle iframe load events to prevent blinking
+        function setupIframeLoadHandler(iframe) {
+            iframe.addEventListener('load', () => {
+                iframe.classList.remove('loading');
+                iframe.classList.add('ready');
+            });
+        }
+        setupIframeLoadHandler(currentFrame);
+        setupIframeLoadHandler(nextFrame);
+
+        // Update display
+        function updateDisplay(data) {
+            const slideChanged = currentSlide !== data.slideIndex;
+            currentSlide = data.slideIndex;
+            revealedCount = data.revealedCount;
+            totalReveals = data.totalReveals;
+
+            // Update slide numbers
+            currentNumEl.textContent = currentSlide + 1;
+            revealedCountEl.textContent = revealedCount;
+            totalRevealsEl.textContent = totalReveals;
+
+            // Update iframes when slide or reveal count changes
+            // Use query param instead of hash (hash changes don't reload iframes)
+            const currentSrc = currentFrame.src;
+            const expectedSrc = `/rubyconfth/?preview=1&slide=${currentSlide + 1}&revealed=${revealedCount}`;
+
+            // Only reload if slide changed OR revealed count changed
+            if (slideChanged || !currentSrc.includes(`revealed=${revealedCount}`)) {
+                const ts = Date.now();
+                // Mark as loading (will fade in when loaded)
+                currentFrame.classList.add('loading');
+                currentFrame.classList.remove('ready');
+                currentFrame.src = `${expectedSrc}&t=${ts}`;
+
+                // Only update next slide preview when slide changes
+                if (slideChanged) {
+                    nextFrame.classList.add('loading');
+                    nextFrame.classList.remove('ready');
+                    nextFrame.src = `/rubyconfth/?preview=1&slide=${currentSlide + 2}&revealed=all&t=${ts}`;
+                }
+            }
+
+            // Update notes (from broadcast data) - only update if we have data
+            if (data.notes !== undefined) {
+                const notes = data.notes || "";
+                notesContent.innerHTML = notes
+                    ? notes.replace(/\*\*(.*?)\*\*/g, '<span class="highlight">$1</span>')
+                    : '<span style="color: var(--text-dim);">No notes for this slide.</span>';
+            }
+
+            // Update reveal dots
+            revealDots.innerHTML = '';
+            for (let i = 0; i < totalReveals; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'reveal-dot' + (i < revealedCount ? ' revealed' : '');
+                revealDots.appendChild(dot);
+            }
+
+            // Connection status
+            statusDot.classList.remove('disconnected');
+            statusText.textContent = 'Connected';
+        }
+
+        // Listen for updates from main presentation
+        channel.onmessage = (event) => {
+            if (event.data.type === 'slide-update') {
+                updateDisplay(event.data);
+            }
+        };
+
+        // Request current state
+        function requestSync() {
+            channel.postMessage({ type: 'request-state' });
+        }
+
+        // Timer
+        function updateTimer() {
+            if (!timerRunning) return;
+
+            const elapsed = Date.now() - timerStart;
+            const hours = Math.floor(elapsed / 3600000);
+            const minutes = Math.floor((elapsed % 3600000) / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+
+            timerEl.textContent =
+                String(hours).padStart(2, '0') + ':' +
+                String(minutes).padStart(2, '0') + ':' +
+                String(seconds).padStart(2, '0');
+
+            // Color warnings
+            timerEl.classList.remove('warning', 'danger');
+            if (minutes >= 25) {
+                timerEl.classList.add('danger');
+            } else if (minutes >= 20) {
+                timerEl.classList.add('warning');
+            }
+        }
+
+        function resetTimer() {
+            timerStart = Date.now();
+        }
+
+        // Keyboard controls (also control main presentation)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                channel.postMessage({ type: 'next-step' });
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                channel.postMessage({ type: 'prev-step' });
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                channel.postMessage({ type: 'goto-slide', slideIndex: 0, revealAll: false });
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                channel.postMessage({ type: 'goto-slide', slideIndex: 61, revealAll: true });
+            }
+        });
+
+        // Initialize
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Request sync on load (give main presentation time to initialize)
+        setTimeout(requestSync, 1000);
+
+        // Mark as synced after receiving first update
+        let hasSynced = false;
+        const originalUpdateDisplay = updateDisplay;
+        updateDisplay = function(data) {
+            hasSynced = true;
+            originalUpdateDisplay(data);
+        };
+
+        // Only request sync again if we never got a response
+        setTimeout(() => {
+            if (!hasSynced) {
+                requestSync();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
