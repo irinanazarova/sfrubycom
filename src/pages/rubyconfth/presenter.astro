@@ -37,7 +37,7 @@
         .presenter-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            grid-template-rows: auto 1fr auto;
+            grid-template-rows: auto 1fr;
             height: 100vh;
             gap: 1rem;
             padding: 1rem;
@@ -210,57 +210,6 @@
             font-weight: bold;
         }
 
-        /* Reveal progress */
-        .reveal-progress {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 0.5rem;
-            padding: 1rem;
-        }
-
-        .reveal-progress-title {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 0.5rem;
-        }
-
-        .reveal-dots {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .reveal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--border);
-        }
-
-        .reveal-dot.revealed {
-            background: var(--green);
-            box-shadow: 0 0 8px var(--green);
-        }
-
-        /* Footer */
-        .footer {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            padding: 0.5rem;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
-
-        kbd {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 0.2rem 0.5rem;
-            border-radius: 0.25rem;
-            font-family: monospace;
-        }
-
         /* Connection status */
         .connection-status {
             display: flex;
@@ -339,20 +288,7 @@
                 <div class="notes-title">Speaker Notes</div>
                 <div class="notes-content" id="notes-content"></div>
             </div>
-
-            <div class="reveal-progress">
-                <div class="reveal-progress-title">Reveal Progress</div>
-                <div class="reveal-dots" id="reveal-dots"></div>
-            </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <span><kbd>→</kbd> / <kbd>Space</kbd> Next</span>
-            <span><kbd>←</kbd> Previous</span>
-            <span><kbd>B</kbd> Black screen</span>
-            <span><kbd>PageDown</kbd> / <kbd>PageUp</kbd> Clicker</span>
-        </footer>
     </div>
 
     <script>
@@ -376,7 +312,6 @@
         const revealedCountEl = document.getElementById('revealed-count');
         const totalRevealsEl = document.getElementById('total-reveals');
         const notesContent = document.getElementById('notes-content');
-        const revealDots = document.getElementById('reveal-dots');
         const timerEl = document.getElementById('timer');
         const statusDot = document.getElementById('status-dot');
         const statusText = document.getElementById('status-text');
@@ -454,14 +389,6 @@
                 notesContent.innerHTML = notes
                     ? notes.replace(/\*\*(.*?)\*\*/g, '<span class="highlight">$1</span>')
                     : '<span style="color: var(--text-dim);">No notes for this slide.</span>';
-            }
-
-            // Update reveal dots
-            revealDots.innerHTML = '';
-            for (let i = 0; i < totalReveals; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'reveal-dot' + (i < revealedCount ? ' revealed' : '');
-                revealDots.appendChild(dot);
             }
 
             // Connection status

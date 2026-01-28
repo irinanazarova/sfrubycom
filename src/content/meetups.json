@@ -1,15 +1,15 @@
 [
   {
-    "id": "sfruby-meetup-jan-2026",
-    "title": "SF Ruby Meetup, January @ Persona",
-    "description": "Monthly SF Ruby meetup. Agenda TBC.",
-    "date": "2026-01-22",
+    "id": "sfruby-meetup-feb-2026",
+    "title": "SF Ruby Meetup, February @ Sentry",
+    "description": "Speakers: Vladimir Dementyev, Mike Dalton, Brandon Weaver. A few slots still open!",
+    "date": "2026-02-25",
     "time": "17:00",
     "endTime": "21:00",
-    "location": "Persona HQ, 50 Beale Street, Fl 16, San Francisco",
-    "lumaUrl": "https://luma.com/rv17ccv7",
+    "location": "Sentry, 45 Fremont Street, San Francisco, CA 94105",
+    "lumaUrl": "https://luma.com/3mf4bhdl",
     "registeredCount": 0,
-    "coverImageUrl": "",
+    "coverImageUrl": "https://images.lumacdn.com/event-covers/1t/8e483486-b897-49f4-8be5-952b187fefc7.jpg",
     "type": "meetup"
   }
 ]
