@@ -269,8 +269,8 @@
                 <div class="timer" id="timer">00:00:00</div>
 
                 <div class="controls">
-                    <button onclick="resetTimer()">Reset Timer</button>
-                    <button onclick="requestSync()">Sync</button>
+                    <button id="btn-reset-timer">Reset Timer</button>
+                    <button id="btn-sync">Sync</button>
                 </div>
             </header>
 
@@ -283,7 +283,7 @@
                             id="current-frame"
                             class="slide-frame"
                             src="/rubyconfth/?preview=1&slide=1&revealed=0"
-                            scrolling="no"></iframe>
+                            style="overflow: hidden;"></iframe>
                     </div>
                 </div>
                 <div class="next-slide-container">
@@ -292,7 +292,7 @@
                             id="next-frame"
                             class="slide-frame"
                             src="/rubyconfth/?preview=1&slide=2&revealed=all"
-                            scrolling="no"></iframe>
+                            style="overflow: hidden;"></iframe>
                     </div>
                 </div>
             </div>
@@ -307,6 +307,7 @@
         </div>
 
         <script>
+            // @ts-nocheck
             // BroadcastChannel for sync
             const channel = new BroadcastChannel("presentation-sync");
 
@@ -493,6 +494,10 @@
                     });
                 }
             });
+
+            // Wire up buttons
+            document.getElementById("btn-reset-timer").addEventListener("click", resetTimer);
+            document.getElementById("btn-sync").addEventListener("click", requestSync);
 
             // Initialize
             setInterval(updateTimer, 1000);
