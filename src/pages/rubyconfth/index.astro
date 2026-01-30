@@ -60,27 +60,6 @@ const aiStartups = [
     },
 ];
 
-const scaleProof = [
-    { company: "Intercom", metric: "2M req/sec", detail: "14 years on Rails" },
-    { company: "Shopify", metric: "80M req/min", detail: "Black Friday 2024" },
-    { company: "AngelList", metric: "$100B+ managed", detail: "~30 engineers" },
-    { company: "NexHealth", metric: "$1B unicorn", detail: "85% Rails" },
-];
-
-const openSourceImpact = [
-    {
-        founder: "Kieran Klaassen",
-        project: "compound-engineering-plugin",
-        stars: "6,240",
-    },
-    { founder: "Carmine Paolino", project: "RubyLLM", stars: "3,452" },
-    {
-        founder: "Jeremy Evans",
-        project: "Sequel + Roda + Rodauth",
-        stars: "8,800+",
-    },
-    { founder: "André Arko", project: "Bundler", stars: "#1 contributor" },
-];
 
 // Southeast Asian Ruby/Rails success stories
 const seaCompanies = [
@@ -113,7 +92,7 @@ const seaCompanies = [
     <Slide
         layout="centered"
         background="gradient-purple"
-        notes="Hey everyone! Sawadee krap! How's everyone doing? So excited to be here in Bangkok. First time in Thailand, and I already love it. Let me tell you what I've been up to for the last two years."
+        notes="Sawasdee ka! So excited to be here in Bangkok. And super grateful to be opening the two days of learning and sharing about Ruby here in Thailand"
     >
         <div>
             <p class="section-label mb-6">RubyConfTH Bangkok 2026</p>
@@ -134,11 +113,25 @@ const seaCompanies = [
         </div>
     </Slide>
 
+    <!-- Slide 1a: Thailand Photo -->
+    <Slide
+        layout="fullscreen"
+        background="dark"
+        notes=""
+    >
+        <img
+            src="/thailand.jpg"
+            alt="Thailand"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
+        <p class="absolute inset-0 flex items-center justify-center text-black text-5xl font-bold z-10">PAGA Microroastery</p>
+    </Slide>
+
     <!-- Slide 1b: About Me -->
     <Slide
         layout="two-column"
         background="dark"
-        notes="A bit about me. I run Evil Martians — we help startups scale with Ruby and Rails. I also co-created AnyCable for real-time apps. And I organize SF Ruby meetup and conference in San Francisco. But honestly? I've spent the last two years doing something a bit unusual..."
+        notes="A bit about me. CLICK — I run Evil Martians — we help startups scale with Ruby and Rails. CLICK — I co-created AnyCable for real-time apps. CLICK — And I organize SF Ruby meetup and conference in San Francisco."
     >
         <div class="grid md:grid-cols-5 items-center relative z-10">
             <div class="md:col-span-2 flex justify-center">
@@ -183,7 +176,7 @@ const seaCompanies = [
     <Slide
         layout="centered"
         background="dark"
-        notes="You know this question, right? 'Are you STILL using Ruby?' That pause. That tone. Like you're driving a vintage car. I got tired of hearing it. Two years back I decided to investigate."
+        notes="CLICK — 'Are you STILL using Ruby?' That pause. That tone. CLICK — You've heard it. At conferences. From recruiters. From that friend who switched to Rust."
     >
         <!-- Matrix Rain Background -->
         <div
@@ -268,7 +261,7 @@ const seaCompanies = [
     <Slide
         layout="stacked"
         background="gradient-purple"
-        notes="So I started calling founders. 50+ of them. I gave three keynotes on this topic. And I organized SF Ruby Conference — first Ruby conference in San Francisco in TEN YEARS. What I found... it surprised me. This talk is that journey."
+        notes="CLICK — 50+ founders interviewed. CLICK — Six talks given. CLICK — One conference organized — first Ruby conference in San Francisco in ten years. CLICK — 25 Rails startups we serve at Evil Martians. What I found surprised me."
     >
         <div>
             <p class="reveal-item section-label mb-6">Context</p>
@@ -326,7 +319,7 @@ const seaCompanies = [
     <Slide
         layout="centered"
         background="dark"
-        notes="Here's what I founde first. The fear."
+        notes="CLICK — The Fear."
     >
         <div>
             <p class="reveal-item section-label mb-4">Part One</p>
@@ -340,7 +333,7 @@ const seaCompanies = [
     <Slide
         layout="stacked"
         background="gradient-pink"
-        notes="Let me tell you about our hero. It's a Ruby engineer who loves Ruby. You've built things. You've shipped. Ruby feels RIGHT. But lately..."
+        notes="CLICK — A Ruby engineer who loves Ruby. CLICK — You've built things. You've shipped. CLICK — Ruby feels right. CLICK — But lately..."
     >
         <div>
             <p class="reveal-item section-label mb-4">Our Hero</p>
@@ -368,7 +361,7 @@ const seaCompanies = [
     <Slide
         layout="stacked"
         background="dark"
-        notes="The anxiety creeps in. AI is taking our jobs — every headline. Python owns machine learning — every tutorial. JavaScript owns the web. And Ruby? Ruby is big in Japan. But Japan is... different? Right?"
+        notes="The anxiety creeps in. CLICK — AI is taking our jobs — every headline. CLICK — Python owns machine learning. CLICK — JavaScript owns the web. CLICK — Ruby is big in Japan. But is that enough?"
     >
         <div>
             <h2
@@ -414,7 +407,7 @@ const seaCompanies = [
     <Slide
         layout="centered"
         background="gradient-purple"
-        notes="But here's what's really going on. The question you're actually asking yourself: How do I secure my career for the next ten years? Should I learn Python? ML? Drop Ruby entirely?"
+        notes="The real question. CLICK — How do I secure my career for the next ten years? CLICK — Should I learn Python? ML? Drop Ruby?"
     >
         <div>
             <h2
@@ -444,7 +437,7 @@ const seaCompanies = [
     <Slide
         layout="stacked"
         background="dark"
-        notes="And then something interesting happens. Ruby Shame. Founders don't mention Ruby to investors anymore. Engineers hedge: 'We use Rails, but we're considering...' Job posts hide the word Ruby. It's like we're embarrassed."
+        notes="The Shame. CLICK — Founders don't mention Ruby to investors. CLICK — Engineers hedge: 'We use Rails, but we're considering...' CLICK — Job posts hide the word Ruby."
     >
         <div>
             <h2
@@ -485,7 +478,7 @@ const seaCompanies = [
     <Slide
         layout="fullscreen"
         background="gradient-pink"
-        notes="So how do we respond to this fear? Denial — Ruby is fine, nothing's changing. Shame — I don't mention Ruby anymore. Flight — learning Rust on weekends, just in case. Defensiveness — Ruby has ALWAYS been underrated! Sound familiar?"
+        notes="How we respond to fear. CLICK — Denial: 'Ruby is fine.' CLICK — Shame: 'I don't mention Ruby anymore.' CLICK — Flight: 'Learning Rust on weekends.' CLICK — Defensiveness: 'Ruby has ALWAYS been underrated!' Sound familiar?"
     >
         <div class="w-full h-full flex flex-col justify-center px-8">
             <h2
@@ -571,7 +564,7 @@ const seaCompanies = [
     <Slide
         layout="centered"
         background="gradient-purple"
-        notes="We seek guidance. A mentor. Someone who's seen this before."
+        notes="CLICK — The Mentor. Someone who's seen this before."
     >
         <!-- Constellation Background - Wisdom -->
         <div class="constellation-container">
@@ -650,14 +643,14 @@ const seaCompanies = [
         label="Wisdom"
         bio="Sarah has been in Ruby since 2006. She founded RailsBridge. She's seen every shift."
         color="cyan"
-        notes="Sarah Mei gave a fantastic talk at our SF Ruby Conference. She's been in Ruby since 2006. She founded RailsBridge. And she said something that really stuck with me: Operating from fear is not helpful. Not to us. Not to anyone."
+        notes="Sarah Mei — in Ruby since 2006, founded RailsBridge. At our SF Ruby Conference she said: operating from fear is not helpful. Not to us. Not to anyone."
     />
 
     <!-- Slide 13: Historical Parallels -->
     <Slide
         layout="stacked"
         background="gradient-purple"
-        notes="Just think about this. Every major technology shift FELT like the end. Virtual machines in the 90s — you can't run a VM in production! Cloud in the 2000s — you need your own hardware! And now AI — you'll always need to write code yourself!"
+        notes="Every major shift felt like the end. CLICK — VMs in the 90s: 'You can't run a VM in production!' CLICK — Cloud in the 2000s: 'You need your own hardware!' CLICK — AI now: 'You'll always need to write code yourself!'"
     >
         <div>
             <h2
@@ -714,7 +707,7 @@ const seaCompanies = [
     <Slide
         layout="stacked"
         background="dark"
-        notes="But what actually happened each time? Development got FASTER. Projects got MORE AMBITIOUS. More people could build. Every single time."
+        notes="What actually happened? CLICK — Development got faster. CLICK — Projects got more ambitious. CLICK — More people could build. Every single time."
     >
         <div>
             <h2
@@ -748,7 +741,7 @@ const seaCompanies = [
     <Slide
         layout="centered"
         background="gradient-purple"
-        notes="Now let me tell you something personal. I joined Evil Martians back in 2017. We built incredible things — AnyCable, Imgproxy, incredible gems. But here's the thing... I had the exact same fear you do. What if this is a dead end? What if all our work is for nothing because the Ruby market is shrinking? I worried about this. A lot."
+        notes="CLICK — I joined Evil Martians in 2017. CLICK — We built AnyCable, TestProf, Action Policy, and more. CLICK — But I had the same fear: what if our effort is in vain?"
     >
         <div class="relative z-10 max-w-4xl mx-auto">
             <p class="reveal-item section-label mb-4">My Story</p>
@@ -774,7 +767,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="dark"
-    notes="So our team searched. Constantly. We tried everything — Next.js, Go services, Rust experiments. And I'm like, wait, we're Evil Martians! We have access to some of the best engineers on the planet. If anyone could find something better, it would be us. And you know what? We couldn't find it. Nothing — nothing — made us more productive than Rails."
+    notes="Our team searched for something better. CLICK — We tried Next.js, Go, Rust. CLICK — We were most productive with Rails. Nothing came close."
 >
     <div class="relative z-10 max-w-4xl mx-auto">
         <h2 class="reveal-item text-3xl md:text-4xl font-bold text-white mb-8">
@@ -797,7 +790,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="Then in 2021, I became CEO of Evil Martians. And something clicked. I realized: if OUR team — some of the best Rails engineers in the world — can't find anything better after years of searching... it means something. It actually means Rails IS the best tool for the job. And that's when everything changed for me. That's when I stopped doubting."
+    notes="In 2021, I became CEO. CLICK — If OUR team — some of the best Rails engineers — can't find anything better... CLICK — It means something."
 >
     <div class="relative z-10 max-w-4xl mx-auto">
         <h2 class="reveal-item text-3xl md:text-4xl font-bold text-white mb-8">
@@ -821,7 +814,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="OK. Enough philosophy. Let's look at what's actually happening. The evidence."
+    notes="CLICK — The Evidence. CLICK — Let's look at what's actually happening."
 >
     <div>
         <p class="reveal-item section-label mb-4">Part Three</p>
@@ -838,7 +831,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="gradient-purple"
-    notes="But first, shoutout to the companies in Southeast Asia — all hiring Ruby developers right now. Opn — Thailand's billion-dollar fintech unicorn. Mekari — Indonesia's number one SaaS platform, 97 million ARR. CoinGecko — the number two crypto data platform, bootstrapped from KL with no VC money. Crypto.com — 150 million users, headquartered in Singapore, hiring senior Rails and Go engineers. Nimble — a Rails dev agency in Bangkok, they even sponsor visas and relocation. Mindvalley — Malaysia's ed-tech platform, a top 10 potential unicorn. Grain — food tech and catering from Singapore. Quincus — logistics SaaS using AI and Rails. Emeritus — online education platform, Rails and React stack. And Funding Societies — the largest SME lending platform in Southeast Asia. Ten companies, all Rails, all hiring."
+    notes="Shoutout to Southeast Asia. CLICK — Building, succeeding, and hiring Ruby developers right now. CLICK — Opn, Mekari, CoinGecko, Crypto.com, Nimble, Mindvalley — ten companies, all Rails, all hiring."
 >
     <div class="w-full">
         <h2
@@ -871,7 +864,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="dark"
-    notes="SF Ruby Conference 2025. 26 startups demoed. 12 of them AI-native — building WITH AI, not just USING it. 5 backed by Y Combinator. Three unicorns — NexHealth at one billion, Intercom at 1.275 billion, and AngelList at four billion. All Ruby."
+    notes="SF Ruby Conference 2025. CLICK — 26 startups demoed. 12 AI-native. 5 YC-backed. Three unicorns. All Ruby."
 >
     <!-- Rising Particles - Celebration -->
     <div class="particles-container">
@@ -949,7 +942,7 @@ const seaCompanies = [
 <Slide
     layout="fullscreen"
     background="gradient-purple"
-    notes="These are their faces. Real founders. Real products. All Ruby. And when I saw this grid... I was honestly blown away. This is happening right now."
+    notes="Their faces. CLICK — Real founders. Real products. CLICK — All Ruby. This is happening right now."
 >
     <div class="w-full text-center">
         <h2 class="reveal-item text-[26px] font-bold text-white mb-8">
@@ -987,7 +980,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-yellow"
-    notes="And here's what's important. These aren't legacy companies hanging on. They're startups that CHOSE Ruby. In 2023, 2024, 2025. Fresh choices. New bets."
+    notes="These aren't legacy companies hanging on. CLICK — They chose Ruby in 2023, 2024, 2025. Fresh choices."
 >
     <div>
         <h2 class="reveal-item text-3xl md:text-5xl font-bold text-white mb-8">
@@ -1005,7 +998,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="OK let me tell you about Bolt.new. This is wild. 40 million dollars ARR. In EIGHT WEEKS. And I'm like, wait, what? Albert Pai, the CTO, told me: 'It's an overnight success seven years in the making.' Seven years building on Rails. Then AI hit. And they were ready. Rails is EASY to get started with. The ability to go to market FAST — that's still our superpower."
+    notes="CLICK — Bolt.new. CLICK — AI app builder. CLICK — Founded 2017, $135M raised, $700M valuation. CLICK — $40M ARR in eight weeks. CLICK — Albert Pai: 'An overnight success seven years in the making. Rails was easy to get started with. Going to market fast is the key advantage.'"
 >
     <div class="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
         <div>
@@ -1052,7 +1045,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="And then there's Kieran Klaassen. Solo founder. Building Cora Computer. Competing with Google! And I'm honestly blown away. He told me: 'I don't write code anymore. I press a button, talk to my microphone, and it does stuff for 25 minutes.' This is wild. And you know what he said? He's having more fun than EVER building software. This isn't nostalgia for the good old days. This is 2025. Ruby is fun again."
+    notes="CLICK — Cora Computer. CLICK — AI email agent that triages and replies for you. CLICK — Solo founder, featured in the New Yorker. CLICK — Kieran describes the product experience. CLICK — 'I'm having more fun than I've ever had building software.'"
 >
     <div class="max-w-5xl mx-auto">
         <p class="reveal-item section-label mb-4 text-center">Case Study</p>
@@ -1102,7 +1095,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="gradient-purple"
-    notes="Now meet Carmine Paolino. He built RubyLLM — the open source library 3,400 people use. But his startup is Chatwithwork. It pulls context from Gmail, Drive, Docs, Sheets, Calendar to draft emails and documents. Built entirely on Rails 8 and RubyLLM. Carmine doesn't hold back. He said: 'The Merchants of Complexity have sold the AI world a lie.' AI today is just API calls. And Ruby is great at API calls."
+    notes="CLICK — Chatwithwork. CLICK — Search and draft across all your work apps. CLICK — Carmine Paolino, creator of RubyLLM: 'With Rails, RubyLLM, and the Async stack, we can build things that would require entire teams in other ecosystems.' CLICK — Rails 8, RubyLLM, 54 seconds to working AI chat."
 >
     <div class="max-w-5xl mx-auto">
         <p class="reveal-item section-label mb-4 text-center">Case Study</p>
@@ -1156,7 +1149,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="Intercom built Fin AI — their AI support agent. $1.275 billion valuation. Over a million tickets resolved per week. Did they rewrite in Python? NO. Their 2-million-line Rails monolith is still the core. They added Python only for GPU workloads and model training. All business logic, data, integrations — still Rails."
+    notes="CLICK — Fin AI by Intercom. CLICK — AI support agent. CLICK — $1.275B valuation, 1M+ tickets per week. CLICK — Did they rewrite in Python? CLICK — No. CLICK — 2-million-line Rails monolith still the core. Python only for GPU workloads."
 >
     <div class="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
         <div>
@@ -1217,14 +1210,14 @@ const seaCompanies = [
     bio="14 years on Rails. Still growing. Still shipping."
     background="gradient-purple"
     color="cyan"
-    notes="Eugene Kenny from Intercom said it best. 2.5 million lines of Ruby code. 250+ engineers. 14 years on Rails. And in the age of LLMs? It's resilient. Still growing. Still shipping."
+    notes="Eugene Kenny, Intercom. 2.5 million lines of Ruby. 250+ engineers. 14 years. In the age of LLMs — resilient."
 />
 
 <!-- Slide: AI Startups Grid (8 more) -->
 <Slide
     layout="stacked"
     background="dark"
-    notes="And there are 8 more AI-native startups building on Ruby. Simple AI — enterprise voice agents, YC-backed. Sixfold — AI insurance underwriting. Cactus — AI lead qualification, YC X25. Superconductor — parallel coding agents. Bemi AI — AI customer support. Cleary — AI HR platform. LlamaPress — AI content on Rails. CorePilot — AI-powered ERP. That's 12 AI-native startups on Ruby, and I only talked to 26 companies. The 'Python owns AI' narrative doesn't match reality."
+    notes="8 more AI-native startups on Ruby. CLICK — Simple AI, Sixfold, Cactus, Superconductor, Bemi AI, Cleary, LlamaPress, CorePilot. CLICK — 12 total. The 'Python owns AI' narrative doesn't match reality."
 >
     <div>
         <h2 class="reveal-item text-3xl font-bold text-white mb-8">
@@ -1259,7 +1252,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="And here's something I did not expect at all. Something unexpected happened. The founders themselves ARE building the ecosystem. Not just using Ruby — building it. Carmine created RubyLLM — 3,452 stars. Brad Gessler built Terminalwire, Superform, Sitepress — the list goes on. Kieran created compound-engineering — 6,240 stars. These folks are building their startups AND giving back to us. That's incredible."
+    notes="What I did not expect. CLICK — The founders ARE building the ecosystem. CLICK — Carmine created RubyLLM, 3,452 stars. Brad built Terminalwire. Kieran created compound-engineering, 6,240 stars. CLICK — Building startups AND the tools we all need."
 >
     <div class="w-full">
         <p class="reveal-item text-[26px] text-gray-400 mb-4 text-center">
@@ -1325,7 +1318,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="But I'm not here to tell you everything is perfect. Real gaps exist. Let's face them honestly."
+    notes="CLICK — What Needs Work. CLICK — Real gaps exist. Let's face them."
 >
     <div>
         <p class="reveal-item section-label mb-4">Part Four</p>
@@ -1342,7 +1335,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="Brian Moseley, CTO of Sixfold — an AI insurance underwriting startup that raised 21 million dollars. He and his co-founder split the work: Brian does product in Ruby, his co-founder does AI in Python. Brian said he's 'not proud' of the Python part. If starting today, he'd write everything in Ruby — but the advanced tooling isn't there yet. No graph-based agent orchestration, no built-in tracing, no agent-to-agent protocols."
+    notes="Brian Moseley, CTO of Sixfold, $21.5M raised. CLICK — 'The agent's box is written in Python. Not proud of that fact.' CLICK — Missing: agent orchestration, tracing, agent-to-agent protocols."
 >
     <div>
         <div class="reveal-item flex items-center gap-6 mb-8">
@@ -1386,7 +1379,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="Evgeny Li from Bemi AI asked the room who uses gradual typing. Almost nobody raised their hand. That's the problem — three competing systems, none widely adopted. And as Vladimir Dementyev pointed out in his Rails X keynote, types aren't just for safety. They're a source of information for AI tools. Without types, AI code generation is less accurate in Ruby than in TypeScript or Python."
+    notes="Evgeny Li from Bemi AI. CLICK — Gradual typing is fragmented between RBS, Steep, Sorbet. CLICK — Vladimir Dementyev: 'Types are not just for safety. They're a source of information for AI tools.'"
 >
     <div>
         <div class="reveal-item flex items-center gap-6 mb-8">
@@ -1425,7 +1418,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="Two gaps in one slide. Albert Pai from Bolt.new wants first-class serverless — running Rails on Lambda or Cloudflare Workers. Rails' boot time and memory make cold starts painful. And Vladimir pointed out that unlike Laravel, Rails lacks officially documented plugins alongside the framework. The tools exist — Rails Byes, generators — but almost nobody knows about them. Vladimir asked the room if they'd heard of Rails Byes. Five people raised their hands."
+    notes="Albert Pai from Bolt.new. CLICK — Wants first-class serverless — Rails on Lambda or Cloudflare Workers."
 >
     <div>
         <div class="reveal-item flex items-center gap-6 mb-8">
@@ -1454,7 +1447,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="gradient-green"
-    notes="But here's what's interesting. What they DON'T complain about. Ruby is too slow? Not a single founder mentioned performance as a blocker. ActiveRecord doesn't scale? Tell that to Intercom and AngelList. Can't hire Ruby developers? Smaller pool equals more experienced engineers. Plus — developers are switching from JavaScript. We need to rewrite? Zero migration plans. Zero."
+    notes="What they DON'T complain about. CLICK — 'Ruby is too slow' — not a single founder mentioned this. CLICK — 'ActiveRecord doesn't scale' — Intercom: 2M req/sec. CLICK — 'Can't hire' — smaller pool means more experienced. Devs switching from JS. CLICK — 'We need to rewrite' — zero migration plans."
 >
     <div>
         <h2 class="reveal-item text-3xl font-bold text-white mb-8">
@@ -1510,7 +1503,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="dark"
-    notes="Now let's talk about this 'Ruby is slow' thing. Just think about this. This narrative is from 2014. It's now 2026. Twelve years! A lot has changed. Ruby is not the same language it was."
+    notes="'Ruby is slow.' CLICK — This narrative is from 2014. CLICK — It's now 2026."
 >
     <div>
         <h2 class="reveal-item text-4xl md:text-5xl font-bold text-white mb-8">
@@ -1529,7 +1522,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-yellow"
-    notes="Ruby 3 is THREE TIMES faster than Ruby 2 — verified on the optcarrot benchmark. Better memory allocation, better GC, M:N thread scheduler. And then there's YJIT — Shopify's gift to us. A just-in-time compiler built right into Ruby. Production Rails apps see 15-20% speedup just by enabling it. The language has fundamentally improved."
+    notes="Ruby 3 is 3x faster than Ruby 2. Better memory, GC, M:N threads. YJIT by Shopify adds another 15% — just enable one flag. CLICK — Verified benchmarks."
 >
     <div>
         <div class="reveal-item grid md:grid-cols-2 gap-8 mb-8">
@@ -1569,11 +1562,316 @@ const seaCompanies = [
     </div>
 </Slide>
 
+<!-- Slide: Ruby YJIT vs Python -->
+<Slide
+    layout="stacked"
+    background="dark"
+    notes="Ruby YJIT vs Python head-to-head. CLICK — bddicken/languages benchmark on M3 MacBook Pro. CLICK — Loops 2.9x faster. Levenshtein 1.9x. N-body 2.8x. CLICK — Ruby YJIT is roughly 2x faster than Python. CLICK — YJIT ships with Ruby by default. PyPy is a separate runtime. CLICK — Source."
+>
+    <div class="max-w-3xl mx-auto">
+        <h2 class="reveal-item text-3xl font-bold text-white mb-1">Ruby YJIT vs Python</h2>
+        <p class="reveal-item text-[26px] text-gray-500 mb-8">bddicken/languages · M3 MacBook Pro · 2025</p>
+
+        <div class="reveal-item space-y-5">
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-400">Loops (1B iterations)</span>
+                    <span class="text-lg font-bold text-neon-magenta">2.9x faster</span>
+                </div>
+                <div class="flex gap-2 items-center">
+                    <div class="neon-bar-container h-8 flex-1">
+                        <div class="neon-bar neon-bar-ruby" style="width: 100%;"></div>
+                    </div>
+                    <span class="text-sm text-gray-500 w-14 text-right">11.0s</span>
+                </div>
+                <div class="flex gap-2 items-center mt-1">
+                    <div class="neon-bar-container h-8 flex-1">
+                        <div class="neon-bar neon-bar-green" style="width: 35%;"></div>
+                    </div>
+                    <span class="text-sm text-gray-500 w-14 text-right">31.6s</span>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-400">Levenshtein distance</span>
+                    <span class="text-lg font-bold text-neon-magenta">1.9x faster</span>
+                </div>
+                <div class="flex gap-2 items-center">
+                    <div class="neon-bar-container h-8 flex-1">
+                        <div class="neon-bar neon-bar-ruby" style="width: 100%;"></div>
+                    </div>
+                    <span class="text-sm text-gray-500 w-14 text-right">419ms</span>
+                </div>
+                <div class="flex gap-2 items-center mt-1">
+                    <div class="neon-bar-container h-8 flex-1">
+                        <div class="neon-bar neon-bar-green" style="width: 52%;"></div>
+                    </div>
+                    <span class="text-sm text-gray-500 w-14 text-right">799ms</span>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-400">N-body simulation</span>
+                    <span class="text-lg font-bold text-neon-magenta">2.8x faster</span>
+                </div>
+                <div class="flex gap-2 items-center">
+                    <div class="neon-bar-container h-8 flex-1">
+                        <div class="neon-bar neon-bar-ruby" style="width: 100%;"></div>
+                    </div>
+                    <span class="text-sm text-gray-500 w-14 text-right">1.04s</span>
+                </div>
+                <div class="flex gap-2 items-center mt-1">
+                    <div class="neon-bar-container h-8 flex-1">
+                        <div class="neon-bar neon-bar-green" style="width: 35%;"></div>
+                    </div>
+                    <span class="text-sm text-gray-500 w-14 text-right">2.97s</span>
+                </div>
+            </div>
+        </div>
+
+        <p class="reveal-item text-neon-magenta text-2xl mt-6">Ruby YJIT is ~2x faster than Python</p>
+        <div class="reveal-item flex items-center gap-4 mt-3 text-sm text-gray-500">
+            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-sm bg-neon-magenta"></span> Ruby YJIT 3.4</span>
+            <span class="flex items-center gap-1"><span class="inline-block w-3 h-3 rounded-sm bg-neon-green"></span> CPython 3.13</span>
+        </div>
+        <p class="reveal-item text-sm text-gray-500 mt-4">
+            Source: <a href="https://benjdd.com/languages/" target="_blank" class="text-neon-cyan hover:underline">benjdd.com/languages</a>
+        </p>
+    </div>
+</Slide>
+
+<!-- Slide: Micro Framework Benchmarks -->
+<Slide
+    layout="stacked"
+    background="dark"
+    notes="Micro frameworks. CLICK — TechEmpower Round 23, Fortunes test. CLICK — Express 173K. Roda 166K. Nest.js 161K. FastAPI 109K. CLICK — Roda is 96% of Express speed. Ruby matches Node.js. CLICK — Source."
+>
+    <div class="max-w-4xl mx-auto">
+        <h2 class="reveal-item text-3xl font-bold text-white mb-1">Micro Frameworks</h2>
+        <p class="reveal-item text-[26px] text-gray-500 mb-8">TechEmpower Round 23 · Fortunes test · Feb 2025</p>
+
+        <div class="reveal-item space-y-5">
+            <!-- Express -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Express <span class="text-gray-500">(Node.js)</span></span>
+                    <span class="text-lg font-bold text-neon-cyan">173K req/s</span>
+                </div>
+                <div class="neon-bar-container h-10">
+                    <div class="neon-bar neon-bar-cyan" style="width: 100%;"></div>
+                </div>
+            </div>
+            <!-- Roda -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Roda <span class="text-gray-500">(Ruby)</span></span>
+                    <span class="text-lg font-bold text-neon-magenta">166K req/s</span>
+                </div>
+                <div class="neon-bar-container neon-bar-container-highlight h-10">
+                    <div class="neon-bar neon-bar-ruby" style="width: 96%;"></div>
+                </div>
+            </div>
+            <!-- Nest.js -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Nest.js <span class="text-gray-500">(TypeScript)</span></span>
+                    <span class="text-lg font-bold text-neon-purple">161K req/s</span>
+                </div>
+                <div class="neon-bar-container h-10">
+                    <div class="neon-bar neon-bar-purple" style="width: 93%;"></div>
+                </div>
+            </div>
+            <!-- FastAPI -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">FastAPI <span class="text-gray-500">(Python)</span></span>
+                    <span class="text-lg font-bold text-neon-green">109K req/s</span>
+                </div>
+                <div class="neon-bar-container h-10">
+                    <div class="neon-bar neon-bar-green" style="width: 63%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <p class="reveal-item text-neon-magenta font-bold text-2xl mt-6">
+            Roda is 96% of Express speed
+        </p>
+        <p class="reveal-item text-sm text-gray-500 mt-4">
+            Source: <a href="https://www.techempower.com/benchmarks/#hw=ph&test=fortune&section=data-r23" target="_blank" class="text-neon-cyan hover:underline">techempower.com/benchmarks</a> · Best config per framework
+        </p>
+    </div>
+</Slide>
+
+<!-- Slide: Full-Stack Framework Benchmarks -->
+<Slide
+    layout="stacked"
+    background="dark"
+    notes="Full-stack frameworks. CLICK — TechEmpower Round 23. CLICK — Laravel Workerman 50K. Rails Iodine 48K — practically tied. Default Rails Puma 43K. Django 33K. Default Laravel 16K. CLICK — Default Rails beats optimized Django. CLICK — Source."
+>
+    <div class="max-w-4xl mx-auto">
+        <h2 class="reveal-item text-3xl font-bold text-white mb-1">Full-Stack Frameworks</h2>
+        <p class="reveal-item text-[26px] text-gray-500 mb-8">TechEmpower Round 23 · Fortunes test · Feb 2025</p>
+
+        <div class="reveal-item space-y-4">
+            <!-- Laravel Workerman -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Laravel <span class="text-gray-500">Workerman</span></span>
+                    <span class="text-lg font-bold text-neon-yellow">50K req/s</span>
+                </div>
+                <div class="neon-bar-container h-8">
+                    <div class="neon-bar neon-bar-yellow" style="width: 100%;"></div>
+                </div>
+            </div>
+            <!-- Rails Iodine -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Rails <span class="text-gray-500">Iodine</span></span>
+                    <span class="text-lg font-bold text-neon-magenta">48K req/s</span>
+                </div>
+                <div class="neon-bar-container neon-bar-container-highlight h-8">
+                    <div class="neon-bar neon-bar-ruby" style="width: 97%;"></div>
+                </div>
+            </div>
+            <!-- Rails Puma (standard) -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Rails <span class="text-gray-500">Puma (default)</span></span>
+                    <span class="text-lg font-bold text-neon-magenta">43K req/s</span>
+                </div>
+                <div class="neon-bar-container h-8">
+                    <div class="neon-bar neon-bar-ruby" style="width: 86%;"></div>
+                </div>
+            </div>
+            <!-- Rails Falcon -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Rails <span class="text-gray-500">Falcon</span></span>
+                    <span class="text-lg font-bold text-neon-magenta">41K req/s</span>
+                </div>
+                <div class="neon-bar-container h-8">
+                    <div class="neon-bar neon-bar-ruby" style="width: 82%;"></div>
+                </div>
+            </div>
+            <!-- Django -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Django <span class="text-gray-500">Meinheld</span></span>
+                    <span class="text-lg font-bold text-neon-green">33K req/s</span>
+                </div>
+                <div class="neon-bar-container h-8">
+                    <div class="neon-bar neon-bar-green" style="width: 66%;"></div>
+                </div>
+            </div>
+            <!-- Laravel standard -->
+            <div>
+                <div class="flex justify-between mb-1">
+                    <span class="text-lg text-gray-300">Laravel <span class="text-gray-500">FPM (default)</span></span>
+                    <span class="text-lg font-bold text-neon-yellow">16K req/s</span>
+                </div>
+                <div class="neon-bar-container h-8">
+                    <div class="neon-bar neon-bar-yellow" style="width: 33%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <p class="reveal-item text-neon-magenta font-bold text-2xl mt-6">
+            Even default Rails beats optimized Django
+        </p>
+        <p class="reveal-item text-sm text-gray-500 mt-4">
+            Source: <a href="https://www.techempower.com/benchmarks/#hw=ph&test=fortune&section=data-r23" target="_blank" class="text-neon-cyan hover:underline">techempower.com/benchmarks</a> · Best config per framework
+        </p>
+    </div>
+</Slide>
+
+<!-- Slide 43: The Model -->
+<Slide
+    layout="fullscreen"
+    background="gradient-purple"
+    notes="Let go of purism. CLICK — Ruby for business logic and product-market fit. Other languages for specialized tools. CLICK — Go, Rust, C++ for infrastructure. CLICK — Python for model training. Ruby/Rails at the center. CLICK — React, Vue, Svelte with Inertia for state-heavy frontends. CLICK — Source."
+>
+    <div class="w-full h-full flex flex-col justify-center px-8">
+        <h2
+            class="reveal-item text-[26px] md:text-3xl font-bold text-white mb-2 text-center"
+        >
+            Let go of purism
+        </h2>
+        <p class="text-[26px] text-gray-400 mb-6 text-center">
+            Ruby for business logic and getting to product-market fit.<br />
+            We add other languages for specialized tools as we grow.
+        </p>
+
+        <!-- Hub and Spoke Layout -->
+        <div class="flex flex-col items-center gap-4">
+            <!-- Top satellite -->
+            <div class="reveal-item anim-glitch flex items-center gap-3 p-3 max-w-md">
+                <div>
+                    <h3 class="text-neon-cyan text-[26px]">
+                        Go / Rust / C++
+                    </h3>
+                    <p class="text-gray-400 text-[26px]">
+                        Fast infrastructure and tools
+                    </p>
+                </div>
+            </div>
+
+            <!-- Center row: satellite - RUBY - satellite -->
+            <div class="flex items-center gap-4 w-full justify-center">
+                <div class="reveal-item anim-glitch flex items-center gap-3 p-3 max-w-xs">
+                    <div>
+                        <h3 class="text-neon-cyan text-[26px]">
+                            Python
+                        </h3>
+                        <p class="text-gray-400 text-[26px]">
+                            Model training, data pipelines
+                        </p>
+                    </div>
+                </div>
+
+                <!-- RUBY CENTER -->
+                <div
+                    class="flex flex-col items-center gap-3 p-5 bg-[rgba(251,113,133,0.15)] border-2 border-[rgba(251,113,133,0.4)] shadow-[0_0_30px_rgba(251,113,133,0.2)]"
+                >
+                    <div class="text-center">
+                        <h3
+                            class="text-neon-magenta font-bold text-[26px] mb-1"
+                        >
+                            Ruby / Rails
+                        </h3>
+                        <p class="text-gray-300 text-[26px] max-w-48">
+                            Business logic
+                        </p>
+                    </div>
+                </div>
+
+                <div class="reveal-item anim-glitch flex items-center gap-3 p-3 max-w-xs">
+                    <div class="text-right">
+                        <h3 class="text-neon-cyan text-[26px]">
+                            React, Vue, Svelte
+                        </h3>
+                        <p class="text-gray-400 text-[26px]">
+                            Frontend with Inertia Rails
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="reveal-item mt-6 text-[26px] text-gray-500 text-center">
+            Source: <a
+                href="https://evilmartians.com/chronicles/baking-with-rails-at-scale-recipes-in-ruby-cookware-from-go-c-rust"
+                target="_blank"
+                class="text-neon-cyan hover:underline">evilmartians.com</a
+            >
+        </p>
+    </div>
+</Slide>
+
 <!-- Slide: Survey Evidence -->
 <Slide
     layout="stacked"
     background="dark"
-    notes="Two independent surveys confirm this. The Pragmatic Engineer — Gergely Orosz's newsletter with 950,000 subscribers, mostly senior engineers at well-funded tech companies — surveyed 3,000 engineers in 2025. Ruby came in as the 5th most used language. And the 3rd most loved. Gergely himself said he was surprised to see so many Ruby developers, 'not that far from Java.' Stack Overflow's broader survey of 65,000 developers shows Ruby growing too — up from 5.2% to 6.4% in 2025, reversing years of decline. Rails grew from 4.7% to 5.9%. The pattern is clear: Ruby is disproportionately popular where senior engineers build funded products."
+    notes="What the surveys say. CLICK — Pragmatic Engineer: 3,000 senior engineers. Ruby #5 most used, #3 most loved. CLICK — Stack Overflow: Ruby up from 5.2% to 6.4%. Rails up from 4.7% to 5.9%. Reversing years of decline. CLICK — Ruby is popular where senior engineers build funded products."
 >
     <div>
         <h2 class="reveal-item text-3xl font-bold text-white mb-8">
@@ -1610,7 +1908,7 @@ const seaCompanies = [
                 </p>
                 <div class="space-y-3 mb-4">
                     <div class="flex items-center gap-3">
-                        <span class="text-4xl font-black text-neon-cyan"
+                        <span class="text-4xl text-neon-cyan"
                             >6.4%</span
                         >
                         <span class="text-xl text-gray-300"
@@ -1620,7 +1918,7 @@ const seaCompanies = [
                         >
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="text-4xl font-black text-neon-cyan"
+                        <span class="text-4xl text-neon-cyan"
                             >5.9%</span
                         >
                         <span class="text-xl text-gray-300"
@@ -1633,8 +1931,8 @@ const seaCompanies = [
                 <p class="text-gray-500 text-lg">Reversing years of decline</p>
             </div>
         </div>
-        <p class="reveal-item text-xl text-gray-500 mt-6 text-center">
-            Ruby is strongest where senior engineers build funded products.
+        <p class="reveal-item text-neon-cyan text-xl text-gray-500 mt-6 text-center">
+            Ruby is popular among senior engineers from well-funded products.
         </p>
     </div>
 </Slide>
@@ -1643,15 +1941,21 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="gradient-purple"
-    notes="These Ruby success stories all crossed paths with SF Ruby. They hosted our meetups, their engineers spoke at our events. GitHub — one of the largest Rails apps in the world, hosted us four times. Shopify — the largest Rails app, period. Their engineer Takashi Kokubun builds ZJIT for Ruby. Stripe built Sorbet — the Ruby type checker — and Jake Zimmerman presented it at our meetup. Cisco has a 4-million-line Ruby codebase. Chime is a billion-dollar-plus fintech, 80% Ruby. Figma uses Ruby internally and hosted a 'Ruby at Figma' talk. One Medical — now Amazon One Medical — their senior engineer Brandon Weaver spoke at our conference. These companies don't just use Ruby. They invest in the community."
+    notes="Ruby and Rails success stories — SF Ruby version. CLICK — These all crossed paths with our community. CLICK — [logo] CLICK — GitHub, Shopify, Stripe, Cisco, Intercom, Figma, Chime, Gusto, AngelList, Y Combinator. They don't just use Ruby — they invest in the community."
 >
     <div>
-        <h2 class="reveal-item text-3xl md:text-4xl font-bold text-white mb-2">
-            Ruby and Rails success stories
-        </h2>
-        <p class="reveal-item text-neon-cyan text-[26px] mb-8">
-            SF Ruby version
-        </p>
+        <div class="flex items-start justify-between mb-2">
+            <div>
+                <h2 class="reveal-item text-3xl md:text-4xl font-bold text-white mb-2">
+                    Ruby and Rails success stories
+                </h2>
+                <p class="reveal-item text-neon-cyan text-[26px]">
+                    SF Ruby version
+                </p>
+            </div>
+            <img src="/images/sfruby.png" alt="SF Ruby" class="reveal-item h-64 object-contain" />
+        </div>
+        <div class="mb-6"></div>
         <div class="reveal-item grid grid-cols-6 md:grid-cols-6 gap-3">
             {
                 [
@@ -1676,7 +1980,7 @@ const seaCompanies = [
                 ].map((logo, i) => (
                     <div
                         class="logo-wall-card"
-                        style={`animation-delay: ${i * 0.06}s;`}
+                        style={`animation-delay: ${(i * 0.28).toFixed(2)}s;`}
                     >
                         <img src={logo.src} alt={logo.alt} />
                     </div>
@@ -1694,7 +1998,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="So what does all this mean? Here's the insight."
+    notes="CLICK — The Insight."
 >
     <!-- Revelation Background - Centered radial glow -->
     <div class="revelation-container">
@@ -1742,7 +2046,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="dark"
-    notes="Ruby's strengths are MORE valuable in the AI era. Not less. More. Think about it. Readability. Conventions. Expressiveness. These matter MORE when AI is reading and writing your code."
+    notes="Ruby's strengths are more valuable in the AI era. CLICK — Not less. More. Readability. Conventions. Expressiveness. These matter MORE when AI reads and writes your code."
 >
     <!-- Matching revelation glow -->
     <div class="revelation-container">
@@ -1770,24 +2074,11 @@ const seaCompanies = [
     </div>
 </Slide>
 
-<!-- Slide 39: Cody on Conventions -->
-<QuoteSlide
-    quote="They'd be using some monstrosity of a JavaScript repository and they're like, 'Why can't Cursor understand my codebase?' And it's like, come on."
-    author="Cody Kendall"
-    authorImage="/speaker_kody_kendall.jpg"
-    context="LlamaPress"
-    label="Conventions"
-    bio="Predictable file structure. Naming conventions. Rails patterns. AI understands all of it."
-    background="gradient-purple"
-    color="magenta"
-    notes="Cody put it perfectly. People with JavaScript monstrosities wondering why Cursor can't understand their codebase. Come on! Predictable file structure. Naming conventions. Rails patterns. AI understands all of it."
-/>
-
 <!-- Slide 40: Token Efficiency -->
 <Slide
     layout="stacked"
     background="dark"
-    notes="And here's something really interesting. Ruby is token-efficient. 15-25% fewer tokens than Python. 40-60% fewer than Go or Java. Fewer tokens means larger context windows. Means better AI assistance. Ruby's expressiveness is actually an advantage."
+    notes="Ruby is token-efficient. CLICK — 15-25% fewer tokens than Python. 40-60% fewer than Go or Java. Larger context windows. Better AI assistance. CLICK — Source."
 >
     <div>
         <h2 class="reveal-item text-3xl font-bold text-white mb-8">
@@ -1819,86 +2110,149 @@ const seaCompanies = [
     </div>
 </Slide>
 
-<!-- Slide 41: The Model -->
+<!-- Slide 41: Convention Over Configuration Powers AI -->
 <Slide
-    layout="fullscreen"
-    background="gradient-purple"
-    notes="Now, purism is not the answer. Here's the model that actually works. Ruby for business logic and getting to product-market fit. Python for GPU workloads and model training. Go or Rust for heavy machinery. React for complex frontends when justified. Ruby stays at the center. Where humans read, iterate, and ship."
+    layout="stacked"
+    background="dark"
+    notes="Convention over configuration powers AI. CLICK — Here's the key idea. In 2025, the AI world discovered 'context engineering' — filling the context window with the right information. Karpathy coined it. 60K repos now have AGENTS.md files telling AI about project structure. But Rails conventions already encode all of that. Every AGENTS.md is an attempt to recreate what conventions already do. 20 years of Rails apps following the same patterns means tighter prior distribution — more correct AI output. The framework is the prompt — no CLAUDE.md needed to explain where models, controllers, and tests go."
 >
-    <div class="w-full h-full flex flex-col justify-center px-8">
-        <h2
-            class="reveal-item text-[26px] md:text-3xl font-bold text-white mb-2 text-center"
-        >
-            Let go of purism.
+    <div>
+        <h2 class="reveal-item text-3xl font-bold text-white mb-8">
+            Convention over configuration<br />
+            <span class="gradient-text">powers AI.</span>
         </h2>
-        <p class="reveal-item text-[26px] text-gray-400 mb-6 text-center">
-            Ruby for business logic and getting to product-market fit.<br />
-            We add other languages for specialized tools as we grow.
-        </p>
 
-        <!-- Hub and Spoke Layout -->
-        <div class="reveal-item flex flex-col items-center gap-4">
-            <!-- Top satellite -->
-            <div class="flex items-center gap-3 p-3 max-w-md">
-                <div>
-                    <h3 class="text-gray-400 font-bold text-[26px]">
-                        Go / Rust / C++
-                    </h3>
-                    <p class="text-gray-500 text-[26px]">
-                        Fast infrastructure and tools.
-                    </p>
-                </div>
+        <div class="reveal-item grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="metric-card fx-scanlines fx-deep-glow-cyan">
+                <h3 class="text-neon-cyan font-bold text-[26px] mb-2">Conventions are context engineering</h3>
+                <p class="text-[22px] text-gray-400">
+                    60K+ repos now have AGENTS.md files telling AI about project structure.
+                    Rails conventions already encode all of that.
+                </p>
             </div>
-
-            <!-- Center row: satellite - RUBY - satellite -->
-            <div class="flex items-center gap-4 w-full justify-center">
-                <div class="flex items-center gap-3 p-3 max-w-xs">
-                    <div>
-                        <h3 class="text-gray-400 font-bold text-[26px]">
-                            Python
-                        </h3>
-                        <p class="text-gray-500 text-[26px]">
-                            Model training, data pipelines.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- RUBY CENTER -->
-                <div
-                    class="rpg-card flex flex-col items-center gap-3 p-5 bg-[rgba(251,113,133,0.15)] border-2 border-[rgba(251,113,133,0.4)] shadow-[0_0_30px_rgba(251,113,133,0.2)]"
-                >
-                    <div class="text-center">
-                        <h3
-                            class="text-neon-magenta font-bold text-[26px] mb-1"
-                        >
-                            Ruby / Rails
-                        </h3>
-                        <p class="text-gray-300 text-[26px] max-w-48">
-                            Business logic.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-3 p-3 max-w-xs">
-                    <div class="text-right">
-                        <h3 class="text-gray-400 font-bold text-[26px]">
-                            React / Tauri / RN
-                        </h3>
-                        <p class="text-gray-500 text-[26px]">
-                            State-heavy frontend.
-                        </p>
-                    </div>
-                </div>
+            <div class="metric-card fx-scanlines fx-deep-glow-cyan">
+                <h3 class="text-neon-cyan font-bold text-[26px] mb-2">20 years of training data</h3>
+                <p class="text-[22px] text-gray-400">
+                    All Rails apps follow the same patterns.
+                    Tighter prior distribution = more correct output.
+                </p>
+            </div>
+            <div class="metric-card fx-scanlines fx-deep-glow-cyan">
+                <h3 class="text-neon-cyan font-bold text-[26px] mb-2">The framework is the prompt</h3>
+                <p class="text-[22px] text-gray-400">
+                    No CLAUDE.md needed to explain where models, controllers, and tests go.
+                    The AI already knows.
+                </p>
             </div>
         </div>
+    </div>
+</Slide>
 
-        <p class="reveal-item mt-6 text-[26px] text-gray-500 text-center">
-            Source: <a
-                href="https://evilmartians.com/chronicles/baking-with-rails-at-scale-recipes-in-ruby-cookware-from-go-c-rust"
-                target="_blank"
-                class="text-neon-cyan hover:underline">evilmartians.com</a
+<!-- Slide 42: What's Here, What's Missing -->
+<Slide
+    layout="stacked"
+    background="gradient-purple"
+    notes="The honest picture. CLICK — Three columns. Already here: YJIT, AnyCable with Durable Streams, async gem, Falcon, RubyLLM, official Anthropic and OpenAI SDKs, Solid Queue. Needs integration: Sorbet and RBS need to become the default for AI code verification — Shopify types 99% of 75K files. Async needs first-class Rails support. Ractors maturing with Port API in Ruby 3.5. Active Agent is early. Genuinely missing: native ML libraries, smaller Ruby training corpus, event-driven multi-agent orchestration. But the trajectory is clear."
+>
+    <div>
+        <h2
+            class="reveal-item text-[26px] md:text-3xl font-bold text-white mb-6"
+        >
+            What's here. What's missing.
+        </h2>
+
+        <div class="reveal-item grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Column 1: Already here -->
+            <div
+                class="rpg-card p-4 border border-[rgba(0,255,255,0.3)] bg-[rgba(0,255,255,0.05)]"
             >
-        </p>
+                <h3 class="text-neon-cyan font-bold text-[22px] mb-3">
+                    Already here
+                </h3>
+                <ul class="space-y-2 text-[20px] text-gray-300">
+                    <li>
+                        <span class="text-neon-green">YJIT</span> — 10-15% faster,
+                        on by default
+                    </li>
+                    <li>
+                        <span class="text-neon-green">AnyCable</span> — 10x faster
+                        streaming, Durable Streams
+                    </li>
+                    <li>
+                        <span class="text-neon-green">async gem + Fibers</span> —
+                        high-concurrency I/O
+                    </li>
+                    <li>
+                        <span class="text-neon-green">Falcon</span> — 6K req/s on
+                        60MB RAM
+                    </li>
+                    <li>
+                        <span class="text-neon-green">RubyLLM, langchainrb</span
+                        > — multi-provider AI
+                    </li>
+                    <li>
+                        <span class="text-neon-green">Official SDKs</span> — Anthropic
+                        &amp; OpenAI
+                    </li>
+                    <li>
+                        <span class="text-neon-green">Solid Queue</span> — 20M jobs/day
+                        at 37signals
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Needs integration -->
+            <div
+                class="rpg-card p-4 border border-[rgba(253,224,71,0.3)] bg-[rgba(253,224,71,0.05)]"
+            >
+                <h3 class="text-neon-yellow font-bold text-[22px] mb-3">
+                    Needs integration
+                </h3>
+                <ul class="space-y-2 text-[20px] text-gray-300">
+                    <li>
+                        <span class="text-neon-yellow">Sorbet / RBS</span> — Shopify:
+                        99% of 75K files typed. Needs to be default for AI code verification
+                    </li>
+                    <li>
+                        <span class="text-neon-yellow">Async in Rails</span> — Fibers
+                        work, need first-class framework support
+                    </li>
+                    <li>
+                        <span class="text-neon-yellow">Ractors</span> — true parallelism
+                        maturing (Port API in Ruby 3.5)
+                    </li>
+                    <li>
+                        <span class="text-neon-yellow">Active Agent</span> — MVC conventions
+                        for AI, still early
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Genuinely missing -->
+            <div
+                class="rpg-card p-4 border border-[rgba(251,113,133,0.3)] bg-[rgba(251,113,133,0.05)]"
+            >
+                <h3 class="text-neon-magenta font-bold text-[22px] mb-3">
+                    Genuinely missing
+                </h3>
+                <ul class="space-y-2 text-[20px] text-gray-300">
+                    <li>
+                        <span class="text-neon-magenta">Native ML</span> — still call
+                        Python for model training
+                    </li>
+                    <li>
+                        <span class="text-neon-magenta"
+                            >Training data share</span
+                        > — smaller Ruby corpus in LLMs
+                    </li>
+                    <li>
+                        <span class="text-neon-magenta"
+                            >Event-driven orchestration</span
+                        > — multi-agent workflows beyond request/response
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </Slide>
 
@@ -1910,7 +2264,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="So now you have a choice. The choice."
+    notes="CLICK — The Choice."
 >
     <!-- Forking Paths - Decision -->
     <div class="paths-container">
@@ -1958,7 +2312,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="dark"
-    notes="Look, choosing Ruby is not the easy path anymore. It's not 'free money' like it was in 2010. It's not the default. Python gets the SDKs first. JavaScript gets the hype. But..."
+    notes="Choosing Ruby is not the easy path anymore. CLICK — It's not 'free money.' Python gets the SDKs first. JavaScript gets the hype. But..."
 >
     <!-- Forking Paths continues -->
     <div class="paths-container">
@@ -1988,7 +2342,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="Here's a story that captures the Ruby spirit. Anthropic launches their API in 2023. Python SDK? Ships before the API even goes public. TypeScript? Same. Ruby? Nothing. For two years. So what does Alex Rudall do? He builds the anthropic gem himself. The community uses it. Then in April 2025, Anthropic finally ships an official Ruby SDK — and they ASK Alex for the gem name. He donates it. And Anthropic's official README says: 'Thank you Alex Rudall for donating the anthropic Ruby gem name and paving the way.' That's the difference. In other ecosystems, you wait. In Ruby, you build — and the giants come to you."
+    notes="Anthropic ships Python and TypeScript SDKs before launch. CLICK — Ruby? Nothing. For two years. CLICK — So Alex Rudall builds the anthropic gem himself. CLICK — Anthropic's official README: 'Thank you Alex Rudall for donating the gem name and paving the way.' CLICK — In other ecosystems, you wait. In Ruby, you build — and the giants come to you."
 >
     <!-- Subtle accent glow matching slide 45 -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -2035,7 +2389,7 @@ const seaCompanies = [
 <Slide
     layout="stacked"
     background="dark"
-    notes="Here's the real choice. Blue pill — wait for official SDKs, follow the giants, ecosystems too big to shape. Stay comfortable. Red pill — Ruby. Small enough to influence. Big enough to matter. Your contribution counts. Choose Ruby."
+    notes="The real choice. CLICK — Bigger ecosystem: wait for SDKs, follow giants, too big to shape. CLICK — Ruby community: small enough to influence, big enough to matter. Your contribution counts. Choose Ruby."
 >
     <!-- Matrix-style falling code background hint -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -2061,14 +2415,10 @@ const seaCompanies = [
         <div class="grid md:grid-cols-2 gap-8">
             <!-- Blue Pill -->
             <div
-                class="reveal-item rpg-card border-cyan-400 text-center relative"
-                style="opacity: 1;"
+                class="reveal-item rpg-card rpg-card-cyan text-center relative"
+                style="background: rgba(0,255,255,0.06);"
             >
-                <div
-                    class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-5 rounded-full bg-cyan-500/30 border border-cyan-400"
-                >
-                </div>
-                <h3 class="text-[26px] font-bold text-cyan-400 mb-4 mt-2">
+                <h3 class="text-[26px] font-bold text-neon-cyan mb-4">
                     Bigger ecosystem
                 </h3>
                 <p class="text-gray-100 mb-6 text-[26px]">
@@ -2079,13 +2429,9 @@ const seaCompanies = [
             </div>
             <!-- Red Pill -->
             <div
-                class="reveal-item rpg-card text-center relative bg-[rgba(255,45,149,0.1)] border-[rgba(255,45,149,0.3)] animate-pulse-slow"
+                class="reveal-item rpg-card text-center relative bg-[rgba(255,45,149,0.1)] animate-pulse-slow"
             >
-                <div
-                    class="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-5 rounded-full bg-red-500 border border-red-400 shadow-[0_0_15px_rgba(255,0,0,0.5)]"
-                >
-                </div>
-                <h3 class="text-[26px] font-bold text-neon-magenta mb-4 mt-2">
+                <h3 class="text-[26px] font-bold text-neon-magenta mb-4">
                     Ruby community
                 </h3>
                 <p class="text-gray-300 mb-6 text-[26px]">
@@ -2108,7 +2454,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="So now, the return. What do we do with all of this?"
+    notes="CLICK — The Return."
 >
     <!-- Network Constellation - Community/Connection -->
     <div class="network-container">
@@ -2190,7 +2536,7 @@ const seaCompanies = [
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="And that's when I found my mission. Help people see that Rails is actually the best choice. But here's the really important part — it's OURS. Not 37signals, not Shopify, not some distant core team. The people who will shape Ruby's future? They're in this room. They're at this conference. They're YOU. Don't take this for granted."
+    notes="I found my mission. CLICK — Help people see that Rails is best. CLICK — And more importantly — it's OURS. CLICK — Not 37signals. Not Shopify. The people in this room. YOU."
 >
     <div class="relative z-10 max-w-4xl mx-auto">
         <h2 class="reveal-item text-3xl md:text-4xl font-bold text-white mb-8">
@@ -2211,11 +2557,22 @@ const seaCompanies = [
     </div>
 </Slide>
 
+<!-- Slide: Vladimir Quote — Building Rails Together -->
+<QuoteSlide
+    quote="Rails is not a single perfect idea. It's a messy quilt that we are constructing together."
+    author="Vladimir Dementyev"
+    authorImage="/speaker_vova.jpg"
+    context="Rails X keynote, SF Ruby Conference"
+    color="magenta"
+    background="dark"
+    notes="Vladimir Dementyev at our conference. Rails is a messy quilt we construct together. The future isn't about the core team — it's about what WE build next."
+/>
+
 <!-- Slide: What Ruby Needs -->
 <Slide
     layout="stacked"
     background="dark"
-    notes="So what does Ruby need from you? Build open source. Write documentation. Create AI tooling. Speak at conferences — even small ones. Run local meetups — like we do in SF. Advocate publicly. This is really important: not consumption. Contribution. That's how we build the future together."
+    notes="What Ruby needs from you. CLICK — Write about Ruby. CLICK — Support local groups. CLICK — Build open source. CLICK — Request the SDKs you need. CLICK — Build missing bits. CLICK — Build in public. CLICK — Run local groups. CLICK — Celebrate success stories. CLICK — Bring people into the community. CLICK — Not consumption. Contribution."
 >
     <!-- Network - Community continues -->
     <div class="network-container">
@@ -2324,11 +2681,11 @@ const seaCompanies = [
     </div>
 </Slide>
 
-<!-- Slide: Final -->
+<!-- Slide: Final - The Question -->
 <Slide
     layout="centered"
     background="gradient-purple"
-    notes="So here's my question for you. The question isn't 'Will Ruby survive?' — Ruby is doing just fine. The real question is: What will YOU build? If you want to follow the crowd — Python is right there. But if you want to build the future — if you want your contribution to matter — welcome to Ruby. This is where builders build. Thank you so much for being here today. I'm so grateful to be part of this community. Let's keep in touch — scan the QR code, come say hi. Sawadee krap!"
+    notes="The question isn't 'Will Ruby survive?' CLICK — It's: 'What will YOU build?' CLICK — If you want to follow the crowd — Python is right there. If you want to build the future — welcome to Ruby."
 >
     <div>
         <h2 class="reveal-item text-3xl md:text-4xl font-bold text-white mb-8">
@@ -2340,17 +2697,32 @@ const seaCompanies = [
         >
             It's: "What will you build?"
         </h2>
-        <p class="reveal-item text-[26px] text-gray-400 mb-6">
+        <p class="reveal-item text-[26px] text-gray-400">
             If you want to follow the crowd — Python is right there.<br />
             If you want to build the future — welcome to Ruby.
         </p>
+    </div>
+</Slide>
+
+<!-- Slide: Thank You -->
+<Slide
+    layout="centered"
+    background="gradient-purple"
+    notes="Thank you! CLICK — Scan the QR code for slides. Come say hi. Sawadee krap!"
+>
+    <div>
+        <h2
+            class="reveal-item text-5xl md:text-6xl font-black gradient-text mb-10"
+        >
+            Thank you!
+        </h2>
         <div
-            class="reveal-item flex flex-col md:flex-row items-center justify-center gap-8"
+            class="reveal-item flex flex-col md:flex-row items-center justify-center gap-10"
         >
             <!-- Speaker info -->
             <div class="flex flex-col items-center gap-4">
                 <div
-                    class="w-20 h-20 rounded-full bg-[var(--dark-surface)] border-2 border-gray-700 overflow-hidden"
+                    class="w-24 h-24 rounded-full bg-[var(--dark-surface)] border-2 border-gray-700 overflow-hidden"
                 >
                     <img
                         src="/speaker_irina.jpg"
@@ -2359,14 +2731,19 @@ const seaCompanies = [
                     />
                 </div>
                 <div class="text-gray-400 text-center">
-                    <p class="text-white font-semibold mb-1">Irina Nazarova</p>
+                    <p class="text-white font-semibold text-xl mb-1">
+                        Irina Nazarova
+                    </p>
                     <p class="text-[26px]">
-                        @irinanazarova • Evil Martians • SF Ruby
+                        @irinanazarova
+                    </p>
+                    <p class="text-[26px]">
+                        Evil Martians • SF Ruby
                     </p>
                 </div>
             </div>
             <!-- QR Code to presentation -->
-            <div class="reveal-item flex flex-col items-center gap-3">
+            <div class="flex flex-col items-center gap-3">
                 <div
                     class="bg-white p-3 rounded-xl shadow-[0_0_20px_rgba(0,255,255,0.3)]"
                 >
@@ -2400,6 +2777,7 @@ const seaCompanies = [
 </footer>
 
 <script>
+    // @ts-nocheck
     // ========================================
     // PREVIEW MODE DETECTION
     // ========================================
