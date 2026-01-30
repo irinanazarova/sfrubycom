@@ -1011,40 +1011,24 @@ code:not(pre code) {
 }
 
 /* Logo wall animation */
-/* Logo wall — neon card grid */
+/* Logo wall — single white card with neon glow */
 .logo-wall-card {
-    opacity: 0;
-    animation: logo-card-in 0.5s ease-out forwards,
-               logo-card-breathe 5s ease-in-out infinite;
-    animation-composition: accumulate;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(138, 43, 226, 0.3);
+    background: rgba(255, 255, 255, 0.93);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.75rem;
-    padding: 0.75rem;
+    padding: 0.6rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: logo-card-breathe 5s ease-in-out infinite;
 }
 
 .logo-wall-card img {
-    height: 2.5rem;
+    height: 2.75rem;
+    max-height: 2.75rem;
     width: auto;
     max-width: 100%;
     object-fit: contain;
-    background: rgba(255, 255, 255, 0.92);
-    padding: 0.35rem 0.75rem;
-    border-radius: 0.375rem;
-}
-
-@keyframes logo-card-in {
-    from {
-        opacity: 0;
-        transform: scale(0.85) translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
 }
 
 @keyframes logo-card-breathe {
