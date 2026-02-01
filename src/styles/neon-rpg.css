@@ -3283,3 +3283,164 @@ body.preview-mode .reveal-item.reveal-preview-next {
         transition: none !important;
     }
 }
+
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    /* --- Base slide: reduce padding, allow vertical overflow --- */
+    .slide {
+        padding: 1.5rem 1.25rem;
+        padding-bottom: 3.5rem; /* space for footer */
+        height: auto !important;
+        min-height: 100dvh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /* Disable scroll-snap on mobile — let users scroll naturally */
+    .presentation-container,
+    [style*="scroll-snap-type"] {
+        scroll-snap-type: none !important;
+    }
+    .slide {
+        scroll-snap-align: none;
+        scroll-snap-stop: normal;
+    }
+
+    /* --- Typography: scale down for small screens --- */
+    :where(.slide) h1 {
+        font-size: 2rem;
+    }
+    :where(.slide) h2 {
+        font-size: 1.5rem;
+    }
+    :where(.slide) h3 {
+        font-size: 1.25rem;
+    }
+    :where(.slide) h4 {
+        font-size: 1.1rem;
+    }
+
+    /* --- Layouts: collapse multi-column to single --- */
+    .slide-two-column > * {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* --- Speaker bio (slide 1b): stack vertically, shrink logos --- */
+    .slide .flex.items-center.gap-8 {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    /* --- Founder grid: fewer columns on mobile --- */
+    .founder-grid-fullscreen {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem 0.5rem;
+        padding: 0 0.5rem;
+    }
+    .founder-grid-fullscreen .founder-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    .founder-grid-fullscreen .founder-name {
+        font-size: 0.6rem;
+        max-width: 70px;
+    }
+    .founder-grid-fullscreen .founder-company {
+        font-size: 0.5rem;
+        max-width: 70px;
+    }
+    .founder-grid-fullscreen .founder-logo {
+        width: 50px;
+        height: 20px;
+    }
+
+    /* --- Logo wall: 3 columns instead of 6 --- */
+    .logo-wall-card {
+        padding: 0.4rem 0.6rem;
+    }
+    .logo-wall-card img {
+        height: 2rem;
+        max-height: 2rem;
+    }
+
+    /* --- Metric grid: stack on mobile --- */
+    .metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .metric-value {
+        font-size: 2rem;
+    }
+
+    /* --- Fixed footer: compact --- */
+    .fixed-footer {
+        height: 36px;
+        padding: 0 0.75rem;
+    }
+    .footer-logo {
+        height: 24px;
+    }
+    .footer-conference {
+        font-size: 0.6rem;
+    }
+    .footer-slide-number {
+        font-size: 0.75rem;
+    }
+
+    /* --- Comparison table cells: less padding --- */
+    .comparison-table td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    /* --- RPG list items: tighter on mobile --- */
+    .rpg-list-item {
+        padding: 0.75rem 1rem;
+    }
+
+    /* --- Fullscreen slide: minimal padding --- */
+    .slide-fullscreen {
+        padding: 0.5rem;
+    }
+
+    /* --- Progress bar: thinner on mobile --- */
+    .progress-bar {
+        height: 2px;
+    }
+
+    /* --- Slide ambient effects: reduce visual noise --- */
+    .slide::before {
+        opacity: 0.3;
+    }
+    .slide::after {
+        opacity: 0.3;
+    }
+
+    /* --- Override large inline text sizes used for projection ---
+       text-[26px] is used extensively for body text optimized for
+       conference projectors. Scale it down for mobile reading. */
+    .slide [class*="text-[26px]"] {
+        font-size: 1rem !important;
+    }
+    .slide [class*="text-5xl"] {
+        font-size: 2rem !important;
+    }
+    .slide [class*="text-4xl"] {
+        font-size: 1.75rem !important;
+    }
+    .slide [class*="text-3xl"] {
+        font-size: 1.375rem !important;
+    }
+
+    /* --- Images that are too tall for mobile screens --- */
+    .slide img[class*="h-36"],
+    .slide img[class*="h-44"],
+    .slide img[class*="h-64"] {
+        height: auto !important;
+        max-height: 6rem;
+    }
+}
