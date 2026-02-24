@@ -4,6 +4,9 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: "https://sfruby.com",
   output: "static",
+  devOverlay: {
+    enabled: false,
+  },
   integrations: [tailwind()],
   build: {
     inlineStylesheets: "auto",

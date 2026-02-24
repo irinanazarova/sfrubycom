@@ -104,7 +104,7 @@ if (!youtubeId) {
     <div class="px-4 py-3">
         {
             startup.logo && (
-                <div class="flex items-center justify-center h-10 group-hover:scale-105 transition-transform">
+                <div class="flex items-center justify-center h-28 group-hover:scale-105 transition-transform">
                     <img
                         src={startup.logo}
                         alt={startup.name}
@@ -118,34 +118,11 @@ if (!youtubeId) {
 
     <!-- Content section -->
     <div class="px-4 pb-4 pt-2">
-        <!-- Speaker row -->
-        {
-            speaker && (
-                <div class="flex items-center gap-2 mb-3">
-                    {speaker.image && (
-                        <img
-                            src={speaker.image}
-                            alt={speaker.name}
-                            class="w-8 h-8 rounded-full object-cover ring-2 ring-gray-100"
-                            loading="lazy"
-                        />
-                    )}
-                    <span class="text-sm text-gray-600">{speaker.name}</span>
-                </div>
-            )
-        }
-
-        <!-- Name -->
-        <h3
-            class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors mb-2"
-        >
-            {startup.name}
-        </h3>
 
         <!-- Short pitch -->
         {
             startup.description && (
-                <p class="text-sm text-gray-600 line-clamp-2 mb-3">
+                <p class="text-sm text-gray-600 line-clamp-8 mb-3">
                     {startup.description}
                 </p>
             )

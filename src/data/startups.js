@@ -13,8 +13,8 @@ export const startups = {
     fundingUrl: "https://sacra.com/c/bolt-new/",
     valuation: "$700M",
     valuationUrl: "https://sacra.com/c/bolt-new/",
-    news: "Raised $105M Series B in Jan 2025, grew to 7M+ users",
-    newsUrl: "https://x.com/boltdotnew/status/1882106655258894390",
+    news: "$40M ARR in 5 months, launched on AWS Marketplace (Dec 2025)",
+    newsUrl: "https://www.growthunhinged.com/p/boltnew-growth-journey",
   },
   stepful: {
     id: "stepful",
@@ -31,8 +31,8 @@ export const startups = {
     fundingUrl:
       "https://techcrunch.com/2024/11/13/stepful-raises-31-5m-to-address-healthcare-staffing-shortage-with-ai-powered-training/",
     valuation: null,
-    news: "Raised $31.5M Series B (Nov 2024), 30K+ enrollees projected",
-    newsUrl: "https://www.stepful.com/post/stepful-announces-series-b",
+    news: "TIME #1 EdTech in the US (2025), 30K+ students enrolled",
+    newsUrl: "https://www.stepful.com/post/stepful-named-1-edtech-company-in-us-top-10-globally-times-2025-list",
   },
   accessgrid: {
     id: "accessgrid",
@@ -65,8 +65,8 @@ export const startups = {
     fundingUrl:
       "https://www.prnewswire.com/news-releases/suppli-raises-3-1-million-to-help-simplify-and-accelerate-payments-for-construction-suppliers-301731341.html",
     valuation: null,
-    news: "Partnered with NCS Credit (Jun 2025)",
-    newsUrl: "https://www.ncscredit.com/about/news/suppli-partners-ncs-credit/",
+    news: "$1B+ processed annually, NCS Credit integration (Jun 2025)",
+    newsUrl: "https://www.ncscredit.com/education-center/blog/suppli-partners-ncs-credit",
   },
   nexhealth: {
     id: "nexhealth",
@@ -83,8 +83,8 @@ export const startups = {
     valuation: "$1B",
     valuationUrl:
       "https://www.fiercehealthcare.com/health-tech/nexhealth-hits-unicorn-status-125m-series-c-patient-experience-platform",
-    news: "Unicorn since 2022, manages 68M patient records",
-    newsUrl: "https://www.nexhealth.com/resources/series-c",
+    news: "TIME Top HealthTech 2025, $100M+ in patient payments/year",
+    newsUrl: "https://time.com/7318020/worlds-top-healthtech-companies-2025/",
   },
   simple_ai: {
     id: "simple_ai",
@@ -97,9 +97,11 @@ export const startups = {
     speakerId: "zach-kamran",
     demoTime: "",
     founded: 2024,
-    funding: "YC-backed",
+    funding: "$14M seed",
+    fundingUrl: "https://www.businesswire.com/news/home/20260210526354/en/Simple-AI-Announces-$14M-from-First-Harmonic-and-Y-Combinator-to-Build-Voice-AI-Agents-That-Sell",
     valuation: null,
-    news: "Part of YC voice AI wave, enterprise voice agents",
+    news: "Raised $14M seed led by First Harmonic (Feb 2026)",
+    newsUrl: "https://venturebeat.com/business/simple-ai-announces-14m-from-first-harmonic-and-y-combinator-to-build-voice-ai-agents-that-sell/",
   },
   sixfold: {
     id: "sixfold",
@@ -111,12 +113,12 @@ export const startups = {
     speakerId: "brian-moseley",
     demoTime: "",
     founded: 2022,
-    funding: "$21.5M total",
-    fundingUrl: "https://www.sixfold.ai/content/post/sixfolds-series-a",
+    funding: "$51.5M total",
+    fundingUrl: "https://ffnews.com/newsarticle/insurtech/sixfold-raises-us30-million-series-b-to-build-the-ai-underwriter/",
     valuation: null,
-    news: "Raised $15M Series A (Jun 2024), Zurich Innovation Champion",
+    news: "Raised $30M Series B (Jan 2026), 1M+ AI submissions processed",
     newsUrl:
-      "https://fintech.global/2024/06/06/sixfold-raises-15m-to-enhance-ai-driven-underwriting-technology/",
+      "https://fintech.global/2026/01/30/insurtech-firm-sixfold-secures-30m-to-advance-ai-underwriting/",
   },
   cactus: {
     id: "cactus",
@@ -247,9 +249,10 @@ export const startups = {
     speakerId: "peter-philips",
     demoTime: "",
     founded: null,
-    funding: null,
+    funding: "Bootstrapped",
     valuation: null,
-    news: null,
+    news: "G2 High Performer 2026, 2K+ companies, Amazon Business Partner",
+    newsUrl: "https://recognizeapp.com/",
   },
   fin: {
     id: "fin",
@@ -265,8 +268,8 @@ export const startups = {
     fundingUrl: "https://www.crunchbase.com/organization/intercom",
     valuation: "$1.275B",
     valuationUrl: "https://sacra.com/c/intercom/valuation/",
-    news: "Fin resolves 1M+ tickets/week, $343M revenue in 2024",
-    newsUrl: "https://sacra.com/research/intercom-at-343m/",
+    news: "Fin AI approaching $100M ARR, 7K+ customers, Berlin R&D hub",
+    newsUrl: "https://www.intercom.com/blog/headlines-from-pioneer-2025/",
   },
   ubicloud: {
     id: "ubicloud",
@@ -283,8 +286,8 @@ export const startups = {
     fundingUrl:
       "https://siliconangle.com/2024/03/05/ubicloud-reels-16m-open-source-cloud-platform/",
     valuation: null,
-    news: "YC W24, from Citus Data founders (acquired by Microsoft)",
-    newsUrl: "https://www.ycombinator.com/companies/ubicloud",
+    news: "Managed K8s, AI inference, 2x faster GitHub Actions runners",
+    newsUrl: "https://www.ubicloud.com/blog/ubicloud-premium-runners-40-faster-builds-10x-larger-cache",
   },
   chatwithwork: {
     id: "chatwithwork",
@@ -314,8 +317,8 @@ export const startups = {
     fundingUrl:
       "https://techcrunch.com/2025/04/03/thatch-raises-40m-to-give-employees-more-control-of-their-health-insurance-choices/",
     valuation: null,
-    news: "Raised $40M Series B (Apr 2025), ADP Ventures investor",
-    newsUrl: "https://thatch.com/blog/thatch-series-b-announcement",
+    news: "Embedded in ADP for 900K+ small businesses (Dec 2025)",
+    newsUrl: "https://www.prnewswire.com/news-releases/thatch-and-adp-simplify-small-business-healthcare-with-seamless-ichra-integration-via-run-powered-by-adp-302639422.html",
   },
   finta: {
     id: "finta",
@@ -349,8 +352,8 @@ export const startups = {
     fundingUrl: "https://techcrunch.com/2022/03/08/angellist-series-c/",
     valuation: "$4B",
     valuationUrl: "https://techcrunch.com/2022/03/08/angellist-series-c/",
-    news: "108 unicorns backed through platform",
-    newsUrl: "https://sacra.com/c/angellist-venture/",
+    news: "Acquired Tome (legal AI); $171B AUM, 72K+ investors",
+    newsUrl: "https://www.angellist.com/blog/angellist-x-tome",
   },
   planetscale: {
     id: "planetscale",
@@ -365,15 +368,15 @@ export const startups = {
     funding: "$105M total",
     fundingUrl: "https://www.crunchbase.com/organization/planetscale",
     valuation: null,
-    news: "Launched PlanetScale for Postgres (2025)",
-    newsUrl: "https://planetscale.com/blog/planetscale-for-postgres",
+    news: "Launched Metal (65% lower latency) + Postgres support (2025)",
+    newsUrl: "https://planetscale.com/blog/announcing-metal",
   },
   llamapress: {
     id: "llamapress",
     name: "llamapress",
     logo: "/startup_llamapress.png",
     url: "https://llamapress.ai/",
-    description: "AI-powered content platform built with Ruby on Rails.",
+    description: "Open-source AI coding agent for Rails apps. 8K+ users, 40K+ pages created. Build full-stack Rails apps in the browser with Leonardo AI agent.",
     speakerId: "kody-kendall",
     demoTime: "",
     founded: null,
@@ -395,9 +398,8 @@ export const startups = {
     fundingUrl:
       "https://www.prnewswire.com/news-releases/cleary-announces-7-5m-in-funding-amid-strong-demand-for-their-employee-experience-platform-to-support-distributed-teams-301734120.html",
     valuation: null,
-    news: "Customers: Flexport, DoorDash, Shippo",
-    newsUrl:
-      "https://www.prnewswire.com/news-releases/cleary-announces-7-5m-in-funding-amid-strong-demand-for-their-employee-experience-platform-to-support-distributed-teams-301734120.html",
+    news: "AI-native HR platform, customers: Flexport, DoorDash, Scale",
+    newsUrl: "https://gocleary.com/",
   },
   bemi: {
     id: "bemi",
@@ -411,7 +413,8 @@ export const startups = {
     founded: null,
     funding: null,
     valuation: null,
-    news: "From creator of popular open-source Ruby projects",
+    news: "Rebranded to Telio, SOC 2 Type II certified, ~$1.2M raised",
+    newsUrl: "https://gettelio.com/",
   },
 };
 

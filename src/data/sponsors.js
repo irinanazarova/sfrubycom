@@ -332,6 +332,20 @@ export const sponsors = {
     logo: "/sponsor_mux.png",
     url: "https://mux.com",
   },
+  persona: {
+    id: "persona",
+    name: "Persona",
+    tier: "Community",
+    logo: "/host_persona.png",
+    url: "https://withpersona.com",
+  },
+  whop: {
+    id: "whop",
+    name: "Whop",
+    tier: "Community",
+    logo: "/startup_whop.avif",
+    url: "https://whop.com",
+  },
 };
 
 // Special organizers

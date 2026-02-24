@@ -252,6 +252,50 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/7307128",
     postedDate: "2025-01-16",
     },*/
+  "staff-software-engineer-whop": {
+    id: "staff-software-engineer-whop",
+    title: "Staff Software Engineer, Backend",
+    sponsorId: "whop",
+    location: "Bay Area, CA & Brooklyn, NY",
+    type: "Full-time",
+    description:
+      "Build beautiful, fast, polished APIs across the Whop backend. Create primitive APIs used by internal and external developers. Create patterns, prompts, and internal tools to create leverage for other developers. Work closely with founders and designers to turn vision into clean architected systems. Come up with reusable architecture patterns. $300K+ cash + equity.",
+    url: "https://careers.whop.com/?gh_jid=4250926007",
+    postedDate: "2026-02-22",
+  },
+  "software-engineer-rails-persona": {
+    id: "software-engineer-rails-persona",
+    title: "Software Engineer, Ruby on Rails",
+    sponsorId: "persona",
+    location: "San Francisco",
+    type: "Full-time",
+    description:
+      "Own the security foundations that safeguard sensitive identity data at scale. Design IAM systems for enterprise customers managing PII across global teams. 5+ years security software engineering experience required.",
+    url: "https://jobs.ashbyhq.com/persona/748ae6d9-fa4f-46b4-8232-943ead83e5e0",
+    postedDate: "2026-02-22",
+  },
+  "software-engineer-security-persona": {
+    id: "software-engineer-security-persona",
+    title: "Software Engineer, Security",
+    sponsorId: "persona",
+    location: "San Francisco",
+    type: "Full-time",
+    description:
+      "Shape and build the security building blocks that engineering teams build on top of. Establish foundational security infrastructure for handling identity data at scale. 3+ years security engineering experience. $130K-$220K + equity.",
+    url: "https://jobs.ashbyhq.com/persona/3602dab9-1d23-4629-b17d-a748f52958e9",
+    postedDate: "2026-02-22",
+  },
+  "senior-security-engineer-product-persona": {
+    id: "senior-security-engineer-product-persona",
+    title: "Senior Security Engineer, Product",
+    sponsorId: "persona",
+    location: "San Francisco",
+    type: "Full-time",
+    description:
+      "Partner with product and engineering teams to design secure product experiences. Architect security controls and monitoring across Persona's platform. Expertise securing Ruby on Rails applications required. 4+ years SWE, 2+ years product security. $150K-$220K + equity.",
+    url: "https://jobs.ashbyhq.com/persona/6b096d89-30b5-4a0c-955c-119e65cc3224",
+    postedDate: "2026-02-22",
+  },
   // Startup jobs (from Ruby startups, not sponsors)
   "senior-rails-ai-engineer-cactus": {
     id: "senior-rails-ai-engineer-cactus",

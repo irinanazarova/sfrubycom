@@ -4,27 +4,19 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import StartupCard from "../components/StartupCard.astro";
 import StartupModal from "../components/StartupModal.astro";
-import MeetupCard from "../components/MeetupCard.astro";
 import ResourceCard from "../components/ResourceCard.astro";
 import Button from "../components/Button.astro";
 import SocialLink from "../components/SocialLink.astro";
 import EmailModal from "../components/EmailModal.astro";
 
-import { getAllStartups, startups as startupsData } from "../data/startups.js";
+import { getAllStartups, getStartup, startups as startupsData } from "../data/startups.js";
 import { getTalk, talks } from "../data/talks.js";
 import { getJobsBySponsor, getSortedJobs } from "../data/jobs.js";
 import { getAllPhotoAlbums, GCS_PHOTO_BASE } from "../data/events.js";
 import { getSponsor, getSponsorsGroupedByTier } from "../data/sponsors.js";
 import { getSpeaker } from "../data/speakers.js";
-
-// Try to load meetups from content if available
-let meetups = [];
-try {
-    const meetupsModule = await import("../content/meetups.json");
-    meetups = meetupsModule.default || [];
-} catch (e) {
-    // No meetups data available
-}
+import { getAllHosts } from "../data/hosts.js";
+import HostCard from "../components/HostCard.astro";
 
 const allStartups = getAllStartups();
 
@@ -42,14 +34,6 @@ const startups = visibleStartups.sort((a, b) => {
     if (!aHasVideo && bHasVideo) return 1;
     return 0;
 });
-
-// Get next upcoming meetup
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-const upcomingMeetups = meetups
-    .filter((m) => new Date(m.date) >= today)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-const nextMeetup = upcomingMeetups[0];
 
 // Get featured startups (first 8)
 const featuredStartups = startups.slice(0, 8);
@@ -81,12 +65,22 @@ for (const [id, startup] of Object.entries(startupsData)) {
     };
 }
 
-// Get featured jobs (first 4)
+// Get featured jobs (1 per company, newest first)
 const allJobs = getSortedJobs();
-const featuredJobs = allJobs.slice(0, 4).map((job) => ({
-    ...job,
-    sponsor: getSponsor(job.sponsorId),
-}));
+const seenCompanies = new Set();
+const featuredJobs = allJobs.filter((job) => {
+    const companyKey = job.sponsorId || job.startupId;
+    if (seenCompanies.has(companyKey)) return false;
+    seenCompanies.add(companyKey);
+    return true;
+}).slice(0, 6).map((job) => {
+    const sponsor = getSponsor(job.sponsorId);
+    const startup = job.startupId ? getStartup(job.startupId) : null;
+    return {
+        ...job,
+        sponsor: sponsor || (startup ? { name: startup.name, logo: startup.logo } : null),
+    };
+});
 const jobCount = allJobs.length;
 
 // Get featured talks with videos (first 4) and include speaker info
@@ -178,188 +172,165 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
         <Header />
 
         <main class="flex-grow">
-            <!-- Hero Section with Blue Gradient -->
-            <section
-                class="relative bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 text-white overflow-hidden min-h-[90vh] flex items-center"
-            >
-                <!-- Background effects -->
-                <div class="absolute inset-0 overflow-hidden">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"
-                    >
-                    </div>
-                    <div
-                        class="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl"
-                    >
-                    </div>
-                    <div
-                        class="absolute bottom-40 right-20 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl"
-                    >
-                    </div>
-                </div>
+            <!-- SF Ruby News Hero -->
+            <section class="relative bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden">
+                <div class="absolute inset-0 bg-ruby-950/30"></div>
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-16">
 
-                <div
-                    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20"
-                >
-                    <div class="max-w-4xl mx-auto text-center">
-                        <h1
-                            class="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-                        >
-                            Let's build the new generation of Ruby success
-                            stories!
-                        </h1>
+                    <!-- Masthead -->
+                    <div class="text-center mb-12">
+                        <div class="flex items-center gap-4 justify-center mb-3">
+                            <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
+                            <h1 class="font-display text-2xl md:text-3xl tracking-wider uppercase text-white font-bold">SF Ruby News</h1>
+                            <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
+                        </div>
+                        <p class="text-sm text-white/50 tracking-widest uppercase">February 2026</p>
+                    </div>
 
-                        <div
-                            class="flex flex-col sm:flex-row gap-4 justify-center"
-                        >
-                            <a
-                                href="https://lu.ma/sfruby"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 border-2 border-ruby-400 text-white rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:shadow-ruby-500/30 hover:scale-105"
-                            >
-                                Join next meetup
-                                <svg
-                                    class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </a>
-                            <a
-                                href="/talks"
-                                class="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-semibold shadow-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 hover:bg-white/20 hover:border-white/50"
-                            >
-                                Explore videos
-                                <svg
-                                    class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 5l7 7-7 7"></path>
-                                </svg>
+                    <!-- Headline Story -->
+                    <div class="mb-10">
+                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">AI + Ruby</span>
+                        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">The Crazy Unlock</h2>
+                        <div class="border-l-2 border-ruby-500/60 pl-6 relative">
+                            <span class="absolute -left-1 -top-4 text-5xl text-ruby-500/30 font-serif leading-none">&ldquo;</span>
+                            <p class="text-lg md:text-xl text-white/80 leading-relaxed italic">
+                                I think people are sleeping a bit on how much Ruby on Rails + Claude Code is a <strong class="text-white not-italic">crazy unlock</strong> — I mean Rails was designed for people who love syntactic sugar, and LLMs are sugar fiends.
+                            </p>
+                            <div class="mt-4 flex items-center gap-3">
+                                <div>
+                                    <p class="text-sm font-semibold text-white/90">Garry Tan</p>
+                                    <p class="text-xs text-white/50">President of Y Combinator · Feb 14, 2026</p>
+                                </div>
+                            </div>
+                            <a href="https://x.com/garrytan/status/1890487632497725797" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                View on X
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                             </a>
                         </div>
                     </div>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-white/10 mb-10"></div>
+
+                    <!-- Three Column Stories -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-12">
+                        <!-- Funding: Sixfold -->
+                        <div class="md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Funding</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Sixfold Closes $30M Series B</h3>
+                            <p class="text-xs text-white/40 mb-2">Jan 30, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">AI underwriting insurtech hits $51.5M total, 1M+ submissions processed.</p>
+                            <a href="https://ffnews.com/newsarticle/insurtech/sixfold-raises-us30-million-series-b-to-build-the-ai-underwriter/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Funding: Simple AI -->
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Funding</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Simple AI Raises $14M Seed Round</h3>
+                            <p class="text-xs text-white/40 mb-2">Feb 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">YC-backed voice AI startup, $14M led by First Harmonic.</p>
+                            <a href="https://usesimple.ai/blog/seed" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Open Source -->
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Open Source</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">RubyLLM 1.12: The Agents DSL</h3>
+                            <p class="text-xs text-white/40 mb-2">Feb 14, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">First-class agent DSL for Ruby developers.</p>
+                            <a href="https://paolino.me/rubyllm-1-12-agents/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Divider + CTA -->
+                    <div class="h-px bg-white/10 mb-10"></div>
+
                 </div>
 
-                <!-- Cloud-shaped transition to next section -->
-                <div
-                    class="absolute bottom-0 left-0 right-0 h-20 overflow-hidden"
-                >
-                    <svg
-                        preserveAspectRatio="none"
-                        viewBox="0 0 1200 120"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="absolute bottom-0 w-full h-full"
-                    >
-                        <path
-                            d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
-                            fill="#f8fafc"></path>
+                <!-- Wave transition to slate-50 -->
+                <div class="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
+                    <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" class="absolute bottom-0 w-full h-full">
+                        <path d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z" fill="#f8fafc"></path>
                     </svg>
                 </div>
             </section>
 
-            <!-- Next Meetup Section -->
-            {
-                nextMeetup && (
-                    <section class="py-20 bg-slate-50">
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div class="max-w-4xl mx-auto">
-                                <!-- Section header -->
-                                <div class="text-center mb-8">
-                                    <span class="inline-block px-4 py-1.5 bg-ruby-100 text-ruby-700 text-sm font-semibold rounded-full mb-4">
-                                        Monthly Meetup
-                                    </span>
-                                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                                        Join the Next SF Ruby Meetup
-                                    </h2>
-                                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                                        Connect with founders and engineers building with Ruby.
-                                        Learn, share, and make friends for life!
-                                    </p>
-                                </div>
+            <!-- Upcoming Events Section -->
+            <section class="py-20 bg-slate-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-4xl mx-auto">
+                        <!-- Section header -->
+                        <div class="text-center mb-8">
+                            <span class="inline-block px-4 py-1.5 bg-ruby-100 text-ruby-700 text-sm font-semibold rounded-full mb-4">
+                                Monthly Meetup
+                            </span>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                Join the Next SF Ruby Meetup
+                            </h2>
+                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                                Connect with founders and engineers building with Ruby.
+                                Learn, share, and make friends for life!
+                            </p>
+                        </div>
 
-                                <!-- Meetup card - more prominent -->
-                                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
-                                    <div class="bg-gradient-to-r from-ruby-500 to-pink-500 px-6 py-3">
-                                        <span class="text-white font-semibold">Next Event</span>
-                                    </div>
-                                    <div class="p-6">
-                                        <MeetupCard meetup={nextMeetup} />
-                                    </div>
-                                </div>
-
-                                <!-- Three CTAs -->
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <!-- Sign up -->
-                                    <a
-                                        href="https://lu.ma/sfruby"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="group flex items-center gap-4 p-5 bg-white rounded-xl border-2 border-gray-200 hover:border-ruby-400 hover:shadow-lg transition-all duration-300"
-                                    >
-                                        <div class="w-12 h-12 bg-ruby-100 rounded-xl flex items-center justify-center group-hover:bg-ruby-500 transition-colors">
-                                            <svg class="w-6 h-6 text-ruby-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">Sign up</h3>
-                                            <p class="text-sm text-gray-500">RSVP on Luma</p>
-                                        </div>
-                                    </a>
-
-                                    <!-- Submit a talk -->
-                                    <a
-                                        href="https://forms.gle/EZLqENWd5VjiLduq8"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="group flex items-center gap-4 p-5 bg-white rounded-xl border-2 border-gray-200 hover:border-ruby-400 hover:shadow-lg transition-all duration-300"
-                                    >
-                                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center group-hover:bg-amber-500 transition-colors">
-                                            <svg class="w-6 h-6 text-amber-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">Submit a talk</h3>
-                                            <p class="text-sm text-gray-500">Share your knowledge</p>
-                                        </div>
-                                    </a>
-
-                                    <!-- Host the meetup -->
-                                    <button
-                                        data-email-modal="host-meetup"
-                                        class="group flex items-center gap-4 p-5 bg-white rounded-xl border-2 border-gray-200 hover:border-ruby-400 hover:shadow-lg transition-all duration-300 text-left w-full"
-                                    >
-                                        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:bg-emerald-500 transition-colors">
-                                            <svg class="w-6 h-6 text-emerald-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">Host the meetup</h3>
-                                            <p class="text-sm text-gray-500">Open your office</p>
-                                        </div>
-                                    </button>
-                                </div>
+                        <!-- Luma calendar embed -->
+                        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
+                            <div class="w-full">
+                                <iframe
+                                    src="https://lu.ma/embed/calendar/cal-L4SDawu65B1grBV/events"
+                                    class="w-full border-0"
+                                    style="min-height: 450px;"
+                                    allowfullscreen
+                                    aria-hidden="false"
+                                    tabindex="0"
+                                ></iframe>
                             </div>
                         </div>
-                    </section>
-                )
-            }
+
+                        <!-- CTAs -->
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a
+                                href="https://lu.ma/sfruby"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 hover:from-ruby-400 hover:to-pink-400 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                            >
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                RSVP on Luma
+                            </a>
+                            <a
+                                href="https://forms.gle/EZLqENWd5VjiLduq8"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2.5 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-medium shadow-sm hover:shadow-md transition-all duration-300"
+                            >
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                Submit a talk
+                            </a>
+                            <button
+                                data-email-modal="host-meetup"
+                                class="inline-flex items-center gap-2.5 px-6 py-3 bg-white hover:bg-gray-50 text-gray-900 rounded-lg font-medium border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md transition-all duration-300"
+                            >
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                                Host the meetup
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- Email Modal for hosting -->
             <EmailModal
@@ -369,147 +340,12 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                 title="Host an SF Ruby Meetup"
             />
 
-            <!-- Startup Gallery Section -->
+            <!-- New Ruby Jobs Section -->
             <section class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2
-                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                        >
-                            Ruby startups shipping today
-                        </h2>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            {startupCount} startups in the SF Bay Area building with
-                            Ruby.
-                        </p>
-                    </div>
-
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-                    >
-                        {
-                            featuredStartups.map((startup) => {
-                                const sponsorId =
-                                    startupToSponsorMap[startup.id];
-                                const hasJobs = sponsorId
-                                    ? getJobsBySponsor(sponsorId).length > 0
-                                    : false;
-                                return (
-                                    <StartupCard
-                                        startup={startup}
-                                        compact
-                                        hasJobs={hasJobs}
-                                    />
-                                );
-                            })
-                        }
-                    </div>
-
-                    <div class="mt-10 text-center">
-                        <Button href="/startups" variant="secondary">
-                            View all startups
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Talks Section -->
-            <section class="py-20 bg-gray-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2
-                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                        >
-                            Watch the Talks
-                        </h2>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Conference keynotes, meetup presentations, and
-                            startup demos.
-                        </p>
-                    </div>
-
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-                    >
-                        {
-                            talksWithVideos.map((talk: any) => (
-                                <a
-                                    href={`/talks?talk=${talk.id}#${talk.id}`}
-                                    class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
-                                >
-                                    <div class="aspect-video bg-gray-900 relative overflow-hidden">
-                                        <img
-                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
-                                            alt={talk.title}
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        />
-                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                            <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                                                <svg
-                                                    class="w-5 h-5 text-ruby-500 ml-1"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path d="M8 5v14l11-7z" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-4">
-                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors">
-                                            {talk.title}
-                                        </h3>
-                                        {talk.speaker && (
-                                            <p class="text-sm text-gray-500 mt-1">
-                                                {talk.speaker.name}
-                                            </p>
-                                        )}
-                                    </div>
-                                </a>
-                            ))
-                        }
-                    </div>
-
-                    <div class="mt-10 text-center">
-                        <Button href="/talks" variant="secondary">
-                            View all talks
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Jobs Section -->
-            <section class="py-20 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2
-                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                        >
-                            Ruby Jobs
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            New Ruby Jobs
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                             {jobCount} open positions at Ruby startups and companies.
@@ -526,11 +362,11 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                     class="group flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300"
                                 >
                                     {job.sponsor?.logo && (
-                                        <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-2 flex-shrink-0 border border-gray-200">
+                                        <div class="w-24 h-10 bg-white rounded-lg flex items-center justify-center px-2 flex-shrink-0 border border-gray-200">
                                             <img
                                                 src={job.sponsor.logo}
                                                 alt={job.sponsor.name}
-                                                class="max-w-full max-h-full object-contain"
+                                                class="w-full h-full object-contain"
                                             />
                                         </div>
                                     )}
@@ -539,7 +375,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                             {job.title}
                                         </h3>
                                         <p class="text-sm text-gray-500">
-                                            {job.sponsor?.name} · {job.location}
+                                            {job.sponsor?.name} &middot; {job.location}
                                         </p>
                                     </div>
                                     <svg
@@ -563,58 +399,56 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     <div class="mt-10 text-center">
                         <Button href="/jobs" variant="secondary">
                             View all jobs
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </Button>
                     </div>
                 </div>
             </section>
 
-            <!-- Photos Section -->
+            <!-- New Meetup Videos Section -->
             <section class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2
-                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                        >
-                            Photos
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            New Meetup Videos
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            {totalPhotoCount} photos from SF Ruby Conference 2025.
+                            Conference keynotes, meetup presentations, and startup demos.
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {
-                            featuredPhotos.map((album) => (
+                            talksWithVideos.map((talk: any) => (
                                 <a
-                                    href={`/photos#${album.id}`}
-                                    class="group block aspect-square rounded-xl overflow-hidden relative"
+                                    href={`/talks?talk=${talk.id}#${talk.id}`}
+                                    class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
                                 >
-                                    <img
-                                        src={album.coverPhoto}
-                                        alt={album.title}
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <div class="absolute bottom-3 left-3 right-3">
-                                            <p class="text-white text-sm font-medium">
-                                                {album.title}
-                                            </p>
-                                            <p class="text-white/70 text-xs">
-                                                {album.photoCount} photos
-                                            </p>
+                                    <div class="aspect-video bg-gray-900 relative overflow-hidden">
+                                        <img
+                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
+                                            alt={talk.title}
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                            <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-ruby-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors">
+                                            {talk.title}
+                                        </h3>
+                                        {talk.speaker && (
+                                            <p class="text-sm text-gray-500 mt-1">
+                                                {talk.speaker.name}
+                                            </p>
+                                        )}
                                     </div>
                                 </a>
                             ))
@@ -622,318 +456,32 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     </div>
 
                     <div class="mt-10 text-center">
-                        <Button href="/photos" variant="secondary">
-                            View all photos
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        <Button href="/talks" variant="secondary">
+                            View all talks
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </Button>
                     </div>
                 </div>
             </section>
 
-            <!-- Community Links Section -->
+            <!-- Our Hosts Section -->
             <section class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2
-                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                        >
-                            Join the Community
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Our Hosts
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Connect with Ruby developers in San Francisco and
-                            beyond.
+                            These companies open their doors to the Ruby community every month.
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <SocialLink
-                            platform="slack"
-                            href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
-                        >
-                            Join SF Ruby Slack
-                        </SocialLink>
-                        <SocialLink
-                            platform="substack"
-                            href="https://sfruby.substack.com/"
-                        >
-                            Newsletter
-                        </SocialLink>
-                        <SocialLink
-                            platform="twitter"
-                            href="https://x.com/sfrubyconf"
-                        >
-                            Twitter
-                        </SocialLink>
-                        <SocialLink
-                            platform="bluesky"
-                            href="https://bsky.app/profile/sfruby.com"
-                        >
-                            Bluesky
-                        </SocialLink>
-                        <SocialLink
-                            platform="linkedin"
-                            href="https://www.linkedin.com/company/sfrubyconf/"
-                        >
-                            LinkedIn
-                        </SocialLink>
-                        <SocialLink
-                            platform="ruby"
-                            href="https://www.rubyevents.org/events"
-                        >
-                            <svg
-                                slot="icon"
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                ></path>
-                            </svg>
-                            Ruby Events
-                        </SocialLink>
-                        <SocialLink
-                            platform="dark"
-                            href="https://forms.gle/EZLqENWd5VjiLduq8"
-                        >
-                            <svg
-                                slot="icon"
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                ></path>
-                            </svg>
-                            Submit a Talk
-                        </SocialLink>
-                        <SocialLink
-                            platform="gradient"
-                            href="https://lu.ma/sfruby"
-                            class="transform hover:scale-105"
-                        >
-                            <svg
-                                slot="icon"
-                                class="w-5 h-5"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                            >
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                                ></path>
-                            </svg>
-                            Sign up on Luma
-                        </SocialLink>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Hosts Section -->
-            <section class="py-20 bg-white border-t border-gray-100">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2
-                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                        >
-                            Our Amazing Hosts
-                        </h2>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            These companies open their doors to the Ruby
-                            community every month.
-                        </p>
-                    </div>
-
-                    <div
-                        class="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-12"
-                    >
-                        <a
-                            href="https://www.ycombinator.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_ycombinator.png"
-                                alt="Y Combinator"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://github.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_github.png"
-                                alt="GitHub"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://chime.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/sponsor_chime.png"
-                                alt="Chime"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://sentry.io"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_sentry.png"
-                                alt="Sentry"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://meraki.cisco.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/sponsor_cisco.png"
-                                alt="Cisco Meraki"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://newrelic.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_newrelic.png"
-                                alt="New Relic"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://productboard.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_productboard.png"
-                                alt="Productboard"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://figma.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_figma.png"
-                                alt="Figma"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://intercom.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/sponsor_intercom.png"
-                                alt="Intercom"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://angellist.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/sponsor_angellist.png"
-                                alt="AngelList"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://planetscale.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/sponsor_planetscale.png"
-                                alt="PlanetScale"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://binti.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/sponsor_binti.png"
-                                alt="Binti"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://withpersona.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_persona.png"
-                                alt="Persona"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
-                        <a
-                            href="https://academia.edu"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-                        >
-                            <img
-                                src="/host_academia.png"
-                                alt="Academia.edu"
-                                class="h-8 md:h-10 w-auto"
-                            />
-                        </a>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+                        {getAllHosts().map((host) => (
+                            <HostCard host={host} />
+                        ))}
                     </div>
 
                     <div class="text-center">
@@ -941,129 +489,184 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                             data-email-modal="host-meetup"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
                         >
-                            Become a host
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            Host the meetup
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Conference Sponsors Section -->
+            <!-- Our Startups Section -->
             <section class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2
-                            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-                        >
-                            SF Ruby Conference 2025 Sponsors
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Our Startups
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Thank you to our amazing sponsors who made the
-                            conference possible.
+                            {startupCount} startups are part of the SF Ruby community.
                         </p>
                     </div>
 
-                    <div class="space-y-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {
-                            sponsorsByTier.map((tier) => (
-                                <div>
-                                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider text-center mb-6">
-                                        {tier.name}
-                                    </h3>
-                                    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-                                        {tier.sponsors.map((sponsor) => (
-                                            <a
-                                                href={sponsor.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
-                                            >
-                                                <img
-                                                    src={sponsor.logo}
-                                                    alt={sponsor.name}
-                                                    class={
-                                                        tier.name ===
-                                                        "Pickaxe ⛏️"
-                                                            ? "h-10 md:h-14 w-auto"
-                                                            : "h-8 md:h-10 w-auto"
-                                                    }
-                                                />
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))
+                            featuredStartups.map((startup) => {
+                                const sponsorId = startupToSponsorMap[startup.id];
+                                const hasJobs = sponsorId
+                                    ? getJobsBySponsor(sponsorId).length > 0
+                                    : false;
+                                return (
+                                    <StartupCard
+                                        startup={startup}
+                                        compact
+                                        hasJobs={hasJobs}
+                                    />
+                                );
+                            })
                         }
                     </div>
 
-                    <div class="mt-12 text-center">
-                        <a
-                            href="/sponsor-2026"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
-                        >
-                            Sponsor 2026
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    <div class="mt-10 text-center">
+                        <Button href="https://docs.google.com/forms/d/e/1FAIpQLSdTg1VZIMOyWqffBZgsQxxWbSWYOKmp_kFVnQhtJvlgvdabyw/viewform?usp=send_form" variant="secondary">
+                            Demo at the meetup
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                        </a>
+                        </Button>
                     </div>
                 </div>
             </section>
 
-            <!-- CTA Section -->
-            <section class="py-20 bg-gradient-to-r from-ruby-500 to-pink-500">
+            <!-- Compact Wrap-up Section -->
+            <section class="py-12 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <!-- Community Links -->
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                            Join the Community
+                        </h2>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <SocialLink
+                                platform="slack"
+                                href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
+                            >
+                                Join SF Ruby Slack
+                            </SocialLink>
+                            <SocialLink
+                                platform="substack"
+                                href="https://sfruby.substack.com/"
+                            >
+                                Newsletter
+                            </SocialLink>
+                            <SocialLink
+                                platform="twitter"
+                                href="https://x.com/sfrubyconf"
+                            >
+                                Twitter
+                            </SocialLink>
+                            <SocialLink
+                                platform="bluesky"
+                                href="https://bsky.app/profile/sfruby.com"
+                            >
+                                Bluesky
+                            </SocialLink>
+                            <SocialLink
+                                platform="linkedin"
+                                href="https://www.linkedin.com/company/sfrubyconf/"
+                            >
+                                LinkedIn
+                            </SocialLink>
+                            <SocialLink
+                                platform="ruby"
+                                href="https://www.rubyevents.org/events"
+                            >
+                                <svg slot="icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                Ruby Events
+                            </SocialLink>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-gray-200 my-10"></div>
+
+                    <!-- Conference Sponsors -->
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                            SF Ruby Conference 2025 Sponsors
+                        </h2>
+                        <p class="text-sm text-gray-500 mb-8">Thank you to our amazing sponsors who made the conference possible.</p>
+
+                        <div class="space-y-8">
+                            {
+                                sponsorsByTier.map((tier) => (
+                                    <div>
+                                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider text-center mb-4">
+                                            {tier.name}
+                                        </h3>
+                                        <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                                            {tier.sponsors.map((sponsor) => (
+                                                <a
+                                                    href={sponsor.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+                                                >
+                                                    <img
+                                                        src={sponsor.logo}
+                                                        alt={sponsor.name}
+                                                        class={tier.name === "Pickaxe ⛏️" ? "h-8 md:h-12 w-auto" : "h-6 md:h-8 w-auto"}
+                                                    />
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+
+                        <div class="mt-8">
+                            <a
+                                href="/sponsor-2026"
+                                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
+                            >
+                                Sponsor 2026
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <section class="py-12 bg-gradient-to-r from-ruby-500 to-pink-500">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
                         Ready to join the Ruby community?
                     </h2>
-                    <p class="text-xl text-ruby-100 mb-10 max-w-2xl mx-auto">
-                        Whether you're a founder, engineer, or Ruby enthusiast,
-                        there's a place for you here.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
                         <a
                             href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-ruby-500 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ruby-500 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                         >
                             Join Slack
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </a>
                         <a
                             href="/sponsor-2026"
-                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300"
                         >
                             Sponsor 2026
                         </a>
