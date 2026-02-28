@@ -84,8 +84,14 @@ const featuredJobs = allJobs.filter((job) => {
 });
 const jobCount = allJobs.length;
 
-// Get latest meetup recordings for homepage
-const latestMeetupRecordings = getLatestMeetupRecordings(4);
+// Get latest 2 meetup recordings + 2 conference keynotes for homepage
+const latestMeetupRecordings = getLatestMeetupRecordings(2);
+const featuredKeynotes = [getTalk("rails-x-keynote"), getTalk("rails-ai-ruby-llm")]
+    .filter(Boolean)
+    .map((talk: any) => ({
+        ...talk,
+        speaker: talk.speakerId ? getSpeaker(talk.speakerId) : null,
+    }));
 
 // Get photo albums
 const photoAlbums = getAllPhotoAlbums();
@@ -422,15 +428,15 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                 </div>
             </section>
 
-            <!-- New Meetup Videos Section -->
+            <!-- New Videos Section -->
             <section class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                            New Meetup Videos
+                            New Videos
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Recordings from our monthly SF Ruby meetups.
+                            Latest meetup recordings and conference keynotes.
                         </p>
                     </div>
 
@@ -469,11 +475,43 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                 </a>
                             ))
                         }
+                        {
+                            featuredKeynotes.map((talk: any) => (
+                                <a
+                                    href={`/talks?talk=${talk.id}#${talk.id}`}
+                                    class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+                                >
+                                    <div class="aspect-video bg-gray-900 relative overflow-hidden">
+                                        <img
+                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
+                                            alt={talk.title}
+                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
+                                        />
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                            <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-ruby-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors">
+                                            {talk.title}
+                                        </h3>
+                                        <p class="text-sm text-gray-500 mt-1">
+                                            {talk.speaker?.name} · SF Ruby Conf 2025
+                                        </p>
+                                    </div>
+                                </a>
+                            ))
+                        }
                     </div>
 
                     <div class="mt-10 text-center">
-                        <Button href="/talks#meetups" variant="secondary">
-                            View all recordings
+                        <Button href="/talks" variant="secondary">
+                            View all talks
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>

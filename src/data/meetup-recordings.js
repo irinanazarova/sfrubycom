@@ -537,6 +537,68 @@ const meetupRecordings = [
       },
     ],
   },
+  {
+    id: "meetup-2025-12",
+    title: "SF Bay Area Ruby Meetup - December 2025",
+    date: "2025-12-18",
+    youtubeId: "V3b9hfN230w",
+    venue: "Intercom",
+    rubyEventsUrl:
+      "https://www.rubyevents.org/talks/sf-bay-area-ruby-meetup-december-2025",
+    talks: [
+      {
+        title: "Ruby 4.0",
+        speaker: "Noel Rappin",
+        company: "Chime",
+        timestamp: 300,
+      },
+      {
+        title: "One Yummy JS Runtime for Rails",
+        speaker: "Irina Nazarova",
+        company: "Evil Martians",
+        timestamp: 2865,
+      },
+      {
+        title:
+          "Live Demonstration of ActiveAgent-powered Fizzy and Writebook",
+        speaker: "Justin Bowen",
+        timestamp: 4077,
+      },
+    ],
+  },
+  {
+    id: "meetup-2026-01",
+    title: "SF Bay Area Ruby Meetup - January 2026",
+    date: "2026-01-22",
+    youtubeId: "DykqANnJfBc",
+    venue: "Persona",
+    rubyEventsUrl:
+      "https://www.rubyevents.org/talks/sf-bay-area-ruby-meetup-january-2026",
+    talks: [
+      {
+        title:
+          "The 3Rs of Ruby Performance: Reduce, Reuse, Recycle (Objects)",
+        speaker: "Samuel Giddins",
+        timestamp: 135,
+      },
+      {
+        title: "Breaking Nil to Fix Bugs",
+        speaker: "Enrique Mogollán",
+        company: "Handshake",
+        timestamp: 2413,
+      },
+      {
+        title: "What to Expect from Ruby 4.0",
+        speaker: "Vitor Oliveira",
+        timestamp: 4284,
+      },
+      {
+        title: "Customizing Form Helpers and Tag Helpers",
+        speaker: "Todd Kummer",
+        timestamp: 6024,
+      },
+    ],
+  },
 ];
 
 // Sort by date descending (newest first)
