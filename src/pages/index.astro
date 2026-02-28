@@ -11,6 +11,7 @@ import EmailModal from "../components/EmailModal.astro";
 
 import { getAllStartups, getStartup, startups as startupsData } from "../data/startups.js";
 import { getTalk, talks } from "../data/talks.js";
+import { getLatestMeetupRecordings } from "../data/meetup-recordings.js";
 import { getJobsBySponsor, getSortedJobs } from "../data/jobs.js";
 import { getAllPhotoAlbums, GCS_PHOTO_BASE } from "../data/events.js";
 import { getSponsor, getSponsorsGroupedByTier } from "../data/sponsors.js";
@@ -83,14 +84,8 @@ const featuredJobs = allJobs.filter((job) => {
 });
 const jobCount = allJobs.length;
 
-// Get featured talks with videos (first 4) and include speaker info
-const talksWithVideos = Object.values(talks)
-    .filter((talk: any) => talk.youtubeId && talk.type !== "demo")
-    .slice(0, 4)
-    .map((talk: any) => ({
-        ...talk,
-        speaker: talk.speakerId ? getSpeaker(talk.speakerId) : null,
-    }));
+// Get latest meetup recordings for homepage
+const latestMeetupRecordings = getLatestMeetupRecordings(4);
 
 // Get photo albums
 const photoAlbums = getAllPhotoAlbums();
@@ -435,40 +430,41 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                             New Meetup Videos
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Conference keynotes, meetup presentations, and startup demos.
+                            Recordings from our monthly SF Ruby meetups.
                         </p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {
-                            talksWithVideos.map((talk: any) => (
+                            latestMeetupRecordings.map((recording: any) => (
                                 <a
-                                    href={`/talks?talk=${talk.id}#${talk.id}`}
+                                    href={`https://www.youtube.com/watch?v=${recording.youtubeId}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
                                 >
                                     <div class="aspect-video bg-gray-900 relative overflow-hidden">
                                         <img
-                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
-                                            alt={talk.title}
+                                            src={`https://img.youtube.com/vi/${recording.youtubeId}/mqdefault.jpg`}
+                                            alt={recording.title}
                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
                                         />
                                         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                                             <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                                                <svg class="w-5 h-5 text-ruby-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-5 h-5 text-sky-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M8 5v14l11-7z" />
                                                 </svg>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="p-4">
-                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors">
-                                            {talk.title}
+                                        <h3 class="font-semibold text-gray-900 group-hover:text-sky-500 transition-colors">
+                                            {recording.title.replace("SF Bay Area Ruby Meetup - ", "")}
                                         </h3>
-                                        {talk.speaker && (
-                                            <p class="text-sm text-gray-500 mt-1">
-                                                {talk.speaker.name}
-                                            </p>
-                                        )}
+                                        <p class="text-sm text-gray-500 mt-1">
+                                            {recording.talks.length} talks · {recording.venue}
+                                        </p>
                                     </div>
                                 </a>
                             ))
@@ -476,8 +472,8 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     </div>
 
                     <div class="mt-10 text-center">
-                        <Button href="/talks" variant="secondary">
-                            View all talks
+                        <Button href="/talks#meetups" variant="secondary">
+                            View all recordings
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>

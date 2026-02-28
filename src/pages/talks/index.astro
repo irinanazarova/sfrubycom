@@ -4,6 +4,9 @@ import TalkModal from "../../components/TalkModal.astro";
 import { talks, getAllTags } from "../../data/talks.js";
 import { slotAssignments, scheduleSlots } from "../../data/schedule.js";
 import { getSpeaker, speakers } from "../../data/speakers.js";
+import { getAllMeetupRecordings, formatTimestamp } from "../../data/meetup-recordings.js";
+
+const meetupRecordings = getAllMeetupRecordings();
 
 // Get only Day 1 & Day 2 conference talk IDs from schedule assignments (exclude Day 3 community events)
 const day1And2SlotIds = Object.keys(scheduleSlots).filter(
@@ -134,6 +137,10 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
                     <div>
                         <div class="text-3xl font-bold text-amber-400">{demosWithVideos.length}</div>
                         <div class="text-sm text-gray-400">Startup Demos</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-sky-400">{meetupRecordings.length}</div>
+                        <div class="text-sm text-gray-400">Meetup Recordings</div>
                     </div>
                 </div>
             </div>
@@ -582,7 +589,8 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
                 <a href="#meetups" class="flex items-center gap-3 group">
                     <div class="w-1 h-8 bg-sky-500 rounded-full"></div>
                     <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-sky-600 transition-colors">
-                        Meetup Talks
+                        Meetup Recordings
+                        <span class="text-lg font-normal text-gray-400 ml-2">{meetupRecordings.length} meetups</span>
                         <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
                     </h2>
                 </a>
@@ -592,38 +600,83 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 text-sm text-sky-500 hover:text-sky-600 font-medium"
                 >
-                    Watch on Ruby Events
+                    Also on Ruby Events
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                 </a>
             </div>
 
-            <div class="bg-white rounded-xl border border-gray-200 p-8 text-center">
-                <div class="w-16 h-16 mx-auto mb-4 bg-sky-100 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">
-                    Watch on Ruby Events
-                </h3>
-                <p class="text-gray-500 max-w-md mx-auto mb-6">
-                    Recordings from our monthly SF Ruby meetups are available on Ruby Events,
-                    the community platform for Ruby conference and meetup videos.
-                </p>
-                <a
-                    href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-6 py-3 bg-sky-500 text-white font-semibold rounded-lg hover:bg-sky-600 transition-all duration-300"
-                >
-                    Browse Meetup Recordings
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {meetupRecordings.map((recording) => (
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all duration-300">
+                        <a
+                            href={`https://www.youtube.com/watch?v=${recording.youtubeId}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="block"
+                        >
+                            <div class="aspect-video bg-gray-900 relative overflow-hidden">
+                                <img
+                                    src={`https://img.youtube.com/vi/${recording.youtubeId}/mqdefault.jpg`}
+                                    alt={recording.title}
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                    loading="lazy"
+                                />
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                    <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-sky-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-gray-900 text-sm">
+                                    {recording.title.replace("SF Bay Area Ruby Meetup - ", "").replace("SF Ruby & Elixir Special - ", "Elixir Special - ")}
+                                </h3>
+                                <span class="text-xs text-gray-400 whitespace-nowrap ml-2">
+                                    {new Date(recording.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                                </span>
+                            </div>
+
+                            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                                <span>{recording.talks.length} talk{recording.talks.length !== 1 ? "s" : ""}</span>
+                                <span class="text-gray-300">·</span>
+                                <span>{recording.venue}</span>
+                            </div>
+
+                            <details class="meetup-details">
+                                <summary class="text-xs text-sky-500 hover:text-sky-600 cursor-pointer font-medium select-none">
+                                    Show talks
+                                </summary>
+                                <ul class="mt-2 space-y-1.5">
+                                    {recording.talks.map((talk) => (
+                                        <li class="text-xs">
+                                            <a
+                                                href={`https://www.youtube.com/watch?v=${recording.youtubeId}${talk.timestamp ? `&t=${talk.timestamp}` : ""}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="flex items-start gap-2 text-gray-600 hover:text-sky-600 transition-colors"
+                                            >
+                                                <span class="text-gray-400 font-mono whitespace-nowrap mt-px">{formatTimestamp(talk.timestamp)}</span>
+                                                <span>
+                                                    <span class="font-medium">{talk.speaker}</span>
+                                                    {talk.company && <span class="text-gray-400"> ({talk.company})</span>}
+                                                    <span class="text-gray-400"> — </span>
+                                                    {talk.title}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </details>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     </section>
