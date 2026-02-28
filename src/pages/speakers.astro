@@ -21,7 +21,6 @@ const targetSpeaker = hash ? (speakers as any)[hash] : null;
 const ogMetadata = {
     title: "Speakers - San Francisco Ruby Conference 2025",
     description: "Meet our amazing speakers at San Francisco Ruby Conference 2025. Industry leaders from Shopify, Cisco, Gusto, and more sharing their expertise.",
-    ogImage: "/sfruby_og.jpg", // TODO: Create /og_speakers.jpg with speaker photos collage
     ogUrl: "https://sfruby.com/speakers",
 };
 
@@ -89,7 +88,6 @@ allSpeakers.sort((a, b) => {
 <Layout
     title={ogMetadata.title}
     description={ogMetadata.description}
-    ogImage={ogMetadata.ogImage}
     ogUrl={ogMetadata.ogUrl}
 >
     <div class="bg-gradient-to-b from-ruby-100 to-ruby-700 text-white pt-32 pb-16">

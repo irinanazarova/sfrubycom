@@ -6,7 +6,6 @@ import "../styles/global.css";
 export interface Props {
     title?: string;
     description?: string;
-    ogImage?: string;
     ogUrl?: string;
     ogType?: string;
 }
@@ -14,14 +13,11 @@ export interface Props {
 const {
     title = "SF Ruby - Where Ruby Startups Are Born",
     description = "Join the SF Ruby community: monthly meetups, talks, jobs, and the annual conference. Connect with founders and engineers building with Ruby.",
-    ogImage = "/og_sfruby.png",
     ogUrl = Astro.url.href,
     ogType = "website",
 } = Astro.props;
 
-const absoluteOgImage = ogImage.startsWith("http")
-    ? ogImage
-    : `https://sfruby.com${ogImage}`;
+const ogPlusImage = `https://iqtfijxk.ogplus.net${Astro.url.pathname}`;
 ---
 
 <!doctype html>
@@ -61,15 +57,15 @@ const absoluteOgImage = ogImage.startsWith("http")
         <meta property="og:url" content={ogUrl} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={absoluteOgImage} />
+        <meta property="og:image" content={ogPlusImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
-        <meta property="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={ogUrl} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={absoluteOgImage} />
+        <meta property="twitter:image" content={ogPlusImage} />
 
         <script
             defer

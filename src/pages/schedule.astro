@@ -22,7 +22,6 @@ import { getTalkOGMetadata, truncateDescription } from '../utils/og';
 const ogMetadata = {
     title: "Schedule - San Francisco Ruby Conference 2025",
     description: "Full conference schedule for San Francisco Ruby Conference 2025. November 19-20 at Fort Mason, featuring talks, workshops, and keynotes from industry leaders.",
-    ogImage: "/sfruby_og.jpg", // TODO: Create /og_schedule.jpg with schedule preview/calendar
     ogUrl: "https://sfruby.com/schedule",
 };
 
@@ -122,7 +121,6 @@ const days = [
 <Layout
     title={ogMetadata.title}
     description={ogMetadata.description}
-    ogImage={ogMetadata.ogImage}
     ogUrl={ogMetadata.ogUrl}
 >
     <!-- Schedule Content -->
