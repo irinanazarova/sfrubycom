@@ -599,6 +599,49 @@ const meetupRecordings = [
       },
     ],
   },
+  {
+    id: "meetup-2026-02",
+    title: "SF Bay Area Ruby Meetup - February 2026",
+    date: "2026-02-26",
+    youtubeId: "izKer1w6nWc",
+    venue: "Sentry",
+    rubyEventsUrl:
+      "https://www.rubyevents.org/events/sf-bay-area-ruby-meetup",
+    talks: [
+      {
+        title: "Introducing Sentry Seer",
+        speaker: "Neil Manvar",
+        company: "Sentry",
+        timestamp: 255,
+      },
+      {
+        title:
+          "Why Coding Agents Need a Harness, Not Just Guardrails",
+        speaker: "Sohil Kshirsagar",
+        company: "Tusk",
+        timestamp: 594,
+      },
+      {
+        title: "How to Turn Images into Calendar Events",
+        speaker: "Mike Dalton",
+        company: "Calendar Vision",
+        timestamp: 1988,
+      },
+      {
+        title:
+          "Does Architecture Still Matter When AI Writes the Code?",
+        speaker: "Vladimir Dementyev",
+        company: "Evil Martians",
+        timestamp: 4819,
+      },
+      {
+        title: "Q&A about Ruby Central",
+        speaker: "Brandon Weaver",
+        company: "One Medical",
+        timestamp: 7389,
+      },
+    ],
+  },
 ];
 
 // Sort by date descending (newest first)
