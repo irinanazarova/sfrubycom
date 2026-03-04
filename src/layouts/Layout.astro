@@ -19,7 +19,8 @@ const {
     ogType = "website",
 } = Astro.props;
 
-const ogPlusImage = `https://iqtfijxk.ogplus.net${Astro.url.pathname}`;
+const ogPlusPath = Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "");
+const ogPlusImage = `https://iqtfijxk.ogplus.net${ogPlusPath}`;
 ---
 
 <!doctype html>
