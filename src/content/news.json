@@ -58,5 +58,65 @@
     "category": "Release",
     "startupName": "Lago",
     "source": "Lago Blog"
+  },
+  {
+    "id": "spring-health-acquires-alma",
+    "date": "2026-01-29",
+    "headline": "Spring Health acquires Alma — combined $6–7B entity, $1B revenue in year one",
+    "summary": "The Rails-powered mental health platform (50M+ lives covered) acquires Alma's therapist network (120M+ lives). Nearly 10M mental health visits projected for 2026. SF office at 2 Embarcadero Center.",
+    "link": "https://www.prnewswire.com/news-releases/spring-health-joins-forces-with-alma-expanding-access-to-precision-mental-health-care-302673454.html",
+    "category": "Acquisition",
+    "startupName": "Spring Health",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "gitlab-1b-arr",
+    "date": "2026-03-03",
+    "headline": "GitLab surpasses $1B ARR — authorizes $400M share buyback",
+    "summary": "Rails Foundation Core member crosses the $1B ARR milestone. Full-year revenue $955M (+26%). Added most $1M+ customers ever in Q4. Free cash flow grew 83% to $220M.",
+    "link": "https://www.businesswire.com/news/home/20260303140705/en/GitLab-Reports-Fourth-Quarter-and-Full-Year-Fiscal-Year-2026-Financial-Results-Board-of-Directors-Authorizes-$400-million-for-Share-Repurchase-Program",
+    "category": "Press",
+    "startupName": "GitLab",
+    "source": "BusinessWire"
+  },
+  {
+    "id": "apollo-ai-assistant-launch",
+    "date": "2026-03-12",
+    "headline": "Apollo.io launches AI Assistant — first agentic GTM platform, built on Rails monolith",
+    "summary": "SF-based $1.6B sales intelligence platform — powered by a Rails monolith serving 210M+ contacts — launches its AI Assistant out of beta. 20K weekly active users, 2.3x more meetings booked. Also launched a native Anthropic Claude connector.",
+    "link": "https://www.prnewswire.com/news-releases/apolloio-launches-ai-assistant-powering-end-to-end-agentic-workflows-in-the-first-ai-native-all-in-one-gtm-platform-302703896.html",
+    "category": "Release",
+    "startupName": "Apollo.io",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "shopify-winter-26-edition",
+    "date": "2026-02-11",
+    "headline": "Shopify Winter '26 Edition: 150+ updates, Agentic Storefronts, $3.67B/quarter",
+    "summary": "Rails Foundation Core member ships 150+ product updates including Agentic Storefronts (products in ChatGPT, Perplexity, Copilot) and Sidekick AI app builder. Revenue $3.67B (+31%), GMV hit $124B. Authorized $2B share buyback.",
+    "link": "https://www.shopify.com/editions/winter2026",
+    "category": "Release",
+    "startupName": "Shopify",
+    "source": "Shopify"
+  },
+  {
+    "id": "omada-health-profitable",
+    "date": "2026-03-05",
+    "headline": "Omada Health reports first profitable quarter — 58% revenue growth",
+    "summary": "SF-based Rails company reports Q4 revenue of $75.8M (+58% YoY), its first profitable quarter with $5.16M net income. Membership grew 55% to 886K. Stock surged 14%. Guiding $312–322M for 2026.",
+    "link": "https://www.globenewswire.com/news-release/2026/03/05/3250649/0/en/Omada-Health-Reports-Fourth-Quarter-and-Full-Year-2025-Results.html",
+    "category": "Press",
+    "startupName": "Omada Health",
+    "source": "GlobeNewsWire"
+  },
+  {
+    "id": "checkr-ai-identity-verification",
+    "date": "2026-03-04",
+    "headline": "Checkr launches AI identity verification to combat deepfake hiring fraud",
+    "summary": "SF-based Rails company launches IDV product with biometric liveness detection and forensic document analysis. Built with Socure. Also partners with Intuit to embed background checks in QuickBooks for 120K+ businesses.",
+    "link": "https://siliconangle.com/2026/03/04/checkr-launches-identity-verification-combat-ai-driven-hiring-fraud/",
+    "category": "Release",
+    "startupName": "Checkr",
+    "source": "SiliconANGLE"
   }
 ]
