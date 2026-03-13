@@ -419,6 +419,13 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
 
                             prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
                             nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+                            document.addEventListener('keydown', (e) => {
+                                const carousel = document.getElementById('news-carousel');
+                                const rect = carousel.getBoundingClientRect();
+                                if (rect.top > window.innerHeight || rect.bottom < 0) return;
+                                if (e.key === 'ArrowRight' && current < total - 1) goTo(current + 1);
+                                if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+                            });
                             dots.forEach(dot => {
                                 dot.addEventListener('click', () => goTo(parseInt(dot.dataset.page)));
                             });
