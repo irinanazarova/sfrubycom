@@ -429,6 +429,19 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                             dots.forEach(dot => {
                                 dot.addEventListener('click', () => goTo(parseInt(dot.dataset.page)));
                             });
+
+                            const carousel = document.getElementById('news-carousel');
+                            let touchStartX = 0;
+                            let touchEndX = 0;
+                            carousel.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+                            carousel.addEventListener('touchend', (e) => {
+                                touchEndX = e.changedTouches[0].screenX;
+                                const diff = touchStartX - touchEndX;
+                                if (Math.abs(diff) > 50) {
+                                    if (diff > 0 && current < total - 1) goTo(current + 1);
+                                    if (diff < 0 && current > 0) goTo(current - 1);
+                                }
+                            });
                         })();
                     </script>
 
