@@ -1,0 +1,251 @@
+---
+/**
+ * HostModal - Native HTML dialog element for displaying host company details
+ * Uses the native <dialog> element for better accessibility and performance
+ */
+---
+
+<dialog id="hostModal" class="host-modal">
+    <div class="modal-panel">
+        <div id="hostModalContent" class="modal-content">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+    </div>
+</dialog>
+
+<style>
+    :root {
+        --modal-viewport-height: 100vh;
+    }
+
+    @supports (height: 100dvh) {
+        :root {
+            --modal-viewport-height: 100dvh;
+        }
+    }
+
+    .host-modal {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: var(--modal-viewport-height);
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: transparent;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+
+    .host-modal[open] {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        visibility: visible !important;
+        animation: hostFadeIn 0.2s ease-out;
+    }
+
+    .host-modal::backdrop {
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        animation: hostFadeIn 0.2s ease-out;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: var(--modal-viewport-height);
+        min-height: 100vh;
+    }
+
+    .host-modal .modal-panel {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 40rem;
+        max-height: 90vh;
+        width: 90vw;
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+
+    .host-modal .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scroll-behavior: smooth;
+    }
+
+    @keyframes hostFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @media (max-width: 640px) {
+        .host-modal .modal-panel {
+            width: 100vw;
+            max-width: 100vw;
+            height: var(--modal-viewport-height);
+            border-radius: 0;
+            top: 0;
+            left: 0;
+            transform: none;
+        }
+
+        .host-modal .modal-content {
+            height: var(--modal-viewport-height);
+            padding: 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .host-modal .modal-content > div {
+            padding-top: max(env(safe-area-inset-top), 1rem);
+            padding-bottom: max(env(safe-area-inset-bottom), 2rem);
+        }
+    }
+
+    .host-modal .modal-content::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .host-modal .modal-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .host-modal .modal-content::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    .host-modal .modal-content::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
+<script>
+    function initializeHostModal() {
+        const modal = document.getElementById("hostModal") as HTMLDialogElement;
+        const modalContent = document.getElementById("hostModalContent");
+
+        if (!modal || !modalContent) {
+            console.error("HostModal elements not found");
+            return;
+        }
+
+        function openModal() {
+            if (!modal) return;
+
+            try {
+                modal.style.display = "block";
+                modal.style.visibility = "visible";
+                modal.style.opacity = "1";
+                modal.style.pointerEvents = "auto";
+                modal.style.position = "fixed";
+                modal.style.zIndex = "9999";
+
+                if (typeof modal.showModal === "function") {
+                    modal.showModal();
+                } else {
+                    modal.setAttribute("open", "");
+                    modal.style.display = "block";
+                }
+
+                document.body.classList.add("modal-open");
+
+                requestAnimationFrame(() => {
+                    if (modalContent) {
+                        modalContent.scrollTop = 0;
+                    }
+                });
+            } catch (error) {
+                console.error("HostModal: Error opening modal:", error);
+                modal.setAttribute("open", "");
+                modal.style.display = "block";
+                modal.style.visibility = "visible";
+                modal.style.opacity = "1";
+                document.body.classList.add("modal-open");
+            }
+        }
+
+        function closeModal() {
+            if (!modal) return;
+
+            try {
+                if (modal.open && typeof modal.close === "function") {
+                    modal.close();
+                } else {
+                    modal.removeAttribute("open");
+                }
+
+                modal.style.display = "";
+                modal.style.visibility = "";
+                modal.style.opacity = "";
+                modal.style.pointerEvents = "";
+                modal.style.position = "";
+                modal.style.zIndex = "";
+
+                document.body.classList.remove("modal-open");
+            } catch (error) {
+                console.error("HostModal: Error closing modal:", error);
+                modal.removeAttribute("open");
+                modal.style.display = "";
+                modal.style.visibility = "";
+                modal.style.opacity = "";
+                modal.style.pointerEvents = "";
+                document.body.classList.remove("modal-open");
+            }
+        }
+
+        function setModalContent(html: string) {
+            if (!modalContent) return;
+
+            modalContent.innerHTML = html;
+            modalContent.scrollTop = 0;
+
+            const closeBtn = modalContent.querySelector("#hostModalCloseBtn");
+            if (closeBtn) {
+                closeBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    closeModal();
+                });
+            }
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && modal.open) {
+                closeModal();
+            }
+        });
+
+        modal.addEventListener("close", () => {
+            document.body.classList.remove("modal-open");
+        });
+
+        modal.addEventListener("click", (e) => {
+            const modalPanel = modal.querySelector(".modal-panel") as HTMLElement;
+            if (modalPanel && !modalPanel.contains(e.target as Node)) {
+                closeModal();
+            }
+        });
+
+        (window as any).showHostModal = openModal;
+        (window as any).hideHostModal = closeModal;
+        (window as any).setHostModalContent = setModalContent;
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeHostModal);
+    } else {
+        initializeHostModal();
+    }
+</script>

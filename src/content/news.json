@@ -1,82 +1,62 @@
 [
   {
-    "id": "bolt-new-40m-arr",
-    "date": "2025-12-15",
-    "headline": "Bolt.new reaches $40M ARR in 5 months",
-    "summary": "The AI-powered development tool built on Rails hits explosive growth, becoming one of the fastest-growing Ruby startups ever.",
-    "link": "https://techcrunch.com/bolt-new-growth",
-    "category": "Funding",
-    "startupName": "Bolt.new",
-    "source": "TechCrunch"
-  },
-  {
-    "id": "rails-8-released",
-    "date": "2025-11-07",
-    "headline": "Rails 8 officially released with major performance improvements",
-    "summary": "The latest version of Ruby on Rails brings Solid Queue, Solid Cache, and significant speed improvements out of the box.",
-    "link": "https://rubyonrails.org/2025/11/7/rails-8",
+    "id": "claude-code-ruby-lsp",
+    "date": "2026-03-10",
+    "headline": "Claude Code adds Ruby LSP to its official plugin directory",
+    "summary": "Anthropic merges Ruby LSP into its official Claude Code plugins, giving Ruby developers one-command install for go-to-definition, hover, and diagnostics — 900x faster than text search for finding call sites.",
+    "link": "https://github.com/anthropics/claude-plugins-official/pull/106/files",
     "category": "Release",
     "startupName": "",
-    "source": "Rails Blog"
-  },
-  {
-    "id": "gusto-ipo-rumors",
-    "date": "2025-11-20",
-    "headline": "Gusto reportedly exploring 2026 IPO",
-    "summary": "The payroll giant built on Rails is considering going public, which would be a landmark moment for the Ruby ecosystem.",
-    "link": "https://bloomberg.com/gusto-ipo",
-    "category": "Press",
-    "startupName": "Gusto",
-    "source": "Bloomberg"
-  },
-  {
-    "id": "sf-ruby-conf-2025-recap",
-    "date": "2025-11-21",
-    "headline": "SF Ruby Conference 2025 breaks attendance records",
-    "summary": "Over 450 Rubyists gathered at Fort Mason for the largest Ruby conference on the West Coast, featuring talks from Matz and DHH.",
-    "link": "https://sfruby.substack.com/conf-2025-recap",
-    "category": "Event",
-    "startupName": "",
-    "source": "SF Ruby Newsletter"
-  },
-  {
-    "id": "thatch-series-a",
-    "date": "2025-10-15",
-    "headline": "Thatch raises $38M Series A for health benefits platform",
-    "summary": "The Ruby-powered startup modernizing health benefits for startups secures major funding round led by Andreessen Horowitz.",
-    "link": "https://techcrunch.com/thatch-series-a",
-    "category": "Funding",
-    "startupName": "Thatch",
-    "source": "TechCrunch"
-  },
-  {
-    "id": "ubicloud-open-source",
-    "date": "2025-10-01",
-    "headline": "Ubicloud open sources its Ruby-based cloud platform",
-    "summary": "The AWS alternative makes its control plane code available to the community, built primarily in Ruby.",
-    "link": "https://github.com/ubicloud/ubicloud",
-    "category": "Release",
-    "startupName": "Ubicloud",
     "source": "GitHub"
   },
   {
-    "id": "ruby-most-loved-2025",
-    "date": "2025-09-15",
-    "headline": "Ruby ranks in top 5 most loved languages in 2025 survey",
-    "summary": "The Pragmatic Engineer survey shows Ruby developers remain among the happiest, with strong job satisfaction scores.",
-    "link": "https://newsletter.pragmaticengineer.com/survey-2025",
-    "category": "Press",
-    "startupName": "",
-    "source": "Pragmatic Engineer"
+    "id": "intercom-250m-400m-arr",
+    "date": "2026-03-09",
+    "headline": "Intercom raises $250M as ARR tops $400M — all on a Rails monolith",
+    "summary": "The Rails Foundation Core member secures $250M in debt financing. Its 2M-line Rails monolith powers Fin, an AI agent nearing $100M ARR on its own. Plans to hire 650 globally.",
+    "link": "https://www.businesspost.ie/tech/intercom-tops-400m-in-recurring-revenue-as-ai-agent-fin-nears-100m-milestone/",
+    "category": "Funding",
+    "startupName": "Intercom",
+    "source": "Business Post"
   },
   {
-    "id": "nexhealth-unicorn",
-    "date": "2025-08-20",
-    "headline": "NexHealth reaches unicorn status with $1B+ valuation",
-    "summary": "The healthcare API platform built on Rails joins the unicorn club after explosive growth in the healthtech sector.",
-    "link": "https://forbes.com/nexhealth-unicorn",
-    "category": "Funding",
-    "startupName": "NexHealth",
-    "source": "Forbes"
+    "id": "garry-tan-rails-claude-code",
+    "date": "2026-03-07",
+    "headline": "YC CEO Garry Tan ships garryslist.org with Rails + Claude Code, open-sources his setup",
+    "summary": "Garry Tan averages 10K LOC and 100 PRs/week building a Rails app with Claude Code. Open-sourced gstack — 6 Claude Code skills for planning, review, and shipping. \"Rails was designed for syntactic sugar, and LLMs are sugar fiends.\"",
+    "link": "https://github.com/garrytan/gstack",
+    "category": "Press",
+    "startupName": "",
+    "source": "GitHub"
+  },
+  {
+    "id": "chime-gaap-profitability-2026",
+    "date": "2026-02-15",
+    "headline": "Chime targets GAAP profitability in 2026, projecting $2.6B+ revenue",
+    "summary": "The Rails-powered fintech that IPO'd at $11.6B reports 31% revenue growth and 9.5M active members. Rails Foundation Contributing member on track to become one of the largest profitable public Rails companies.",
+    "link": "https://www.stocktitan.net/sec-filings/CHYM/8-k-chime-financial-inc-reports-material-event-d4e199b0cb62.html",
+    "category": "Press",
+    "startupName": "Chime",
+    "source": "StockTitan"
+  },
+  {
+    "id": "chatwoot-trending-github",
+    "date": "2026-03-12",
+    "headline": "Chatwoot trending: 27.7K GitHub stars for the open-source Rails alternative to Intercom",
+    "summary": "The YC-backed, Rails-powered customer support platform is the fastest-growing Ruby repo on GitHub this month (+490 stars). Built by a 10-person team doing $870K in revenue.",
+    "link": "https://github.com/chatwoot/chatwoot",
+    "category": "Press",
+    "startupName": "Chatwoot",
+    "source": "GitHub"
+  },
+  {
+    "id": "lago-embedded-launch",
+    "date": "2026-03-12",
+    "headline": "Lago launches Embedded — white-label open-source billing built on Rails",
+    "summary": "The open-source billing API (9K+ GitHub stars) launches Lago Embedded, letting companies ship billing as a feature in weeks. PayPal is an early adopter. Built in Ruby by a team with 10 years of Rails experience.",
+    "link": "https://getlago.com/blog/lago-embedded-launch",
+    "category": "Release",
+    "startupName": "Lago",
+    "source": "Lago Blog"
   }
 ]

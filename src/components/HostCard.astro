@@ -21,11 +21,9 @@ const { host } = Astro.props;
 const jobs = host.sponsorId ? getJobsBySponsor(host.sponsorId) : [];
 ---
 
-<a
-    href={host.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="group relative bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-200 hover:-translate-y-0.5 flex flex-col"
+<button
+    data-host-id={host.id}
+    class="group relative bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-200 hover:-translate-y-0.5 flex flex-col text-left w-full cursor-pointer"
 >
     <!-- Tag -->
     <div class="px-4 pt-3 pb-1 flex items-center justify-between">
@@ -62,9 +60,7 @@ const jobs = host.sponsorId ? getJobsBySponsor(host.sponsorId) : [];
 
     <!-- Content -->
     <div class="px-4 pb-4 pt-1 flex flex-col flex-1">
-
-
-        <p class="text-xs text-gray-500mt-auto">{host.rubyConnection}</p>
+        <p class="text-xs text-gray-500 mt-auto">{host.rubyConnection}</p>
     </div>
 
     <!-- Jobs footer -->
@@ -90,4 +86,4 @@ const jobs = host.sponsorId ? getJobsBySponsor(host.sponsorId) : [];
             </div>
         )
     }
-</a>
+</button>
