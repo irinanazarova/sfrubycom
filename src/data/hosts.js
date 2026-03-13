@@ -323,6 +323,38 @@ export const hosts = {
       { name: "cached_counts", url: "https://github.com/academia-edu/cached_counts", desc: "Rails counter cache replacement using memcached" },
     ],
   },
+  evilmartians: {
+    id: "evilmartians",
+    name: "Evil Martians",
+    logo: "/evilmartians.png",
+    url: "https://evilmartians.com",
+    summary:
+      "Product development consultancy and open-source powerhouse behind 100+ developer tools used by millions.",
+    rubyConnection:
+      "100+ open-source projects. Hundreds of millions of gem downloads. test-prof, AnyCable, imgproxy, action_policy, and many more",
+    tag: "Built with Rails",
+    founded: "2006",
+    founders: "Alexander Tishchenko, Yaroslav Markin",
+    leadership: "Irina Nazarova, CEO. Organizer of the SF Ruby community",
+    product:
+      "A product development consultancy that works with growth-stage startups, transforming them into market leaders. Evil Martians works with ~40 startups per year — 65% of their client companies raise capital within 1-3 years. Two clients (Teleport and Tines) reached unicorn status with Martians on their teams. Beyond consulting, they build commercial open-source products: imgproxy (image processing server, 10.5K stars) and AnyCable (real-time WebSocket server for Rails). A remote-first team of ~50 with offices in San Francisco, Lisbon, and Osaka.",
+    history:
+      "Alexander Tishchenko and Yaroslav Markin co-founded Evil Martians in 2006. The company grew into one of the most respected Ruby consultancies in the world, known equally for shipping client products and building open-source tools. Irina Nazarova, a former C++ engineer and JP Morgan analyst, rose from account manager to CFO to CEO — and founded the SF Ruby community along the way. The Martian Chronicles blog reaches 500K+ developers/year. Notable clients include bolt.new/StackBlitz (scaled to $40M+ ARR in 5 months), Tines (reached unicorn at $1.1B), Whop, Doximity, and BetterUp.",
+    rubyEcosystem:
+      "Evil Martians is arguably the single most prolific contributor to the Ruby/Rails open-source ecosystem. They maintain 100+ projects with combined hundreds of millions of gem downloads. Their team includes Vladimir Dementyev (palkan) — creator of AnyCable, TestProf, Action Policy, and author of \"Layered Design for Ruby on Rails Applications\" — and Andrey Sitnik, whose JavaScript tools (PostCSS, Autoprefixer, Nano ID) account for 0.7% of all npm downloads.",
+    openSource: [
+      { name: "test-prof", url: "https://github.com/test-prof/test-prof", desc: "Ruby test profiling toolkit (2K stars, 72M+ downloads)" },
+      { name: "AnyCable", url: "https://github.com/anycable/anycable", desc: "Real-time WebSocket server for Rails (2.3K stars)" },
+      { name: "imgproxy", url: "https://github.com/imgproxy/imgproxy", desc: "On-the-fly image processing server (10.5K stars)" },
+      { name: "action_policy", url: "https://github.com/palkan/action_policy", desc: "Authorization framework for Ruby/Rails (1.5K stars, 6M+ downloads)" },
+      { name: "logidze", url: "https://github.com/palkan/logidze", desc: "PostgreSQL JSONB-based model change tracking (1.7K stars)" },
+      { name: "anyway_config", url: "https://github.com/palkan/anyway_config", desc: "Configuration library for Ruby gems and apps (29M+ downloads)" },
+      { name: "lefthook", url: "https://github.com/evilmartians/lefthook", desc: "Git hooks manager (7.7K stars)" },
+      { name: "overmind", url: "https://github.com/DarthSim/overmind", desc: "Procfile-based process manager with tmux (3.5K stars)" },
+      { name: "store_model", url: "https://github.com/DmitryTsepelev/store_model", desc: "JSON-backed attributes as ActiveRecord models (1.2K stars, 4.9M downloads)" },
+      { name: "isolator", url: "https://github.com/palkan/isolator", desc: "Detect non-atomic interactions in DB transactions (1.1K stars)" },
+    ],
+  },
 };
 
 export function getAllHosts() {
