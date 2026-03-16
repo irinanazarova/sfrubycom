@@ -1,5 +1,15 @@
 [
   {
+    "id": "herb-v0-9-release",
+    "date": "2026-03-16",
+    "headline": "Herb v0.9: the ERB toolchain that gives the Rails frontend real IDE support",
+    "summary": "A fast C-based HTML+ERB parser that now understands Action View helpers like tag.*, content_tag, and link_to. As Hotwire pushes more UI logic into ERB, Herb brings the linting, formatting, and code intelligence that JS frameworks take for granted — and gives AI coding tools a proper AST to work with instead of raw string matching.",
+    "link": "https://herb-tools.dev/blog/whats-new-in-herb-v0-9",
+    "category": "Release",
+    "startupName": "",
+    "source": "Herb Blog"
+  },
+  {
     "id": "claude-code-ruby-lsp",
     "date": "2026-03-10",
     "headline": "Claude Code adds Ruby LSP to its official plugin directory",
