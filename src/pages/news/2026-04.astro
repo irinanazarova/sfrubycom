@@ -1,0 +1,313 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="SF Ruby News - April 2026"
+    description="April 2026 edition of SF Ruby News: Coinbase, Stripe, Shopify back x402 AI payments protocol. Gusto acquires Mosey. Intercom opens Fin API. RubyKaigi 2026 Hakodate."
+>
+    <section class="relative bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden min-h-screen">
+        <div class="absolute inset-0 bg-ruby-950/30"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-16">
+
+            <!-- Issue Navigation -->
+            <div class="flex items-center justify-between mb-8 text-sm">
+                <a href="/news/2026-03/" class="text-white/50 hover:text-white transition-colors flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    March 2026
+                </a>
+                <span class="text-white/30">Latest issue</span>
+            </div>
+
+            <!-- Masthead -->
+            <div class="text-center mb-12">
+                <div class="flex items-center gap-4 justify-center mb-3">
+                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
+                    <a href="/#news" class="font-display text-2xl md:text-3xl tracking-wider uppercase text-white font-bold hover:text-ruby-400 transition-colors">SF Ruby News</a>
+                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
+                </div>
+                <p class="text-sm text-white/50 tracking-widest uppercase">April 2026</p>
+            </div>
+
+            <!-- News Carousel -->
+            <div class="relative" id="news-carousel">
+
+                <!-- Page 1 -->
+                <div class="news-page" data-page="0">
+                    <!-- Headline Story: x402 Foundation -->
+                    <div class="mb-10">
+                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">AI + Ruby</span>
+                        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Ruby Powers AI Payments</h2>
+                        <div class="border-l-2 border-ruby-500/60 pl-6">
+                            <p class="text-lg md:text-xl text-white/80 leading-relaxed">
+                                Three Ruby-based companies — <strong class="text-white">Coinbase</strong> (Rails), <strong class="text-white">Stripe</strong> (Sinatra), and <strong class="text-white">Shopify</strong> (Rails) — back the x402 Foundation, the Linux Foundation's new open standard for AI-native payments.
+                            </p>
+                            <p class="text-sm text-white/60 leading-relaxed mt-4">
+                                Coinbase and Stripe co-founded the foundation with Cloudflare. Shopify joins alongside <strong class="text-white/80">Google, AWS, Microsoft, Mastercard, and Visa</strong>. The first open protocol for agent-to-agent commerce.
+                            </p>
+                            <div class="mt-4">
+                                <p class="text-xs text-white/50">Apr 2, 2026</p>
+                            </div>
+                            <a href="https://www.coindesk.com/tech/2026/04/02/coinbase-s-ai-payments-system-joins-linux-foundation-gathers-support-from-google-stripe-aws-and-others/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-white/10 mb-10"></div>
+
+                    <!-- Three Column Stories: Row 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                        <!-- Acquisition: Gusto -->
+                        <div class="md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Acquisition</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Gusto Acquires Mosey, Ships Payroll in Claude</h3>
+                            <p class="text-xs text-white/40 mb-2">Apr 8–9, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails unicorn ($9.5B valuation) acquires compliance platform Mosey — then ships payroll inside Claude and Slack. Two agent-native moves in 48 hours.</p>
+                            <a href="https://www.prnewswire.com/news-releases/gusto-acquires-mosey-to-close-the-compliance-gap-for-small-businesses-302737584.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Release: Intercom Fin API -->
+                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Intercom Opens Fin API</h3>
+                            <p class="text-xs text-white/40 mb-2">Apr 3, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Rails Foundation Core member opens its Fin AI agent to developers. Fin Search and Reranker APIs. Contracts from $250K/year. Fin is on $100M ARR inside a $400M ARR Rails monolith.</p>
+                            <a href="https://www.intercom.com/blog/introducing-the-fin-api-platform/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Acquisition: Apollo.io -->
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Acquisition</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Apollo.io Acquires Pocus</h3>
+                            <p class="text-xs text-white/40 mb-2">Mar 20, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails sales platform (230M+ contacts, approaching $200M ARR) absorbs enterprise revenue intelligence. 400% enterprise growth in 12 months.</p>
+                            <a href="https://thenextweb.com/news/apollo-acquires-pocus-revenue-intelligence-gtm" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Three Column Stories: Row 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
+                        <div class="md:pr-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Acquisition</span>
+                                <h3 class="font-display text-xl font-bold text-white">Thatch Welcomes Venteur Customers</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">SF-based Rails health benefits platform (Series B, $84.5M raised) takes over competitor Venteur's customers, employees, and broker relationships — consolidating ICHRA lead.</p>
+                                <a href="https://www.prnewswire.com/news-releases/thatch-welcomes-venteur-customers-to-advance-shared-health-benefits-mission-302730756.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <h3 class="font-display text-xl font-bold text-white">Basecamp Goes Agent-Native</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">DHH ships new API, CLI, and agent skill modules. AI agents can now manage projects, create todos, post messages. HEY and Fizzy next.</p>
+                                <a href="https://world.hey.com/dhh/basecamp-becomes-agent-accessible-3ae6b949" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <h3 class="font-display text-xl font-bold text-white">Rails Adds AGENTS.md</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">Rafael Mendonça França opens AGENTS.md; Xavier Noria merges. Official AI agent guidance now lives in the Rails repo — monorepo structure, testing conventions, contribution rules.</p>
+                                <a href="https://github.com/rails/rails/pull/55991" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                    View on GitHub
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="news-page hidden" data-page="1">
+                    <!-- Headline Story: RubyKaigi 2026 -->
+                    <div class="mb-10">
+                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">Event</span>
+                        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">RubyKaigi 2026: Hakodate</h2>
+                        <div class="border-l-2 border-ruby-500/60 pl-6">
+                            <p class="text-lg md:text-xl text-white/80 leading-relaxed">
+                                The world's largest Ruby conference heads to <strong class="text-white">Hokkaido, Japan</strong> for three days.
+                            </p>
+                            <p class="text-sm text-white/60 leading-relaxed mt-4">
+                                Speakers include <strong class="text-white/80">Matz</strong>, <strong class="text-white/80">Charles Nutter</strong> (JRuby), and <strong class="text-white/80">Satoshi Tagomori</strong>. Lightning talks on a chartered Hakodate tram. RubyKaraoke. ESM Drinkup with Hokkaido seafood and sake.
+                            </p>
+                            <div class="mt-4">
+                                <p class="text-xs text-white/50">Apr 22–24, 2026 · Hakodate Arena</p>
+                            </div>
+                            <a href="https://rubykaigi.org/2026/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                View schedule
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-white/10 mb-10"></div>
+
+                    <!-- Three Column Stories: Row 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                        <!-- Event: Ruby Runway -->
+                        <div class="md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Ruby Runway: Pitch Live at RubyConf</h3>
+                            <p class="text-xs text-white/40 mb-2">Deadline: Apr 17, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Ruby Central's first global startup competition. Early-stage Ruby companies (under $500K raised) compete live at RubyConf 2026 in Las Vegas. 1st/2nd/3rd place plus Attendee Choice.</p>
+                            <a href="https://rubyconf.org/ruby_runway/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                Apply now
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Release: Puma 8.0 -->
+                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Puma 8.0: Into the Arena</h3>
+                            <p class="text-xs text-white/40 mb-2">Apr 9, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Default Rails web server adds IO-bound thread marking (puma.mark_as_io_bound), dynamic thread pool updates at runtime, and default IPv6 bind address.</p>
+                            <a href="https://github.com/puma/puma/releases" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                View on GitHub
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Release: JRuby 10 -->
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">JRuby 10: Java 26 + RISC-V</h3>
+                            <p class="text-xs text-white/40 mb-2">Apr 6, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Ruby 3.4 compatibility with Java 26 and RISC-V 64 support. 43 fixes including memory leaks and JIT compiler issues.</p>
+                            <a href="https://www.jruby.org/2026/04/06/jruby-10-0-5-0.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Three Column Stories: Row 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
+                        <div class="md:pr-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Security</span>
+                                <h3 class="font-display text-xl font-bold text-white">RubyGems.org: DoS Prevention</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">AST-based gem validation by Aaron Patterson, audited against 180K gems. Have I Been Pwned integration flagged 1,166 accounts with breached credentials.</p>
+                                <a href="https://blog.rubygems.org/2026/04/09/protecting-rubygems-from-the-outside-in.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <h3 class="font-display text-xl font-bold text-white">Ruby 3.2 End of Life</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">Final security patches for Ruby 3.2 (3.2.11) and 3.3 (3.3.11) shipped March 27. Ruby 3.2 officially EOL April 1. Upgrade to Ruby 4.0.x or stay on 3.4.x.</p>
+                                <a href="https://www.ruby-lang.org/en/news/2026/03/27/ruby-3-2-11-released/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Event</span>
+                                <h3 class="font-display text-xl font-bold text-white">Omacon NYC: Sold Out in Hours</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">DHH hosts 130 people at Shopify SoHo. ThePrimeagen, TJ DeVries, Dax Raad on stage. Omarchy hits 50K ISO downloads/week.</p>
+                                <a href="https://www.omacon.org/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex items-center justify-center gap-6 mt-4 mb-6">
+                    <button id="news-prev" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-colors disabled:opacity-20 disabled:cursor-default" disabled>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <div class="flex gap-2">
+                        <button class="news-dot w-2.5 h-2.5 rounded-full bg-white transition-colors" data-page="0"></button>
+                        <button class="news-dot w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/50 transition-colors" data-page="1"></button>
+                    </div>
+                    <button id="news-next" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-colors disabled:opacity-20 disabled:cursor-default">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Divider + CTA -->
+            <div class="h-px bg-white/10 mb-10"></div>
+
+            <div class="text-center">
+                <a href="/#news" class="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    Back to current issue
+                </a>
+            </div>
+
+            <script>
+                (function() {
+                    const pages = document.querySelectorAll('.news-page');
+                    const dots = document.querySelectorAll('.news-dot');
+                    const prevBtn = document.getElementById('news-prev');
+                    const nextBtn = document.getElementById('news-next');
+                    let current = 0;
+                    const total = pages.length;
+
+                    function goTo(index) {
+                        pages.forEach(p => p.classList.add('hidden'));
+                        pages[index].classList.remove('hidden');
+                        dots.forEach(d => { d.classList.remove('bg-white'); d.classList.add('bg-white/30'); });
+                        dots[index].classList.remove('bg-white/30');
+                        dots[index].classList.add('bg-white');
+                        prevBtn.disabled = index === 0;
+                        nextBtn.disabled = index === total - 1;
+                        current = index;
+                    }
+
+                    prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+                    nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+                    document.addEventListener('keydown', (e) => {
+                        const carousel = document.getElementById('news-carousel');
+                        const rect = carousel.getBoundingClientRect();
+                        if (rect.top > window.innerHeight || rect.bottom < 0) return;
+                        if (e.key === 'ArrowRight' && current < total - 1) goTo(current + 1);
+                        if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+                    });
+                    dots.forEach(dot => {
+                        dot.addEventListener('click', () => goTo(parseInt(dot.dataset.page)));
+                    });
+
+                    const carousel = document.getElementById('news-carousel');
+                    let touchStartX = 0;
+                    let touchEndX = 0;
+                    carousel.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+                    carousel.addEventListener('touchend', (e) => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        const diff = touchStartX - touchEndX;
+                        if (Math.abs(diff) > 50) {
+                            if (diff > 0 && current < total - 1) goTo(current + 1);
+                            if (diff < 0 && current > 0) goTo(current - 1);
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+    </section>
+</BaseLayout>

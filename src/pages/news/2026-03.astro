@@ -1,0 +1,309 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="SF Ruby News - March 2026"
+    description="March 2026 edition of SF Ruby News: Garry Tan ships 10K LOC/week with Rails + Claude Code, Intercom $250M raise, Chatwoot trending, Spring Health $6-7B acquisition."
+>
+    <section class="relative bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden min-h-screen">
+        <div class="absolute inset-0 bg-ruby-950/30"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-16">
+
+            <!-- Issue Navigation -->
+            <div class="flex items-center justify-between mb-8 text-sm">
+                <a href="/news/2026-02/" class="text-white/50 hover:text-white transition-colors flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    February 2026
+                </a>
+                <a href="/news/2026-04/" class="text-white/50 hover:text-white transition-colors flex items-center gap-1">
+                    April 2026
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </a>
+            </div>
+
+            <!-- Masthead -->
+            <div class="text-center mb-12">
+                <div class="flex items-center gap-4 justify-center mb-3">
+                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
+                    <a href="/#news" class="font-display text-2xl md:text-3xl tracking-wider uppercase text-white font-bold hover:text-ruby-400 transition-colors">SF Ruby News</a>
+                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
+                </div>
+                <p class="text-sm text-white/50 tracking-widest uppercase">March 2026</p>
+            </div>
+
+            <!-- News Carousel -->
+            <div class="relative" id="news-carousel">
+
+                <!-- Page 1 -->
+                <div class="news-page" data-page="0">
+                    <!-- Headline Story -->
+                    <div class="mb-10">
+                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">AI + Ruby</span>
+                        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">10K LOC / Week</h2>
+                        <div class="border-l-2 border-ruby-500/60 pl-6 relative">
+                            <span class="absolute -left-1 -top-4 text-5xl text-ruby-500/30 font-serif leading-none">&ldquo;</span>
+                            <p class="text-lg md:text-xl text-white/80 leading-relaxed italic">
+                                Rails was designed for syntactic sugar, and LLMs are <strong class="text-white not-italic">sugar friends.</strong>
+                            </p>
+                            <p class="text-sm text-white/60 leading-relaxed mt-4">
+                                YC CEO Garry Tan averages 10K LOC and 100 PRs/week building <strong class="text-white/80">garryslist.org</strong> with Rails + Claude Code. Open-sourced <strong class="text-white/80">gstack</strong> — 6 Claude Code skills for planning, review, and shipping.
+                            </p>
+                            <div class="mt-4 flex items-center gap-3">
+                                <div>
+                                    <p class="text-sm font-semibold text-white/90">Garry Tan</p>
+                                    <p class="text-xs text-white/50">President of Y Combinator · Mar 7, 2026</p>
+                                </div>
+                            </div>
+                            <a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                View on GitHub
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-white/10 mb-10"></div>
+
+                    <!-- Three Column Stories -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                        <!-- Funding: Intercom -->
+                        <div class="md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Funding</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Intercom: $250M at $400M+ ARR</h3>
+                            <p class="text-xs text-white/40 mb-2">Mar 9, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Rails Foundation Core member's 2M-line Rails monolith powers Fin AI agent, nearing $100M ARR on its own. Plans to hire 650.</p>
+                            <a href="https://ventureburn.com/intercom-raises-250-million-ai-customer-agents/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Press: Chime -->
+                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Press</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Chime: $2.6B+ Revenue</h3>
+                            <p class="text-xs text-white/40 mb-2">Feb 15, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Rails-powered fintech targets GAAP profitability in 2026. 31% revenue growth, 9.5M active members.</p>
+                            <a href="https://www.stocktitan.net/sec-filings/CHYM/8-k-chime-financial-inc-reports-material-event-d4e199b0cb62.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-sky-400 hover:text-sky-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Release: Claude Code Ruby LSP -->
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Claude Code Adds Ruby LSP</h3>
+                            <p class="text-xs text-white/40 mb-2">Mar 10, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Anthropic merges Ruby LSP into official plugins — go-to-definition, hover, diagnostics. 900x faster than text search.</p>
+                            <a href="https://github.com/anthropics/claude-plugins-official/pull/106/files" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Second Row: Chatwoot + Lago + Herb -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
+                        <div class="md:pr-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Trending</span>
+                                <h3 class="font-display text-xl font-bold text-white">Chatwoot: 27.7K Stars</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">YC-backed, open-source Rails alternative to Intercom. Fastest-growing Ruby repo on GitHub this month (+490 stars). 10-person team, $870K revenue.</p>
+                                <a href="https://github.com/chatwoot/chatwoot" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-sky-400 hover:text-sky-300 transition-colors">
+                                    View on GitHub
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <h3 class="font-display text-xl font-bold text-white">Lago Launches Embedded</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">White-label open-source billing built on Rails (9K+ GitHub stars). PayPal is an early adopter. Ship billing as a feature in weeks.</p>
+                                <a href="https://getlago.com/blog/lago-embedded-launch" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <h3 class="font-display text-xl font-bold text-white">Herb v0.9: ERB Toolchain</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">Real IDE support for the Rails frontend. Parses Action View helpers, lints and formats ERB. Gives AI coding tools an AST instead of raw string matching.</p>
+                                <a href="https://herb-tools.dev/blog/whats-new-in-herb-v0-9" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="news-page hidden" data-page="1">
+                    <!-- Headline Story: Spring Health + Alma -->
+                    <div class="mb-10">
+                        <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-4">Acquisition</span>
+                        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">$6–7B Mental Health Giant</h2>
+                        <div class="border-l-2 border-emerald-500/60 pl-6">
+                            <p class="text-lg md:text-xl text-white/80 leading-relaxed">
+                                Spring Health acquires Alma — combined entity projected at <strong class="text-white">$1B revenue</strong> in year one.
+                            </p>
+                            <p class="text-sm text-white/60 leading-relaxed mt-4">
+                                Spring Health uses AI to match employees with the right mental health treatment — therapy, medication, or coaching — sold as a benefit to 450+ employers covering <strong class="text-white/80">50M+ lives</strong>. Their Rails backend powers the matching engine and clinical platform. The acquisition of Alma, a network of <strong class="text-white/80">8,000+ independent therapists</strong> across all 50 states, creates a vertically integrated system: demand (employer benefit) + supply (provider network). Nearly 10M visits projected for 2026. SF office at 2 Embarcadero.
+                            </p>
+                            <div class="mt-4">
+                                <p class="text-xs text-white/50">Jan 29, 2026 · Closing Q2 2026</p>
+                            </div>
+                            <a href="https://www.prnewswire.com/news-releases/spring-health-joins-forces-with-alma-expanding-access-to-precision-mental-health-care-302673454.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="h-px bg-white/10 mb-10"></div>
+
+                    <!-- Three Column Stories -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                        <!-- Press: GitLab $1B ARR -->
+                        <div class="md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Press</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">GitLab Surpasses $1B ARR</h3>
+                            <p class="text-xs text-white/40 mb-2">Mar 3, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">Rails Foundation Core member crosses $1B ARR milestone. Revenue up 26% to $955M. Authorized $400M share buyback. 155+ customers above $1M.</p>
+                            <a href="https://www.businesswire.com/news/home/20260303140705/en/GitLab-Reports-Fourth-Quarter-and-Full-Year-Fiscal-Year-2026-Financial-Results-Board-of-Directors-Authorizes-$400-million-for-Share-Repurchase-Program" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-sky-400 hover:text-sky-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Release: Apollo.io -->
+                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                            <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Apollo.io: First Agentic GTM</h3>
+                            <p class="text-xs text-white/40 mb-2">Mar 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based $1.6B sales platform — built on a Rails monolith serving 210M+ contacts — launches AI Assistant. 20K weekly active users in beta, 2.3x more meetings booked.</p>
+                            <a href="https://www.prnewswire.com/news-releases/apolloio-launches-ai-assistant-powering-end-to-end-agentic-workflows-in-the-first-ai-native-all-in-one-gtm-platform-302703896.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        <!-- Release: Shopify Winter '26 -->
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Shopify Winter '26 Edition</h3>
+                            <p class="text-xs text-white/40 mb-2">Feb 11, 2026</p>
+                            <p class="text-sm text-white/60 leading-relaxed mb-3">150+ updates from the Rails Foundation Core member. Agentic Storefronts put products in ChatGPT and Perplexity. Revenue $3.67B/quarter (+31%). GMV hit $124B.</p>
+                            <a href="https://www.shopify.com/editions/winter2026" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                Read more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Second Row: Omada + Checkr -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 mb-6">
+                        <div class="md:pr-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Press</span>
+                                <h3 class="font-display text-xl font-bold text-white">Omada Health: First Profitable Quarter</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">SF-based Rails company reports 58% revenue growth ($75.8M in Q4). Membership up 55% to 886K. Stock surged 14%. Guiding $312–322M for 2026.</p>
+                                <a href="https://www.globenewswire.com/news-release/2026/03/05/3250649/0/en/Omada-Health-Reports-Fourth-Quarter-and-Full-Year-2025-Results.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-sky-400 hover:text-sky-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="md:border-l md:border-white/10 md:pl-8">
+                            <div class="flex flex-col gap-3">
+                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <h3 class="font-display text-xl font-bold text-white">Checkr Launches AI Identity Verification</h3>
+                                <p class="text-sm text-white/60 leading-relaxed">SF-based Rails company combats deepfake hiring fraud with biometric liveness detection. Partners with Intuit for 120K+ businesses.</p>
+                                <a href="https://siliconangle.com/2026/03/04/checkr-launches-identity-verification-combat-ai-driven-hiring-fraud/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                    Read more
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex items-center justify-center gap-6 mt-4 mb-6">
+                    <button id="news-prev" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-colors disabled:opacity-20 disabled:cursor-default" disabled>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <div class="flex gap-2">
+                        <button class="news-dot w-2.5 h-2.5 rounded-full bg-white transition-colors" data-page="0"></button>
+                        <button class="news-dot w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/50 transition-colors" data-page="1"></button>
+                    </div>
+                    <button id="news-next" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-colors disabled:opacity-20 disabled:cursor-default">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Divider + CTA -->
+            <div class="h-px bg-white/10 mb-10"></div>
+
+            <div class="text-center">
+                <a href="/#news" class="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    Back to current issue
+                </a>
+            </div>
+
+            <script>
+                (function() {
+                    const pages = document.querySelectorAll('.news-page');
+                    const dots = document.querySelectorAll('.news-dot');
+                    const prevBtn = document.getElementById('news-prev');
+                    const nextBtn = document.getElementById('news-next');
+                    let current = 0;
+                    const total = pages.length;
+
+                    function goTo(index) {
+                        pages.forEach(p => p.classList.add('hidden'));
+                        pages[index].classList.remove('hidden');
+                        dots.forEach(d => { d.classList.remove('bg-white'); d.classList.add('bg-white/30'); });
+                        dots[index].classList.remove('bg-white/30');
+                        dots[index].classList.add('bg-white');
+                        prevBtn.disabled = index === 0;
+                        nextBtn.disabled = index === total - 1;
+                        current = index;
+                    }
+
+                    prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+                    nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+                    document.addEventListener('keydown', (e) => {
+                        const carousel = document.getElementById('news-carousel');
+                        const rect = carousel.getBoundingClientRect();
+                        if (rect.top > window.innerHeight || rect.bottom < 0) return;
+                        if (e.key === 'ArrowRight' && current < total - 1) goTo(current + 1);
+                        if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+                    });
+                    dots.forEach(dot => {
+                        dot.addEventListener('click', () => goTo(parseInt(dot.dataset.page)));
+                    });
+
+                    const carousel = document.getElementById('news-carousel');
+                    let touchStartX = 0;
+                    let touchEndX = 0;
+                    carousel.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+                    carousel.addEventListener('touchend', (e) => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        const diff = touchStartX - touchEndX;
+                        if (Math.abs(diff) > 50) {
+                            if (diff > 0 && current < total - 1) goTo(current + 1);
+                            if (diff < 0 && current > 0) goTo(current - 1);
+                        }
+                    });
+                })();
+            </script>
+
+        </div>
+    </section>
+</BaseLayout>

@@ -1,5 +1,145 @@
 [
   {
+    "id": "x402-foundation-ai-payments",
+    "date": "2026-04-02",
+    "headline": "Coinbase, Stripe, and Shopify back x402 Foundation for AI payments",
+    "summary": "Three Ruby-based companies — Coinbase (Rails), Stripe (Sinatra), and Shopify (Rails) — back the Linux Foundation's new open standard for AI-native payments. Coinbase and Stripe co-founded it with Cloudflare; Shopify joins alongside Google, AWS, Microsoft, Mastercard, and Visa.",
+    "link": "https://www.coindesk.com/tech/2026/04/02/coinbase-s-ai-payments-system-joins-linux-foundation-gathers-support-from-google-stripe-aws-and-others/",
+    "category": "Press",
+    "startupName": "",
+    "source": "CoinDesk"
+  },
+  {
+    "id": "gusto-acquires-mosey",
+    "date": "2026-04-08",
+    "headline": "Gusto acquires Mosey and ships payroll in Claude and Slack",
+    "summary": "SF-based Rails unicorn ($9.5B valuation) acquires compliance platform Mosey (April 8) — then ships payroll inside Claude and Slack (April 9). Two agent-native moves in 48 hours from a Rails Foundation Contributing member.",
+    "link": "https://www.prnewswire.com/news-releases/gusto-acquires-mosey-to-close-the-compliance-gap-for-small-businesses-302737584.html",
+    "category": "Acquisition",
+    "startupName": "Gusto",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "intercom-fin-api-platform",
+    "date": "2026-04-03",
+    "headline": "Intercom opens Fin API platform to developers",
+    "summary": "Rails Foundation Core member opens its Fin AI agent to third-party developers. Fin Search API and Reranker API. Contracts from $250K/year. Fin is on $100M ARR inside a $400M ARR Rails monolith.",
+    "link": "https://www.intercom.com/blog/introducing-the-fin-api-platform/",
+    "category": "Release",
+    "startupName": "Intercom",
+    "source": "Intercom Blog"
+  },
+  {
+    "id": "thatch-welcomes-venteur",
+    "date": "2026-04-01",
+    "headline": "Thatch welcomes Venteur customers, consolidating ICHRA lead",
+    "summary": "SF-based Rails health benefits platform (Series B, $84.5M raised, a16z/Index/General Catalyst) takes over competitor Venteur's customers, employees, and broker relationships.",
+    "link": "https://www.prnewswire.com/news-releases/thatch-welcomes-venteur-customers-to-advance-shared-health-benefits-mission-302730756.html",
+    "category": "Acquisition",
+    "startupName": "Thatch",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "apollo-acquires-pocus",
+    "date": "2026-03-20",
+    "headline": "Apollo.io acquires Pocus, approaching $200M ARR — Rails monolith keeps expanding",
+    "summary": "SF-based Rails sales platform (230M+ contacts, approaching $200M ARR) absorbs enterprise revenue intelligence platform Pocus. 400% enterprise account growth in past 12 months.",
+    "link": "https://thenextweb.com/news/apollo-acquires-pocus-revenue-intelligence-gtm",
+    "category": "Acquisition",
+    "startupName": "Apollo.io",
+    "source": "TNW"
+  },
+  {
+    "id": "basecamp-agent-accessible",
+    "date": "2026-03-25",
+    "headline": "Basecamp becomes agent-accessible — new CLI and AI skill modules from 37signals",
+    "summary": "DHH ships a new API, CLI, and agent skill modules letting AI agents manage projects, create to-do lists, post messages, and arrange schedules. Next up: HEY and Fizzy.",
+    "link": "https://world.hey.com/dhh/basecamp-becomes-agent-accessible-3ae6b949",
+    "category": "Release",
+    "startupName": "Basecamp",
+    "source": "HEY World"
+  },
+  {
+    "id": "rails-agents-md",
+    "date": "2026-03-31",
+    "headline": "Rails adds official AGENTS.md for AI coding agents",
+    "summary": "Rafael Mendonça França opens AGENTS.md; Xavier Noria merges. Project-specific guidance for Claude Code, Copilot, and other AI agents — Rails' monorepo structure, testing conventions, and contribution rules now live in the repo.",
+    "link": "https://github.com/rails/rails/pull/55991",
+    "category": "Release",
+    "startupName": "",
+    "source": "GitHub"
+  },
+  {
+    "id": "puma-8-release",
+    "date": "2026-04-09",
+    "headline": "Puma 8.0 \"Into the Arena\": IO-bound thread management",
+    "summary": "Default Rails web server adds IO-bound thread marking (puma.mark_as_io_bound), dynamic thread pool updates at runtime, and default IPv6 bind address.",
+    "link": "https://github.com/puma/puma/releases/tag/v8.0.0",
+    "category": "Release",
+    "startupName": "",
+    "source": "GitHub"
+  },
+  {
+    "id": "rubygems-security-dos-prevention",
+    "date": "2026-04-09",
+    "headline": "RubyGems.org ships DoS prevention and compromised password detection",
+    "summary": "AST-based gem content validation designed by Aaron Patterson, audited against all 180K existing gems. Have I Been Pwned integration already flagged 1,166 accounts with breached credentials.",
+    "link": "https://blog.rubygems.org/2026/04/09/protecting-rubygems-from-the-outside-in.html",
+    "category": "Release",
+    "startupName": "",
+    "source": "RubyGems Blog"
+  },
+  {
+    "id": "omacon-nyc-2026",
+    "date": "2026-04-10",
+    "headline": "Omacon NYC: DHH's sold-out 130-person event at Shopify celebrates agent-native tools",
+    "summary": "$299 tickets sold out in hours. ThePrimeagen, TJ DeVries, Dax Raad on stage. Celebrates terminal UIs, AI coding tools, and Omarchy — 37signals' Linux distro with 50K ISO downloads/week.",
+    "link": "https://www.omacon.org/",
+    "category": "Event",
+    "startupName": "",
+    "source": "Omacon"
+  },
+  {
+    "id": "rubykaigi-2026-hakodate",
+    "date": "2026-04-22",
+    "headline": "RubyKaigi 2026: the world's largest Ruby conference heads to Hakodate",
+    "summary": "Three days in Hokkaido, Japan. Speakers include Matz, Charles Nutter (JRuby), and Satoshi Tagomori. Lightning talks on a chartered Hakodate tram.",
+    "link": "https://rubykaigi.org/2026/",
+    "category": "Event",
+    "startupName": "",
+    "source": "RubyKaigi"
+  },
+  {
+    "id": "ruby-runway-pitch-competition",
+    "date": "2026-04-17",
+    "headline": "Ruby Runway: first-ever global startup pitch competition from Ruby Central",
+    "summary": "Early-stage Ruby startups (under $500K raised) compete live at RubyConf 2026 in Las Vegas. 1st/2nd/3rd place plus Attendee Choice Award. Applications close April 17.",
+    "link": "https://rubyconf.org/ruby_runway/",
+    "category": "Event",
+    "startupName": "",
+    "source": "RubyConf"
+  },
+  {
+    "id": "jruby-10-java-26",
+    "date": "2026-04-06",
+    "headline": "JRuby 10.0.5.0 adds Java 26 and RISC-V 64 support",
+    "summary": "Targets Ruby 3.4 compatibility with official Java 26 support and RISC-V 64 architecture. Fixes 43 issues including memory leaks and JIT compiler bugs.",
+    "link": "https://www.jruby.org/2026/04/06/jruby-10-0-5-0.html",
+    "category": "Release",
+    "startupName": "",
+    "source": "JRuby"
+  },
+  {
+    "id": "ruby-3-2-eol",
+    "date": "2026-03-27",
+    "headline": "Ruby 3.2 reaches end of life — time to upgrade to Ruby 4.0",
+    "summary": "Final security patches for Ruby 3.2 (3.2.11) and 3.3 (3.3.11) shipped March 27. Ruby 3.2 officially EOL April 1. Upgrade to Ruby 4.0.x or stay on 3.4.x for continued support.",
+    "link": "https://www.ruby-lang.org/en/news/2026/03/27/ruby-3-2-11-released/",
+    "category": "Release",
+    "startupName": "",
+    "source": "ruby-lang.org"
+  },
+  {
     "id": "herb-v0-9-release",
     "date": "2026-03-16",
     "headline": "Herb v0.9: the ERB toolchain that gives the Rails frontend real IDE support",
