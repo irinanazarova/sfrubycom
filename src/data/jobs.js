@@ -3,6 +3,42 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "product-engineer-patch": {
+    id: "product-engineer-patch",
+    title: "Product Engineer (Senior / Staff+)",
+    startupId: "patch",
+    location: "San Francisco, CA (In-person)",
+    type: "Full-time",
+    salary: "$180K - $230K + equity",
+    description:
+      "Patch is the platform powering corporate climate action — a marketplace + API for buying verified carbon-removal credits, routing hundreds of millions of dollars to projects that permanently pull CO₂ out of the atmosphere. Originally pitched as 'Stripe for climate,' now a full market infrastructure layer for environmental commodities. Backed by a16z, Coatue, and Energize Ventures; $80M raised through Series B; HQ San Francisco. They're hiring Product Engineers to own outcomes end-to-end — defining problems, pressure-testing solutions, and shipping reliable software in a high-trust EPD environment. Core stack is Ruby on Rails + Stimulus; prior Rails experience helpful but not required. AI-native workflow expected. In-person SF; senior or staff+ scope.",
+    url: "https://jobs.ashbyhq.com/patch.io/8d3edb1a-3846-436c-a286-700a1e923e0f",
+    postedDate: "2026-04-28",
+  },
+  "fullstack-engineer-reset": {
+    id: "fullstack-engineer-reset",
+    title: "Full Stack Engineer",
+    startupId: "reset",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$150K - $180K + equity",
+    description:
+      "Reset is a public benefit corp building earned-wage access (EWA) for everyday Americans — fee-free access to pay you've already earned, before payday. Unlike consumer EWA apps that go direct-to-consumer, Reset embeds directly into the credit unions and community banks people already trust, pairing daily income access with automated cashflow budgeting inside the partner's banking app. Mission: better timing of income to fundamentally change how paycheck-to-paycheck households manage money. $7M+ raised; founders ex-Visa, Salesforce, Upstart; HQ Palo Alto. Work closely with the CTO on real-time card-transaction decisioning (sub-second authorization, dynamic spend limits based on income and cash flow) and integrations with banking + payments partners. Stack: Ruby on Rails + PostgreSQL backend, React frontend, Heroku. Strong full-stack and API design experience required; fintech background a bonus. AI as a force multiplier expected.",
+    url: "https://jobs.ashbyhq.com/Reset/b40547a5-3b95-4646-8786-147cf83b4181",
+    postedDate: "2026-04-28",
+  },
+  "senior-software-engineer-beam-companycam": {
+    id: "senior-software-engineer-beam-companycam",
+    title: "Senior Software Engineer (Beam)",
+    sponsorId: "companycam",
+    location: "San Francisco, CA (In-person, Financial District)",
+    type: "Full-time",
+    salary: "$175K - $200K + equity",
+    description:
+      "Join the Beam team — recently acquired by CompanyCam, focused on the intersection of fintech and AI for the construction industry. Design and build APIs, AI-powered workflows, and frontend features across both Beam and CompanyCam codebases. Provide technical leadership, ship products quickly, and collaborate directly with customers on real construction-finance problems. Full-stack role spanning multiple programming languages; in-person in SF's Financial District.",
+    url: "https://companycam.com/job?gh_jid=7696876003",
+    postedDate: "2026-04-28",
+  },
   "founding-engineer-finta": {
     id: "founding-engineer-finta",
     title: "Founding Engineer (Ruby)",

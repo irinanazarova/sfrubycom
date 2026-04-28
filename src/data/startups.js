@@ -416,6 +416,38 @@ export const startups = {
     news: "Rebranded to Telio, SOC 2 Type II certified, ~$1.2M raised",
     newsUrl: "https://gettelio.com/",
   },
+  patch: {
+    id: "patch",
+    name: "Patch",
+    logo: "/patch.png",
+    url: "https://www.patch.io/",
+    description:
+      "Climate market infrastructure built on Ruby on Rails + Stimulus. Routes hundreds of millions of dollars to projects that permanently remove or reduce CO₂.",
+    demoTime: "",
+    founded: 2020,
+    funding: "$80M total",
+    fundingUrl: "https://www.crunchbase.com/organization/patch-34bf",
+    valuation: null,
+    news: "Series B led by Energize Ventures (Sept 2022); a16z and Coatue investors",
+    newsUrl:
+      "https://www.globenewswire.com/news-release/2022/09/13/2514952/0/en/Patch-Raises-55M-Series-B-Embedding-Climate-Action-Directly-Into-the-Global-Economy.html",
+  },
+  reset: {
+    id: "reset",
+    name: "Reset",
+    logo: "/reset.png",
+    url: "https://www.getreset.co/",
+    description:
+      "Public benefit corporation giving everyday Americans fee-free access to income they've already earned. Embedded into credit unions and community banks. Built on Ruby on Rails, PostgreSQL, React, and Heroku.",
+    demoTime: "",
+    founded: 2022,
+    funding: "$7M+ total",
+    fundingUrl:
+      "https://www.axios.com/pro/fintech-deals/2024/02/29/earned-wage-access-reset-2-million",
+    valuation: null,
+    news: "Founding team from Visa, Salesforce, and Upstart; HQ Palo Alto",
+    newsUrl: "https://www.getreset.co/",
+  },
 };
 
 // Helper functions
