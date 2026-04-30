@@ -1,0 +1,393 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EmailModal from "../components/EmailModal.astro";
+import { getAllHosts } from "../data/hosts.js";
+
+const pastHosts = getAllHosts();
+---
+
+<BaseLayout
+    title="Host the SF Ruby Meetup"
+    description="How to host an SF Ruby community meetup — what's involved, what you provide, what we provide, and how to apply. Reach 1,000+ Bay Area Ruby and Rails builders."
+>
+    <!-- Hero -->
+    <section class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-ruby-500/20 text-ruby-200 mb-4">
+                For companies
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                Host the SF Ruby Meetup
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl">
+                Open your doors to 60–100 of the Bay Area's best Ruby and Rails engineers, founders, and OSS maintainers. We bring the community, talks, and format. You bring the room and the pizza.
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <button
+                    data-email-modal="host-apply"
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ruby-600 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
+                >
+                    Apply to host
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+                <a href="#format" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300">
+                    See the format
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why host -->
+    <section class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Why host</h2>
+            <p class="text-lg text-gray-600 mb-12 max-w-3xl">
+                Hosting is the highest-signal way to reach Bay Area Ruby builders. The audience is opt-in, technical, and actively investing in their craft. They show up because they want to be there.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Recruiting reach that converts</h3>
+                    <p class="text-gray-700">60–100 senior Ruby/Rails engineers in your space for three hours. Your engineering managers, recruiters, and founders get face time. Past hosts have closed hires within weeks.</p>
+                </div>
+
+                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
+                    <div class="text-3xl mb-3">📣</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Brand on the SF Ruby map</h3>
+                    <p class="text-gray-700">Your company's logo and story go to our 1,000+ member Slack, the Luma list, the homepage host wall, and our newsletter. Plus a YouTube recording of any talk your engineers give.</p>
+                </div>
+
+                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
+                    <div class="text-3xl mb-3">🎤</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">A stage for your engineers</h3>
+                    <p class="text-gray-700">One of the two talk slots is yours. Showcase a hard problem your team solved, an OSS release, or a real engineering story. Recorded, edited, and published on the SF Ruby YouTube channel.</p>
+                </div>
+
+                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
+                    <div class="text-3xl mb-3">🤝</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Community goodwill</h3>
+                    <p class="text-gray-700">Hosts get a long-term reputation in the SF Ruby community. We celebrate and remember the companies that show up — in our newsletter, our annual conference, and word of mouth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The format -->
+    <section id="format" class="py-16 bg-gradient-to-b from-cloud-50 to-white scroll-mt-24">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">What a meetup looks like</h2>
+            <p class="text-lg text-gray-600 mb-10 max-w-3xl">
+                We run a deliberate format that prioritizes connection over performance. Here's the flow:
+            </p>
+
+            <div class="space-y-4">
+                <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">5:00</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Doors open</h3>
+                        <p class="text-gray-700">Pizza, drinks, mingling. People trickle in, find old friends, meet new ones.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">5:30</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Welcome + community announcements</h3>
+                        <p class="text-gray-700">5–10 minutes. Host introduces themselves and the company. Brief community news (jobs, OSS, what's happening in the Ruby world).</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">5:40</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Talk #1 (host)</h3>
+                        <p class="text-gray-700">25–30 minutes. Your engineer presents something real — an architecture, a hard problem, a launch, an OSS release. We record it.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">6:10</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Talk #2 (community)</h3>
+                        <p class="text-gray-700">25–30 minutes. We curate from community submissions — usually a founder, OSS maintainer, or another Rails shop with a story to tell.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">6:40</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Round of intros ⚡</h3>
+                        <p class="text-gray-700">Everyone in the room gets ~20 seconds: name, what you build, one thing you're hacking on or curious about. No slides, no pitches.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">7:10</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Interest circles 🔀</h3>
+                        <p class="text-gray-700">5–6 themed corners of the room (AI agents in Rails, founders &amp; startups, OSS maintainers, performance &amp; infra, security, hiring, etc. — voted on by Slack ahead of the night). People self-select and dig in.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
+                    <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">8:00</div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Wrap</h3>
+                        <p class="text-gray-700">Hard stop. People keep talking on the sidewalk for another 30 minutes anyway.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split: what you provide / what we provide -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-10">Who does what</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-ruby-100 text-ruby-700 text-sm font-bold">H</span>
+                        You provide
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">Space for 60–100 people</strong> · open area or auditorium with seating, projector or large display, microphone, decent acoustics.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">Pizza + drinks</strong> for the room. Plan ~$15–20 per head. Some hosts include beer, others don't — both work.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">Lobby coverage</strong> · someone to let people up the elevator from 4:45 to 6:30 PM.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">One speaker</strong> from your team — engineer, founder, or anyone with a real story to tell.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">A welcome</strong> · 5–10 minute intro from a host, founder, or hiring manager about what your team is working on.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 inline-flex items-center justify-center rounded-full bg-ruby-100 text-ruby-700 text-sm font-bold">SF</span>
+                        We provide
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">The audience</strong> · we promote the event to our 1,000+ member Slack, Luma list, newsletter, X/LinkedIn, and Hacker News — typical RSVP volume is 80–150.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">Talk curation</strong> · we source and vet the second speaker, coordinate slides, and brief them on time + topic.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">MCs and facilitation</strong> · we run the welcome, the intros, and the interest circles.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">Recording + editing</strong> · we record both talks and publish edited videos on the SF Ruby YouTube channel within ~2 weeks.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">Post-event coverage</strong> · highlights in the next monthly newsletter, Slack recap, and a permanent host card on sfruby.com.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="py-16 bg-gradient-to-b from-white to-cloud-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Timeline</h2>
+            <p class="text-lg text-gray-600 mb-10">From "we'd like to host" to "lights are on" usually takes 6–8 weeks. Faster is possible if a slot opens up.</p>
+
+            <div class="relative">
+                <div class="absolute left-6 top-2 bottom-2 w-0.5 bg-ruby-200"></div>
+
+                <div class="space-y-6">
+                    <div class="flex gap-4 relative">
+                        <div class="w-12 h-12 rounded-full bg-ruby-500 text-white font-bold flex items-center justify-center shrink-0 z-10">1</div>
+                        <div class="flex-1 pt-2">
+                            <h3 class="font-bold text-gray-900 mb-1">8 weeks out · You apply</h3>
+                            <p class="text-gray-700">Tell us your company, your space capacity, the talk you want to give, and any month preferences.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 relative">
+                        <div class="w-12 h-12 rounded-full bg-ruby-500 text-white font-bold flex items-center justify-center shrink-0 z-10">2</div>
+                        <div class="flex-1 pt-2">
+                            <h3 class="font-bold text-gray-900 mb-1">6 weeks out · We confirm a date</h3>
+                            <p class="text-gray-700">Meetups happen the third or fourth Wednesday of the month. We confirm a specific date with you and lock it in.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 relative">
+                        <div class="w-12 h-12 rounded-full bg-ruby-500 text-white font-bold flex items-center justify-center shrink-0 z-10">3</div>
+                        <div class="flex-1 pt-2">
+                            <h3 class="font-bold text-gray-900 mb-1">4 weeks out · Luma + Slack go live</h3>
+                            <p class="text-gray-700">We publish the event with your branding, draft the description together, and open RSVPs.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 relative">
+                        <div class="w-12 h-12 rounded-full bg-ruby-500 text-white font-bold flex items-center justify-center shrink-0 z-10">4</div>
+                        <div class="flex-1 pt-2">
+                            <h3 class="font-bold text-gray-900 mb-1">2 weeks out · Talks finalized</h3>
+                            <p class="text-gray-700">Your speaker confirms title and abstract. We brief them on the format. Interest circles get voted on in Slack.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 relative">
+                        <div class="w-12 h-12 rounded-full bg-ruby-500 text-white font-bold flex items-center justify-center shrink-0 z-10">5</div>
+                        <div class="flex-1 pt-2">
+                            <h3 class="font-bold text-gray-900 mb-1">Day-of · Your team shows up</h3>
+                            <p class="text-gray-700">We arrive at 4:00 to set up. Pizza arrives at 4:45. Doors at 5:00. We MC, you present, the room connects.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 relative">
+                        <div class="w-12 h-12 rounded-full bg-ruby-500 text-white font-bold flex items-center justify-center shrink-0 z-10">6</div>
+                        <div class="flex-1 pt-2">
+                            <h3 class="font-bold text-gray-900 mb-1">2 weeks after · Recording + recap</h3>
+                            <p class="text-gray-700">Edited talk video published to YouTube. Recap in the next newsletter. Your host card stays on sfruby.com forever.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past hosts -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Companies that have hosted us</h2>
+            <p class="text-lg text-gray-600 mb-10 max-w-3xl">
+                A partial list of teams that have opened their doors to the SF Ruby community.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                {pastHosts.map((host) => (
+                    <a
+                        href={host.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="aspect-[3/2] flex items-center justify-center p-4 bg-cloud-50 rounded-xl border border-gray-100 hover:border-ruby-200 hover:shadow-md transition-all duration-300"
+                        title={host.name}
+                    >
+                        <img
+                            src={host.logo}
+                            alt={host.name}
+                            class="max-h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
+                            loading="lazy"
+                        />
+                    </a>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-cloud-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-10">FAQ</h2>
+
+            <div class="space-y-6">
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        Do we have to be a Rails shop to host?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">No — but Ruby has to be a real part of how you build, ship, or support your product. If your engineers genuinely write Ruby, contribute to OSS, or your company sells something the Ruby community uses, you're a fit.</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        Our office is small / has no auditorium. Can we still host?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">If you can fit 60+ people standing with a clear speaker area and a screen, yes. Most SF tech offices clear a kitchen, lobby, or all-hands area for the night. If you're not sure, send us a photo or floor plan and we'll work it out.</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        Can we recruit at the meetup?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">Strongly yes — recruiting is one of the main reasons companies host. Mention open roles in your welcome, post jobs on sfruby.com/jobs, hand out cards. We just ask you skip the hard pitch in the talk itself.</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        What if no one from our team wants to give a talk?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">We can work with that — a 5-minute company intro from a founder or eng lead instead of a full talk is fine. But the room genuinely loves hearing real engineering stories from your team, so we'd encourage at least a short one.</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        Is this paid? Do you need sponsorship money?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">No fee. You cover space and food; we cover everything else. (If you want to go further and sponsor the annual SF Ruby Conference, that's a separate thing — see <a href="/sponsor-2026" class="text-ruby-600 hover:underline">/sponsor-2026</a>.)</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        We're not in SF — can we host remotely or in a different city?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">SF Ruby meetups are in-person in San Francisco proper. If you're out of town and want to be involved, the best path is sponsoring our annual conference or supporting community OSS — happy to chat about either.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-16 bg-gradient-to-br from-ruby-500 to-pink-500">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to host?</h2>
+            <p class="text-lg text-ruby-50 mb-8">
+                Drop us a line. We'll reply within a few days with available months and next steps.
+            </p>
+            <button
+                data-email-modal="host-apply"
+                class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-ruby-600 rounded-lg font-bold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
+            >
+                Apply to host
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </button>
+            <p class="text-sm text-ruby-100 mt-4">
+                Or email <a href="mailto:irina@evilmartians.com" class="underline">irina@evilmartians.com</a> directly.
+            </p>
+        </div>
+    </section>
+
+    <EmailModal
+        id="host-apply"
+        email="irina@evilmartians.com"
+        subject="Hosting an SF Ruby Meetup"
+        title="Apply to host"
+    />
+</BaseLayout>
