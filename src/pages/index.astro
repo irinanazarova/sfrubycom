@@ -7,7 +7,6 @@ import StartupModal from "../components/StartupModal.astro";
 import ResourceCard from "../components/ResourceCard.astro";
 import Button from "../components/Button.astro";
 import SocialLink from "../components/SocialLink.astro";
-import EmailModal from "../components/EmailModal.astro";
 
 import { getAllStartups, getStartup, startups as startupsData } from "../data/startups.js";
 import { getTalk, talks } from "../data/talks.js";
@@ -540,27 +539,19 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                 </svg>
                                 Submit a talk
                             </a>
-                            <button
-                                data-email-modal="host-meetup"
+                            <a
+                                href="/host"
                                 class="inline-flex items-center gap-2.5 px-6 py-3 bg-white hover:bg-gray-50 text-gray-900 rounded-lg font-medium border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md transition-all duration-300"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                 </svg>
                                 Host the meetup
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <!-- Email Modal for hosting -->
-            <EmailModal
-                id="host-meetup"
-                email="irina@evilmartians.com"
-                subject="Host SF Ruby Meetup"
-                title="Host an SF Ruby Meetup"
-            />
 
             <!-- New Ruby Jobs Section -->
             <section id="jobs" class="py-20 bg-white">
@@ -740,15 +731,15 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     </div>
 
                     <div class="text-center">
-                        <button
-                            data-email-modal="host-meetup"
+                        <a
+                            href="/host"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
                         >
                             Host the meetup
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </section>
