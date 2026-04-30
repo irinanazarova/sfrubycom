@@ -8,7 +8,7 @@ const pastHosts = getAllHosts();
 
 <BaseLayout
     title="Host the SF Ruby Meetup"
-    description="How to host an SF Ruby community meetup — what's involved, what you provide, what we provide, and how to apply. Reach 650+ Bay Area Ruby and Rails builders."
+    description="How to host an SF Ruby meetup or Saturday hack day — venue requirements, format, what hosts get (speaker slot + 1-year jobs board access), and how to apply. Reach 650+ Bay Area Ruby and Rails builders."
 >
     <!-- Hero -->
     <section class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden">
@@ -24,7 +24,7 @@ const pastHosts = getAllHosts();
                 Host the SF Ruby Meetup
             </h1>
             <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl">
-                Open your doors to 60–100 of the Bay Area's best Ruby and Rails engineers, founders, and OSS maintainers. We bring the community, talks, and format. You bring the room and the pizza.
+                Open your doors to 70–100 of the Bay Area's best Ruby and Rails engineers, founders, and OSS maintainers. A weeknight evening or a Saturday Ruby Hack Day. We bring the community, talks, and format. You bring the room, the pizza, and one speaker.
             </p>
             <div class="flex flex-wrap gap-3">
                 <button
@@ -66,25 +66,25 @@ const pastHosts = getAllHosts();
                 <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
                     <div class="text-3xl mb-3">🎯</div>
                     <h3 class="text-lg font-bold text-gray-900 mb-2">Recruiting reach that converts</h3>
-                    <p class="text-gray-700">60–100 senior Ruby/Rails engineers in your space for three hours. Your engineering managers, recruiters, and founders get face time. Past hosts have closed hires within weeks.</p>
+                    <p class="text-gray-700">70–100 senior Ruby/Rails engineers in your space for an evening. Your engineering managers, recruiters, and founders get face time. Past hosts have closed hires within weeks.</p>
+                </div>
+
+                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
+                    <div class="text-3xl mb-3">💼</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">1 year on the job board</h3>
+                    <p class="text-gray-700">Hosts get a full year of free job postings on <a href="/jobs" class="text-ruby-600 hover:underline">sfruby.com/jobs</a> — featured by your company logo, with all your open Ruby/Rails roles in front of the same audience that came to your meetup.</p>
+                </div>
+
+                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
+                    <div class="text-3xl mb-3">🎤</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">A speaker slot for your team</h3>
+                    <p class="text-gray-700">5 to 20 minutes on the agenda — your call. A short company welcome from a founder, a 20-minute deep technical talk from your staff engineer, or anywhere in between.</p>
                 </div>
 
                 <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
                     <div class="text-3xl mb-3">📣</div>
                     <h3 class="text-lg font-bold text-gray-900 mb-2">Brand on the SF Ruby map</h3>
-                    <p class="text-gray-700">Your company's logo and story go to our 650+ member Slack, the Luma list, the homepage host wall, and our newsletter. Plus a YouTube recording of any talk your engineers give.</p>
-                </div>
-
-                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
-                    <div class="text-3xl mb-3">🎤</div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">A stage for your engineers</h3>
-                    <p class="text-gray-700">One of the two talk slots is yours. Showcase a hard problem your team solved, an OSS release, or a real engineering story. Recorded, edited, and published on the SF Ruby YouTube channel.</p>
-                </div>
-
-                <div class="p-6 bg-cloud-50 rounded-xl border border-gray-100">
-                    <div class="text-3xl mb-3">🤝</div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Community goodwill</h3>
-                    <p class="text-gray-700">Hosts get a long-term reputation in the SF Ruby community. We celebrate and remember the companies that show up — in our newsletter, our annual conference, and word of mouth.</p>
+                    <p class="text-gray-700">Your logo and story go to our 650+ member Slack, the Luma list, the homepage host wall, the monthly newsletter, X/LinkedIn, and Hacker News. Long-term goodwill, not a one-night burst.</p>
                 </div>
             </div>
         </div>
@@ -94,8 +94,11 @@ const pastHosts = getAllHosts();
     <section id="format" class="py-16 bg-gradient-to-b from-cloud-50 to-white scroll-mt-24">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">What a meetup looks like</h2>
-            <p class="text-lg text-gray-600 mb-10 max-w-3xl">
-                We run a deliberate format that prioritizes connection over performance. Here's the flow:
+            <p class="text-lg text-gray-600 mb-4 max-w-3xl">
+                Weekday evening (any day except Friday), <strong>5pm–9pm</strong>. We run a deliberate format that prioritizes connection over performance. Here's the flow:
+            </p>
+            <p class="text-sm text-gray-500 mb-10">
+                Programmed content runs 5pm–8pm. The room stays open until 9pm for the conversations that always continue afterward.
             </p>
 
             <div class="space-y-4">
@@ -110,24 +113,24 @@ const pastHosts = getAllHosts();
                 <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
                     <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">5:30</div>
                     <div>
-                        <h3 class="font-bold text-gray-900 mb-1">Welcome + community announcements</h3>
-                        <p class="text-gray-700">5–10 minutes. Host introduces themselves and the company. Brief community news (jobs, OSS, what's happening in the Ruby world).</p>
+                        <h3 class="font-bold text-gray-900 mb-1">Host welcome + community announcements</h3>
+                        <p class="text-gray-700">A short introduction from someone on your team — founder, eng lead, hiring manager — plus brief community news. This can be the host's full speaker slot if you want a quick 5-minute version.</p>
                     </div>
                 </div>
 
                 <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
                     <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">5:40</div>
                     <div>
-                        <h3 class="font-bold text-gray-900 mb-1">Talk #1 (host)</h3>
-                        <p class="text-gray-700">25–30 minutes. Your engineer presents something real — an architecture, a hard problem, a launch, an OSS release. We record it.</p>
+                        <h3 class="font-bold text-gray-900 mb-1">Talk #1</h3>
+                        <p class="text-gray-700">~25 minutes. Either your team's main talk (if you took the longer 20-minute speaker slot) or a curated community talk we sourced.</p>
                     </div>
                 </div>
 
                 <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
                     <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">6:10</div>
                     <div>
-                        <h3 class="font-bold text-gray-900 mb-1">Talk #2 (community)</h3>
-                        <p class="text-gray-700">25–30 minutes. We curate from community submissions — usually a founder, OSS maintainer, or another Rails shop with a story to tell.</p>
+                        <h3 class="font-bold text-gray-900 mb-1">Talk #2</h3>
+                        <p class="text-gray-700">~25 minutes. A curated community talk — usually a founder, OSS maintainer, or another Rails shop with a story to tell.</p>
                     </div>
                 </div>
 
@@ -150,8 +153,27 @@ const pastHosts = getAllHosts();
                 <div class="flex gap-6 p-6 bg-white rounded-xl border border-gray-100 shadow-sm">
                     <div class="text-2xl font-bold text-ruby-500 w-20 shrink-0">8:00</div>
                     <div>
-                        <h3 class="font-bold text-gray-900 mb-1">Wrap</h3>
-                        <p class="text-gray-700">Hard stop. People keep talking on the sidewalk for another 30 minutes anyway.</p>
+                        <h3 class="font-bold text-gray-900 mb-1">Programmed content ends · networking continues</h3>
+                        <p class="text-gray-700">Lights stay on, conversations keep going. Hard stop at 9pm.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saturday alternative -->
+            <div class="mt-12 p-6 md:p-8 bg-gradient-to-br from-ruby-50 to-pink-50 rounded-2xl border border-ruby-100">
+                <div class="flex items-start gap-4">
+                    <div class="text-4xl shrink-0">🛠️</div>
+                    <div>
+                        <div class="text-xs font-semibold text-ruby-700 uppercase tracking-wider mb-2">
+                            Or: a Saturday all-day format
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">Ruby Hack Day or Rails Girls</h3>
+                        <p class="text-gray-700 mb-3">
+                            If your team prefers a deeper, all-day experience, we also organize <strong>Ruby Hack Days</strong> (community OSS contribution sessions, ~30–60 attendees) and <strong>Rails Girls workshops</strong> (intro-to-Rails for newcomers — has launched many careers). Both run a full Saturday and need a slightly different setup: tables, power, breakout space, lunch.
+                        </p>
+                        <p class="text-gray-700">
+                            Tell us in your application if either format fits your space and team better than a weeknight meetup — we'll walk through the differences.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -172,23 +194,31 @@ const pastHosts = getAllHosts();
                     <ul class="space-y-3">
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">Space for 60–100 people</strong> · open area or auditorium with seating, projector or large display, microphone, decent acoustics.</div>
+                            <div><strong class="text-gray-900">Date</strong> · any weekday <em>except Friday</em>, 5pm–9pm. (Or a full Saturday for a Ruby Hack Day or Rails Girls.)</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">Pizza + drinks</strong> for the room. Plan ~$15–20 per head. Some hosts include beer, others don't — both work.</div>
+                            <div><strong class="text-gray-900">Venue for 70–100 attendees</strong> · open area or auditorium with seating and a clear speaker area.</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">Lobby coverage</strong> · someone to let people up the elevator from 4:45 to 6:30 PM.</div>
+                            <div><strong class="text-gray-900">Presenter A/V</strong> · projector or large screen, microphones, and sound system. Decent acoustics for talks of ~25 minutes.</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">One speaker</strong> from your team — engineer, founder, or anyone with a real story to tell.</div>
+                            <div><strong class="text-gray-900">Recording setup</strong> <span class="text-gray-500">(highly preferred)</span> · video + audio capture of the talks. We publish the edited recordings on the SF Ruby YouTube channel.</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">A welcome</strong> · 5–10 minute intro from a host, founder, or hiring manager about what your team is working on.</div>
+                            <div><strong class="text-gray-900">Food &amp; drinks</strong> · snacks, pizza, and salads, plus soft drinks and beer. Plan for ~80 people.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">Lobby coverage</strong> · someone to let people up the elevator from 4:45 to ~6:30pm.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">One speaker (5–20 minutes)</strong> · founder, engineer, or hiring lead — your call on length and topic.</div>
                         </li>
                     </ul>
                 </div>
@@ -201,23 +231,27 @@ const pastHosts = getAllHosts();
                     <ul class="space-y-3">
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">The audience</strong> · we promote the event to our 650+ member Slack, Luma list, newsletter, X/LinkedIn, and Hacker News — typical RSVP volume is 120–250.</div>
+                            <div><strong class="text-gray-900">The audience</strong> · we bring people. Promotion to our 650+ member Slack, Luma list, newsletter, X/LinkedIn, and Hacker News — typical RSVP volume is 120–250 for a 70-person night.</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">Talk curation</strong> · we source and vet the second speaker, coordinate slides, and brief them on time + topic.</div>
+                            <div><strong class="text-gray-900">Speakers and agenda</strong> · we pick the other speakers, set the running order, and brief everyone on time + topic.</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">MCs and facilitation</strong> · we run the welcome, the intros, and the interest circles.</div>
+                            <div><strong class="text-gray-900">Organization &amp; facilitation</strong> · MCs run the welcome, the round of intros, and the interest circles. We handle the timing.</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">Recording + editing</strong> · we record both talks and publish edited videos on the SF Ruby YouTube channel within ~2 weeks.</div>
+                            <div><strong class="text-gray-900">Editing &amp; publication</strong> · we edit your recording and publish the talks on the SF Ruby YouTube channel within ~2 weeks.</div>
                         </li>
                         <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
                             <span class="text-ruby-500 font-bold shrink-0">·</span>
-                            <div><strong class="text-gray-900">Post-event coverage</strong> · highlights in the next monthly newsletter, Slack recap, and a permanent host card on sfruby.com.</div>
+                            <div><strong class="text-gray-900">Post-event coverage</strong> · highlights in the next monthly newsletter, a Slack recap, and a permanent host card on sfruby.com.</div>
+                        </li>
+                        <li class="flex gap-3 p-4 bg-cloud-50 rounded-lg border border-gray-100">
+                            <span class="text-ruby-500 font-bold shrink-0">·</span>
+                            <div><strong class="text-gray-900">1 year of free job postings</strong> · your open Ruby/Rails roles featured on <a href="/jobs" class="text-ruby-600 hover:underline">sfruby.com/jobs</a> for 12 months after the event.</div>
                         </li>
                     </ul>
                 </div>
@@ -335,7 +369,31 @@ const pastHosts = getAllHosts();
                         Our office is small / has no auditorium. Can we still host?
                         <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
                     </summary>
-                    <p class="text-gray-700 mt-4">If you can fit 60+ people standing with a clear speaker area and a screen, yes. Most SF tech offices clear a kitchen, lobby, or all-hands area for the night. If you're not sure, send us a photo or floor plan and we'll work it out.</p>
+                    <p class="text-gray-700 mt-4">If you can fit 70+ people with seating and a clear speaker area, yes. Most SF tech offices clear a kitchen, lobby, or all-hands area for the night. If you're not sure, send us a photo or floor plan and we'll work it out.</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        What's a Ruby Hack Day or Rails Girls?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">An all-Saturday alternative to the weeknight format. <strong>Ruby Hack Day</strong> is a community OSS day — engineers bring projects to work on, contribute to gems, and pair with each other. Smaller crowd (~30–60) but high-signal. <strong>Rails Girls</strong> is an intro-to-Rails workshop for newcomers; high-impact for the broader ecosystem and a great way for your engineers to mentor. Both need tables, power, breakout space, and lunch. Mention either in your application and we'll walk through it.</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        Why no Fridays?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">Friday-night attendance for tech meetups in SF reliably drops off — people leave town, have plans, or are exhausted from the week. Tuesday/Wednesday/Thursday consistently fill the room.</p>
+                </details>
+
+                <details class="group p-6 bg-white rounded-xl border border-gray-100">
+                    <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
+                        We don't have recording equipment. Is that a dealbreaker?
+                        <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
+                    </summary>
+                    <p class="text-gray-700 mt-4">No, but it's strongly preferred — recordings are how the talks reach the wider Ruby community on YouTube and are part of what makes hosting valuable. Even a single tripod-mounted camera on the speaker plus a clean audio feed from the mic works. If you don't have anything, tell us early and we'll figure something out.</p>
                 </details>
 
                 <details class="group p-6 bg-white rounded-xl border border-gray-100">
@@ -348,10 +406,10 @@ const pastHosts = getAllHosts();
 
                 <details class="group p-6 bg-white rounded-xl border border-gray-100">
                     <summary class="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
-                        What if no one from our team wants to give a talk?
+                        What if no one from our team wants to give a long talk?
                         <span class="text-ruby-500 group-open:rotate-45 transition-transform text-xl">+</span>
                     </summary>
-                    <p class="text-gray-700 mt-4">We can work with that — a 5-minute company intro from a founder or eng lead instead of a full talk is fine. But the room genuinely loves hearing real engineering stories from your team, so we'd encourage at least a short one.</p>
+                    <p class="text-gray-700 mt-4">The host speaker slot is anywhere from 5 to 20 minutes — your call. A 5-minute welcome from a founder or hiring lead is plenty if no one wants to give a deep technical talk. The room genuinely loves real engineering stories from your team, but we'd never force one.</p>
                 </details>
 
                 <details class="group p-6 bg-white rounded-xl border border-gray-100">
