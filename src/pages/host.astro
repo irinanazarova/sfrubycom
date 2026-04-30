@@ -36,8 +36,19 @@ const pastHosts = getAllHosts();
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                     </svg>
                 </button>
-                <a href="#format" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300">
-                    See the format
+                <a
+                    href="https://cal.com/inazarova/meeting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    Book a call
+                </a>
+                <a href="#format" class="inline-flex items-center justify-center gap-2 px-4 py-3 text-white/80 hover:text-white font-medium transition-colors">
+                    See the format →
                 </a>
             </div>
         </div>
@@ -367,17 +378,30 @@ const pastHosts = getAllHosts();
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to host?</h2>
             <p class="text-lg text-ruby-50 mb-8">
-                Drop us a line. We'll reply within a few days with available months and next steps.
+                Drop us a line or grab a 30-minute slot — we'll talk through the format, your space, and pick a month.
             </p>
-            <button
-                data-email-modal="host-apply"
-                class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-ruby-600 rounded-lg font-bold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
-            >
-                Apply to host
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-            </button>
+            <div class="flex flex-wrap gap-3 justify-center">
+                <button
+                    data-email-modal="host-apply"
+                    class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-ruby-600 rounded-lg font-bold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300"
+                >
+                    Apply to host
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+                <a
+                    href="https://cal.com/inazarova/meeting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ruby-700 text-white border border-white/20 rounded-lg font-bold hover:bg-ruby-800 transition-all duration-300"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    Book a 30-min call
+                </a>
+            </div>
             <p class="text-sm text-ruby-100 mt-4">
                 Or email <a href="mailto:irina@evilmartians.com" class="underline">irina@evilmartians.com</a> directly.
             </p>
