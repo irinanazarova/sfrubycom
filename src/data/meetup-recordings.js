@@ -739,7 +739,7 @@ const meetupRecordings = [
         timestamp: 4170,
       },
       {
-        title: "Reagance: A Ractor-Based Agent Gem (RubyKaigi 2026 Preview)",
+        title: "Ragents: A Ractor-Based Agent Gem (RubyKaigi 2026 Preview)",
         speaker: "Justin Bowen",
         timestamp: 4220,
       },
