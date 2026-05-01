@@ -632,7 +632,7 @@ const meetupRecordings = [
         timestamp: 5316,
       },
       {
-        title: "Standup Comedy",
+        title: "Volunteer Standup 😎",
         speaker: "Matt Duszynski",
         company: "NexHealth",
         timestamp: 5503,
@@ -705,6 +705,55 @@ const meetupRecordings = [
         speaker: "Mike Dalton",
         company: "Calendar Vision",
         timestamp: 1988,
+      },
+      {
+        title: "gem.coop: A Community-Owned Gem Hosting Service",
+        speaker: "André Arko",
+        company: "gem.coop",
+        timestamp: 3672,
+      },
+      {
+        title: "Announcing 'What Cursed Platforms Does Ruby Run On?' at RubyConf 2026",
+        speaker: "Ziggy the Hamster",
+        timestamp: 3809,
+      },
+      {
+        title: "Ractors Are Just Actors with an R — Benchmarking Ractors vs Threads",
+        speaker: "Miles Georgi",
+        timestamp: 3931,
+      },
+      {
+        title: "Marketing Services for Ruby Startups",
+        speaker: "Rhiannon Payne",
+        timestamp: 4028,
+      },
+      {
+        title: "Ubicloud Is Hiring",
+        speaker: "Daniel Farina",
+        company: "Ubicloud",
+        timestamp: 4093,
+      },
+      {
+        title: "Building an Ambient OS on the Open Home Dev Kit",
+        speaker: "Jake Moffatt",
+        timestamp: 4170,
+      },
+      {
+        title: "Reagance: A Ractor-Based Agent Gem (RubyKaigi 2026 Preview)",
+        speaker: "Justin Bowen",
+        timestamp: 4220,
+      },
+      {
+        title: "garnet-js: Implementing the YARV Virtual Machine in TypeScript",
+        speaker: "Cameron Dutro",
+        company: "Cisco Meraki",
+        timestamp: 4310,
+      },
+      {
+        title: "Solaris: Vibe-Coding an Internal Rails App Over Two Weekends",
+        speaker: "Irina Nazarova",
+        company: "Evil Martians",
+        timestamp: 4512,
       },
       {
         title:
