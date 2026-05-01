@@ -172,38 +172,6 @@ function transformStartup(row) {
 }
 
 /**
- * Transform job row to JSON
- */
-function transformJob(row) {
-  const title = row['Job Title'] || row['Title'] || '';
-  const company = row['Company Name'] || row['Company'] || '';
-  if (!title || !company) return null;
-
-  const postedDate = row['Posted Date'] || row['Timestamp'] || new Date().toISOString().split('T')[0];
-  const expirationDate = row['Expiration Date'] || '';
-
-  return {
-    id: generateId(`${company}-${title}`),
-    companyName: company,
-    companyLogo: row['Company Logo URL'] || row['Logo'] || '',
-    companyWebsite: row['Company Website'] || row['Website'] || '',
-    contactEmail: row['Contact Email'] || '',
-    contactName: row['Contact Name'] || '',
-    jobTitle: title,
-    description: (row['Job Description'] || row['Description'] || '').slice(0, 500),
-    experienceLevel: row['Experience Level'] || 'Mid',
-    location: row['Location'] || 'Remote',
-    rubyRequired: parseBoolean(row['Ruby/Rails Required?'] || row['Ruby Required']),
-    applicationUrl: row['Application URL'] || row['Apply URL'] || '',
-    salaryRange: row['Salary Range'] || '',
-    postedDate: postedDate,
-    expirationDate: expirationDate,
-    status: row['Status'] || 'Paid, Active',
-    featured: parseBoolean(row['Featured'])
-  };
-}
-
-/**
  * Transform news row to JSON
  */
 function transformNews(row) {
@@ -244,23 +212,11 @@ function transformTalk(row) {
   };
 }
 
-/**
- * Check if today is before expiration date
- */
-function isNotExpired(expirationDate) {
-  if (!expirationDate) return true;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const expDate = new Date(expirationDate);
-  return expDate >= today;
-}
-
 async function main() {
   console.log('Fetching data from Google Sheets...');
 
   const {
     SHEET_STARTUPS_CSV_URL,
-    SHEET_JOBS_CSV_URL,
     SHEET_NEWS_CSV_URL,
     SHEET_TALKS_CSV_URL
   } = process.env;
@@ -291,35 +247,7 @@ async function main() {
     console.log('SHEET_STARTUPS_CSV_URL not set, skipping startups');
   }
 
-  // Fetch jobs
-  if (SHEET_JOBS_CSV_URL) {
-    try {
-      console.log('Fetching jobs...');
-      const csv = await fetchCSV(SHEET_JOBS_CSV_URL);
-      const rows = parseCSV(csv);
-      const jobs = rows
-        .filter(row => {
-          const status = row['Approval Status'] || row['Status'] || '';
-          const paymentStatus = row['Status'] || '';
-          const isApproved = status.toLowerCase() === 'approved' || status === '';
-          const isPaid = paymentStatus.toLowerCase().includes('paid') || paymentStatus === '';
-          const notExpired = isNotExpired(row['Expiration Date']);
-          return isApproved && isPaid && notExpired;
-        })
-        .map(transformJob)
-        .filter(Boolean);
-
-      fs.writeFileSync(
-        path.join(CONTENT_DIR, 'jobs.json'),
-        JSON.stringify(jobs, null, 2)
-      );
-      console.log(`Wrote ${jobs.length} jobs`);
-    } catch (err) {
-      console.error('Error fetching jobs:', err.message);
-    }
-  } else {
-    console.log('SHEET_JOBS_CSV_URL not set, skipping jobs');
-  }
+  // Jobs are hand-maintained in src/data/jobs.js
 
   // Fetch news
   if (SHEET_NEWS_CSV_URL) {

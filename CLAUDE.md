@@ -27,11 +27,12 @@ npm run fetch-data   # Fetch Google Sheets + Luma events data
 
 ### Data Flow
 
-Content comes from two sources:
-1. **Google Sheets** - Talks, startups, jobs, news (fetched via `scripts/fetch-sheets.js`)
+Content comes from three sources:
+1. **Google Sheets** - Talks, startups, news (fetched via `scripts/fetch-sheets.js`)
 2. **Luma API** - Meetup events (fetched via `scripts/fetch-luma-events.js`)
+3. **Hand-maintained JS files** - Jobs (`src/data/jobs.js`), meetup recordings (`src/data/meetup-recordings.js`), hosts, sponsors, speakers, schedule
 
-Data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions.
+Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions. Jobs do **not** flow through Google Sheets — edit `src/data/jobs.js` directly.
 
 ### Directory Structure
 
@@ -54,7 +55,7 @@ Data is fetched at build time and saved to `src/content/*.json`. The `src/data/*
 ### Environment Variables
 
 Required for `npm run build` (data fetching):
-- `SHEET_STARTUPS_CSV_URL`, `SHEET_JOBS_CSV_URL`, `SHEET_NEWS_CSV_URL`, `SHEET_TALKS_CSV_URL` - Google Sheets CSV export URLs
+- `SHEET_STARTUPS_CSV_URL`, `SHEET_NEWS_CSV_URL`, `SHEET_TALKS_CSV_URL` - Google Sheets CSV export URLs
 - `LUMA_API_KEY`, `LUMA_CALENDAR_ID` - Luma API access
 
 ## Key Patterns
