@@ -10,7 +10,7 @@ import SocialLink from "../components/SocialLink.astro";
 
 import { getAllStartups, getStartup, startups as startupsData } from "../data/startups.js";
 import { getTalk, talks } from "../data/talks.js";
-import { getLatestMeetupRecordings } from "../data/meetup-recordings.js";
+import { getLatestMeetupRecordings, formatTimestamp } from "../data/meetup-recordings.js";
 import { getJobsBySponsor, getSortedJobs } from "../data/jobs.js";
 import { getAllPhotoAlbums, GCS_PHOTO_BASE } from "../data/events.js";
 import { getSponsor, getSponsorsGroupedByTier } from "../data/sponsors.js";
@@ -635,36 +635,65 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {
                             latestMeetupRecordings.map((recording: any) => (
-                                <a
-                                    href={`https://www.youtube.com/watch?v=${recording.youtubeId}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
-                                >
-                                    <div class="aspect-video bg-gray-900 relative overflow-hidden">
-                                        <img
-                                            src={`https://img.youtube.com/vi/${recording.youtubeId}/mqdefault.jpg`}
-                                            alt={recording.title}
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                            loading="lazy"
-                                        />
-                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                            <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                                                <svg class="w-5 h-5 text-sky-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8 5v14l11-7z" />
-                                                </svg>
+                                <div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                                    <a
+                                        href={`https://www.youtube.com/watch?v=${recording.youtubeId}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="block"
+                                    >
+                                        <div class="aspect-video bg-gray-900 relative overflow-hidden">
+                                            <img
+                                                src={`https://img.youtube.com/vi/${recording.youtubeId}/mqdefault.jpg`}
+                                                alt={recording.title}
+                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                loading="lazy"
+                                            />
+                                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
+                                                    <svg class="w-5 h-5 text-sky-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M8 5v14l11-7z" />
+                                                    </svg>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="p-4 pb-2">
+                                            <h3 class="font-semibold text-gray-900 group-hover:text-sky-500 transition-colors">
+                                                {recording.title.replace("SF Bay Area Ruby Meetup - ", "").replace("SF Ruby & Elixir Special - ", "Elixir Special - ")}
+                                            </h3>
+                                            <p class="text-sm text-gray-500 mt-1">
+                                                {recording.talks.length} talks · {recording.venue}
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <div class="px-4 pb-4">
+                                        <details class="meetup-details">
+                                            <summary class="text-xs text-sky-500 hover:text-sky-600 cursor-pointer font-medium select-none">
+                                                Show talks
+                                            </summary>
+                                            <ul class="mt-2 space-y-1.5">
+                                                {recording.talks.map((talk: any) => (
+                                                    <li class="text-xs">
+                                                        <a
+                                                            href={`https://www.youtube.com/watch?v=${recording.youtubeId}${talk.timestamp ? `&t=${talk.timestamp}` : ""}`}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            class="flex items-start gap-2 text-gray-600 hover:text-sky-600 transition-colors"
+                                                        >
+                                                            <span class="text-gray-400 font-mono whitespace-nowrap mt-px">{formatTimestamp(talk.timestamp)}</span>
+                                                            <span>
+                                                                <span class="font-medium">{talk.speaker}</span>
+                                                                {talk.company && <span class="text-gray-400"> ({talk.company})</span>}
+                                                                <span class="text-gray-400"> — </span>
+                                                                {talk.title}
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </details>
                                     </div>
-                                    <div class="p-4">
-                                        <h3 class="font-semibold text-gray-900 group-hover:text-sky-500 transition-colors">
-                                            {recording.title.replace("SF Bay Area Ruby Meetup - ", "")}
-                                        </h3>
-                                        <p class="text-sm text-gray-500 mt-1">
-                                            {recording.talks.length} talks · {recording.venue}
-                                        </p>
-                                    </div>
-                                </a>
+                                </div>
                             ))
                         }
                         {

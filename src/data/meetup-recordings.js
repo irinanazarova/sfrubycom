@@ -600,6 +600,85 @@ const meetupRecordings = [
     ],
   },
   {
+    id: "meetup-2026-04",
+    title: "SF Bay Area Ruby Meetup - April 2026",
+    date: "2026-04-14",
+    youtubeId: "xep8UoK5cyA",
+    venue: "Intercom",
+    rubyEventsUrl:
+      "https://www.rubyevents.org/events/sf-bay-area-ruby-meetup",
+    talks: [
+      {
+        title: "Turning Claude into a Full-Stack Engineering Platform",
+        speaker: "Brian Scanlan",
+        company: "Intercom",
+        timestamp: 310,
+      },
+      {
+        title:
+          "Stop Asking Useless Questions: Adaptive User Flows with Ruby DSLs and LLMs",
+        speaker: "Konstantin Gredeskoul",
+        company: "Archive",
+        timestamp: 3041,
+      },
+      {
+        title: "Building Voter Mailers in Ruby",
+        speaker: "John Woodell",
+        timestamp: 4807,
+      },
+      {
+        title: "Ractorize: Wrapping Ruby Objects in Ractors",
+        speaker: "Miles Georgi",
+        timestamp: 5316,
+      },
+      {
+        title: "Standup Comedy",
+        speaker: "Matt Duszynski",
+        company: "NexHealth",
+        timestamp: 5503,
+      },
+      {
+        title: "My AI Development Workflow with Parallel Coding Agents",
+        speaker: "Jake Moffatt",
+        timestamp: 5639,
+      },
+      {
+        title: "Judging Code on Gut — Reading DHH's 2012 Ruby Rogues Letter",
+        speaker: "Michael Foley",
+        timestamp: 5935,
+      },
+      {
+        title: "Announcing 'Weird and Wacky Machines Running Ruby' at RubyConf 2026",
+        speaker: "Ziggy the Hamster",
+        timestamp: 6120,
+      },
+      {
+        title: "Superconductor: Multiplayer Agent Workflows in the Cloud",
+        speaker: "Galileo Friedman",
+        company: "Superconductor",
+        timestamp: 6385,
+      },
+      {
+        title: "RefundDesk: A Rails App for Customs Brokers to Claim Tariff Refunds",
+        speaker: "Hector Miramontes",
+        company: "RefundDesk",
+        timestamp: 7218,
+      },
+      {
+        title:
+          "Semi-Autonomous Software: Putting the Human in the Loop with Rubot",
+        speaker: "Chris Davis",
+        company: "Bootstrapital",
+        timestamp: 7390,
+      },
+      {
+        title: "claude-yolo: Parallel Claude Code Agents in tmux",
+        speaker: "Dmitry Kozlov",
+        timestamp: 8092,
+      },
+    ],
+  },
+  {
     id: "meetup-2026-02",
     title: "SF Bay Area Ruby Meetup - February 2026",
     date: "2026-02-26",
