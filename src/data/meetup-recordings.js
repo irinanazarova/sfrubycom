@@ -178,7 +178,7 @@ const meetupRecordings = [
       },
       {
         title: "Lessons from Running Sidekiq at Scale (RubyConf Talk Preview)",
-        speaker: "Keith Gable",
+        speaker: "Ziggy the Hamster",
         timestamp: 4580,
       },
       {
