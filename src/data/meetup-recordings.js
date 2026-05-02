@@ -579,6 +579,7 @@ const meetupRecordings = [
         title:
           "The 3Rs of Ruby Performance: Reduce, Reuse, Recycle (Objects)",
         speaker: "Samuel Giddins",
+        company: "Persona",
         timestamp: 135,
       },
       {
@@ -588,13 +589,30 @@ const meetupRecordings = [
         timestamp: 2413,
       },
       {
+        title: "Burnout Is Real — A PSA from Active Agent",
+        speaker: "Justin Bowen",
+        timestamp: 3949,
+      },
+      {
+        title: "Ruby Constants Aren't Stored in an Ordered Hash",
+        speaker: "Miles Georgi",
+        timestamp: 4050,
+      },
+      {
+        title: "From Public Policy to Ruby — Building a Tariff App",
+        speaker: "Hector Miramontes",
+        timestamp: 4132,
+      },
+      {
         title: "What to Expect from Ruby 4.0",
         speaker: "Vitor Oliveira",
+        company: "Strides",
         timestamp: 4284,
       },
       {
         title: "Customizing Form Helpers and Tag Helpers",
         speaker: "Todd Kummer",
+        company: "Rockridge Solutions",
         timestamp: 6024,
       },
     ],
