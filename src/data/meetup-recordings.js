@@ -100,9 +100,9 @@ const meetupRecordings = [
         timestamp: 0,
       },
       {
-        title: "Codo.ai — Software Testing Automation, Asking About Ruby Support",
-        speaker: "Magna",
-        company: "Codo.ai",
+        title: "Gocodeo — Software Testing Automation, Asking About Ruby Support",
+        speaker: "Meghana Jagadeesh",
+        company: "Gocodeo",
         timestamp: 5114,
       },
       {
@@ -113,7 +113,7 @@ const meetupRecordings = [
       },
       {
         title: "Babylist Is Hiring Rails Engineers",
-        speaker: "Jamie Leio",
+        speaker: "Jamie Alessio",
         company: "Babylist",
         timestamp: 5278,
       },
@@ -172,22 +172,23 @@ const meetupRecordings = [
       },
       {
         title: "Baltic Ruby + RSpec-Llama Gem for Testing AI Models",
-        speaker: "Sergey Sidorov",
+        speaker: "Sergey Sergyenko",
+        company: "Baltic Ruby",
         timestamp: 4062,
       },
       {
         title: "Lessons from Running Sidekiq at Scale (RubyConf Talk Preview)",
-        speaker: "Keith",
+        speaker: "Keith Gable",
         timestamp: 4580,
       },
       {
         title: "Looking for Ruby Roles (Job Seeker)",
-        speaker: "Meredith",
+        speaker: "Meredith White",
         timestamp: 4652,
       },
       {
-        title: "OYN-Cov: Usage-Weighted Test Coverage Gem",
-        speaker: "Open Mic Speaker",
+        title: "OyenCov: Usage-Weighted Test Coverage Gem",
+        speaker: "Chong Hon Siong",
         timestamp: 4741,
       },
       {
@@ -384,20 +385,20 @@ const meetupRecordings = [
         timestamp: 8458,
       },
       {
-        title: "Jetic AI — On-Device AI Infrastructure for Mobile",
-        speaker: "Jangseok",
-        company: "Jetic AI",
+        title: "Zetic AI — On-Device AI Infrastructure for Mobile",
+        speaker: "Yeonseok Kim",
+        company: "Zetic AI",
         timestamp: 8511,
       },
       {
         title: "Pre-Vetted Software Engineering Talent",
-        speaker: "Federico Razzoli",
+        speaker: "Federico Ramallo",
         timestamp: 8669,
       },
       {
-        title: "Quanto Flow — All-in-One AI AML Platform",
-        speaker: "Michael",
-        company: "Quanto Flow",
+        title: "Quantoflow — All-in-One AI AML Platform",
+        speaker: "Michael Yu",
+        company: "Quantoflow",
         timestamp: 8743,
       },
       {
@@ -519,8 +520,8 @@ const meetupRecordings = [
       },
       {
         title: "hello-csv: An Open-Source CSV Importer for Rails Apps",
-        speaker: "Chris",
-        company: "Primary.Health",
+        speaker: "Chris Zhu",
+        company: "Primary Health",
         timestamp: 5903,
       },
       {
@@ -536,7 +537,8 @@ const meetupRecordings = [
       },
       {
         title: "Brighton Ruby + EuRuKo Conference Announcements",
-        speaker: "Conference Announcer",
+        speaker: "Victoria Melnikova",
+        company: "Evil Martians",
         timestamp: 6187,
       },
       {
@@ -570,7 +572,8 @@ const meetupRecordings = [
       },
       {
         title: "A Ruby Gem to Prettify Rails Notes",
-        speaker: "Marissa",
+        speaker: "Marisa Lopez",
+        company: "Primary Health",
         timestamp: 4794,
       },
       {
@@ -698,7 +701,8 @@ const meetupRecordings = [
       },
       {
         title: "Office Hours for Ruby/Rails Pairing",
-        speaker: "Ronan",
+        speaker: "Ronan Protage",
+        company: "Cisco Meraki",
         timestamp: 5939,
       },
       {
