@@ -402,11 +402,6 @@ const meetupRecordings = [
         timestamp: 8743,
       },
       {
-        title: "Support Your Public Library",
-        speaker: "Open Mic Speaker",
-        timestamp: 8789,
-      },
-      {
         title: "Announcing the SF Ruby Slack/Discord",
         speaker: "Brandon Weaver",
         timestamp: 8889,
