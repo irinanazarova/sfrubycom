@@ -23,3 +23,11 @@ pnpm-debug.log*
 # research and content prep (not for website)
 research/
 tech-stacks/
+drafts/
+
+# browser automation outputs (Playwright MCP)
+.playwright-mcp/
+
+# scratch screenshots and exports at repo root (real assets live under public/ or src/)
+/*.png
+/*.pdf
