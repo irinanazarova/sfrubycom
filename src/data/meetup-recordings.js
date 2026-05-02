@@ -19,6 +19,11 @@ const meetupRecordings = [
         timestamp: 275,
       },
       {
+        title: "Community Announcements (AnyCable, Ruby Central, Hotwire.io)",
+        speaker: "Adarsh Pandit & Marco Roth",
+        timestamp: 1606,
+      },
+      {
         title: "Building a Cloud in Ruby and Roda",
         speaker: "Daniel Farina",
         company: "Ubicloud",
@@ -95,6 +100,30 @@ const meetupRecordings = [
         timestamp: 0,
       },
       {
+        title: "Codo.ai — Software Testing Automation, Asking About Ruby Support",
+        speaker: "Magna",
+        company: "Codo.ai",
+        timestamp: 5114,
+      },
+      {
+        title: "Rocky Mountain Ruby Conference Announcement",
+        speaker: "Zach Mariscal",
+        company: "UserTesting",
+        timestamp: 5236,
+      },
+      {
+        title: "Babylist Is Hiring Rails Engineers",
+        speaker: "Jamie Leio",
+        company: "Babylist",
+        timestamp: 5278,
+      },
+      {
+        title: "RubyConf Chicago + Ruby Central Updates",
+        speaker: "Adarsh Pandit",
+        company: "Ruby Central",
+        timestamp: 5308,
+      },
+      {
         title: "Terminalwire: Ship a CLI for Your Web App",
         speaker: "Brad Gessler",
         timestamp: 0,
@@ -135,6 +164,43 @@ const meetupRecordings = [
         company: "Evil Martians",
         timestamp: 2167,
       },
+      {
+        title: "RubyConf Chicago + Ruby Central Updates",
+        speaker: "Adarsh Pandit",
+        company: "Ruby Central",
+        timestamp: 3645,
+      },
+      {
+        title: "Baltic Ruby + RSpec-Llama Gem for Testing AI Models",
+        speaker: "Sergey Sidorov",
+        timestamp: 4062,
+      },
+      {
+        title: "Lessons from Running Sidekiq at Scale (RubyConf Talk Preview)",
+        speaker: "Keith",
+        timestamp: 4580,
+      },
+      {
+        title: "Looking for Ruby Roles (Job Seeker)",
+        speaker: "Meredith",
+        timestamp: 4652,
+      },
+      {
+        title: "OYN-Cov: Usage-Weighted Test Coverage Gem",
+        speaker: "Open Mic Speaker",
+        timestamp: 4741,
+      },
+      {
+        title: "Ruby AI Working Group + Active Agents",
+        speaker: "Justin Bowen",
+        timestamp: 4773,
+      },
+      {
+        title: "Lemur Story Preview (Functional Programming Talk)",
+        speaker: "Brandon Weaver",
+        company: "One Medical",
+        timestamp: 4950,
+      },
     ],
   },
   {
@@ -157,6 +223,37 @@ const meetupRecordings = [
         speaker: "Chris Fung",
         company: "Binti",
         timestamp: 1760,
+      },
+      {
+        title: "Filterameter: A Rails Search/Filter Gem",
+        speaker: "Todd Kummer",
+        company: "Rockridge Solutions",
+        timestamp: 3366,
+      },
+      {
+        title: "Looking for a Product Management Role",
+        speaker: "Ken Decanio",
+        timestamp: 3467,
+      },
+      {
+        title: "rubyvideo.dev — Indexing Ruby Conference Talks",
+        speaker: "Cameron Dutro",
+        timestamp: 3506,
+      },
+      {
+        title: "Veteran Ruby Meetups",
+        speaker: "Dave Doolin",
+        timestamp: 3590,
+      },
+      {
+        title: "us_geo Gem for US Geographic Data",
+        speaker: "Brian Durand",
+        timestamp: 3638,
+      },
+      {
+        title: "macchiato.dev — A Local-First Ruby Project",
+        speaker: "Benjamin Atkin",
+        timestamp: 3780,
       },
       {
         title: "Content Management in Rails with Sitepress",
@@ -196,6 +293,21 @@ const meetupRecordings = [
         speaker: "Edoardo Serra",
         company: "Stepful",
         timestamp: 3578,
+      },
+      {
+        title: "Learning Ruby (Open Mic)",
+        speaker: "Ken Decanio",
+        timestamp: 4605,
+      },
+      {
+        title: "epicstrips.tv",
+        speaker: "Chris Hobbs",
+        timestamp: 4712,
+      },
+      {
+        title: "seafoam.media",
+        speaker: "Rhiannon Payne",
+        timestamp: 4805,
       },
       {
         title: "Lammy",
@@ -267,6 +379,38 @@ const meetupRecordings = [
         timestamp: 5209,
       },
       {
+        title: "Active Agent — An Open-Source AI Framework for Rails",
+        speaker: "Justin Bowen",
+        timestamp: 8458,
+      },
+      {
+        title: "Jetic AI — On-Device AI Infrastructure for Mobile",
+        speaker: "Jangseok",
+        company: "Jetic AI",
+        timestamp: 8511,
+      },
+      {
+        title: "Pre-Vetted Software Engineering Talent",
+        speaker: "Federico Razzoli",
+        timestamp: 8669,
+      },
+      {
+        title: "Quanto Flow — All-in-One AI AML Platform",
+        speaker: "Michael",
+        company: "Quanto Flow",
+        timestamp: 8743,
+      },
+      {
+        title: "Support Your Public Library",
+        speaker: "Open Mic Speaker",
+        timestamp: 8789,
+      },
+      {
+        title: "Announcing the SF Ruby Slack/Discord",
+        speaker: "Brandon Weaver",
+        timestamp: 8889,
+      },
+      {
         title: "Presence Ain't Perfect",
         speaker: "Vladimir Dementyev",
         company: "Evil Martians",
@@ -301,6 +445,24 @@ const meetupRecordings = [
         speaker: "Rich Steinmetz",
         company: "ClickFunnels",
         timestamp: 1312,
+      },
+      {
+        title: "Eloquent Ruby Second Edition Update",
+        speaker: "Brandon Weaver",
+        company: "One Medical",
+        timestamp: 3283,
+      },
+      {
+        title: "Gusto Is Hiring (Dogpatch SF)",
+        speaker: "Todd Sedano",
+        company: "Gusto",
+        timestamp: 3343,
+      },
+      {
+        title: "Luthor.ai Is Hiring — Bleeding-Edge AI in Ruby",
+        speaker: "Glenn Espinosa",
+        company: "Luthor.ai",
+        timestamp: 3403,
       },
       {
         title: "Sorbet Syntax: A Retrospective",
@@ -351,6 +513,33 @@ const meetupRecordings = [
         timestamp: 4721,
       },
       {
+        title: "Announcing the SF Ruby AI Hackathon at Sentry HQ",
+        speaker: "Kamil Nicieja",
+        timestamp: 5672,
+      },
+      {
+        title: "hello-csv: An Open-Source CSV Importer for Rails Apps",
+        speaker: "Chris",
+        company: "Primary.Health",
+        timestamp: 5903,
+      },
+      {
+        title: "sarah.substack.com — Newsletter on Software and Tech",
+        speaker: "Sarah Mei",
+        timestamp: 6107,
+      },
+      {
+        title: "Eloquent Ruby Second Edition Coming in 2026",
+        speaker: "Brandon Weaver",
+        company: "One Medical",
+        timestamp: 6155,
+      },
+      {
+        title: "Brighton Ruby + EuRuKo Conference Announcements",
+        speaker: "Conference Announcer",
+        timestamp: 6187,
+      },
+      {
         title: "Red in Fantasyland",
         speaker: "Brandon Weaver",
         company: "One Medical",
@@ -378,6 +567,32 @@ const meetupRecordings = [
         speaker: "Melvyn Peignon",
         company: "ClickHouse",
         timestamp: 3610,
+      },
+      {
+        title: "A Ruby Gem to Prettify Rails Notes",
+        speaker: "Marissa",
+        timestamp: 4794,
+      },
+      {
+        title: "Announcing the SF Ruby AI Hackathon at Sentry HQ",
+        speaker: "Kamil Nicieja",
+        timestamp: 4957,
+      },
+      {
+        title: "TDD with AI Agents — Game of Life Demo",
+        speaker: "Brian Douglas",
+        company: "Continue",
+        timestamp: 5125,
+      },
+      {
+        title: "Foobara — A Command-Centric Framework for Rails",
+        speaker: "Miles Georgi",
+        timestamp: 5291,
+      },
+      {
+        title: "AI Coding Assistants for Legacy Rails Codebases",
+        speaker: "Sarah Mei",
+        timestamp: 5443,
       },
       {
         title: "Learnings and Roadmap for Langchain.rb",
@@ -444,6 +659,49 @@ const meetupRecordings = [
         timestamp: 1820,
       },
       {
+        title: "Sponsorship, Slack, and Ruby Book Announcements",
+        speaker: "Irina Nazarova",
+        company: "Evil Martians",
+        timestamp: 4424,
+      },
+      {
+        title: "SF Ruby AI Hackathon Recap",
+        speaker: "Kamil Nicieja",
+        timestamp: 4595,
+      },
+      {
+        title: "Spinel Cooperative — Retainers for Ruby Open Source Maintainers",
+        speaker: "André Arko",
+        company: "Spinel Cooperative",
+        timestamp: 4954,
+      },
+      {
+        title: "Writing Ruby (Just Not in English) — Multi-Language Ruby Education",
+        speaker: "Ratnadep Deshan",
+        company: "BetaCraft Technologies",
+        timestamp: 5097,
+      },
+      {
+        title: "Active Agent + Free Pairing Sessions",
+        speaker: "Justin Bowen",
+        timestamp: 5330,
+      },
+      {
+        title: "Beautiful Ruby — A Phlex on Rails Video Course",
+        speaker: "Brad Gessler",
+        timestamp: 5432,
+      },
+      {
+        title: "Foobara Agent-Backed Commands — Loan Origination Demo",
+        speaker: "Miles Georgi",
+        timestamp: 5647,
+      },
+      {
+        title: "Office Hours for Ruby/Rails Pairing",
+        speaker: "Ronan",
+        timestamp: 5939,
+      },
+      {
         title: "Eliminating Unnecessary Implicit Allocations",
         speaker: "Jeremy Evans",
         company: "Ubicloud",
@@ -472,6 +730,52 @@ const meetupRecordings = [
         speaker: "Enrique Mogollán",
         company: "Handshake",
         timestamp: 2858,
+      },
+      {
+        title: "Announcing LlamaPress: An Open-Source Coding Agent for Rails Apps",
+        speaker: "Kody Kendall",
+        company: "LlamaPress",
+        timestamp: 5356,
+      },
+      {
+        title: "Token Ruby — A Weekly Newsletter on Ruby and AI",
+        speaker: "Yatish Mehta",
+        company: "Asana",
+        timestamp: 5600,
+      },
+      {
+        title: "Describe AI — Rails + Inertia + React for 3D Volumetric Computer Vision",
+        speaker: "Cole Robertson",
+        company: "Describe AI",
+        timestamp: 5660,
+      },
+      {
+        title: "Cactus Is Hiring Senior Rails Engineers for an AI Voice + Text Platform",
+        speaker: "Avinash Joshi",
+        company: "Cactus",
+        timestamp: 5824,
+      },
+      {
+        title: "rv: A Fast Ruby Version Manager (Inspired by Python's uv)",
+        speaker: "André Arko",
+        company: "Spinel Cooperative",
+        timestamp: 5922,
+      },
+      {
+        title: "Active Agents 0.6 — Capybara/Cuprite Browse Agent + Structured Output",
+        speaker: "Justin Bowen",
+        timestamp: 6043,
+      },
+      {
+        title: "A Ruby Book Idea — Telling the Human Stories Behind the Language",
+        speaker: "Rhiannon Payne",
+        company: "Ruby Central",
+        timestamp: 6147,
+      },
+      {
+        title: "SuperForm — A Form Helper for Rails with Auto Strong Parameters (ERB + Phlex)",
+        speaker: "Brad Gessler",
+        timestamp: 6315,
       },
       {
         title: "Tackling Domain Complexity with Foobara",
@@ -547,6 +851,12 @@ const meetupRecordings = [
       "https://www.rubyevents.org/talks/sf-bay-area-ruby-meetup-december-2025",
     talks: [
       {
+        title: "Opening Words",
+        speaker: "Hiten Parmar",
+        company: "Intercom",
+        timestamp: 135,
+      },
+      {
         title: "Ruby 4.0",
         speaker: "Noel Rappin",
         company: "Chime",
@@ -557,6 +867,22 @@ const meetupRecordings = [
         speaker: "Irina Nazarova",
         company: "Evil Martians",
         timestamp: 2865,
+      },
+      {
+        title: "Hiring Rails Engineers at Apple",
+        speaker: "Catherine Meyers",
+        company: "Apple",
+        timestamp: 3438,
+      },
+      {
+        title: "Foobara as a Drop-In Service-Objects Layer for Rails",
+        speaker: "Miles Georgi",
+        timestamp: 3528,
+      },
+      {
+        title: "An Open-Source Project-Tracking Tool",
+        speaker: "Glauber Bannwart",
+        timestamp: 3938,
       },
       {
         title:
