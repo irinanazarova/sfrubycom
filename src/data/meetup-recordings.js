@@ -1002,6 +1002,12 @@ const meetupRecordings = [
         timestamp: 6385,
       },
       {
+        title: "Whop Is Hiring an SRE",
+        speaker: "Irina Nazarova",
+        company: "Evil Martians",
+        timestamp: 7103,
+      },
+      {
         title: "RefundDesk: A Rails App for Customs Brokers to Claim Tariff Refunds",
         speaker: "Hector Miramontes",
         company: "RefundDesk",
