@@ -172,7 +172,7 @@ const meetupRecordings = [
       },
       {
         title: "Baltic Ruby + RSpec-Llama Gem for Testing AI Models",
-        speaker: "Sergey Sergyenko",
+        speaker: "Sergy Sergyenko",
         company: "Baltic Ruby",
         timestamp: 4062,
       },
@@ -188,7 +188,7 @@ const meetupRecordings = [
       },
       {
         title: "OyenCov: Usage-Weighted Test Coverage Gem",
-        speaker: "Chong Hon Siong",
+        speaker: "Anonoz Chong",
         timestamp: 4741,
       },
       {
