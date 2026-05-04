@@ -696,7 +696,7 @@ const meetupRecordings = [
       },
       {
         title: "Office Hours for Ruby/Rails Pairing",
-        speaker: "Ronan Protage",
+        speaker: "Ronan Potage",
         company: "Cisco Meraki",
         timestamp: 5939,
       },
