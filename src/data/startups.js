@@ -448,6 +448,19 @@ export const startups = {
     news: "Founding team from Visa, Salesforce, and Upstart; HQ Palo Alto",
     newsUrl: "https://www.getreset.co/",
   },
+  "koah-labs": {
+    id: "koah-labs",
+    name: "Koah Labs",
+    logo: "/startup_koah.svg",
+    url: "https://www.koahlabs.com",
+    description:
+      "Ad network for AI-native products — helping publishers monetize chat and agent experiences with native, contextual ads, and helping advertisers reach users in AI-influenced decision moments. Built on Ruby on Rails, React, TypeScript, PostgreSQL, ClickHouse, Redis, and Kafka. SF-based, with engineers from X, Apple, and Meta.",
+    demoTime: "",
+    funding: null,
+    valuation: null,
+    news: "Backed by Theory Ventures, Forerunner Ventures, and South Park Commons",
+    newsUrl: "https://www.koahlabs.com/about",
+  },
 };
 
 // Helper functions

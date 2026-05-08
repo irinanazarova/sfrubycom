@@ -3,6 +3,42 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "software-engineer-backend-koah": {
+    id: "software-engineer-backend-koah",
+    title: "Software Engineer - Backend",
+    startupId: "koah-labs",
+    location: "San Francisco, CA (In-person)",
+    type: "Full-time",
+    salary: "$180K - $250K + equity",
+    description:
+      "Koah Labs is hiring a Backend Software Engineer to design data models, abstractions, and high-performance systems for the ad infrastructure powering AI-native products. Example projects: build scalable data models that align publisher and advertiser interests across multiple impressions per ad request, design abstractions for new ad formats and engagement tracking, build a low-latency frequency-capping system to prevent ad fatigue, and create schemas for high-volume ad bidding with exchanges. Stack: Ruby on Rails, React, TypeScript, PostgreSQL, ClickHouse, Redis, Kafka, AWS. Active users of palkan's layered design for Rails, Lefthook, Yabeda, and test-prof. Backed by Theory Ventures, Forerunner Ventures, and South Park Commons.",
+    url: "https://jobs.ashbyhq.com/koahlabs/43616243-f485-480d-b31a-f89589a4b09d",
+    postedDate: "2026-05-07",
+  },
+  "software-engineer-product-koah": {
+    id: "software-engineer-product-koah",
+    title: "Software Engineer - Product",
+    startupId: "koah-labs",
+    location: "San Francisco, CA (In-person)",
+    type: "Full-time",
+    salary: "$180K - $250K + equity",
+    description:
+      "Koah Labs is hiring a Product Software Engineer to ship across the stack and shape product direction for an ad network powering AI-native products. Lead initiatives end-to-end with high agency in product and technical design — optimize matching algorithms, build experiences reaching millions of users, partner with data and GTM teams, and run experiments to learn how users interact with AI-native products. Strong fit for former founders or early-stage engineers comfortable with ambiguity and fast feedback loops. Stack: Ruby on Rails, React, TypeScript, PostgreSQL, ClickHouse. Active users of palkan's layered design for Rails, Lefthook, Yabeda, and test-prof. Backed by Theory Ventures, Forerunner Ventures, and South Park Commons.",
+    url: "https://jobs.ashbyhq.com/koahlabs/0e9b7d88-7698-45f6-890b-9e25cca0ee8b",
+    postedDate: "2026-05-07",
+  },
+  "software-engineer-platform-koah": {
+    id: "software-engineer-platform-koah",
+    title: "Software Engineer - Platform",
+    startupId: "koah-labs",
+    location: "San Francisco, CA (In-person)",
+    type: "Full-time",
+    salary: "$180K - $250K + equity",
+    description:
+      "Koah Labs is hiring a Platform Software Engineer to design, build, and maintain the infrastructure powering an ad network for AI-native products. Operate serious systems at scale, own the platform layer beneath the product, and build reliable systems with rigor on performance and observability. Infra stack: Terraform, AWS, LGTM (Loki, Grafana, Tempo, Mimir), Tailscale, Cloudflare. Data: PostgreSQL, ClickHouse, Redis, Kafka, Python. Core app: Ruby on Rails, React, TypeScript. Active users of palkan's layered design for Rails, Lefthook, Yabeda, and test-prof. Backed by Theory Ventures, Forerunner Ventures, and South Park Commons.",
+    url: "https://jobs.ashbyhq.com/koahlabs/729e2608-4a27-4aa7-895e-a427e55d466a",
+    postedDate: "2026-05-07",
+  },
   "product-engineer-patch": {
     id: "product-engineer-patch",
     title: "Product Engineer (Senior / Staff+)",
