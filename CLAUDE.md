@@ -32,7 +32,7 @@ Content comes from three sources:
 2. **Luma API** - Meetup events (fetched via `scripts/fetch-luma-events.js`)
 3. **Hand-maintained JS files** - Jobs (`src/data/jobs.js`), meetup recordings (`src/data/meetup-recordings.js`), hosts, sponsors, speakers, schedule
 
-Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions. Jobs do **not** flow through Google Sheets — edit `src/data/jobs.js` directly.
+Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions. Jobs do **not** flow through Google Sheets — edit `src/data/jobs.js` directly. (`src/content/jobs.json` is unused; the plumbing was removed in commit `833216b`.)
 
 ### Directory Structure
 
@@ -43,6 +43,8 @@ Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The 
 - `src/content/` - JSON data fetched from external sources
 - `src/utils/` - TypeScript utilities and type definitions
 - `scripts/` - Build-time data fetching scripts
+- `drafts/` - Gitignored. Monthly Substack drafts live here as a pair: `substack-YYYY-MM-[month].md` (working draft) and `.html` (paste-ready, since Substack's editor doesn't parse Markdown).
+- `src/pages/news/YYYY-MM.astro` - Per-issue archive pages. When publishing a new monthly issue, keep prior issue pages intact for archive linking.
 
 ### Key Types (src/utils/types.ts)
 
@@ -64,6 +66,46 @@ Required for `npm run build` (data fetching):
 - **Minimal JS**: Uses inline `<script>` tags in components for interactivity (modals, filtering)
 - **Modal System**: TalkModal, StartupModal, EmailModal components use embedded JavaScript
 - **URL Parameters**: Shareable URLs for talks via `?talk=id` query param
+
+## Data Quality & Editorial Conventions
+
+These rules apply to all content edits (jobs, talks, news, startups, meetup recordings, drafts).
+
+### Verify names against authoritative sources
+
+- **Speaker names**: rubyevents.org is canonical. Match its spelling exactly (recent corrections: "Sergy Sergyenko", "Ronan Potage", "Anonoz Chong").
+- **Project / gem / library names**: confirm via `rubygems.org/api/v1/gems/<name>.json`, the speaker's GitHub, or the project landing page.
+- **YouTube auto-captions mangle Ruby vocabulary.** Past mishears that almost shipped: "Reagance" → **Ragents**, "ametronet-js" → **garnet-js**, "Ubloud" → **ubicloud**, "gem.cop" → **gem.coop**. If a captioned name looks like an English word, assume it's wrong and verify. Prefer URLs/repo names shown on-screen over caption transcriptions.
+
+### Ruby ≠ Rails
+
+Several major Ruby companies don't use Rails. Don't say "Rails" when you mean "Ruby":
+
+- **Stripe** — Sinatra + internal framework. Not Rails.
+- **Ubicloud** — Roda. Not Rails.
+
+Use "Ruby-based" when mixing Rails and non-Rails companies. Use "Rails" only when confirmed via the company's tech blog or current job postings.
+
+### Editorial voice for SF Ruby copy
+
+When writing news, social posts, or homepage copy: lead with what Ruby **IS** (winning, dynamic, shipping, growing), not what it isn't. Avoid the "Rails is dead" trope in any form — even ironic subversion centers the frame we're trying to displace.
+
+## Maintenance Workflows
+
+### Jobs board audit (`src/data/jobs.js`)
+
+Audit URLs monthly alongside the News refresh. Stale listings erode site credibility.
+
+- **Content-check, don't trust HTTP status.** Greenhouse, Ashby, and Thatch return 200 even for closed jobs — grep the response body for "Job not found", "Sorry, we couldn't find", or "page you're looking for isn't here".
+- **JS-heavy career pages** (Whop, Persona, CompanyCam, Chime) defeat WebFetch. Use Playwright MCP, then evaluate `document.body.innerText` or extract `/jobs/` anchors.
+- **Replace, don't just remove.** When a listing closes, check the same company's careers page for an equivalent Ruby/Rails opening and swap in-place. Drop entirely only if no equivalent exists.
+- **Keep a paper trail.** Move closed listings to commented-out blocks at the bottom of `jobs.js` under the `ARCHIVED` header.
+- After deploying, re-content-check every outbound job URL on prod.
+
+### Verifying changes locally
+
+- `npm run build:dev` — fast syntax check without env vars or external fetch. Use this after editing data files.
+- `npm run build` — full build, requires Sheet/Luma env vars.
 
 ## Allowed Tools
 
