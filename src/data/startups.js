@@ -461,6 +461,19 @@ export const startups = {
     news: "Backed by Theory Ventures, Forerunner Ventures, and South Park Commons",
     newsUrl: "https://www.koahlabs.com/about",
   },
+  stealth_startup: {
+  id: "stealth_startup",
+  name: "Stealth Startup",
+  logo: "/startup_stealth.svg",
+  url: "",
+  description:
+    "Companies operating in stealth — not yet publicly disclosing their product, brand, or funding. See the individual job listing for role-specific details about the team, stack, and mission.",
+  demoTime: "",
+  founded: null,
+  funding: null,
+  valuation: null,
+  news: null,
+},
 };
 
 // Helper functions
