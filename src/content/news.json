@@ -1,5 +1,235 @@
 [
   {
+    "id": "matz-spinel-ai-compiler",
+    "date": "2026-04-24",
+    "headline": "Matz unveils Spinel — AI-built Ruby AOT compiler, 11.6× faster than MiniRuby",
+    "summary": "At RubyKaigi 2026 in Hakodate, Yukihiro Matsumoto debuted Spinel, a native Ruby compiler that goes Ruby → AST → C → binary. Three-year-old idea, implemented in weeks with Claude Code. MIT licensed, 1.5K GitHub stars.",
+    "link": "https://www.theregister.com/devops/2026/05/06/ruby-inventor-matz-working-on-native-compiler-with-ai-help/",
+    "category": "Release",
+    "startupName": "",
+    "source": "The Register"
+  },
+  {
+    "id": "chime-q1-2026-first-gaap-profit",
+    "date": "2026-05-06",
+    "headline": "Chime turns first GAAP profit — $647M revenue (+25%), 10.2M members",
+    "summary": "SF-based Rails fintech reports its first GAAP profitable quarter as a public company. Net income $53.5M, EPS $0.13 (vs. -$0.08 expected), adjusted EBITDA $118.6M (18% margin). Raises full-year guidance to $2.66–2.69B.",
+    "link": "https://investors.chime.com/news-releases/news-release-details/chime-reports-first-quarter-2026-financial-results",
+    "category": "Press",
+    "startupName": "Chime",
+    "source": "Chime Investor Relations"
+  },
+  {
+    "id": "stripe-sessions-2026-288-launches",
+    "date": "2026-04-29",
+    "headline": "Stripe Sessions 2026: 288 launches, agentic commerce, Link AI-agent wallet",
+    "summary": "SF Ruby company (Sinatra + internal framework) ships 288 new products at its annual conference. Agentic Commerce Suite expands with Meta and Google partnerships, Link adds an AI-agent wallet, and Stripe Reader T600 ships. 9,000 attendees at Moscone.",
+    "link": "https://stripe.com/newsroom/news/sessions-2026",
+    "category": "Release",
+    "startupName": "Stripe",
+    "source": "Stripe Newsroom"
+  },
+  {
+    "id": "shopify-acquires-vantage-discovery",
+    "date": "2026-04-15",
+    "headline": "Shopify acquires Vantage Discovery to deepen AI search stack",
+    "summary": "Rails Foundation Core member absorbs the San Jose AI-search startup for an undisclosed amount. Vantage's semantic-search team joins Shopify's merchant + buyer AI stack. Comes in a Q1 of $3.2B revenue (+34%) and the first $100B+ GMV quarter.",
+    "link": "https://betakit.com/shopify-acquires-search-startup-vantage-discovery-for-undisclosed-amount/",
+    "category": "Acquisition",
+    "startupName": "Shopify",
+    "source": "BetaKit"
+  },
+  {
+    "id": "intercom-fin-for-sales-launch",
+    "date": "2026-04-24",
+    "headline": "Intercom launches Fin for Sales — AI agent now qualifies leads and books meetings",
+    "summary": "Fin moves beyond support. Spring broadcast ships Fin for Sales (qualifying leads, booking meetings, starting trials), a free Fin Copilot tier (10 conversations/month per agent), and Fin Insights with CX Score and Optimize Dashboard. Fin growing 350% YoY across 8,000 companies — all on a 2M-line Rails monolith.",
+    "link": "https://siliconangle.com/2026/04/24/intercoms-customer-service-agent-takes-new-sales-role/",
+    "category": "Release",
+    "startupName": "Intercom",
+    "source": "SiliconANGLE"
+  },
+  {
+    "id": "doximity-clinical-ai-suite",
+    "date": "2026-05-05",
+    "headline": "Doximity ships free Clinical AI Suite to U.S. clinicians",
+    "summary": "SF-based Rails Foundation Core member bundles Ask, Scribe, and Dialer into one free product for U.S. clinicians. Scribe is already generating millions of clinical notes for 10K+ Doximity members in beta.",
+    "link": "https://blog.doximity.com/articles/introducing-the-doximity-clinical-ai-suite",
+    "category": "Release",
+    "startupName": "Doximity",
+    "source": "Doximity Blog"
+  },
+  {
+    "id": "gusto-spring-showcase-2026",
+    "date": "2026-05-08",
+    "headline": "Gusto Spring Showcase: ~75 features deepen Claude, ChatGPT, Slack",
+    "summary": "SF Rails unicorn ($9.5B valuation) extends its agent-accessible footprint. Owners now run payroll and ask wage / overtime questions in natural language inside Claude, ChatGPT, and Slack — building on the April launch.",
+    "link": "https://gusto.com/resources/company-news/spring-showcase-2026",
+    "category": "Release",
+    "startupName": "Gusto",
+    "source": "Gusto"
+  },
+  {
+    "id": "saeloun-rails-ai-setup",
+    "date": "2026-04-29",
+    "headline": "Saeloun packages Garry Tan's AI toolkit as a Rails workflow",
+    "summary": "Rails consultancy Saeloun publishes a long-form walkthrough of the YC CEO's stack — Perplexity, Claude Code, Codex, Conductor, GBrain, gstack, Copilot/CodeRabbit, mandatory human gate — framed explicitly as the Rails AI setup. First time a Rails shop packages and evangelizes Tan's runtime-agnostic tooling as a Rails workflow.",
+    "link": "https://blog.saeloun.com/2026/04/29/ever-improving-ai-setup-rails-gbrain-gstack-codex-claude-perplexity/",
+    "category": "Press",
+    "startupName": "",
+    "source": "Saeloun"
+  },
+  {
+    "id": "garry-tan-thin-harness-fat-skills",
+    "date": "2026-04-13",
+    "headline": "Garry Tan: \"Thin harness, fat skills\" — the agentic engineering thesis",
+    "summary": "YC CEO publishes a 90-day retrospective on agentic engineering: push fuzzy operations into markdown skills, push deterministic operations into code, keep the harness thin. The clearest articulation yet of why opinionated, convention-driven frameworks compose well with LLMs — without saying Rails by name.",
+    "link": "https://www.linkedin.com/posts/garrytan_i-posted-an-essay-on-what-ive-learned-about-activity-7448916360555929600-Sxl-",
+    "category": "Press",
+    "startupName": "",
+    "source": "LinkedIn"
+  },
+  {
+    "id": "thoughtbot-rails-audit-claude-skill",
+    "date": "2026-04-13",
+    "headline": "thoughtbot ships a Rails-audit Claude Code skill",
+    "summary": "Jose Blanco and Chad Pytel built a Claude Code skill that runs a structured Rails code audit against thoughtbot's Ruby Science / Testing Rails playbooks plus a security checklist, returning severity-tagged Markdown reports. MIT licensed.",
+    "link": "https://thoughtbot.com/blog/ai-in-focus:a-new-claude-skill-for-rails-code-audits",
+    "category": "Release",
+    "startupName": "",
+    "source": "thoughtbot"
+  },
+  {
+    "id": "angellist-usvc-500-minimum",
+    "date": "2026-04-22",
+    "headline": "AngelList launches USVC — $500-minimum venture fund open to everyone",
+    "summary": "SF-based Rails platform opens a regulated closed-end venture fund to every U.S. investor (no accreditation required) at a $500 minimum. Naval Ravikant chairs the investment committee. Holdings include OpenAI, Anthropic, xAI, Sierra, Crusoe, Vercel, and Legora.",
+    "link": "https://www.crowdfundinsider.com/2026/04/274959-angellist-launches-usvc-a-regulated-venture-fund-available-to-everyone-minimum-investment-of-500/",
+    "category": "Release",
+    "startupName": "AngelList",
+    "source": "Crowdfund Insider"
+  },
+  {
+    "id": "omada-q1-2026-crosses-1m-members",
+    "date": "2026-05-07",
+    "headline": "Omada crosses 1M members, joins Optum Rx Weight Engage for GLP-1",
+    "summary": "SF Rails company posts Q1 revenue $78M (+42% YoY), 1.02M members (+51%, first time over 1M), and a small adjusted EBITDA profit ($1M vs. -$4M a year ago). Joins Optum Rx's Weight Engage portfolio for GLP-1 access — now contracted with all three major PBMs — and Eli Lilly's Employer Connect. Raises 2026 guidance to $322–330M.",
+    "link": "https://www.globenewswire.com/news-release/2026/05/07/3290526/0/en/Omada-Health-Reports-First-Quarter-2026-Results.html",
+    "category": "Press",
+    "startupName": "Omada Health",
+    "source": "GlobeNewsWire"
+  },
+  {
+    "id": "shopify-q1-2026-100b-gmv",
+    "date": "2026-05-05",
+    "headline": "Shopify Q1 2026: $3.2B revenue (+34%), first $100B+ GMV quarter",
+    "summary": "Rails Foundation Core member crosses $100B in quarterly GMV for the first time. Merchant solutions revenue +39%, free-cash-flow margin held at 15%. Stock dropped on softer Q2 guidance, but the print is a milestone for any commerce platform.",
+    "link": "https://www.shopify.com/news/shopify-q1-2026-financial-results",
+    "category": "Press",
+    "startupName": "Shopify",
+    "source": "Shopify"
+  },
+  {
+    "id": "instacart-q1-2026-first-1b-revenue",
+    "date": "2026-05-06",
+    "headline": "Instacart Q1 2026: first $1B revenue quarter, ads +16%",
+    "summary": "Rails-backed grocery platform crosses $1B in quarterly revenue for the first time. Total revenue $1.02B (+14%), GTV $10.3B, GAAP EPS $0.57. Advertising revenue grew 16% — its fastest pace since Q3 2023.",
+    "link": "https://investors.instacart.com/news-releases/news-release-details/instacart-announces-first-quarter-2026-financial-results",
+    "category": "Press",
+    "startupName": "Instacart",
+    "source": "Instacart IR"
+  },
+  {
+    "id": "block-q1-2026-record",
+    "date": "2026-05-07",
+    "headline": "Block Q1 2026: record gross profit $2.91B (+27%), Cash App +38%",
+    "summary": "Adjusted EPS $0.85 (+52%). Raised full-year guidance to $12.33B gross profit / $3.34B adjusted operating income. Shares up ~10% pre-market. Cash App and Square continue running on Ruby/Rails.",
+    "link": "https://www.stocktitan.net/sec-filings/XYZ/8-k-block-inc-reports-material-event-e61e67c1e641.html",
+    "category": "Press",
+    "startupName": "Block",
+    "source": "StockTitan"
+  },
+  {
+    "id": "airbnb-q1-2026",
+    "date": "2026-05-07",
+    "headline": "Airbnb Q1 2026: $2.7B revenue (+18%), GBV $29.2B",
+    "summary": "Rails-rooted travel platform raises full-year revenue growth outlook to low-to-mid teens. Flagged elevated EMEA/APAC cancellations from Middle East war but otherwise a clean print.",
+    "link": "https://news.airbnb.com/airbnb-q1-2026-financial-results/",
+    "category": "Press",
+    "startupName": "Airbnb",
+    "source": "Airbnb News"
+  },
+  {
+    "id": "rails-world-2026-austin-cfp",
+    "date": "2026-04-23",
+    "headline": "Rails World 2026 heads to Austin — 1,200 seats, AI/Agentic Systems track",
+    "summary": "Rails Foundation announces the biggest Rails World yet: Austin, Sep 23–24, 1,200-attendee capacity with dedicated AI / Agentic Systems and Trust & Security tracks. CFP closes May 16. Corporate tickets ($1,300) live; general admission ($699) on sale May 12, 10am CT.",
+    "link": "https://rubyonrails.org/2026/4/23/big-rails-world-2026-update-CFP",
+    "category": "Event",
+    "startupName": "",
+    "source": "Rails Foundation"
+  },
+  {
+    "id": "rubyllm-1-15-image-editing",
+    "date": "2026-05-07",
+    "headline": "RubyLLM 1.15: image editing, cost tracking, Action Text safety",
+    "summary": "Carmine Paolino's RubyLLM (≈5M downloads, ~3,900 stars) ships image editing via paint, conversation cost tracking with cache-read/write buckets, and Action Text plain-text extraction so HTML doesn't leak into prompts. Aliases now include Claude Opus 4.7.",
+    "link": "https://github.com/crmne/ruby_llm/releases/tag/1.15.0",
+    "category": "Release",
+    "startupName": "",
+    "source": "GitHub"
+  },
+  {
+    "id": "github-adopts-herb",
+    "date": "2026-05-06",
+    "headline": "GitHub adopts Herb to lint 500K lines of ERB across the github.com monolith",
+    "summary": "Joel Hawksley, staff engineer at GitHub working on the github.com Rails monolith, publishes the inside story: Rails core wants Herb to replace Erubi, and GitHub — rendering ERB at the largest scale of any Rails app — was asked to validate the parser. 500K lines of ERB across 10K files. Herb caught invalid markup and Ruby syntax that erb_lint had missed (~150 mismatched-tag cases alone). Main blocker is compile speed (7–15× slower than Erubi today).",
+    "link": "https://hawksley.org/2026/05/06/adopting-herb-at-github.html",
+    "category": "Press",
+    "startupName": "GitHub",
+    "source": "hawksley.org"
+  },
+  {
+    "id": "herb-v0-10-reactive-rendering",
+    "date": "2026-04-24",
+    "headline": "Herb v0.10 ships diff engine, dev server, and the foundation for reactive ERB",
+    "summary": "Marco Roth releases Herb v0.10 in time for RubyKaigi 2026, with a Syntax Tree Diff Engine, a Herb Dev Server (live page updates without full refresh, via the new @herb-tools/client package), compile-time optimizations for Action View tag helpers, and ActionView-specific static analysis. Marco's RubyKaigi talk: 'HTML-Aware ERB: The Path to Reactive Rendering.'",
+    "link": "https://github.com/marcoroth/herb/releases/tag/v0.10.0",
+    "category": "Release",
+    "startupName": "",
+    "source": "GitHub"
+  },
+  {
+    "id": "ruby-4-0-3-erb-cve",
+    "date": "2026-04-21",
+    "headline": "Ruby 4.0.3 ships ERB 6.0.1.1 security patch",
+    "summary": "A point release patching CVE-2026-41316: a Marshal.load deserialization vulnerability triggered when ERB and ActiveSupport are loaded against untrusted input. Recommended upgrade for every Rails app on Ruby 4.0.",
+    "link": "https://www.ruby-lang.org/en/news/2026/04/21/ruby-4-0-3-released/",
+    "category": "Release",
+    "startupName": "",
+    "source": "ruby-lang.org"
+  },
+  {
+    "id": "sf-ruby-may-2026-checkr",
+    "date": "2026-05-21",
+    "headline": "SF Ruby Meetup, May @ Checkr: fraud at scale, DSPy.rb, Chatwoot CEO",
+    "summary": "Thursday May 21, 5pm, One Montgomery St. Kurt Ude (Checkr) on engineering fraud solutions at enterprise scale, Waldemar Quevedo (Synadia) on building agents in Ruby with DSPy, and Pranav Raj (Chatwoot CEO, YC W21). 116+ RSVPs.",
+    "link": "https://luma.com/eyizxwjt",
+    "category": "Event",
+    "startupName": "",
+    "source": "Luma"
+  },
+  {
+    "id": "stripe-fast-ci-50m-ruby-monorepo",
+    "date": "2026-04-09",
+    "headline": "Stripe details Selective Test Execution for its 50M-line Ruby monorepo",
+    "summary": "Aditya Anchuri (Tech Lead, Ruby Infra Platform) publishes the inside story of Stripe's CI: 50 million lines of Ruby (Sinatra + internal framework), and Selective Test Execution that runs only ~5% of tests on average per PR. One of the largest Ruby codebases in the world, with engineering culture to match.",
+    "link": "https://stripe.dev/blog/selective-test-execution-at-stripe-fast-ci-for-a-50m-line-ruby-monorepo",
+    "category": "Press",
+    "startupName": "Stripe",
+    "source": "Stripe Dev Blog"
+  },
+  {
     "id": "x402-foundation-ai-payments",
     "date": "2026-04-02",
     "headline": "Coinbase, Stripe, and Shopify back x402 Foundation for AI payments",

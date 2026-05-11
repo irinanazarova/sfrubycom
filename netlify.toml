@@ -16,13 +16,23 @@
   status = 301
 
 [[redirects]]
+  from = "/talks"
+  to = "/videos"
+  status = 301
+
+[[redirects]]
+  from = "/talks/*"
+  to = "/videos/:splat"
+  status = 301
+
+[[redirects]]
   from = "/speakers"
-  to = "/talks"
+  to = "/videos"
   status = 301
 
 [[redirects]]
   from = "/schedule"
-  to = "/talks"
+  to = "/videos"
   status = 301
 
 [[redirects]]

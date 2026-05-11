@@ -127,8 +127,8 @@ export const jobs = {
     type: "Full-time",
     description:
       "Omada Health is hiring a Senior Software Engineer for the Member Engineering team to build the backends powering mobile applications for members and web applications for providers delivering digital healthcare. Spend 80-90% of time hands-on coding, mentor junior engineers, and propose AI solutions to complex problems. 7+ years experience with Ruby or Python, relational databases (PostgreSQL/MySQL), scalable APIs, and CI/CD pipelines. $172-224K base depending on state + bonus + equity. US-based.",
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7711461",
-    postedDate: "2026-04-27",
+    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7822840",
+    postedDate: "2026-05-10",
   },
   "software-engineer-backend-thatch": {
     id: "software-engineer-backend-thatch",
@@ -163,38 +163,27 @@ export const jobs = {
     url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
     postedDate: "2026-04-27",
   },
-  "senior-software-engineer-chime": {
-    id: "senior-software-engineer-chime",
-    title: "Senior Software Engineer, Application and Language Frameworks",
+  "senior-software-engineer-secure-cards-chime": {
+    id: "senior-software-engineer-secure-cards-chime",
+    title: "Senior Software Engineer, Secure Cards",
     sponsorId: "chime",
-    location: "Remote",
+    location: "San Francisco, CA",
     type: "Full-time",
     description:
-      "Chime is looking for a senior engineer to build and evolve our core messaging and low-latency data-sharing platforms – the backbone of information exchange across Chime services. The Application and Language Frameworks team also owns key systems that shape the developer experience and engineering consistency, including caching, job processing, unified tooling, and language and engineering excellence. $176k-$245k base.",
-    url: "https://careers.chime.com/en/jobs/8141073002/senior-software-engineer-application-and-language-frameworks/",
-    postedDate: "2025-01-13",
+      "Chime's Secured Card team is hiring a Senior Software Engineer to help scale and evolve Chime Card — the flagship product helping members safely build credit without debt. Drive technical design and architectural decisions across the service architecture, mentor engineers, and collaborate with product, risk, and design partners to deliver resilient, secure systems. Backend-focused, full-stack-friendly Rails environment. $164k-$227k base + bonus + equity.",
+    url: "https://careers.chime.com/en/jobs/8322470002/senior-software-engineer-secure-cards/",
+    postedDate: "2026-05-10",
   },
-  "senior-software-engineer-rails-boltnew": {
-    id: "senior-software-engineer-rails-boltnew",
-    title: "Senior Software Engineer (Ruby on Rails)",
-    sponsorId: "bolt-new",
-    location: "Remote",
-    type: "Full-time",
-    description:
-      "StackBlitz is hiring a Senior Software Engineer (Ruby on Rails) to help build bolt.new, the AI-powered full-stack web development agent. Work on the Rails backend powering bolt.new's cloud infrastructure, focusing on scalability, reliability, and performance. Use PostgreSQL, AWS, and APIs to support millions of developers building software in the browser. 5+ years of Rails and database experience required; bonus points for Node.js, TypeScript, and AI/LLM familiarity.",
-    url: "https://job-boards.greenhouse.io/stackblitz/jobs/4006004009?gh_src=fk3cln2c9us",
-    postedDate: "2025-01-13",
-  },
-  "principal-software-engineer-gusto": {
-    id: "principal-software-engineer-gusto",
-    title: "Principal Software Engineer - Contractors Payroll",
+  "principal-software-engineer-money-group-gusto": {
+    id: "principal-software-engineer-money-group-gusto",
+    title: "Principal Software Engineer, Money Group",
     sponsorId: "gusto",
-    location: "San Francisco, Denver, New York City, Remote",
+    location: "Denver, San Francisco, New York City",
     type: "Full-time",
     description:
-      "Gusto is seeking a Principal Software Engineer to lead the Contractors area of its flagship Payroll product, a high-impact role focused on architecting, building, and scaling backend systems that empower businesses to onboard and pay contractors globally. The position involves hands-on technical leadership, guiding projects across multiple teams, mentoring engineers, and driving key product initiatives spanning payroll, compliance, and real-time systems, especially within large-scale Ruby on Rails and TypeScript/React codebases. Ideal candidates have over 15 years of development experience.",
-    url: "https://job-boards.greenhouse.io/gusto/jobs/6447954?gh_src=ih272kl21us",
-    postedDate: "2025-01-16",
+      "Gusto is hiring a Principal Engineer to serve as Technical Lead across multiple teams in the Money Group — Gusto's fastest-growing organization and a cornerstone of the company's transformation into the Small Business Finance Platform. Define long-term technical vision for systems powering cash flow management, lending, expense controls, invoicing, payments, and tax optimization. Set architectural direction across 5+ teams, vet external partners, prototype new product lines, extract services from the monolith, and mentor engineers. Large-scale Ruby on Rails environment. $250k-$300k base in SF/NYC ($214k-$260k other metros) + bonus + equity.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7654934",
+    postedDate: "2026-05-10",
   },
   "principal-software-engineer-pay-group-gusto": {
     id: "principal-software-engineer-pay-group-gusto",
@@ -217,17 +206,6 @@ export const jobs = {
       "Gusto is hiring a Sr Staff Software Engineer to lead technical development of a new compliance product within the Entity Management team, helping small businesses navigate incorporation and ongoing legal requirements. Mentor engineers and execute the team's technical roadmap while collaborating across product, design, and marketing functions. 8+ years of software engineering experience required; Ruby on Rails, TypeScript, and React experience preferred. $225k-$275k + equity.",
     url: "https://job-boards.greenhouse.io/gusto/jobs/6963453",
     postedDate: "2026-04-27",
-  },
-  "staff-software-engineer-whop": {
-    id: "staff-software-engineer-whop",
-    title: "Staff Software Engineer, Backend",
-    sponsorId: "whop",
-    location: "Bay Area, CA & Brooklyn, NY",
-    type: "Full-time",
-    description:
-      "Build beautiful, fast, polished APIs across the Whop backend. Create primitive APIs used by internal and external developers. Create patterns, prompts, and internal tools to create leverage for other developers. Work closely with founders and designers to turn vision into clean architected systems. Come up with reusable architecture patterns. $300K+ cash + equity.",
-    url: "https://careers.whop.com/?gh_jid=4250926007",
-    postedDate: "2026-02-22",
   },
   "software-engineer-security-persona": {
     id: "software-engineer-security-persona",
@@ -290,6 +268,12 @@ export const jobs = {
    *   postedDate: "2025-01-13",
    * },
    *
+   * Omada — Senior SE Member Engineering re-listed under new ID 7822840
+   * "senior-software-engineer-member-omada-7711461": {
+   *   url: "https://job-boards.greenhouse.io/omadahealth/jobs/7711461",
+   *   postedDate: "2026-04-27",
+   * },
+   *
    * Thatch — Engineering Manager role no longer open
    * "engineering-manager-thatch": {
    *   url: "https://thatch.com/jobs/engineering-manager-4973468008",
@@ -313,6 +297,36 @@ export const jobs = {
    * "senior-staff-software-engineer-gusto": {
    *   url: "https://job-boards.greenhouse.io/gusto/jobs/5933602?gh_src=ih272kl21us",
    *   postedDate: "2025-01-16",
+   * },
+   *
+   * Gusto — Principal Contractors Payroll closed, replaced with Principal Money Group
+   * "principal-software-engineer-gusto": {
+   *   url: "https://job-boards.greenhouse.io/gusto/jobs/6447954?gh_src=ih272kl21us",
+   *   postedDate: "2025-01-16",
+   * },
+   *
+   * Chime — Senior SE Application and Language Frameworks closed,
+   * replaced with Senior SE Secure Cards
+   * "senior-software-engineer-chime": {
+   *   url: "https://careers.chime.com/en/jobs/8141073002/senior-software-engineer-application-and-language-frameworks/",
+   *   postedDate: "2025-01-13",
+   * },
+   *
+   * Whop — Staff Software Engineer, Backend (gh_jid=4250926007) closed.
+   * As of May 2026, Whop's Greenhouse board has collapsed to a single generic
+   * "Engineering" catch-all (gh_jid=5133646007) covering "Hardcore /
+   * Design / Business savvy" engineer archetypes — no Rails-specific listing
+   * "staff-software-engineer-whop": {
+   *   sponsorId: "whop",
+   *   url: "https://careers.whop.com/?gh_jid=4250926007",
+   *   postedDate: "2026-02-22",
+   * },
+   *
+   * StackBlitz / bolt.new — Senior Rails role closed; no Rails openings as of May 2026
+   * (current eng listings are Front-End / Full Stack / Applied AI only)
+   * "senior-software-engineer-rails-boltnew": {
+   *   url: "https://job-boards.greenhouse.io/stackblitz/jobs/4006004009?gh_src=fk3cln2c9us",
+   *   postedDate: "2025-01-13",
    * },
    *
    * Persona — explicit "Software Engineer, Ruby on Rails" listing no longer

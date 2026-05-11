@@ -187,7 +187,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                             <h1 class="font-display text-2xl md:text-3xl tracking-wider uppercase text-white font-bold">SF Ruby News</h1>
                             <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
                         </div>
-                        <p class="text-sm text-white/50 tracking-widest uppercase">April 2026</p>
+                        <p class="text-sm text-white/50 tracking-widest uppercase">May 2026</p>
                         <!-- Past Issues -->
                         <div class="absolute top-0 right-0">
                             <div class="flex items-center gap-3 text-xs text-white/40">
@@ -205,22 +205,22 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
 
                         <!-- Page 1 -->
                         <div class="news-page" data-page="0">
-                            <!-- Headline Story: x402 Foundation -->
+                            <!-- Headline Story: GitHub adopts Herb -->
                             <div class="mb-10">
-                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">AI + Ruby</span>
-                                <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Ruby Powers AI Payments</h2>
+                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">Ruby at Scale</span>
+                                <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">GitHub Adopts Herb Across 500K Lines of ERB</h2>
                                 <div class="border-l-2 border-ruby-500/60 pl-6">
                                     <p class="text-lg md:text-xl text-white/80 leading-relaxed">
-                                        Three Ruby-based companies — <strong class="text-white">Coinbase</strong> (Rails), <strong class="text-white">Stripe</strong> (Sinatra), and <strong class="text-white">Shopify</strong> (Rails) — back the x402 Foundation, the Linux Foundation's new open standard for AI-native payments.
+                                        <strong class="text-white">Joel Hawksley</strong>, staff engineer on the github.com Rails monolith, publishes the inside story: <strong class="text-white">Rails core wants Herb to replace Erubi</strong>, and GitHub — rendering ERB at the largest scale of any Rails app — was asked to validate the parser.
                                     </p>
                                     <p class="text-sm text-white/60 leading-relaxed mt-4">
-                                        Coinbase and Stripe co-founded the foundation with Cloudflare. Shopify joins alongside <strong class="text-white/80">Google, AWS, Microsoft, Mastercard, and Visa</strong>. The first open protocol for agent-to-agent commerce.
+                                        500,000 lines of ERB across 10,000 files. 2,768 files initially failed Herb parsing. Herb caught markup and Ruby errors <code class="text-white/80">erb_lint</code> had missed (~150 mismatched-tag cases alone). Marco Roth's <a href="https://github.com/marcoroth/herb/releases/tag/v0.10.0" class="underline hover:text-white/80">Herb v0.10</a> shipped the same week — diff engine, dev server, and the foundation for reactive ERB rendering.
                                     </p>
                                     <div class="mt-4">
-                                        <p class="text-xs text-white/50">Apr 2, 2026</p>
+                                        <p class="text-xs text-white/50">May 6, 2026 · hawksley.org</p>
                                     </div>
-                                    <a href="https://www.coindesk.com/tech/2026/04/02/coinbase-s-ai-payments-system-joins-linux-foundation-gathers-support-from-google-stripe-aws-and-others/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Read more<span class="sr-only"> about x402 Foundation</span>
+                                    <a href="https://hawksley.org/2026/05/06/adopting-herb-at-github.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                        Read the post<span class="sr-only"> about GitHub adopting Herb</span>
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                                     </a>
                                 </div>
@@ -231,36 +231,137 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
 
                             <!-- Three Column Stories: Row 1 -->
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
-                                <!-- Acquisition: Gusto -->
+                                <!-- AI + Ruby: Matz Spinel -->
                                 <div class="md:pr-8">
-                                    <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Acquisition</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">Gusto Acquires Mosey, Ships Payroll in Claude</h3>
-                                    <p class="text-xs text-white/40 mb-2">Apr 8–9, 2026</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails unicorn ($9.5B valuation) acquires compliance platform Mosey — then ships payroll inside Claude and Slack. Two agent-native moves in 48 hours.</p>
-                                    <a href="https://www.prnewswire.com/news-releases/gusto-acquires-mosey-to-close-the-compliance-gap-for-small-businesses-302737584.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
-                                        Read more<span class="sr-only"> about Gusto acquiring Mosey</span>
+                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">AI + Ruby</span>
+                                    <h3 class="font-display text-xl font-bold text-white mb-2">Matz Ships an AI-Built Ruby Compiler</h3>
+                                    <p class="text-xs text-white/40 mb-2">Apr 24, 2026</p>
+                                    <p class="text-sm text-white/60 leading-relaxed mb-3">At RubyKaigi 2026, Matz unveils <strong class="text-white/80">Spinel</strong> — a native Ruby AOT compiler 11.6× faster than MiniRuby on Ruby 4.1. Ruby → AST → C → native binary. A three-year-old idea, implemented in weeks with Claude Code. MIT, 1.5K stars in two weeks.</p>
+                                    <a href="https://www.theregister.com/devops/2026/05/06/ruby-inventor-matz-working-on-native-compiler-with-ai-help/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                        Read more<span class="sr-only"> about Spinel</span>
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                     </a>
                                 </div>
-                                <!-- Release: Intercom Fin API -->
+                                <!-- Stripe — merged CI + Sessions -->
                                 <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
                                     <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">Intercom Opens Fin API</h3>
-                                    <p class="text-xs text-white/40 mb-2">Apr 3, 2026</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Rails Foundation Core member opens its Fin AI agent to developers. Fin Search and Reranker APIs. Contracts from $250K/year. Fin is on $100M ARR inside a $400M ARR Rails monolith.</p>
-                                    <a href="https://www.intercom.com/blog/introducing-the-fin-api-platform/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                        Read more<span class="sr-only"> about Intercom Fin API</span>
+                                    <h3 class="font-display text-xl font-bold text-white mb-2">Stripe: 50M-Line Ruby CI + 288 at Sessions</h3>
+                                    <p class="text-xs text-white/40 mb-2">Apr 9 · Apr 29–May 1, 2026</p>
+                                    <p class="text-sm text-white/60 leading-relaxed mb-3">SF Ruby company (Sinatra + internal framework) bookends April with two big signals. Aditya Anchuri details Stripe's <strong class="text-white/80">50-million-line Ruby monolith</strong> and Selective Test Execution (~5% of tests per PR). Days later: <a href="https://stripe.com/newsroom/news/sessions-2026" class="underline hover:text-white/80">288 Sessions launches</a> — Agentic Commerce with Meta/Google, AI-agent wallet, 9,000 attendees at Moscone.</p>
+                                    <a href="https://stripe.dev/blog/selective-test-execution-at-stripe-fast-ci-for-a-50m-line-ruby-monorepo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                        Read the CI post<span class="sr-only"> about Stripe</span>
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                     </a>
                                 </div>
-                                <!-- Acquisition: Apollo.io -->
+                                <!-- Intercom Fin for Sales -->
                                 <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Acquisition</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">Apollo.io Acquires Pocus</h3>
-                                    <p class="text-xs text-white/40 mb-2">Mar 20, 2026</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails sales platform (230M+ contacts, approaching $200M ARR) absorbs enterprise revenue intelligence. 400% enterprise growth in 12 months.</p>
-                                    <a href="https://thenextweb.com/news/apollo-acquires-pocus-revenue-intelligence-gtm" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
-                                        Read more<span class="sr-only"> about Apollo.io acquiring Pocus</span>
+                                    <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                                    <h3 class="font-display text-xl font-bold text-white mb-2">Intercom Launches Fin for Sales</h3>
+                                    <p class="text-xs text-white/40 mb-2">Apr 24, 2026</p>
+                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Fin moves beyond support. New Fin for Sales qualifies leads, books meetings, starts trials; Fin Copilot adds a free tier (10 conversations/month per agent); Fin Insights ships CX Score. Fin growing 350% YoY across 8,000 companies — all on a 2M-line Rails monolith.</p>
+                                    <a href="https://siliconangle.com/2026/04/24/intercoms-customer-service-agent-takes-new-sales-role/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                        Read more<span class="sr-only"> about Intercom Fin for Sales</span>
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Three Column Stories: Row 2 -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
+                                <div class="md:pr-8">
+                                    <div class="flex flex-col gap-3">
+                                        <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                        <h3 class="font-display text-xl font-bold text-white">RubyLLM 1.15: Image Editing + Cost Tracking</h3>
+                                        <p class="text-sm text-white/60 leading-relaxed">Carmine Paolino's RubyLLM (≈5M downloads) ships image editing via <code class="text-white/80">paint</code>, conversation cost tracking with cache-read/write buckets, and Action Text plain-text extraction so HTML doesn't leak into prompts. Now the de-facto Ruby LangChain.</p>
+                                        <a href="https://github.com/crmne/ruby_llm/releases/tag/1.15.0" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                            View release<span class="sr-only"> - RubyLLM 1.15</span>
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                                    <div class="flex flex-col gap-3">
+                                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Event</span>
+                                        <h3 class="font-display text-xl font-bold text-white">SF Ruby Meetup, May @ Checkr</h3>
+                                        <p class="text-sm text-white/60 leading-relaxed">Thursday May 21, 5pm, One Montgomery St. Kurt Ude (Checkr) on engineering fraud at enterprise scale, Waldemar Quevedo (Synadia) on building agents in Ruby with DSPy, and Pranav Raj (Chatwoot CEO, YC W21). 116+ RSVPs.</p>
+                                        <a href="https://luma.com/eyizxwjt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                            RSVP on Luma<span class="sr-only"> - SF Ruby May meetup at Checkr</span>
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="md:border-l md:border-white/10 md:pl-8">
+                                    <div class="flex flex-col gap-3">
+                                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Event</span>
+                                        <h3 class="font-display text-xl font-bold text-white">Rails World 2026: Austin, AI Track, 1,200 Seats</h3>
+                                        <p class="text-sm text-white/60 leading-relaxed">Rails Foundation announces the biggest Rails World yet: Austin, Sep 23–24, 1,200-attendee capacity, dedicated AI / Agentic Systems and Trust &amp; Security tracks. CFP closes May 16. General admission ($699) on sale May 12, 10am CT.</p>
+                                        <a href="https://rubyonrails.org/2026/4/23/big-rails-world-2026-update-CFP" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                            Read announcement<span class="sr-only"> - Rails World 2026 CFP</span>
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 2 -->
+                        <div class="news-page hidden" data-page="1">
+                            <!-- Headline Story: Q1 earnings -->
+                            <div class="mb-10">
+                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">Earnings</span>
+                                <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Public Rails Companies Print Records</h2>
+                                <div class="border-l-2 border-ruby-500/60 pl-6">
+                                    <p class="text-lg md:text-xl text-white/80 leading-relaxed">
+                                        <strong class="text-white">Chime</strong> turned its first GAAP-profitable quarter as a public company. <strong class="text-white">Shopify</strong> crossed $100B GMV. <strong class="text-white">Block</strong> printed a record $2.91B in gross profit.
+                                    </p>
+                                    <p class="text-sm text-white/60 leading-relaxed mt-4">
+                                        Chime: $647M revenue (+25%), 10.2M members, $53M net income. <strong class="text-white/80">Instacart</strong> hit its first $1B revenue quarter. <strong class="text-white/80">Airbnb</strong> $2.7B (+18%). <strong class="text-white/80">Procore</strong> $359M (+16%). All running Rails.
+                                    </p>
+                                    <div class="mt-4">
+                                        <p class="text-xs text-white/50">Q1 2026 results · May 5–7, 2026</p>
+                                    </div>
+                                    <a href="https://investors.chime.com/news-releases/news-release-details/chime-reports-first-quarter-2026-financial-results" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
+                                        Read Chime Q1 release<span class="sr-only"> - Q1 2026 earnings</span>
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Divider -->
+                            <div class="h-px bg-white/10 mb-10"></div>
+
+                            <!-- Three Column Stories: Row 1 -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                                <!-- Release: AngelList USVC -->
+                                <div class="md:pr-8">
+                                    <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                                    <h3 class="font-display text-xl font-bold text-white mb-2">AngelList USVC: $500 Minimum VC Fund</h3>
+                                    <p class="text-xs text-white/40 mb-2">Apr 22, 2026</p>
+                                    <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails platform opens a regulated venture fund to every U.S. investor at a $500 minimum. Naval Ravikant chairs. Holdings include OpenAI, Anthropic, xAI, Sierra, Crusoe, Vercel, Legora.</p>
+                                    <a href="https://www.crowdfundinsider.com/2026/04/274959-angellist-launches-usvc-a-regulated-venture-fund-available-to-everyone-minimum-investment-of-500/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                        Read more<span class="sr-only"> about AngelList USVC</span>
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                    </a>
+                                </div>
+                                <!-- Earnings: Omada -->
+                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                                    <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Earnings</span>
+                                    <h3 class="font-display text-xl font-bold text-white mb-2">Omada Crosses 1M Members, Joins Optum Rx GLP-1</h3>
+                                    <p class="text-xs text-white/40 mb-2">May 7, 2026</p>
+                                    <p class="text-sm text-white/60 leading-relaxed mb-3">SF Rails company posts Q1 revenue $78M (+42%), 1.02M members (+51%, first time over 1M), and adjusted EBITDA turned positive ($1M vs. -$4M a year ago). Joins Optum Rx's Weight Engage for GLP-1 access — now contracted with all three major PBMs — plus Eli Lilly Employer Connect. Raises 2026 guidance to $322–330M.</p>
+                                    <a href="https://www.globenewswire.com/news-release/2026/05/07/3290526/0/en/Omada-Health-Reports-First-Quarter-2026-Results.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                        Read more<span class="sr-only"> about Omada Q1</span>
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                    </a>
+                                </div>
+                                <!-- Release: Doximity Clinical AI Suite -->
+                                <div class="md:border-l md:border-white/10 md:pl-8">
+                                    <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
+                                    <h3 class="font-display text-xl font-bold text-white mb-2">Doximity Ships Free Clinical AI Suite</h3>
+                                    <p class="text-xs text-white/40 mb-2">May 5, 2026</p>
+                                    <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails Foundation Core member bundles Ask, Scribe, and Dialer into one free product for U.S. clinicians. Scribe is already generating millions of clinical notes for 10K+ Doximity members in beta.</p>
+                                    <a href="https://blog.doximity.com/articles/introducing-the-doximity-clinical-ai-suite" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                        Read more<span class="sr-only"> about Doximity Clinical AI Suite</span>
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                     </a>
                                 </div>
@@ -271,10 +372,10 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                 <div class="md:pr-8">
                                     <div class="flex flex-col gap-3">
                                         <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Acquisition</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Thatch Welcomes Venteur Customers</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">SF-based Rails health benefits platform (Series B, $84.5M raised) takes over competitor Venteur's customers, employees, and broker relationships — consolidating ICHRA lead.</p>
-                                        <a href="https://www.prnewswire.com/news-releases/thatch-welcomes-venteur-customers-to-advance-shared-health-benefits-mission-302730756.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
-                                            Read more<span class="sr-only"> about Thatch welcoming Venteur</span>
+                                        <h3 class="font-display text-xl font-bold text-white">Shopify Acquires Vantage Discovery</h3>
+                                        <p class="text-sm text-white/60 leading-relaxed">Rails Foundation Core member absorbs San Jose AI-search startup. Vantage's semantic search team joins Shopify's merchant + buyer AI stack. Adds to a Q1 of $3.2B revenue (+34%) and the first $100B+ GMV quarter.</p>
+                                        <a href="https://betakit.com/shopify-acquires-search-startup-vantage-discovery-for-undisclosed-amount/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+                                            Read more<span class="sr-only"> about Shopify acquiring Vantage Discovery</span>
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                         </a>
                                     </div>
@@ -282,10 +383,10 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                 <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
                                     <div class="flex flex-col gap-3">
                                         <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Basecamp Goes Agent-Native</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">DHH ships new API, CLI, and agent skill modules. AI agents can now manage projects, create todos, post messages. HEY and Fizzy next.</p>
-                                        <a href="https://world.hey.com/dhh/basecamp-becomes-agent-accessible-3ae6b949" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            Read more<span class="sr-only"> about Basecamp agent-native</span>
+                                        <h3 class="font-display text-xl font-bold text-white">Gusto Spring Showcase Deepens Claude</h3>
+                                        <p class="text-sm text-white/60 leading-relaxed">SF Rails unicorn ships ~75 new features and expands its agent-accessible footprint. Owners now run payroll in Claude, ChatGPT, and Slack with natural-language questions about wages and overtime.</p>
+                                        <a href="https://gusto.com/resources/company-news/spring-showcase-2026" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                            Read more<span class="sr-only"> about Gusto Spring Showcase</span>
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                         </a>
                                     </div>
@@ -293,111 +394,10 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                 <div class="md:border-l md:border-white/10 md:pl-8">
                                     <div class="flex flex-col gap-3">
                                         <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Rails Adds AGENTS.md</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">Rafael Mendonça França opens AGENTS.md; Xavier Noria merges. Official AI agent guidance now lives in the Rails repo — monorepo structure, testing conventions, contribution rules.</p>
-                                        <a href="https://github.com/rails/rails/pull/55991" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            View on GitHub<span class="sr-only"> - Rails AGENTS.md</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Page 2 -->
-                        <div class="news-page hidden" data-page="1">
-                            <!-- Headline Story: RubyKaigi 2026 -->
-                            <div class="mb-10">
-                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">Event</span>
-                                <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">RubyKaigi 2026: Hakodate</h2>
-                                <div class="border-l-2 border-ruby-500/60 pl-6">
-                                    <p class="text-lg md:text-xl text-white/80 leading-relaxed">
-                                        The world's largest Ruby conference heads to <strong class="text-white">Hokkaido, Japan</strong> for three days.
-                                    </p>
-                                    <p class="text-sm text-white/60 leading-relaxed mt-4">
-                                        Speakers include <strong class="text-white/80">Matz</strong>, <strong class="text-white/80">Charles Nutter</strong> (JRuby), and <strong class="text-white/80">Satoshi Tagomori</strong>. Lightning talks on a chartered Hakodate tram. RubyKaraoke. ESM Drinkup with Hokkaido seafood and sake.
-                                    </p>
-                                    <div class="mt-4">
-                                        <p class="text-xs text-white/50">Apr 22–24, 2026 · Hakodate Arena</p>
-                                    </div>
-                                    <a href="https://rubykaigi.org/2026/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        View schedule<span class="sr-only"> - RubyKaigi 2026</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Divider -->
-                            <div class="h-px bg-white/10 mb-10"></div>
-
-                            <!-- Three Column Stories: Row 1 -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
-                                <!-- Event: Ruby Runway -->
-                                <div class="md:pr-8">
-                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">Ruby Runway: Pitch Live at RubyConf</h3>
-                                    <p class="text-xs text-white/40 mb-2">Deadline: Apr 17, 2026</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Ruby Central's first global startup competition. Early-stage Ruby companies (under $500K raised) compete live at RubyConf 2026 in Las Vegas. 1st/2nd/3rd place plus Attendee Choice.</p>
-                                    <a href="https://rubyconf.org/ruby_runway/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Apply now<span class="sr-only"> - Ruby Runway</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                                <!-- Release: Puma 8.0 -->
-                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                                    <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">Puma 8.0: Into the Arena</h3>
-                                    <p class="text-xs text-white/40 mb-2">Apr 9, 2026</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Default Rails web server adds IO-bound thread marking (puma.mark_as_io_bound), dynamic thread pool updates at runtime, and default IPv6 bind address.</p>
-                                    <a href="https://github.com/puma/puma/releases" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                        View on GitHub<span class="sr-only"> - Puma 8.0</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                                <!-- Release: JRuby 10 -->
-                                <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Release</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">JRuby 10: Java 26 + RISC-V</h3>
-                                    <p class="text-xs text-white/40 mb-2">Apr 6, 2026</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Ruby 3.4 compatibility with Java 26 and RISC-V 64 support. 43 fixes including memory leaks and JIT compiler issues.</p>
-                                    <a href="https://www.jruby.org/2026/04/06/jruby-10-0-5-0.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                        Read more<span class="sr-only"> about JRuby 10</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Three Column Stories: Row 2 -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                                <div class="md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Security</span>
-                                        <h3 class="font-display text-xl font-bold text-white">RubyGems.org: DoS Prevention</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">AST-based gem validation by Aaron Patterson, audited against 180K gems. Have I Been Pwned integration flagged 1,166 accounts with breached credentials.</p>
-                                        <a href="https://blog.rubygems.org/2026/04/09/protecting-rubygems-from-the-outside-in.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors">
-                                            Read more<span class="sr-only"> about RubyGems security</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Ruby 3.2 End of Life</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">Final security patches for Ruby 3.2 (3.2.11) and 3.3 (3.3.11) shipped March 27. Ruby 3.2 officially EOL April 1. Upgrade to Ruby 4.0.x or stay on 3.4.x.</p>
-                                        <a href="https://www.ruby-lang.org/en/news/2026/03/27/ruby-3-2-11-released/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            Read more<span class="sr-only"> about Ruby 3.2 EOL</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Event</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Omacon NYC: Sold Out in Hours</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">DHH hosts 130 people at Shopify SoHo. ThePrimeagen, TJ DeVries, Dax Raad on stage. Omarchy hits 50K ISO downloads/week.</p>
-                                        <a href="https://www.omacon.org/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                            Read more<span class="sr-only"> about Omacon NYC</span>
+                                        <h3 class="font-display text-xl font-bold text-white">thoughtbot Ships Rails-Audit Claude Skill</h3>
+                                        <p class="text-sm text-white/60 leading-relaxed">A structured Claude Code skill that runs a full Rails code audit against thoughtbot's Ruby Science / Testing Rails playbooks and a security checklist, returning severity-tagged Markdown. MIT licensed. Tested on thoughtbot's own 10-year-old platform.</p>
+                                        <a href="https://thoughtbot.com/blog/ai-in-focus:a-new-claude-skill-for-rails-code-audits" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                            Read more<span class="sr-only"> about thoughtbot's Rails audit Claude skill</span>
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                         </a>
                                     </div>
@@ -699,7 +699,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                         {
                             featuredKeynotes.map((talk: any) => (
                                 <a
-                                    href={`/talks?talk=${talk.id}#${talk.id}`}
+                                    href={`/videos?talk=${talk.id}#${talk.id}`}
                                     class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
                                 >
                                     <div class="aspect-video bg-gray-900 relative overflow-hidden">
@@ -731,8 +731,8 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     </div>
 
                     <div class="mt-10 text-center">
-                        <Button href="/talks" variant="secondary">
-                            View all talks
+                        <Button href="/videos" variant="secondary">
+                            View all videos
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>

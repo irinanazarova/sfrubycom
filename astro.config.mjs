@@ -7,6 +7,10 @@ export default defineConfig({
   devOverlay: {
     enabled: false,
   },
+  redirects: {
+    "/talks": "/videos",
+    "/talks/": "/videos/",
+  },
   integrations: [tailwind()],
   build: {
     inlineStylesheets: "auto",
