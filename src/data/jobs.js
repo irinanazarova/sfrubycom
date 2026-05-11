@@ -3,6 +3,18 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "founding-fullstack-engineer-stealth-startup": {
+  id: "founding-fullstack-engineer-stealth-startup",
+  title: "Founding Senior Full Stack Engineer",
+  startupId: "stealth_startup",
+  location: "Raleigh, NC (Hybrid, ET required)",
+  type: "Full-time",
+  salary: "$150K - $180K + 1-2% equity",
+  description:
+    "Stealth-mode startup founded by the creator of Lodgistics (acquired 2024) is hiring a Founding Senior Full Stack Engineer to build a workforce management platform for the hospitality industry — software that powers staffing operations for hotels. Own product trajectory from MVP through pilot to production: ship with design partners, stabilize and scale the platform, then hire and lead the engineering team from month 3-9 onward. Partner directly with founders on roadmap and strategy, and engage with customers to understand real workflows. Stack: Ruby 3.x on Rails 8.x, PostgreSQL, Redis, Solid Queue, Devise, Action Policy, RSpec, Kamal, Docker on the backend; React 19, TypeScript (strict), react-hook-form + Zod, Nanostores, Vite, Tailwind, shadcn/Radix UI, Vitest, Playwright, MSW on the frontend. Requires 0→1 SaaS experience, direct hiring/mentoring of engineers, B2B SaaS background, strong API design with Rails/PostgreSQL, and complex React UI skills. Hospitality, workforce management, or OpenAPI-first design experience is a plus.",
+  url: "https://www.linkedin.com/jobs/view/4412158233/",
+  postedDate: "2026-05-11",
+},
   "software-engineer-backend-koah": {
     id: "software-engineer-backend-koah",
     title: "Software Engineer - Backend",
