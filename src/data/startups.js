@@ -461,19 +461,19 @@ export const startups = {
     news: "Backed by Theory Ventures, Forerunner Ventures, and South Park Commons",
     newsUrl: "https://www.koahlabs.com/about",
   },
-  stealth_startup: {
-  id: "stealth_startup",
-  name: "Stealth Startup",
-  logo: "/startup_stealth.svg",
-  url: "",
-  description:
-    "Companies operating in stealth — not yet publicly disclosing their product, brand, or funding. See the individual job listing for role-specific details about the team, stack, and mission.",
-  demoTime: "",
-  founded: null,
-  funding: null,
-  valuation: null,
-  news: null,
-},
+  duler: {
+    id: "duler",
+    name: "Stealth Startup",
+    logo: "/startup_stealth.svg",
+    url: "",
+    description:
+      "Stealth-mode startup from the founder of Lodgistics (acquired 2024) and Parks Hospitality Group, building a workforce management platform for the hospitality industry — the software hotels use to staff their properties. Pre-pilot stage with design partners lined up; MVP on staging. Ruby 3 / Rails 8 backend, React 19 + TypeScript frontend, Kamal/Docker deploys. Raleigh, NC.",
+    demoTime: "",
+    founded: null,
+    funding: null,
+    valuation: null,
+    news: null,
+  },
 };
 
 // Helper functions
