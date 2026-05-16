@@ -1,5 +1,35 @@
 [
   {
+    "id": "gusto-joins-ruby-alliance",
+    "date": "2026-05-11",
+    "headline": "Gusto becomes first member of Ruby Alliance, Ruby Central's new ecosystem coalition",
+    "summary": "Ruby Central launches the Ruby Alliance — a coalition of companies making significant investments in the long-term health, resilience, and sustainability of the Ruby ecosystem and its infrastructure. SF-based $9.5B Rails unicorn Gusto signs on as the inaugural member.",
+    "link": "https://rubycentral.org/news/gusto-joins-the-ruby-alliance/",
+    "category": "Press",
+    "startupName": "Gusto",
+    "source": "Ruby Central"
+  },
+  {
+    "id": "blastoff-rails-2026-save-the-date",
+    "date": "2026-06-11",
+    "headline": "Blastoff Rails 2026 in Albuquerque — June 11-12, Irina Nazarova + Kieran Klaassen keynote",
+    "summary": "Yearly U.S. Rails conference returns to Albuquerque, NM (June 11-12). 9 talks including keynotes from Irina Nazarova (Evil Martians) and Kieran Klaassen. Other talks: 'How to Become a Famous Ruby/Rails Agentic Developer,' 'Why We're Still Training Rails Developers in an Age of AI,' 'Fewer Tests, More Confidence.' Sponsors include Typesense, Avo, AppSignal.",
+    "link": "https://www.blastoffrails.com/",
+    "category": "Event",
+    "startupName": "",
+    "source": "Blastoff Rails"
+  },
+  {
+    "id": "blue-ridge-ruby-2026",
+    "date": "2026-04-30",
+    "headline": "Blue Ridge Ruby 2026 in Asheville — 21 talks, agent-thread cluster",
+    "summary": "Two-day, single-track Ruby conference in downtown Asheville (April 30 - May 1). 21 talks including 'LLM Telemetry as a First-Class Rails Concern,' 'Instillment of Successful Practices in an Agentic World,' and a lightning talk on 'Teaching Claude Code to Upgrade Rails.' Speakers: Joël Quenneville, Rachael Wright-Munn, Katya Sarmiento, Ifat Ribon.",
+    "link": "https://blueridgeruby.com/",
+    "category": "Event",
+    "startupName": "",
+    "source": "Blue Ridge Ruby"
+  },
+  {
     "id": "matz-spinel-ai-compiler",
     "date": "2026-04-24",
     "headline": "Matz unveils Spinel — AI-built Ruby AOT compiler, 11.6× faster than MiniRuby",
