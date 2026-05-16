@@ -72,8 +72,8 @@ export const jobs = {
     salary: "$175K - $200K + equity",
     description:
       "Join the Beam team — recently acquired by CompanyCam, focused on the intersection of fintech and AI for the construction industry. Design and build APIs, AI-powered workflows, and frontend features across both Beam and CompanyCam codebases. Provide technical leadership, ship products quickly, and collaborate directly with customers on real construction-finance problems. Full-stack role spanning multiple programming languages; in-person in SF's Financial District.",
-    url: "https://companycam.com/job?gh_jid=7696876003",
-    postedDate: "2026-04-28",
+    url: "https://job-boards.greenhouse.io/companycam/jobs/7696876003",
+    postedDate: "2026-05-15",
   },
   "founding-engineer-finta": {
     id: "founding-engineer-finta",
@@ -86,17 +86,6 @@ export const jobs = {
     url: "https://www.ycombinator.com/companies/finta/jobs/vg5fXEw-founding-engineer-ruby",
     postedDate: "2026-04-27",
   },
-  "staff-software-engineer-rails-companycam": {
-    id: "staff-software-engineer-rails-companycam",
-    title: "Staff Software Engineer (Ruby on Rails)",
-    sponsorId: "companycam",
-    location: "Remote (US)",
-    type: "Full-time",
-    description:
-      "CompanyCam is hiring a Staff Software Engineer to provide technical leadership across five core product teams while maintaining hands-on contributions to the Ruby on Rails systems that power their photo documentation platform for contractors. Provide architectural guidance and technical direction, mentor senior engineers, proactively mitigate technical risks, and help shape engineering practices as the company scales. Remote-first, US-based. $190k-$210k + equity.",
-    url: "https://companycam.com/job?gh_jid=7692268003",
-    postedDate: "2026-04-27",
-  },
   "staff-software-engineer-omada": {
     id: "staff-software-engineer-omada",
     title: "Staff Software Engineer",
@@ -105,8 +94,8 @@ export const jobs = {
     type: "Full-time",
     description:
       "Omada Health is hiring a Staff Software Engineer to lead the modernization, optimization, and scalability of its B2B platform. Re-architect complex legacy systems, design high-performance batch and real-time data pipelines, and ensure core capabilities — file ingestion, marketing outreach, eligibility, and billing — are robust and ready for growth. 10+ years experience required, with strong Ruby/Rails, PostgreSQL, and distributed systems expertise. $193-253K base depending on state + bonus + equity. US-based.",
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7611424",
-    postedDate: "2026-04-27",
+    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7915113",
+    postedDate: "2026-05-15",
   },
   "senior-software-engineer-enterprise-omada": {
     id: "senior-software-engineer-enterprise-omada",
@@ -196,16 +185,16 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/7027020",
     postedDate: "2026-04-27",
   },
-  "sr-staff-software-engineer-entity-management-gusto": {
-    id: "sr-staff-software-engineer-entity-management-gusto",
-    title: "Sr Staff Software Engineer, Entity Management",
+  "staff-software-engineer-core-platforms-gusto": {
+    id: "staff-software-engineer-core-platforms-gusto",
+    title: "Staff Software Engineer, Core Platforms",
     sponsorId: "gusto",
-    location: "San Francisco, CA",
+    location: "San Francisco, Denver, or New York City (Hybrid)",
     type: "Full-time",
     description:
-      "Gusto is hiring a Sr Staff Software Engineer to lead technical development of a new compliance product within the Entity Management team, helping small businesses navigate incorporation and ongoing legal requirements. Mentor engineers and execute the team's technical roadmap while collaborating across product, design, and marketing functions. 8+ years of software engineering experience required; Ruby on Rails, TypeScript, and React experience preferred. $225k-$275k + equity.",
-    url: "https://job-boards.greenhouse.io/gusto/jobs/6963453",
-    postedDate: "2026-04-27",
+      "Gusto is hiring a Staff Software Engineer to join the Core Platforms team — engineering the core business engine that 5+ product teams depend on. Help scale one of the largest Ruby/Rails + JavaScript/React applications in the world. Build reliable backend services, set the engineering standard for those around you, and partner with Product Engineering, Product Management, Data, and Design to translate customer pain points into solutions. AI is a fundamental part of how work gets done at Gusto. Hybrid in SF / Denver / NYC. $163k-$204k base depending on location + bonus + equity.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
+    postedDate: "2026-05-15",
   },
   "software-engineer-security-persona": {
     id: "software-engineer-security-persona",
@@ -256,6 +245,14 @@ export const jobs = {
    * "senior-software-engineer-agentic-companycam": {
    *   url: "https://companycam.com/job?gh_jid=7505187003",
    *   postedDate: "2024-11-20",
+   * },
+   *
+   * CompanyCam — Staff Software Engineer (Ruby on Rails, gh_jid=7692268003) closed
+   * (May 2026). Greenhouse API confirms only Senior SE Beam remains as the
+   * Rails-relevant CompanyCam role. No Staff Rails replacement on the board.
+   * "staff-software-engineer-rails-companycam": {
+   *   url: "https://companycam.com/job?gh_jid=7692268003",
+   *   postedDate: "2026-04-27",
    * },
    *
    * Omada — old Software Engineer II Enterprise role closed, no SE II replacement
