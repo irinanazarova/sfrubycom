@@ -63,17 +63,17 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/Reset/b40547a5-3b95-4646-8786-147cf83b4181?utm_source=rb8JwX8KGV",
     postedDate: "2026-04-28",
   },
-  "senior-software-engineer-beam-companycam": {
-    id: "senior-software-engineer-beam-companycam",
-    title: "Senior Software Engineer (Beam)",
+  "software-engineer-ii-companycam": {
+    id: "software-engineer-ii-companycam",
+    title: "Software Engineer II (Integrations)",
     sponsorId: "companycam",
-    location: "San Francisco, CA (In-person, Financial District)",
+    location: "Remote (US)",
     type: "Full-time",
-    salary: "$175K - $200K + equity",
+    salary: "$116.5K - $123K + equity",
     description:
-      "Join the Beam team — recently acquired by CompanyCam, focused on the intersection of fintech and AI for the construction industry. Design and build APIs, AI-powered workflows, and frontend features across both Beam and CompanyCam codebases. Provide technical leadership, ship products quickly, and collaborate directly with customers on real construction-finance problems. Full-stack role spanning multiple programming languages; in-person in SF's Financial District.",
-    url: "https://job-boards.greenhouse.io/companycam/jobs/7696876003",
-    postedDate: "2026-05-15",
+      "CompanyCam is hiring a Software Engineer II for the Integrations team: keep existing integrations healthy and growing, triage incoming support requests, manage endpoint updates and deprecations, and build enhancements on top of established integrations. Full-stack work (front end and back end) on a Rails + React codebase, for someone energized by a good debugging challenge. Remote-first engineering team spanning every US time zone. 1+ years of professional experience; Rails, React, PostgreSQL, and Datadog experience are pluses.",
+    url: "https://job-boards.greenhouse.io/companycam/jobs/7728259003",
+    postedDate: "2026-06-05",
   },
   "founding-engineer-finta": {
     id: "founding-engineer-finta",
@@ -97,16 +97,16 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7915113",
     postedDate: "2026-05-15",
   },
-  "senior-software-engineer-enterprise-omada": {
-    id: "senior-software-engineer-enterprise-omada",
-    title: "Senior Software Engineer (Enterprise)",
+  "senior-software-engineer-omada": {
+    id: "senior-software-engineer-omada",
+    title: "Senior Software Engineer",
     sponsorId: "omada",
     location: "Remote (US Only)",
     type: "Full-time",
     description:
-      "Omada Health is hiring a Senior Software Engineer to build and integrate tools that optimize contracting, eligibility, and billing processes. Be an informal team leader, mentor others, lead large projects, and leverage AI/ML tooling to deliver innovative solutions. 7+ years experience required, with Rails or Python, modern front-end frameworks (React/Vue), and PostgreSQL. $172-224K base depending on state + bonus + equity. US-based.",
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7685483",
-    postedDate: "2026-04-27",
+      "Omada Health is hiring a Senior Software Engineer to build and integrate tools that optimize contracting, eligibility, and billing processes. Be an informal team leader, mentor others, lead large projects, and leverage AI/ML tooling to deliver innovative solutions. 7+ years experience required, with Rails or Python, modern front-end frameworks (React/Vue), and PostgreSQL. Stack: AWS, Ruby, Rails, Postgres, Kafka. $179-224K base in CA/NY/WA ($172-215K in CO) + bonus + equity. US-based.",
+    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7137954",
+    postedDate: "2026-06-05",
   },
   "senior-software-engineer-member-omada": {
     id: "senior-software-engineer-member-omada",
@@ -163,16 +163,16 @@ export const jobs = {
     url: "https://careers.chime.com/en/jobs/8322470002/senior-software-engineer-secure-cards/",
     postedDate: "2026-05-10",
   },
-  "principal-software-engineer-money-group-gusto": {
-    id: "principal-software-engineer-money-group-gusto",
-    title: "Principal Software Engineer, Money Group",
+  "staff-software-engineer-payments-risk-gusto": {
+    id: "staff-software-engineer-payments-risk-gusto",
+    title: "Staff Software Engineer, Payments / Risk",
     sponsorId: "gusto",
-    location: "Denver, San Francisco, New York City",
+    location: "San Francisco or New York (Hybrid)",
     type: "Full-time",
     description:
-      "Gusto is hiring a Principal Engineer to serve as Technical Lead across multiple teams in the Money Group — Gusto's fastest-growing organization and a cornerstone of the company's transformation into the Small Business Finance Platform. Define long-term technical vision for systems powering cash flow management, lending, expense controls, invoicing, payments, and tax optimization. Set architectural direction across 5+ teams, vet external partners, prototype new product lines, extract services from the monolith, and mentor engineers. Large-scale Ruby on Rails environment. $250k-$300k base in SF/NYC ($214k-$260k other metros) + bonus + equity.",
-    url: "https://job-boards.greenhouse.io/gusto/jobs/7654934",
-    postedDate: "2026-05-10",
+      "Gusto is hiring Staff Software Engineers for the teams behind its payments and risk platforms. Design, build, and test core money-movement and risk services — payment rails, ledgering, wallets, fraud, decisioning engines, KYC, AML, and compliance capabilities. Help scale one of the largest Ruby/Rails and JavaScript/React applications in the world, mentor engineers, and own multi-quarter projects in complex financial domains. 8+ years of experience. $197k-$247k base in SF/NY ($163k-$204k Denver and most remote locations) + bonus + equity.",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7822587",
+    postedDate: "2026-06-05",
   },
   "principal-software-engineer-pay-group-gusto": {
     id: "principal-software-engineer-pay-group-gusto",
@@ -351,6 +351,20 @@ export const jobs = {
    *   startupId: "cactus",
    *   url: "https://www.ycombinator.com/companies/oncactus/jobs/EQeRwos-senior-ruby-on-rails-ai-engineer",
    *   postedDate: "2026-01-13",
+   * },
+   *
+   * Omada — Senior SE (Enterprise) closed (June 2026 audit); replaced with
+   * Senior Software Engineer (id 7137954), same contracting/eligibility/billing scope
+   * "senior-software-engineer-enterprise-omada": {
+   *   url: "https://job-boards.greenhouse.io/omadahealth/jobs/7685483",
+   *   postedDate: "2026-04-27",
+   * },
+   *
+   * Gusto — Principal SWE Money Group closed (June 2026 audit); replaced with
+   * Staff SWE Payments / Risk (id 7822587). No Principal Money Group role open.
+   * "principal-software-engineer-money-group-gusto": {
+   *   url: "https://job-boards.greenhouse.io/gusto/jobs/7654934",
+   *   postedDate: "2026-05-10",
    * },
    */
 };
