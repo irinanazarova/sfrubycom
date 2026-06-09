@@ -1,5 +1,205 @@
 [
   {
+    "id": "factorial-150m-series-d",
+    "date": "2026-06-03",
+    "headline": "Factorial raises $150M Series D at $2.5B valuation — one of Europe's most valuable AI scale-ups, built on Rails",
+    "summary": "Barcelona-based HR platform Factorial (Rails backend, 200+ product engineers) closes a $150M Series D led by General Catalyst, with up to an additional $540M committed through GC's Customer Value Fund — more than $700M in total. 16,000 businesses across 90 countries, ~2,600 employees, hiring up to 50 people a week. Funds the shift to an AI-powered workforce operations platform plus a new Munich office.",
+    "link": "https://www.prnewswire.com/news-releases/factorial-raises-150m-series-d-reaches-2-5-billion-valuation-to-become-one-of-the-most-valuable-ai-scale-ups-in-europe-302789074.html",
+    "category": "Funding",
+    "startupName": "Factorial",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "rubygems-supply-chain-response",
+    "date": "2026-05-16",
+    "headline": "RubyGems repels a supply-chain attack — registrations restored in five days",
+    "summary": "Thousands of attacker-controlled accounts flooded the registry with tens of thousands of malicious packages (May 11). RubyGems suspended new signups, yanked 500+ packages, shipped WAF and rate-limiting fixes with Fastly, and reopened registrations May 16.",
+    "link": "https://thehackernews.com/2026/05/rubygems-suspends-new-signups-after.html",
+    "category": "Press",
+    "startupName": "",
+    "source": "The Hacker News"
+  },
+  {
+    "id": "toptal-acquires-adeva",
+    "date": "2026-05-26",
+    "headline": "Toptal acquires Adeva",
+    "summary": "The Rails-built talent network absorbs Adeva, a global IT talent network of vetted developers, architects, and tech professionals. CEO Taso Du Val frames it as deepening Toptal's expertise, scale, and delivery capacity. Terms undisclosed.",
+    "link": "https://www.prnewswire.com/news-releases/toptal-announces-the-acquisition-of-adeva-302781293.html",
+    "category": "Acquisition",
+    "startupName": "Toptal",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "handshake-ai-1b-run-rate",
+    "date": "2026-04-15",
+    "headline": "Handshake AI reaches ~$1.1B annualized gross revenue, up 349% — on a Rails monolith",
+    "summary": "The career network's AI data-labeling arm serves OpenAI and other frontier labs at a ~$1.1B annualized gross revenue run rate (+349% YoY, ~$450M net after contractor pay). The platform underneath: a Rails monolith (Puma, Sidekiq) decomposing into Rails Engines.",
+    "link": "https://www.upstartsmedia.com/p/handshake-refounding-layoff-ai",
+    "category": "Press",
+    "startupName": "Handshake",
+    "source": "Upstarts Media"
+  },
+  {
+    "id": "fin-operator-launch",
+    "date": "2026-05-14",
+    "headline": "Fin launches Operator — an AI agent that manages the AI agent",
+    "summary": "Two days after the rebrand, Fin debuts Operator: an AI back-office for the teams that configure, monitor, and improve the customer-facing Fin agent. Disclosed alongside: Fin crossed $100M ARR, growing 3.5x. General availability planned for summer 2026.",
+    "link": "https://fin.ai/operator",
+    "category": "Release",
+    "startupName": "Intercom",
+    "source": "Fin"
+  },
+  {
+    "id": "intercom-becomes-fin",
+    "date": "2026-05-12",
+    "headline": "Intercom renames the company to Fin, after its AI agent",
+    "summary": "The 15-year-old company takes its AI agent's name: the corporate entity is now Fin, with Intercom continuing as the help-desk product. Fin nears $100M ARR inside a $400M+ ARR business, all running on the 2M-line Rails monolith. 1,400 employees and every contract stay intact.",
+    "link": "https://www.intercom.com/blog/today-intercom-becomes-fin/",
+    "category": "Press",
+    "startupName": "Intercom",
+    "source": "Intercom Blog"
+  },
+  {
+    "id": "clio-500m-arr",
+    "date": "2026-05-12",
+    "headline": "Clio crosses $500M ARR — up from $400M six months prior",
+    "summary": "The legal practice platform and longtime Rails shop hits $500M in annual recurring revenue, serving legal professionals in 130+ countries. CEO Jack Newton frames it as joining 'a rare class of profitable, accelerating AI platforms.' Follows the $1B vLex acquisition and a $5B valuation.",
+    "link": "https://www.clio.com/about/press/clio-500-million-arr/",
+    "category": "Press",
+    "startupName": "Clio",
+    "source": "Clio"
+  },
+  {
+    "id": "gitlab-q1-fy2027",
+    "date": "2026-06-02",
+    "headline": "GitLab Q1 FY2027: $264M revenue (+23%), 'agentic era is creating structural tailwinds'",
+    "summary": "Rails Foundation Core member reports Q1 FY2027 revenue of $264.2M (+23% YoY), 14% non-GAAP operating margin, $149.2M operating cash flow, and 117% net retention. CEO Bill Staples credits accelerating platform activity and traction from GitLab Duo Agent Platform.",
+    "link": "https://www.businesswire.com/news/home/20260602438182/en/GitLab-Reports-First-Quarter-Fiscal-Year-2027-Financial-Results",
+    "category": "Press",
+    "startupName": "GitLab",
+    "source": "Business Wire"
+  },
+  {
+    "id": "doximity-fy2026-results",
+    "date": "2026-05-13",
+    "headline": "Doximity closes FY2026 at $645M revenue with 800K+ active prescribers",
+    "summary": "SF-based Rails Foundation Core member reports FY2026 revenue of $644.9M (+13%) and free cash flow of $317.5M (+19%). Record 800,000+ active prescribers use its workflow tools; nearly half already use its clinical AI, with prompts per user nearly doubling from January to April. FY2027 guidance: $664-676M.",
+    "link": "https://press.doximity.com/articles/doximity-announces-fourth-quarter-and-fiscal-year-2026-financial-results",
+    "category": "Press",
+    "startupName": "Doximity",
+    "source": "Doximity"
+  },
+  {
+    "id": "thoughtbot-joins-ruby-alliance",
+    "date": "2026-05-19",
+    "headline": "thoughtbot becomes second member of the Ruby Alliance",
+    "summary": "The Ruby Alliance gets its second member after Gusto: thoughtbot commits engineering time and financial support to RubyGems and shared Ruby infrastructure. The coalition Ruby Central launched on May 11 is turning into a roster.",
+    "link": "https://rubycentral.org/news/thoughtbot-joins-the-ruby-alliance/",
+    "category": "Press",
+    "startupName": "",
+    "source": "Ruby Central"
+  },
+  {
+    "id": "sf-ruby-meetup-june-2026-planetscale",
+    "date": "2026-06-18",
+    "headline": "SF Ruby Meetup, June @ PlanetScale — Jeremy Evans on Implementing Core Set",
+    "summary": "Thursday June 18, 5pm, 108 Natoma St. Jeremy Evans on 'Implementing Core Set,' Alan Ridlehoover's 'Indispensable: What Human Computers Can Teach Human Programmers,' plus a PlanetScale talk and interest circles. Hosted with Sam Lambert. 108+ RSVPs.",
+    "link": "https://lu.ma/ltipgvuh",
+    "category": "Event",
+    "startupName": "PlanetScale",
+    "source": "Luma"
+  },
+  {
+    "id": "rubyconf-austria-2026",
+    "date": "2026-05-29",
+    "headline": "RubyConf Austria 2026 in Vienna — Dave Thomas and Chad Fowler keynote",
+    "summary": "22 talks over three days (May 29-31). Dave Thomas opens with 'Start Writing Ruby'; Chad Fowler answers with 'This is What We've Been Training For.' One panel seats Fowler, José Valim, Obie Fernandez, and Armin Ronacher. Plus Bozhidar Batsov on RuboCop 2.0, a Charles Nutter JRuby workshop, and Marco Roth's Herb & ReActionView progress update.",
+    "link": "https://rubyevents.org/events/rubyconf-austria-2026",
+    "category": "Event",
+    "startupName": "",
+    "source": "RubyConf Austria"
+  },
+  {
+    "id": "balkan-ruby-2026",
+    "date": "2026-05-15",
+    "headline": "Balkan Ruby 2026 in Sofia — 12 talks on AI and Rails internals",
+    "summary": "May 15-16. Jean Boussier on multiprocessing as the most efficient way to serve Rails apps, Marco Roth on HTML-aware ERB, Vladimir Dementyev (Evil Martians) with 'Drop your app/services!', Carmine Paolino's 'Ruby Is the Best Language for Building AI Web Apps,' and a PostgreSQL-to-SQLite migration story from production.",
+    "link": "https://rubyevents.org/events/balkan-ruby-2026",
+    "category": "Event",
+    "startupName": "",
+    "source": "Balkan Ruby"
+  },
+  {
+    "id": "checkr-profiles-launch",
+    "date": "2026-04-29",
+    "headline": "Checkr launches Profiles — verified identity that travels with you",
+    "summary": "SF background-check platform ($2.2B valuation, Rails) ships portable verified identity: identity verification, background checks, and credential validation in a shareable profile that individuals own. Built against AI-era fraud; per Checkr's research, 62% of managers believe people now fake identity better than organizations detect it.",
+    "link": "https://www.prnewswire.com/news-releases/checkr-launches-profiles-giving-people-a-verified-identity-that-travels-with-them-302756790.html",
+    "category": "Release",
+    "startupName": "Checkr",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "shopify-summer-26-edition",
+    "date": "2026-05-10",
+    "headline": "Shopify Summer '26 Edition: Horizon themes, AI block generation, 150+ changes",
+    "summary": "Rails Foundation Core member ships 150+ changes: the Horizon theme system with 10 free themes and AI block generation via Shopify Magic, up to 50% faster cart and checkout, a ground-up POS v10, Sidekick answering plain-English questions over ShopifyQL, and Payments in 16 new countries.",
+    "link": "https://www.shopify.com/editions",
+    "category": "Release",
+    "startupName": "Shopify",
+    "source": "Shopify"
+  },
+  {
+    "id": "brighton-ruby-2026",
+    "date": "2026-06-25",
+    "headline": "Brighton Ruby returns June 25 — 11 talks in one day",
+    "summary": "The long-running single-day UK conference returns with 11 talks: Rachael Wright-Munn's 'Your First Open-Source Contribution,' David Paluy's 'LLM Telemetry as a First-Class Rails Concern,' and Brooke Kuhlmann's Hanami + htmx app for e-ink devices.",
+    "link": "https://rubyevents.org/events/brighton-ruby-2026",
+    "category": "Event",
+    "startupName": "",
+    "source": "Brighton Ruby"
+  },
+  {
+    "id": "sfruby-jobs-june-2026-refresh",
+    "date": "2026-06-05",
+    "headline": "Fresh Ruby roles on the SF Ruby jobs board — every listing re-verified",
+    "summary": "The sfruby.com jobs board got its monthly audit: every listing content-checked against live career pages. New and refreshed roles from Gusto (Staff, Payments/Risk), Superconductor (Principal Rails), Koah Labs (Backend, Product, Platform), Omada Health, CompanyCam, plus open roles at Thatch, Persona, Chime, Patch, Reset, and Finta.",
+    "link": "https://sfruby.com/jobs",
+    "category": "Hiring",
+    "startupName": "",
+    "source": "SF Ruby"
+  },
+  {
+    "id": "persona-fedramp-moderate",
+    "date": "2026-05-21",
+    "headline": "Persona achieves FedRAMP Moderate Authorization",
+    "summary": "The SF identity unicorn ($2B valuation, Rails backend) earns FedRAMP Moderate Authorization as the only identity-verification provider in the FedRAMP 20x Phase 2 pilot. Federal agencies can now deploy Persona directly via the FedRAMP Marketplace and Carahsoft.",
+    "link": "https://www.businesswire.com/news/home/20260521233540/en/Persona-Achieves-FedRAMP-Moderate-Authorization-Giving-Federal-Agencies-Modern-Identity-Verification",
+    "category": "Press",
+    "startupName": "Persona",
+    "source": "Business Wire"
+  },
+  {
+    "id": "great-question-series-a",
+    "date": "2026-05-05",
+    "headline": "Great Question raises $13M Series A led by Inovia Capital",
+    "summary": "The Bay Area UX research platform (YC W21, Rails + React) raises $13M to expand its AI-driven research tools. Customers include ServiceNow, Brex, Canva, and Asana.",
+    "link": "https://greatquestion.co/blog/series-a",
+    "category": "Funding",
+    "startupName": "Great Question",
+    "source": "Great Question"
+  },
+  {
+    "id": "natural-agentic-payments-rails",
+    "date": "2026-06-01",
+    "headline": "Natural builds payment infrastructure for AI agents on Ruby on Rails",
+    "summary": "The SF startup building agentic payments (wallets, pay, request, and credit across banking and stablecoins) runs Ruby on Rails under the hood. Out of stealth with a $9.8M seed, and currently hiring 15 engineering roles.",
+    "link": "https://www.natural.co/",
+    "category": "Hiring",
+    "startupName": "Natural",
+    "source": "Natural"
+  },
+  {
     "id": "gusto-joins-ruby-alliance",
     "date": "2026-05-11",
     "headline": "Gusto becomes first member of Ruby Alliance, Ruby Central's new ecosystem coalition",
