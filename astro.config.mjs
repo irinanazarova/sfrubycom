@@ -9,7 +9,6 @@ export default defineConfig({
   },
   redirects: {
     "/talks": "/videos",
-    "/talks/": "/videos/",
   },
   integrations: [tailwind()],
   build: {

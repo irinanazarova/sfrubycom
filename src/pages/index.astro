@@ -175,10 +175,45 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
         <Header />
 
         <main class="flex-grow">
+            <!-- Conference Announcement -->
+            <!-- TODO before publish: replace href="#" with the real conference-page URL -->
+            <!-- Gradient runs the full height sky -> navy, ending on the news color so the join is seamless -->
+            <section id="conf-announcement" class="relative min-h-[92vh] flex items-center bg-gradient-to-b from-sky-400 via-sky-500 to-indigo-950 text-white overflow-hidden">
+                <!-- soft clouds -->
+                <div class="absolute top-24 left-1/5 w-80 h-36 bg-white/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute top-44 right-12 w-64 h-28 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute top-[30%] left-1/2 w-72 h-32 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-32">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <span class="inline-block px-3 py-1 bg-white/15 text-white text-xs md:text-sm font-bold uppercase tracking-wider rounded">Conference Announced</span>
+                        <span class="text-sm md:text-base text-white/70 tracking-widest uppercase">Nov 10–12, 2026 · SF Jazz, San Francisco</span>
+                    </div>
+                    <!-- TODO before publish: hero.png reads "2025" and "Ruby Conference" (not "Ruby Startup Conference") — swap for an updated 2026 logo asset -->
+                    <img src="/hero.png" alt="San Francisco Ruby Startup Conference" width="430" height="290" class="w-full max-w-lg lg:max-w-xl h-auto mb-8" />
+                    <!-- Photo: Seb Daly / Web Summit / Sportsfile, CC BY 2.0 (Wikimedia Commons) -->
+                    <div class="flex items-center gap-5">
+                        <img src="/speaker_garry_tan.jpg" alt="Garry Tan" width="500" height="667" loading="lazy" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover object-top ring-2 ring-white/40 shrink-0" />
+                        <div>
+                            <p class="text-xl md:text-2xl lg:text-3xl text-white/90 leading-snug">
+                                Keynote: <strong class="text-white">Garry Tan</strong>, President &amp; CEO of <strong class="text-white">Y Combinator</strong>
+                            </p>
+                            <p class="text-base md:text-lg text-white/70 mt-2">
+                                creator of <a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener noreferrer" class="underline hover:text-white transition-colors">GStack</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a href="/conference-2026" class="inline-flex items-center gap-2 text-base md:text-lg text-white/90 hover:text-white transition-colors">
+                            Learn more<span class="sr-only"> about the San Francisco Ruby Startup Conference</span>
+                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <!-- SF Ruby News Hero -->
-            <section id="news" class="relative bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden">
-                <div class="absolute inset-0 bg-ruby-950/30"></div>
-                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-16">
+            <section id="news" class="relative bg-gradient-to-b from-indigo-950 via-slate-950 to-slate-950 text-white overflow-hidden">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 pb-16">
 
                     <!-- Masthead -->
                     <div class="text-center mb-12 relative">
