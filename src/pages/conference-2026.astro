@@ -87,6 +87,9 @@ import "../styles/global.css";
                 <div
                     class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-28 text-center"
                 >
+                    <h1 class="sr-only">
+                        San Francisco Ruby Startup Conference 2026
+                    </h1>
                     <span
                         class="inline-block px-3 py-1 bg-white/15 text-white text-xs md:text-sm font-bold uppercase tracking-wider rounded mb-8"
                         >Conference Announced</span
@@ -135,52 +138,71 @@ import "../styles/global.css";
                         </a>
                     </div>
                 </div>
+
+                <!-- wave into the keynote section -->
+                <svg
+                    preserveAspectRatio="none"
+                    viewBox="0 0 1200 120"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="absolute bottom-0 left-0 w-full h-12 md:h-20"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
+                        fill="#f0f9ff"></path>
+                </svg>
             </section>
 
             <!-- Keynote -->
-            <section class="py-20 bg-white">
+            <section class="py-20 md:py-24 bg-gradient-to-b from-sky-50 to-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2
-                        class="font-display text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12"
+                    <p
+                        class="text-center text-sm font-bold uppercase tracking-widest text-ruby-600 mb-8"
                     >
                         Keynote
-                    </h2>
+                    </p>
                     <div
-                        class="flex flex-col md:flex-row items-center gap-8 md:gap-12"
+                        class="bg-white rounded-3xl shadow-xl ring-1 ring-gray-900/5 p-8 md:p-12"
                     >
-                        <!-- Photo: Seb Daly / Web Summit / Sportsfile, CC BY 2.0 (Wikimedia Commons) -->
-                        <img
-                            src="/speaker_garry_tan.jpg"
-                            alt="Garry Tan"
-                            width="500"
-                            height="667"
-                            loading="lazy"
-                            class="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover object-top shadow-lg shrink-0"
-                        />
-                        <div class="text-center md:text-left">
-                            <h3
-                                class="font-display text-2xl md:text-3xl font-bold text-gray-900"
-                            >
-                                Garry Tan
-                            </h3>
-                            <p class="text-lg text-ruby-600 font-medium mt-1">
-                                President &amp; CEO, Y Combinator
-                            </p>
-                            <p
-                                class="text-base md:text-lg text-gray-600 leading-relaxed mt-4"
-                            >
-                                Garry co-founded Initialized Capital, built
-                                Bookface, YC's internal software, on Rails, and
-                                created <a
-                                    href="https://github.com/garrytan/gstack"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="text-ruby-600 underline hover:text-ruby-700 transition-colors"
-                                    >GStack</a
-                                >, his open-source Claude Code toolkit. Since
-                                2023, he's led YC's fastest-growing and most
-                                profitable batches on record.
-                            </p>
+                        <div
+                            class="flex flex-col md:flex-row items-center gap-8 md:gap-12"
+                        >
+                            <!-- Photo: Seb Daly / Web Summit / Sportsfile, CC BY 2.0 (Wikimedia Commons) -->
+                            <img
+                                src="/speaker_garry_tan.jpg"
+                                alt="Garry Tan"
+                                width="500"
+                                height="667"
+                                loading="lazy"
+                                class="w-44 h-44 md:w-56 md:h-56 rounded-2xl object-cover object-top shadow-lg shrink-0"
+                            />
+                            <div class="text-center md:text-left">
+                                <h2
+                                    class="font-display text-3xl md:text-4xl font-bold text-gray-900"
+                                >
+                                    Garry Tan
+                                </h2>
+                                <p
+                                    class="text-lg md:text-xl text-ruby-600 font-medium mt-1"
+                                >
+                                    President &amp; CEO, Y Combinator
+                                </p>
+                                <p
+                                    class="text-base md:text-lg text-gray-600 leading-relaxed mt-5"
+                                >
+                                    Garry co-founded Initialized Capital, built
+                                    Bookface, YC's internal software, on Rails,
+                                    and created <a
+                                        href="https://github.com/garrytan/gstack"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-ruby-600 underline hover:text-ruby-700 transition-colors"
+                                        >GStack</a
+                                    >, his open-source Claude Code toolkit. Since
+                                    2023, he's led YC's fastest-growing and most
+                                    profitable batches on record.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,10 +210,10 @@ import "../styles/global.css";
 
             <!-- Get notified -->
             <section
-                class="py-20 bg-gradient-to-br from-sky-500 via-sky-600 to-indigo-700 text-white"
+                class="relative overflow-hidden pt-20 pb-28 bg-gradient-to-br from-sky-500 via-sky-600 to-indigo-700 text-white"
             >
                 <div
-                    class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+                    class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
                 >
                     <h2
                         class="font-display text-3xl md:text-4xl font-bold text-white"
@@ -310,6 +332,19 @@ import "../styles/global.css";
                         </div>
                     </div>
                 </div>
+
+                <!-- wave into the sponsor section -->
+                <svg
+                    preserveAspectRatio="none"
+                    viewBox="0 0 1200 120"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="absolute bottom-0 left-0 w-full h-12 md:h-16"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
+                        fill="#f8fafc"></path>
+                </svg>
             </section>
 
             <!-- Sponsor CTA -->
@@ -328,7 +363,7 @@ import "../styles/global.css";
                     </p>
                     <a
                         href="/sponsor-2026"
-                        class="inline-flex items-center gap-2 rounded-lg bg-ruby-600 px-6 py-3 text-base font-semibold text-white hover:bg-ruby-500 transition-colors"
+                        class="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-ruby-500 to-pink-500 px-6 py-3 text-base font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                     >
                         Become a 2026 sponsor
                         <svg

@@ -119,20 +119,18 @@ const tiers2026 = [
         <Header />
 
         <main class="flex-grow">
-            <!-- Hero Section with Dark Background -->
+            <!-- Hero -->
             <section
-                class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden"
+                class="relative pt-32 pb-28 bg-gradient-to-b from-sky-400 via-sky-500 to-indigo-700 text-white overflow-hidden"
             >
-                <!-- Background effects -->
-                <div class="absolute inset-0 overflow-hidden">
-                    <div
-                        class="absolute top-20 left-10 w-72 h-72 bg-ruby-500/10 rounded-full blur-3xl"
-                    >
-                    </div>
-                    <div
-                        class="absolute bottom-20 right-20 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"
-                    >
-                    </div>
+                <!-- soft clouds -->
+                <div
+                    class="absolute top-20 left-1/5 w-72 h-32 bg-white/20 rounded-full blur-3xl pointer-events-none"
+                >
+                </div>
+                <div
+                    class="absolute top-36 right-12 w-56 h-24 bg-white/10 rounded-full blur-3xl pointer-events-none"
+                >
                 </div>
 
                 <div
@@ -140,16 +138,29 @@ const tiers2026 = [
                 >
                     <div class="text-center">
                         <h1
-                            class="text-4xl md:text-5xl font-bold text-white mb-4"
+                            class="font-display text-4xl md:text-5xl font-bold text-white mb-4"
                         >
                             Sponsor SF Ruby 2026
                         </h1>
-                        <p class="text-xl text-gray-300">
+                        <p class="text-xl text-white/85">
                             Connect with the Ruby community at our annual
                             conference and monthly meetups.
                         </p>
                     </div>
                 </div>
+
+                <!-- wave into the white content below -->
+                <svg
+                    preserveAspectRatio="none"
+                    viewBox="0 0 1200 120"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="absolute bottom-0 left-0 w-full h-12 md:h-20"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
+                        fill="#ffffff"></path>
+                </svg>
             </section>
 
             <!-- Content Section -->
@@ -157,7 +168,7 @@ const tiers2026 = [
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- 2025 Stats -->
                     <div
-                        class="bg-white rounded-2xl border border-gray-200 p-8 mb-12"
+                        class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12"
                     >
                         <h2
                             class="text-xl font-bold text-gray-900 mb-6 text-center"
@@ -212,12 +223,12 @@ const tiers2026 = [
 
                     <!-- Why Sponsor -->
                     <div
-                        class="bg-white rounded-2xl border border-gray-200 p-8 mb-12"
+                        class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12"
                     >
                         <h2 class="text-xl font-bold text-gray-900 mb-6">
                             Why Sponsor?
                         </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="flex items-start gap-4">
                                 <div
                                     class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
@@ -316,7 +327,7 @@ const tiers2026 = [
                             {
                                 tiers2026.map((tier) => (
                                     <div
-                                        class={`relative flex flex-col rounded-2xl border p-8 ${tier.featured ? "border-ruby-300 ring-1 ring-ruby-200 bg-gradient-to-br from-ruby-50/60 to-white" : "border-gray-200 bg-white"}`}
+                                        class={`relative flex flex-col rounded-2xl border p-8 ${tier.featured ? "border-ruby-300 ring-1 ring-ruby-200 bg-gradient-to-br from-ruby-50/60 to-white shadow-lg shadow-ruby-500/10" : "border-gray-200 bg-white shadow-sm"}`}
                                     >
                                         {tier.featured && (
                                             <span class="absolute top-5 right-5 text-[11px] font-semibold uppercase tracking-wider text-ruby-600 bg-ruby-100 rounded-full px-2.5 py-1">
@@ -368,7 +379,7 @@ const tiers2026 = [
 
                     <!-- 2025 Sponsors -->
                     <div
-                        class="bg-white rounded-2xl border border-gray-200 p-8 mb-12"
+                        class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12"
                     >
                         <h2
                             class="text-xl font-bold text-gray-900 mb-6 text-center"
@@ -471,11 +482,11 @@ const tiers2026 = [
                         class="bg-gradient-to-br from-ruby-50 to-pink-50 rounded-2xl border border-ruby-100 p-8 text-center"
                     >
                         <h2 class="text-xl font-bold text-gray-900 mb-4">
-                            Interested in sponsoring?
+                            Questions, or want a custom package?
                         </h2>
                         <p class="text-gray-600 mb-6">
-                            Get in touch and we'll share sponsorship options for
-                            2026.
+                            Tell us what you have in mind and we'll tailor a
+                            sponsorship for 2026.
                         </p>
                         <button
                             data-email-modal="sponsor-2026"
@@ -494,7 +505,7 @@ const tiers2026 = [
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                                 ></path>
                             </svg>
-                            Contact Us
+                            Get in touch
                         </button>
                     </div>
                 </div>
