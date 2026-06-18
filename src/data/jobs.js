@@ -86,16 +86,16 @@ export const jobs = {
     url: "https://www.ycombinator.com/companies/finta/jobs/vg5fXEw-founding-engineer-ruby",
     postedDate: "2026-04-27",
   },
-  "staff-software-engineer-omada": {
-    id: "staff-software-engineer-omada",
-    title: "Staff Software Engineer",
+  "senior-software-engineer-assurance-omada": {
+    id: "senior-software-engineer-assurance-omada",
+    title: "Senior Software Engineer, Assurance",
     sponsorId: "omada",
     location: "Remote (US Only)",
     type: "Full-time",
     description:
-      "Omada Health is hiring a Staff Software Engineer to lead the modernization, optimization, and scalability of its B2B platform. Re-architect complex legacy systems, design high-performance batch and real-time data pipelines, and ensure core capabilities — file ingestion, marketing outreach, eligibility, and billing — are robust and ready for growth. 10+ years experience required, with strong Ruby/Rails, PostgreSQL, and distributed systems expertise. $193-253K base depending on state + bonus + equity. US-based.",
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7915113",
-    postedDate: "2026-05-15",
+      "Omada Health is hiring a Senior Software Engineer for its Assurance / agentic systems team, powering AI Transformation across Engineering, Product, and Design. Sitting inside Architecture & Infrastructure, the team defines the patterns, tools, and infrastructure that let every engineer, PM, and designer use AI to build, test, and operate software safely, orchestrating agentic software development with quality built in by design. Work at the intersection of infrastructure and application development on Omada's Ruby/Rails stack (PostgreSQL, Kafka). $179.4-224.3K base in CA/NY/WA ($171.6-214.5K in CO) + bonus + equity. US-based.",
+    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7997294",
+    postedDate: "2026-06-18",
   },
   "senior-software-engineer-omada": {
     id: "senior-software-engineer-omada",
@@ -152,16 +152,16 @@ export const jobs = {
     url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
     postedDate: "2026-04-27",
   },
-  "senior-software-engineer-secure-cards-chime": {
-    id: "senior-software-engineer-secure-cards-chime",
-    title: "Senior Software Engineer, Secure Cards",
+  "senior-ruby-fullstack-disputes-chime": {
+    id: "senior-ruby-fullstack-disputes-chime",
+    title: "Senior Ruby Full-Stack Software Engineer, Disputes Intake",
     sponsorId: "chime",
-    location: "San Francisco, CA",
+    location: "Chicago, IL",
     type: "Full-time",
     description:
-      "Chime's Secured Card team is hiring a Senior Software Engineer to help scale and evolve Chime Card — the flagship product helping members safely build credit without debt. Drive technical design and architectural decisions across the service architecture, mentor engineers, and collaborate with product, risk, and design partners to deliver resilient, secure systems. Backend-focused, full-stack-friendly Rails environment. $164k-$227k base + bonus + equity.",
-    url: "https://careers.chime.com/en/jobs/8322470002/senior-software-engineer-secure-cards/",
-    postedDate: "2026-05-10",
+      "Chime is hiring a Senior Full-Stack Software Engineer for its Disputes Intake Engineering team, building the next generation of experiences that help members and the agents who support them recover funds. Work hands-on across the Ruby stack while shaping architecture and technical direction for mission-critical, member-facing and internal workflows, evolving disputes intake from static flows into intelligent, adaptive experiences that improve claim quality and reduce friction. $173k-$204k base + bonus + equity + benefits.",
+    url: "https://careers.chime.com/jobs/8499443002/senior-ruby-full-stack-software-engineer-disputes-intake",
+    postedDate: "2026-06-18",
   },
   "staff-software-engineer-payments-risk-gusto": {
     id: "staff-software-engineer-payments-risk-gusto",
@@ -364,6 +364,22 @@ export const jobs = {
    * Staff SWE Payments / Risk (id 7822587). No Principal Money Group role open.
    * "principal-software-engineer-money-group-gusto": {
    *   url: "https://job-boards.greenhouse.io/gusto/jobs/7654934",
+   *   postedDate: "2026-05-10",
+   * },
+   *
+   * Omada — Staff Software Engineer (id 7915113) closed (June 18, 2026 audit);
+   * GH API 404. No Staff-tier Rails role open. Replaced with Senior Software
+   * Engineer, Assurance (id 7997294), Omada's agentic-systems/AI-transformation team.
+   * "staff-software-engineer-omada": {
+   *   url: "https://job-boards.greenhouse.io/omadahealth/jobs/7915113",
+   *   postedDate: "2026-05-15",
+   * },
+   *
+   * Chime — Senior SE Secure Cards (id 8322470002) closed (June 18, 2026 audit);
+   * URL returns HTTP 200 but renders an empty shell, role gone from the live board.
+   * Replaced with Senior Ruby Full-Stack SWE, Disputes Intake (id 8499443002).
+   * "senior-software-engineer-secure-cards-chime": {
+   *   url: "https://careers.chime.com/en/jobs/8322470002/senior-software-engineer-secure-cards/",
    *   postedDate: "2026-05-10",
    * },
    */
