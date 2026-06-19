@@ -530,6 +530,7 @@ export const jobs = {
     id: "software-engineer-rails-levelpath",
     title: "Software Engineer, Ruby on Rails (Backend)",
     companyId: "levelpath",
+    companyLogo: "/company_levelpath.png",
     companyName: "Levelpath",
     location: "San Francisco, CA (On-site)",
     type: "Full-time",
@@ -556,6 +557,7 @@ export const jobs = {
     id: "senior-software-engineer-authorium",
     title: "Senior Software Engineer",
     companyId: "authorium",
+    companyLogo: "/company_authorium.png",
     companyName: "Authorium",
     location: "San Francisco, CA (Hybrid)",
     type: "Full-time",
@@ -569,6 +571,7 @@ export const jobs = {
     id: "software-engineer-authorium",
     title: "Software Engineer",
     companyId: "authorium",
+    companyLogo: "/company_authorium.png",
     companyName: "Authorium",
     location: "San Francisco, CA (Hybrid)",
     type: "Full-time",
@@ -582,6 +585,7 @@ export const jobs = {
     id: "senior-software-engineer-truelink",
     title: "Senior Software Engineer",
     companyId: "truelink",
+    companyLogo: "/company_truelink.png",
     companyName: "True Link Financial",
     location: "Remote (US)",
     type: "Full-time",
@@ -594,6 +598,7 @@ export const jobs = {
     id: "software-engineer-rails-luthor",
     title: "Software Engineer (Ruby on Rails)",
     companyId: "luthor",
+    companyLogo: "/company_luthor.png",
     companyName: "Luthor",
     location: "San Francisco, CA / Remote (US)",
     type: "Full-time",
@@ -607,6 +612,7 @@ export const jobs = {
     id: "senior-fullstack-rails-prevail",
     title: "Senior Full Stack Developer (Ruby on Rails)",
     companyId: "prevail",
+    companyLogo: "/company_prevail.png",
     companyName: "Prevail Legal",
     location: "Remote (US)",
     type: "Full-time",
@@ -620,6 +626,7 @@ export const jobs = {
     id: "midlevel-fullstack-rails-prevail",
     title: "Mid-Level Full Stack Developer (Ruby on Rails)",
     companyId: "prevail",
+    companyLogo: "/company_prevail.png",
     companyName: "Prevail Legal",
     location: "Remote (US)",
     type: "Full-time",
@@ -633,6 +640,7 @@ export const jobs = {
     id: "senior-fullstack-instrumentl",
     title: "Senior Full Stack Software Engineer",
     companyId: "instrumentl",
+    companyLogo: "/company_instrumentl.png",
     companyName: "Instrumentl",
     location: "Remote (US) / Oakland, CA",
     type: "Full-time",
@@ -646,6 +654,7 @@ export const jobs = {
     id: "senior-staff-fullstack-versemedical",
     title: "Senior/Staff Full Stack Engineer",
     companyId: "versemedical",
+    companyLogo: "/company_versemedical.png",
     companyName: "Verse Medical",
     location: "San Francisco, CA (On-site)",
     type: "Full-time",
@@ -659,6 +668,7 @@ export const jobs = {
     id: "senior-software-engineer-client-apps-github",
     title: "Senior Software Engineer, Client Apps Platform",
     companyId: "github",
+    companyLogo: "/company_github.png",
     companyName: "GitHub",
     location: "Remote (US)",
     type: "Full-time",
@@ -668,57 +678,20 @@ export const jobs = {
     url: "https://www.github.careers/careers-home/jobs/5306?lang=en-us",
     postedDate: "2026-06-19",
   },
-  "senior-software-engineer-product-platform-block": {
-    id: "senior-software-engineer-product-platform-block",
-    title: "Senior Software Engineer, Product Platform",
-    companyId: "block",
-    companyName: "Block (Cash App, Square)",
-    location: "Bay Area, CA",
-    type: "Full-time",
-    salary: "$217.8K - $326.8K",
-    description:
-      "Block (Cash App, Square) is hiring a Senior Software Engineer on Product Platform to build and operate the internal developer platform and shared application infrastructure spanning CI/CD, Kafka event streaming, databases, and observability. The role lists Ruby among the platform's core languages alongside Go and Java; Cash App's backend is Ruby on Rails + Sidekiq. Bay Area-based with a posted Zone A salary band.",
-    url: "https://block.xyz/careers/jobs/5231964008?gh_jid=5231964008",
-    postedDate: "2026-06-19",
-  },
-  "senior-software-engineer-pay-safety-handshake": {
-    id: "senior-software-engineer-pay-safety-handshake",
-    title: "Senior Software Engineer, Pay & Safety",
-    companyId: "handshake",
-    companyName: "Handshake",
-    location: "San Francisco, CA",
-    type: "Full-time",
-    salary: "$225K - $250K + equity",
-    description:
-      "Handshake runs a Ruby on Rails monolith (Puma, Sidekiq) decomposing into Rails Engines. On the Pay & Safety team you'll build payments and trust/safety systems; the role requires strong backend skills in Ruby on Rails and/or TypeScript/Node, with fluency expected across both. SF-based full-time role.",
-    url: "https://jobs.ashbyhq.com/Handshake/60057740-e884-4025-9d02-e332f8feb867",
-    postedDate: "2026-06-19",
-  },
-  "senior-software-engineer-customers-backend-instacart": {
-    id: "senior-software-engineer-customers-backend-instacart",
-    title: "Senior Software Engineer, Customers Back End",
-    companyId: "instacart",
-    companyName: "Instacart",
-    location: "San Francisco, CA",
-    type: "Full-time",
-    description:
-      "Instacart's platform runs on Ruby on Rails (PostgreSQL, Sidekiq, Elasticsearch). This backend role on the Customers team works on a large, rapidly scaling marketplace processing millions of real-time transactions; 3+ years and strong Ruby on Rails experience required. Visa sponsorship available.",
-    url: "https://www.ycombinator.com/companies/instacart/jobs/Vc34PRHze-senior-software-engineer-customers-back-end",
-    postedDate: "2026-06-19",
-  },
-  "senior-software-engineer-freight-flexport": {
-    id: "senior-software-engineer-freight-flexport",
-    title: "Senior Software Engineer, Autonomous Freight Systems",
-    companyId: "flexport",
-    companyName: "Flexport",
-    location: "San Francisco, CA",
-    type: "Full-time",
-    salary: "$183K - $229K",
-    description:
-      "Flexport runs a Ruby on Rails monolith (decoupling into Kotlin/gRPC services). This senior backend role on the Autonomous Freight Systems team builds on Flexport's Rails-based platform. Stack: Ruby on Rails, Java, Spring Boot, React, AWS.",
-    url: "https://boards.greenhouse.io/flexport/jobs/7975365?gh_jid=7975365",
-    postedDate: "2026-06-19",
-  },
+
+  /* ─────────────────────────────────────────────────────────────────
+   * PENDING SPONSORSHIP — verified-open Ruby/Rails roles held back because
+   * the company has not (yet) hosted an SF Ruby meetup or sponsored the
+   * conference. Publish once they host or sponsor. (Held June 19, 2026.)
+   *   Block (Cash App, Square) — Senior SWE, Product Platform
+   *     https://block.xyz/careers/jobs/5231964008?gh_jid=5231964008
+   *   Handshake — Senior SWE, Pay & Safety
+   *     https://jobs.ashbyhq.com/Handshake/60057740-e884-4025-9d02-e332f8feb867
+   *   Instacart — Senior SWE, Customers Back End
+   *     https://www.ycombinator.com/companies/instacart/jobs/Vc34PRHze-senior-software-engineer-customers-back-end
+   *   Flexport — Senior SWE, Autonomous Freight Systems
+   *     https://boards.greenhouse.io/flexport/jobs/7975365?gh_jid=7975365
+   * ───────────────────────────────────────────────────────────────── */
 
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
