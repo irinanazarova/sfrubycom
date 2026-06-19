@@ -655,6 +655,70 @@ export const jobs = {
     url: "https://www.workatastartup.com/jobs/79906",
     postedDate: "2026-06-19",
   },
+  "senior-software-engineer-client-apps-github": {
+    id: "senior-software-engineer-client-apps-github",
+    title: "Senior Software Engineer, Client Apps Platform",
+    companyId: "github",
+    companyName: "GitHub",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$124K - $329.2K",
+    description:
+      "GitHub.com runs on a Ruby on Rails monolith. The Client Apps Platform team connects the gh CLI, Desktop, and Mobile apps to backend teams; you'll maintain and operate production Ruby and Go services and integrate with GitHub's Ruby on Rails monolith. SF-headquartered, remote across the US.",
+    url: "https://www.github.careers/careers-home/jobs/5306?lang=en-us",
+    postedDate: "2026-06-19",
+  },
+  "senior-software-engineer-product-platform-block": {
+    id: "senior-software-engineer-product-platform-block",
+    title: "Senior Software Engineer, Product Platform",
+    companyId: "block",
+    companyName: "Block (Cash App, Square)",
+    location: "Bay Area, CA",
+    type: "Full-time",
+    salary: "$217.8K - $326.8K",
+    description:
+      "Block (Cash App, Square) is hiring a Senior Software Engineer on Product Platform to build and operate the internal developer platform and shared application infrastructure spanning CI/CD, Kafka event streaming, databases, and observability. The role lists Ruby among the platform's core languages alongside Go and Java; Cash App's backend is Ruby on Rails + Sidekiq. Bay Area-based with a posted Zone A salary band.",
+    url: "https://block.xyz/careers/jobs/5231964008?gh_jid=5231964008",
+    postedDate: "2026-06-19",
+  },
+  "senior-software-engineer-pay-safety-handshake": {
+    id: "senior-software-engineer-pay-safety-handshake",
+    title: "Senior Software Engineer, Pay & Safety",
+    companyId: "handshake",
+    companyName: "Handshake",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$225K - $250K + equity",
+    description:
+      "Handshake runs a Ruby on Rails monolith (Puma, Sidekiq) decomposing into Rails Engines. On the Pay & Safety team you'll build payments and trust/safety systems; the role requires strong backend skills in Ruby on Rails and/or TypeScript/Node, with fluency expected across both. SF-based full-time role.",
+    url: "https://jobs.ashbyhq.com/Handshake/60057740-e884-4025-9d02-e332f8feb867",
+    postedDate: "2026-06-19",
+  },
+  "senior-software-engineer-customers-backend-instacart": {
+    id: "senior-software-engineer-customers-backend-instacart",
+    title: "Senior Software Engineer, Customers Back End",
+    companyId: "instacart",
+    companyName: "Instacart",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    description:
+      "Instacart's platform runs on Ruby on Rails (PostgreSQL, Sidekiq, Elasticsearch). This backend role on the Customers team works on a large, rapidly scaling marketplace processing millions of real-time transactions; 3+ years and strong Ruby on Rails experience required. Visa sponsorship available.",
+    url: "https://www.ycombinator.com/companies/instacart/jobs/Vc34PRHze-senior-software-engineer-customers-back-end",
+    postedDate: "2026-06-19",
+  },
+  "senior-software-engineer-freight-flexport": {
+    id: "senior-software-engineer-freight-flexport",
+    title: "Senior Software Engineer, Autonomous Freight Systems",
+    companyId: "flexport",
+    companyName: "Flexport",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$183K - $229K",
+    description:
+      "Flexport runs a Ruby on Rails monolith (decoupling into Kotlin/gRPC services). This senior backend role on the Autonomous Freight Systems team builds on Flexport's Rails-based platform. Stack: Ruby on Rails, Java, Spring Boot, React, AWS.",
+    url: "https://boards.greenhouse.io/flexport/jobs/7975365?gh_jid=7975365",
+    postedDate: "2026-06-19",
+  },
 
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
