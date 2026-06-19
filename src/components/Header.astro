@@ -1,9 +1,14 @@
 ---
 const navItems = [
-    { name: "Startups", href: "/startups" },
-    { name: "Videos", href: "/videos" },
     { name: "Jobs", href: "/jobs" },
-    { name: "Photos", href: "/photos" },
+    { name: "Sponsor", href: "/sponsor-2026" },
+    {
+        name: "Slack",
+        href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
+        external: true,
+    },
+    { name: "Videos", href: "/videos" },
+    { name: "Startups", href: "/startups" },
     { name: "About", href: "/about" },
 ];
 ---
@@ -35,6 +40,8 @@ const navItems = [
                     navItems.map((item) => (
                         <a
                             href={item.href}
+                            target={item.external ? "_blank" : undefined}
+                            rel={item.external ? "noopener noreferrer" : undefined}
                             class="nav-link relative font-medium text-white/90 hover:text-white transition-all duration-300 group"
                         >
                             {item.name}
@@ -101,6 +108,8 @@ const navItems = [
                 navItems.map((item) => (
                     <a
                         href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
                         class="flex items-center px-4 py-3 rounded-xl text-lg font-medium text-gray-700 hover:text-ruby-600 hover:bg-gradient-to-r hover:from-ruby-50 hover:to-pink-50 transition-all duration-300 group"
                     >
                         <span class="flex-1">{item.name}</span>
