@@ -152,17 +152,6 @@ export const jobs = {
     url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
     postedDate: "2026-04-27",
   },
-  "senior-ruby-fullstack-disputes-chime": {
-    id: "senior-ruby-fullstack-disputes-chime",
-    title: "Senior Ruby Full-Stack Software Engineer, Disputes Intake",
-    sponsorId: "chime",
-    location: "Chicago, IL",
-    type: "Full-time",
-    description:
-      "Chime is hiring a Senior Full-Stack Software Engineer for its Disputes Intake Engineering team, building the next generation of experiences that help members and the agents who support them recover funds. Work hands-on across the Ruby stack while shaping architecture and technical direction for mission-critical, member-facing and internal workflows, evolving disputes intake from static flows into intelligent, adaptive experiences that improve claim quality and reduce friction. $173k-$204k base + bonus + equity + benefits.",
-    url: "https://careers.chime.com/jobs/8499443002/senior-ruby-full-stack-software-engineer-disputes-intake",
-    postedDate: "2026-06-18",
-  },
   "staff-software-engineer-payments-risk-gusto": {
     id: "staff-software-engineer-payments-risk-gusto",
     title: "Staff Software Engineer, Payments / Risk",
@@ -277,18 +266,6 @@ export const jobs = {
     url: "https://www.angellist.com/careers/9adf9ccb-61c1-4a75-bf00-03f39fea8f09",
     postedDate: "2026-06-19",
   },
-  "software-engineer-nexhealth": {
-    id: "software-engineer-nexhealth",
-    title: "Software Engineer",
-    startupId: "nexhealth",
-    location: "Seattle, WA",
-    type: "Full-time",
-    salary: "$128.6K - $189.5K",
-    description:
-      "NexHealth is building the patient-experience and API platform for healthcare — no-permission EHR integrations, high-throughput data ingestion pipelines, and low-latency data serving. This is an early-career (0-2 years) Software Engineer role focused primarily on back-end development; per the posting, the team primarily uses Ruby on Rails. Experience with Ruby, Python, Go, or Java is a plus, along with relational databases. Bonus: AWS/GCP/Azure, Docker, Kubernetes, API/webhook design, and HL7/FHIR.",
-    url: "https://www.nexhealth.com/careers/open-positions?gh_jid=6014570004",
-    postedDate: "2026-06-17",
-  },
   "senior-fullstack-app-journey-chime": {
     id: "senior-fullstack-app-journey-chime",
     title: "Senior Full-Stack Engineer, App Journey (GraphQL)",
@@ -336,18 +313,6 @@ export const jobs = {
       "Chime is hiring a Software Engineer on the Deposits & Insights team for backend engineering on the products that help members manage and grow their money. Requires Ruby on Rails or comparable frameworks plus transactional databases and caching. Chime is the largest US consumer fintech, built to help everyday Americans get ahead.",
     url: "https://careers.chime.com/jobs/8523547002/software-engineer-deposits-insights/",
     postedDate: "2026-05-04",
-  },
-  "senior-software-engineer-chicago-chime": {
-    id: "senior-software-engineer-chicago-chime",
-    title: "Senior Software Engineer",
-    sponsorId: "chime",
-    location: "Chicago, IL",
-    type: "Full-time",
-    salary: "$173K - $204K + bonus, equity",
-    description:
-      "Chime is hiring a Senior Software Engineer / technical lead for backend engineering at scale. 5+ years of experience with Ruby on Rails or comparable frameworks, transactional databases, and caching. Chime is the largest US consumer fintech, helping everyday Americans build credit and get ahead.",
-    url: "https://careers.chime.com/jobs/8400999002/senior-software-engineer-chicago/",
-    postedDate: "2026-02-04",
   },
   "staff-software-engineer-developer-productivity-gusto": {
     id: "staff-software-engineer-developer-productivity-gusto",
@@ -467,50 +432,6 @@ export const jobs = {
     description:
       "Simple AI (YC S24, $14M raised) builds voice AI agents that handle enterprise phone operations — support, order intake, lead qualification — for customers like DoorDash and xAI. This is a founding full-stack role; the core work is LLM/voice AI systems, with Ruby on Rails listed among the 'nice to have' stack experience alongside Python, TypeScript, React, PostgreSQL, and AWS. 4+ years of experience.",
     url: "https://jobs.ashbyhq.com/simple-ai/9a5f5694-e066-4087-9a13-b1a62d8d8025",
-    postedDate: "2026-06-19",
-  },
-  "backend-engineer-aisquared": {
-    id: "backend-engineer-aisquared",
-    title: "Backend Engineer (SDE2)",
-    startupId: "aisquared",
-    location: "India",
-    type: "Full-time",
-    description:
-      "AI Squared builds the open-source Multiwoven reverse-ETL / data-activation platform (an alternative to Hightouch and Census). This backend role (3+ years) designs and maintains scalable backend systems for a distributed team. Ruby on Rails is listed as a preferred qualification, and the Multiwoven backend is predominantly Ruby. India-based.",
-    url: "https://job-boards.greenhouse.io/aisquared/jobs/4422754006",
-    postedDate: "2026-06-19",
-  },
-  "senior-product-engineer-dublin-fin": {
-    id: "senior-product-engineer-dublin-fin",
-    title: "Senior Product Engineer",
-    startupId: "fin",
-    location: "Dublin, Ireland",
-    type: "Full-time",
-    description:
-      "Fin is Intercom's AI customer-service agent. As a Senior Product Engineer you'll build scalable backend and frontend systems within a multidisciplinary product team, writing Ruby code that knits together the AWS, infrastructure, platform, and SaaS technologies forming the core of Fin's backend. Intercom is one of the best-known Ruby on Rails companies in the world.",
-    url: "https://job-boards.greenhouse.io/intercom/jobs/6386428",
-    postedDate: "2026-06-19",
-  },
-  "senior-product-engineer-london-fin": {
-    id: "senior-product-engineer-london-fin",
-    title: "Senior Product Engineer",
-    startupId: "fin",
-    location: "London, England",
-    type: "Full-time",
-    description:
-      "Fin is Intercom's AI customer-service agent. As a Senior Product Engineer you'll build scalable backend and frontend systems, writing Ruby code that knits together the AWS, infrastructure, platform, and SaaS technologies that form the core of Fin's backend. Intercom is one of the best-known Ruby on Rails companies in the world. London-based.",
-    url: "https://job-boards.greenhouse.io/intercom/jobs/5107681",
-    postedDate: "2026-06-19",
-  },
-  "senior-software-engineer-dublin-fin": {
-    id: "senior-software-engineer-dublin-fin",
-    title: "Senior Software Engineer",
-    startupId: "fin",
-    location: "Dublin, Ireland",
-    type: "Full-time",
-    description:
-      "Fin is Intercom's AI customer-service agent. As a Senior Software Engineer you'll build the backend and frontend systems behind the product, with Ruby development as a core responsibility; the posting notes prior experience with their exact stack isn't required. Intercom is one of the best-known Ruby on Rails companies in the world. Hybrid in Dublin.",
-    url: "https://job-boards.greenhouse.io/intercom/jobs/5082494",
     postedDate: "2026-06-19",
   },
   "senior-rails-engineer-monami": {
@@ -678,6 +599,138 @@ export const jobs = {
     url: "https://www.github.careers/careers-home/jobs/5306?lang=en-us",
     postedDate: "2026-06-19",
   },
+  "full-stack-engineer-generalmedicine": {
+    id: "full-stack-engineer-generalmedicine",
+    title: "Full-Stack Engineer",
+    companyId: "generalmedicine",
+    companyName: "General Medicine",
+    companyLogo: "/company_generalmedicine.png",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    description:
+      "General Medicine is a consumer healthcare marketplace from the founders of PillPack / Amazon Pharmacy, showing upfront cash and insurance prices for virtual and in-person visits, prescriptions, labs, and imaging. This full-stack role builds the core product; the team states 'We currently use AWS, Ruby on Rails, and Next.js,' on PostgreSQL. SF HQ with a Boston office. (Seed, $32M, Matrix Partners-led.)",
+    url: "https://jobs.ashbyhq.com/general-medicine/bf71b5f5-a87e-4969-9b69-f6188108f53a",
+    postedDate: "2026-06-19",
+  },
+  "senior-software-engineer-ascend": {
+    id: "senior-software-engineer-ascend",
+    title: "Senior Software Engineer",
+    companyId: "ascend",
+    companyName: "Ascend",
+    companyLogo: "/company_ascend.png",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$200K - $225K",
+    description:
+      "Ascend is an all-in-one payments and financial-automation platform for the insurance industry: online customer payments, premium financing, and commission/carrier-payable distribution. The backend is a Ruby on Rails API on Heroku, with a Next.js + TypeScript frontend on Vercel, Tailwind, PostgreSQL, and Redis. ~50+ people across SF and Columbus. (Series B.)",
+    url: "https://job-boards.greenhouse.io/ascend21/jobs/4460281008",
+    postedDate: "2026-06-19",
+  },
+  "senior-fullstack-rails-piesystems": {
+    id: "senior-fullstack-rails-piesystems",
+    title: "Sr. Fullstack Engineer (Ruby on Rails)",
+    companyId: "piesystems",
+    companyName: "Pie Systems",
+    companyLogo: "/company_piesystems.png",
+    location: "San Francisco / Remote",
+    type: "Full-time",
+    salary: "$75K - $150K + equity",
+    description:
+      "Pie Systems (PieVAT) is a fintech digitizing VAT and tax-free-shopping refunds for travelers and merchants. You'll contribute to the Ruby on Rails application and support deployments and releases, alongside a modern JavaScript frontend. US HQ in San Francisco (also Copenhagen and Tokyo). (Series A, $15.5M, Nov 2025.)",
+    url: "https://wellfound.com/jobs/3076798-sr-fullstack-engineer-ror",
+    postedDate: "2026-06-19",
+  },
+  "full-stack-engineer-upmetrics": {
+    id: "full-stack-engineer-upmetrics",
+    title: "Full Stack Software Engineer",
+    companyId: "upmetrics",
+    companyName: "UpMetrics",
+    companyLogo: "/company_upmetrics.png",
+    location: "Remote (US) / San Francisco, CA",
+    type: "Full-time",
+    salary: "$145K - $170K",
+    description:
+      "UpMetrics is an impact-reporting and analytics platform for nonprofits, foundations, and impact investors. You'll build and evolve the Ruby on Rails API (background jobs, data models) plus rich Vue.js + TypeScript front-end experiences on MySQL; 6+ years wanted. HQ at 300 Brannan St, San Francisco (SOMA).",
+    url: "https://jobs.lever.co/UpMetrics/62b78791-e881-44c7-bf21-c82bce483081",
+    postedDate: "2026-06-19",
+  },
+  "senior-rails-engineer-decile": {
+    id: "senior-rails-engineer-decile",
+    title: "Senior Ruby on Rails Engineer",
+    companyId: "decile",
+    companyName: "Decile Group",
+    companyLogo: "/company_decile.png",
+    location: "Remote (US, Pacific overlap)",
+    type: "Full-time",
+    salary: "$120K - $170K",
+    description:
+      "Decile Group runs VC Lab, a venture-capital accelerator and fund-operations platform. This senior role owns complex Ruby on Rails features end-to-end (ActiveRecord, Sidekiq, RESTful APIs); 5+ years of production Rails required. Palo Alto HQ.",
+    url: "https://jobs.lever.co/decilegroup/4804b6c2-0ba8-4a1b-8024-84c8ab95fb2f",
+    postedDate: "2026-06-19",
+  },
+  "core-payments-engineer-natural": {
+    id: "core-payments-engineer-natural",
+    title: "Core Payments Engineer",
+    companyId: "natural",
+    companyName: "Natural",
+    location: "San Francisco, CA (In-office)",
+    type: "Full-time",
+    description:
+      "Natural builds owned payment rails for AI agents — wallets, pay, request, credit, and billing across traditional banking and stablecoins — founded by ex-Stripe and Method engineers. This role builds the Ruby on Rails payments infrastructure; the team runs Rails under the hood. 15-person team, all in SF, in-office. (Seed, $9.8M.)",
+    url: "https://www.natural.co/careers",
+    postedDate: "2026-06-19",
+  },
+  "software-engineer-middesk": {
+    id: "software-engineer-middesk",
+    title: "Software Engineer",
+    companyId: "middesk",
+    companyName: "Middesk",
+    companyLogo: "/company_middesk.png",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$148K - $275K + equity",
+    description:
+      "Middesk is a business-identity-verification fintech (YC, Sequoia, Accel) that helps companies onboard and underwrite other businesses. This full-stack product role builds on a Ruby on Rails + PostgreSQL backend with a React/Redux frontend; all levels welcome. Hybrid in SF, two days per week. (Series B.)",
+    url: "https://jobs.ashbyhq.com/middesk/e1c6af86-dce1-495f-a710-ad369fd1308c",
+    postedDate: "2026-06-19",
+  },
+  "senior-fullstack-engineer-found": {
+    id: "senior-fullstack-engineer-found",
+    title: "Senior Software Engineer (Full-Stack)",
+    companyId: "found",
+    companyName: "Found",
+    companyLogo: "/company_found.png",
+    location: "San Francisco, CA / Remote (US)",
+    type: "Full-time",
+    description:
+      "Found is business banking for the self-employed (founded by ex-Square execs), with banking, tax automation, and expense tracking built on Ruby on Rails. This full-stack role requires production experience with Ruby on Rails or a comparable framework; the posting asks for 12+ years despite the 'Senior' title. Stack: Rails, React, Redux, TypeScript, MySQL, Spanner.",
+    url: "https://jobs.ashbyhq.com/found/20795864-e7c3-4836-b5bc-26190f79bed3",
+    postedDate: "2026-06-19",
+  },
+
+  /* ─────────────────────────────────────────────────────────────────
+   * OUT OF ICP SCOPE — verified-open Ruby/Rails roles removed because they
+   * fall outside the job board's ICP (experienced Ruby dev in the US, in
+   * California if in-office). International roles and in-office roles outside
+   * CA are excluded. Junior US roles are kept. (Removed June 19, 2026.)
+   *
+   * Outside the US:
+   *   AI Squared — Backend Engineer (SDE2), India
+   *     https://job-boards.greenhouse.io/aisquared/jobs/4422754006
+   *   Fin (Intercom) — Senior Product Engineer, Dublin
+   *     https://job-boards.greenhouse.io/intercom/jobs/6386428
+   *   Fin (Intercom) — Senior Product Engineer, London
+   *     https://job-boards.greenhouse.io/intercom/jobs/5107681
+   *   Fin (Intercom) — Senior Software Engineer, Dublin
+   *     https://job-boards.greenhouse.io/intercom/jobs/5082494
+   * In-office outside CA:
+   *   Chime — Senior Ruby Full-Stack SWE, Disputes Intake, Chicago
+   *     https://careers.chime.com/jobs/8499443002
+   *   Chime — Senior Software Engineer, Chicago
+   *     https://careers.chime.com/jobs/8400999002
+   *   NexHealth — Software Engineer, Seattle
+   *     https://www.nexhealth.com/careers/open-positions?gh_jid=6014570004
+   * ───────────────────────────────────────────────────────────────── */
 
   /* ─────────────────────────────────────────────────────────────────
    * PENDING SPONSORSHIP — verified-open Ruby/Rails roles held back because
@@ -691,6 +744,8 @@ export const jobs = {
    *     https://www.ycombinator.com/companies/instacart/jobs/Vc34PRHze-senior-software-engineer-customers-back-end
    *   Flexport — Senior SWE, Autonomous Freight Systems
    *     https://boards.greenhouse.io/flexport/jobs/7975365?gh_jid=7975365
+   *   Scribd — Software Engineer II, Signup & Activation [late-stage / mature]
+   *     https://jobs.ashbyhq.com/ScribdInc/f9e8ac27-6323-40e4-bae8-3d7c6e6534c6
    * ───────────────────────────────────────────────────────────────── */
 
   /* ─────────────────────────────────────────────────────────────────
