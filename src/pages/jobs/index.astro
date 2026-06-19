@@ -30,6 +30,17 @@ const jobs = rawJobs.map((job) => {
             isStartup: true,
             isYC: startup?.isYC || false,
         };
+    } else if (job.companyName) {
+        // Off-roster company carried inline on the job (job-board only, not a
+        // featured sponsor/startup). Renders via companyName/companyLogo.
+        return {
+            ...job,
+            companyName: job.companyName,
+            companyLogo: job.companyLogo || null,
+            companyId: job.companyId || job.companyName,
+            tier: null,
+            isStartup: false,
+        };
     }
     return job;
 });
@@ -58,6 +69,7 @@ const companies = Object.values(jobsByCompany).sort((a, b) => b.jobs.length - a.
 const uniqueCompanies = new Set([
     ...jobs.filter(j => j.sponsorId).map(j => j.sponsorId),
     ...jobs.filter(j => j.startupId).map(j => j.startupId),
+    ...jobs.filter(j => !j.sponsorId && !j.startupId && j.companyId).map(j => j.companyId),
 ]);
 ---
 

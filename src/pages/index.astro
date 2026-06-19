@@ -70,16 +70,17 @@ for (const [id, startup] of Object.entries(startupsData)) {
 const allJobs = getSortedJobs();
 const seenCompanies = new Set();
 const featuredJobs = allJobs.filter((job) => {
-    const companyKey = job.sponsorId || job.startupId;
+    const companyKey = job.sponsorId || job.startupId || job.companyId;
     if (seenCompanies.has(companyKey)) return false;
     seenCompanies.add(companyKey);
     return true;
 }).slice(0, 6).map((job) => {
     const sponsor = getSponsor(job.sponsorId);
     const startup = job.startupId ? getStartup(job.startupId) : null;
+    const inline = job.companyName ? { name: job.companyName, logo: job.companyLogo } : null;
     return {
         ...job,
-        sponsor: sponsor || (startup ? { name: startup.name, logo: startup.logo } : null),
+        sponsor: sponsor || (startup ? { name: startup.name, logo: startup.logo } : inline),
     };
 });
 const jobCount = allJobs.length;
