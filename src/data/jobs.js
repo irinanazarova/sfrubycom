@@ -81,6 +81,7 @@ export const jobs = {
     sponsorId: "finta",
     location: "San Francisco, CA",
     type: "Full-time",
+    salary: "$150K - $250K + 5% equity",
     description:
       "Finta is hiring a Founding Engineer to collaborate directly with the CEO and designer on complete product features end-to-end, from backend to frontend. Work with Ruby on Rails, Hotwire, Stimulus, Tailwind, and Redis to build banking and accounting integrations with rigorous data-quality and reliability standards. Finta automates bookkeeping, files taxes, and gives companies real-time financial metrics. 6+ years of Rails experience required. Regular use of AI coding tools (Cursor, Claude Code) expected. $150-$250k base + 5% equity.",
     url: "https://www.ycombinator.com/companies/finta/jobs/vg5fXEw-founding-engineer-ruby",
@@ -92,6 +93,7 @@ export const jobs = {
     sponsorId: "omada",
     location: "Remote (US Only)",
     type: "Full-time",
+    salary: "$179K - $224K",
     description:
       "Omada Health is hiring a Senior Software Engineer for its Assurance / agentic systems team, powering AI Transformation across Engineering, Product, and Design. Sitting inside Architecture & Infrastructure, the team defines the patterns, tools, and infrastructure that let every engineer, PM, and designer use AI to build, test, and operate software safely, orchestrating agentic software development with quality built in by design. Work at the intersection of infrastructure and application development on Omada's Ruby/Rails stack (PostgreSQL, Kafka). $179.4-224.3K base in CA/NY/WA ($171.6-214.5K in CO) + bonus + equity. US-based.",
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7997294",
@@ -103,6 +105,7 @@ export const jobs = {
     sponsorId: "omada",
     location: "Remote (US Only)",
     type: "Full-time",
+    salary: "$179K - $224K",
     description:
       "Omada Health is hiring a Senior Software Engineer to build and integrate tools that optimize contracting, eligibility, and billing processes. Be an informal team leader, mentor others, lead large projects, and leverage AI/ML tooling to deliver innovative solutions. 7+ years experience required, with Rails or Python, modern front-end frameworks (React/Vue), and PostgreSQL. Stack: AWS, Ruby, Rails, Postgres, Kafka. $179-224K base in CA/NY/WA ($172-215K in CO) + bonus + equity. US-based.",
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7137954",
@@ -114,6 +117,7 @@ export const jobs = {
     sponsorId: "omada",
     location: "Remote (US Only)",
     type: "Full-time",
+    salary: "$179K - $224K",
     description:
       "Omada Health is hiring a Senior Software Engineer for the Member Engineering team to build the backends powering mobile applications for members and web applications for providers delivering digital healthcare. Spend 80-90% of time hands-on coding, mentor junior engineers, and propose AI solutions to complex problems. 7+ years experience with Ruby or Python, relational databases (PostgreSQL/MySQL), scalable APIs, and CI/CD pipelines. $172-224K base depending on state + bonus + equity. US-based.",
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7822840",
@@ -125,6 +129,7 @@ export const jobs = {
     sponsorId: "thatch",
     location: "Remote (US) / San Francisco",
     type: "Full-time",
+    salary: "$161K - $230K",
     description:
       "Thatch is hiring a Backend Engineer to design and build core systems powering its health benefits platform — data models, fund flows, and integrations with payroll and insurance providers. Own production systems handling financial transactions and complex business logic. Strong skills in data modeling and system design required, ideally with healthcare or finance experience. $161k-$230k.",
     url: "https://thatch.com/jobs/software-engineer-backend-5113759008",
@@ -136,6 +141,7 @@ export const jobs = {
     sponsorId: "thatch",
     location: "Remote (US) / San Francisco",
     type: "Full-time",
+    salary: "$161K - $230K",
     description:
       "Thatch is hiring a Full Stack Software Engineer to own product areas spanning frontend and backend systems for its health benefits platform. Build across React, TailwindCSS, and Ruby on Rails to ship features that directly impact employer benefits management, employee onboarding, and payment systems. Strong product judgment, systems thinking, and a track record of shipping production applications required. $161k-$230k.",
     url: "https://thatch.com/jobs/software-engineer-full-stack-5113761008",
@@ -147,6 +153,7 @@ export const jobs = {
     sponsorId: "thatch",
     location: "Remote (US) / San Francisco",
     type: "Full-time",
+    salary: "$170K - $200K",
     description:
       "Thatch is hiring a Full Stack Engineer on the Product Engagement team to enhance how members and employers experience the platform — onboarding, activation, and enrollment flows. Build user-facing features and backend systems while using data and instrumentation to drive engagement. Work across Ruby on Rails, React, and TailwindCSS, collaborating with product and design to ship impactful changes. $170k-$200k.",
     url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
@@ -158,6 +165,7 @@ export const jobs = {
     sponsorId: "gusto",
     location: "San Francisco or New York (Hybrid)",
     type: "Full-time",
+    salary: "$197K - $247K",
     description:
       "Gusto is hiring Staff Software Engineers for the teams behind its payments and risk platforms. Design, build, and test core money-movement and risk services — payment rails, ledgering, wallets, fraud, decisioning engines, KYC, AML, and compliance capabilities. Help scale one of the largest Ruby/Rails and JavaScript/React applications in the world, mentor engineers, and own multi-quarter projects in complex financial domains. 8+ years of experience. $197k-$247k base in SF/NY ($163k-$204k Denver and most remote locations) + bonus + equity.",
     url: "https://job-boards.greenhouse.io/gusto/jobs/7822587",
@@ -169,6 +177,7 @@ export const jobs = {
     sponsorId: "gusto",
     location: "Denver, San Francisco, New York City",
     type: "Full-time",
+    salary: "$251K - $295K",
     description:
       "Gusto is hiring a Principal Software Engineer on Pay Group Engineering to function as a Technical Lead across multiple teams, helping keep engineers unblocked and shipping high-quality work. Design, build, and test the foundation that supports compliant payroll for millions of people. Help scale one of the largest Ruby/Rails and TypeScript/React applications in the world. Mentor fellow engineers and drive holistic, scalable solutions. 15+ years of experience, expertise in resilient backend system design. $215k-$295k depending on location.",
     url: "https://job-boards.greenhouse.io/gusto/jobs/7027020",
@@ -180,6 +189,7 @@ export const jobs = {
     sponsorId: "gusto",
     location: "San Francisco, Denver, or New York City (Hybrid)",
     type: "Full-time",
+    salary: "$197K - $247K",
     description:
       "Gusto is hiring a Staff Software Engineer to join the Core Platforms team — engineering the core business engine that 5+ product teams depend on. Help scale one of the largest Ruby/Rails + JavaScript/React applications in the world. Build reliable backend services, set the engineering standard for those around you, and partner with Product Engineering, Product Management, Data, and Design to translate customer pain points into solutions. AI is a fundamental part of how work gets done at Gusto. Hybrid in SF / Denver / NYC. $163k-$204k base depending on location + bonus + equity.",
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
@@ -191,6 +201,7 @@ export const jobs = {
     sponsorId: "persona",
     location: "San Francisco",
     type: "Full-time",
+    salary: "$130K - $220K + equity",
     description:
       "Persona builds identity verification infrastructure where security is core to everything they ship. The security team operates as a true generalist function: designing IAM systems for enterprise customers managing PII, owning supply chain security as AI tooling expands, and building secure internal tooling for engineers scaling AI usage. This is a software engineering role first — security curiosity matters; a dedicated security background doesn't. Proficiency in Ruby on Rails preferred. 3+ years of software engineering experience. $130K-$220K + equity.",
     url: "https://jobs.ashbyhq.com/persona/06ce6de8-8541-4dfd-9c09-3e467d5f91bb",
@@ -202,6 +213,7 @@ export const jobs = {
     sponsorId: "persona",
     location: "San Francisco",
     type: "Full-time",
+    salary: "$200K - $280K + equity",
     description:
       "Persona is hiring a Senior Product Security Engineer embedded in a generalist security team. Drive the full vulnerability lifecycle, design autonomous systems and AI tooling that scale security across every team and product, partner with product engineers to shape how new features get built securely, and run the bug bounty program. 6+ years of software engineering experience, 3+ years in product security. $200K-$280K + equity.",
     url: "https://jobs.ashbyhq.com/persona/a9d3cd2c-d4a4-4e1b-825f-a9a45b775f69",
@@ -702,6 +714,7 @@ export const jobs = {
     companyLogo: "/company_found.png",
     location: "San Francisco, CA / Remote (US)",
     type: "Full-time",
+    salary: "$210K - $278K",
     description:
       "Found is business banking for the self-employed (founded by ex-Square execs), with banking, tax automation, and expense tracking built on Ruby on Rails. This full-stack role requires production experience with Ruby on Rails or a comparable framework; the posting asks for 12+ years despite the 'Senior' title. Stack: Rails, React, Redux, TypeScript, MySQL, Spanner.",
     url: "https://jobs.ashbyhq.com/found/20795864-e7c3-4836-b5bc-26190f79bed3",
