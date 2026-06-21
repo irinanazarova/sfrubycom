@@ -114,6 +114,12 @@ export const COMPANY_META = {
   natural: { industry: "Fintech", stage: "Seed" },
   middesk: { industry: "Fintech", stage: "Growth" },
   found: { industry: "Fintech", stage: "Growth" },
+  arkestro: { industry: "Enterprise SaaS", stage: "Growth" },
+  edo: { industry: "Enterprise SaaS", stage: "Growth" },
+  betterstack: { industry: "Infrastructure / Data", stage: "Early-stage" },
+  nomad: { industry: "Fintech", stage: "Early-stage" },
+  relevanthealthcare: { industry: "Healthtech", stage: "Seed" },
+  backerkit: { industry: "Enterprise SaaS", stage: "Early-stage" },
 };
 
 // Display labels and canonical ordering for the parsed facets.
