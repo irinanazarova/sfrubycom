@@ -853,6 +853,14 @@ export const jobs = {
    *     https://boards.greenhouse.io/flexport/jobs/7975365?gh_jid=7975365
    *   Scribd — Software Engineer II, Signup & Activation [late-stage / mature]
    *     https://jobs.ashbyhq.com/ScribdInc/f9e8ac27-6323-40e4-bae8-3d7c6e6534c6
+   *   Fleetio — Senior SWE, Integrations (remote-US) [Series C]
+   *     https://job-boards.greenhouse.io/fleetio/jobs/5044498007
+   *   Calendly — Senior Full Stack Engineer (remote-US) [named Series B, ~$3B unicorn / late-stage]
+   *     https://job-boards.greenhouse.io/calendly/jobs/8464846002
+   *   Tines — Staff SWE, Backend (remote-US) [Series C]
+   *     https://job-boards.greenhouse.io/tines/jobs/6014045004
+   *   Tines — Senior SWE, Government Cloud (remote-US, US citizenship) [Series C]
+   *     https://job-boards.greenhouse.io/tines/jobs/6017339004
    * ───────────────────────────────────────────────────────────────── */
 
   /* ─────────────────────────────────────────────────────────────────
