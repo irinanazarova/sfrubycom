@@ -230,7 +230,8 @@ const facetGroups = [
                     <div id="jobs-list" class="space-y-3">
                         {jobs.map((job) => (
                             <article
-                                class="job-row bg-white rounded-xl border border-gray-200 hover:border-ruby-200 hover:shadow-md transition-all"
+                                id={job.id}
+                                class="job-row scroll-mt-28 bg-white rounded-xl border border-gray-200 hover:border-ruby-200 hover:shadow-md transition-all"
                                 data-worktype={job.workType.join(" ")}
                                 data-geo={job.geo.join(" ")}
                                 data-level={job.level}
@@ -254,6 +255,15 @@ const facetGroups = [
                                             <h3 class="font-semibold text-gray-900 text-base sm:text-lg leading-snug">
                                                 {job.title}
                                             </h3>
+                                            <a
+                                                href={`#${job.id}`}
+                                                class="copy-link"
+                                                data-job-id={job.id}
+                                                aria-label="Copy link to this role"
+                                                title="Copy link to this role"
+                                            >
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"></path></svg>
+                                            </a>
                                             {job.isFeatured && (
                                                 <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-ruby-100 text-ruby-700">
                                                     Featured
@@ -414,6 +424,52 @@ const facetGroups = [
             opacity: 0.85;
         }
 
+        /* Per-card anchor: highlight when linked, copy-link affordance. */
+        .job-row:target {
+            border-color: #f87171;
+            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+        }
+        .copy-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            color: #9ca3af;
+            opacity: 0;
+            transition: opacity 0.15s, color 0.15s;
+        }
+        .job-row:hover .copy-link,
+        .copy-link:focus-visible {
+            opacity: 1;
+        }
+        .copy-link:hover {
+            color: #dc2626;
+        }
+        .copy-link.copied {
+            color: #059669;
+            opacity: 1;
+        }
+        .copy-link.copied::after {
+            content: "Link copied";
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 0.35rem);
+            transform: translateX(-50%);
+            white-space: nowrap;
+            background: #111827;
+            color: #fff;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            padding: 0.2rem 0.45rem;
+            border-radius: 0.35rem;
+            pointer-events: none;
+        }
+        @media (max-width: 1023px) {
+            /* Always tappable on touch devices (no hover). */
+            .copy-link {
+                opacity: 1;
+            }
+        }
+
         /* Mobile: filter panel is a collapsible drawer. On desktop it is always
            a visible sidebar regardless of the data-filters state. */
         @media (max-width: 1023px) {
@@ -553,7 +609,24 @@ const facetGroups = [
         document.getElementById("filter-done")?.addEventListener("click", () => setDrawer(false));
         // Mobile starts open (filter-first): choose filters, then "Show results" collapses
         // the panel. The sticky "Filters" button reopens it. Desktop ignores this entirely.
-        if (mql.matches) setDrawer(true);
+        // Exception: if the page is opened on a specific role anchor, start collapsed so the
+        // targeted card is visible instead of hidden behind the drawer.
+        if (mql.matches) setDrawer(!location.hash);
+
+        // Per-card anchor links: scroll + highlight, and copy a shareable URL.
+        for (const link of Array.from(document.querySelectorAll<HTMLAnchorElement>(".copy-link"))) {
+            link.addEventListener("click", (e) => {
+                const id = link.dataset.jobId!;
+                e.preventDefault();
+                location.hash = id; // scrolls to the card (scroll-mt) and triggers :target
+                if (navigator.clipboard) {
+                    const url = location.origin + location.pathname + "#" + id;
+                    navigator.clipboard.writeText(url).catch(() => {});
+                    link.classList.add("copied");
+                    window.setTimeout(() => link.classList.remove("copied"), 1400);
+                }
+            });
+        }
         // If the viewport crosses the breakpoint, never leave the body scroll-locked.
         mql.addEventListener("change", (e) => {
             if (!e.matches) document.body.classList.remove("overflow-hidden");
