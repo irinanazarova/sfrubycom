@@ -161,147 +161,176 @@ const facetGroups = [
         </div>
     </section>
 
-    <!-- Filter Bar -->
-    <nav class="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-2.5">
-            {facetGroups.map((group) => (
-                <div class="flex items-start gap-3">
-                    <span class="shrink-0 w-20 pt-1.5 text-xs font-semibold uppercase tracking-wider text-gray-400">
-                        {group.label}
-                    </span>
-                    <div class="flex flex-wrap gap-1.5">
-                        {group.options.map((opt) => (
-                            <button
-                                type="button"
-                                class="chip"
-                                data-facet={group.key}
-                                data-value={opt.value}
-                                data-single={group.single ? "true" : undefined}
-                            >
-                                {opt.label}
-                                <span class="chip-count">{opt.count}</span>
+    <!-- Jobs: filters (left) + results (right) -->
+    <section class="bg-gradient-to-b from-white to-cloud-50">
+        <div id="jobs-app" data-filters="open" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Mobile filter toggle bar -->
+            <div class="lg:hidden sticky top-20 z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 bg-cloud-50/95 backdrop-blur-md border-b border-gray-200 flex items-center justify-between gap-3">
+                <button id="filter-open" type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-300 text-sm font-semibold text-gray-800 shadow-sm active:scale-[0.98] transition-transform">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L14 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 018 21v-7.586L3.293 6.707A1 1 0 013 6V4z"></path></svg>
+                    Filters
+                    <span class="active-badge hidden inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-ruby-500 text-white text-[11px] font-bold">0</span>
+                </button>
+                <span class="text-sm text-gray-600"><span class="result-count font-semibold text-gray-900">{jobs.length}</span> roles</span>
+            </div>
+
+            <div class="lg:grid lg:grid-cols-[15rem_1fr] xl:grid-cols-[16rem_1fr] lg:gap-8 lg:py-10">
+
+                <!-- Filter sidebar -->
+                <aside id="filter-panel" class="filter-panel py-6 lg:py-0">
+                    <div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-1 lg:-mr-1">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900">Filters</h2>
+                            <button id="clear-filters" type="button" class="hidden text-xs font-semibold text-ruby-600 hover:text-ruby-700">
+                                Clear all
                             </button>
+                        </div>
+
+                        {facetGroups.map((group) => (
+                            <div class="facet-group">
+                                <h3 class="facet-label">{group.label}</h3>
+                                <div class="flex flex-wrap gap-1.5">
+                                    {group.options.map((opt) => (
+                                        <button
+                                            type="button"
+                                            class="chip"
+                                            data-facet={group.key}
+                                            data-value={opt.value}
+                                            data-single={group.single ? "true" : undefined}
+                                        >
+                                            {opt.label}
+                                            <span class="chip-count">{opt.count}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+
+                        <!-- Mobile-only: apply / clear -->
+                        <div class="lg:hidden sticky bottom-0 -mx-4 sm:-mx-6 mt-6 px-4 sm:px-6 py-3 bg-white/95 backdrop-blur-md border-t border-gray-200 flex items-center gap-3">
+                            <button id="filter-done" type="button" class="flex-1 inline-flex items-center justify-center px-5 py-2.5 bg-ruby-500 text-white rounded-lg font-semibold hover:bg-ruby-600 transition-colors">
+                                Show <span class="result-count mx-1">{jobs.length}</span> results
+                            </button>
+                            <button id="clear-filters-mobile" type="button" class="px-4 py-2.5 text-sm font-semibold text-gray-600 hover:text-ruby-600">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Results -->
+                <div class="min-w-0 pb-12 lg:pb-0">
+                    <div class="hidden lg:flex items-center justify-between mb-4">
+                        <p class="text-sm text-gray-500">
+                            Showing <span class="result-count font-semibold text-gray-900">{jobs.length}</span> of {jobs.length} roles
+                        </p>
+                    </div>
+
+                    <div id="jobs-list" class="space-y-3">
+                        {jobs.map((job) => (
+                            <article
+                                class="job-row bg-white rounded-xl border border-gray-200 hover:border-ruby-200 hover:shadow-md transition-all"
+                                data-worktype={job.workType.join(" ")}
+                                data-geo={job.geo.join(" ")}
+                                data-level={job.level}
+                                data-industry={job.industry ? slugify(job.industry) : ""}
+                                data-stage={job.stage ? slugify(job.stage) : ""}
+                                data-salmax={job.salaryRange ? job.salaryRange.max : ""}
+                            >
+                                <div class="flex items-start gap-4 p-4 sm:p-5">
+                                    {job.companyLogo ? (
+                                        <div class="shrink-0 w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
+                                            <img src={job.companyLogo} alt={job.companyName} class="w-full h-full object-contain p-1" loading="lazy" />
+                                        </div>
+                                    ) : (
+                                        <div class="shrink-0 w-12 h-12 rounded-lg bg-ruby-50 flex items-center justify-center text-ruby-500 font-bold">
+                                            {job.companyName?.[0] ?? "?"}
+                                        </div>
+                                    )}
+
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
+                                            <h3 class="font-semibold text-gray-900 text-base sm:text-lg leading-snug">
+                                                {job.title}
+                                            </h3>
+                                            {job.isFeatured && (
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-ruby-100 text-ruby-700">
+                                                    Featured
+                                                </span>
+                                            )}
+                                            {job.isYC && (
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-orange-100 text-orange-700">
+                                                    YC
+                                                </span>
+                                            )}
+                                        </div>
+                                        <p class="text-sm text-gray-600 mb-2">{job.companyName}</p>
+
+                                        <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-gray-700">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                                {job.location}
+                                            </span>
+                                            <span class="px-2 py-1 rounded bg-gray-100 text-gray-700">{LEVEL_LABELS[job.level]}</span>
+                                            {job.industry && (
+                                                <span class="px-2 py-1 rounded bg-gray-100 text-gray-700">{job.industry}</span>
+                                            )}
+                                            {job.stage && (
+                                                <span class="px-2 py-1 rounded bg-gray-100 text-gray-500">{job.stage}</span>
+                                            )}
+                                            {job.salary && (
+                                                <span class="px-2 py-1 rounded bg-emerald-50 text-emerald-700 font-medium">{job.salary}</span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div class="shrink-0 flex flex-col items-end gap-2">
+                                        <a
+                                            href={job.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="inline-flex items-center gap-1 px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-lg hover:bg-ruby-600 transition-colors"
+                                        >
+                                            Apply
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                        </a>
+                                        <button
+                                            type="button"
+                                            class="more-btn inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-ruby-600"
+                                            aria-expanded="false"
+                                        >
+                                            <span class="more-label">Details</span>
+                                            <svg class="more-chevron w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="more-panel hidden border-t border-gray-100 px-4 sm:px-5 py-4">
+                                    <p class="text-sm text-gray-700 leading-relaxed">{job.description}</p>
+                                    <a
+                                        href={job.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center gap-1 mt-3 text-sm font-medium text-ruby-600 hover:text-ruby-700"
+                                    >
+                                        View full posting
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                    </a>
+                                </div>
+                            </article>
                         ))}
                     </div>
+
+                    <!-- Empty State (filtered to nothing) -->
+                    <div id="no-results" class="hidden text-center py-16">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">No roles match these filters</h3>
+                        <p class="text-gray-600 mb-4">Try removing a filter to widen your search.</p>
+                        <button id="clear-filters-empty" type="button" class="inline-flex items-center px-5 py-2.5 bg-ruby-500 text-white rounded-lg font-semibold hover:bg-ruby-600 transition-colors">
+                            Clear all filters
+                        </button>
+                    </div>
                 </div>
-            ))}
-            <div class="flex items-center gap-3 pt-1">
-                <span class="w-20 shrink-0"></span>
-                <p class="text-sm text-gray-500">
-                    Showing <span id="job-count" class="font-semibold text-gray-900">{jobs.length}</span> of {jobs.length} roles
-                </p>
-                <button id="clear-filters" type="button" class="hidden text-sm font-medium text-ruby-600 hover:text-ruby-700 underline">
-                    Clear all
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Jobs Listing -->
-    <section class="py-10 bg-gradient-to-b from-white to-cloud-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="jobs-list" class="space-y-3">
-                {jobs.map((job) => (
-                    <article
-                        class="job-row bg-white rounded-xl border border-gray-200 hover:border-ruby-200 hover:shadow-md transition-all"
-                        data-worktype={job.workType.join(" ")}
-                        data-geo={job.geo.join(" ")}
-                        data-level={job.level}
-                        data-industry={job.industry ? slugify(job.industry) : ""}
-                        data-stage={job.stage ? slugify(job.stage) : ""}
-                        data-salmax={job.salaryRange ? job.salaryRange.max : ""}
-                    >
-                        <div class="flex items-start gap-4 p-4 sm:p-5">
-                            {job.companyLogo ? (
-                                <div class="shrink-0 w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
-                                    <img src={job.companyLogo} alt={job.companyName} class="w-full h-full object-contain p-1" loading="lazy" />
-                                </div>
-                            ) : (
-                                <div class="shrink-0 w-12 h-12 rounded-lg bg-ruby-50 flex items-center justify-center text-ruby-500 font-bold">
-                                    {job.companyName?.[0] ?? "?"}
-                                </div>
-                            )}
-
-                            <div class="flex-1 min-w-0">
-                                <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
-                                    <h3 class="font-semibold text-gray-900 text-base sm:text-lg leading-snug">
-                                        {job.title}
-                                    </h3>
-                                    {job.isFeatured && (
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-ruby-100 text-ruby-700">
-                                            Featured
-                                        </span>
-                                    )}
-                                    {job.isYC && (
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-orange-100 text-orange-700">
-                                            YC
-                                        </span>
-                                    )}
-                                </div>
-                                <p class="text-sm text-gray-600 mb-2">{job.companyName}</p>
-
-                                <div class="flex flex-wrap items-center gap-1.5 text-xs">
-                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-gray-700">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                        {job.location}
-                                    </span>
-                                    <span class="px-2 py-1 rounded bg-gray-100 text-gray-700">{LEVEL_LABELS[job.level]}</span>
-                                    {job.industry && (
-                                        <span class="px-2 py-1 rounded bg-gray-100 text-gray-700">{job.industry}</span>
-                                    )}
-                                    {job.stage && (
-                                        <span class="px-2 py-1 rounded bg-gray-100 text-gray-500">{job.stage}</span>
-                                    )}
-                                    {job.salary && (
-                                        <span class="px-2 py-1 rounded bg-emerald-50 text-emerald-700 font-medium">{job.salary}</span>
-                                    )}
-                                </div>
-                            </div>
-
-                            <div class="shrink-0 flex flex-col items-end gap-2">
-                                <a
-                                    href={job.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center gap-1 px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-lg hover:bg-ruby-600 transition-colors"
-                                >
-                                    Apply
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </a>
-                                <button
-                                    type="button"
-                                    class="more-btn inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-ruby-600"
-                                    aria-expanded="false"
-                                >
-                                    <span class="more-label">Details</span>
-                                    <svg class="more-chevron w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="more-panel hidden border-t border-gray-100 px-4 sm:px-5 py-4">
-                            <p class="text-sm text-gray-700 leading-relaxed">{job.description}</p>
-                            <a
-                                href={job.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-flex items-center gap-1 mt-3 text-sm font-medium text-ruby-600 hover:text-ruby-700"
-                            >
-                                View full posting
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
-                        </div>
-                    </article>
-                ))}
-            </div>
-
-            <!-- Empty State (filtered to nothing) -->
-            <div id="no-results" class="hidden text-center py-16">
-                <h3 class="text-xl font-bold text-gray-900 mb-2">No roles match these filters</h3>
-                <p class="text-gray-600 mb-4">Try removing a filter to widen your search.</p>
-                <button id="clear-filters-empty" type="button" class="inline-flex items-center px-5 py-2.5 bg-ruby-500 text-white rounded-lg font-semibold hover:bg-ruby-600 transition-colors">
-                    Clear all filters
-                </button>
             </div>
         </div>
     </section>
@@ -342,6 +371,17 @@ const facetGroups = [
     />
 
     <style>
+        .facet-group {
+            margin-bottom: 1.5rem;
+        }
+        .facet-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+        }
         .chip {
             display: inline-flex;
             align-items: center;
@@ -373,16 +413,42 @@ const facetGroups = [
         .chip-active .chip-count {
             opacity: 0.85;
         }
+
+        /* Mobile: filter panel is a collapsible drawer. On desktop it is always
+           a visible sidebar regardless of the data-filters state. */
+        @media (max-width: 1023px) {
+            #jobs-app[data-filters="closed"] #filter-panel {
+                display: none;
+            }
+            #jobs-app[data-filters="open"] #filter-panel {
+                position: fixed;
+                inset: 5rem 0 0 0; /* below the fixed 80px site header */
+                z-index: 40;
+                overflow-y: auto;
+                background: #fff;
+                padding: 1.25rem 1rem 0;
+                animation: filter-slide-up 0.2s ease-out;
+            }
+        }
+        @keyframes filter-slide-up {
+            from { transform: translateY(0.75rem); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 
     <script>
+        const app = document.getElementById("jobs-app")!;
         const chips = Array.from(document.querySelectorAll<HTMLButtonElement>(".chip"));
         const rows = Array.from(document.querySelectorAll<HTMLElement>(".job-row"));
-        const countEl = document.getElementById("job-count");
+        const countEls = Array.from(document.querySelectorAll<HTMLElement>(".result-count"));
+        const badges = Array.from(document.querySelectorAll<HTMLElement>(".active-badge"));
         const noResults = document.getElementById("no-results");
         const list = document.getElementById("jobs-list");
-        const clearBtn = document.getElementById("clear-filters");
-        const clearBtnEmpty = document.getElementById("clear-filters-empty");
+        const clearBtns = Array.from(
+            document.querySelectorAll<HTMLButtonElement>(
+                "#clear-filters, #clear-filters-mobile, #clear-filters-empty",
+            ),
+        );
 
         type Facet = "worktype" | "geo" | "level" | "industry" | "stage";
         const multiFacets: Facet[] = ["worktype", "geo", "level", "industry", "stage"];
@@ -418,13 +484,18 @@ const facetGroups = [
                 row.style.display = ok ? "" : "none";
                 if (ok) visible++;
             }
-            if (countEl) countEl.textContent = String(visible);
+            for (const el of countEls) el.textContent = String(visible);
             if (noResults) noResults.classList.toggle("hidden", visible !== 0);
             if (list) list.classList.toggle("hidden", visible === 0);
 
-            const anyActive =
-                multiFacets.some((f) => state[f].size > 0) || salaryMin !== null;
-            if (clearBtn) clearBtn.classList.toggle("hidden", !anyActive);
+            const activeCount =
+                multiFacets.reduce((n, f) => n + state[f].size, 0) +
+                (salaryMin !== null ? 1 : 0);
+            for (const btn of clearBtns) btn.classList.toggle("hidden", activeCount === 0);
+            for (const badge of badges) {
+                badge.textContent = String(activeCount);
+                badge.classList.toggle("hidden", activeCount === 0);
+            }
         }
 
         function matchSalary(row: HTMLElement): boolean {
@@ -470,8 +541,23 @@ const facetGroups = [
             for (const c of chips) c.classList.remove("chip-active");
             apply();
         }
-        clearBtn?.addEventListener("click", clearAll);
-        clearBtnEmpty?.addEventListener("click", clearAll);
+        for (const btn of clearBtns) btn.addEventListener("click", clearAll);
+
+        // Mobile filter drawer: open on load, collapse to read results, reopen via button.
+        const mql = window.matchMedia("(max-width: 1023px)");
+        function setDrawer(open: boolean) {
+            app.dataset.filters = open ? "open" : "closed";
+            document.body.classList.toggle("overflow-hidden", open && mql.matches);
+        }
+        document.getElementById("filter-open")?.addEventListener("click", () => setDrawer(true));
+        document.getElementById("filter-done")?.addEventListener("click", () => setDrawer(false));
+        // Mobile starts open (filter-first): choose filters, then "Show results" collapses
+        // the panel. The sticky "Filters" button reopens it. Desktop ignores this entirely.
+        if (mql.matches) setDrawer(true);
+        // If the viewport crosses the breakpoint, never leave the body scroll-locked.
+        mql.addEventListener("change", (e) => {
+            if (!e.matches) document.body.classList.remove("overflow-hidden");
+        });
 
         // Expand / collapse "Details"
         for (const btn of Array.from(document.querySelectorAll<HTMLButtonElement>(".more-btn"))) {
