@@ -107,6 +107,30 @@ Audit URLs monthly alongside the News refresh. Stale listings erode site credibi
 - `npm run build:dev` — fast syntax check without env vars or external fetch. Use this after editing data files.
 - `npm run build` — full build, requires Sheet/Luma env vars.
 
+### Mobile nav regression check (run after any header/overlay/sticky change)
+
+The mobile menu (`src/components/Header.astro`, `#mobile-menu`) is a fixed overlay at `z-50`. Page-level `sticky`/`fixed` bars must stay below it, or they paint through the open menu (this bit us on `/videos`, whose category nav was `z-40`). Two recurring traps: a page sticky element with `z-index >= 50`, and a translucent menu background letting content bleed through (the panel is now solid `bg-white`).
+
+Verify with Playwright MCP at a mobile viewport (390x844), for each top-level route (`/`, `/jobs`, `/videos`, `/startups`, `/about`, `/sponsor-2026`):
+
+1. Navigate, set `scrollBehavior='auto'`, scroll down ~600px so any sticky bar is engaged.
+2. Click `#mobile-menu-button`; confirm `#mobile-menu` loses `.hidden`.
+3. Assert nothing leaks through the menu band — sample `elementFromPoint` down the panel and require every hit to be inside `#mobile-menu`:
+
+```js
+() => {
+  const menu = document.getElementById('mobile-menu');
+  const r = menu.getBoundingClientRect(), leaks = [];
+  for (let y = Math.ceil(r.top)+2; y < r.bottom-2; y += 12) {
+    const el = document.elementFromPoint(r.left + r.width/2, y);
+    if (el && !menu.contains(el)) leaks.push({ y, hit: el.id || el.tagName });
+  }
+  return leaks; // must be []
+}
+```
+
+Also confirm the toggle itself works pre-hydration: the toggle script is `is:inline` in `Header.astro` so it runs during HTML parse (a deferred module left a dead window where the button did nothing on slow mobile). Keep it inline.
+
 ## Allowed Tools
 
 - **Playwright**: Using Playwright MCP or browser automation is allowed for testing and visual inspection of the site
