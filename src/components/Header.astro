@@ -156,7 +156,7 @@ const navItems = [
     </div>
 </div>
 
-<script>
+<script is:inline>
     const mobileMenuButton = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
     const menuIcon = document.getElementById("menu-icon");
@@ -183,7 +183,7 @@ const navItems = [
     });
 
     document.addEventListener("click", (event) => {
-        const target = event.target as HTMLElement;
+        const target = event.target;
         if (
             mobileMenu &&
             !mobileMenu.classList.contains("hidden") &&
