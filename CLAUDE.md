@@ -107,15 +107,42 @@ Audit URLs monthly alongside the News refresh. Stale listings erode site credibi
 - `npm run build:dev` — fast syntax check without env vars or external fetch. Use this after editing data files.
 - `npm run build` — full build, requires Sheet/Luma env vars.
 
+### Mobile experience review (run after any layout/card/list change)
+
+Most of our traffic is mobile, and the site should feel like a native iOS app, not a desktop page shrunk down. Default to designing the mobile layout first, then widening for desktop with `sm:`/`lg:` modifiers. Reuse desktop structure on mobile only when it genuinely fits.
+
+After changing any card, list, or content layout, review it with Playwright MCP at 390x844 against this checklist:
+
+- **Vertical density.** Cards/rows should not waste height. Measure: aim for 3+ list items visible per screen. The classic trap (which bit `/jobs`): a desktop multi-column horizontal `flex` (logo │ content │ action) forced onto mobile starves the middle column to ~140px, so meta chips that should flow as a horizontal wrapping row instead stack vertically and wrap internally. Fix by stacking columns on mobile (`flex-wrap` + a `w-full` action row, or `flex-col sm:flex-row`) so content gets the full width. Verify by measuring `.getBoundingClientRect().height` before/after.
+- **Touch targets.** Interactive elements ≥ 44x44px (iOS HIG). Buttons full-width or comfortably wide; don't rely on hover-only affordances (touch has no hover, e.g. the copy-link is forced visible under `max-width: 1023px`).
+- **Native-feel details.** Momentum scroll not trapped in inner scrollers (`overscroll-behavior: contain` on sheets); sticky bars use `backdrop-blur` and sit at the right z-index; respect safe-area insets on notched devices (`env(safe-area-inset-*)`) for any fixed bottom bar; no horizontal overflow (assert `document.documentElement.scrollWidth <= innerWidth`). Keep the brand fonts (Martian Grotesk/Mono); don't swap to a system stack.
+- **Tap feedback.** Primary actions give a pressed state (use the global `.tap-press` helper, which only fires on `(hover: none)` touch devices). The global tap-highlight flash is already suppressed in `global.css`.
+- **No layout shift / starved text.** Titles shouldn't wrap to 3+ lines from a squeezed column; long values (salary, location) shouldn't break mid-word.
+
+Take a screenshot and actually look at it. Numbers confirm density; eyes confirm it reads like an app.
+
+### Mobile chrome architecture (tab bar + sheet)
+
+The mobile experience has three pieces of native-style chrome. When adding pages or fixed/sticky UI, respect their z-index contract:
+
+- **Bottom tab bar** (`src/components/BottomNav.astro`): fixed bottom, mobile-only (`lg:hidden`), `ogplus:hidden`, at **`z-40`**. Five tabs (Home / Jobs / Videos / Startups / Join). Pages give content bottom clearance with the `pb-tabbar` body class, and the bar pads its own `pb-safe`. **The site has three page-shell patterns and the tab bar must be in all of them:** `BaseLayout.astro`, `Layout.astro`, and the standalone pages that build their own `<body>` (`index.astro`, `sponsor-2026.astro`, `conference-2026.astro`). A new top-level page that defines its own `<body>` must import `BottomNav`, add `pb-tabbar` to the body, and use the `viewport-fit=cover` meta (so safe-area insets resolve).
+- **Mobile menu overlay** (the hamburger dropdown in both `Header.astro` and `Navigation.astro`, `#mobile-menu`): **`z-50`**, above the tab bar. Both must stay at `z-50`. The menu is a top dropdown that doesn't cover the screen bottom, so `BottomNav.astro` watches `#mobile-menu`'s `.hidden` via a `MutationObserver` and slides the tab bar out (`.nav-hidden`) while the menu is open, rather than leaving it showing/tappable underneath.
+- **Jobs filter sheet** (`/jobs`, `#filter-panel` + `#filter-backdrop`): an iOS bottom sheet (rounded top, grab handle, drag-to-dismiss, dim backdrop). Backdrop `z-45`, sheet `z-46`, both above the tab bar so the sheet covers it. Pattern to reuse for any future mobile sheet.
+
+z-index ladder (mobile): page stickies `≤ z-30` < tab bar `z-40` < jobs sheet `z-45/46` < menu overlay `z-50`.
+
+Quick check (390x844): `document.getElementById('bottom-nav')` exists; at full scroll the lowest content link clears the tab bar top; no horizontal overflow.
+
 ### Mobile nav regression check (run after any header/overlay/sticky change)
 
-The mobile menu (`src/components/Header.astro`, `#mobile-menu`) is a fixed overlay at `z-50`. Page-level `sticky`/`fixed` bars must stay below it, or they paint through the open menu (this bit us on `/videos`, whose category nav was `z-40`). Two recurring traps: a page sticky element with `z-index >= 50`, and a translucent menu background letting content bleed through (the panel is now solid `bg-white`).
+The mobile menu (`#mobile-menu`, implemented in **both** `src/components/Header.astro` and `src/components/Navigation.astro`) is a fixed overlay at `z-50`. Page-level `sticky`/`fixed` bars must stay below it (`≤ z-30`), or they paint through the open menu (this bit us on `/videos`, whose category nav was `z-40`). The bottom tab bar (`z-40`) and jobs sheet (`z-45/46`) sit below the menu by design. Two recurring traps: a page sticky element with `z-index >= 50`, and a translucent menu background letting content bleed through (Header's panel is solid `bg-white`).
 
 Verify with Playwright MCP at a mobile viewport (390x844), for each top-level route (`/`, `/jobs`, `/videos`, `/startups`, `/about`, `/sponsor-2026`):
 
 1. Navigate, set `scrollBehavior='auto'`, scroll down ~600px so any sticky bar is engaged.
-2. Click `#mobile-menu-button`; confirm `#mobile-menu` loses `.hidden`.
-3. Assert nothing leaks through the menu band — sample `elementFromPoint` down the panel and require every hit to be inside `#mobile-menu`:
+2. Confirm `#bottom-nav` exists (tab bar present on this shell).
+3. Click `#mobile-menu-button`; confirm `#mobile-menu` loses `.hidden`.
+4. Assert nothing leaks through the menu band — sample `elementFromPoint` down the panel and require every hit to be inside `#mobile-menu`:
 
 ```js
 () => {

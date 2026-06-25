@@ -23,6 +23,9 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    /* Don't let iOS Safari inflate font sizes on rotation. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 :focus-visible {
@@ -32,6 +35,43 @@ html {
 
 body {
     overflow-x: hidden;
+    /* Keep scroll momentum contained to the page (no parent rubber-banding). */
+    overscroll-behavior-y: none;
+}
+
+/* Native-app feel on touch: kill the grey tap-highlight flash; let elements
+   opt into a pressed state instead. iOS has no hover, so feedback comes from
+   :active. Disabled where a desktop pointer is present. */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+@media (hover: none) {
+    .tap-press {
+        transition: transform 0.08s ease;
+    }
+    .tap-press:active {
+        transform: scale(0.97);
+    }
+}
+
+/* Safe-area helpers for fixed bars on notched / home-indicator devices. */
+.pt-safe {
+    padding-top: env(safe-area-inset-top);
+}
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+.h-safe-bottom {
+    height: env(safe-area-inset-bottom);
+}
+/* Pages add this so content clears the mobile bottom tab bar. */
+.pb-tabbar {
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 1024px) {
+    .pb-tabbar {
+        padding-bottom: 0;
+    }
 }
 
 /* Line clamp utilities */

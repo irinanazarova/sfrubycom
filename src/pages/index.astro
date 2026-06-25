@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BottomNav from "../components/BottomNav.astro";
 import "../styles/global.css";
 import StartupCard from "../components/StartupCard.astro";
 import StartupModal from "../components/StartupModal.astro";
@@ -120,7 +121,10 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
 <html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link
             rel="icon"
@@ -171,7 +175,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
         ></script>
     </head>
     <body
-        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col"
+        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col pb-tabbar"
     >
         <Header />
 
@@ -1086,6 +1090,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
         <HostModal />
 
         <Footer />
+        <BottomNav />
     </body>
 </html>
 

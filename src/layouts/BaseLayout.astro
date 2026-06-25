@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BottomNav from "../components/BottomNav.astro";
 import "../styles/global.css";
 
 export interface Props {
@@ -25,7 +26,10 @@ const ogPlusImage = `https://iqtfijxk.ogplus.net${ogPlusPath}`;
 <html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link
             rel="icon"
@@ -84,7 +88,7 @@ const ogPlusImage = `https://iqtfijxk.ogplus.net${ogPlusPath}`;
         </script>
     </head>
     <body
-        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col overflow-x-hidden"
+        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col overflow-x-hidden pb-tabbar"
     >
         <Header />
 
@@ -93,5 +97,6 @@ const ogPlusImage = `https://iqtfijxk.ogplus.net${ogPlusPath}`;
         </main>
 
         <Footer />
+        <BottomNav />
     </body>
 </html>
