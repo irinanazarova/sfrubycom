@@ -72,4 +72,36 @@ const isActive = (href: string) =>
         font-weight: 500;
         transition: color 0.15s;
     }
+
+    /* Slide the bar out of the way while the hamburger menu overlay is open,
+       so it isn't left showing/tappable beneath the menu. */
+    #bottom-nav {
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+    }
+    #bottom-nav.nav-hidden {
+        transform: translateY(100%);
+        opacity: 0;
+        pointer-events: none;
+    }
 </style>
+
+<script is:inline>
+    // Keep the tab bar in sync with the mobile menu overlay (#mobile-menu lives
+    // in Header.astro / Navigation.astro and toggles its own `.hidden`). Driven
+    // here so it works under whichever header shell renders, with no edits
+    // scattered across the menu toggles.
+    (() => {
+        const menu = document.getElementById("mobile-menu");
+        const nav = document.getElementById("bottom-nav");
+        if (!menu || !nav) return;
+        const sync = () =>
+            nav.classList.toggle("nav-hidden", !menu.classList.contains("hidden"));
+        new MutationObserver(sync).observe(menu, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+        sync();
+    })();
+</script>

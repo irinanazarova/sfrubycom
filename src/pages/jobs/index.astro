@@ -840,6 +840,16 @@ const facetGroups = [
                     panel.style.transform = "translateY(0)";
                 }
             });
+
+            // If the OS cancels the gesture mid-drag (incoming call, system
+            // edge-swipe), spring back instead of leaving the sheet frozen at
+            // the dragged offset.
+            grabber.addEventListener("touchcancel", () => {
+                if (!dragging) return;
+                dragging = false;
+                panel.style.transition = spring;
+                panel.style.transform = "translateY(0)";
+            });
         }
         // Mobile starts open (filter-first): choose filters, then "Show results" collapses
         // the panel. The sticky "Filters" button reopens it. Desktop ignores this entirely.
