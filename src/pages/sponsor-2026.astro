@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BottomNav from "../components/BottomNav.astro";
 import EmailModal from "../components/EmailModal.astro";
 import "../styles/global.css";
 
@@ -66,7 +67,10 @@ const tiers2026 = [
 <html lang="en" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link
             rel="icon"
@@ -114,7 +118,7 @@ const tiers2026 = [
         ></script>
     </head>
     <body
-        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col"
+        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col pb-tabbar"
     >
         <Header />
 
@@ -520,5 +524,6 @@ const tiers2026 = [
         />
 
         <Footer />
+        <BottomNav />
     </body>
 </html>

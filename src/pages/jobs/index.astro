@@ -149,7 +149,7 @@ const facetGroups = [
                     </div>
                     <button
                         data-email-modal="post-job"
-                        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-ruby-600 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all"
+                        class="tap-press inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-ruby-600 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all"
                     >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -177,8 +177,13 @@ const facetGroups = [
 
             <div class="lg:grid lg:grid-cols-[15rem_1fr] xl:grid-cols-[16rem_1fr] lg:gap-8 lg:py-10">
 
-                <!-- Filter sidebar -->
+                <!-- Dim backdrop behind the mobile filter sheet -->
+                <div id="filter-backdrop" class="lg:hidden" aria-hidden="true"></div>
+
+                <!-- Filter sidebar (desktop) / bottom sheet (mobile) -->
                 <aside id="filter-panel" class="filter-panel py-6 lg:py-0">
+                    <!-- Mobile-only drag handle -->
+                    <div class="filter-grabber lg:hidden" aria-hidden="true"></div>
                     <div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-1 lg:-mr-1">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900">Filters</h2>
@@ -239,7 +244,7 @@ const facetGroups = [
                                 data-stage={job.stage ? slugify(job.stage) : ""}
                                 data-salmax={job.salaryRange ? job.salaryRange.max : ""}
                             >
-                                <div class="flex items-start gap-4 p-4 sm:p-5">
+                                <div class="flex flex-wrap sm:flex-nowrap items-start gap-x-4 gap-y-3 p-4 sm:p-5">
                                     {job.companyLogo ? (
                                         <div class="shrink-0 w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
                                             <img src={job.companyLogo} alt={job.companyName} class="w-full h-full object-contain p-1" loading="lazy" />
@@ -295,12 +300,12 @@ const facetGroups = [
                                         </div>
                                     </div>
 
-                                    <div class="shrink-0 flex flex-col items-end gap-2">
+                                    <div class="order-last sm:order-none w-full sm:w-auto shrink-0 flex items-center gap-2 sm:flex-col sm:items-end">
                                         <a
                                             href={job.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            class="inline-flex items-center gap-1 px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-lg hover:bg-ruby-600 transition-colors"
+                                            class="tap-press flex-1 sm:flex-none justify-center inline-flex items-center gap-1 px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-lg hover:bg-ruby-600 transition-colors"
                                         >
                                             Apply
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -423,6 +428,12 @@ const facetGroups = [
         .chip-active .chip-count {
             opacity: 0.85;
         }
+        /* Options that would narrow results to zero, and facets with no options
+           left, are removed from the panel until the selection changes. */
+        .chip-hidden,
+        .facet-group-hidden {
+            display: none;
+        }
 
         /* Per-card anchor: highlight when linked, copy-link affordance. */
         .job-row:target {
@@ -470,31 +481,82 @@ const facetGroups = [
             }
         }
 
-        /* Mobile: filter panel is a collapsible drawer. On desktop it is always
-           a visible sidebar regardless of the data-filters state. */
+        /* Mobile: filter panel is an iOS-style bottom sheet (rounded top, grab
+           handle, drag-to-dismiss, dim backdrop). On desktop it is always a
+           visible sidebar regardless of the data-filters state. */
+        .filter-grabber {
+            display: none;
+        }
         @media (max-width: 1023px) {
-            #jobs-app[data-filters="closed"] #filter-panel {
+            #jobs-app[data-filters="closed"] #filter-panel,
+            #jobs-app[data-filters="closed"] #filter-backdrop {
                 display: none;
             }
+
+            #filter-backdrop {
+                position: fixed;
+                inset: 0;
+                z-index: 45; /* above the bottom tab bar (z-40) */
+                background: rgba(17, 24, 39, 0.45);
+                opacity: 0;
+                animation: filter-backdrop-in 0.28s ease forwards;
+            }
+
             #jobs-app[data-filters="open"] #filter-panel {
                 position: fixed;
-                inset: 5rem 0 0 0; /* below the fixed 80px site header */
-                z-index: 40;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: auto;
+                z-index: 46; /* above the bottom tab bar (z-40) and its backdrop */
+                max-height: 85vh;
                 overflow-y: auto;
+                overscroll-behavior: contain;
                 background: #fff;
-                padding: 1.25rem 1rem 0;
-                animation: filter-slide-up 0.2s ease-out;
+                border-radius: 1.25rem 1.25rem 0 0;
+                box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
+                padding: 0 1rem env(safe-area-inset-bottom);
+                animation: filter-sheet-up 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+                will-change: transform;
+            }
+
+            .filter-grabber {
+                position: sticky;
+                top: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0.625rem 0 0.5rem;
+                margin: 0 -1rem;
+                background: #fff;
+                border-radius: 1.25rem 1.25rem 0 0;
+                cursor: grab;
+                touch-action: none;
+                z-index: 2;
+            }
+            .filter-grabber::before {
+                content: "";
+                width: 2.25rem;
+                height: 0.3125rem;
+                border-radius: 9999px;
+                background: #d1d5db;
             }
         }
-        @keyframes filter-slide-up {
-            from { transform: translateY(0.75rem); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes filter-sheet-up {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        @keyframes filter-backdrop-in {
+            to { opacity: 1; }
         }
     </style>
 
     <script>
         const app = document.getElementById("jobs-app")!;
         const chips = Array.from(document.querySelectorAll<HTMLButtonElement>(".chip"));
+        const facetGroupEls = Array.from(
+            document.querySelectorAll<HTMLElement>(".facet-group"),
+        );
         const rows = Array.from(document.querySelectorAll<HTMLElement>(".job-row"));
         const countEls = Array.from(document.querySelectorAll<HTMLElement>(".result-count"));
         const badges = Array.from(document.querySelectorAll<HTMLElement>(".active-badge"));
@@ -527,17 +589,73 @@ const facetGroups = [
             return rowTokens.some((t) => active.has(t));
         }
 
+        // Precompute each row's facet data once, so recounting on every click is cheap.
+        const rowData = rows.map((el) => ({
+            el,
+            worktype: tokens(el, "data-worktype"),
+            geo: tokens(el, "data-geo"),
+            level: el.getAttribute("data-level") || "",
+            industry: el.getAttribute("data-industry") || "",
+            stage: el.getAttribute("data-stage") || "",
+            salmax: el.getAttribute("data-salmax")
+                ? Number(el.getAttribute("data-salmax"))
+                : null,
+        }));
+        type Row = (typeof rowData)[number];
+
+        type FilterState = {
+            worktype: Set<string>;
+            geo: Set<string>;
+            level: Set<string>;
+            industry: Set<string>;
+            stage: Set<string>;
+            salaryMin: number | null;
+        };
+
+        function snapshot(): FilterState {
+            return {
+                worktype: state.worktype,
+                geo: state.geo,
+                level: state.level,
+                industry: state.industry,
+                stage: state.stage,
+                salaryMin,
+            };
+        }
+
+        function facetTokens(d: Row, facet: string): string[] {
+            if (facet === "worktype") return d.worktype;
+            if (facet === "geo") return d.geo;
+            if (facet === "level") return [d.level];
+            if (facet === "industry") return [d.industry];
+            if (facet === "stage") return [d.stage];
+            return [];
+        }
+
+        function rowMatches(d: Row, st: FilterState): boolean {
+            return (
+                matchFacet(d.worktype, st.worktype) &&
+                matchFacet(d.geo, st.geo) &&
+                matchFacet([d.level], st.level) &&
+                matchFacet([d.industry], st.industry) &&
+                matchFacet([d.stage], st.stage) &&
+                (st.salaryMin === null ||
+                    (d.salmax !== null && d.salmax >= st.salaryMin))
+            );
+        }
+
+        function countMatches(st: FilterState): number {
+            let n = 0;
+            for (const d of rowData) if (rowMatches(d, st)) n++;
+            return n;
+        }
+
         function apply() {
+            const cur = snapshot();
             let visible = 0;
-            for (const row of rows) {
-                const ok =
-                    matchFacet(tokens(row, "data-worktype"), state.worktype) &&
-                    matchFacet(tokens(row, "data-geo"), state.geo) &&
-                    matchFacet([row.getAttribute("data-level") || ""], state.level) &&
-                    matchFacet([row.getAttribute("data-industry") || ""], state.industry) &&
-                    matchFacet([row.getAttribute("data-stage") || ""], state.stage) &&
-                    matchSalary(row);
-                row.style.display = ok ? "" : "none";
+            for (const d of rowData) {
+                const ok = rowMatches(d, cur);
+                d.el.style.display = ok ? "" : "none";
                 if (ok) visible++;
             }
             for (const el of countEls) el.textContent = String(visible);
@@ -552,13 +670,56 @@ const facetGroups = [
                 badge.textContent = String(activeCount);
                 badge.classList.toggle("hidden", activeCount === 0);
             }
+
+            updateChips(cur);
         }
 
-        function matchSalary(row: HTMLElement): boolean {
-            if (salaryMin === null) return true;
-            const max = row.getAttribute("data-salmax");
-            if (!max) return false;
-            return Number(max) >= salaryMin;
+        // Conditional facet counts (disjunctive faceting): every chip's number is
+        // recomputed against the CURRENT selection. An inactive chip shows the
+        // result count you'd get by clicking it on top of what you have now (a
+        // second value in the same facet widens via OR; a value in another facet
+        // narrows via AND). An active chip shows its share of the current results.
+        // Inactive options that would narrow the list to zero are hidden, and a
+        // facet whose options all disappear is hidden entirely, so the panel only
+        // ever offers filters that lead somewhere.
+        function updateChips(cur: FilterState) {
+            const visibleRows = rowData.filter((d) => rowMatches(d, cur));
+            for (const chip of chips) {
+                const facet = chip.dataset.facet!;
+                const value = chip.dataset.value!;
+                const isSalary = chip.dataset.single === "true";
+                const active = isSalary
+                    ? salaryMin === Number(value)
+                    : state[facet as Facet].has(value);
+
+                let count: number;
+                if (active) {
+                    count = isSalary
+                        ? visibleRows.length
+                        : visibleRows.filter((d) =>
+                              facetTokens(d, facet).includes(value),
+                          ).length;
+                } else if (isSalary) {
+                    count = countMatches({ ...cur, salaryMin: Number(value) });
+                } else {
+                    const next = new Set(cur[facet as Facet]);
+                    next.add(value);
+                    count = countMatches({ ...cur, [facet]: next });
+                }
+
+                const countEl = chip.querySelector(".chip-count");
+                if (countEl) countEl.textContent = String(count);
+
+                chip.classList.toggle("chip-hidden", !active && count === 0);
+            }
+
+            // Hide a facet group once none of its options remain available.
+            for (const group of facetGroupEls) {
+                const anyVisible = Array.from(
+                    group.querySelectorAll<HTMLElement>(".chip"),
+                ).some((c) => !c.classList.contains("chip-hidden"));
+                group.classList.toggle("facet-group-hidden", !anyVisible);
+            }
         }
 
         // Bring results back into view from the top when filters change, so you
@@ -620,17 +781,66 @@ const facetGroups = [
         }
         for (const btn of clearBtns) btn.addEventListener("click", clearAll);
 
-        // Mobile filter drawer: open on load, collapse to read results, reopen via button.
+        // Initialize conditional counts / availability on load.
+        apply();
+
+        // Mobile filter sheet: open on load, collapse to read results, reopen via button.
         const mql = window.matchMedia("(max-width: 1023px)");
+        const panel = document.getElementById("filter-panel");
+        const backdrop = document.getElementById("filter-backdrop");
+        const grabber = document.querySelector<HTMLElement>(".filter-grabber");
+
         function setDrawer(open: boolean) {
             app.dataset.filters = open ? "open" : "closed";
             document.body.classList.toggle("overflow-hidden", open && mql.matches);
+            // Clear any leftover drag transform so the open animation runs clean.
+            if (open && panel) {
+                panel.style.transition = "";
+                panel.style.transform = "";
+            }
         }
         document.getElementById("filter-open")?.addEventListener("click", () => setDrawer(true));
         document.getElementById("filter-done")?.addEventListener("click", () => {
             setDrawer(false);
             scrollToListTop(true);
         });
+        // Tap the dim backdrop to dismiss.
+        backdrop?.addEventListener("click", () => setDrawer(false));
+
+        // Drag the grab handle down to dismiss, like an iOS sheet. Follows the
+        // finger; past ~30% of the sheet height (or a quick flick) it closes,
+        // otherwise it springs back.
+        if (grabber && panel) {
+            let startY = 0;
+            let dy = 0;
+            let dragging = false;
+            const spring = "transform 0.32s cubic-bezier(0.32, 0.72, 0, 1)";
+
+            grabber.addEventListener("touchstart", (e) => {
+                dragging = true;
+                startY = e.touches[0].clientY;
+                dy = 0;
+                panel.style.transition = "none";
+            }, { passive: true });
+
+            grabber.addEventListener("touchmove", (e) => {
+                if (!dragging) return;
+                dy = Math.max(0, e.touches[0].clientY - startY);
+                panel.style.transform = `translateY(${dy}px)`;
+            }, { passive: true });
+
+            grabber.addEventListener("touchend", () => {
+                if (!dragging) return;
+                dragging = false;
+                panel.style.transition = spring;
+                if (dy > panel.offsetHeight * 0.3 || dy > 140) {
+                    panel.style.transform = `translateY(100%)`;
+                    window.setTimeout(() => setDrawer(false), 220);
+                } else {
+                    panel.style.transform = "translateY(0)";
+                }
+            });
+        }
         // Mobile starts open (filter-first): choose filters, then "Show results" collapses
         // the panel. The sticky "Filters" button reopens it. Desktop ignores this entirely.
         // Exception: if the page is opened on a specific role anchor, start collapsed so the

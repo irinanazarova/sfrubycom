@@ -1,0 +1,75 @@
+---
+// iOS-style bottom tab bar, mobile only. Hidden on desktop (lg:) and when
+// generating OG images (ogplus:). Four primary destinations plus the Join CTA.
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) =>
+    href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<nav
+    id="bottom-nav"
+    aria-label="Primary"
+    class="lg:hidden ogplus:hidden fixed bottom-0 inset-x-0 z-40 bg-white/90 backdrop-blur-xl border-t border-gray-200/80 pb-safe"
+>
+    <div class="grid grid-cols-5 h-16">
+        <a
+            href="/"
+            aria-current={isActive("/") ? "page" : undefined}
+            class={`tab-item tap-press ${isActive("/") ? "text-ruby-600" : "text-gray-500"}`}
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            <span>Home</span>
+        </a>
+
+        <a
+            href="/jobs"
+            aria-current={isActive("/jobs") ? "page" : undefined}
+            class={`tab-item tap-press ${isActive("/jobs") ? "text-ruby-600" : "text-gray-500"}`}
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <span>Jobs</span>
+        </a>
+
+        <a
+            href="/videos"
+            aria-current={isActive("/videos") ? "page" : undefined}
+            class={`tab-item tap-press ${isActive("/videos") ? "text-ruby-600" : "text-gray-500"}`}
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Videos</span>
+        </a>
+
+        <a
+            href="/startups"
+            aria-current={isActive("/startups") ? "page" : undefined}
+            class={`tab-item tap-press ${isActive("/startups") ? "text-ruby-600" : "text-gray-500"}`}
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            <span>Startups</span>
+        </a>
+
+        <a
+            href="https://lu.ma/sfruby"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="tab-item tap-press text-ruby-600 font-semibold"
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span>Join</span>
+        </a>
+    </div>
+</nav>
+
+<style>
+    .tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.125rem;
+        font-size: 0.625rem;
+        line-height: 1;
+        font-weight: 500;
+        transition: color 0.15s;
+    }
+</style>
