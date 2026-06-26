@@ -44,7 +44,7 @@ const { id, email, subject = "", title = "Get in touch" } = Astro.props;
             <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-xl border border-gray-200">
                 <span class="flex-1 font-mono text-gray-900 select-all">{email}</span>
                 <button
-                    class="email-copy-btn flex items-center gap-2 px-3 py-1.5 bg-ruby-500 hover:bg-ruby-600 text-white text-sm font-medium rounded-lg transition-colors"
+                    class="email-copy-btn flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-ruby-500 to-pink-500 hover:from-ruby-400 hover:to-pink-400 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow-md transition-all"
                     data-email={email}
                 >
                     <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
