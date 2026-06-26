@@ -509,7 +509,8 @@ const facetGroups = [
                 bottom: 0;
                 top: auto;
                 z-index: 46; /* above the bottom tab bar (z-40) and its backdrop */
-                max-height: 85vh;
+                max-height: 85vh; /* fallback for iOS < 15.4 */
+                max-height: 85dvh;
                 overflow-y: auto;
                 overscroll-behavior: contain;
                 background: #fff;
