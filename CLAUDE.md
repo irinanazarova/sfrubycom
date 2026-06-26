@@ -123,40 +123,37 @@ Take a screenshot and actually look at it. Numbers confirm density; eyes confirm
 
 ### Mobile chrome architecture (tab bar + sheet)
 
-The mobile experience has three pieces of native-style chrome. When adding pages or fixed/sticky UI, respect their z-index contract:
+The mobile experience has two pieces of native-style chrome. When adding pages or fixed/sticky UI, respect their z-index contract:
 
-- **Bottom tab bar** (`src/components/BottomNav.astro`): fixed bottom, mobile-only (`lg:hidden`), `ogplus:hidden`, at **`z-40`**. Five tabs (Home / Jobs / Videos / Startups / Join). Pages give content bottom clearance with the `pb-tabbar` body class, and the bar pads its own `pb-safe`. **The site has three page-shell patterns and the tab bar must be in all of them:** `BaseLayout.astro`, `Layout.astro`, and the standalone pages that build their own `<body>` (`index.astro`, `sponsor-2026.astro`, `conference-2026.astro`). A new top-level page that defines its own `<body>` must import `BottomNav`, add `pb-tabbar` to the body, and use the `viewport-fit=cover` meta (so safe-area insets resolve).
-- **Mobile menu overlay** (the hamburger dropdown in both `Header.astro` and `Navigation.astro`, `#mobile-menu`): **`z-50`**, above the tab bar. Both must stay at `z-50`. The menu is a top dropdown that doesn't cover the screen bottom, so `BottomNav.astro` watches `#mobile-menu`'s `.hidden` via a `MutationObserver` and slides the tab bar out (`.nav-hidden`) while the menu is open, rather than leaving it showing/tappable underneath.
+- **Bottom tab bar** (`src/components/BottomNav.astro`): fixed bottom, mobile-only (`lg:hidden`), `ogplus:hidden`, at **`z-40`**. It is the **sole mobile nav** (the hamburger menu was removed on mobile), so it carries every destination: the first five (Home / Jobs / Slack / Videos / Join) fill the screen and the rest (Sponsor / Conf / News / Startups / About) are reached by scrolling the bar horizontally. The tab list is data-driven (`tabs` array in the component); add destinations there. The bar scrolls via `.tab-scroll` (hidden scrollbar, right-edge mask fade hints there is more). Pages give content bottom clearance with the `pb-tabbar` body class, and the bar pads its own `pb-safe`. **The site has three page-shell patterns and the tab bar must be in all of them:** `BaseLayout.astro`, `Layout.astro`, and the standalone pages that build their own `<body>` (`index.astro`, `sponsor-2026.astro`, `conference-2026.astro`). A new top-level page that defines its own `<body>` must import `BottomNav`, add `pb-tabbar` to the body, and use the `viewport-fit=cover` meta (so safe-area insets resolve).
 - **Jobs filter sheet** (`/jobs`, `#filter-panel` + `#filter-backdrop`): an iOS bottom sheet (rounded top, grab handle, drag-to-dismiss, dim backdrop). Backdrop `z-45`, sheet `z-46`, both above the tab bar so the sheet covers it. Pattern to reuse for any future mobile sheet.
 
-z-index ladder (mobile): page stickies `≤ z-30` < tab bar `z-40` < jobs sheet `z-45/46` < menu overlay `z-50`.
+The hamburger trigger (`#mobile-menu-button` in `Header.astro` / `Navigation.astro`) is hidden on every viewport; desktop uses the inline horizontal `<nav>`, mobile uses the tab bar.
+
+z-index ladder (mobile): page stickies `≤ z-30` < tab bar `z-40` < jobs sheet `z-45/46`.
 
 Quick check (390x844): `document.getElementById('bottom-nav')` exists; at full scroll the lowest content link clears the tab bar top; no horizontal overflow.
 
-### Mobile nav regression check (run after any header/overlay/sticky change)
+### Header logo contrast (`darkHero` contract)
 
-The mobile menu (`#mobile-menu`, implemented in **both** `src/components/Header.astro` and `src/components/Navigation.astro`) is a fixed overlay at `z-50`. Page-level `sticky`/`fixed` bars must stay below it (`≤ z-30`), or they paint through the open menu (this bit us on `/videos`, whose category nav was `z-40`). The bottom tab bar (`z-40`) and jobs sheet (`z-45/46`) sit below the menu by design. Two recurring traps: a page sticky element with `z-index >= 50`, and a translucent menu background letting content bleed through (Header's panel is solid `bg-white`).
+`Header.astro` (the `BaseLayout` shell) starts as a **transparent** header with the **white** logo, then swaps to a solid white header with the **dark** logo once scrolled past 50px. That transparent/white-logo state only reads on a **dark hero**. A `BaseLayout` page whose top section is light (`bg-white`, `bg-gray-50`, `from-gray-50`, etc.) must pass **`darkHero={false}`**, which starts the header solid with the dark logo so the logo isn't invisible on a light background at the top.
 
-Verify with Playwright MCP at a mobile viewport (390x844), for each top-level route (`/`, `/jobs`, `/videos`, `/startups`, `/about`, `/sponsor-2026`):
+Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/jobs`, `/videos`, `/photos`, `/host`, the monthly `news/YYYY-MM`, `conference-2026`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
 
-1. Navigate, set `scrollBehavior='auto'`, scroll down ~600px so any sticky bar is engaged.
-2. Confirm `#bottom-nav` exists (tab bar present on this shell).
-3. Click `#mobile-menu-button`; confirm `#mobile-menu` loses `.hidden`.
-4. Assert nothing leaks through the menu band — sample `elementFromPoint` down the panel and require every hit to be inside `#mobile-menu`:
+When adding a `BaseLayout` page, check the first section's background and set `darkHero` accordingly. QA: at 390x844, the header logo must be legible at scroll-top (`.header-logo-white` visible only over a dark hero; otherwise `.header-logo-dark` on a solid header).
 
-```js
-() => {
-  const menu = document.getElementById('mobile-menu');
-  const r = menu.getBoundingClientRect(), leaks = [];
-  for (let y = Math.ceil(r.top)+2; y < r.bottom-2; y += 12) {
-    const el = document.elementFromPoint(r.left + r.width/2, y);
-    if (el && !menu.contains(el)) leaks.push({ y, hit: el.id || el.tagName });
-  }
-  return leaks; // must be []
-}
-```
+### Mobile regression check (run after any header/overlay/sticky change)
 
-Also confirm the toggle itself works pre-hydration: the toggle script is `is:inline` in `Header.astro` so it runs during HTML parse (a deferred module left a dead window where the button did nothing on slow mobile). Keep it inline.
+There is no hamburger menu on mobile; the bottom tab bar is the only mobile nav (the `#mobile-menu-button` is hidden on all viewports). Page-level `sticky`/`fixed` bars must stay `≤ z-30` so they sit below the tab bar (`z-40`) and jobs sheet (`z-45/46`).
+
+Verify with Playwright at 390x844 for each top-level route (`/`, `/jobs`, `/videos`, `/startups`, `/about`, `/news`, `/sponsor-2026`):
+
+1. `#bottom-nav` exists and is visible; it scrolls horizontally to reveal all ten tabs (`.tab-scroll` scrollWidth > clientWidth).
+2. `#mobile-menu-button` is not visible (`display: none`).
+3. No horizontal overflow: `document.documentElement.scrollWidth <= innerWidth`.
+4. Header logo is legible at scroll-top (see `darkHero` contract above).
+
+A standalone Playwright runner lives in scratchpad during development (`node _qa.mjs` from the project root, since it needs the project's `node_modules`); the MCP browser is often locked by a live session.
 
 ## Allowed Tools
 

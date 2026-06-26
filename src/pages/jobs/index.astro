@@ -509,7 +509,8 @@ const facetGroups = [
                 bottom: 0;
                 top: auto;
                 z-index: 46; /* above the bottom tab bar (z-40) and its backdrop */
-                max-height: 85vh;
+                max-height: 85vh; /* fallback for iOS < 15.4 */
+                max-height: 85dvh;
                 overflow-y: auto;
                 overscroll-behavior: contain;
                 background: #fff;
@@ -851,11 +852,43 @@ const facetGroups = [
                 panel.style.transform = "translateY(0)";
             });
         }
-        // Mobile starts open (filter-first): choose filters, then "Show results" collapses
-        // the panel. The sticky "Filters" button reopens it. Desktop ignores this entirely.
-        // Exception: if the page is opened on a specific role anchor, start collapsed so the
-        // targeted card is visible instead of hidden behind the drawer.
-        if (mql.matches) setDrawer(!location.hash);
+        // Resolve a deep link to a specific card (/jobs#job-id) up front.
+        const hashEl =
+            location.hash.length > 1
+                ? document.getElementById(decodeURIComponent(location.hash.slice(1)))
+                : null;
+        const deepLink = hashEl?.classList.contains("job-row") ? hashEl : null;
+
+        // A deep link always closes the sheet so the linked card is visible
+        // (harmless on desktop, where the panel is a static sidebar). Otherwise
+        // mobile starts filter-first with the sheet open.
+        if (deepLink) setDrawer(false);
+        else if (mql.matches) setDrawer(true);
+
+        // Cold-load deep link: the native on-load hash scroll animates (global
+        // scroll-behavior: smooth) over a long distance and lands stale, and
+        // lazy images keep shifting the target. Jump instantly each frame, with
+        // scroll-behavior forced to auto so the native smooth scroll can't fight
+        // us, until the position holds steady; then restore smooth.
+        if (deepLink) {
+            const root = document.documentElement;
+            const prevBehavior = root.style.scrollBehavior;
+            root.style.scrollBehavior = "auto";
+            let stable = 0;
+            let frames = 0;
+            const converge = () => {
+                const offset = mql.matches ? 140 : 96; // header (+ mobile filter bar)
+                const y = Math.max(
+                    0,
+                    deepLink.getBoundingClientRect().top + window.scrollY - offset,
+                );
+                window.scrollTo(0, y);
+                stable = Math.abs(y - window.scrollY) < 2 ? stable + 1 : 0;
+                if (stable < 3 && ++frames < 120) requestAnimationFrame(converge);
+                else root.style.scrollBehavior = prevBehavior;
+            };
+            requestAnimationFrame(converge);
+        }
 
         // Per-card anchor links: scroll + highlight, and copy a shareable URL.
         for (const link of Array.from(document.querySelectorAll<HTMLAnchorElement>(".copy-link"))) {

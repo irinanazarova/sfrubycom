@@ -75,7 +75,8 @@
         left: 50%;
         transform: translate(-50%, -50%);
         max-width: 56rem;
-        max-height: 90vh;
+        max-height: 90vh; /* fallback for iOS < 15.4 */
+        max-height: 90dvh;
         width: 95vw;
         background: white;
         border-radius: 1rem;
@@ -84,7 +85,8 @@
     }
 
     .modal-content {
-        max-height: 90vh;
+        max-height: 90vh; /* fallback for iOS < 15.4 */
+        max-height: 90dvh;
         overflow-y: auto;
         overscroll-behavior: contain;
     }

@@ -11,10 +11,22 @@ const navItems = [
     { name: "Startups", href: "/startups" },
     { name: "About", href: "/about" },
 ];
+
+// Pages with a dark hero at the top get the transparent header + white logo.
+// Pages with a light top must pass `darkHero={false}` so the header starts
+// solid with the dark logo (otherwise the white logo is invisible on a light
+// background until the user scrolls).
+const { darkHero = true } = Astro.props;
 ---
 
 <header
-    class="fixed w-full z-50 transition-all duration-300 bg-transparent ogplus:hidden"
+    class:list={[
+        "fixed w-full z-50 transition-all duration-300 ogplus:hidden",
+        darkHero
+            ? "bg-transparent"
+            : "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100/20",
+    ]}
+    data-dark-hero={darkHero ? "true" : "false"}
     id="main-header"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,12 +38,12 @@ const navItems = [
                 <img
                     src="/sfruby_letters_white.png"
                     alt="SF Ruby"
-                    class="header-logo-white object-contain w-28 h-12"
+                    class:list={["header-logo-white object-contain w-28 h-12", { hidden: !darkHero }]}
                 />
                 <img
                     src="/sfruby_letters_black.png"
                     alt="SF Ruby"
-                    class="header-logo-dark object-contain w-28 h-12 hidden"
+                    class:list={["header-logo-dark object-contain w-28 h-12", { hidden: darkHero }]}
                 />
             </a>
 
@@ -63,7 +75,7 @@ const navItems = [
                 id="mobile-menu-button"
                 aria-label="Toggle mobile menu"
                 aria-expanded="false"
-                class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+                class="hidden items-center justify-center w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
             >
                 <svg
                     id="menu-icon"
@@ -165,6 +177,8 @@ const navItems = [
     const logoWhite = document.querySelector(".header-logo-white");
     const logoDark = document.querySelector(".header-logo-dark");
     const navLinks = document.querySelectorAll(".nav-link");
+    // Pages with a light top opt out of the transparent/white-logo state.
+    const darkHero = header?.dataset.darkHero !== "false";
 
     mobileMenuButton?.addEventListener("click", () => {
         const isHidden = mobileMenu?.classList.contains("hidden");
@@ -199,8 +213,9 @@ const navItems = [
     });
 
     function updateHeaderStyle() {
-        if (window.scrollY > 50) {
-            // Scrolled - white background, dark text
+        // Light-top pages (darkHero=false) stay solid at all scroll positions.
+        if (!darkHero || window.scrollY > 50) {
+            // Scrolled / light-top - white background, dark text
             header?.classList.remove("bg-transparent");
             header?.classList.add(
                 "bg-white/95",

@@ -9,6 +9,7 @@ export interface Props {
     description?: string;
     ogUrl?: string;
     ogType?: string;
+    darkHero?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
     description = "Join the SF Ruby community: monthly meetups, talks, jobs, and the annual conference. Connect with founders and engineers building with Ruby.",
     ogUrl = Astro.url.href,
     ogType = "website",
+    darkHero = true,
 } = Astro.props;
 
 const ogPlusPath = Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "");
@@ -90,7 +92,7 @@ const ogPlusImage = `https://iqtfijxk.ogplus.net${ogPlusPath}`;
     <body
         class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col overflow-x-hidden pb-tabbar"
     >
-        <Header />
+        <Header darkHero={darkHero} />
 
         <main class="flex-grow">
             <slot />

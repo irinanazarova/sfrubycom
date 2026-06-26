@@ -28,6 +28,20 @@ html {
     text-size-adjust: 100%;
 }
 
+/* Native cross-document (MPA) view transitions: a soft cross-fade between
+   pages for an app-like navigation. Zero JS; ignored on browsers without
+   support (Safari < 18.2 / Chrome < 126), which just do a normal nav. */
+@view-transition {
+    navigation: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
+}
+
 :focus-visible {
     outline: 2px solid #dc2626;
     outline-offset: 2px;
