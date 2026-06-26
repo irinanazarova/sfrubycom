@@ -435,6 +435,15 @@ const facetGroups = [
             display: none;
         }
 
+        /* Skip rendering off-screen rows (long list) for better INP/scrolling.
+           `auto` remembers each row's real height once rendered; the estimate
+           only seeds not-yet-seen rows. Anchored (:target) and filtered rows
+           still resolve because the browser renders them when relevant. */
+        .job-row {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 280px;
+        }
+
         /* Per-card anchor: highlight when linked, copy-link affordance. */
         .job-row:target {
             border-color: #f87171;
