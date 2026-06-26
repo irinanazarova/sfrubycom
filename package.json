@@ -9,6 +9,7 @@
     "build": "npm run fetch-data && astro build",
     "build:dev": "astro build",
     "preview": "astro preview",
+    "qa": "npm run build:dev && node scripts/qa-mobile.mjs",
     "astro": "astro"
   },
   "dependencies": {
@@ -17,7 +18,10 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/tailwind": "^6.0.2",
+    "@iconify-json/ph": "^1.2.2",
     "@types/node": "^20.0.0",
+    "astro-icon": "^1.1.5",
+    "playwright": "^1.61.1",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.0.0"

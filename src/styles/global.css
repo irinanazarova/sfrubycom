@@ -78,9 +78,10 @@ body {
 .h-safe-bottom {
     height: env(safe-area-inset-bottom);
 }
-/* Pages add this so content clears the mobile bottom tab bar. */
+/* Pages add this so content clears the floating mobile bottom nav (the glass
+   pill is 4rem tall and floats ~0.5rem above the home indicator). */
 .pb-tabbar {
-    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(5.25rem + env(safe-area-inset-bottom));
 }
 @media (min-width: 1024px) {
     .pb-tabbar {
