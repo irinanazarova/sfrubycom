@@ -31,3 +31,6 @@ drafts/
 # scratch screenshots and exports at repo root (real assets live under public/ or src/)
 /*.png
 /*.pdf
+
+# Playwright QA screenshots
+.qa-shots/
