@@ -214,7 +214,7 @@ const facetGroups = [
 
                         <!-- Mobile-only: apply / clear -->
                         <div class="lg:hidden sticky bottom-0 -mx-4 sm:-mx-6 mt-6 px-4 sm:px-6 py-3 bg-white/95 backdrop-blur-md border-t border-gray-200 flex items-center gap-3">
-                            <button id="filter-done" type="button" class="flex-1 inline-flex items-center justify-center px-5 py-2.5 bg-ruby-500 text-white rounded-lg font-semibold hover:bg-ruby-600 transition-colors">
+                            <button id="filter-done" type="button" class="flex-1 inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-sm hover:shadow-md hover:from-ruby-400 hover:to-pink-400 transition-all">
                                 Show <span class="result-count mx-1">{jobs.length}</span> results
                             </button>
                             <button id="clear-filters-mobile" type="button" class="px-4 py-2.5 text-sm font-semibold text-gray-600 hover:text-ruby-600">
@@ -305,7 +305,7 @@ const facetGroups = [
                                             href={job.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            class="tap-press flex-1 sm:flex-none justify-center inline-flex items-center gap-1 px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-lg hover:bg-ruby-600 transition-colors"
+                                            class="tap-press flex-1 sm:flex-none justify-center inline-flex items-center gap-1 px-4 py-2 bg-gradient-to-r from-ruby-500 to-pink-500 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow-md hover:from-ruby-400 hover:to-pink-400 transition-all"
                                         >
                                             Apply
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -341,7 +341,7 @@ const facetGroups = [
                     <div id="no-results" class="hidden text-center py-16">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">No roles match these filters</h3>
                         <p class="text-gray-600 mb-4">Try removing a filter to widen your search.</p>
-                        <button id="clear-filters-empty" type="button" class="inline-flex items-center px-5 py-2.5 bg-ruby-500 text-white rounded-lg font-semibold hover:bg-ruby-600 transition-colors">
+                        <button id="clear-filters-empty" type="button" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-sm hover:shadow-md hover:from-ruby-400 hover:to-pink-400 transition-all">
                             Clear all filters
                         </button>
                     </div>
