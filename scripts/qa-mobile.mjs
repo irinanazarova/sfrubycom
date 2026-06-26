@@ -4,9 +4,13 @@
 //   BASE_URL=http://localhost:4321 npm run qa   # check an already-running server
 //
 // Asserts, per route at 390x844 (mobile) and 1440x900 (desktop):
-//   - no horizontal overflow (decks in EXPECTED_OVERFLOW are exempt)
-//   - mobile: #bottom-nav present with 10 tabs; hamburger (#mobile-menu-button) hidden
-//   - header logo legible at scroll-top (white logo only over a dark hero)
+//   - no horizontal overflow (decks in DECKS are exempt)
+//   - mobile: #bottom-nav present with >= MIN_TABS tabs; hamburger hidden
+//   - desktop: #bottom-nav hidden
+//   - header logo legible at scroll-top: on Header-based pages the visible
+//     logo must match the page's `data-dark-hero` contract (white over a dark
+//     hero, dark otherwise). Navigation-based pages have no #main-header and
+//     are skipped (they always render the dark logo on a solid header).
 // Plus a cold-load deep-link check on /jobs#<id>.
 // Screenshots are written to .qa-shots/ (gitignored). Exits non-zero on failure.
 import { chromium } from "playwright";
@@ -21,11 +25,17 @@ const ROUTES = [
 ];
 // Fixed-canvas slide decks legitimately overflow / have no tab bar.
 const DECKS = new Set(["/meetup-2026-06"]);
+// The tab bar carries the primary destinations plus a "More" overflow. Kept as
+// a floor (not an exact count) so editorial tab changes don't break QA; gross
+// breakage (tabs failing to render) still trips it.
+const MIN_TABS = 5;
 const VIEWPORTS = [
     { name: "mobile", width: 390, height: 844, isMobile: true },
     { name: "desktop", width: 1440, height: 900, isMobile: false },
 ];
 const OUT = ".qa-shots";
+// Uncommon port so the sweep doesn't collide with a dev server on 4321/4322.
+const PORT = 4329;
 
 async function waitForServer(url, ms = 30000) {
     const deadline = Date.now() + ms;
@@ -68,15 +78,29 @@ async function run(base) {
                 const de = document.documentElement;
                 const nav = document.getElementById("bottom-nav");
                 const burger = document.getElementById("mobile-menu-button");
-                const shown = (el) => !!el && getComputedStyle(el).display !== "none";
+                // Real visibility: a 0x0 rect catches display:none on the
+                // element OR any ancestor (the nav is hidden via its wrapper).
+                const shown = (el) => {
+                    if (!el) return false;
+                    const r = el.getBoundingClientRect();
+                    return r.width > 0 && r.height > 0;
+                };
+                // The visible header logo (the hidden one carries `.hidden`).
                 const logo = document.querySelector(
                     ".header-logo-white:not(.hidden), .header-logo-dark:not(.hidden)",
                 );
+                const header = document.getElementById("main-header");
                 return {
                     overflow: de.scrollWidth - de.clientWidth,
                     navShown: shown(nav),
-                    navTabs: nav ? nav.querySelectorAll("a").length : 0,
+                    // Count interactive tabs (links + the "More" button) so the
+                    // floor check is agnostic to the exact tab layout.
+                    navTabs: nav ? nav.querySelectorAll("a, button").length : 0,
                     burgerShown: shown(burger),
+                    // Header-based pages declare their hero-contrast contract;
+                    // Navigation-based pages have no #main-header (skip the check).
+                    hasHeader: !!header,
+                    darkHero: header ? header.dataset.darkHero !== "false" : null,
                     logoKind: logo
                         ? logo.classList.contains("header-logo-white") ? "white" : "dark"
                         : null,
@@ -89,9 +113,16 @@ async function run(base) {
             if (r.burgerShown) failures.push(`${vp.name} ${route}: hamburger visible (should be removed)`);
             if (vp.name === "mobile" && !isDeck) {
                 if (!r.navShown) failures.push(`${vp.name} ${route}: bottom tab bar missing`);
-                else if (r.navTabs !== 10) failures.push(`${vp.name} ${route}: tab bar has ${r.navTabs} tabs (expected 10)`);
+                else if (r.navTabs < MIN_TABS) failures.push(`${vp.name} ${route}: tab bar has ${r.navTabs} tabs (expected >= ${MIN_TABS})`);
             }
             if (vp.name === "desktop" && r.navShown) failures.push(`desktop ${route}: tab bar should be hidden`);
+            // Header logo legibility at scroll-top (Header-based pages only).
+            if (r.hasHeader) {
+                const expected = r.darkHero ? "white" : "dark";
+                if (r.logoKind !== expected) {
+                    failures.push(`${vp.name} ${route}: header logo ${r.logoKind ?? "missing"} at scroll-top, expected ${expected} (darkHero=${r.darkHero})`);
+                }
+            }
             if (errors.length) failures.push(`${vp.name} ${route}: console error ${errors[0].slice(0, 60)}`);
         }
         await ctx.close();
@@ -107,10 +138,12 @@ async function run(base) {
         return [rows[0]?.id, rows.at(-1)?.id].filter(Boolean);
     });
     await idCtx.close();
+    if (!ids.length) failures.push("deep-link: no .job-row ids found on /jobs");
     for (const vp of VIEWPORTS) {
         for (const id of ids) {
             const ctx = await browser.newContext({
                 viewport: { width: vp.width, height: vp.height },
+                deviceScaleFactor: 2,
                 isMobile: vp.isMobile,
             });
             const page = await ctx.newPage();
@@ -118,12 +151,21 @@ async function run(base) {
             await page.waitForTimeout(1600);
             const r = await page.evaluate((jid) => {
                 const e = document.getElementById(jid);
-                const top = Math.round(e.getBoundingClientRect().top);
-                return { top, sheet: document.getElementById("jobs-app")?.dataset.filters };
+                if (!e) return { found: false };
+                return {
+                    found: true,
+                    top: Math.round(e.getBoundingClientRect().top),
+                    sheet: document.getElementById("jobs-app")?.dataset.filters,
+                };
             }, id);
-            const ok = r.top >= 60 && r.top < 220 && r.sheet === "closed";
-            note(`  ${vp.name} #${id}: top=${r.top} sheet=${r.sheet} ${ok ? "ok" : "FAIL"}`);
-            if (!ok) failures.push(`${vp.name} deep-link #${id}: top=${r.top} sheet=${r.sheet}`);
+            if (!r.found) {
+                note(`  ${vp.name} #${id}: target missing FAIL`);
+                failures.push(`${vp.name} deep-link #${id}: target element not found`);
+            } else {
+                const ok = r.top >= 60 && r.top < 220 && r.sheet === "closed";
+                note(`  ${vp.name} #${id}: top=${r.top} sheet=${r.sheet} ${ok ? "ok" : "FAIL"}`);
+                if (!ok) failures.push(`${vp.name} deep-link #${id}: top=${r.top} sheet=${r.sheet}`);
+            }
             await ctx.close();
         }
     }
@@ -136,8 +178,13 @@ const provided = process.env.BASE_URL;
 let server = null;
 let base = provided;
 if (!base) {
-    base = "http://localhost:4321";
-    server = spawn("npm", ["run", "preview"], { stdio: "ignore", detached: true });
+    base = `http://localhost:${PORT}`;
+    // Explicit port so a busy port fails loudly here rather than silently
+    // binding elsewhere and timing out the reachability check.
+    server = spawn("npm", ["run", "preview", "--", "--port", String(PORT)], {
+        stdio: "ignore",
+        detached: true,
+    });
 }
 try {
     if (!(await waitForServer(base + "/"))) throw new Error(`server not reachable at ${base}`);
@@ -152,5 +199,9 @@ try {
         console.log("✓ all checks passed");
     }
 } finally {
-    if (server) process.kill(-server.pid);
+    if (server?.pid) {
+        try {
+            process.kill(-server.pid);
+        } catch {}
+    }
 }
