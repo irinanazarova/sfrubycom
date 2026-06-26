@@ -123,16 +123,17 @@ Take a screenshot and actually look at it. Numbers confirm density; eyes confirm
 
 ### Mobile chrome architecture (tab bar + sheet)
 
-The mobile experience has two pieces of native-style chrome. When adding pages or fixed/sticky UI, respect their z-index contract:
+The mobile experience has native-style chrome modeled on the iOS 26 "Liquid Glass" tab bar. When adding pages or fixed/sticky UI, respect its z-index contract:
 
-- **Bottom tab bar** (`src/components/BottomNav.astro`): fixed bottom, mobile-only (`lg:hidden`), `ogplus:hidden`, at **`z-40`**. It is the **sole mobile nav** (the hamburger menu was removed on mobile), so it carries every destination: the first five (Home / Jobs / Slack / Videos / Join) fill the screen and the rest (Sponsor / Conf / News / Startups / About) are reached by scrolling the bar horizontally. The tab list is data-driven (`tabs` array in the component); add destinations there. Icons are **Phosphor "light"** (delicate, iOS-like) via `astro-icon` + `@iconify-json/ph`, referenced as `ph:<name>-light` and inlined at build (no client JS). The bar scrolls via `.tab-scroll` (hidden scrollbar, right-edge mask fade hints there is more). Pages give content bottom clearance with the `pb-tabbar` body class, and the bar pads its own `pb-safe`. **The site has three page-shell patterns and the tab bar must be in all of them:** `BaseLayout.astro`, `Layout.astro`, and the standalone pages that build their own `<body>` (`index.astro`, `sponsor-2026.astro`, `conference-2026.astro`). A new top-level page that defines its own `<body>` must import `BottomNav`, add `pb-tabbar` to the body, and use the `viewport-fit=cover` meta (so safe-area insets resolve).
-- **Jobs filter sheet** (`/jobs`, `#filter-panel` + `#filter-backdrop`): an iOS bottom sheet (rounded top, grab handle, drag-to-dismiss, dim backdrop). Backdrop `z-45`, sheet `z-46`, both above the tab bar so the sheet covers it. Pattern to reuse for any future mobile sheet.
+- **Bottom nav** (`src/components/BottomNav.astro`): a floating frosted-glass **pill** plus a detached accent **CTA circle**, mobile-only (`lg:hidden`), `ogplus:hidden`. It is the **sole mobile nav** (the hamburger was removed). The pill (`#bottom-nav`) holds four primary tabs (Home / Slack / Jobs / Videos) **+ a "More" tab** that opens a bottom-sheet menu (`#more-sheet`) for the overflow destinations (Startups / Sponsor / Conference / News / About). The detached ruby circle (`#join-fab`) is the Join CTA. **No horizontal scrolling** (overflow lives in the More sheet, so every destination is discoverable). The `.bottom-dock` wrapper is `pointer-events-none` with the pill/circle `pointer-events-auto`, so the transparent margins stay tappable to the page; content scrolls under the glass. Tabs are data-driven (`tabs` + `moreItems` arrays); **display/visibility come from utility classes** (`flex lg:hidden ogplus:hidden` on the dock) so the hide variants win the cascade over the scoped glass styles. Icons are **Phosphor** via `astro-icon` + `@iconify-json/ph` (`ph:<name>-light` idle, `-fill` active), inlined at build (no client JS). Pages give content bottom clearance with the `pb-tabbar` body class (`5.25rem`, tuned to the floating pill height + lift). **The site has three page-shell patterns and the nav must be in all of them:** `BaseLayout.astro`, `Layout.astro`, and the standalone pages that build their own `<body>` (`index.astro`, `sponsor-2026.astro`, `conference-2026.astro`). A new top-level page that defines its own `<body>` must import `BottomNav`, add `pb-tabbar` to the body, and use the `viewport-fit=cover` meta (so safe-area insets resolve).
+- **More sheet** (`#more-sheet` + `#more-backdrop`): an iOS bottom sheet (rounded top, grab handle, drag-to-dismiss, dim backdrop, Escape/backdrop close, body scroll-lock). Backdrop `z-50`, sheet `z-51`.
+- **Jobs filter sheet** (`/jobs`, `#filter-panel` + `#filter-backdrop`): same bottom-sheet pattern. Backdrop `z-45`, sheet `z-46`, above the nav so the sheet covers it. Reuse this pattern for any future mobile sheet.
 
-The hamburger trigger (`#mobile-menu-button` in `Header.astro` / `Navigation.astro`) is hidden on every viewport; desktop uses the inline horizontal `<nav>`, mobile uses the tab bar.
+The hamburger trigger (`#mobile-menu-button` in `Header.astro` / `Navigation.astro`) is hidden on every viewport; desktop uses the inline horizontal `<nav>`, mobile uses the glass nav.
 
-z-index ladder (mobile): page stickies `≤ z-30` < tab bar `z-40` < jobs sheet `z-45/46`.
+z-index ladder (mobile): page stickies `≤ z-30` < bottom nav `z-40` < jobs filter sheet `z-45/46` < More sheet `z-50/51`.
 
-Quick check (390x844): `document.getElementById('bottom-nav')` exists; at full scroll the lowest content link clears the tab bar top; no horizontal overflow.
+Quick check (390x844): `document.getElementById('bottom-nav')` exists and is visible; the More tab opens `#more-sheet`; at full scroll the lowest content link clears `.bottom-dock`; no horizontal overflow. Or just run `npm run qa`.
 
 ### Header logo contrast (`darkHero` contract)
 
@@ -144,16 +145,16 @@ When adding a `BaseLayout` page, check the first section's background and set `d
 
 ### Mobile regression check (run after any header/overlay/sticky change)
 
-There is no hamburger menu on mobile; the bottom tab bar is the only mobile nav (the `#mobile-menu-button` is hidden on all viewports). Page-level `sticky`/`fixed` bars must stay `≤ z-30` so they sit below the tab bar (`z-40`) and jobs sheet (`z-45/46`).
+There is no hamburger menu on mobile; the floating glass nav is the only mobile nav (the `#mobile-menu-button` is hidden on all viewports). Page-level `sticky`/`fixed` bars must stay `≤ z-30` so they sit below the bottom nav (`z-40`), jobs filter sheet (`z-45/46`), and More sheet (`z-50/51`).
 
 Verify with Playwright at 390x844 for each top-level route (`/`, `/jobs`, `/videos`, `/startups`, `/about`, `/news`, `/sponsor-2026`):
 
-1. `#bottom-nav` exists and is visible; it scrolls horizontally to reveal all ten tabs (`.tab-scroll` scrollWidth > clientWidth).
-2. `#mobile-menu-button` is not visible (`display: none`).
+1. `#bottom-nav` exists and is visible (pill + `#join-fab` circle); the More tab opens `#more-sheet`.
+2. `#mobile-menu-button` is not visible; `#bottom-nav` is not visible at `≥ lg`.
 3. No horizontal overflow: `document.documentElement.scrollWidth <= innerWidth`.
 4. Header logo is legible at scroll-top (see `darkHero` contract above).
 
-Run the committed sweep with **`npm run qa`** (`scripts/qa-mobile.mjs`): it builds, spawns `astro preview`, then checks every route at 390x844 and 1440x900 for horizontal overflow, tab-bar presence (10 tabs) / hamburger absence, logo legibility, and cold-load deep links (`/jobs#id`). Screenshots land in `.qa-shots/` (gitignored); it exits non-zero on failure. Point it at a running server with `BASE_URL=… npm run qa`. (Requires the chromium binary once: `npx playwright install chromium`.)
+Run the committed sweep with **`npm run qa`** (`scripts/qa-mobile.mjs`): it builds, spawns `astro preview`, then checks every route at 390x844 and 1440x900 for horizontal overflow, bottom-nav presence (`>= MIN_TABS`, counting the More button) / desktop hiding / hamburger absence, header-logo legibility (asserted against each page's `data-dark-hero`), and cold-load deep links (`/jobs#id`). Screenshots land in `.qa-shots/` (gitignored); it exits non-zero on failure. Point it at a running server with `BASE_URL=… npm run qa`. (Requires the chromium binary once: `npx playwright install chromium`.)
 
 ## Allowed Tools
 

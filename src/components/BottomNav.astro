@@ -1,107 +1,394 @@
 ---
 import { Icon } from "astro-icon/components";
 
-// iOS-style bottom tab bar, mobile only. Hidden on desktop (lg:) and when
-// generating OG images (ogplus:). It is the sole mobile nav (the hamburger
-// menu was removed), so it carries every destination: the first five fill the
-// screen, the rest are reached by scrolling the bar horizontally. Icons are
-// Phosphor "light" (delicate, iOS-like) via astro-icon, inlined at build.
+// Floating glass bottom nav, mobile only (hidden on lg: and OG-image renders).
+// Inspired by the iOS 26 "Liquid Glass" tab bar: a frosted pill that floats
+// over the content (which scrolls underneath), plus a detached accent circle
+// for the primary CTA. The pill holds a few primary destinations + a "More"
+// tab that opens a full-menu bottom sheet for everything else. Icons are
+// Phosphor (light = idle, fill = active) via astro-icon, inlined at build.
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isActive = (href: string) =>
     href === "/" ? path === "/" : path.startsWith(href);
+const ph = (name: string, active: boolean) => `ph:${name}-${active ? "fill" : "light"}`;
 
+// Primary tabs that live in the glass pill.
 const tabs = [
-    { name: "Home", href: "/", icon: "ph:house-light" },
-    { name: "Jobs", href: "/jobs", icon: "ph:briefcase-light" },
+    { name: "Home", href: "/", icon: "house" },
     {
         name: "Slack",
         href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
         external: true,
-        icon: "ph:slack-logo-light",
+        icon: "slack-logo",
     },
-    { name: "Videos", href: "/videos", icon: "ph:play-circle-light" },
-    {
-        name: "Join",
-        href: "https://lu.ma/sfruby",
-        external: true,
-        accent: true,
-        icon: "ph:calendar-plus-light",
-    },
-    { name: "Sponsor", href: "/sponsor-2026", icon: "ph:hand-heart-light" },
-    { name: "Conf", href: "/conference-2026", icon: "ph:microphone-stage-light" },
-    { name: "News", href: "/news", icon: "ph:newspaper-light" },
-    { name: "Startups", href: "/startups", icon: "ph:rocket-launch-light" },
-    { name: "About", href: "/about", icon: "ph:info-light" },
+    { name: "Jobs", href: "/jobs", icon: "briefcase" },
+    { name: "Videos", href: "/videos", icon: "play-circle" },
 ];
+
+// Overflow destinations, reached via the "More" tab → bottom sheet.
+const moreItems = [
+    { name: "Startups", href: "/startups", icon: "rocket-launch" },
+    { name: "Sponsor", href: "/sponsor-2026", icon: "hand-heart" },
+    { name: "Conference", href: "/conference-2026", icon: "microphone-stage" },
+    { name: "News", href: "/news", icon: "newspaper" },
+    { name: "About", href: "/about", icon: "info" },
+];
+const moreActive = moreItems.some((it) => isActive(it.href));
 ---
 
-<nav
-    id="bottom-nav"
-    aria-label="Primary"
-    class="lg:hidden ogplus:hidden fixed bottom-0 inset-x-0 z-40 bg-white/90 backdrop-blur-xl border-t border-gray-200/80 pb-safe"
->
-    <div class="tab-scroll flex h-16">
+<!-- Floating dock: transparent margins pass taps through to content. Display
+     comes from the `flex` utility so `lg:hidden`/`ogplus:hidden` win the cascade. -->
+<div class="bottom-dock lg:hidden ogplus:hidden fixed inset-x-0 bottom-0 z-40 flex items-center gap-2.5 px-4 pointer-events-none">
+    <nav id="bottom-nav" aria-label="Primary" class="nav-glass">
         {
             tabs.map((tab) => {
                 const active = !tab.external && isActive(tab.href);
-                const color = tab.accent
-                    ? "text-ruby-600"
-                    : active
-                      ? "text-ruby-600"
-                      : "text-gray-500";
                 return (
                     <a
                         href={tab.href}
                         target={tab.external ? "_blank" : undefined}
                         rel={tab.external ? "noopener noreferrer" : undefined}
                         aria-current={active ? "page" : undefined}
-                        class={`tab-item tap-press ${color}`}
+                        class="tab-item tap-press"
                     >
-                        <Icon name={tab.icon} class="w-6 h-6" />
-                        <span>{tab.name}</span>
+                        <span class:list={["tab-inner", { active }]}>
+                            <Icon name={ph(tab.icon, active)} class="w-6 h-6" />
+                            <span>{tab.name}</span>
+                        </span>
                     </a>
                 );
             })
         }
-    </div>
-</nav>
+        <button id="more-tab" type="button" class="tab-item tap-press" aria-haspopup="dialog" aria-expanded="false" aria-controls="more-sheet">
+            <span class:list={["tab-inner", { active: moreActive }]}>
+                <Icon name={ph("dots-three", moreActive)} class="w-6 h-6" />
+                <span>More</span>
+            </span>
+        </button>
+    </nav>
+
+    <a
+        id="join-fab"
+        href="https://lu.ma/sfruby"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="join-fab tap-press"
+        aria-label="Join the next SF Ruby meetup"
+    >
+        <Icon name="ph:calendar-plus-light" class="w-6 h-6" />
+    </a>
+</div>
+
+<!-- More menu: dim backdrop + iOS bottom sheet -->
+<div id="more-backdrop" class="more-backdrop lg:hidden" aria-hidden="true" hidden></div>
+<div
+    id="more-sheet"
+    class="more-sheet lg:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="More"
+    hidden
+>
+    <div class="more-grabber" aria-hidden="true"></div>
+    <p class="more-title">More</p>
+    <nav class="more-list" aria-label="More destinations">
+        {
+            moreItems.map((it) => {
+                const active = isActive(it.href);
+                return (
+                    <a
+                        href={it.href}
+                        aria-current={active ? "page" : undefined}
+                        class:list={["more-row tap-press", { active }]}
+                    >
+                        <Icon name={ph(it.icon, active)} class="w-6 h-6 more-row-icon" />
+                        <span class="more-row-label">{it.name}</span>
+                        <Icon name="ph:caret-right-light" class="w-4 h-4 more-row-caret" />
+                    </a>
+                );
+            })
+        }
+    </nav>
+</div>
 
 <style>
-    .tab-scroll {
-        overflow-x: auto;
-        overflow-y: hidden;
-        /* Commit to horizontal panning immediately (no vertical-scroll
-           disambiguation delay on the first swipe). */
-        touch-action: pan-x;
-        scrollbar-width: none;
-        /* Fade the right edge to hint that the bar scrolls to more tabs. */
-        -webkit-mask-image: linear-gradient(
-            to right,
-            #000 calc(100% - 1.5rem),
-            transparent
-        );
-        mask-image: linear-gradient(
-            to right,
-            #000 calc(100% - 1.5rem),
-            transparent
-        );
+    /* The dock spans the bottom; its padding lifts the pill above the home
+       indicator. pointer-events pass through the transparent margins so the
+       page stays tappable to the sides of the pill. */
+    /* Layout/display/hide come from utility classes (so the lg:/ogplus: hidden
+       variants win the cascade); scoped CSS only adds the safe-area lift. */
+    .bottom-dock {
+        padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
     }
-    .tab-scroll::-webkit-scrollbar {
-        display: none;
+
+    /* Frosted "liquid glass" surface shared by the pill and the CTA circle. */
+    .nav-glass,
+    .join-fab {
+        pointer-events: auto;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow:
+            0 8px 30px rgba(0, 0, 0, 0.14),
+            0 1px 0 rgba(255, 255, 255, 0.7) inset;
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
     }
-    .tab-item {
-        flex: 0 0 20%;
+    @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+        .nav-glass,
+        .join-fab {
+            background: rgba(255, 255, 255, 0.6);
+        }
+    }
+
+    .nav-glass {
+        flex: 1 1 auto;
         display: flex;
-        flex-direction: column;
+        height: 4rem;
+        border-radius: 1.75rem;
+        overflow: hidden;
+    }
+
+    .tab-item {
+        flex: 1 1 0;
+        display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.1875rem;
-        font-size: 0.625rem;
-        line-height: 1;
-        font-weight: 500;
-        transition: color 0.15s;
-        /* Suppress the iOS long-press callout / text selection on chrome. */
+        color: #6b7280;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
         -webkit-touch-callout: none;
         user-select: none;
     }
+    .tab-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.1875rem;
+        padding: 0.3125rem 0.625rem;
+        border-radius: 9999px;
+        font-size: 0.625rem;
+        line-height: 1;
+        font-weight: 500;
+        transition: background 0.15s, color 0.15s;
+    }
+    /* Active tab: ruby tint + a soft tinted capsule behind it (iOS 26 look). */
+    .tab-inner.active {
+        color: #e11d48;
+        background: rgba(225, 29, 72, 0.1);
+    }
+
+    /* Detached accent CTA, mirrors the native search circle but ruby-filled. */
+    .join-fab {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 9999px;
+        color: #fff;
+        background:
+            linear-gradient(135deg, #f43f5e, #db2777);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 10px 30px rgba(225, 29, 72, 0.4);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    /* ---- More bottom sheet ---- */
+    .more-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(17, 24, 39, 0.45);
+        opacity: 0;
+        transition: opacity 0.28s ease;
+        pointer-events: none;
+    }
+    .more-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .more-sheet {
+        position: fixed;
+        inset-inline: 0;
+        bottom: 0;
+        z-index: 51;
+        max-height: 80vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: #fff;
+        border-radius: 1.25rem 1.25rem 0 0;
+        box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
+        padding: 0 0.75rem calc(0.75rem + env(safe-area-inset-bottom));
+        transform: translateY(100%);
+        transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .more-sheet.open {
+        transform: translateY(0);
+    }
+    .more-grabber {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.625rem 0 0.25rem;
+        background: #fff;
+        cursor: grab;
+        touch-action: none;
+    }
+    .more-grabber::before {
+        content: "";
+        width: 2.25rem;
+        height: 0.3125rem;
+        border-radius: 9999px;
+        background: #d1d5db;
+    }
+    .more-title {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #9ca3af;
+        padding: 0.25rem 0.75rem 0.5rem;
+    }
+    .more-row {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        padding: 0.875rem 0.75rem;
+        border-radius: 0.875rem;
+        color: #1f2937;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .more-row-icon {
+        color: #6b7280;
+        flex: 0 0 auto;
+    }
+    .more-row-caret {
+        margin-inline-start: auto;
+        color: #d1d5db;
+        flex: 0 0 auto;
+    }
+    .more-row.active {
+        background: rgba(225, 29, 72, 0.08);
+        color: #e11d48;
+    }
+    .more-row.active .more-row-icon {
+        color: #e11d48;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .more-sheet,
+        .more-backdrop,
+        .tab-inner {
+            transition: none;
+        }
+    }
 </style>
+
+<script>
+    const moreBtn = document.getElementById("more-tab");
+    const sheet = document.getElementById("more-sheet");
+    const backdrop = document.getElementById("more-backdrop");
+    const grabber = sheet?.querySelector<HTMLElement>(".more-grabber");
+    const SPRING = "transform 0.32s cubic-bezier(0.32, 0.72, 0, 1)";
+    let lastFocused: HTMLElement | null = null;
+
+    const isOpen = () => sheet?.classList.contains("open") ?? false;
+
+    function openMore() {
+        if (!sheet || !backdrop) return;
+        lastFocused = document.activeElement as HTMLElement;
+        sheet.hidden = false;
+        backdrop.hidden = false;
+        // Always start from the fully-closed position, then animate up — this
+        // clears any leftover inline transform from a previous drag.
+        sheet.style.transition = "none";
+        sheet.style.transform = "";
+        void sheet.offsetHeight; // reflow at translateY(100%)
+        sheet.style.transition = "";
+        sheet.classList.add("open");
+        backdrop.classList.add("open");
+        document.body.classList.add("overflow-hidden");
+        moreBtn?.setAttribute("aria-expanded", "true");
+        sheet.querySelector<HTMLElement>("a")?.focus();
+    }
+
+    function closeMore() {
+        if (!sheet || !backdrop) return;
+        sheet.classList.remove("open");
+        backdrop.classList.remove("open");
+        // Drive the slide-down explicitly (a drag may have left an inline
+        // transform that would otherwise override the class and freeze it).
+        sheet.style.transition = SPRING;
+        sheet.style.transform = "";
+        document.body.classList.remove("overflow-hidden");
+        moreBtn?.setAttribute("aria-expanded", "false");
+        lastFocused?.focus?.();
+        lastFocused = null;
+        const done = (e: TransitionEvent) => {
+            if (e.propertyName !== "transform") return;
+            // Reopened mid-close: leave it open, don't hide.
+            if (isOpen()) { sheet.removeEventListener("transitionend", done); return; }
+            sheet.hidden = true;
+            backdrop.hidden = true;
+            sheet.style.transition = "";
+            sheet.removeEventListener("transitionend", done);
+        };
+        sheet.addEventListener("transitionend", done);
+    }
+
+    moreBtn?.addEventListener("click", () => (isOpen() ? closeMore() : openMore()));
+    backdrop?.addEventListener("click", closeMore);
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isOpen()) closeMore();
+    });
+
+    // Keep keyboard focus inside the open sheet.
+    sheet?.addEventListener("keydown", (e) => {
+        if (e.key !== "Tab" || !isOpen()) return;
+        const items = sheet.querySelectorAll<HTMLElement>("a[href]");
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    });
+
+    // Drag the grab handle down to dismiss, like an iOS sheet.
+    if (grabber && sheet) {
+        let startY = 0;
+        let dy = 0;
+        let dragging = false;
+        grabber.addEventListener("touchstart", (e) => {
+            dragging = true;
+            startY = e.touches[0].clientY;
+            dy = 0;
+            sheet.style.transition = "none";
+        }, { passive: true });
+        grabber.addEventListener("touchmove", (e) => {
+            if (!dragging) return;
+            dy = Math.max(0, e.touches[0].clientY - startY);
+            sheet.style.transform = `translateY(${dy}px)`;
+        }, { passive: true });
+        grabber.addEventListener("touchend", () => {
+            if (!dragging) return;
+            dragging = false;
+            if (dy > sheet.offsetHeight * 0.3 || dy > 120) {
+                closeMore();
+            } else {
+                sheet.style.transition = SPRING;
+                sheet.style.transform = "translateY(0)";
+            }
+        });
+    }
+</script>
