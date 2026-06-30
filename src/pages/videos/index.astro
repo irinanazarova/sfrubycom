@@ -76,18 +76,17 @@ const fmtMonthYear = (iso: string) => {
     return `${MONTHS[+m - 1]} ${y}`;
 };
 
-// A meetup recording is one video bundling many timestamped talks. We sort each talk
-// into one of three buckets:
+// A meetup recording is one video bundling many timestamped talks. Every talk gets a
+// row; we only decide which category it lands in:
 //   - "meetup": a substantial talk (≥12 min, or the final/unknown-length talk) -> its
 //     own row in the Meetups category, with a transcript summary.
-//   - "openmic": a lightning / open-mic talk -> its own row in the Open Mic category,
-//     no description (too short to summarize well; the title carries it).
-//   - "exclude": pure logistics (announcements, hiring pitches, standups, recaps) ->
-//     no row; still reachable via the "full recording" row.
+//   - "openmic": a lightning / open-mic talk or a short logistics slot (announcement,
+//     hiring shout-out, standup) -> Open Mic category, no description (the title
+//     carries it). Logistics keywords route here too so they don't get a summary.
 // Heuristic by duration + title keyword, so the data file stays clean. A talk can opt
 // into Open Mic explicitly with `openMic: true` (e.g. a final lightning talk the
 // duration heuristic would otherwise read as a main talk).
-const MEETUP_ANNOUNCEMENT_KW =
+const MEETUP_LIGHTNING_KW =
     /(announc|hiring|open mic|stand[\s-]?up|q&a|newsletter|office hours|\bupdates?\b|recap|\bpsa\b|pre-vetted|looking for|job seeker|sponsorship|opening words)/i;
 const MEETUP_MIN_SEC = 720;
 function classifiedMeetupTalks(rec: any) {
@@ -97,14 +96,13 @@ function classifiedMeetupTalks(rec: any) {
             const next = sorted[i + 1];
             const dur =
                 next && t.timestamp > 0 && next.timestamp > t.timestamp ? next.timestamp - t.timestamp : null;
-            let bucket: "meetup" | "openmic" | "exclude";
+            let bucket: "meetup" | "openmic";
             if (t.openMic) bucket = "openmic";
-            else if (MEETUP_ANNOUNCEMENT_KW.test(t.title)) bucket = "exclude";
+            else if (MEETUP_LIGHTNING_KW.test(t.title)) bucket = "openmic";
             else if (dur == null) bucket = "meetup"; // final/real talk
             else bucket = dur >= MEETUP_MIN_SEC ? "meetup" : "openmic";
             return { talk: t, bucket };
-        })
-        .filter((x) => x.bucket !== "exclude");
+        });
 }
 
 type Item = {
