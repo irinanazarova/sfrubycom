@@ -34,3 +34,6 @@ drafts/
 
 # Playwright QA screenshots
 .qa-shots/
+
+# Raw YouTube transcripts pulled by scripts/fetch-subtitles.rb (summaries are the committed artifact)
+transcripts/

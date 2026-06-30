@@ -1,839 +1,330 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import TalkModal from "../../components/TalkModal.astro";
-import { talks, getAllTags } from "../../data/talks.js";
+import { talks } from "../../data/talks.js";
 import { slotAssignments, scheduleSlots } from "../../data/schedule.js";
-import { getSpeaker, speakers } from "../../data/speakers.js";
-import { getAllMeetupRecordings, formatTimestamp } from "../../data/meetup-recordings.js";
+import { getSpeaker } from "../../data/speakers.js";
+import { getAllMeetupRecordings } from "../../data/meetup-recordings.js";
 import { getAllEmVideos } from "../../data/em-videos.js";
+import youtubeDates from "../../content/youtube-dates.json";
+import talkSummaries from "../../content/talk-summaries.json";
 
 const meetupRecordings = getAllMeetupRecordings();
 const emVideos = getAllEmVideos();
-const studioInterviews = emVideos.filter((v) => v.type === "interview");
-const studioBonus = emVideos.filter((v) => v.type === "promo" || v.type === "event");
 
-// Get only Day 1 & Day 2 conference talk IDs from schedule assignments (exclude Day 3 community events)
-const day1And2SlotIds = Object.keys(scheduleSlots).filter(
-    (slotId) => scheduleSlots[slotId].day <= 2
-);
-const conferenceTalkIds = new Set(
-    day1And2SlotIds.map((slotId) => slotAssignments[slotId]).filter(Boolean)
-);
-
-// Get all talks as array and separate by event type
+// Day 1 & 2 conference talks (exclude Day 3 community events).
+const day1And2SlotIds = Object.keys(scheduleSlots).filter((s) => scheduleSlots[s].day <= 2);
+const conferenceTalkIds = new Set(day1And2SlotIds.map((s) => slotAssignments[s]).filter(Boolean));
 const allTalks = Object.values(talks);
-
-// IDs to exclude from display
 const excludedTalkIds = new Set(["hack-day-angellist", "community-day-placeholder"]);
-
-// Conference talks (those in the schedule) - filter to keynotes, talks, workshops
 const conferenceTalks = allTalks.filter(
-    (talk) =>
-        conferenceTalkIds.has(talk.id) &&
-        ["keynote", "talk", "workshop", "panel"].includes(talk.type) &&
-        !excludedTalkIds.has(talk.id)
+    (t: any) =>
+        conferenceTalkIds.has(t.id) &&
+        ["keynote", "talk", "workshop", "panel"].includes(t.type) &&
+        !excludedTalkIds.has(t.id),
 );
+const startupDemos = allTalks.filter((t: any) => t.type === "demo");
 
-// Startup demos - type "demo" with videos, sorted by recording
-const startupDemos = allTalks
-    .filter((talk) => talk.type === "demo")
-    .sort((a: any, b: any) => {
-        if (a.youtubeId && !b.youtubeId) return -1;
-        if (!a.youtubeId && b.youtubeId) return 1;
-        return 0;
-    });
-
-// Separate keynotes from regular talks for better display
-// Sort each category with recordings first
-const sortByRecording = (a: any, b: any) => {
-    if (a.youtubeId && !b.youtubeId) return -1;
-    if (!a.youtubeId && b.youtubeId) return 1;
-    return 0;
-};
-
-const keynotes = conferenceTalks
-    .filter((talk) => talk.type === "keynote")
-    .sort(sortByRecording);
-const regularTalks = conferenceTalks
-    .filter((talk) => talk.type === "talk")
-    .sort((a: any, b: any) => {
-        // Welcome remarks always first
-        if (a.id === "welcome-remarks-day1") return -1;
-        if (b.id === "welcome-remarks-day1") return 1;
-        // Then sort by recording
-        if (a.youtubeId && !b.youtubeId) return -1;
-        if (!a.youtubeId && b.youtubeId) return 1;
-        return 0;
-    });
-const workshops = conferenceTalks
-    .filter((talk) => talk.type === "workshop")
-    .sort(sortByRecording);
-
-// Talks with videos (including demos)
-const talksWithVideos = [...conferenceTalks, ...startupDemos].filter((talk) => talk.youtubeId);
-const demosWithVideos = startupDemos.filter((talk) => talk.youtubeId);
-const workshopsWithVideos = workshops.filter((talk) => talk.youtubeId);
-
-// Helper to get speaker info
-function getTalkSpeakers(talk) {
+function getTalkSpeakers(talk: any) {
     if (talk.speakerId) {
-        const speaker = getSpeaker(talk.speakerId);
-        return speaker ? [speaker] : [];
+        const s = getSpeaker(talk.speakerId);
+        return s ? [s] : [];
     }
-    if (talk.speakers && talk.speakers.length > 0) {
-        return talk.speakers.map((id) => getSpeaker(id)).filter(Boolean);
+    if (talk.speakers && talk.speakers.length) {
+        return talk.speakers.map((id: string) => getSpeaker(id)).filter(Boolean);
     }
     return [];
 }
-
-// Format description - remove HTML and limit length for cards
-function formatDescription(desc, maxLength = 200) {
+function clean(desc: string, max = 240) {
     if (!desc) return "";
-    // Remove HTML tags
-    const clean = desc.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-    return clean;
+    const c = desc.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    return c.length > max ? c.slice(0, max).trimEnd() + "…" : c;
 }
 
-// Build enhanced talks data with speaker info for modal (including demos)
-const enhancedTalksData: Record<string, any> = {};
-for (const talk of [...conferenceTalks, ...startupDemos]) {
-    const talkSpeakers = getTalkSpeakers(talk);
-    enhancedTalksData[talk.id] = {
-        ...talk,
-        speakers: talkSpeakers,
-    };
+// Real YouTube publish dates, scraped into src/content/youtube-dates.json by
+// scripts/fetch-youtube-dates.js (run `npm run fetch-youtube-dates` to refresh).
+const pubDate = (id: string) => (youtubeDates as Record<string, string>)[id] || null;
+
+// Filter categories + accent dot. Literal class strings so Tailwind keeps them.
+const CATEGORIES = [
+    { slug: "studio", label: "Interviews", badge: "bg-pink-500" },
+    { slug: "meetups", label: "Meetups", badge: "bg-sky-500" },
+    { slug: "keynotes", label: "Conference Keynotes", badge: "bg-ruby-500" },
+    { slug: "talks", label: "Conference Talks", badge: "bg-violet-500" },
+    { slug: "workshops", label: "Conference Workshops", badge: "bg-emerald-500" },
+    { slug: "demos", label: "Startup Demos", badge: "bg-amber-500" },
+];
+const badgeFor = Object.fromEntries(CATEGORIES.map((c) => [c.slug, c.badge]));
+const slugForTalkType: Record<string, string> = {
+    keynote: "keynotes",
+    talk: "talks",
+    panel: "talks",
+    workshop: "workshops",
+    demo: "demos",
+};
+
+// Event name shown on each row. Conference content shares one event; meetups use
+// the recording's name + hosting venue; interviews use the series.
+const CONF_EVENT = "SF Ruby Conference 2025";
+const meetupEvent = (rec: any) => {
+    const base = (rec.title || "Ruby Meetup").replace(/\s*[-–—]\s*[A-Za-z]+\s+\d{4}.*$/, "").trim();
+    return rec.venue ? `${base} · ${rec.venue}` : base;
+};
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const fmtMonthYear = (iso: string) => {
+    const [y, m] = iso.split("-");
+    return `${MONTHS[+m - 1]} ${y}`;
+};
+
+// A meetup recording is one video bundling many timestamped talks. We surface the
+// substantial talks as their own playlist rows (≥12 min, or the final/unknown-length
+// talk) and drop lightning talks, intros, hiring pitches, and announcements; those
+// stay reachable via the "full recording" row. Heuristic so the data file stays clean.
+const MEETUP_SHORT_KW =
+    /(announc|hiring|open mic|stand[\s-]?up|q&a|newsletter|office hours|\bupdates?\b|recap|\bpsa\b|pre-vetted|looking for|job seeker|sponsorship|opening words)/i;
+const MEETUP_MIN_SEC = 720;
+function substantialMeetupTalks(rec: any) {
+    const sorted = [...(rec.talks || [])].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+    return sorted.filter((t, i) => {
+        const next = sorted[i + 1];
+        const dur =
+            next && t.timestamp > 0 && next.timestamp > t.timestamp ? next.timestamp - t.timestamp : null;
+        if (MEETUP_SHORT_KW.test(t.title)) return false;
+        if (dur == null) return true; // final talk or unknown timestamp -> assume real talk
+        return dur >= MEETUP_MIN_SEC;
+    });
 }
+
+type Item = {
+    yt: string;
+    start: number;
+    slug: string;
+    event: string;
+    title: string;
+    speaker: string;
+    org: string;
+    desc: string;
+    date: string;
+    order: number;
+    badge?: string;
+    dateLabel?: string;
+    href?: string;
+    who?: string;
+    sumKey?: string;
+};
+const items: Item[] = [];
+
+// Conference talks (keynote/talk/panel/workshop) + startup demos.
+for (const talk of [...conferenceTalks, ...startupDemos]) {
+    if (!talk.youtubeId) continue;
+    const date = pubDate(talk.youtubeId);
+    if (!date) continue;
+    const sp = getTalkSpeakers(talk);
+    const slug = slugForTalkType[talk.type] || "talks";
+    items.push({
+        yt: talk.youtubeId,
+        start: 0,
+        slug,
+        sumKey: `v:${talk.youtubeId}`,
+        event: CONF_EVENT,
+        title: talk.title,
+        speaker: sp.map((s: any) => s.name).join(", "),
+        org: sp[0]?.company || "",
+        desc: clean(talk.description),
+        date,
+        order: 0,
+    });
+}
+
+// Meetups: substantial talks (seek to timestamp) + one "full recording" row, last.
+for (const rec of meetupRecordings) {
+    if (!rec.youtubeId) continue;
+    const date = pubDate(rec.youtubeId);
+    if (!date) continue;
+    for (const t of substantialMeetupTalks(rec)) {
+        items.push({
+            yt: rec.youtubeId,
+            start: t.timestamp || 0,
+            slug: "meetups",
+            sumKey: `m:${rec.id}:${rec.talks.indexOf(t)}`,
+            event: meetupEvent(rec),
+            title: t.title,
+            speaker: t.speaker || "",
+            org: t.company || "",
+            desc: "",
+            date,
+            order: t.timestamp || 0,
+        });
+    }
+    items.push({
+        yt: rec.youtubeId,
+        start: 0,
+        slug: "meetups",
+        sumKey: `r:${rec.id}`,
+        event: meetupEvent(rec),
+        title: "Full recording",
+        speaker: "",
+        org: "",
+        desc: "",
+        date,
+        order: Number.MAX_SAFE_INTEGER,
+    });
+}
+
+// Evil Martians studio videos.
+for (const v of emVideos) {
+    if (!v.youtubeId) continue;
+    const date = pubDate(v.youtubeId) || v.date;
+    if (!date) continue;
+    items.push({
+        yt: v.youtubeId,
+        start: 0,
+        slug: "studio",
+        sumKey: `v:${v.youtubeId}`,
+        event: v.series || "Evil Martians",
+        title: v.title,
+        speaker: v.guest
+            ? `${v.guest}${v.guestRole ? ", " + v.guestRole : ""}`
+            : v.interviewer
+                ? `Hosted by ${v.interviewer}`
+                : "",
+        org: v.guestCompany || "",
+        desc: clean(v.description),
+        date,
+        order: 0,
+    });
+}
+
+// Newest first; within a shared publish date, meetup talks keep timestamp order
+// and the "full recording" row sorts to the end of its meetup.
+items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.order - b.order));
+for (const it of items) {
+    it.badge = badgeFor[it.slug];
+    it.dateLabel = fmtMonthYear(it.date);
+    it.href = `https://www.youtube.com/watch?v=${it.yt}${it.start ? `&t=${it.start}s` : ""}`;
+    // "Name (Company)" when we have both.
+    it.who = it.speaker ? `${it.speaker}${it.org ? ` (${it.org})` : ""}` : "";
+    // Prefer the transcript-based summary over the raw abstract when we have one.
+    const summary = it.sumKey ? (talkSummaries as Record<string, string>)[it.sumKey] : undefined;
+    if (summary) it.desc = summary;
+}
+
+const categoryChips = CATEGORIES.map((c) => ({
+    ...c,
+    count: items.filter((it) => it.slug === c.slug).length,
+})).filter((c) => c.count > 0);
+const totalVideos = items.length;
+const first = items[0];
 ---
 
 <BaseLayout
     title="Ruby Videos - SF Ruby"
-    description="Watch Ruby and Rails videos: Startups on Rails founder interviews, SF Ruby Conference 2025 talks, monthly meetup recordings, and more."
+    description="Watch Ruby and Rails videos: Startups on Rails founder interviews, SF Ruby Conference 2025 talks, monthly meetup recordings, and more. Newest first."
 >
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden">
+    <!-- Hero -->
+    <section class="relative pt-28 pb-8 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
         </div>
-
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                    Videos
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300 mb-8">
-                    Founder interviews, conference talks, meetup recordings, and more — Ruby in the wild.
-                </p>
-
-                <!-- Stats -->
-                <div class="flex flex-wrap gap-8">
-                    <div>
-                        <div class="text-3xl font-bold text-pink-400">{studioInterviews.length}</div>
-                        <div class="text-sm text-gray-400">Founder Interviews</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-white">{talksWithVideos.length}</div>
-                        <div class="text-sm text-gray-400">Conference Recordings</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-ruby-400">{keynotes.length}</div>
-                        <div class="text-sm text-gray-400">Keynotes</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-emerald-400">{workshopsWithVideos.length}</div>
-                        <div class="text-sm text-gray-400">Workshops</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-amber-400">{demosWithVideos.length}</div>
-                        <div class="text-sm text-gray-400">Startup Demos</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-sky-400">{meetupRecordings.length}</div>
-                        <div class="text-sm text-gray-400">Meetup Recordings</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Navigation Menu -->
-    <nav class="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
-                <a href="#studio" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-colors whitespace-nowrap">
-                    <div class="w-2 h-2 bg-pink-500 rounded-full"></div>
-                    Founder Interviews
-                </a>
-                <a href="#meetups" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-sky-600 hover:bg-sky-50 transition-colors whitespace-nowrap">
-                    <div class="w-2 h-2 bg-sky-500 rounded-full"></div>
-                    Meetup Recordings
-                </a>
-                <a href="#keynotes" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-ruby-600 hover:bg-ruby-50 transition-colors whitespace-nowrap">
-                    <div class="w-2 h-2 bg-ruby-500 rounded-full"></div>
-                    Keynotes
-                </a>
-                <a href="#workshops" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 transition-colors whitespace-nowrap">
-                    <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                    Workshops
-                </a>
-                <a href="#talks" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-ruby-600 hover:bg-ruby-50 transition-colors whitespace-nowrap">
-                    <div class="w-2 h-2 bg-ruby-500 rounded-full"></div>
-                    Conference Talks
-                </a>
-                <a href="#demos" class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-colors whitespace-nowrap">
-                    <div class="w-2 h-2 bg-amber-500 rounded-full"></div>
-                    Startup Demos
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Studio: Evil Martians founder interviews & SF Ruby promo -->
-    <section id="studio" class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
-                <a href="#studio" class="flex items-center gap-3 group">
-                    <div class="w-1 h-8 bg-pink-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-pink-600 transition-colors">
-                        Founder Interviews & Studio
-                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
-                    </h2>
-                </a>
-                <a
-                    href="https://www.youtube.com/@evil.martians"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm text-pink-500 hover:text-pink-600 font-medium"
-                >
-                    Evil Martians on YouTube
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
-            </div>
-
-            <p class="text-gray-600 mb-8 max-w-3xl">
-                The <strong class="text-gray-900">Startups on Rails</strong> series — Irina Nazarova in conversation with the founders behind Rails-built companies. Plus the occasional SF Ruby Conference promo.
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Videos</h1>
+            <p class="mt-2 text-base md:text-lg text-gray-300">
+                Meetup and conference talks, workshops, demos and founder interviews. {totalVideos} videos, newest first.
             </p>
-
-            <!-- Founder Interviews grid -->
-            {studioInterviews.length > 0 && (
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                    {studioInterviews.map((video) => (
-                        <a
-                            href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-pink-200 transition-all duration-300"
-                        >
-                            <div class="block relative aspect-video bg-gray-900 overflow-hidden">
-                                <img
-                                    src={`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`}
-                                    alt={video.title}
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                    loading="lazy"
-                                />
-                                <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                        <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="absolute top-3 left-3">
-                                    <span class="px-3 py-1 bg-pink-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                        {video.series || "Interview"}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-pink-600 transition-colors">
-                                    {video.title}
-                                </h3>
-                                <p class="text-sm text-gray-500 mb-3">
-                                    <strong class="text-gray-700">{video.guest}</strong>
-                                    {video.guestRole && `, ${video.guestRole}`}
-                                    {video.guestCompany && ` @ ${video.guestCompany}`}
-                                    {" · "}
-                                    <span class="text-gray-400">with {video.interviewer}</span>
-                                </p>
-                                <p class="text-gray-600 leading-relaxed text-sm line-clamp-3">
-                                    {video.description}
-                                </p>
-                                {video.tags && video.tags.length > 0 && (
-                                    <div class="flex flex-wrap gap-2 mt-4">
-                                        {video.tags.slice(0, 4).map((tag) => (
-                                            <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </a>
-                    ))}
-                </div>
-            )}
-
-            <!-- Promo + event bonus row -->
-            {studioBonus.length > 0 && (
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {studioBonus.map((video) => (
-                        <a
-                            href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-pink-200 transition-all duration-300"
-                        >
-                            <div class="block relative aspect-video bg-gray-900 overflow-hidden">
-                                <img
-                                    src={`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`}
-                                    alt={video.title}
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    loading="lazy"
-                                />
-                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                    <div class="w-12 h-12 bg-pink-500/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                        <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="absolute top-3 left-3">
-                                    <span class="px-3 py-1 bg-pink-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                        {video.type === "promo" ? "Promo" : "Event"}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-pink-600 transition-colors">
-                                    {video.title}
-                                </h3>
-                                <p class="text-sm text-gray-500 line-clamp-3">
-                                    {video.description}
-                                </p>
-                            </div>
-                        </a>
-                    ))}
-                </div>
-            )}
         </div>
     </section>
 
-    <!-- Meetup Recordings -->
-    <section id="meetups" class="py-12 bg-gray-50 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
-                <a href="#meetups" class="flex items-center gap-3 group">
-                    <div class="w-1 h-8 bg-sky-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-sky-600 transition-colors">
-                        Meetup Recordings
-                        <span class="text-lg font-normal text-gray-400 ml-2">{meetupRecordings.length} meetups</span>
-                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
-                    </h2>
-                </a>
-                <a
-                    href="https://www.rubyevents.org/events/sf-bay-area-ruby-meetup"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm text-sky-500 hover:text-sky-600 font-medium"
-                >
-                    Also on Ruby Events
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {meetupRecordings.map((recording) => (
-                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-all duration-300">
-                        <a
-                            href={`https://www.youtube.com/watch?v=${recording.youtubeId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="block"
-                        >
-                            <div class="aspect-video bg-gray-900 relative overflow-hidden">
-                                <img
-                                    src={`https://img.youtube.com/vi/${recording.youtubeId}/mqdefault.jpg`}
-                                    alt={recording.title}
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    loading="lazy"
-                                />
-                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                    <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-sky-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <div class="p-4">
-                            <div class="flex items-center justify-between mb-2">
-                                <h3 class="font-semibold text-gray-900 text-sm">
-                                    {recording.title.replace("SF Bay Area Ruby Meetup - ", "").replace("SF Ruby & Elixir Special - ", "Elixir Special - ")}
-                                </h3>
-                                <span class="text-xs text-gray-400 whitespace-nowrap ml-2">
-                                    {new Date(recording.date + "T00:00:00").toLocaleDateString("en-US", { month: "short", year: "numeric" })}
-                                </span>
-                            </div>
-
-                            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                                <span>{recording.talks.length} talk{recording.talks.length !== 1 ? "s" : ""}</span>
-                                <span class="text-gray-300">·</span>
-                                <span>{recording.venue}</span>
-                            </div>
-
-                            <details class="meetup-details">
-                                <summary class="text-xs text-sky-500 hover:text-sky-600 cursor-pointer font-medium select-none">
-                                    Show talks
-                                </summary>
-                                <ul class="mt-2 space-y-1.5">
-                                    {recording.talks.map((talk) => (
-                                        <li class="text-xs">
-                                            <a
-                                                href={`https://www.youtube.com/watch?v=${recording.youtubeId}${talk.timestamp ? `&t=${talk.timestamp}` : ""}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="flex items-start gap-2 text-gray-600 hover:text-sky-600 transition-colors"
-                                            >
-                                                <span class="text-gray-400 font-mono whitespace-nowrap mt-px">{formatTimestamp(talk.timestamp)}</span>
-                                                <span>
-                                                    <span class="font-medium">{talk.speaker}</span>
-                                                    {talk.company && <span class="text-gray-400"> ({talk.company})</span>}
-                                                    <span class="text-gray-400"> — </span>
-                                                    {talk.title}
-                                                </span>
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </details>
-                        </div>
+    <!-- Player + playlist -->
+    <section class="bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 lg:grid lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-10 lg:items-start">
+            <!-- Player column -->
+            <div class="lg:sticky lg:top-24">
+                <div class="sticky top-20 z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 pt-2 pb-3 bg-white lg:static lg:z-auto lg:mx-0 lg:p-0">
+                    <div class="aspect-video rounded-xl lg:rounded-2xl overflow-hidden bg-black shadow-lg">
+                        <iframe
+                            id="player"
+                            class="w-full h-full"
+                            src={`https://www.youtube.com/embed/${first.yt}?start=${first.start}&rel=0`}
+                            title="Video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                        ></iframe>
                     </div>
-                ))}
-            </div>
-        </div>
-    </section>
-
-    <!-- Conference Keynotes -->
-    <section id="keynotes" class="py-12 bg-white border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
-                <a href="#keynotes" class="flex items-center gap-3 group">
-                    <div class="w-1 h-8 bg-ruby-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">
-                        SF Ruby Conference 2025 - Keynotes
-                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
-                    </h2>
-                </a>
-                <a
-                    href="https://www.rubyevents.org/events/sfruby-2025"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 text-sm text-ruby-500 hover:text-ruby-600 font-medium"
-                >
-                    Watch on Ruby Events
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {keynotes.map((talk) => {
-                    const speakers = getTalkSpeakers(talk);
-                    return (
-                        <div
-                            class="talk-card group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-ruby-200 transition-all duration-300 cursor-pointer"
-                            data-talk-id={talk.id}
-                        >
-                            <!-- YouTube Preview or Cover Image -->
-                            {talk.youtubeId ? (
-                                <div class="block relative aspect-video bg-gray-900 overflow-hidden">
-                                    <img
-                                        src={`https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`}
-                                        alt={talk.title}
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                        loading="lazy"
-                                    />
-                                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                        <div class="w-16 h-16 bg-ruby-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                            <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M8 5v14l11-7z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="absolute top-3 left-3">
-                                        <span class="px-3 py-1 bg-ruby-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                            Keynote
-                                        </span>
-                                    </div>
-                                </div>
-                            ) : talk.coverImage ? (
-                                <div class="block relative aspect-video bg-gray-900 overflow-hidden">
-                                    <img
-                                        src={talk.coverImage}
-                                        alt={talk.title}
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                        loading="lazy"
-                                    />
-                                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
-                                    <div class="absolute top-3 left-3">
-                                        <span class="px-3 py-1 bg-ruby-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                            Keynote
-                                        </span>
-                                    </div>
-                                    {talk.noVideo && (
-                                        <div class="absolute bottom-3 left-3 right-3">
-                                            <span class="px-3 py-1.5 bg-gray-900/80 text-gray-200 text-xs rounded-lg">
-                                                {talk.noVideoReason}
-                                            </span>
-                                        </div>
-                                    )}
-                                </div>
-                            ) : (
-                                <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                                    <div class="text-center">
-                                        <span class="px-3 py-1 bg-ruby-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                            Keynote
-                                        </span>
-                                        <p class="text-gray-400 mt-3 text-sm">Recording coming soon</p>
-                                    </div>
-                                </div>
-                            )}
-
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-ruby-600 transition-colors">
-                                    {talk.title}
-                                </h3>
-
-                                {speakers.length > 0 && (
-                                    <div class="flex items-center gap-3 mb-4">
-                                        <div class="flex -space-x-2">
-                                            {speakers.map((speaker) => (
-                                                speaker.image && (
-                                                    <img
-                                                        src={speaker.image}
-                                                        alt={speaker.name}
-                                                        class="w-10 h-10 rounded-full border-2 border-white object-cover"
-                                                    />
-                                                )
-                                            ))}
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">
-                                                {speakers.map(s => s.name).join(", ")}
-                                            </p>
-                                            {speakers[0]?.company && (
-                                                <p class="text-sm text-gray-500">{speakers[0].company}</p>
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
-
-                                <p class="text-gray-600 leading-relaxed line-clamp-3">
-                                    {formatDescription(talk.description)}
-                                </p>
-
-                                {talk.blogPost && (
-                                    <a
-                                        href={talk.blogPost}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-2 mt-4 text-ruby-500 hover:text-ruby-600 font-medium text-sm"
-                                        onclick="event.stopPropagation();"
-                                    >
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                        </svg>
-                                        Read: {talk.blogPostTitle || "Blog Post"}
-                                    </a>
-                                )}
-
-                                {talk.tags && talk.tags.length > 0 && (
-                                    <div class="flex flex-wrap gap-2 mt-4">
-                                        {talk.tags.slice(0, 4).map((tag) => (
-                                            <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
-    </section>
-
-    <!-- Workshops -->
-    {workshops.length > 0 && (
-        <section id="workshops" class="py-12 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <a href="#workshops" class="flex items-center gap-3 mb-8 group">
-                    <div class="w-1 h-8 bg-emerald-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                        Workshops
-                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
-                    </h2>
-                </a>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {workshops.map((talk) => {
-                        const speakers = getTalkSpeakers(talk);
-                        return (
-                            <div
-                                class="talk-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-emerald-200 transition-all duration-300 cursor-pointer"
-                                data-talk-id={talk.id}
-                            >
-                                {talk.youtubeId ? (
-                                    <div class="block relative aspect-video bg-gray-900 overflow-hidden">
-                                        <img
-                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`}
-                                            alt={talk.title}
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                            loading="lazy"
-                                        />
-                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                            <div class="w-12 h-12 bg-emerald-500/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                                <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8 5v14l11-7z"/>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="absolute top-3 left-3">
-                                            <span class="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                                Workshop
-                                            </span>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div class="aspect-video bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center">
-                                        <div class="text-center">
-                                            <span class="px-3 py-1 bg-emerald-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                                Workshop
-                                            </span>
-                                            <p class="text-emerald-600 mt-3 text-sm">Recording coming soon</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                <div class="p-5">
-                                    <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-emerald-600 transition-colors">
-                                        {talk.title}
-                                    </h3>
-
-                                    {speakers.length > 0 && (
-                                        <div class="flex items-center gap-2 mb-3">
-                                            <div class="flex -space-x-1">
-                                                {speakers.slice(0, 3).map((speaker) => (
-                                                    speaker.image && (
-                                                        <img
-                                                            src={speaker.image}
-                                                            alt={speaker.name}
-                                                            class="w-8 h-8 rounded-full border-2 border-white object-cover"
-                                                        />
-                                                    )
-                                                ))}
-                                            </div>
-                                            <p class="text-sm text-gray-600">
-                                                {speakers.map(s => s.name).join(", ")}
-                                            </p>
-                                        </div>
-                                    )}
-
-                                    <p class="text-sm text-gray-500 line-clamp-3">
-                                        {formatDescription(talk.description, 150)}
-                                    </p>
-                                </div>
-                            </div>
-                        );
-                    })}
+                </div>
+                <div class="px-1 pt-4">
+                    <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 mb-2">
+                        <span id="pv-dot" class:list={["inline-block w-2 h-2 rounded-full", first.badge]}></span>
+                        <span id="pv-meta">{[first.who, first.event, first.dateLabel].filter(Boolean).join(" · ")}</span>
+                    </div>
+                    <h2 id="pv-title" class="text-xl md:text-2xl font-bold text-gray-900 leading-snug">{first.title}</h2>
+                    <p id="pv-desc" class:list={["mt-3 text-sm text-gray-600 leading-relaxed", { hidden: !first.desc }]}>{first.desc}</p>
                 </div>
             </div>
-        </section>
-    )}
 
-    <!-- Conference Talks -->
-    <section id="talks" class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <a href="#talks" class="flex items-center gap-3 mb-8 group">
-                <div class="w-1 h-8 bg-ruby-500 rounded-full"></div>
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-ruby-600 transition-colors">
-                    Conference Talks
-                    <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
-                </h2>
-            </a>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {regularTalks.map((talk) => {
-                    const speakers = getTalkSpeakers(talk);
-                    return (
-                        <div
-                            class="talk-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-ruby-200 transition-all duration-300 cursor-pointer"
-                            data-talk-id={talk.id}
+            <!-- Playlist column -->
+            <div class="mt-8 lg:mt-0">
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button
+                        type="button"
+                        class="cat-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border bg-gray-900 text-white border-gray-900 transition-colors"
+                        data-cat="all"
+                        data-active="true"
+                    >
+                        All <span class="opacity-60 tabular-nums">{totalVideos}</span>
+                    </button>
+                    {categoryChips.map((c) => (
+                        <button
+                            type="button"
+                            class="cat-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border bg-white text-gray-700 border-gray-200 hover:border-gray-300 transition-colors"
+                            data-cat={c.slug}
+                            data-active="false"
                         >
-                            <!-- YouTube Preview -->
-                            {talk.youtubeId ? (
-                                <div class="block relative aspect-video bg-gray-900 overflow-hidden">
-                                    <img
-                                        src={`https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`}
-                                        alt={talk.title}
-                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                        loading="lazy"
-                                    />
-                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                        <div class="w-12 h-12 bg-ruby-500/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                            <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M8 5v14l11-7z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div class="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                    <p class="text-gray-400 text-sm">Recording coming soon</p>
-                                </div>
-                            )}
+                            <span class:list={["w-2 h-2 rounded-full", c.badge]} />
+                            {c.label} <span class="opacity-60 tabular-nums">{c.count}</span>
+                        </button>
+                    ))}
+                </div>
 
-                            <div class="p-5">
-                                <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-ruby-600 transition-colors">
-                                    {talk.title}
-                                </h3>
-
-                                {speakers.length > 0 && (
-                                    <div class="flex items-center gap-2 mb-3">
-                                        {speakers[0]?.image && (
-                                            <img
-                                                src={speakers[0].image}
-                                                alt={speakers[0].name}
-                                                class="w-8 h-8 rounded-full object-cover"
-                                            />
-                                        )}
-                                        <p class="text-sm text-gray-600">
-                                            {speakers.map(s => s.name).join(", ")}
-                                        </p>
-                                    </div>
-                                )}
-
-                                <p class="text-sm text-gray-500 line-clamp-3 mb-3">
-                                    {formatDescription(talk.description, 150)}
-                                </p>
-
-                                {talk.tags && talk.tags.length > 0 && (
-                                    <div class="flex flex-wrap gap-1.5">
-                                        {talk.tags.slice(0, 3).map((tag) => (
-                                            <span class="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    );
-                })}
+                <ul id="video-list" class="rounded-xl border border-gray-200 divide-y divide-gray-100 overflow-hidden">
+                    {items.map((it, i) => (
+                        <li>
+                            <button
+                                type="button"
+                                class:list={["video-row w-full text-left flex items-start gap-3 px-3.5 py-3 hover:bg-gray-50 transition-colors", { "bg-ruby-50": i === 0 }]}
+                                data-idx={i}
+                                data-yt={it.yt}
+                                data-start={it.start}
+                                data-title={it.title}
+                                data-speaker={it.who}
+                                data-desc={it.desc}
+                                data-event={it.event}
+                                data-date={it.dateLabel}
+                                data-badge={it.badge}
+                                data-category={it.slug}
+                                aria-current={i === 0 ? "true" : undefined}
+                            >
+                                <span class:list={["mt-1.5 w-2 h-2 rounded-full shrink-0", it.badge]} />
+                                <span class="min-w-0 flex-1">
+                                    <span class="block font-medium text-gray-900">{it.who || it.title}</span>
+                                    {it.who && <span class="block text-sm text-gray-600">{it.title}</span>}
+                                    <span class="block text-xs text-gray-400 mt-1">{it.event}</span>
+                                </span>
+                                <span class="shrink-0 pl-2 text-xs text-gray-400 tabular-nums">{it.dateLabel}</span>
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+                <div id="videos-empty" class="hidden text-center py-16 text-gray-500">No videos in this category.</div>
             </div>
         </div>
     </section>
-
-    <!-- Startup Demos -->
-    {startupDemos.length > 0 && (
-        <section id="demos" class="py-12 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <a href="#demos" class="flex items-center gap-3 mb-8 group">
-                    <div class="w-1 h-8 bg-amber-500 rounded-full"></div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">
-                        Startup Demos
-                        <span class="opacity-0 group-hover:opacity-100 text-gray-400 text-lg ml-1 transition-opacity">#</span>
-                    </h2>
-                </a>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {startupDemos.map((talk) => {
-                        const speakers = getTalkSpeakers(talk);
-                        return (
-                            <div
-                                class="talk-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-amber-200 transition-all duration-300 cursor-pointer"
-                                data-talk-id={talk.id}
-                            >
-                                {talk.youtubeId ? (
-                                    <div class="block relative aspect-video bg-gray-900 overflow-hidden">
-                                        <img
-                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`}
-                                            alt={talk.title}
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                            loading="lazy"
-                                        />
-                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                            <div class="w-12 h-12 bg-amber-500/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                                <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8 5v14l11-7z"/>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="absolute top-3 left-3">
-                                            <span class="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                                Demo
-                                            </span>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div class="aspect-video bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center">
-                                        <div class="text-center">
-                                            <span class="px-3 py-1 bg-amber-500 text-white text-xs font-bold rounded-full uppercase tracking-wider">
-                                                Demo
-                                            </span>
-                                            <p class="text-amber-600 mt-3 text-sm">Recording coming soon</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                <div class="p-5">
-                                    <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors">
-                                        {talk.title}
-                                    </h3>
-
-                                    {speakers.length > 0 && (
-                                        <div class="flex items-center gap-2 mb-3">
-                                            {speakers[0]?.image && (
-                                                <img
-                                                    src={speakers[0].image}
-                                                    alt={speakers[0].name}
-                                                    class="w-8 h-8 rounded-full object-cover"
-                                                />
-                                            )}
-                                            <p class="text-sm text-gray-600">
-                                                {speakers.map(s => s.name).join(", ")}
-                                            </p>
-                                        </div>
-                                    )}
-
-                                    <p class="text-sm text-gray-500 line-clamp-3">
-                                        {formatDescription(talk.description, 150)}
-                                    </p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        </section>
-    )}
 
     <!-- CFP CTA -->
-    <section class="py-16 bg-white border-t border-gray-100">
+    <section class="py-16 bg-gray-50 border-t border-gray-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Want to give a talk?
-            </h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Want to give a talk?</h2>
             <p class="text-lg text-gray-600 mb-8">
-                We're always looking for speakers. Submit a talk proposal for
-                our next meetup.
+                We're always looking for speakers. Submit a talk proposal for our next meetup.
             </p>
             <a
                 href="https://forms.gle/EZLqENWd5VjiLduq8"
@@ -842,322 +333,106 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
                 class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
                 Submit a Talk
-                <svg
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    ></path>
-                </svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </a>
         </div>
     </section>
-
-    <!-- Talk Modal -->
-    <TalkModal />
 </BaseLayout>
 
-<script define:vars={{ enhancedTalksData }}>
-    // Make talks data available to the modal
-    window.talksData = enhancedTalksData;
-</script>
-
 <script>
-    // Wait for DOM and modal to be ready
-    function initTalkCards() {
-        const cards = document.querySelectorAll(".talk-card");
+    // Playlist: clicking a row plays it in the sticky player; chips filter the list.
+    function initPlaylist() {
+        const rows = Array.from(document.querySelectorAll<HTMLButtonElement>(".video-row"));
+        const player = document.getElementById("player") as HTMLIFrameElement | null;
+        const chips = Array.from(document.querySelectorAll<HTMLButtonElement>(".cat-chip"));
+        const empty = document.getElementById("videos-empty");
+        if (!rows.length || !player) return;
 
-        cards.forEach((card) => {
-            card.addEventListener("click", (e) => {
-                e.preventDefault();
-                const talkId = card.getAttribute("data-talk-id");
-                if (!talkId) return;
+        const pvDot = document.getElementById("pv-dot");
+        const pvMeta = document.getElementById("pv-meta");
+        const pvTitle = document.getElementById("pv-title");
+        const pvDesc = document.getElementById("pv-desc");
 
-                openTalkModal(talkId);
+        function play(row: HTMLButtonElement, autoplay: boolean) {
+            const d = row.dataset;
+            const start = d.start && d.start !== "0" ? d.start : "0";
+            player!.src = `https://www.youtube.com/embed/${d.yt}?start=${start}&rel=0${autoplay ? "&autoplay=1" : ""}`;
+            if (pvTitle) pvTitle.textContent = d.title || "";
+            if (pvMeta) pvMeta.textContent = [d.speaker, d.event, d.date].filter(Boolean).join(" · ");
+            if (pvDot) pvDot.className = "inline-block w-2 h-2 rounded-full " + (d.badge || "");
+            if (pvDesc) {
+                pvDesc.textContent = d.desc || "";
+                pvDesc.classList.toggle("hidden", !d.desc);
+            }
+            rows.forEach((r) => {
+                const on = r === row;
+                r.classList.toggle("bg-ruby-50", on);
+                if (on) r.setAttribute("aria-current", "true");
+                else r.removeAttribute("aria-current");
             });
-        });
-    }
-
-    function openTalkModal(talkId: string) {
-        const talk = (window as any).talksData[talkId];
-        if (!talk) return;
-
-        // Update URL with talk parameter (without page reload)
-        const url = new URL(window.location.href);
-        url.searchParams.set("talk", talkId);
-        window.history.pushState({ talkId }, "", url.toString());
-
-        // Build modal content
-        const modalHtml = buildTalkModalContent(talk);
-
-        // Show modal
-        if (typeof (window as any).setTalkModalContent === "function") {
-            (window as any).setTalkModalContent(modalHtml);
-            (window as any).showTalkModal();
-        }
-    }
-
-    function closeTalkModalAndUpdateUrl() {
-        // Remove talk parameter from URL
-        const url = new URL(window.location.href);
-        url.searchParams.delete("talk");
-        window.history.pushState({}, "", url.toString());
-
-        // Close the modal
-        if (typeof (window as any).hideTalkModal === "function") {
-            (window as any).hideTalkModal();
-        }
-    }
-
-    function buildTalkModalContent(talk: any): string {
-        // Build YouTube video section or cover image for noVideo talks
-        let videoHtml = "";
-        if (talk.youtubeId) {
-            videoHtml = `
-                <div class="mb-6">
-                    <div class="relative aspect-video rounded-xl overflow-hidden bg-black shadow-lg">
-                        <iframe
-                            src="https://www.youtube.com/embed/${talk.youtubeId}?autoplay=1"
-                            title="${talk.title}"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                            class="absolute inset-0 w-full h-full"
-                        ></iframe>
-                    </div>
-                </div>
-            `;
-        } else if (talk.coverImage) {
-            videoHtml = `
-                <div class="mb-6">
-                    <div class="relative aspect-video rounded-xl overflow-hidden bg-gray-900 shadow-lg">
-                        <img
-                            src="${talk.coverImage}"
-                            alt="${talk.title}"
-                            class="w-full h-full object-cover"
-                        />
-                        <div class="absolute inset-0 bg-black/30"></div>
-                        ${talk.noVideo ? `
-                            <div class="absolute bottom-4 left-4 right-4">
-                                <span class="px-3 py-2 bg-gray-900/80 text-gray-200 text-sm rounded-lg inline-block">
-                                    ${talk.noVideoReason || "Recording unavailable"}
-                                </span>
-                            </div>
-                        ` : ""}
-                    </div>
-                </div>
-            `;
+            const url = new URL(location.href);
+            url.searchParams.set("v", d.yt || "");
+            if (start !== "0") url.searchParams.set("t", start);
+            else url.searchParams.delete("t");
+            history.replaceState({}, "", url.toString());
         }
 
-        // Build speakers section
-        let speakersHtml = "";
-        if (talk.speakers && talk.speakers.length > 0) {
-            const speakersList = talk.speakers.map((speaker: any) => `
-                <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
-                    ${speaker.image ? `
-                        <img
-                            src="${speaker.image}"
-                            alt="${speaker.name}"
-                            class="w-16 h-16 rounded-full object-cover ring-2 ring-white shadow-md flex-shrink-0"
-                        />
-                    ` : `
-                        <div class="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                    `}
-                    <div class="flex-1 min-w-0">
-                        <p class="font-semibold text-gray-900">${speaker.name}</p>
-                        ${speaker.role || speaker.title ? `<p class="text-sm text-gray-600">${speaker.role || speaker.title}</p>` : ""}
-                        ${speaker.company ? `<p class="text-sm text-gray-500">${speaker.company}</p>` : ""}
-                        ${speaker.bio ? `<p class="text-sm text-gray-600 mt-2">${speaker.bio}</p>` : ""}
-                        <div class="flex gap-3 mt-2">
-                            ${speaker.twitter ? `
-                                <a href="https://twitter.com/${speaker.twitter}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                                    </svg>
-                                </a>
-                            ` : ""}
-                            ${speaker.github ? `
-                                <a href="https://github.com/${speaker.github}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                    </svg>
-                                </a>
-                            ` : ""}
-                            ${speaker.linkedin ? `
-                                <a href="${speaker.linkedin}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                    </svg>
-                                </a>
-                            ` : ""}
-                        </div>
-                    </div>
-                </div>
-            `).join("");
+        rows.forEach((r) =>
+            r.addEventListener("click", () => {
+                play(r, true);
+                // On mobile the player is pinned at the top; bring it into view.
+                if (window.matchMedia("(max-width: 1023px)").matches) {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            }),
+        );
 
-            speakersHtml = `
-                <div class="mb-6">
-                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                        ${talk.speakers.length > 1 ? "Speakers" : "Speaker"}
-                    </h3>
-                    <div class="space-y-3">
-                        ${speakersList}
-                    </div>
-                </div>
-            `;
+        const ACTIVE = ["bg-gray-900", "text-white", "border-gray-900"];
+        const INACTIVE = ["bg-white", "text-gray-700", "border-gray-200", "hover:border-gray-300"];
+        function applyFilter(cat: string) {
+            let shown = 0;
+            rows.forEach((r) => {
+                const match = cat === "all" || r.dataset.category === cat;
+                r.closest("li")?.classList.toggle("hidden", !match);
+                if (match) shown++;
+            });
+            chips.forEach((ch) => {
+                const on = ch.dataset.cat === cat;
+                ch.dataset.active = on ? "true" : "false";
+                ch.classList.remove(...ACTIVE, ...INACTIVE);
+                ch.classList.add(...(on ? ACTIVE : INACTIVE));
+            });
+            if (empty) empty.classList.toggle("hidden", shown > 0);
         }
+        chips.forEach((ch) =>
+            ch.addEventListener("click", () => {
+                const cat = ch.dataset.cat || "all";
+                applyFilter(cat);
+                const url = new URL(location.href);
+                if (cat === "all") url.searchParams.delete("category");
+                else url.searchParams.set("category", cat);
+                history.replaceState({}, "", url.toString());
+            }),
+        );
 
-        // Build tags section
-        let tagsHtml = "";
-        if (talk.tags && talk.tags.length > 0) {
-            const tagsList = talk.tags.map((tag: string) => `
-                <span class="text-xs px-2.5 py-1 bg-gray-100 text-gray-600 rounded-full">${tag}</span>
-            `).join("");
-            tagsHtml = `
-                <div class="flex flex-wrap gap-2 mb-6">
-                    ${tagsList}
-                </div>
-            `;
-        }
-
-        // Get talk type badge
-        const typeColors: Record<string, string> = {
-            keynote: "bg-ruby-500 text-white",
-            talk: "bg-sky-500 text-white",
-            workshop: "bg-emerald-500 text-white",
-            panel: "bg-purple-500 text-white",
-        };
-        const typeColor = typeColors[talk.type] || "bg-gray-500 text-white";
-        const typeBadge = `<span class="px-2.5 py-1 text-xs font-semibold ${typeColor} rounded-full uppercase">${talk.type}</span>`;
-
-        // Clean description (remove HTML tags)
-        const cleanDescription = talk.description
-            ? talk.description.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim()
-            : "";
-
-        return `
-            <div class="p-6 sm:p-8">
-                <!-- Close button -->
-                <button
-                    id="talkModalCloseBtn"
-                    onclick="if(window.closeTalkModalAndUpdateUrl) window.closeTalkModalAndUpdateUrl();"
-                    class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors z-10"
-                    aria-label="Close modal"
-                >
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-                <!-- Video Player -->
-                ${videoHtml}
-
-                <!-- Header -->
-                <div class="mb-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        ${typeBadge}
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-2">${talk.title}</h2>
-                </div>
-
-                <!-- Tags -->
-                ${tagsHtml}
-
-                <!-- Description -->
-                ${cleanDescription ? `
-                    <div class="mb-6">
-                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">About this talk</h3>
-                        <p class="text-gray-700 leading-relaxed">${cleanDescription}</p>
-                    </div>
-                ` : ""}
-
-                <!-- Speakers -->
-                ${speakersHtml}
-
-                <!-- Watch on YouTube link -->
-                ${talk.youtubeId ? `
-                    <div class="pt-4 border-t border-gray-100">
-                        <a
-                            href="https://www.youtube.com/watch?v=${talk.youtubeId}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-ruby-500 hover:text-ruby-600 font-medium"
-                        >
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                            </svg>
-                            Watch on YouTube
-                        </a>
-                    </div>
-                ` : ""}
-
-                <!-- Blog post link -->
-                ${talk.blogPost ? `
-                    <div class="${talk.youtubeId ? 'pt-2' : 'pt-4 border-t border-gray-100'}">
-                        <a
-                            href="${talk.blogPost}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 text-ruby-500 hover:text-ruby-600 font-medium"
-                        >
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                            </svg>
-                            Read: ${talk.blogPostTitle || "Blog Post"}
-                        </a>
-                    </div>
-                ` : ""}
-            </div>
-        `;
-    }
-
-    // Check URL for talk parameter and open modal
-    function checkUrlForTalk() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const talkId = urlParams.get("talk");
-
-        if (talkId) {
-            const talk = (window as any).talksData[talkId];
-            if (talk && typeof (window as any).setTalkModalContent === "function") {
-                const modalHtml = buildTalkModalContent(talk);
-                (window as any).setTalkModalContent(modalHtml);
-                (window as any).showTalkModal();
-            }
-        } else {
-            // No talk in URL, make sure modal is closed
-            if (typeof (window as any).hideTalkModal === "function") {
-                (window as any).hideTalkModal();
+        // Deep links: ?category= filters, ?v= selects a video.
+        const params = new URLSearchParams(location.search);
+        const cat = params.get("category");
+        if (cat && chips.some((c) => c.dataset.cat === cat)) applyFilter(cat);
+        const v = params.get("v");
+        if (v) {
+            const match = rows.find((r) => r.dataset.yt === v);
+            if (match) {
+                play(match, false);
+                // Deep link may land on a row far down the list; bring it into view.
+                match.scrollIntoView({ block: "center" });
             }
         }
     }
 
-    // Handle browser back/forward buttons
-    window.addEventListener("popstate", () => {
-        checkUrlForTalk();
-    });
-
-    // Export close function for use in modal
-    (window as any).closeTalkModalAndUpdateUrl = closeTalkModalAndUpdateUrl;
-
-    // Initialize when DOM is ready
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", () => {
-            initTalkCards();
-            // Small delay to ensure modal is ready
-            setTimeout(checkUrlForTalk, 100);
-        });
+        document.addEventListener("DOMContentLoaded", initPlaylist);
     } else {
-        initTalkCards();
-        setTimeout(checkUrlForTalk, 100);
+        initPlaylist();
     }
 </script>
