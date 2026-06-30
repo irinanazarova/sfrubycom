@@ -1,0 +1,42 @@
+export const meta = {
+  name: 'talk-summaries',
+  description: 'Summarize SF Ruby talks from their transcripts in the newsletter voice',
+  phases: [{ title: 'Summarize' }],
+}
+
+const ROOT = "/Users/irinanazarova/Projects/sfrubycom";
+const ITEMS = /*__ITEMS__*/[];
+
+log(`Summarizing ${ITEMS.length} talks`);
+
+const STYLE = `You write a one-paragraph summary of a Ruby-community talk for the SF Ruby videos page, in the voice of the SF Ruby newsletter.
+
+STYLE (match exactly):
+- 2-3 sentences, 45-65 words, plain prose. No bullet points, no headings.
+- Lead with the talk's thesis or what was built/shown. NEVER open with "In this talk" / "The speaker discusses" / "This talk".
+- Specific and concrete: name the gem/tool/technique, the number, the result, drawn from the transcript.
+- Poetic density: every word earns its place. Cut "actually/basically/really/very".
+- Confident and positive about Ruby; lead with what Ruby/Rails IS. NEVER use or subvert the "Rails is dead" trope.
+- Active voice, present tense; name the speaker once, using the authoritative name in the metadata (not the transcript's spelling).
+
+ACCURACY (critical - the transcript is YouTube auto-captions and mishears names):
+- Names are mangled ("Irina"->"Arena", "Marco Roth"->"Marcom", "Konstantin"->"Constantine", "ReActionView"->"Reaction View", "Ragents"->"Reagance"). Use the metadata speaker/company/title verbatim. For any gem/library/project/person name from the transcript, if it reads like an ordinary English word or looks off, assume it is a mishearing and correct it to the real name (rubygems.org / GitHub naming).
+- Ruby is not always Rails: only say Rails if it is actually Rails (Stripe = Sinatra, Ubicloud = Roda). Use "Ruby" when unsure.
+- Never invent numbers, funding, valuations, or claims the transcript does not support.`;
+
+phase('Summarize');
+const results = await pipeline(ITEMS, (it) => {
+  const abs = `${ROOT}/${it.itemFile}`;
+  let extra = '';
+  if (it.kind === 'meetup-recording') {
+    const lineup = (it.lineup || []).map((t) => `"${t.title}" by ${t.speaker || 'a speaker'}${t.company ? ` (${t.company})` : ''}`).join('; ');
+    extra = `\nThis is a FULL meetup recording covering several talks. Summarize the LINEUP in 1-2 sentences, naming the headline speakers and what they showed: ${lineup}.`;
+  } else if (it.note) {
+    extra = `\nNOTE: ${it.note} The talk is titled "${it.title}" by ${it.speaker}. Summarize ONLY that talk's segment of the recording.`;
+  }
+  const prompt = `${STYLE}\n\nRead the talk transcript by running: cat '${abs}'${extra}\n\nAUTHORITATIVE METADATA (use these exact names; the transcript's auto-captions mangle them):\n- Speaker: ${it.speaker || '(none listed)'}${it.company ? ` — ${it.company}` : ''}\n- Title: ${it.title}\n- Event: ${it.event}\n- Kind: ${it.kind}\n\nOutput ONLY the final summary paragraph (2-3 sentences, 45-65 words). No preamble, no quotation marks, no markdown, no list.`;
+  return agent(prompt, { label: `sum:${it.sumKey}`, phase: 'Summarize' })
+    .then((text) => (text && text.trim() ? { sumKey: it.sumKey, summary: text.trim() } : null));
+});
+
+return results.filter(Boolean);

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "fetch-data": "node scripts/fetch-sheets.js && node scripts/fetch-luma-events.js",
+    "fetch-youtube-dates": "node scripts/fetch-youtube-dates.js",
     "build": "npm run fetch-data && astro build",
     "build:dev": "astro build",
     "preview": "astro preview",

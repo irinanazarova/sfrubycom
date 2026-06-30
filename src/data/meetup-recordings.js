@@ -1024,6 +1024,7 @@ const meetupRecordings = [
         title: "claude-yolo: Parallel Claude Code Agents in tmux",
         speaker: "Dmitry Kozlov",
         timestamp: 8092,
+        openMic: true,
       },
     ],
   },
