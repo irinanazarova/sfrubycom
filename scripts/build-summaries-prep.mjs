@@ -147,6 +147,7 @@ for (const rec of getAllMeetupRecordings()) {
     const substantial = sorted.filter((t, i) => {
         const next = sorted[i + 1];
         const dur = next && t.timestamp > 0 && next.timestamp > t.timestamp ? next.timestamp - t.timestamp : null;
+        if (t.openMic) return false; // Open Mic / lightning talks get no summary
         if (MEETUP_SHORT_KW.test(t.title)) return false;
         if (dur == null) return true;
         return dur >= MEETUP_MIN_SEC;
