@@ -30,6 +30,23 @@ const CHIP_CLASS = {
     signal: "border-amber-200 text-amber-800 bg-amber-50/60",
 };
 
+// Full-text haystack per job for the search box: title, company, location,
+// chips, industry/stage, and the description. Lowercased once at build time.
+function searchText(job) {
+    return [
+        job.title,
+        job.companyName,
+        job.location,
+        ...(job.chips || []),
+        job.industry,
+        job.stage,
+        job.description,
+    ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+}
+
 // Enrich each job with company info (sponsor / startup / inline) + derived facets.
 const jobs = getSortedJobs().map((job) => {
     let companyName = job.companyName;
@@ -235,6 +252,23 @@ const facetGroups = [
 
                 <!-- Results -->
                 <div class="min-w-0 pb-12 lg:pb-0">
+                    <!-- Text search -->
+                    <div class="relative mb-4">
+                        <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input
+                            id="job-search"
+                            type="search"
+                            autocomplete="off"
+                            enterkeyhint="search"
+                            placeholder="Search roles, companies, stack…"
+                            aria-label="Search jobs by role, company, or stack"
+                            class="w-full h-11 pl-10 pr-10 rounded-lg border border-gray-300 bg-white text-sm text-gray-900 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-ruby-300 focus:border-ruby-300"
+                        />
+                        <button id="job-search-clear" type="button" aria-label="Clear search" class="hidden absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+
                     <div class="hidden lg:flex items-center justify-between mb-4">
                         <p class="text-sm text-gray-500">
                             Showing <span class="result-count font-semibold text-gray-900">{jobs.length}</span> of {jobs.length} roles
@@ -252,6 +286,7 @@ const facetGroups = [
                                 data-industry={job.industry ? slugify(job.industry) : ""}
                                 data-stage={job.stage ? slugify(job.stage) : ""}
                                 data-salmax={job.salaryRange ? job.salaryRange.max : ""}
+                                data-search={searchText(job)}
                             >
                                 <div class="flex flex-wrap sm:flex-nowrap items-start gap-x-4 gap-y-3 p-4 sm:p-5">
                                     {job.companyLogo ? (
@@ -405,6 +440,12 @@ const facetGroups = [
     />
 
     <style>
+        /* Suppress the native search clear/decoration; we render our own ×. */
+        #job-search::-webkit-search-cancel-button,
+        #job-search::-webkit-search-decoration {
+            -webkit-appearance: none;
+            appearance: none;
+        }
         .facet-group {
             margin-bottom: 1.5rem;
         }
@@ -587,6 +628,9 @@ const facetGroups = [
                 "#clear-filters, #clear-filters-mobile, #clear-filters-empty",
             ),
         );
+        const searchInput = document.getElementById("job-search") as HTMLInputElement | null;
+        const searchClear = document.getElementById("job-search-clear");
+        let searchTerms: string[] = [];
 
         type Facet = "worktype" | "geo" | "level" | "industry" | "stage";
         const multiFacets: Facet[] = ["worktype", "geo", "level", "industry", "stage"];
@@ -620,6 +664,7 @@ const facetGroups = [
             salmax: el.getAttribute("data-salmax")
                 ? Number(el.getAttribute("data-salmax"))
                 : null,
+            search: el.getAttribute("data-search") || "",
         }));
         type Row = (typeof rowData)[number];
 
@@ -630,6 +675,7 @@ const facetGroups = [
             industry: Set<string>;
             stage: Set<string>;
             salaryMin: number | null;
+            search: string[];
         };
 
         function snapshot(): FilterState {
@@ -640,6 +686,7 @@ const facetGroups = [
                 industry: state.industry,
                 stage: state.stage,
                 salaryMin,
+                search: searchTerms,
             };
         }
 
@@ -660,7 +707,9 @@ const facetGroups = [
                 matchFacet([d.industry], st.industry) &&
                 matchFacet([d.stage], st.stage) &&
                 (st.salaryMin === null ||
-                    (d.salmax !== null && d.salmax >= st.salaryMin))
+                    (d.salmax !== null && d.salmax >= st.salaryMin)) &&
+                // Every search term must appear (AND) in the row's haystack.
+                st.search.every((t) => d.search.includes(t))
             );
         }
 
@@ -685,11 +734,16 @@ const facetGroups = [
             const activeCount =
                 multiFacets.reduce((n, f) => n + state[f].size, 0) +
                 (salaryMin !== null ? 1 : 0);
-            for (const btn of clearBtns) btn.classList.toggle("hidden", activeCount === 0);
+            const hasSearch = searchTerms.length > 0;
+            // Clear buttons appear for facets OR search; the filter-drawer badge
+            // stays facet-only (search lives outside the drawer).
+            for (const btn of clearBtns)
+                btn.classList.toggle("hidden", activeCount === 0 && !hasSearch);
             for (const badge of badges) {
                 badge.textContent = String(activeCount);
                 badge.classList.toggle("hidden", activeCount === 0);
             }
+            if (searchClear) searchClear.classList.toggle("hidden", !hasSearch);
 
             updateChips(cur);
         }
@@ -796,10 +850,31 @@ const facetGroups = [
             for (const f of multiFacets) state[f].clear();
             salaryMin = null;
             for (const c of chips) c.classList.remove("chip-active");
+            searchTerms = [];
+            if (searchInput) searchInput.value = "";
             apply();
             scrollToListTop();
         }
         for (const btn of clearBtns) btn.addEventListener("click", clearAll);
+
+        // Text search: split on whitespace, AND the terms. No debounce needed at
+        // this row count; filtering is a cheap in-memory pass.
+        function readSearch() {
+            searchTerms = (searchInput?.value || "")
+                .toLowerCase()
+                .split(/\s+/)
+                .filter(Boolean);
+        }
+        searchInput?.addEventListener("input", () => {
+            readSearch();
+            apply();
+        });
+        searchClear?.addEventListener("click", () => {
+            if (searchInput) searchInput.value = "";
+            searchTerms = [];
+            apply();
+            searchInput?.focus();
+        });
 
         // Initialize conditional counts / availability on load.
         apply();
