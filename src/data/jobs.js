@@ -12,6 +12,7 @@ export const jobs = {
     salary: "$180K - $250K + equity",
     description:
       "Koah Labs is hiring a Backend Software Engineer to design data models, abstractions, and high-performance systems for the ad infrastructure powering AI-native products. Example projects: build scalable data models that align publisher and advertiser interests across multiple impressions per ad request, design abstractions for new ad formats and engagement tracking, build a low-latency frequency-capping system to prevent ad fatigue, and create schemas for high-volume ad bidding with exchanges. Stack: Ruby on Rails, React, TypeScript, PostgreSQL, ClickHouse, Redis, Kafka, AWS. Active users of palkan's layered design for Rails, Lefthook, Yabeda, and test-prof. Backed by Theory Ventures, Forerunner Ventures, and South Park Commons.",
+    chips: ["Backend", "Data", "ClickHouse", "Kafka"],
     url: "https://jobs.ashbyhq.com/koahlabs/43616243-f485-480d-b31a-f89589a4b09d",
     postedDate: "2026-05-07",
   },
@@ -24,6 +25,7 @@ export const jobs = {
     salary: "$180K - $250K + equity",
     description:
       "Koah Labs is hiring a Product Software Engineer to ship across the stack and shape product direction for an ad network powering AI-native products. Lead initiatives end-to-end with high agency in product and technical design — optimize matching algorithms, build experiences reaching millions of users, partner with data and GTM teams, and run experiments to learn how users interact with AI-native products. Strong fit for former founders or early-stage engineers comfortable with ambiguity and fast feedback loops. Stack: Ruby on Rails, React, TypeScript, PostgreSQL, ClickHouse. Active users of palkan's layered design for Rails, Lefthook, Yabeda, and test-prof. Backed by Theory Ventures, Forerunner Ventures, and South Park Commons.",
+    chips: ["Product Eng", "Fullstack", "React", "ClickHouse"],
     url: "https://jobs.ashbyhq.com/koahlabs/0e9b7d88-7698-45f6-890b-9e25cca0ee8b",
     postedDate: "2026-05-07",
   },
@@ -36,6 +38,7 @@ export const jobs = {
     salary: "$180K - $250K + equity",
     description:
       "Koah Labs is hiring a Platform Software Engineer to design, build, and maintain the infrastructure powering an ad network for AI-native products. Operate serious systems at scale, own the platform layer beneath the product, and build reliable systems with rigor on performance and observability. Infra stack: Terraform, AWS, LGTM (Loki, Grafana, Tempo, Mimir), Tailscale, Cloudflare. Data: PostgreSQL, ClickHouse, Redis, Kafka, Python. Core app: Ruby on Rails, React, TypeScript. Active users of palkan's layered design for Rails, Lefthook, Yabeda, and test-prof. Backed by Theory Ventures, Forerunner Ventures, and South Park Commons.",
+    chips: ["Platform", "Infra", "Terraform", "Kafka", "Polyglot"],
     url: "https://jobs.ashbyhq.com/koahlabs/729e2608-4a27-4aa7-895e-a427e55d466a",
     postedDate: "2026-05-07",
   },
@@ -48,6 +51,7 @@ export const jobs = {
     salary: "$180K - $230K + equity",
     description:
       "Patch is the platform powering corporate climate action — a marketplace + API for buying verified carbon-removal credits, routing hundreds of millions of dollars to projects that permanently pull CO₂ out of the atmosphere. Originally pitched as 'Stripe for climate,' now a full market infrastructure layer for environmental commodities. Backed by a16z, Coatue, and Energize Ventures; $80M raised through Series B; HQ San Francisco. They're hiring Product Engineers to own outcomes end-to-end — defining problems, pressure-testing solutions, and shipping reliable software in a high-trust EPD environment. Core stack is Ruby on Rails + Stimulus; prior Rails experience helpful but not required. AI-native workflow expected. In-person SF; senior or staff+ scope.",
+    chips: ["Product Eng", "Fullstack", "Hotwire", "AI-native"],
     url: "https://jobs.ashbyhq.com/patch.io/8d3edb1a-3846-436c-a286-700a1e923e0f",
     postedDate: "2026-04-28",
   },
@@ -60,6 +64,7 @@ export const jobs = {
     salary: "$150K - $180K + equity",
     description:
       "Reset is a public benefit corp building earned-wage access (EWA) for everyday Americans — fee-free access to pay you've already earned, before payday. Unlike consumer EWA apps that go direct-to-consumer, Reset embeds directly into the credit unions and community banks people already trust, pairing daily income access with automated cashflow budgeting inside the partner's banking app. Mission: better timing of income to fundamentally change how paycheck-to-paycheck households manage money. $7M+ raised; founders ex-Visa, Salesforce, Upstart; HQ Palo Alto. Work closely with the CTO on real-time card-transaction decisioning (sub-second authorization, dynamic spend limits based on income and cash flow) and integrations with banking + payments partners. Stack: Ruby on Rails + PostgreSQL backend, React frontend, Heroku. Strong full-stack and API design experience required; fintech background a bonus. AI as a force multiplier expected.",
+    chips: ["Fullstack", "Payments", "React", "Public benefit"],
     url: "https://jobs.ashbyhq.com/Reset/b40547a5-3b95-4646-8786-147cf83b4181?utm_source=rb8JwX8KGV",
     postedDate: "2026-04-28",
   },
@@ -72,6 +77,7 @@ export const jobs = {
     salary: "$150K - $250K + 5% equity",
     description:
       "Finta is hiring a Founding Engineer to collaborate directly with the CEO and designer on complete product features end-to-end, from backend to frontend. Work with Ruby on Rails, Hotwire, Stimulus, Tailwind, and Redis to build banking and accounting integrations with rigorous data-quality and reliability standards. Finta automates bookkeeping, files taxes, and gives companies real-time financial metrics. 6+ years of Rails experience required. Regular use of AI coding tools (Cursor, Claude Code) expected. $150-$250k base + 5% equity.",
+    chips: ["Fullstack", "Hotwire", "Founding role", "AI-native"],
     url: "https://www.ycombinator.com/companies/finta/jobs/vg5fXEw-founding-engineer-ruby",
     postedDate: "2026-04-27",
   },
@@ -84,6 +90,7 @@ export const jobs = {
     salary: "$179K - $224K",
     description:
       "Omada Health is hiring a Senior Software Engineer for its Assurance / agentic systems team, powering AI Transformation across Engineering, Product, and Design. Sitting inside Architecture & Infrastructure, the team defines the patterns, tools, and infrastructure that let every engineer, PM, and designer use AI to build, test, and operate software safely, orchestrating agentic software development with quality built in by design. Work at the intersection of infrastructure and application development on Omada's Ruby/Rails stack (PostgreSQL, Kafka). $179.4-224.3K base in CA/NY/WA ($171.6-214.5K in CO) + bonus + equity. US-based.",
+    chips: ["AI/ML", "Platform", "Kafka", "AI-native"],
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7997294",
     postedDate: "2026-06-18",
   },
@@ -96,6 +103,7 @@ export const jobs = {
     salary: "$179K - $224K",
     description:
       "Omada Health is hiring a Senior Software Engineer to build and integrate tools that optimize contracting, eligibility, and billing processes. Be an informal team leader, mentor others, lead large projects, and leverage AI/ML tooling to deliver innovative solutions. 7+ years experience required, with Rails or Python, modern front-end frameworks (React/Vue), and PostgreSQL. Stack: AWS, Ruby, Rails, Postgres, Kafka. $179-224K base in CA/NY/WA ($172-215K in CO) + bonus + equity. US-based.",
+    chips: ["Fullstack", "PostgreSQL", "Kafka", "Polyglot", "Mentorship"],
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7137954",
     postedDate: "2026-06-05",
   },
@@ -108,6 +116,7 @@ export const jobs = {
     salary: "$179K - $224K",
     description:
       "Omada Health is hiring a Senior Software Engineer for the Member Engineering team to build the backends powering mobile applications for members and web applications for providers delivering digital healthcare. Spend 80-90% of time hands-on coding, mentor junior engineers, and propose AI solutions to complex problems. 7+ years experience with Ruby or Python, relational databases (PostgreSQL/MySQL), scalable APIs, and CI/CD pipelines. $172-224K base depending on state + bonus + equity. US-based.",
+    chips: ["Backend", "PostgreSQL", "Polyglot", "Mentorship"],
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7822840",
     postedDate: "2026-05-10",
   },
@@ -120,6 +129,7 @@ export const jobs = {
     salary: "$161K - $230K",
     description:
       "Thatch is hiring a Backend Engineer to design and build core systems powering its health benefits platform — data models, fund flows, and integrations with payroll and insurance providers. Own production systems handling financial transactions and complex business logic. Strong skills in data modeling and system design required, ideally with healthcare or finance experience. $161k-$230k.",
+    chips: ["Backend", "Payments", "Data", "PostgreSQL"],
     url: "https://thatch.com/jobs/software-engineer-backend-5113759008",
     postedDate: "2026-04-27",
   },
@@ -132,6 +142,7 @@ export const jobs = {
     salary: "$161K - $230K",
     description:
       "Thatch is hiring a Full Stack Software Engineer to own product areas spanning frontend and backend systems for its health benefits platform. Build across React, TailwindCSS, and Ruby on Rails to ship features that directly impact employer benefits management, employee onboarding, and payment systems. Strong product judgment, systems thinking, and a track record of shipping production applications required. $161k-$230k.",
+    chips: ["Fullstack", "Payments", "React"],
     url: "https://thatch.com/jobs/software-engineer-full-stack-5113761008",
     postedDate: "2026-04-27",
   },
@@ -144,6 +155,7 @@ export const jobs = {
     salary: "$170K - $200K",
     description:
       "Thatch is hiring a Full Stack Engineer on the Product Engagement team to enhance how members and employers experience the platform — onboarding, activation, and enrollment flows. Build user-facing features and backend systems while using data and instrumentation to drive engagement. Work across Ruby on Rails, React, and TailwindCSS, collaborating with product and design to ship impactful changes. $170k-$200k.",
+    chips: ["Product Eng", "Fullstack", "React"],
     url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
     postedDate: "2026-04-27",
   },
@@ -156,6 +168,7 @@ export const jobs = {
     salary: "$197K - $247K",
     description:
       "Gusto is hiring Staff Software Engineers for the teams behind its payments and risk platforms. Design, build, and test core money-movement and risk services — payment rails, ledgering, wallets, fraud, decisioning engines, KYC, AML, and compliance capabilities. Help scale one of the largest Ruby/Rails and JavaScript/React applications in the world, mentor engineers, and own multi-quarter projects in complex financial domains. 8+ years of experience. $197k-$247k base in SF/NY ($163k-$204k Denver and most remote locations) + bonus + equity.",
+    chips: ["Payments", "Backend", "Mentorship"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7822587",
     postedDate: "2026-06-05",
   },
@@ -168,6 +181,7 @@ export const jobs = {
     salary: "$251K - $295K",
     description:
       "Gusto is hiring a Principal Software Engineer on Pay Group Engineering to function as a Technical Lead across multiple teams, helping keep engineers unblocked and shipping high-quality work. Design, build, and test the foundation that supports compliant payroll for millions of people. Help scale one of the largest Ruby/Rails and TypeScript/React applications in the world. Mentor fellow engineers and drive holistic, scalable solutions. 15+ years of experience, expertise in resilient backend system design. $215k-$295k depending on location.",
+    chips: ["Payments", "Backend", "Mentorship"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7027020",
     postedDate: "2026-04-27",
   },
@@ -180,6 +194,7 @@ export const jobs = {
     salary: "$197K - $247K",
     description:
       "Gusto is hiring a Staff Software Engineer to join the Core Platforms team — engineering the core business engine that 5+ product teams depend on. Help scale one of the largest Ruby/Rails + JavaScript/React applications in the world. Build reliable backend services, set the engineering standard for those around you, and partner with Product Engineering, Product Management, Data, and Design to translate customer pain points into solutions. AI is a fundamental part of how work gets done at Gusto. Hybrid in SF / Denver / NYC. $163k-$204k base depending on location + bonus + equity.",
+    chips: ["Platform", "Backend", "AI-native"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
     postedDate: "2026-05-15",
   },
@@ -192,6 +207,7 @@ export const jobs = {
     salary: "$130K - $220K + equity",
     description:
       "Persona is the configurable identity platform that companies like Reddit and OpenAI rely on to verify individuals and organizations at scale. This role sits on the Data Products team, building the customer-facing surfaces of Persona's data platform: in-dashboard SQL, bulk data exports, and AI-powered analytics. It's a data-leaning full-stack role on Persona's Ruby on Rails application layer, collaborating closely with product, design, and data science. 3+ years of software engineering experience. $130K-$220K + equity.",
+    chips: ["Data", "Fullstack", "AI/ML"],
     url: "https://jobs.ashbyhq.com/persona/9d501850-37ce-432a-928b-eb1ac22e2757",
     postedDate: "2026-07-01",
   },
@@ -204,6 +220,7 @@ export const jobs = {
     salary: "$200K - $280K + equity",
     description:
       "Persona is hiring a Senior Product Security Engineer embedded in a generalist security team. Drive the full vulnerability lifecycle, design autonomous systems and AI tooling that scale security across every team and product, partner with product engineers to shape how new features get built securely, and run the bug bounty program. 6+ years of software engineering experience, 3+ years in product security. $200K-$280K + equity.",
+    chips: ["Security", "Backend", "AI-native"],
     url: "https://jobs.ashbyhq.com/persona/a9d3cd2c-d4a4-4e1b-825f-a9a45b775f69",
     postedDate: "2026-04-27",
   },
@@ -215,6 +232,7 @@ export const jobs = {
     type: "Full-time",
     description:
       "Superconductor is building a platform where AI agents find work autonomously across customer emails, bug reports, session replays, Slack threads, and X posts, then ship code while you sleep. The Principal Web Developer is the architect, reviewer, and quality guardian for the fleet: defining patterns, evolving the Rails application architecture, writing agent instructions and coding standards, and being the last line of defense before code reaches production. A realistic goal from the team: ship more quality code in your first month than you did in all of 2025. Team of 7, $7M raised, founders previously co-founded Gradescope and were AI PhDs at UC Berkeley. Hybrid in the East Bay (3 days in a BART-accessible office, 2 from home). 10+ years of Rails experience required, ideally 15+. Bonus points for active Rails community involvement (conferences, gems, open source) and experience with React, Tailwind, Stimulus, Turbo, Hotwire, and AI coding tools like Claude Code, Cursor, or Copilot.",
+    chips: ["Backend", "Hotwire", "AI-native", "Mentorship"],
     url: "https://jobs.ashbyhq.com/superconductor/806417c7-52c3-4820-b059-74b35ef2cf2f",
     postedDate: "2026-05-18",
   },
@@ -227,6 +245,7 @@ export const jobs = {
     salary: "$95K - $250K + 0.15%-0.50% equity",
     description:
       "Ubicloud is building an open-source alternative to the big clouds — elastic compute, block storage, managed PostgreSQL, GitHub Actions runners, Kubernetes, and AI inference — serving 500+ customers. The control plane is written in Ruby on the Roda framework with Sequel and PostgreSQL (not Rails), and that codebase is fully open source. You'll work across the Postgres, GitHub Actions, and AI inference products, building real systems software in Ruby. Mid-stage role (2-8 years). $95K-$250K base + 0.15%-0.50% equity.",
+    chips: ["Backend", "Roda", "PostgreSQL", "Open source"],
     url: "https://www.ycombinator.com/companies/ubicloud/jobs/j4bntEJ-software-engineer",
     postedDate: "2026-06-19",
   },
@@ -239,6 +258,7 @@ export const jobs = {
     salary: "$200K+ base + equity",
     description:
       "AngelList is hiring a back-end-focused Senior Software Engineer on its Accounting team to build the accounting infrastructure behind its fund-management platform — scalable systems that model financial workflows, read and write to the general ledger, and produce audit-ready outputs with rigorous data integrity. Stack is Ruby on Rails (or a similar MVC framework), React, TypeScript, Postgres, and MySQL. 5+ years of experience, back-end weighted, with room to venture into the React/TypeScript frontend. Hybrid, two days per week in SF or NYC.",
+    chips: ["Backend", "Data", "PostgreSQL"],
     url: "https://www.angellist.com/careers/9870a63b-ac75-436b-b1a6-a2fb006afd1c",
     postedDate: "2026-06-19",
   },
@@ -251,6 +271,7 @@ export const jobs = {
     salary: "$200K+ base + equity",
     description:
       "AngelList is hiring a full-stack Senior Software Engineer to build the financial infrastructure powering private markets. The two primary languages at AngelList are Ruby and TypeScript, and this is a generalist role (or a back-end specialist comfortable across the stack) with 4+ years building large-scale web applications. A single application is considered for all open team-specific roles. Hybrid, two days per week in SF or NYC.",
+    chips: ["Fullstack", "TypeScript"],
     url: "https://www.angellist.com/careers/9adf9ccb-61c1-4a75-bf00-03f39fea8f09",
     postedDate: "2026-06-19",
   },
@@ -263,6 +284,7 @@ export const jobs = {
     salary: "$187K - $259K + bonus, equity",
     description:
       "Chime is hiring a Senior Full-Stack Engineer on the App Journey team, owning the core app surfaces and navigation that members use every day. You'll build the React Native frontend plus backend services and GraphQL APIs in Ruby on Rails. Chime is the largest US consumer fintech built to help everyday Americans get ahead, with banking, credit-building, and payments products serving millions.",
+    chips: ["Fullstack", "React Native", "GraphQL"],
     url: "https://careers.chime.com/jobs/8485955002/senior-full-stack-engineer-app-journey-graphql/",
     postedDate: "2026-04-07",
   },
@@ -275,6 +297,7 @@ export const jobs = {
     salary: "$133K - $184K + bonus, equity",
     description:
       "Chime is hiring a Software Engineer on the Credit Risk Platform team to build backend services and internal tools powering the shared credit-risk platform behind Loans, MyPay, and SpotMe. 3+ years of experience with Ruby on Rails or comparable frameworks, plus relational databases and caching. Chime is the largest US consumer fintech, helping everyday Americans build credit and get ahead.",
+    chips: ["Backend", "Payments", "Platform"],
     url: "https://careers.chime.com/jobs/8219793002/software-engineer-credit-risk-platform/",
     postedDate: "2026-04-06",
   },
@@ -287,6 +310,7 @@ export const jobs = {
     salary: "$133K - $184K + bonus, equity",
     description:
       "Chime is hiring a Software Engineer for the Instant Loans product, doing backend engineering at scale. 3+ years of experience with Ruby on Rails or comparable frameworks. Chime is the largest US consumer fintech, with banking, credit-building, and lending products that help everyday Americans get ahead.",
+    chips: ["Backend", "Payments"],
     url: "https://careers.chime.com/jobs/8433840002/software-engineer-instant-loans/",
     postedDate: "2026-04-08",
   },
@@ -299,6 +323,7 @@ export const jobs = {
     salary: "$133K - $184K + bonus, equity",
     description:
       "Chime is hiring a Software Engineer on the Deposits & Insights team for backend engineering on the products that help members manage and grow their money. Requires Ruby on Rails or comparable frameworks plus transactional databases and caching. Chime is the largest US consumer fintech, built to help everyday Americans get ahead.",
+    chips: ["Backend", "Payments"],
     url: "https://careers.chime.com/jobs/8523547002/software-engineer-deposits-insights/",
     postedDate: "2026-05-04",
   },
@@ -311,6 +336,7 @@ export const jobs = {
     salary: "$189K - $220K",
     description:
       "Gusto is hiring a Staff Software Engineer on Developer Productivity to build the tooling that keeps large engineering teams fast and effective. The role requires deep experience with Ruby and Rails. Gusto runs one of the largest Ruby on Rails and TypeScript/React applications in the world, powering payroll, benefits, and HR for over 400,000 businesses.",
+    chips: ["Platform", "DevOps", "Backend"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7947658",
     postedDate: "2026-06-19",
   },
@@ -323,6 +349,7 @@ export const jobs = {
     salary: "$163K - $247K",
     description:
       "Gusto is hiring a Staff Software Engineer on the Growth team to build revenue-enablement systems in a collaborative, test-driven environment on Ruby on Rails. Gusto runs one of the largest Ruby on Rails and JavaScript/React applications in the world, powering payroll, benefits, and HR for over 400,000 businesses.",
+    chips: ["Backend", "Fullstack"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7673999",
     postedDate: "2026-06-19",
   },
@@ -335,6 +362,7 @@ export const jobs = {
     salary: "$180K - $250K",
     description:
       "Thatch is hiring an Infrastructure Engineer to ensure reliability, security, and performance across its HIPAA-compliant environment, building infrastructure-as-code and improving CI/CD. Stack is Ruby on Rails, PostgreSQL, and Terraform. Thatch is building the modern ICHRA health-benefits platform that lets employers give employees money to buy their own health coverage.",
+    chips: ["Infra", "DevOps", "Terraform", "High compliance"],
     url: "https://thatch.com/jobs/software-engineer-infrastructure-5161129008",
     postedDate: "2026-06-19",
   },
@@ -347,6 +375,7 @@ export const jobs = {
     salary: "$188K - $248K + equity",
     description:
       "Stepful (YC-backed) is building the platform that trains and places healthcare workers — a learning-management system, AI-powered career services, and internal tooling. This staff-level full-stack role works across the backend and a React/TypeScript frontend on PostgreSQL. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
+    chips: ["Fullstack", "React", "Polyglot", "Mentorship"],
     url: "https://jobs.ashbyhq.com/stepful/1bcc5add-aebd-46c8-8bcc-3bcf60dda70e",
     postedDate: "2026-06-19",
   },
@@ -359,6 +388,7 @@ export const jobs = {
     salary: "$157K - $208K + equity",
     description:
       "Stepful (YC-backed) is building the platform that trains and places healthcare workers. This senior full-stack role works across the backend and a React/TypeScript frontend on PostgreSQL. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
+    chips: ["Fullstack", "React", "Polyglot"],
     url: "https://jobs.ashbyhq.com/stepful/0441f421-a1b2-4561-9284-50e0621db3ba",
     postedDate: "2026-06-19",
   },
@@ -371,6 +401,7 @@ export const jobs = {
     salary: "$157K - $248K + equity",
     description:
       "Stepful (YC-backed) is building the platform that trains and places healthcare workers — building adaptive learning, career-services, and data-infrastructure features. This senior full-stack role spans the backend and a React/TypeScript frontend on PostgreSQL. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
+    chips: ["Fullstack", "React", "Polyglot"],
     url: "https://jobs.ashbyhq.com/stepful/227ebf1e-4d95-46cb-9b52-f7e6677db180",
     postedDate: "2026-06-19",
   },
@@ -383,6 +414,7 @@ export const jobs = {
     salary: "$188K - $248K + equity",
     description:
       "Stepful (YC-backed) is building the platform that trains and places healthcare workers. This staff-level product engineering role builds user-facing features across the platform. The posting states: 'Familiarity with any of the following languages for the backend: Python, Node.js, Ruby on Rails.'",
+    chips: ["Product Eng", "Fullstack", "Polyglot"],
     url: "https://jobs.ashbyhq.com/stepful/10cb2e4c-acb5-43d2-b3ae-56fa296a1125",
     postedDate: "2026-06-19",
   },
@@ -395,6 +427,7 @@ export const jobs = {
     salary: "$157K - $208K + equity",
     description:
       "Stepful (YC-backed) is building the platform that trains and places healthcare workers. This senior product engineering role ships student- and instructor-facing features across the Rails backend and a React/TypeScript frontend. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
+    chips: ["Product Eng", "React", "Polyglot"],
     url: "https://jobs.ashbyhq.com/stepful/06376db3-9192-4ff4-bcbc-6635a878ed81",
     postedDate: "2026-06-19",
   },
@@ -407,6 +440,7 @@ export const jobs = {
     salary: "$157K - $248K + equity",
     description:
       "Stepful (YC-backed) is building the platform that trains and places healthcare workers. This senior product engineering role (higher band than SPE 1) builds across the product. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
+    chips: ["Product Eng", "Fullstack", "Polyglot"],
     url: "https://jobs.ashbyhq.com/stepful/128da2c1-041e-41ab-a82a-5bb95e766f76",
     postedDate: "2026-06-19",
   },
@@ -419,6 +453,7 @@ export const jobs = {
     salary: "$130K - $280K + equity",
     description:
       "Simple AI (YC S24, $14M raised) builds voice AI agents that handle enterprise phone operations — support, order intake, lead qualification — for customers like DoorDash and xAI. This is a founding full-stack role; the core work is LLM/voice AI systems, with Ruby on Rails listed among the 'nice to have' stack experience alongside Python, TypeScript, React, PostgreSQL, and AWS. 4+ years of experience.",
+    chips: ["AI/ML", "Founding role", "Polyglot"],
     url: "https://jobs.ashbyhq.com/simple-ai/9a5f5694-e066-4087-9a13-b1a62d8d8025",
     postedDate: "2026-06-19",
   },
@@ -432,6 +467,7 @@ export const jobs = {
     type: "Full-time",
     description:
       "Mon Ami is a San Francisco company building software for the aging and disability services sector — the platform that Area Agencies on Aging and public agencies rely on to manage caregivers and deliver senior services. As a Senior Rails Engineer you'll design, build, test, and maintain core product software, lead a defined area of the codebase, and mentor 1-3 junior engineers alongside product managers. The stack is Ruby on Rails, PostgreSQL, Hotwire/Turbo, Stimulus, ViewComponent, Bootstrap, and RSpec, with a heavy emphasis on disciplined testing and code quality. Apply via jobs@monami.io.",
+    chips: ["Fullstack", "Hotwire", "ViewComponent", "Mentorship"],
     url: "https://www.monami.io/jobs/senior-rails-engineer",
     postedDate: "2026-05-01",
   },
@@ -446,6 +482,7 @@ export const jobs = {
     salary: "$165K - $240K + equity",
     description:
       "Levelpath is an AI-native, mobile-first enterprise procurement platform (Series B, ~$100M raised from Redpoint, Benchmark, and Battery; founded 2022 by the team behind Scout RFP). This backend role builds the customer-facing Ruby on Rails application that powers sourcing, contract management, and procurement workflows; 3+ years of Ruby on Rails required. Stack: Ruby on Rails, PostgreSQL/MySQL, GraphQL + REST, React/TypeScript, Docker.",
+    chips: ["Backend", "GraphQL", "React"],
     url: "https://jobs.ashbyhq.com/levelpath/140eb34a-a723-4b29-9cda-b894c01c67f3",
     postedDate: "2026-06-19",
   },
@@ -459,6 +496,7 @@ export const jobs = {
     salary: "$150K - $250K",
     description:
       "Mudflap (Palo Alto) is a profitable fintech building fuel-payment products for the $800B trucking industry, helping truckers save on fuel and connecting fuel stops with new customers. You'll build and scale the Ruby on Rails payments and transactions platform end-to-end; the posting spans levels from 1+ to 8+ years. Stack: Ruby on Rails, PostgreSQL/AWS Aurora, Vue.js, REST APIs, AWS ECS, CircleCI.",
+    chips: ["Fullstack", "Payments", "Vue"],
     url: "https://jobs.ashbyhq.com/mudflap/6d599ccc-4566-4cd3-9721-2273601acba6",
     postedDate: "2026-06-19",
   },
@@ -473,6 +511,7 @@ export const jobs = {
     salary: "$170K - $230K + equity",
     description:
       "Authorium (formerly City Innovate) is a GovTech SaaS unifying procurement, grants, and budgeting workflows for state and local governments; clients include California's CDSS, CalPERS, and EDD. This senior role owns core architecture — versioning, approval workflows, and permission models — on a Ruby on Rails modular monolith built with Packwerk. Stack: Rails (Packwerk), Hotwire, PostgreSQL, React/Next.js, AWS. Hybrid in SF, Mon-Thu in office.",
+    chips: ["Backend", "Hotwire", "Packwerk"],
     url: "https://jobs.ashbyhq.com/Authorium/dc83e0dd-9279-4381-9930-fca2c5f2b4be",
     postedDate: "2026-06-19",
   },
@@ -487,6 +526,7 @@ export const jobs = {
     salary: "$148.75K - $201.25K + equity",
     description:
       "Authorium is a SF GovTech startup automating procurement, grants, and budgeting for state and local governments. This mid-level full-stack role builds features across a Ruby on Rails modular monolith that manages billions in public funds. Stack: Rails, Hotwire, PostgreSQL, Next.js. Hybrid in SF, Mon-Thu in office.",
+    chips: ["Fullstack", "Hotwire", "Packwerk"],
     url: "https://jobs.ashbyhq.com/Authorium/b59ff28c-3e3c-4190-abaa-ab8572052740",
     postedDate: "2026-06-19",
   },
@@ -500,6 +540,7 @@ export const jobs = {
     type: "Full-time",
     description:
       "True Link Financial is a profitable, mission-driven fintech (Forbes Fintech 50) building financial products for people with disabilities, older adults, and people in recovery. This hands-on senior role spends most of its time coding in the Rails/React stack, owning complex features end-to-end and mentoring, in a high-compliance (PCI/HIPAA/SOC) environment. SF and Kingston, NY offices; remote-first across the US.",
+    chips: ["Fullstack", "React", "High compliance"],
     url: "https://jobs.ashbyhq.com/truelinkfinancial/79a24a30-5f5a-4147-a5c2-c35e24f56802",
     postedDate: "2026-06-19",
   },
@@ -514,6 +555,7 @@ export const jobs = {
     salary: "$120K - $180K + equity",
     description:
       "Luthor (YC F24) is an AI-powered marketing-compliance platform for regulated industries — fintechs, banks, and investment advisors — reviewing and enforcing policy on marketing content as it's created. As one of the first full-time engineering hires, you'll work directly with the founding team on the core Ruby on Rails platform; 3+ years of experience. Stack: Ruby on Rails, React, PostgreSQL, JavaScript.",
+    chips: ["Fullstack", "AI/ML", "React", "Founding role"],
     url: "https://www.ycombinator.com/companies/luthor/jobs/HKrdhp0-staff-senior-software-engineer-backend-fullstack",
     postedDate: "2026-06-19",
   },
@@ -528,6 +570,7 @@ export const jobs = {
     salary: "$150K - $180K",
     description:
       "Prevail Legal is an SF legal-tech startup building the legal industry's Testimony Intelligence Platform — remote court reporting, AI-assisted transcription, and testimony management (SOC 2 Type 2, ISO 27001). This senior full-stack role builds end-to-end on a Ruby on Rails monolith with the Hotwire stack, reporting to the CTO; 3-5+ years of Rails. Stack: Ruby on Rails, Stimulus/Hotwire/Importmaps, PostgreSQL, AWS, Docker, WebRTC.",
+    chips: ["Fullstack", "Hotwire", "PostgreSQL"],
     url: "https://job-boards.greenhouse.io/prevail/jobs/4553082008",
     postedDate: "2026-06-19",
   },
@@ -542,6 +585,7 @@ export const jobs = {
     salary: "$120K - $160K",
     description:
       "Prevail Legal is an SF legal-tech startup building a Testimony Intelligence Platform for the legal industry. This mid-level full-stack role builds web applications and new features on a Ruby on Rails monolith (Hotwire stack) in a fully remote setting; 4+ years of Rails.",
+    chips: ["Fullstack", "Hotwire"],
     url: "https://job-boards.greenhouse.io/prevail/jobs/4553411008",
     postedDate: "2026-06-19",
   },
@@ -556,6 +600,7 @@ export const jobs = {
     salary: "$160K - $190K",
     description:
       "Instrumentl is a profitable, YC-backed SaaS automating grant discovery and management for 1,500+ nonprofits. This full-stack generalist role builds and scales the product end-to-end on a Ruby on Rails stack; 7+ years of experience. Stack: Ruby on Rails, Python, JavaScript, PostgreSQL, Redis. Distributed team with an Oakland office.",
+    chips: ["Fullstack", "PostgreSQL", "Profitable"],
     url: "https://www.workatastartup.com/jobs/91151",
     postedDate: "2026-06-19",
   },
@@ -570,6 +615,7 @@ export const jobs = {
     salary: "$124K - $329.2K",
     description:
       "GitHub.com runs on a Ruby on Rails monolith. The Client Apps Platform team connects the gh CLI, Desktop, and Mobile apps to backend teams; you'll maintain and operate production Ruby and Go services and integrate with GitHub's Ruby on Rails monolith. SF-headquartered, remote across the US.",
+    chips: ["Backend", "Platform", "Go", "Polyglot"],
     url: "https://www.github.careers/careers-home/jobs/5306?lang=en-us",
     postedDate: "2026-06-19",
   },
@@ -583,6 +629,7 @@ export const jobs = {
     type: "Full-time",
     description:
       "General Medicine is a consumer healthcare marketplace from the founders of PillPack / Amazon Pharmacy, showing upfront cash and insurance prices for virtual and in-person visits, prescriptions, labs, and imaging. This full-stack role builds the core product; the team states 'We currently use AWS, Ruby on Rails, and Next.js,' on PostgreSQL. SF HQ with a Boston office. (Seed, $32M, Matrix Partners-led.)",
+    chips: ["Fullstack", "Next.js", "PostgreSQL"],
     url: "https://jobs.ashbyhq.com/general-medicine/bf71b5f5-a87e-4969-9b69-f6188108f53a",
     postedDate: "2026-06-19",
   },
@@ -597,6 +644,7 @@ export const jobs = {
     salary: "$200K - $225K",
     description:
       "Ascend is an all-in-one payments and financial-automation platform for the insurance industry: online customer payments, premium financing, and commission/carrier-payable distribution. The backend is a Ruby on Rails API on Heroku, with a Next.js + TypeScript frontend on Vercel, Tailwind, PostgreSQL, and Redis. ~50+ people across SF and Columbus. (Series B.)",
+    chips: ["Backend", "Payments", "Next.js"],
     url: "https://job-boards.greenhouse.io/ascend21/jobs/4460281008",
     postedDate: "2026-06-19",
   },
@@ -611,6 +659,7 @@ export const jobs = {
     salary: "$75K - $150K + equity",
     description:
       "Pie Systems (PieVAT) is a fintech digitizing VAT and tax-free-shopping refunds for travelers and merchants. You'll contribute to the Ruby on Rails application and support deployments and releases, alongside a modern JavaScript frontend. US HQ in San Francisco (also Copenhagen and Tokyo). (Series A, $15.5M, Nov 2025.)",
+    chips: ["Fullstack", "Payments"],
     url: "https://wellfound.com/jobs/3076798-sr-fullstack-engineer-ror",
     postedDate: "2026-06-19",
   },
@@ -625,6 +674,7 @@ export const jobs = {
     salary: "$145K - $170K",
     description:
       "UpMetrics is an impact-reporting and analytics platform for nonprofits, foundations, and impact investors. You'll build and evolve the Ruby on Rails API (background jobs, data models) plus rich Vue.js + TypeScript front-end experiences on MySQL; 6+ years wanted. HQ at 300 Brannan St, San Francisco (SOMA).",
+    chips: ["Fullstack", "Vue", "MySQL"],
     url: "https://jobs.lever.co/UpMetrics/62b78791-e881-44c7-bf21-c82bce483081",
     postedDate: "2026-06-19",
   },
@@ -639,6 +689,7 @@ export const jobs = {
     salary: "$120K - $170K",
     description:
       "Decile Group runs VC Lab, a venture-capital accelerator and fund-operations platform. This senior role owns complex Ruby on Rails features end-to-end (ActiveRecord, Sidekiq, RESTful APIs); 5+ years of production Rails required. Palo Alto HQ.",
+    chips: ["Backend", "Sidekiq"],
     url: "https://jobs.lever.co/decilegroup/4804b6c2-0ba8-4a1b-8024-84c8ab95fb2f",
     postedDate: "2026-06-19",
   },
@@ -651,6 +702,7 @@ export const jobs = {
     type: "Full-time",
     description:
       "Natural builds owned payment rails for AI agents — wallets, pay, request, credit, and billing across traditional banking and stablecoins — founded by ex-Stripe and Method engineers. This role builds the Ruby on Rails payments infrastructure; the team runs Rails under the hood. 15-person team, all in SF, in-office. (Seed, $9.8M.)",
+    chips: ["Payments", "Backend"],
     url: "https://www.natural.co/careers",
     postedDate: "2026-06-19",
   },
@@ -665,6 +717,7 @@ export const jobs = {
     salary: "$148K - $275K + equity",
     description:
       "Middesk is a business-identity-verification fintech (YC, Sequoia, Accel) that helps companies onboard and underwrite other businesses. This full-stack product role builds on a Ruby on Rails + PostgreSQL backend with a React/Redux frontend; all levels welcome. Hybrid in SF, two days per week. (Series B.)",
+    chips: ["Fullstack", "React", "PostgreSQL"],
     url: "https://jobs.ashbyhq.com/middesk/e1c6af86-dce1-495f-a710-ad369fd1308c",
     postedDate: "2026-06-19",
   },
@@ -679,6 +732,7 @@ export const jobs = {
     salary: "$210K - $278K",
     description:
       "Found is business banking for the self-employed (founded by ex-Square execs), with banking, tax automation, and expense tracking built on Ruby on Rails. This full-stack role requires production experience with Ruby on Rails or a comparable framework; the posting asks for 12+ years despite the 'Senior' title. Stack: Rails, React, Redux, TypeScript, MySQL, Spanner.",
+    chips: ["Fullstack", "React", "Payments"],
     url: "https://jobs.ashbyhq.com/found/20795864-e7c3-4836-b5bc-26190f79bed3",
     postedDate: "2026-06-19",
   },
@@ -693,6 +747,7 @@ export const jobs = {
     salary: "$160K - $180K",
     description:
       "Arkestro is building a predictive procurement platform that combines AI and behavioral science to help enterprises source and negotiate. This role builds and scales the product on a Ruby on Rails backend with a React/TypeScript frontend; 6+ years of Rails/Ruby. Stack: Rails, React/TypeScript, PostgreSQL, Redis, AWS, Kubernetes. San Francisco company, remote-US. (Series B.)",
+    chips: ["Fullstack", "React", "PostgreSQL"],
     url: "https://job-boards.greenhouse.io/arkestroinc/jobs/5161290007",
     postedDate: "2026-06-20",
   },
@@ -706,6 +761,7 @@ export const jobs = {
     salary: "$150K - $180K + equity",
     description:
       "EDO is a TV measurement and advertising-analytics platform. This role builds data-visualization and reporting features on a Ruby on Rails backend with a React/TypeScript frontend. Stack: Rails, React/TypeScript, MySQL, Snowflake, AWS. Los Angeles, CA company, remote-US. (Series B.)",
+    chips: ["Fullstack", "Data", "React"],
     url: "https://job-boards.greenhouse.io/edo/jobs/5143687007",
     postedDate: "2026-06-20",
   },
@@ -719,6 +775,7 @@ export const jobs = {
     type: "Full-time",
     description:
       "Better Stack is building an AI-native incident-response and observability platform. This full-stack role works on a Ruby on Rails backend with a Vue.js frontend, on PostgreSQL, Redis, ClickHouse, and Redpanda. Remote across North America (US-eligible). (Series A.)",
+    chips: ["Fullstack", "Vue", "ClickHouse"],
     url: "https://jobs.rubyonrails.org/jobs/28439-full-stack-engineer-i-better-stack",
     postedDate: "2026-06-20",
   },
@@ -733,6 +790,7 @@ export const jobs = {
     salary: "$150K - $190K",
     description:
       "Nomad is a real-estate fintech offering guaranteed rent for long-term rentals. This full-stack senior role ships features across a Ruby on Rails backend and a TypeScript + React frontend. Remote, continental US. (Series A.)",
+    chips: ["Fullstack", "React"],
     url: "https://jobs.rubyonrails.org/jobs/28550-senior-software-engineer-ii-nomad",
     postedDate: "2026-06-20",
   },
@@ -746,6 +804,7 @@ export const jobs = {
     salary: "$115K - $165K",
     description:
       "Relevant Healthcare is a bootstrapped, profitable ~25-person team building an analytics and population-health platform for community health centers. This role works across a Ruby on Rails backend with a TypeScript/React frontend (Apollo/GraphQL, d3, Go, GCP). Fully remote, US/Canada.",
+    chips: ["Fullstack", "GraphQL", "Profitable"],
     url: "https://relevant.healthcare/jobs/software-engineer/",
     postedDate: "2026-06-20",
   },
@@ -759,6 +818,7 @@ export const jobs = {
     salary: "$165K - $190K + equity",
     description:
       "Relevant Healthcare is a bootstrapped, profitable ~24-person team building a healthcare-analytics platform for safety-net providers (community health centers). This senior/lead role (5+ years) works across a Ruby on Rails backend with a TypeScript/React frontend, Go, and GraphQL. Fully remote, US/Canada.",
+    chips: ["Fullstack", "GraphQL", "Mentorship", "Profitable"],
     url: "https://relevant.healthcare/jobs/lead-engineer/",
     postedDate: "2026-06-20",
   },
@@ -773,6 +833,7 @@ export const jobs = {
     salary: "$184K - $235K",
     description:
       "BackerKit builds crowdfunding and creator-commerce tooling on a Ruby on Rails monolith with the Hotwire stack (Turbo, Stimulus) and Tailwind. This staff role works across that monolith; salary is banded by location. San Francisco company, remote, US-based.",
+    chips: ["Fullstack", "Hotwire"],
     url: "https://jobs.rubyonrails.org/jobs/32638-staff-software-developer-backerkit",
     postedDate: "2026-06-20",
   },

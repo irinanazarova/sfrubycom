@@ -102,6 +102,26 @@ Audit URLs monthly alongside the News refresh. Stale listings erode site credibi
 - **Keep a paper trail.** Move closed listings to commented-out blocks at the bottom of `jobs.js` under the `ARCHIVED` header.
 - After deploying, re-content-check every outbound job URL on prod.
 
+### Job matching chips (`chips` on each job record)
+
+Every job carries a hand-curated `chips: [...]` array, rendered as pills on the card so an applicant can scan the factors they match on. Chips are **manual, not parsed** — regex over-tags (e.g. "we use AI tools" is not an AI/ML role). Add or refresh them whenever you add or edit a listing.
+
+**The controlled vocabulary lives in `CHIP_KIND` (`src/utils/jobFacets.js`).** Add a new label there first (pick its kind), then use it. Three kinds, styled distinctly and displayed focus → stack → signal:
+
+- **focus** — what kind of work it is: `Fullstack`, `Backend`, `Frontend`, `Platform`, `Infra`, `DevOps`, `Data`, `AI/ML`, `Security`, `Payments`, `Product Eng`, `Mobile`.
+- **stack** — the *differentiating* tools they'll actually use: `Hotwire`, `ViewComponent`, `Packwerk`, `Sidekiq`, `React`, `React Native`, `Vue`, `Next.js`, `TypeScript`, `GraphQL`, `PostgreSQL`, `MySQL`, `ClickHouse`, `Kafka`, `Terraform`, `Go`, `Roda`.
+- **signal** — deal-makers / breakers: `Polyglot`, `Founding role`, `AI-native`, `Mentorship`, `High compliance`, `Open source`, `Profitable`, `Public benefit`.
+
+**How to pick chips for a posting (aim for 3–5):**
+
+1. Read the posting's stack line and "what you'll do" — chip only what *differentiates* this role. Skip the obvious: **Rails/Ruby is never a chip** (every listing is Rails), and don't chip generic Postgres/AWS unless it's a notable part of the pitch.
+2. One or two **focus** chips capturing the actual work (a "Software Engineer, Backend" on an ad platform → `Backend` + `Data`, not `Fullstack`).
+3. One to three **stack** chips for the tools an engineer self-selects on: Hotwire vs React frontend, Sidekiq, Packwerk (modular monolith), GraphQL, non-default DBs (ClickHouse), or a non-Rails runtime (`Roda`, and pair with the fact it's not Rails).
+4. **signal** chips only when genuinely present and decision-relevant: `Polyglot` when Ruby is one-of-several backend languages (this is the Verse-Medical filter — Ruby listed alongside Python/Go/Node), `Founding role`, `High compliance` (HIPAA/PCI/SOC), `Open source`, `Profitable`, `Public benefit`, `AI-native` (AI tooling *expected in the workflow*), `Mentorship` (leads/staff who mentor).
+5. Prefer fewer, high-signal chips over a full stack dump. Two chips on a thin posting is fine.
+
+After editing, `npm run build:dev` (a validation snippet can assert every chip is in `CHIP_KIND`), then eyeball the `/jobs` cards at 390x844 — the chip row must not push the card past 3-per-screen density or cause horizontal overflow.
+
 ### Verifying changes locally
 
 - `npm run build:dev` — fast syntax check without env vars or external fetch. Use this after editing data files.
