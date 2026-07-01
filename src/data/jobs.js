@@ -559,20 +559,6 @@ export const jobs = {
     url: "https://www.workatastartup.com/jobs/91151",
     postedDate: "2026-06-19",
   },
-  "senior-staff-fullstack-versemedical": {
-    id: "senior-staff-fullstack-versemedical",
-    title: "Senior/Staff Full Stack Engineer",
-    companyId: "versemedical",
-    companyLogo: "/company_versemedical.png",
-    companyName: "Verse Medical",
-    location: "San Francisco, CA (On-site)",
-    type: "Full-time",
-    salary: "$160K - $220K",
-    description:
-      "Verse Medical (YC S18) is a software-driven medical supplier bringing the $50B home-medical-supply ordering market online, replacing fax-based clinic workflows. As a founding member of a new downtown SF hub, you'll own features end-to-end across a Ruby/Rails + Python/Flask + React stack; 6+ years of experience. Stack: Ruby on Rails, Python/Flask, React/TypeScript, PostgreSQL, AWS, GraphQL.",
-    url: "https://www.workatastartup.com/jobs/79906",
-    postedDate: "2026-06-19",
-  },
   "senior-software-engineer-client-apps-github": {
     id: "senior-software-engineer-client-apps-github",
     title: "Senior Software Engineer, Client Apps Platform",
@@ -1009,6 +995,17 @@ export const jobs = {
    *   sponsorId: "companycam",
    *   url: "https://job-boards.greenhouse.io/companycam/jobs/7728259003",
    *   postedDate: "2026-06-05",
+   * },
+   *
+   * Verse Medical — Senior/Staff Full Stack Engineer (workatastartup 79906)
+   * still OPEN (July 1, 2026 audit) but off-stack: the role's requirements and
+   * "Our Team & Our Tools" list are Python/Flask + TypeScript/React + Postgres,
+   * and the skill chips drop Ruby entirely. Ruby/Rails survives only in a generic
+   * company-wide tech-stack footer. No longer a genuine Rails role; removed.
+   * "senior-staff-fullstack-versemedical": {
+   *   companyId: "versemedical",
+   *   url: "https://www.workatastartup.com/jobs/79906",
+   *   postedDate: "2026-06-19",
    * },
    *
    * PlanetScale — Software Engineer, Surfaces (Greenhouse 4091110009) closed
