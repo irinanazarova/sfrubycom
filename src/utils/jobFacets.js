@@ -122,6 +122,46 @@ export const COMPANY_META = {
   backerkit: { industry: "Enterprise SaaS", stage: "Early-stage" },
 };
 
+// ── Matching chips ──────────────────────────────────────────────────────────
+// Hand-curated per job (see the `chips` array on each record in jobs.js). Chips
+// surface the factors an applicant scans for. Three kinds, styled distinctly:
+//   focus  — what kind of work the role is (Backend, Payments, AI/ML, ...)
+//   stack  — the differentiating tools they'll actually use (Hotwire, GraphQL, ...)
+//   signal — deal-makers / breakers (Polyglot, Founding role, High compliance, ...)
+// Any label not in CHIP_KIND renders as a stack chip. Keep this list as the
+// controlled vocabulary; add here first, then use on jobs. Ruby/Rails itself is
+// never a chip (every role is Rails) — flag the exceptions with "Polyglot" or a
+// non-Rails runtime chip (Roda) instead.
+export const CHIP_KIND = {
+  // focus
+  Fullstack: "focus", Backend: "focus", Frontend: "focus", Platform: "focus",
+  Infra: "focus", DevOps: "focus", Data: "focus", "AI/ML": "focus",
+  Security: "focus", Payments: "focus", "Product Eng": "focus", Mobile: "focus",
+  // stack
+  Hotwire: "stack", ViewComponent: "stack", Packwerk: "stack", Sidekiq: "stack",
+  React: "stack", "React Native": "stack", Vue: "stack", "Next.js": "stack",
+  TypeScript: "stack", GraphQL: "stack", PostgreSQL: "stack", MySQL: "stack",
+  ClickHouse: "stack", Kafka: "stack", Terraform: "stack", Go: "stack",
+  Roda: "stack",
+  // signal
+  Polyglot: "signal", "Founding role": "signal", "AI-native": "signal",
+  Mentorship: "signal", "High compliance": "signal", "Open source": "signal",
+  Profitable: "signal", "Public benefit": "signal",
+};
+
+const CHIP_KIND_RANK = { focus: 0, stack: 1, signal: 2 };
+
+export function chipKind(label) {
+  return CHIP_KIND[label] || "stack";
+}
+
+// Stable sort a job's chips into focus → stack → signal for consistent display.
+export function orderChips(chips = []) {
+  return [...chips].sort(
+    (a, b) => CHIP_KIND_RANK[chipKind(a)] - CHIP_KIND_RANK[chipKind(b)],
+  );
+}
+
 // Display labels and canonical ordering for the parsed facets.
 export const WORK_TYPE_LABELS = { onsite: "On-site", hybrid: "Hybrid", remote: "Remote" };
 export const WORK_TYPE_ORDER = ["remote", "hybrid", "onsite"];
