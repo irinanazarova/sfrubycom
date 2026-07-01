@@ -63,18 +63,6 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/Reset/b40547a5-3b95-4646-8786-147cf83b4181?utm_source=rb8JwX8KGV",
     postedDate: "2026-04-28",
   },
-  "software-engineer-ii-companycam": {
-    id: "software-engineer-ii-companycam",
-    title: "Software Engineer II (Integrations)",
-    sponsorId: "companycam",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$116.5K - $123K + equity",
-    description:
-      "CompanyCam is hiring a Software Engineer II for the Integrations team: keep existing integrations healthy and growing, triage incoming support requests, manage endpoint updates and deprecations, and build enhancements on top of established integrations. Full-stack work (front end and back end) on a Rails + React codebase, for someone energized by a good debugging challenge. Remote-first engineering team spanning every US time zone. 1+ years of professional experience; Rails, React, PostgreSQL, and Datadog experience are pluses.",
-    url: "https://job-boards.greenhouse.io/companycam/jobs/7728259003",
-    postedDate: "2026-06-05",
-  },
   "founding-engineer-finta": {
     id: "founding-engineer-finta",
     title: "Founding Engineer (Ruby)",
@@ -195,17 +183,17 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
     postedDate: "2026-05-15",
   },
-  "software-engineer-security-persona": {
-    id: "software-engineer-security-persona",
-    title: "Software Engineer, Security",
+  "software-engineer-data-products-persona": {
+    id: "software-engineer-data-products-persona",
+    title: "Software Engineer, Data Products",
     sponsorId: "persona",
-    location: "San Francisco",
+    location: "Remote (US)",
     type: "Full-time",
     salary: "$130K - $220K + equity",
     description:
-      "Persona builds identity verification infrastructure where security is core to everything they ship. The security team operates as a true generalist function: designing IAM systems for enterprise customers managing PII, owning supply chain security as AI tooling expands, and building secure internal tooling for engineers scaling AI usage. This is a software engineering role first — security curiosity matters; a dedicated security background doesn't. Proficiency in Ruby on Rails preferred. 3+ years of software engineering experience. $130K-$220K + equity.",
-    url: "https://jobs.ashbyhq.com/persona/06ce6de8-8541-4dfd-9c09-3e467d5f91bb",
-    postedDate: "2026-04-27",
+      "Persona is the configurable identity platform that companies like Reddit and OpenAI rely on to verify individuals and organizations at scale. This role sits on the Data Products team, building the customer-facing surfaces of Persona's data platform: in-dashboard SQL, bulk data exports, and AI-powered analytics. It's a data-leaning full-stack role on Persona's Ruby on Rails application layer, collaborating closely with product, design, and data science. 3+ years of software engineering experience. $130K-$220K + equity.",
+    url: "https://jobs.ashbyhq.com/persona/9d501850-37ce-432a-928b-eb1ac22e2757",
+    postedDate: "2026-07-01",
   },
   "senior-product-security-engineer-persona": {
     id: "senior-product-security-engineer-persona",
@@ -240,18 +228,6 @@ export const jobs = {
     description:
       "Ubicloud is building an open-source alternative to the big clouds — elastic compute, block storage, managed PostgreSQL, GitHub Actions runners, Kubernetes, and AI inference — serving 500+ customers. The control plane is written in Ruby on the Roda framework with Sequel and PostgreSQL (not Rails), and that codebase is fully open source. You'll work across the Postgres, GitHub Actions, and AI inference products, building real systems software in Ruby. Mid-stage role (2-8 years). $95K-$250K base + 0.15%-0.50% equity.",
     url: "https://www.ycombinator.com/companies/ubicloud/jobs/j4bntEJ-software-engineer",
-    postedDate: "2026-06-19",
-  },
-  "software-engineer-surfaces-planetscale": {
-    id: "software-engineer-surfaces-planetscale",
-    title: "Software Engineer, Surfaces",
-    sponsorId: "planetscale",
-    location: "San Francisco Bay Area or Remote",
-    type: "Full-time",
-    salary: "$120K - $290K + equity",
-    description:
-      "PlanetScale (the database company behind Vitess) is hiring a Software Engineer on the Surfaces team, which builds and maintains the PlanetScale dashboard at app.planetscale.com, the public APIs, and billing systems. The backend runs on Ruby on Rails with Sidekiq; the dashboard is React + TypeScript and the CLI is Go, all on top of MySQL/Vitess and PostgreSQL. Work spans user-facing UIs, CLIs, and APIs for the database control plane. The posting calls for strong proficiency in Ruby on Rails for backend development.",
-    url: "https://job-boards.greenhouse.io/planetscale/jobs/4091110009",
     postedDate: "2026-06-19",
   },
   "senior-software-engineer-accounting-angellist": {
@@ -1014,6 +990,36 @@ export const jobs = {
    * "senior-software-engineer-secure-cards-chime": {
    *   url: "https://careers.chime.com/en/jobs/8322470002/senior-software-engineer-secure-cards/",
    *   postedDate: "2026-05-10",
+   * },
+   *
+   * Persona — Software Engineer, Security (Ashby 06ce6de8) closed (July 1, 2026
+   * audit); gone from the live Ashby board. That was the Rails-preferred security
+   * SWE. Replaced in-place with Software Engineer, Data Products (Ashby 9d501850),
+   * a $130-220K Rails full-stack role on Persona's data platform application layer.
+   * "software-engineer-security-persona": {
+   *   url: "https://jobs.ashbyhq.com/persona/06ce6de8-8541-4dfd-9c09-3e467d5f91bb",
+   *   postedDate: "2026-04-27",
+   * },
+   *
+   * CompanyCam — Software Engineer II, Integrations (Greenhouse 7728259003) closed
+   * (July 1, 2026 audit); GH boards-api 404. CompanyCam's live board has no
+   * Ruby/Rails software role (only ML Computer Vision and a Senior Infrastructure
+   * Engineer that lists Ruby merely as a scripting skill). Removed, no replacement.
+   * "software-engineer-ii-companycam": {
+   *   sponsorId: "companycam",
+   *   url: "https://job-boards.greenhouse.io/companycam/jobs/7728259003",
+   *   postedDate: "2026-06-05",
+   * },
+   *
+   * PlanetScale — Software Engineer, Surfaces (Greenhouse 4091110009) closed
+   * (July 1, 2026 audit); GH boards-api 404. Surfaces was PlanetScale's Rails
+   * dashboard team. The remaining open SWE roles (Insights, Neki Orchestration,
+   * PlanetScale Postgres) are Go-primary and list Ruby only as "or similar," so
+   * none qualifies as a Ruby/Rails role for this board. Removed, no replacement.
+   * "software-engineer-surfaces-planetscale": {
+   *   sponsorId: "planetscale",
+   *   url: "https://job-boards.greenhouse.io/planetscale/jobs/4091110009",
+   *   postedDate: "2026-06-19",
    * },
    */
 };
