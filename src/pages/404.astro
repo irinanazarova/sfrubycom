@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import IslandNav from "../components/IslandNav.astro";
 ---
 
 <BaseLayout
@@ -7,76 +8,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     title="Page Not Found - SF Ruby"
     description="The page you're looking for doesn't exist."
 >
-    <section
-        class="pt-32 pb-20 bg-gradient-to-br from-gray-50 to-white min-h-[60vh] flex items-center"
-    >
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="mb-8">
-                <span
-                    class="text-8xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
-                    >404</span
-                >
-            </div>
-
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Page not found
-            </h1>
-
-            <p class="text-lg text-gray-600 mb-8">
-                The page you're looking for doesn't exist or has been moved.
+    <section class="pt-32 pb-16 bg-sky-50 text-center">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="px-font text-5xl md:text-7xl text-ruby-500 px-shadow-ruby mb-8">
+                404
             </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                    href="/"
-                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                    <svg
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                        ></path>
-                    </svg>
-                    Back to Home
-                </a>
-                <a
-                    href="/community"
-                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-all duration-300"
-                >
-                    Join Community
-                </a>
-            </div>
-
-            <div class="mt-12 pt-8 border-t border-gray-200">
-                <p class="text-gray-500 text-sm">
-                    Looking for something specific? Try these:
-                </p>
-                <div class="mt-4 flex flex-wrap justify-center gap-4 text-sm">
-                    <a
-                        href="/startups"
-                        class="text-ruby-500 hover:text-ruby-600">Startups</a
-                    >
-                    <a href="/jobs" class="text-ruby-500 hover:text-ruby-600"
-                        >Jobs</a
-                    >
-                    <a href="/videos" class="text-ruby-500 hover:text-ruby-600"
-                        >Videos</a
-                    >
-                    <a href="/news" class="text-ruby-500 hover:text-ruby-600"
-                        >News</a
-                    >
-                    <a href="/about" class="text-ruby-500 hover:text-ruby-600"
-                        >About</a
-                    >
-                </div>
-            </div>
+            <h1 class="px-font text-lg md:text-xl text-gray-900 mb-4">
+                Level not found
+            </h1>
+            <p class="text-lg text-gray-600">
+                The page you're looking for doesn't exist or has been moved.
+                Pick an exit below.
+            </p>
         </div>
     </section>
+
+    <IslandNav
+        title="Warp zones"
+        items={[
+            { href: "/", label: "Home", icon: "mascot" },
+            { href: "/videos", label: "Videos", icon: "play" },
+            { href: "/jobs", label: "Jobs", icon: "briefcase" },
+            {
+                href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
+                label: "Join Slack",
+                icon: "heart",
+                external: true,
+            },
+        ]}
+    />
 </BaseLayout>

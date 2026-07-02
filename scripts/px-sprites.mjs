@@ -15,6 +15,8 @@ const PALETTE = {
   R: "#ff5545", // coral ruby
   r: "#b52e27", // ruby shadow
   L: "#ff9d94", // coral highlight
+  G: "#f4c700", // coin gold
+  g: "#c8a300", // gold shadow
 };
 
 const SPRITES = {
@@ -46,6 +48,49 @@ const SPRITES = {
     ".KrrrrrrrrKrKrrrrrrrrrrrK.",
     ".KKKKKKKKKKKKKKKKKKKKKKKK.",
     "..........................",
+  ],
+  "px-heart": [
+    "..............",
+    "..KKK....KKK..",
+    ".KLLRK..KRRRK.",
+    "KLLRRRKKRRRRRK",
+    "KLRRRRRRRRRRRK",
+    "KRRRRRRRRRRRRK",
+    ".KRRRRRRRRRRK.",
+    "..KrRRRRRRrK..",
+    "...KrRRRRrK...",
+    "....KrRRrK....",
+    ".....KrrK.....",
+    "......KK......",
+    "..............",
+  ],
+  "px-play": [
+    "..............",
+    ".KKKKKKKKKKKK.",
+    ".KWWWWWWWWWWK.",
+    ".KWWWRWWWWWWK.",
+    ".KWWWRRWWWWWK.",
+    ".KWWWRRRWWWWK.",
+    ".KWWWRRRRWWWK.",
+    ".KWWWRRRWWWWK.",
+    ".KWWWRRWWWWWK.",
+    ".KWWWRWWWWWWK.",
+    ".KWWWWWWWWWWK.",
+    ".KKKKKKKKKKKK.",
+    "..............",
+  ],
+  "px-briefcase": [
+    "..................",
+    "......KKKKKK......",
+    "......KggggK......",
+    ".KKKKKKKKKKKKKKKK.",
+    ".KGGGGGGGGGGGGGGK.",
+    ".KGGGGGGKKGGGGGGK.",
+    ".KggggggKKggggggK.",
+    ".KggggggggggggggK.",
+    ".KggggggggggggggK.",
+    ".KKKKKKKKKKKKKKKK.",
+    "..................",
   ],
 };
 

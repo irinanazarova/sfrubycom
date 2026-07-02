@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
+import IslandNav from "../components/IslandNav.astro";
 import "../styles/global.css";
 ---
 
@@ -454,121 +455,28 @@ import "../styles/global.css";
             </section>
 
             <!-- Get involved: the overworld -->
-            <section
+            <IslandNav
                 id="get-involved"
-                class="py-16 md:py-20 px-dither-sky"
-            >
-                <div
-                    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-                >
-                    <span
-                        class="px-plate px-plate--gold px-font text-[0.625rem] px-4 py-2 mb-6"
-                        >World 2026</span
-                    >
-                    <h2
-                        class="px-font px-shadow-ink text-lg md:text-xl text-white"
-                    >
-                        Choose your quest
-                    </h2>
-                    <p class="text-lg text-white mt-4 mb-12">
-                        Tickets, talks, sponsorship, or just say hi.
-                    </p>
-                    <div
-                        class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 justify-items-center"
-                    >
-                        <a
-                            href="https://luma.com/sfrubyconf2026"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="px-island-btn tap-press"
-                        >
-                            <img
-                                src="/px-ticket.png"
-                                alt=""
-                                width="26"
-                                height="12"
-                                class="px-island-btn__item h-8 w-auto"
-                            />
-                            <img
-                                src="/px-island.png"
-                                alt=""
-                                width="598"
-                                height="104"
-                                class="px-pixelated w-32 md:w-36 h-auto"
-                            />
-                            <span
-                                class="px-plate px-font text-[0.5rem] px-3 py-1.5"
-                                >Tickets</span
-                            >
-                        </a>
-                        <a
-                            href="https://cfp.sfruby.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="px-island-btn tap-press"
-                        >
-                            <img
-                                src="/px-quest.png"
-                                alt=""
-                                width="64"
-                                height="296"
-                                class="px-island-btn__item h-10 w-auto"
-                            />
-                            <img
-                                src="/px-island.png"
-                                alt=""
-                                width="598"
-                                height="104"
-                                class="px-pixelated w-32 md:w-36 h-auto"
-                            />
-                            <span
-                                class="px-plate px-font text-[0.5rem] px-3 py-1.5"
-                                >Propose a talk</span
-                            >
-                        </a>
-                        <a href="/sponsor-2026" class="px-island-btn tap-press">
-                            <img
-                                src="/px-coin.png"
-                                alt=""
-                                width="134"
-                                height="134"
-                                class="px-island-btn__item h-10 w-auto [animation-delay:-1.2s]"
-                            />
-                            <img
-                                src="/px-island.png"
-                                alt=""
-                                width="598"
-                                height="104"
-                                class="px-pixelated w-32 md:w-36 h-auto"
-                            />
-                            <span
-                                class="px-plate px-font text-[0.5rem] px-3 py-1.5"
-                                >Sponsor</span
-                            >
-                        </a>
-                        <a href="/contact" class="px-island-btn tap-press">
-                            <img
-                                src="/px-envelope.png"
-                                alt=""
-                                width="24"
-                                height="13"
-                                class="px-island-btn__item h-8 w-auto [animation-delay:-1.8s]"
-                            />
-                            <img
-                                src="/px-island.png"
-                                alt=""
-                                width="598"
-                                height="104"
-                                class="px-pixelated w-32 md:w-36 h-auto"
-                            />
-                            <span
-                                class="px-plate px-font text-[0.5rem] px-3 py-1.5"
-                                >Contact us</span
-                            >
-                        </a>
-                    </div>
-                </div>
-            </section>
+                kicker="World 2026"
+                title="Choose your quest"
+                lede="Tickets, talks, sponsorship, or just say hi."
+                items={[
+                    {
+                        href: "https://luma.com/sfrubyconf2026",
+                        label: "Tickets",
+                        icon: "ticket",
+                        external: true,
+                    },
+                    {
+                        href: "https://cfp.sfruby.com",
+                        label: "Propose a talk",
+                        icon: "quest",
+                        external: true,
+                    },
+                    { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
+                    { href: "/contact", label: "Contact us", icon: "envelope" },
+                ]}
+            />
         </main>
 
         <Footer />

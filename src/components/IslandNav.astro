@@ -1,0 +1,112 @@
+---
+/**
+ * IslandNav: a row of Mario-style floating-island buttons on a dithered sky.
+ * Each island carries a bobbing item sprite and a plate label; the whole
+ * island is the link (hover speeds the bob, press dips the island — see
+ * .px-island-btn in pixel.css).
+ *
+ * @example
+ * <IslandNav
+ *     title="Choose your quest"
+ *     items={[
+ *         { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
+ *         { href: "/contact", label: "Contact us", icon: "envelope" },
+ *     ]}
+ * />
+ */
+
+interface Item {
+    href: string;
+    label: string;
+    icon: keyof typeof ICONS;
+    external?: boolean;
+}
+
+interface Props {
+    id?: string;
+    kicker?: string;
+    title: string;
+    lede?: string;
+    items: Item[];
+}
+
+const ICONS = {
+    coin: { src: "/px-coin.png", width: 134, height: 134, class: "h-10" },
+    quest: { src: "/px-quest.png", width: 64, height: 296, class: "h-10" },
+    envelope: { src: "/px-envelope.png", width: 24, height: 13, class: "h-8" },
+    ticket: { src: "/px-ticket.png", width: 26, height: 12, class: "h-8" },
+    heart: { src: "/px-heart.png", width: 14, height: 13, class: "h-9" },
+    play: { src: "/px-play.png", width: 14, height: 13, class: "h-9" },
+    briefcase: {
+        src: "/px-briefcase.png",
+        width: 18,
+        height: 11,
+        class: "h-9",
+    },
+    mascot: {
+        src: "/logo8bit-mascot.png",
+        width: 504,
+        height: 438,
+        class: "h-12",
+    },
+} as const;
+
+const { id, kicker, title, lede, items } = Astro.props;
+---
+
+<section id={id} class="py-16 md:py-20 px-dither-sky">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {
+            kicker && (
+                <span class="px-plate px-plate--gold px-font text-[0.625rem] px-4 py-2 mb-6">
+                    {kicker}
+                </span>
+            )
+        }
+        <h2 class="px-font px-shadow-ink text-lg md:text-xl text-white">
+            {title}
+        </h2>
+        {lede && <p class="text-lg text-white mt-4">{lede}</p>}
+        <div class="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-12">
+            {
+                items.map((item, i) => {
+                    const icon = ICONS[item.icon];
+                    return (
+                        <a
+                            href={item.href}
+                            target={item.external ? "_blank" : undefined}
+                            rel={
+                                item.external
+                                    ? "noopener noreferrer"
+                                    : undefined
+                            }
+                            class="px-island-btn tap-press"
+                        >
+                            <img
+                                src={icon.src}
+                                alt=""
+                                width={icon.width}
+                                height={icon.height}
+                                class:list={[
+                                    "px-island-btn__item w-auto",
+                                    icon.class,
+                                ]}
+                                style={`--px-bob-delay: -${(i * 0.7).toFixed(1)}s`}
+                            />
+                            <img
+                                src="/px-island.png"
+                                alt=""
+                                width="598"
+                                height="104"
+                                class="px-pixelated w-32 md:w-36 h-auto"
+                            />
+                            <span class="px-plate px-font text-[0.5rem] px-3 py-1.5">
+                                {item.label}
+                            </span>
+                        </a>
+                    );
+                })
+            }
+        </div>
+    </div>
+</section>

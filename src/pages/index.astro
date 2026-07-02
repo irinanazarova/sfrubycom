@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
+import IslandNav from "../components/IslandNav.astro";
 import "../styles/global.css";
 import StartupCard from "../components/StartupCard.astro";
 import StartupModal from "../components/StartupModal.astro";
@@ -1030,33 +1031,25 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                 </div>
             </section>
 
-            <!-- Final CTA Section -->
-            <section class="py-14 bg-ruby-500 border-y-4 border-ink">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="px-font px-shadow-ink text-sm md:text-lg text-white mb-6">
-                        Ready to join the Ruby community?
-                    </h2>
-                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                        <a
-                            href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="px-btn px-font text-[0.625rem] gap-2 px-6 py-3.5 bg-white text-ruby-600 hover:bg-gray-50"
-                        >
-                            Join Slack
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
-                        <a
-                            href="/sponsor-2026"
-                            class="px-btn px-font text-[0.625rem] gap-2 px-6 py-3.5 bg-gold-500 text-ink hover:bg-gold-400"
-                        >
-                            Sponsor 2026
-                        </a>
-                    </div>
-                </div>
-            </section>
+            <!-- Final CTA: overworld exits -->
+            <IslandNav
+                title="Ready to join the Ruby community?"
+                items={[
+                    {
+                        href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
+                        label: "Join Slack",
+                        icon: "heart",
+                        external: true,
+                    },
+                    {
+                        href: "/conference-2026",
+                        label: "The conference",
+                        icon: "ticket",
+                    },
+                    { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
+                    { href: "/contact", label: "Contact us", icon: "envelope" },
+                ]}
+            />
         </main>
 
         <!-- Startup Modal -->
