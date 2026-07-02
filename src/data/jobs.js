@@ -187,13 +187,13 @@ export const jobs = {
   },
   "staff-software-engineer-core-platforms-gusto": {
     id: "staff-software-engineer-core-platforms-gusto",
-    title: "Staff Software Engineer, Core Platforms",
+    title: "Staff Software Engineer, Core AI Platforms",
     sponsorId: "gusto",
     location: "San Francisco, Denver, or New York City (Hybrid)",
     type: "Full-time",
     salary: "$197K - $247K",
     description:
-      "Gusto is hiring a Staff Software Engineer to join the Core Platforms team — engineering the core business engine that 5+ product teams depend on. Help scale one of the largest Ruby/Rails + JavaScript/React applications in the world. Build reliable backend services, set the engineering standard for those around you, and partner with Product Engineering, Product Management, Data, and Design to translate customer pain points into solutions. AI is a fundamental part of how work gets done at Gusto. Hybrid in SF / Denver / NYC. $163k-$204k base depending on location + bonus + equity.",
+      "Gusto is hiring a Staff Software Engineer to join the Core AI Platforms team — engineering the core business engine that 5+ product teams depend on. Help scale one of the largest Ruby/Rails + JavaScript/React applications in the world. Build reliable backend services, set the engineering standard for those around you, and partner with Product Engineering, Product Management, Data, and Design to translate customer pain points into solutions. AI is a fundamental part of how work gets done at Gusto. Hybrid in SF / Denver / NYC. $163k-$204k base depending on location + bonus + equity.",
     chips: ["Platform", "Backend", "AI-native"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
     postedDate: "2026-05-15",
@@ -601,7 +601,7 @@ export const jobs = {
     description:
       "Instrumentl is a profitable, YC-backed SaaS automating grant discovery and management for 1,500+ nonprofits. This full-stack generalist role builds and scales the product end-to-end on a Ruby on Rails stack; 7+ years of experience. Stack: Ruby on Rails, Python, JavaScript, PostgreSQL, Redis. Distributed team with an Oakland office.",
     chips: ["Fullstack", "PostgreSQL", "Profitable"],
-    url: "https://www.workatastartup.com/jobs/91151",
+    url: "https://jobs.lever.co/Instrumentl/6fa7b6d7-7e64-429a-80ea-4f70469d7584",
     postedDate: "2026-06-19",
   },
   "senior-software-engineer-client-apps-github": {
@@ -701,9 +701,9 @@ export const jobs = {
     location: "San Francisco, CA (In-office)",
     type: "Full-time",
     description:
-      "Natural builds owned payment rails for AI agents — wallets, pay, request, credit, and billing across traditional banking and stablecoins — founded by ex-Stripe and Method engineers. This role builds the Ruby on Rails payments infrastructure; the team runs Rails under the hood. 15-person team, all in SF, in-office. (Seed, $9.8M.)",
+      "Natural builds owned payment rails for AI agents — wallets, pay, request, credit, and billing across traditional banking and stablecoins — founded by ex-Stripe and Method engineers. This role builds the Ruby on Rails payments infrastructure; the team runs Rails under the hood. 16-person team, all in SF, in-office. (Seed, $9.8M.)",
     chips: ["Payments", "Backend"],
-    url: "https://www.natural.co/careers",
+    url: "https://www.natural.co/careers/core-payments-engineer",
     postedDate: "2026-06-19",
   },
   "software-engineer-middesk": {
@@ -727,7 +727,7 @@ export const jobs = {
     companyId: "found",
     companyName: "Found",
     companyLogo: "/company_found.png",
-    location: "San Francisco, CA / Remote (US)",
+    location: "San Francisco, CA / New York / Remote (US)",
     type: "Full-time",
     salary: "$210K - $278K",
     description:
@@ -836,6 +836,75 @@ export const jobs = {
     chips: ["Fullstack", "Hotwire"],
     url: "https://jobs.rubyonrails.org/jobs/32638-staff-software-developer-backerkit",
     postedDate: "2026-06-20",
+  },
+  "software-engineer-operational-systems-windborne": {
+    id: "software-engineer-operational-systems-windborne",
+    title: "Software Engineer, Operational Systems",
+    companyId: "windborne",
+    companyName: "WindBorne Systems",
+    location: "Redwood City, CA (In-person)",
+    type: "Full-time",
+    salary: "$150K - $220K + equity",
+    description:
+      "WindBorne flies the world's largest smart weather-balloon constellation and builds WeatherMesh, the AI forecast model that has beaten DeepMind's GraphCast. This is a force-multiplier role on operational systems: you set priorities other engineers execute on, across Ruby on Rails, Python, and Rust with Postgres. Khosla-backed (~$25M raised, Series A). Redwood City, in person.",
+    chips: ["Platform", "Backend", "Polyglot", "Mentorship"],
+    url: "https://windbornesystems.com/careers/software-engineer---operational-systems",
+    postedDate: "2026-07-01",
+  },
+  "software-engineer-platforms-integrations-salma": {
+    id: "software-engineer-platforms-integrations-salma",
+    title: "Software Engineer, Platforms & Integrations",
+    companyId: "salmahealth",
+    companyName: "Salma Health",
+    location: "Hybrid (Bay Area preferred) / Remote (US)",
+    type: "Full-time",
+    salary: "$123K - $183K",
+    description:
+      "Salma Health is a brain-health company delivering interventional psychiatry (TMS plus care coordination), out of stealth in March 2026 with an $80M Series A led by Mubadala Capital and ARCH Venture Partners; clinics across California. This mid-level role (3-5 years) builds EHR, CRM, and billing integrations across Node.js, Python, and Ruby. San Mateo HQ.",
+    chips: ["Platform", "Data", "Polyglot"],
+    url: "https://jobs.ashbyhq.com/salma-health/91df7bfc-b8a0-4ac6-a5f4-e1fc3e896c9d",
+    postedDate: "2026-07-01",
+  },
+  "senior-fullstack-engineer-opendate": {
+    id: "senior-fullstack-engineer-opendate",
+    title: "Senior Full-Stack Software Engineer",
+    companyId: "opendate",
+    companyName: "Opendate",
+    location: "Remote (US)",
+    type: "Full-time",
+    description:
+      "Opendate is the operating system for live events: booking, ticketing, and settlement for 200+ independent venues, doubled in the past year. $14M Series A led by High Alpha (January 2026). You'll work in a monolithic Ruby on Rails codebase with PostgreSQL, Redis, BigQuery, and React; the team says every engineer has AI teammates in their daily workflow. Remote US, with Indianapolis and Chicago offices to drop into.",
+    chips: ["Fullstack", "React", "PostgreSQL", "AI-native"],
+    url: "https://www.opendate.io/careers/senior-full-stack-software-engineer",
+    postedDate: "2026-07-01",
+  },
+  "senior-fullstack-engineer-jukebox": {
+    id: "senior-fullstack-engineer-jukebox",
+    title: "Senior Fullstack Engineer",
+    companyId: "jukeboxhealth",
+    companyName: "Jukebox Health",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$180K - $210K + equity",
+    description:
+      "Jukebox Health makes homes safer for older adults, delivering home-safety modifications through Medicare/Medicaid plans; $30.5M raised (Series A: Valtruis, Home Depot Ventures, Equitage). This senior role builds the platform end to end on a Ruby on Rails backend with a React + TypeScript frontend. NYC HQ, remote across the US.",
+    chips: ["Fullstack", "React", "TypeScript"],
+    url: "https://job-boards.greenhouse.io/jukeboxhealth/jobs/4284648009",
+    postedDate: "2026-07-01",
+  },
+  "senior-fullstack-engineer-checkmate": {
+    id: "senior-fullstack-engineer-checkmate",
+    title: "Senior Full Stack Engineer",
+    companyId: "checkmate",
+    companyName: "Checkmate",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$180K",
+    description:
+      "Checkmate powers restaurant ordering: POS integrations, voice AI, and kiosks for enterprise restaurant brands. $21.5M raised, Series B led by Tiger Global. The stack is Ruby on Rails and React with Sidekiq, REST/GraphQL APIs, and PostgreSQL/MySQL, in what the team calls an AI-led SDLC where engineers are expected to leverage AI coding agents daily. 100% remote, US.",
+    chips: ["Fullstack", "React", "Sidekiq", "AI-native"],
+    url: "https://jobs.rubyonrails.org/jobs/34523-senior-full-stack-engineer-ruby-on-rails-reactjs-checkmate",
+    postedDate: "2026-07-01",
   },
 
   /* ─────────────────────────────────────────────────────────────────

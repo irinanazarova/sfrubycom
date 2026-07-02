@@ -120,6 +120,11 @@ export const COMPANY_META = {
   nomad: { industry: "Fintech", stage: "Early-stage" },
   relevanthealthcare: { industry: "Healthtech", stage: "Seed" },
   backerkit: { industry: "Enterprise SaaS", stage: "Early-stage" },
+  windborne: { industry: "Climate", stage: "Early-stage" },
+  salmahealth: { industry: "Healthtech", stage: "Early-stage" },
+  opendate: { industry: "Enterprise SaaS", stage: "Early-stage" },
+  jukeboxhealth: { industry: "Healthtech", stage: "Early-stage" },
+  checkmate: { industry: "Enterprise SaaS", stage: "Growth" },
 };
 
 // ── Matching chips ──────────────────────────────────────────────────────────
