@@ -56,6 +56,18 @@
         if (!ctx) return;
 
         const total = scroller ? scroller.children.length : 0;
+        const lockEls = scroller
+            ? Array.from(scroller.querySelectorAll(".news-lock"))
+            : [];
+        // during a run, stories ahead of you are face-down; the first is open
+        const lockAll = () =>
+            lockEls.forEach((el, i) => el.classList.toggle("hidden", i === 0));
+        const unlockUpTo = (n: number) =>
+            lockEls.forEach((el, i) => {
+                if (i <= n) el.classList.add("hidden");
+            });
+        const unlockAll = () =>
+            lockEls.forEach((el) => el.classList.add("hidden"));
 
         // sprites
         const load = (src: string) => {
@@ -125,6 +137,7 @@
             player.onGround = true;
             // the run always starts at story 1 so coins == stories
             scroller?.scrollTo({ left: 0, behavior: "instant" });
+            lockAll();
         }
 
         function step(dt: number) {
@@ -175,10 +188,12 @@
                             rubies++;
                         } else {
                             caught++;
+                            unlockUpTo(caught);
                             speed = Math.min(speed + 6, 380);
                             if (nextBtn && !nextBtn.disabled) nextBtn.click();
                             if (total && caught >= total) {
                                 cleared = true;
+                                unlockAll();
                                 // finished: glide the news back to the start
                                 setTimeout(() => {
                                     scroller?.scrollTo({
@@ -298,6 +313,7 @@
             cancelAnimationFrame(raf);
             wrap.classList.add("hidden");
             playBtn.parentElement?.classList.remove("hidden");
+            unlockAll();
         }
 
         playBtn.addEventListener("click", open);
