@@ -42,7 +42,7 @@ const platformStyles: Record<string, string> = {
     ruby: "bg-ruby-500 hover:bg-ruby-600",
     dark: "bg-gray-700 hover:bg-gray-600",
     gradient:
-        "bg-gradient-to-r from-ruby-500 to-pink-500 hover:from-ruby-400 hover:to-pink-400 shadow-lg hover:shadow-xl",
+        "bg-ruby-500 hover:bg-ruby-400",
 };
 
 // Platform icons (inline SVGs for common platforms)
@@ -61,7 +61,7 @@ const platformIcons: Record<string, string> = {
     target="_blank"
     rel="noopener noreferrer"
     class:list={[
-        "inline-flex items-center gap-3 px-6 py-3 text-white rounded-lg font-medium transition-all duration-300 shadow-sm hover:shadow-md",
+        "px-btn px-font text-[0.625rem] gap-3 px-6 py-3.5 text-white",
         platformStyles[platform],
         className,
     ]}

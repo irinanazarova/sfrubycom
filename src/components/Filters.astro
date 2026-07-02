@@ -19,7 +19,7 @@ interface Props {
 const { filters, searchPlaceholder = "Search...", showSearch = true } = Astro.props;
 ---
 
-<div class="filters-container bg-white rounded-xl border border-gray-200 p-4 mb-8">
+<div class="filters-container bg-white border-2 border-ink shadow-md p-4 mb-8">
     <div class="flex flex-col lg:flex-row gap-4">
         {showSearch && (
             <div class="flex-1">
@@ -31,7 +31,7 @@ const { filters, searchPlaceholder = "Search...", showSearch = true } = Astro.pr
                         type="text"
                         id="search-input"
                         placeholder={searchPlaceholder}
-                        class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-ruby-500 focus:border-transparent transition-all"
+                        class="w-full pl-10 pr-4 py-2.5 border-2 border-ink rounded-none focus:outline-none focus:ring-2 focus:ring-ruby-500 focus:border-transparent transition-all"
                     />
                 </div>
             </div>
@@ -43,7 +43,7 @@ const { filters, searchPlaceholder = "Search...", showSearch = true } = Astro.pr
                     <select
                         id={`filter-${filter.id}`}
                         data-filter={filter.id}
-                        class="appearance-none bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 pr-10 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-ruby-500 focus:border-transparent cursor-pointer hover:bg-gray-100 transition-all"
+                        class="appearance-none bg-gray-50 border-2 border-ink rounded-none px-4 py-2.5 pr-10 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-ruby-500 focus:border-transparent cursor-pointer hover:bg-gray-100 transition-all"
                     >
                         {filter.options.map((option) => (
                             <option value={option.value}>{option.label}</option>
