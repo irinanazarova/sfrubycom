@@ -123,6 +123,8 @@
             player.y = 0;
             player.vy = 0;
             player.onGround = true;
+            // the run always starts at story 1 so coins == stories
+            scroller?.scrollTo({ left: 0, behavior: "instant" });
         }
 
         function step(dt: number) {
@@ -175,7 +177,16 @@
                             caught++;
                             speed = Math.min(speed + 6, 380);
                             if (nextBtn && !nextBtn.disabled) nextBtn.click();
-                            if (total && caught >= total) cleared = true;
+                            if (total && caught >= total) {
+                                cleared = true;
+                                // finished: glide the news back to the start
+                                setTimeout(() => {
+                                    scroller?.scrollTo({
+                                        left: 0,
+                                        behavior: "smooth",
+                                    });
+                                }, 700);
+                            }
                         }
                     }
                 }
