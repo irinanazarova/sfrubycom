@@ -1,0 +1,81 @@
+<!doctype html>
+<!-- OG card template. To regenerate public/og/*.png: copy this file to
+     dist/og-template/index.html, run `astro preview`, then screenshot
+     1200x630 at these URLs (Playwright or a browser):
+       /og-template/?lockup=1&sub=sfruby.com                          -> home.png
+       /og-template/?lockup=1&sub=Nov 10-12, 2026 %C2%B7 SF Jazz&gold=1 -> conference.png
+       /og-template/?icon=/px-briefcase.png&title=Ruby Jobs&sub=sfruby.com/jobs&gold=1 -> jobs.png
+       /og-template/?bg=night&title=SF Ruby News&sub=sfruby.com/news&noisland=1&gold=1 -> news.png
+       /og-template/?icon=/px-play.png&title=Videos&sub=sfruby.com/videos&gold=1 -> videos.png
+       /og-template/?icon=/px-quest.png&title=Our Startups&sub=sfruby.com/startups&gold=1 -> startups.png
+       /og-template/?icon=/px-coin.png&title=Sponsor SF Ruby 2026&sub=sfruby.com/sponsor-2026&gold=1 -> sponsor.png
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family:"Press Start 2P"; src:url("/fonts/PressStart2P.woff2") format("woff2"); }
+@font-face { font-family:"Martian Mono"; src:url("/fonts/MartianMono.woff2") format("woff2"); font-weight:100 800; }
+* { margin:0; box-sizing:border-box; }
+body { width:1200px; height:630px; overflow:hidden; font-family:"Martian Mono",monospace; }
+.card {
+  position:relative; width:1200px; height:630px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background-color:#3ea3dd;
+  background-image:url("/px-sky-day.png");
+  background-size:auto 100%; background-repeat:repeat-x;
+  image-rendering:pixelated;
+}
+.card.night {
+  background-color:#020617;
+  background-image:
+    radial-gradient(rgba(255,255,255,.7) 2px, transparent 3px),
+    radial-gradient(rgba(255,255,255,.35) 2px, transparent 3px),
+    linear-gradient(to bottom,#071f56 0%,#041030 35%,#020617 75%);
+  background-size:260px 260px,140px 140px,100% 100%;
+  background-position:24px 44px,104px 128px,0 0;
+}
+img { image-rendering:pixelated; }
+.cloud1 { position:absolute; top:60px; left:70px; width:170px; }
+.cloud2 { position:absolute; top:120px; right:90px; width:120px; }
+.island1 { position:absolute; bottom:90px; left:60px; width:190px; }
+.island2 { position:absolute; top:230px; right:60px; width:140px; }
+.icon { height:110px; width:auto; margin-bottom:40px; }
+.lockup { height:440px; width:auto; }
+.title {
+  font-family:"Press Start 2P"; font-size:52px; line-height:1.5; color:#fff;
+  text-shadow:5px 5px 0 #00040c; text-transform:uppercase; text-align:center;
+  max-width:1000px;
+}
+.night .title { text-shadow:5px 5px 0 #000; }
+.sub {
+  margin-top:34px; display:inline-block; padding:16px 26px;
+  font-family:"Press Start 2P"; font-size:20px; color:#fff; text-transform:uppercase;
+  background:#0047eb; border:4px solid #00040c; box-shadow:6px 6px 0 0 #00040c;
+}
+.sub.gold { background:#f4c700; color:#00040c; }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <img class="cloud1" src="/px-cloud.png">
+  <img class="cloud2" src="/px-cloud.png">
+  <img class="island1" src="/px-island.png">
+  <img class="island2" src="/px-island.png">
+  <img class="icon" id="icon" src="" style="display:none">
+  <img class="lockup" id="lockup" src="/logo8bit-transparent.png" style="display:none">
+  <div class="title" id="title" style="display:none"></div>
+  <div class="sub" id="sub" style="display:none"></div>
+</div>
+<script>
+const q = new URLSearchParams(location.search);
+const card = document.getElementById('card');
+if (q.get('bg') === 'night') card.classList.add('night');
+if (q.get('lockup')) document.getElementById('lockup').style.display = 'block';
+if (q.get('icon')) { const i = document.getElementById('icon'); i.src = q.get('icon'); i.style.display = 'block'; }
+if (q.get('title')) { const t = document.getElementById('title'); t.textContent = q.get('title'); t.style.display = 'block'; }
+if (q.get('sub')) { const s = document.getElementById('sub'); s.textContent = q.get('sub'); s.style.display = 'inline-block'; if (q.get('gold')) s.classList.add('gold'); }
+if (q.get('noisland')) { document.querySelector('.island1').style.display='none'; document.querySelector('.island2').style.display='none'; }
+</script>
+</body>
+</html>

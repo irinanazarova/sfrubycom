@@ -1,0 +1,328 @@
+---
+/**
+ * NewsRunner: an opt-in endless-runner easter egg for the news section,
+ * in the spirit of Chrome's offline dino game. The fog mascot runs across
+ * the night sky; catching a coin advances the news scroller (#news-next)
+ * to the next story. No fail state: it's a reading device, not a challenge.
+ *
+ * Expects #news-scroller / #news-next / #news-count to exist on the page.
+ */
+---
+
+<div class="mb-6 text-center">
+    <button
+        id="news-play"
+        type="button"
+        class="px-btn px-font text-[0.5625rem] gap-2 px-4 py-3 bg-gold-500 text-ink hover:bg-gold-400"
+    >
+        &#9654; Play the news
+    </button>
+</div>
+
+<div id="news-game-wrap" class="relative mb-8 hidden">
+    <canvas
+        id="news-game"
+        height="220"
+        class="w-full border-2 border-white/30 bg-white/5 cursor-pointer touch-none"
+        aria-label="News runner mini game. Press space or tap to jump; catch coins to advance the news and rubies for bonus points."
+    ></canvas>
+    <button
+        id="news-game-close"
+        type="button"
+        aria-label="Close the game"
+        class="absolute top-2 right-2 w-9 h-9 border-2 border-white/50 bg-ink/60 text-white hover:border-white transition-colors px-font text-[0.625rem]"
+    >
+        X
+    </button>
+    <p class="px-font text-[0.5rem] text-white/60 mt-3 text-center">
+        Space / tap to jump &#183; coins advance the news &#183; rubies are bonus
+    </p>
+</div>
+
+<script>
+    (function () {
+        const playBtn = document.getElementById("news-play");
+        const wrap = document.getElementById("news-game-wrap");
+        const canvas = document.getElementById(
+            "news-game",
+        ) as HTMLCanvasElement | null;
+        const closeBtn = document.getElementById("news-game-close");
+        const nextBtn = document.getElementById(
+            "news-next",
+        ) as HTMLButtonElement | null;
+        const scroller = document.getElementById("news-scroller");
+        if (!playBtn || !wrap || !canvas || !closeBtn) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const total = scroller ? scroller.children.length : 0;
+
+        // sprites
+        const load = (src: string) => {
+            const img = new Image();
+            img.src = src;
+            return img;
+        };
+        const S = {
+            mascot: load("/logo8bit-mascot.png"),
+            coin: load("/px-coin.png"),
+            ruby: load("/px-ruby.png"),
+            island: load("/px-island.png"),
+            cloud: load("/px-cloud.png"),
+        };
+
+        // world state
+        const GROUND_H = 44;
+        let W = 0,
+            H = canvas.height;
+        let running = false;
+        let raf = 0;
+        let last = 0;
+        let speed = 220; // px/s world scroll
+        let groundX = 0;
+        let caught = 0;
+        let rubies = 0;
+        let cleared = false;
+
+        const player = { x: 70, y: 0, vy: 0, w: 54, h: 47, onGround: true };
+        type Coin = { x: number; y: number; taken: boolean; kind: "coin" | "ruby" };
+        type Pop = { x: number; y: number; t: number };
+        let coins: Coin[] = [];
+        let pops: Pop[] = [];
+        let spawnIn = 0.8;
+        const clouds = [
+            { x: 80, y: 24, s: 0.25, w: 90 },
+            { x: 460, y: 58, s: 0.35, w: 64 },
+            { x: 900, y: 30, s: 0.2, w: 110 },
+        ];
+
+        const groundY = () => H - GROUND_H;
+
+        function resize() {
+            W = canvas.clientWidth;
+            canvas.width = W;
+            H = canvas.height = 220;
+        }
+
+        function jump() {
+            if (!running) return;
+            if (player.onGround) {
+                player.vy = -520;
+                player.onGround = false;
+            }
+        }
+
+        function reset() {
+            coins = [];
+            pops = [];
+            caught = 0;
+            rubies = 0;
+            cleared = false;
+            speed = 220;
+            spawnIn = 0.8;
+            player.y = 0;
+            player.vy = 0;
+            player.onGround = true;
+        }
+
+        function step(dt: number) {
+            // player physics (y is offset above ground, 0 = standing)
+            player.vy += 1500 * dt;
+            player.y += player.vy * dt;
+            if (player.y >= 0) {
+                player.y = 0;
+                player.vy = 0;
+                player.onGround = true;
+            }
+
+            groundX = (groundX - speed * dt) % 160;
+            clouds.forEach((c) => {
+                c.x -= speed * c.s * dt;
+                if (c.x < -c.w) c.x = W + 40;
+            });
+
+            spawnIn -= dt;
+            if (spawnIn <= 0 && !cleared) {
+                // low coins are walk-through; high coins need a jump
+                const ruby = Math.random() < 0.25;
+                const high = ruby || Math.random() > 0.45;
+                coins.push({
+                    x: W + 40,
+                    y: ruby ? 132 : high ? 118 : 36,
+                    taken: false,
+                    kind: ruby ? "ruby" : "coin",
+                });
+                spawnIn = 1.1 + Math.random() * 1.1;
+            }
+
+            const px = player.x,
+                py = groundY() - player.h + player.y;
+            coins.forEach((c) => {
+                c.x -= speed * dt;
+                if (!c.taken) {
+                    const cy = groundY() - c.y - 28;
+                    if (
+                        px < c.x + 28 &&
+                        px + player.w > c.x &&
+                        py < cy + 28 &&
+                        py + player.h > cy
+                    ) {
+                        c.taken = true;
+                        pops.push({ x: c.x, y: cy, t: 0 });
+                        if (c.kind === "ruby") {
+                            rubies++;
+                        } else {
+                            caught++;
+                            speed = Math.min(speed + 6, 380);
+                            if (nextBtn && !nextBtn.disabled) nextBtn.click();
+                            if (total && caught >= total) cleared = true;
+                        }
+                    }
+                }
+            });
+            coins = coins.filter((c) => c.x > -40 && !c.taken);
+            pops.forEach((p) => (p.t += dt));
+            pops = pops.filter((p) => p.t < 0.7);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.imageSmoothingEnabled = false;
+
+            // clouds
+            clouds.forEach((c) => {
+                const r = S.cloud.width ? c.w / S.cloud.width : 1;
+                ctx.globalAlpha = 0.8;
+                ctx.drawImage(S.cloud, c.x, c.y, c.w, S.cloud.height * r);
+                ctx.globalAlpha = 1;
+            });
+
+            // ground: repeating island strip
+            if (S.island.width) {
+                const gw = 160;
+                const gh = (S.island.height / S.island.width) * gw;
+                for (let x = groundX - gw; x < W + gw; x += gw - 8) {
+                    ctx.drawImage(S.island, x, groundY() - 6, gw, gh);
+                }
+            }
+
+            // coins
+            coins.forEach((c) => {
+                if (c.taken) return;
+                if (c.kind === "ruby")
+                    ctx.drawImage(S.ruby, c.x, groundY() - c.y - 28, 32, 27);
+                else ctx.drawImage(S.coin, c.x, groundY() - c.y - 28, 28, 28);
+            });
+
+            // mascot
+            const bob = player.onGround
+                ? Math.sin(performance.now() / 90) * 2
+                : 0;
+            ctx.drawImage(
+                S.mascot,
+                player.x,
+                groundY() - player.h + player.y + bob,
+                player.w,
+                player.h,
+            );
+
+            // +1 pops
+            ctx.font = "10px 'Press Start 2P', monospace";
+            ctx.fillStyle = "#f4c700";
+            pops.forEach((p) => {
+                ctx.globalAlpha = 1 - p.t / 0.7;
+                ctx.fillText("+1", p.x + 6, p.y - p.t * 40);
+                ctx.globalAlpha = 1;
+            });
+
+            // HUD
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "10px 'Press Start 2P', monospace";
+            const hud = total
+                ? `NEWS ${Math.min(caught + 1, total)}/${total}`
+                : `${caught}`;
+            ctx.fillText(hud, 12, 22);
+            if (S.ruby.width) {
+                const hw = ctx.measureText(hud).width;
+                ctx.drawImage(S.ruby, 12 + hw + 16, 10, 18, 15);
+                ctx.fillText(`x${rubies}`, 12 + hw + 40, 22);
+            }
+
+            if (cleared) {
+                ctx.fillStyle = "#f4c700";
+                ctx.font = "16px 'Press Start 2P', monospace";
+                const msg = "WORLD CLEAR!";
+                const tw = ctx.measureText(msg).width;
+                ctx.fillText(msg, (W - tw) / 2, H / 2 - 10);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "8px 'Press Start 2P', monospace";
+                const sub = "ALL NEWS READ - TAP TO RESTART";
+                const sw = ctx.measureText(sub).width;
+                ctx.fillText(sub, (W - sw) / 2, H / 2 + 16);
+            }
+        }
+
+        function loop(t: number) {
+            if (!running) return;
+            const dt = Math.min((t - last) / 1000, 0.05);
+            last = t;
+            if (!cleared) step(dt);
+            draw();
+            raf = requestAnimationFrame(loop);
+        }
+
+        function open() {
+            wrap.classList.remove("hidden");
+            playBtn.parentElement?.classList.add("hidden");
+            resize();
+            reset();
+            running = true;
+            last = performance.now();
+            document.fonts?.ready.then(() => {});
+            raf = requestAnimationFrame(loop);
+        }
+
+        function close() {
+            running = false;
+            cancelAnimationFrame(raf);
+            wrap.classList.add("hidden");
+            playBtn.parentElement?.classList.remove("hidden");
+        }
+
+        playBtn.addEventListener("click", open);
+        closeBtn.addEventListener("click", close);
+        canvas.addEventListener("pointerdown", () => {
+            if (cleared) {
+                reset();
+            } else {
+                jump();
+            }
+        });
+        document.addEventListener("keydown", (e) => {
+            if (!running) return;
+            if (e.key === " " || e.key === "ArrowUp") {
+                // only capture keys while the game is on screen
+                const r = canvas.getBoundingClientRect();
+                if (r.bottom > 0 && r.top < innerHeight) {
+                    e.preventDefault();
+                    if (cleared) reset();
+                    else jump();
+                }
+            }
+            if (e.key === "Escape") close();
+        });
+        window.addEventListener("resize", () => {
+            if (running) resize();
+        });
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden && running) {
+                running = false;
+                cancelAnimationFrame(raf);
+            } else if (!document.hidden && !wrap.classList.contains("hidden")) {
+                running = true;
+                last = performance.now();
+                raf = requestAnimationFrame(loop);
+            }
+        });
+    })();
+</script>
