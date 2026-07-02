@@ -1,9 +1,13 @@
+/* @import must precede all other statements (including @tailwind) or the
+   bundler drops it silently. */
+/* Design System Tokens */
+@import "./design-tokens.css";
+/* 8-bit design language: palette vars, pixel font, px-* components */
+@import "./pixel.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Design System Tokens */
-@import "./design-tokens.css";
 
 @font-face {
     font-family: "Martian Grotesk";
@@ -43,8 +47,15 @@ html {
 }
 
 :focus-visible {
-    outline: 2px solid #dc2626;
+    outline: 3px solid #ff5545;
     outline-offset: 2px;
+}
+
+/* Press Start 2P ships one weight; never let the browser fake bold/italic
+   (it smears the pixels). */
+.font-display,
+.px-font {
+    font-synthesis: none;
 }
 
 body {

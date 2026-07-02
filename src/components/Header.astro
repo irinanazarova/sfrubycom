@@ -24,27 +24,29 @@ const { darkHero = true } = Astro.props;
         "fixed w-full z-50 transition-all duration-300 ogplus:hidden",
         darkHero
             ? "bg-transparent"
-            : "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100/20",
+            : "bg-white border-b-4 border-ink",
     ]}
     data-dark-hero={darkHero ? "true" : "false"}
     id="main-header"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
-            <a
-                href="/"
-                class="font-display font-bold text-xl md:text-2xl transition-transform duration-200 hover:scale-105"
-            >
+            <a href="/" class="flex items-center gap-2.5">
                 <img
-                    src="/sfruby_letters_white.png"
-                    alt="SF Ruby"
-                    class:list={["header-logo-white object-contain w-28 h-12", { hidden: !darkHero }]}
+                    src="/logo8bit-mascot.png"
+                    alt=""
+                    width="504"
+                    height="438"
+                    class="px-pixelated h-11 w-auto"
                 />
-                <img
-                    src="/sfruby_letters_black.png"
-                    alt="SF Ruby"
-                    class:list={["header-logo-dark object-contain w-28 h-12", { hidden: darkHero }]}
-                />
+                <span
+                    class:list={["header-logo-white px-font text-sm text-white px-shadow-ink", { hidden: !darkHero }]}
+                    >SF Ruby</span
+                >
+                <span
+                    class:list={["header-logo-dark px-font text-sm text-ink", { hidden: darkHero }]}
+                    >SF Ruby</span
+                >
             </a>
 
             <nav class="hidden lg:flex items-center space-x-8">
@@ -54,10 +56,10 @@ const { darkHero = true } = Astro.props;
                             href={item.href}
                             target={item.external ? "_blank" : undefined}
                             rel={item.external ? "noopener noreferrer" : undefined}
-                            class="nav-link relative font-medium text-white/90 hover:text-white transition-all duration-300 group"
+                            class="nav-link px-font text-[0.625rem] relative text-white/90 hover:text-white transition-all duration-300 group"
                         >
                             {item.name}
-                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-ruby-500 to-pink-500 transition-all duration-300 group-hover:w-full" />
+                            <span class="absolute -bottom-1 left-0 w-0 h-1 bg-ruby-500 transition-all duration-300 group-hover:w-full" />
                         </a>
                     ))
                 }
@@ -65,7 +67,7 @@ const { darkHero = true } = Astro.props;
                     href="https://lu.ma/sfruby"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="px-5 py-2.5 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                    class="px-btn px-btn--gold px-font text-[0.625rem] px-5 py-3"
                 >
                     Join Meetup
                 </a>
@@ -217,13 +219,7 @@ const { darkHero = true } = Astro.props;
         if (!darkHero || window.scrollY > 50) {
             // Scrolled / light-top - white background, dark text
             header?.classList.remove("bg-transparent");
-            header?.classList.add(
-                "bg-white/95",
-                "backdrop-blur-lg",
-                "shadow-lg",
-                "border-b",
-                "border-gray-100/20",
-            );
+            header?.classList.add("bg-white", "border-b-4", "border-ink");
             logoWhite?.classList.add("hidden");
             logoDark?.classList.remove("hidden");
             navLinks.forEach((link) => {
@@ -247,13 +243,7 @@ const { darkHero = true } = Astro.props;
         } else {
             // At top - transparent background, white text
             header?.classList.add("bg-transparent");
-            header?.classList.remove(
-                "bg-white/95",
-                "backdrop-blur-lg",
-                "shadow-lg",
-                "border-b",
-                "border-gray-100/20",
-            );
+            header?.classList.remove("bg-white", "border-b-4", "border-ink");
             logoWhite?.classList.remove("hidden");
             logoDark?.classList.add("hidden");
             navLinks.forEach((link) => {
