@@ -245,6 +245,47 @@
         8px 0 0 0 rgba(255, 255, 255, 0.85);
 }
 
+/* ---------- interactive islands ---------- */
+
+/* A floating island as a button: an item sprite bobs above the island,
+   the label is a plate below. Hover speeds the bob and lights the plate
+   gold; press pushes the whole island down. */
+@keyframes px-bob {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+.px-island-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+.px-island-btn__item {
+    image-rendering: pixelated;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.375rem;
+    animation: px-bob 2.4s ease-in-out infinite;
+}
+.px-island-btn:hover .px-island-btn__item {
+    animation-duration: 0.9s;
+}
+.px-island-btn:active {
+    transform: translateY(4px);
+}
+.px-island-btn .px-plate {
+    margin-top: 0.875rem;
+}
+.px-island-btn:hover .px-plate {
+    background: var(--px-gold);
+    color: var(--px-ink);
+}
+
 /* PRESS START blink */
 @keyframes px-blink {
     0%,
@@ -263,6 +304,12 @@
 @media (prefers-reduced-motion: reduce) {
     .px-blink {
         animation: none;
+    }
+    .px-island-btn__item {
+        animation: none;
+    }
+    .px-island-btn:active {
+        transform: none;
     }
     .px-btn,
     .px-btn:hover,
