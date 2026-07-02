@@ -110,6 +110,24 @@
     image-rendering: pixelated;
 }
 
+/* starry night: the news section's dark counterpart to the day skies.
+   Two offset 1px star fields over a flat navy ramp. */
+.px-night {
+    background-color: #020617;
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1.5px),
+        radial-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1.5px),
+        linear-gradient(to bottom, #071f56 0%, #041030 25%, #020617 60%);
+    background-size:
+        260px 260px,
+        140px 140px,
+        100% 100%;
+    background-position:
+        24px 44px,
+        104px 128px,
+        0 0;
+}
+
 /* ---------- boxes ---------- */
 
 /* card with ink border + hard offset shadow; no rounding anywhere */
@@ -235,15 +253,6 @@
     background: var(--px-cloud);
 }
 
-/* blocky retro cloud: stepped corners via side shadows, no radius */
-.px-cloud-block {
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow:
-        0 -8px 0 0 rgba(255, 255, 255, 0.85),
-        0 8px 0 0 rgba(255, 255, 255, 0.85),
-        -8px 0 0 0 rgba(255, 255, 255, 0.85),
-        8px 0 0 0 rgba(255, 255, 255, 0.85);
-}
 
 /* ---------- interactive islands ---------- */
 
@@ -285,6 +294,17 @@
 .px-island-btn:hover .px-plate {
     background: var(--px-gold);
     color: var(--px-ink);
+}
+
+/* horizontal snap row with the scrollbar hidden (pager provides state) */
+.px-scroll-row {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    scroll-padding-left: 0.25rem;
+}
+.px-scroll-row::-webkit-scrollbar {
+    display: none;
 }
 
 /* PRESS START blink */
