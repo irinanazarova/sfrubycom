@@ -25,12 +25,12 @@ const { id, email, subject = "", title = "Get in touch" } = Astro.props;
     id={`email-modal-${id}`}
     class="email-modal fixed inset-0 z-50 m-auto p-0 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur-sm"
 >
-    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+    <div class="px-card bg-white max-w-md w-full mx-4 overflow-hidden">
         <div class="p-6">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-gray-900">{title}</h3>
+                <h3 class="px-font text-xs md:text-sm text-gray-900">{title}</h3>
                 <button
-                    class="email-modal-close w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                    class="email-modal-close w-9 h-9 flex items-center justify-center border-2 border-ink bg-gray-100 hover:bg-gray-200 transition-colors"
                     aria-label="Close"
                 >
                     <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,10 +41,10 @@ const { id, email, subject = "", title = "Get in touch" } = Astro.props;
 
             <p class="text-gray-600 mb-4">Send us an email at:</p>
 
-            <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-xl border border-gray-200">
+            <div class="flex items-center gap-2 p-3 bg-gray-50 border-2 border-ink">
                 <span class="flex-1 font-mono text-gray-900 select-all">{email}</span>
                 <button
-                    class="email-copy-btn flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-ruby-500 to-pink-500 hover:from-ruby-400 hover:to-pink-400 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow-md transition-all"
+                    class="email-copy-btn px-btn px-font text-[0.5rem] gap-2 px-3 py-2 bg-ruby-500 text-white hover:bg-ruby-400"
                     data-email={email}
                 >
                     <svg class="w-4 h-4 copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +66,7 @@ const { id, email, subject = "", title = "Get in touch" } = Astro.props;
             <div class="mt-6 flex gap-3">
                 <a
                     href={`mailto:${email}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`}
-                    class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg transition-colors"
+                    class="flex-1 px-btn px-font text-[0.5625rem] gap-2 px-4 py-3 bg-ink text-white hover:bg-gray-800"
                 >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
