@@ -67,13 +67,6 @@
     background-repeat: repeat-x;
     image-rendering: pixelated;
 }
-.px-sky-grad-deep {
-    background-color: oklch(68.22% 0.1255 238.04);
-    background-image: url("/px-sky-deep.png");
-    background-size: auto 100%;
-    background-repeat: repeat-x;
-    image-rendering: pixelated;
-}
 .px-sky-grad-dusk {
     background-color: oklch(42.51% 0.0832 242.52);
     background-image: url("/px-sky-dusk.png");
