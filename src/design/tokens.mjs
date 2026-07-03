@@ -123,21 +123,24 @@ export const skyRamps = {
     height: 384,
     stops: [palette.sky[500], palette.sky[400]],
   },
+  // Deep: Anton-flat light blues for most of the hero, then a late
+  // descent to the news navy (the masthead handoff needs indigo-900).
   "px-sky-deep": {
     height: 576,
     stops: [
-      palette.sky[400],
       palette.sky[500],
+      palette.sky[400],
+      palette.sky[400],
       palette.sky[600],
-      palette.sky[700],
-      palette.sky[800],
       palette.sky[900],
       palette.indigo[900],
     ],
   },
+  // Dusk: calm dark sky, lighter toward the ground like the logo,
+  // dark enough throughout for white hero text.
   "px-sky-dusk": {
     height: 256,
-    stops: [palette.sky[700], palette.sky[800], palette.sky[900], palette.indigo[900]],
+    stops: [palette.sky[800], palette.sky[700]],
   },
   "px-royal": {
     height: 192,

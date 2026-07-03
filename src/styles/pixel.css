@@ -68,14 +68,14 @@
     image-rendering: pixelated;
 }
 .px-sky-grad-deep {
-    background-color: #236a97;
+    background-color: #3ea3dd;
     background-image: url("/px-sky-deep.png");
     background-size: auto 100%;
     background-repeat: repeat-x;
     image-rendering: pixelated;
 }
 .px-sky-grad-dusk {
-    background-color: #123a57;
+    background-color: #1d5378;
     background-image: url("/px-sky-dusk.png");
     background-size: auto 100%;
     background-repeat: repeat-x;
