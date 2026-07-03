@@ -1,2532 +1,525 @@
 ---
-import { palette } from "../design/tokens.mjs";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Badge from "../components/Badge.astro";
 import SocialLink from "../components/SocialLink.astro";
-import EmailModal from "../components/EmailModal.astro";
-import ResourceCard from "../components/ResourceCard.astro";
-import DistanceBadge from "../components/DistanceBadge.astro";
+import IslandNav from "../components/IslandNav.astro";
+import { palette, cssVars, pixelSizes } from "../design/tokens.mjs";
+
+// The living style guide for the 8-bit design language (2026 refresh).
+// Values render straight from src/design/tokens.mjs so docs cannot drift.
+
+const nav = [
+    { id: "principles", label: "Principles" },
+    { id: "tokens", label: "Tokens" },
+    { id: "type", label: "Type" },
+    { id: "skies", label: "Skies" },
+    { id: "components", label: "Components" },
+    { id: "islands", label: "Islands" },
+    { id: "sprites", label: "Sprites" },
+    { id: "motion", label: "Motion" },
+    { id: "patterns", label: "Patterns" },
+];
+
+const scales = ["ruby", "sky", "indigo", "gold", "pumpkin"] as const;
+
+const sprites = [
+    { src: "/logo8bit-mascot.png", name: "mascot", note: "header, footer, game player, 404" },
+    { src: "/logo8bit-transparent.png", name: "lockup", note: "conference + homepage heroes" },
+    { src: "/px-island.png", name: "island", note: "island buttons, hero decoration, game ground" },
+    { src: "/px-coin.png", name: "coin '26", note: "sponsor islands, game collectible" },
+    { src: "/px-ruby.png", name: "ruby", note: "game bonus collectible" },
+    { src: "/px-quest.png", name: "quest !", note: "CFP islands, new-quest markers" },
+    { src: "/px-envelope.png", name: "envelope", note: "contact / newsletter islands" },
+    { src: "/px-ticket.png", name: "ticket", note: "tickets / conference islands" },
+    { src: "/px-heart.png", name: "heart", note: "Slack / community islands" },
+    { src: "/px-play.png", name: "play", note: "videos islands" },
+    { src: "/px-briefcase.png", name: "briefcase", note: "jobs islands, news hiring strip" },
+    { src: "/px-cloud.png", name: "cloud", note: "hero + game decoration" },
+    { src: "/px-scene-cfp.png", name: "CFP scene", note: "conference CFP section" },
+];
+
+const skies = [
+    { cls: "px-sky-grad-day", name: "px-sky-grad-day", note: "conference + sponsor heroes" },
+    { cls: "px-sky-grad-deep", name: "px-sky-grad-deep", note: "homepage hero" },
+    { cls: "px-sky-grad-dusk", name: "px-sky-grad-dusk", note: "interior page heroes" },
+    { cls: "px-royal-grad", name: "px-royal-grad", note: "notify / CTA sections" },
+    { cls: "px-night", name: "px-night", note: "news sections (starry)" },
+    { cls: "px-dither-sky", name: "px-dither-sky", note: "flat sky (overworld sections)" },
+];
 ---
 
 <BaseLayout
     title="Design System - SF Ruby"
-    description="SF Ruby Design System documentation. Typography, colors, components, and usage guidelines."
+    description="The SF Ruby 8-bit design system: tokens, type, skies, components, sprites, and page patterns."
 >
     <!-- Hero -->
-    <section
-        class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden"
-    >
-        
-
+    <section class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden">
+        <img
+            src="/px-cloud.png"
+            alt=""
+            width="34"
+            height="14"
+            class="px-pixelated absolute top-24 right-[12%] w-28 animate-float pointer-events-none"
+            aria-hidden="true"
+        />
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <Badge variant="ruby" size="md" class="mb-4"
-                    >Design System</Badge
-                >
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                    SF Ruby Design System
-                </h1>
-                <p class="text-xl text-gray-300">
-                    A comprehensive guide to our visual language, components,
-                    and patterns. Build consistent, beautiful interfaces across
-                    the SF Ruby ecosystem.
-                </p>
-            </div>
+            <h1 class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-5">
+                Design System
+            </h1>
+            <p class="text-lg text-white/90 max-w-2xl">
+                The 8-bit language, derived pixel by pixel from the 2026
+                conference logo. One token source, generated assets, and
+                components that press like buttons should.
+            </p>
         </div>
     </section>
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex gap-8 overflow-x-auto py-4 text-sm font-medium">
-                <a
-                    href="#foundations"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Foundations</a
-                >
-                <a
-                    href="#colors"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Colors</a
-                >
-                <a
-                    href="#typography"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Typography</a
-                >
-                <a
-                    href="#spacing"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Spacing</a
-                >
-                <a
-                    href="#buttons"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Buttons</a
-                >
-                <a
-                    href="#badges"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Badges</a
-                >
-                <a
-                    href="#social-links"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Social Links</a
-                >
-                <a
-                    href="#cards"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Cards</a
-                >
-                <a
-                    href="#modals"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Modals</a
-                >
-                <a
-                    href="#navigation"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Navigation</a
-                >
-                <a
-                    href="#sections"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Sections</a
-                >
-                <a
-                    href="#filters"
-                    class="text-gray-600 hover:text-ruby-500 whitespace-nowrap"
-                    >Filters</a
-                >
-            </div>
+    <!-- In-page nav (z below the mobile bottom nav) -->
+    <nav
+        class="sticky top-20 z-30 bg-white border-b-4 border-ink overflow-x-auto px-scroll-row"
+        aria-label="Design system sections"
+    >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6 py-3 whitespace-nowrap">
+            {
+                nav.map((item) => (
+                    <a
+                        href={`#${item.id}`}
+                        class="px-font text-px8 text-gray-600 hover:text-ruby-600 transition-colors"
+                    >
+                        {item.label}
+                    </a>
+                ))
+            }
         </div>
     </nav>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <!-- Foundations -->
-        <!-- 8-bit design language (2026 refresh) -->
-        <section id="pixel" class="mb-24 scroll-mt-24">
+        <!-- Principles -->
+        <section id="principles" class="mb-24 scroll-mt-32">
             <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
-                8-bit Language
+                Principles
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="px-card bg-white p-6">
+                    <h3 class="px-font text-px10 text-ruby-600 mb-3">
+                        Everything is square
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Border radii are globally zero (including
+                        <code>rounded-full</code>). Elevation is a hard ink
+                        offset, never a blur. If a corner looks rounded or a
+                        shadow looks soft, it's a bug.
+                    </p>
+                </div>
+                <div class="px-card bg-white p-6">
+                    <h3 class="px-font text-px10 text-ruby-600 mb-3">
+                        The logo is the source
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Every color, sprite, and sky is sampled or generated
+                        from <code>public/logo8bit.png</code>. New art follows
+                        its conventions: pure black outlines, flat fills, one
+                        highlight and one shadow per hue.
+                    </p>
+                </div>
+                <div class="px-card bg-white p-6">
+                    <h3 class="px-font text-px10 text-ruby-600 mb-3">
+                        Playful, never gated
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Game elements (islands, coins, the news runner) are
+                        opt-in delight layered over content that works without
+                        them. Locks and unlocks live only inside a play
+                        session.
+                    </p>
+                </div>
+                <div class="px-card bg-white p-6">
+                    <h3 class="px-font text-px10 text-ruby-600 mb-3">
+                        Mobile first, app feel
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Design at 390px first. Touch targets stay at 44px+,
+                        press states use <code>.tap-press</code> or
+                        <code>.px-btn</code>, and all motion respects
+                        <code>prefers-reduced-motion</code>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokens -->
+        <section id="tokens" class="mb-24 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Tokens
             </h2>
             <p class="text-gray-600 mb-8 max-w-2xl">
-                The 2026 refresh derives everything from the pixel logo
-                (<code>public/logo8bit.png</code>). Tokens are remapped in
-                <code>tailwind.config.mjs</code> (palette, zero radii, hard ink
-                shadows); components live in
-                <code>src/styles/pixel.css</code>. Sections below this one
-                document the pre-refresh system and are kept for reference.
+                <code>src/design/tokens.mjs</code> is the single source of
+                truth. Tailwind imports it, <code>scripts/sync-tokens.mjs</code>
+                generates the CSS variables, and the sprite and gradient
+                generators consume the same object. Never edit
+                <code>src/styles/tokens.css</code> or <code>public/px-*.png</code>
+                by hand.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-px10 text-gray-900 mb-4">Palette</h3>
-                    {["ruby", "sky", "indigo", "gold"].map((name) => (
-                        <div class="mb-3">
-                            <p class="text-xs text-gray-500 mb-1.5 font-mono">{name}</p>
+            <div class="px-card bg-white p-6 mb-6">
+                {
+                    scales.map((name) => (
+                        <div class="mb-4">
+                            <p class="text-xs text-gray-500 mb-1.5 font-mono">
+                                {name}
+                            </p>
                             <div class="flex flex-wrap gap-1">
                                 {Object.entries(palette[name]).map(([step, hex]) => (
                                     <span
-                                        class="w-8 h-8 border-2 border-ink inline-block"
+                                        class="w-9 h-9 border-2 border-ink inline-block"
                                         style={`background:${hex}`}
                                         title={`${name}-${step} ${hex}`}
                                     />
                                 ))}
                             </div>
                         </div>
-                    ))}
-                    <p class="text-sm text-gray-500 mt-4">Single source: <code>src/design/tokens.mjs</code> (plus ink <code>{palette.ink}</code>). Edit there, then run the sync scripts.</p>
+                    ))
+                }
+                <div class="flex flex-wrap gap-4 mt-5">
+                    <span class="inline-flex items-center gap-2 text-sm text-gray-600">
+                        <span class="w-9 h-9 border-2 border-ink inline-block" style={`background:${palette.ink}`}></span>
+                        <code>ink {palette.ink}</code>
+                    </span>
+                    <span class="inline-flex items-center gap-2 text-sm text-gray-600">
+                        <span class="w-9 h-9 border-2 border-ink inline-block" style={`background:${palette.cloudshade}`}></span>
+                        <code>cloudshade {palette.cloudshade}</code>
+                    </span>
+                </div>
+            </div>
+            <div class="px-card bg-white p-6">
+                <h3 class="px-font text-px10 text-gray-900 mb-4">
+                    CSS variables (generated)
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 font-mono text-xs text-gray-600">
+                    {
+                        Object.entries(cssVars).map(([name, value]) => (
+                            <span class="inline-flex items-center gap-2">
+                                <span
+                                    class="w-4 h-4 border border-ink inline-block shrink-0"
+                                    style={`background:${value}`}
+                                />
+                                --{name}: {value}
+                            </span>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Type -->
+        <section id="type" class="mb-24 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Type
+            </h2>
+            <p class="text-gray-600 mb-8 max-w-2xl">
+                Three tiers. Press Start 2P is loud and wide: use it only for
+                short display strings, never faked bold, never long sentences.
+            </p>
+            <div class="space-y-6">
+                <div class="px-card bg-white p-6">
+                    <p class="text-xs text-gray-500 font-mono mb-3">
+                        .px-font / font-pixel — Press Start 2P, display moments
+                    </p>
+                    <p class="px-font text-xl text-gray-900 mb-2">Choose your quest</p>
+                    <div class="flex flex-wrap gap-x-8 gap-y-2 mt-4">
+                        <span class="px-font text-px8 text-gray-700">text-px8 · 0.5rem</span>
+                        <span class="px-font text-px9 text-gray-700">text-px9 · 0.5625rem</span>
+                        <span class="px-font text-px10 text-gray-700">text-px10 · 0.625rem</span>
+                    </div>
                 </div>
                 <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-px10 text-gray-900 mb-4">Type</h3>
-                    <p class="px-font text-sm text-gray-900 mb-2">Press Start 2P: display moments</p>
-                    <p class="font-display font-bold text-lg text-gray-900 mb-2">Martian Grotesk: long headings</p>
-                    <p class="text-sm text-gray-600">Martian Mono: body text. Pixel type only for short strings via <code>.px-font</code>.</p>
+                    <p class="text-xs text-gray-500 font-mono mb-3">
+                        font-display — Martian Grotesk, long headings
+                    </p>
+                    <p class="font-display font-bold text-3xl text-gray-900">
+                        The new generation of Ruby success stories
+                    </p>
                 </div>
                 <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-px10 text-gray-900 mb-4">Components</h3>
-                    <div class="flex flex-wrap items-center gap-4">
-                        <button class="px-btn px-font text-px10 px-5 py-3 bg-gold-500 text-ink">px-btn</button>
-                        <span class="px-plate px-font text-px10 px-3 py-2">px-plate</span>
-                        <span class="px-plate px-plate--gold px-font text-px10 px-3 py-2">gold</span>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-4">Also: px-card, px-dialog, px-bubble, px-crenel, px-island-btn (see IslandNav.astro), px-night, px-sky-grad-*.</p>
+                    <p class="text-xs text-gray-500 font-mono mb-3">
+                        font-sans (default) — Martian Mono, body
+                    </p>
+                    <p class="text-gray-600 max-w-xl">
+                        Join founders and engineers at monthly meetups, talks,
+                        and the annual SF Ruby conference. The fixed-width
+                        rhythm echoes the pixel grid.
+                    </p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Skies -->
+        <section id="skies" class="mb-24 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Skies
+            </h2>
+            <p class="text-gray-600 mb-8 max-w-2xl">
+                Bayer-dithered gradients generated from the sky ramp tokens
+                (<code>scripts/px-gradients.mjs</code>), plus a starry night
+                for news. Pick by page mood; the crenellated divider steps one
+                sky into the next section's background color.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {
+                    skies.map((sky) => (
+                        <figure class="px-card bg-white overflow-hidden">
+                            <div class={`h-28 ${sky.cls}`} />
+                            <figcaption class="p-4">
+                                <code class="text-sm text-gray-900">.{sky.name}</code>
+                                <p class="text-xs text-gray-500 mt-1">{sky.note}</p>
+                            </figcaption>
+                        </figure>
+                    ))
+                }
+            </div>
+            <div class="mt-8 px-card bg-white overflow-hidden">
+                <div class="px-dither-sky h-16 relative">
+                    <div
+                        class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#ffffff]"
+                        aria-hidden="true"
+                    >
+                    </div>
+                </div>
+                <p class="p-4 text-xs text-gray-500">
+                    <code>.px-crenel</code> divider: set
+                    <code>--px-crenel-color</code> to the next section's
+                    background.
+                </p>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section id="components" class="mb-24 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Components
+            </h2>
+
+            <div class="px-card bg-white p-6 mb-6">
+                <h3 class="px-font text-px10 text-gray-900 mb-4">
+                    Buttons — Button component / .px-btn
+                </h3>
+                <div class="flex flex-wrap items-center gap-4 mb-4">
+                    <Button variant="primary">Primary</Button>
+                    <Button variant="secondary">Secondary</Button>
+                    <Button variant="white" class="ring-1 ring-gray-200">White</Button>
+                    <Button variant="outline">Outline</Button>
+                    <button class="px-btn px-btn--gold px-font text-px10 px-6 py-3.5">Gold (.px-btn--gold)</button>
+                </div>
+                <div class="flex flex-wrap items-center gap-4">
+                    <Button variant="primary" size="sm">Small</Button>
+                    <Button variant="primary" size="md">Medium</Button>
+                    <Button variant="primary" size="lg">Large</Button>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                    Hover nudges up, press pushes into the shadow. Ghost
+                    variant stays chromeless for tertiary actions.
+                </p>
+            </div>
+
+            <div class="px-card bg-white p-6 mb-6">
+                <h3 class="px-font text-px10 text-gray-900 mb-4">
+                    Badges & plates
+                </h3>
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <Badge variant="ruby">Ruby</Badge>
+                    <Badge variant="success">Funding</Badge>
+                    <Badge variant="warning">Release</Badge>
+                    <Badge variant="info">Info</Badge>
+                    <Badge variant="featured">Featured</Badge>
+                    <Badge variant="hiring">Hiring</Badge>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="px-plate px-font text-px10 px-4 py-2">px-plate</span>
+                    <span class="px-plate px-plate--gold px-font text-px10 px-4 py-2">px-plate--gold</span>
+                    <span class="px-plate px-plate--orange px-font text-px10 px-4 py-2">px-plate--orange</span>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                    Badges tag content inline; plates are standalone label
+                    blocks (kickers, island labels, HUD chips).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-px10 text-gray-900 mb-4">Sprites</h3>
-                    <div class="flex flex-wrap items-end gap-4">
-                        <img src="/logo8bit-mascot.png" alt="mascot" class="px-pixelated h-12 w-auto" />
-                        <img src="/px-island.png" alt="island" class="px-pixelated h-8 w-auto" />
-                        <img src="/px-coin.png" alt="coin" class="px-pixelated h-8 w-auto" />
-                        <img src="/px-heart.png" alt="heart" class="px-pixelated h-8 w-auto" />
-                        <img src="/px-envelope.png" alt="envelope" class="px-pixelated h-7 w-auto" />
-                        <img src="/px-ticket.png" alt="ticket" class="px-pixelated h-6 w-auto" />
-                        <img src="/px-cloud.png" alt="cloud" class="px-pixelated h-8 w-auto" />
-                    </div>
-                    <p class="text-sm text-gray-500 mt-4">Regenerate with <code>scripts/px-sprites.mjs</code> and <code>scripts/px-gradients.mjs</code>.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="foundations" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    Foundations
-                </h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    The building blocks of our design system. These foundational
-                    elements ensure consistency and cohesion across all SF Ruby
-                    properties.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <a
-                    href="#colors"
-                    class="group p-6 bg-white rounded-xl border border-gray-200 hover:border-ruby-300 hover:shadow-lg transition-all"
-                >
-                    <div
-                        class="w-12 h-12 bg-gradient-to-br from-ruby-500 to-pink-500 rounded-xl mb-4"
-                    >
-                    </div>
-                    <h3
-                        class="font-bold text-gray-900 group-hover:text-ruby-600 mb-2"
-                    >
-                        Colors
-                    </h3>
+                    <h3 class="px-font text-px10 text-gray-900 mb-4">.px-card</h3>
                     <p class="text-sm text-gray-600">
-                        Our color palette including Ruby red, neutrals, and
-                        semantic colors.
+                        4px ink border + 8px hard shadow. The default surface
+                        for content on light backgrounds.
                     </p>
-                </a>
-                <a
-                    href="#typography"
-                    class="group p-6 bg-white rounded-xl border border-gray-200 hover:border-ruby-300 hover:shadow-lg transition-all"
-                >
-                    <div
-                        class="w-12 h-12 bg-gray-900 rounded-xl mb-4 flex items-center justify-center text-white font-bold text-xl"
-                    >
-                        Aa
-                    </div>
-                    <h3
-                        class="font-bold text-gray-900 group-hover:text-ruby-600 mb-2"
-                    >
-                        Typography
-                    </h3>
-                    <p class="text-sm text-gray-600">
-                        Martian Grotesk and Martian Mono typefaces with scale.
+                </div>
+                <div class="px-dialog p-6">
+                    <h3 class="px-font text-px10 text-white mb-4">.px-dialog</h3>
+                    <p class="text-sm text-white/80">
+                        NES dialog box: royal panel, white inner frame, ink
+                        outline. News cards and dark-surface content.
                     </p>
-                </a>
-                <a
-                    href="#spacing"
-                    class="group p-6 bg-white rounded-xl border border-gray-200 hover:border-ruby-300 hover:shadow-lg transition-all"
-                >
-                    <div
-                        class="w-12 h-12 bg-gray-100 rounded-xl mb-4 flex items-center justify-center"
-                    >
-                        <div class="grid grid-cols-3 gap-1">
-                            <div class="w-2 h-2 bg-gray-400 rounded-sm"></div>
-                            <div class="w-2 h-2 bg-gray-400 rounded-sm"></div>
-                            <div class="w-2 h-2 bg-gray-400 rounded-sm"></div>
-                            <div class="w-2 h-2 bg-gray-400 rounded-sm"></div>
-                            <div class="w-2 h-2 bg-gray-400 rounded-sm"></div>
-                            <div class="w-2 h-2 bg-gray-400 rounded-sm"></div>
-                        </div>
-                    </div>
-                    <h3
-                        class="font-bold text-gray-900 group-hover:text-ruby-600 mb-2"
-                    >
-                        Spacing
-                    </h3>
-                    <p class="text-sm text-gray-600">
-                        Consistent spacing scale for layouts and components.
-                    </p>
-                </a>
-            </div>
-        </section>
-
-        <!-- Colors -->
-        <section id="colors" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Colors</h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Our color system is built around Ruby red as the primary
-                    brand color, with a full gray scale and semantic colors for
-                    different states.
-                </p>
-            </div>
-
-            <!-- Ruby Palette -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Ruby (Primary)
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    The signature SF Ruby color. Use ruby-500 for primary
-                    actions and branding.
-                </p>
-                <div
-                    class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-11 gap-2"
-                >
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-50"></div>
-                        <p class="text-xs text-center font-mono">50</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-100"></div>
-                        <p class="text-xs text-center font-mono">100</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-200"></div>
-                        <p class="text-xs text-center font-mono">200</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-300"></div>
-                        <p class="text-xs text-center font-mono">300</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-400"></div>
-                        <p class="text-xs text-center font-mono">400</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div
-                            class="h-16 rounded-lg bg-ruby-500 ring-2 ring-ruby-500 ring-offset-2"
-                        >
-                        </div>
-                        <p class="text-xs text-center font-mono font-bold">
-                            500
-                        </p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-600"></div>
-                        <p class="text-xs text-center font-mono">600</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-700"></div>
-                        <p class="text-xs text-center font-mono">700</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-800"></div>
-                        <p class="text-xs text-center font-mono">800</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-900"></div>
-                        <p class="text-xs text-center font-mono">900</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-ruby-950"></div>
-                        <p class="text-xs text-center font-mono">950</p>
-                    </div>
                 </div>
             </div>
 
-            <!-- Gray Palette -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Gray (Neutral)
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    For text, backgrounds, and borders. Gray-900 for headings,
-                    gray-600 for body text.
-                </p>
-                <div
-                    class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-2"
-                >
-                    <div class="space-y-2">
-                        <div
-                            class="h-16 rounded-lg bg-gray-50 border border-gray-200"
-                        >
-                        </div>
-                        <p class="text-xs text-center font-mono">50</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-gray-100"></div>
-                        <p class="text-xs text-center font-mono">100</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-gray-200"></div>
-                        <p class="text-xs text-center font-mono">200</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-gray-300"></div>
-                        <p class="text-xs text-center font-mono">300</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-gray-400"></div>
-                        <p class="text-xs text-center font-mono">400</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-gray-500"></div>
-                        <p class="text-xs text-center font-mono">500</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div
-                            class="h-16 rounded-lg bg-gray-600 ring-2 ring-gray-600 ring-offset-2"
-                        >
-                        </div>
-                        <p class="text-xs text-center font-mono font-bold">
-                            600
-                        </p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-gray-700"></div>
-                        <p class="text-xs text-center font-mono">700</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="h-16 rounded-lg bg-gray-800"></div>
-                        <p class="text-xs text-center font-mono">800</p>
-                    </div>
-                    <div class="space-y-2">
-                        <div
-                            class="h-16 rounded-lg bg-gray-900 ring-2 ring-gray-900 ring-offset-2"
-                        >
-                        </div>
-                        <p class="text-xs text-center font-mono font-bold">
-                            900
-                        </p>
-                    </div>
+            <div class="px-card bg-white p-6 mb-6">
+                <h3 class="px-font text-px10 text-gray-900 mb-4">.px-bubble</h3>
+                <div class="px-bubble px-font text-px10 text-ruby-600 px-5 py-4 mb-2">
+                    CFP opens July 6!
                 </div>
+                <p class="text-xs text-gray-500 mt-5">
+                    Speech bubble with a stepped pixel tail. Text stays live
+                    HTML: change the copy, keep the art.
+                </p>
             </div>
 
-            <!-- Semantic Colors -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Semantic Colors
+            <div class="px-card bg-white p-6">
+                <h3 class="px-font text-px10 text-gray-900 mb-4">
+                    Social links
                 </h3>
-                <p class="text-gray-600 mb-6">
-                    For status indicators, alerts, and contextual information.
-                </p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div
-                        class="p-4 bg-emerald-50 rounded-xl border border-emerald-200"
-                    >
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-8 h-8 bg-emerald-500 rounded-lg">
-                            </div>
-                            <span class="font-bold text-emerald-700"
-                                >Success</span
-                            >
-                        </div>
-                        <p class="text-xs text-emerald-600 font-mono">
-                            emerald-500
-                        </p>
-                        <p class="text-xs text-gray-500 mt-1">
-                            Hiring badges, positive states
-                        </p>
-                    </div>
-                    <div
-                        class="p-4 bg-amber-50 rounded-xl border border-amber-200"
-                    >
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-8 h-8 bg-amber-500 rounded-lg"></div>
-                            <span class="font-bold text-amber-700">Warning</span
-                            >
-                        </div>
-                        <p class="text-xs text-amber-600 font-mono">
-                            amber-500
-                        </p>
-                        <p class="text-xs text-gray-500 mt-1">
-                            Valuations, sponsor tiers
-                        </p>
-                    </div>
-                    <div
-                        class="p-4 bg-blue-50 rounded-xl border border-blue-200"
-                    >
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-8 h-8 bg-blue-500 rounded-lg"></div>
-                            <span class="font-bold text-blue-700">Info</span>
-                        </div>
-                        <p class="text-xs text-blue-600 font-mono">blue-500</p>
-                        <p class="text-xs text-gray-500 mt-1">
-                            Informational badges
-                        </p>
-                    </div>
-                    <div
-                        class="p-4 bg-orange-50 rounded-xl border border-orange-200"
-                    >
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-8 h-8 bg-orange-500 rounded-lg"></div>
-                            <span class="font-bold text-orange-700">YC</span>
-                        </div>
-                        <p class="text-xs text-orange-600 font-mono">
-                            orange-500
-                        </p>
-                        <p class="text-xs text-gray-500 mt-1">
-                            Y Combinator badges
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Social Brand Colors -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Social Brand Colors
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Official brand colors for social media links.
-                </p>
-                <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
-                    <div class="text-center">
-                        <div
-                            class="h-16 rounded-lg mb-2"
-                            style="background-color: #4A154B"
-                        >
-                        </div>
-                        <p class="text-sm font-medium">Slack</p>
-                        <p class="text-xs text-gray-500 font-mono">#4A154B</p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="h-16 rounded-lg mb-2"
-                            style="background-color: #FF6719"
-                        >
-                        </div>
-                        <p class="text-sm font-medium">Substack</p>
-                        <p class="text-xs text-gray-500 font-mono">#FF6719</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="h-16 rounded-lg mb-2 bg-black"></div>
-                        <p class="text-sm font-medium">X/Twitter</p>
-                        <p class="text-xs text-gray-500 font-mono">#000000</p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="h-16 rounded-lg mb-2"
-                            style="background-color: #0085FF"
-                        >
-                        </div>
-                        <p class="text-sm font-medium">Bluesky</p>
-                        <p class="text-xs text-gray-500 font-mono">#0085FF</p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="h-16 rounded-lg mb-2"
-                            style="background-color: #0A66C2"
-                        >
-                        </div>
-                        <p class="text-sm font-medium">LinkedIn</p>
-                        <p class="text-xs text-gray-500 font-mono">#0A66C2</p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="h-16 rounded-lg mb-2"
-                            style="background-color: #FF0000"
-                        >
-                        </div>
-                        <p class="text-sm font-medium">YouTube</p>
-                        <p class="text-xs text-gray-500 font-mono">#FF0000</p>
-                    </div>
+                <div class="flex flex-wrap gap-3">
+                    <SocialLink platform="slack" href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg">Join Slack</SocialLink>
+                    <SocialLink platform="substack" href="https://sfruby.substack.com/">Newsletter</SocialLink>
+                    <SocialLink platform="ruby" href="https://www.rubyevents.org/events">Ruby Events</SocialLink>
                 </div>
             </div>
         </section>
 
-        <!-- Typography -->
-        <section id="typography" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    Typography
-                </h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    We use the Martian font family: Martian Grotesk for display
-                    text and Martian Mono for body text and UI elements.
-                </p>
-            </div>
-
-            <!-- Font Families -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Font Families
-                </h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="p-6 bg-gray-50 rounded-xl">
-                        <p class="text-sm text-gray-500 mb-2 font-mono">
-                            font-display
-                        </p>
-                        <p
-                            class="text-4xl font-display font-bold text-gray-900 mb-4"
-                        >
-                            Martian Grotesk
-                        </p>
-                        <p class="text-gray-600">
-                            Used for headings, hero text, and display elements
-                            where visual impact is important.
-                        </p>
-                    </div>
-                    <div class="p-6 bg-gray-50 rounded-xl">
-                        <p class="text-sm text-gray-500 mb-2 font-mono">
-                            font-sans (default)
-                        </p>
-                        <p class="text-4xl font-sans text-gray-900 mb-4">
-                            Martian Mono
-                        </p>
-                        <p class="text-gray-600">
-                            Our default font for body text, UI elements, and
-                            general content. Monospace for that dev feel.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Type Scale -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Type Scale</h3>
-                <div class="space-y-6 p-6 bg-gray-50 rounded-xl">
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-5xl</span
-                        >
-                        <span class="text-5xl font-bold text-gray-900"
-                            >Display</span
-                        >
-                    </div>
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-4xl</span
-                        >
-                        <span class="text-4xl font-bold text-gray-900"
-                            >Heading 1</span
-                        >
-                    </div>
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-3xl</span
-                        >
-                        <span class="text-3xl font-bold text-gray-900"
-                            >Heading 2</span
-                        >
-                    </div>
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-2xl</span
-                        >
-                        <span class="text-2xl font-bold text-gray-900"
-                            >Heading 3</span
-                        >
-                    </div>
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-xl</span
-                        >
-                        <span class="text-xl font-semibold text-gray-900"
-                            >Heading 4</span
-                        >
-                    </div>
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-lg</span
-                        >
-                        <span class="text-lg text-gray-900"
-                            >Large body text for introductions</span
-                        >
-                    </div>
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-base</span
-                        >
-                        <span class="text-base text-gray-600"
-                            >Standard body text for paragraphs and content</span
-                        >
-                    </div>
-                    <div
-                        class="flex items-baseline gap-4 pb-4 border-b border-gray-200"
-                    >
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-sm</span
-                        >
-                        <span class="text-sm text-gray-500"
-                            >Small text for captions and metadata</span
-                        >
-                    </div>
-                    <div class="flex items-baseline gap-4">
-                        <span class="text-xs text-gray-500 font-mono w-24"
-                            >text-xs</span
-                        >
-                        <span class="text-xs text-gray-400"
-                            >Extra small for badges and labels</span
-                        >
-                    </div>
-                </div>
-            </div>
-
-            <!-- Font Weights -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Font Weights
-                </h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="p-4 bg-gray-50 rounded-xl text-center">
-                        <p class="text-2xl font-light text-gray-900 mb-2">
-                            Light
-                        </p>
-                        <p class="text-xs text-gray-500 font-mono">
-                            font-light (300)
-                        </p>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded-xl text-center">
-                        <p class="text-2xl font-normal text-gray-900 mb-2">
-                            Regular
-                        </p>
-                        <p class="text-xs text-gray-500 font-mono">
-                            font-normal (400)
-                        </p>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded-xl text-center">
-                        <p class="text-2xl font-semibold text-gray-900 mb-2">
-                            Semibold
-                        </p>
-                        <p class="text-xs text-gray-500 font-mono">
-                            font-semibold (600)
-                        </p>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded-xl text-center">
-                        <p class="text-2xl font-bold text-gray-900 mb-2">
-                            Bold
-                        </p>
-                        <p class="text-xs text-gray-500 font-mono">
-                            font-bold (700)
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <!-- Islands -->
+        <section id="islands" class="mb-8 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Islands
+            </h2>
+            <p class="text-gray-600 max-w-2xl">
+                The interactive signature: a floating island with a bobbing
+                item sprite and a plate label, the whole thing a link. Hover
+                speeds the bob and lights the plate gold; press dips the
+                island. Use the IslandNav component for rows (live example
+                below); icons come from its catalog (coin, quest, envelope,
+                ticket, heart, play, briefcase, mascot).
+            </p>
         </section>
+    </div>
 
-        <!-- Spacing -->
-        <section id="spacing" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Spacing</h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Consistent spacing creates visual rhythm and hierarchy. We
-                    use Tailwind's spacing scale with specific tokens for
-                    sections and components.
-                </p>
-            </div>
+    <IslandNav
+        title="Live island nav"
+        lede="This is the actual component, not a mockup."
+        items={[
+            { href: "#components", label: "Components", icon: "quest" },
+            { href: "#sprites", label: "Sprites", icon: "coin" },
+            { href: "#patterns", label: "Patterns", icon: "envelope" },
+        ]}
+    />
 
-            <!-- Section Spacing -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Section Spacing (Vertical Padding)
-                </h3>
-                <div class="space-y-4">
-                    <div
-                        class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl"
-                    >
-                        <div
-                            class="w-24 h-12 bg-ruby-100 rounded flex items-center justify-center"
-                        >
-                            <div class="w-full h-3 bg-ruby-500 rounded"></div>
-                        </div>
-                        <div>
-                            <p class="font-mono text-sm font-bold">py-12</p>
-                            <p class="text-sm text-gray-600">
-                                Regular sections, secondary pages
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl"
-                    >
-                        <div
-                            class="w-24 h-16 bg-ruby-100 rounded flex items-center justify-center"
-                        >
-                            <div class="w-full h-4 bg-ruby-500 rounded"></div>
-                        </div>
-                        <div>
-                            <p class="font-mono text-sm font-bold">py-16</p>
-                            <p class="text-sm text-gray-600">
-                                CTA sections, call-to-action blocks
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl"
-                    >
-                        <div
-                            class="w-24 h-20 bg-ruby-100 rounded flex items-center justify-center"
-                        >
-                            <div class="w-full h-5 bg-ruby-500 rounded"></div>
-                        </div>
-                        <div>
-                            <p class="font-mono text-sm font-bold">py-20</p>
-                            <p class="text-sm text-gray-600">
-                                Large sections, main content blocks
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl"
-                    >
-                        <div
-                            class="w-24 h-24 bg-ruby-100 rounded flex items-center justify-center"
-                        >
-                            <div class="w-full h-8 bg-ruby-500 rounded"></div>
-                        </div>
-                        <div>
-                            <p class="font-mono text-sm font-bold">py-32</p>
-                            <p class="text-sm text-gray-600">
-                                Featured sections (sponsors, speakers)
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Element Spacing -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Element Spacing (Margins)
-                </h3>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-gray-50 rounded-xl">
-                        <p class="font-mono text-sm font-bold mb-2">mb-2</p>
-                        <p class="text-sm text-gray-600">
-                            Tight spacing: card title to body
-                        </p>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded-xl">
-                        <p class="font-mono text-sm font-bold mb-2">mb-4</p>
-                        <p class="text-sm text-gray-600">
-                            Small spacing: header to subheader
-                        </p>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded-xl">
-                        <p class="font-mono text-sm font-bold mb-2">mb-8</p>
-                        <p class="text-sm text-gray-600">
-                            Medium spacing: between card groups
-                        </p>
-                    </div>
-                    <div class="p-4 bg-gray-50 rounded-xl">
-                        <p class="font-mono text-sm font-bold mb-2">mb-12</p>
-                        <p class="text-sm text-gray-600">
-                            Large spacing: section header to content
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Buttons -->
-        <section id="buttons" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Buttons</h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Buttons are used for actions. Use the Button component for
-                    consistent styling across variants and sizes.
-                </p>
-            </div>
-
-            <!-- Usage -->
-            <div class="mb-8 p-4 bg-gray-900 rounded-xl">
-                <p class="text-xs text-gray-400 mb-2">Usage</p>
-                <code class="text-sm text-emerald-400">
-                    &lt;Button href="/path" variant="primary" size="md"&gt;Click
-                    Me&lt;/Button&gt;
-                </code>
-            </div>
-
-            <!-- Variants -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Variants</h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-4 items-center mb-8">
-                        <Button variant="primary">Primary</Button>
-                        <Button variant="secondary">Secondary</Button>
-                        <Button variant="outline">Outline</Button>
-                        <Button variant="ghost">Ghost</Button>
-                        <Button variant="white">White</Button>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >primary</code
-                            > - Main CTAs, hero buttons
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >secondary</code
-                            > - Secondary actions
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >outline</code
-                            > - Tertiary actions
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >ghost</code
-                            > - Subtle actions
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >white</code
-                            > - On dark backgrounds
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Social Variants -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Social Variants
-                </h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-4 items-center mb-8">
-                        <Button variant="slack">Slack</Button>
-                        <Button variant="substack">Substack</Button>
-                        <Button variant="twitter">Twitter</Button>
-                        <Button variant="bluesky">Bluesky</Button>
-                        <Button variant="linkedin">LinkedIn</Button>
-                        <Button variant="ruby">Ruby</Button>
-                    </div>
-                    <p class="text-sm text-gray-600">
-                        Social variants use official brand colors and are
-                        perfect for social media CTAs.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Sizes -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Sizes</h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-4 items-end mb-8">
-                        <div class="text-center">
-                            <Button variant="primary" size="sm">Small</Button>
-                            <p class="text-xs text-gray-500 mt-2 font-mono">
-                                sm
-                            </p>
-                        </div>
-                        <div class="text-center">
-                            <Button variant="primary" size="md">Medium</Button>
-                            <p class="text-xs text-gray-500 mt-2 font-mono">
-                                md
-                            </p>
-                        </div>
-                        <div class="text-center">
-                            <Button variant="primary" size="lg">Large</Button>
-                            <p class="text-xs text-gray-500 mt-2 font-mono">
-                                lg
-                            </p>
-                        </div>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >sm</code
-                            > - Inline actions, cards (px-4 py-2)
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >md</code
-                            > - Standard CTAs (px-6 py-3)
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >lg</code
-                            > - Hero sections (px-8 py-4)
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Badges -->
-        <section id="badges" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Badges</h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Badges are small labels for tags, status indicators, and
-                    metadata. Use them sparingly to highlight important
-                    information.
-                </p>
-            </div>
-
-            <!-- Usage -->
-            <div class="mb-8 p-4 bg-gray-900 rounded-xl">
-                <p class="text-xs text-gray-400 mb-2">Usage</p>
-                <code class="text-sm text-emerald-400">
-                    &lt;Badge variant="success"
-                    size="sm"&gt;Hiring&lt;/Badge&gt;
-                </code>
-            </div>
-
-            <!-- Standard Variants -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Standard Variants
-                </h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-3 items-center mb-8">
-                        <Badge variant="default">Default</Badge>
-                        <Badge variant="ruby">Ruby</Badge>
-                        <Badge variant="success">Success</Badge>
-                        <Badge variant="warning">Warning</Badge>
-                        <Badge variant="info">Info</Badge>
-                        <Badge variant="outline">Outline</Badge>
-                    </div>
-                    <p class="text-sm text-gray-600">
-                        Standard variants for general purpose labeling and
-                        categorization.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Special Variants -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Special Variants
-                </h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-3 items-center mb-8">
-                        <Badge variant="yc">YC</Badge>
-                        <Badge variant="hiring">Hiring</Badge>
-                        <Badge variant="featured">Featured</Badge>
-                        <Badge variant="tier">$700M</Badge>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >yc</code
-                            > - Y Combinator badge (orange)
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >hiring</code
-                            > - Job availability (green)
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >featured</code
-                            > - Highlighted items (ruby)
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >tier</code
-                            > - Valuations, tiers (amber)
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sizes -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Sizes</h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-4 items-center mb-8">
-                        <div class="text-center">
-                            <Badge variant="ruby" size="xs">Extra Small</Badge>
-                            <p class="text-xs text-gray-500 mt-2 font-mono">
-                                xs
-                            </p>
-                        </div>
-                        <div class="text-center">
-                            <Badge variant="ruby" size="sm">Small</Badge>
-                            <p class="text-xs text-gray-500 mt-2 font-mono">
-                                sm
-                            </p>
-                        </div>
-                        <div class="text-center">
-                            <Badge variant="ruby" size="md">Medium</Badge>
-                            <p class="text-xs text-gray-500 mt-2 font-mono">
-                                md
-                            </p>
-                        </div>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >xs</code
-                            > - Compact: YC, Hiring badges on cards
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >sm</code
-                            > - Standard: Talk types, tags (default)
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >md</code
-                            > - Prominent: Featured badges, headers
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Social Links -->
-        <section id="social-links" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    Social Links
-                </h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Consistent button-style links for social media platforms.
-                    All social links have the same height and include platform
-                    icons.
-                </p>
-            </div>
-
-            <!-- Usage -->
-            <div class="mb-8 p-4 bg-gray-900 rounded-xl">
-                <p class="text-xs text-gray-400 mb-2">Usage</p>
-                <code class="text-sm text-emerald-400">
-                    &lt;SocialLink platform="slack" href="https://..."&gt;Join
-                    Slack&lt;/SocialLink&gt;
-                </code>
-            </div>
-
-            <!-- Platforms -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Platforms</h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-4 mb-8">
-                        <SocialLink platform="slack" href="#">Slack</SocialLink>
-                        <SocialLink platform="substack" href="#"
-                            >Substack</SocialLink
-                        >
-                        <SocialLink platform="twitter" href="#"
-                            >Twitter</SocialLink
-                        >
-                        <SocialLink platform="bluesky" href="#"
-                            >Bluesky</SocialLink
-                        >
-                        <SocialLink platform="linkedin" href="#"
-                            >LinkedIn</SocialLink
-                        >
-                        <SocialLink platform="youtube" href="#"
-                            >YouTube</SocialLink
-                        >
-                    </div>
-                    <p class="text-sm text-gray-600">
-                        Each platform has its official brand color and icon
-                        built-in.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Generic Variants -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Generic Variants
-                </h3>
-                <div class="p-8 bg-gray-50 rounded-xl">
-                    <div class="flex flex-wrap gap-4 mb-8">
-                        <SocialLink platform="ruby" href="#">
-                            <svg
-                                slot="icon"
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                ></path>
-                            </svg>
-                            Ruby Events
-                        </SocialLink>
-                        <SocialLink platform="dark" href="#">
-                            <svg
-                                slot="icon"
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                                ></path>
-                            </svg>
-                            Submit a Talk
-                        </SocialLink>
-                        <SocialLink platform="gradient" href="#">
-                            <svg
-                                slot="icon"
-                                class="w-5 h-5"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                            >
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                                ></path>
-                            </svg>
-                            Sign up on Luma
-                        </SocialLink>
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >ruby</code
-                            > - Ruby-branded links
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >dark</code
-                            > - Dark gray for generic external links
-                        </p>
-                        <p>
-                            <code class="bg-gray-200 px-2 py-0.5 rounded"
-                                >gradient</code
-                            > - Primary CTA style with gradient
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cards -->
-        <section id="cards" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Cards</h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Cards are containers for related content. We have two main
-                    patterns: standard cards and featured cards.
-                </p>
-            </div>
-
-            <!-- Standard Card -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Standard Card
-                </h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div
-                        class="p-6 bg-white rounded-xl border border-gray-200 hover:shadow-lg hover:border-ruby-200 transition-all cursor-pointer"
-                    >
-                        <h4 class="font-bold text-gray-900 mb-2">Card Title</h4>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Card description text goes here. This is an example
-                            of a standard card with hover state.
-                        </p>
-                        <Badge variant="default">Tag</Badge>
-                    </div>
-                    <div class="p-4 bg-gray-900 rounded-xl overflow-x-auto">
-                        <p class="text-xs text-gray-400 mb-2">CSS Classes</p>
-                        <code
-                            class="text-xs text-emerald-400 whitespace-pre-wrap break-all"
-                            >bg-white rounded-xl border border-gray-200 p-6
-                            transition-all duration-300 hover:shadow-lg
-                            hover:border-ruby-200</code
-                        >
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured Card -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Featured Card
-                </h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div
-                        class="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all cursor-pointer"
-                    >
-                        <div
-                            class="h-32 bg-gradient-to-br from-gray-50 to-slate-100"
-                        >
-                        </div>
-                        <div class="p-5">
-                            <h4 class="font-bold text-gray-900 mb-2">
-                                Featured Card
-                            </h4>
-                            <p class="text-gray-600 text-sm">
-                                Used for startups, speakers, and other featured
-                                content with more visual emphasis.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-900 rounded-xl overflow-x-auto">
-                        <p class="text-xs text-gray-400 mb-2">CSS Classes</p>
-                        <code
-                            class="text-xs text-emerald-400 whitespace-pre-wrap break-all"
-                            >bg-white rounded-2xl border border-gray-100
-                            overflow-hidden transition-all duration-300
-                            hover:shadow-2xl hover:-translate-y-1</code
-                        >
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Modals -->
-        <section id="modals" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Modals</h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Modals are used for focused interactions. We have
-                    specialized modals for different use cases.
-                </p>
-            </div>
-
-            <!-- Email Modal -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Email Modal
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Use instead of mailto links for better UX. Shows email with
-                    copy button and option to open in email app.
-                </p>
-
-                <div class="mb-8 p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">Usage</p>
-                    <code
-                        class="text-xs text-emerald-400 whitespace-pre-wrap break-words"
-                        >&lt;!-- Add modal component --&gt; &lt;EmailModal
-                        id="contact" email="hello@example.com" subject="Hello"
-                        title="Get in Touch" /&gt; &lt;!-- Trigger with button
-                        --&gt; &lt;button data-email-modal="contact"&gt;Contact
-                        Us&lt;/button&gt;</code
-                    >
-                </div>
-
-                <div class="flex gap-4">
-                    <Button data-email-modal="demo-email"
-                        >Try Email Modal</Button
-                    >
-                </div>
-            </div>
-
-            <!-- Startup Modal -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Startup Modal
-                </h3>
-                <p class="text-gray-600 mb-4">
-                    Used on the startups page to show detailed startup
-                    information including demo video, speaker bio, funding
-                    details, and job openings.
-                </p>
-                <p class="text-sm text-gray-500">
-                    See <a
-                        href="/startups"
-                        class="text-ruby-500 hover:underline">/startups</a
-                    > for live examples.
-                </p>
-            </div>
-
-            <!-- Talk Modal -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Talk Modal</h3>
-                <p class="text-gray-600 mb-4">
-                    Used on the schedule and talks pages to show talk details
-                    including video, speaker info, and description.
-                </p>
-                <p class="text-sm text-gray-500">
-                    See <a href="/videos" class="text-ruby-500 hover:underline"
-                        >/videos</a
-                    > for live examples.
-                </p>
-            </div>
-        </section>
-
-        <!-- Navigation -->
-        <section id="navigation" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    Navigation
-                </h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Navigation components guide users through the site. We have
-                    a fixed header with scroll-based styling and a comprehensive
-                    footer.
-                </p>
-            </div>
-
-            <!-- Header -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Header</h3>
-                <p class="text-gray-600 mb-6">
-                    Fixed header with transparent-to-white transition on scroll.
-                    Includes logo, navigation links, and mobile menu.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div class="p-6 bg-gray-900 rounded-xl">
-                        <p class="text-xs text-gray-400 mb-3">
-                            Top of page (transparent)
-                        </p>
-                        <div class="flex items-center justify-between py-3">
-                            <span class="text-white font-bold">SF Ruby</span>
-                            <div class="flex gap-4 text-white/80 text-sm">
-                                <span>Startups</span>
-                                <span>Talks</span>
-                                <span>Jobs</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="p-6 bg-white rounded-xl border border-gray-200 shadow-md"
-                    >
-                        <p class="text-xs text-gray-400 mb-3">
-                            Scrolled (white bg)
-                        </p>
-                        <div class="flex items-center justify-between py-3">
-                            <span class="text-gray-900 font-bold">SF Ruby</span>
-                            <div class="flex gap-4 text-gray-700 text-sm">
-                                <span>Startups</span>
-                                <span>Talks</span>
-                                <span>Jobs</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">Key Features</p>
-                    <ul class="text-sm text-gray-300 space-y-1">
-                        <li>
-                            • Fixed position with <code class="text-emerald-400"
-                                >z-50</code
-                            >
-                        </li>
-                        <li>
-                            • Scroll-triggered background: transparent → white
-                        </li>
-                        <li>• Logo swap: white version → dark version</li>
-                        <li>• Mobile hamburger menu with slide-down panel</li>
-                        <li>• CTA button: "Join Meetup" with ruby gradient</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Footer</h3>
-                <p class="text-gray-600 mb-6">
-                    Dark footer with multi-column layout for navigation, social
-                    links, and credits.
-                </p>
-
-                <div class="bg-gray-900 rounded-xl p-8 text-gray-300">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-6">
-                        <div>
-                            <p class="text-white font-semibold mb-2">
-                                Logo + Description
-                            </p>
-                            <p class="text-xs text-gray-400">
-                                2-column span on large screens
-                            </p>
-                        </div>
-                        <div>
-                            <p class="text-white font-semibold mb-2">
-                                Discover
-                            </p>
-                            <p class="text-xs text-gray-400">
-                                Startups, Talks, Jobs, Photos
-                            </p>
-                        </div>
-                        <div>
-                            <p class="text-white font-semibold mb-2">
-                                Community
-                            </p>
-                            <p class="text-xs text-gray-400">
-                                Slack, Meetups, Newsletter
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3 mb-4">
-                        <div
-                            class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center text-xs"
-                        >
-                            X
-                        </div>
-                        <div
-                            class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center text-xs"
-                        >
-                            BS
-                        </div>
-                        <div
-                            class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center text-xs"
-                        >
-                            LI
-                        </div>
-                        <div
-                            class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center text-xs"
-                        >
-                            SS
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-500">
-                        © 2025 SF Ruby. Organized by Evil Martians.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Page Sections -->
-        <section id="sections" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    Page Sections
-                </h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Pre-built section components for common page layouts. These
-                    components combine multiple elements into cohesive, reusable
-                    sections.
-                </p>
-            </div>
-
-            <!-- Hero -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Hero Section
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Full-viewport hero with gradient background, logo, event
-                    details, and CTAs.
-                </p>
-
-                <div
-                    class="rounded-xl overflow-hidden border border-gray-200 mb-6"
-                >
-                    <div
-                        class="bg-gradient-to-br from-sky-400 via-sky-600 to-indigo-700 p-8 text-white text-center"
-                    >
-                        <div class="text-3xl font-bold mb-2">
-                            SF Ruby Conference
-                        </div>
-                        <p class="text-sky-100 mb-4">
-                            Building the Future with Ruby
-                        </p>
-                        <p class="text-sm text-sky-200 mb-6">
-                            November 19-21, 2025 • Fort Mason
-                        </p>
-                        <div class="flex justify-center gap-3">
-                            <span
-                                class="px-4 py-2 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-lg text-sm font-semibold"
-                                >Get Tickets</span
-                            >
-                            <span
-                                class="px-4 py-2 bg-white/10 border border-white/30 rounded-lg text-sm font-semibold"
-                                >Get Updates</span
-                            >
-                        </div>
-                    </div>
-                    <div class="h-6 bg-slate-50">
-                        <svg
-                            preserveAspectRatio="none"
-                            viewBox="0 0 1200 30"
-                            class="w-full h-full"
-                        >
-                            <path
-                                d="M0,30 L0,15 C300,0 600,25 900,10 C1050,5 1150,8 1200,10 L1200,30 Z"
-                                fill="#f8fafc"></path>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">
-                        File: <code class="text-emerald-400"
-                            >src/components/Hero.astro</code
-                        >
-                    </p>
-                    <p class="text-sm text-gray-300">
-                        Full-height section with sky-to-indigo gradient and
-                        cloud-shaped bottom transition.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Newsletter / Follow Us -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Newsletter Section
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Social links section with gradient background and
-                    platform-specific CTAs.
-                </p>
-
-                <div
-                    class="rounded-xl overflow-hidden border border-gray-200 mb-6"
-                >
-                    <div
-                        class="bg-gradient-to-br from-sky-100 to-sky-400 p-8 text-center"
-                    >
-                        <h4 class="text-2xl font-bold text-sky-950 mb-2">
-                            Sign up for updates
-                        </h4>
-                        <p class="text-sky-800 mb-6">
-                            Stay informed on conference activities and community
-                            events.
-                        </p>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <span
-                                class="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg text-sm font-semibold"
-                                >Substack</span
-                            >
-                            <span
-                                class="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-lg text-sm font-semibold"
-                                >Twitter</span
-                            >
-                            <span
-                                class="px-4 py-2 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-lg text-sm font-semibold"
-                                >Bluesky</span
-                            >
-                            <span
-                                class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg text-sm font-semibold"
-                                >LinkedIn</span
-                            >
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">
-                        File: <code class="text-emerald-400"
-                            >src/components/Newsletter.astro</code
-                        >
-                    </p>
-                    <p class="text-sm text-gray-300">
-                        Used on the homepage to drive social follows and
-                        newsletter signups.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Sponsors Section -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Sponsors Section
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Tiered sponsor display with hover effects and gradient
-                    accents.
-                </p>
-
-                <div
-                    class="rounded-xl overflow-hidden border border-gray-200 mb-6 bg-gradient-to-b from-white to-gray-50 p-8"
-                >
-                    <div class="text-center mb-6">
-                        <h4 class="text-2xl font-bold text-gray-900">
-                            Our Sponsors
-                        </h4>
-                        <div
-                            class="w-16 h-1 bg-gradient-to-r from-ruby-500 to-pink-500 rounded-full mx-auto mt-2"
-                        >
-                        </div>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div class="text-center">
-                            <p class="text-sm font-semibold text-gray-500 mb-3">
-                                Pickaxe Sponsors
-                            </p>
-                            <div class="flex justify-center gap-4">
-                                <div
-                                    class="p-6 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all"
-                                >
-                                    <div
-                                        class="w-32 h-12 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500"
-                                    >
-                                        Logo
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-sm font-semibold text-gray-500 mb-3">
-                                Ruby Sponsors
-                            </p>
-                            <div class="flex justify-center gap-3">
-                                <div
-                                    class="p-4 bg-white rounded-xl border border-gray-200 shadow-sm"
-                                >
-                                    <div
-                                        class="w-24 h-8 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500"
-                                    >
-                                        Logo
-                                    </div>
-                                </div>
-                                <div
-                                    class="p-4 bg-white rounded-xl border border-gray-200 shadow-sm"
-                                >
-                                    <div
-                                        class="w-24 h-8 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500"
-                                    >
-                                        Logo
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">
-                        File: <code class="text-emerald-400"
-                            >src/components/Sponsors.astro</code
-                        >
-                    </p>
-                    <p class="text-sm text-gray-300">
-                        Pulls sponsor data from <code class="text-emerald-400"
-                            >src/data/sponsors.js</code
-                        >. Logo sizes vary by tier.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Cloud Cards Section -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Cloud Cards Section
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Animated card grid showcasing conference attendee "cloud
-                    cards" with staggered animations.
-                </p>
-
-                <div
-                    class="rounded-xl overflow-hidden border border-gray-200 mb-6 bg-gradient-to-b from-sky-50 to-gray-50 p-8"
-                >
-                    <div class="text-center mb-6">
-                        <h4 class="text-2xl font-bold text-gray-900">
-                            Join us in the clouds!
-                        </h4>
-                        <div
-                            class="w-16 h-1 bg-gradient-to-r from-sky-500 to-ruby-500 rounded-full mx-auto mt-2"
-                        >
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-4 gap-4 mb-6">
-                        <div
-                            class="aspect-[3/4] bg-gradient-to-br from-sky-100 to-white rounded-xl shadow-md"
-                        >
-                        </div>
-                        <div
-                            class="aspect-[3/4] bg-gradient-to-br from-sky-100 to-white rounded-xl shadow-md"
-                        >
-                        </div>
-                        <div
-                            class="aspect-[3/4] bg-gradient-to-br from-sky-100 to-white rounded-xl shadow-md"
-                        >
-                        </div>
-                        <div
-                            class="aspect-[3/4] bg-gradient-to-br from-sky-100 to-white rounded-xl shadow-md"
-                        >
-                        </div>
-                    </div>
-
-                    <div class="text-center">
-                        <span
-                            class="px-6 py-3 bg-gradient-to-r from-sky-500 to-ruby-500 text-white rounded-xl text-sm font-semibold"
-                            >See All Cloud Cards</span
-                        >
-                    </div>
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">
-                        File: <code class="text-emerald-400"
-                            >src/components/CloudCards.astro</code
-                        >
-                    </p>
-                    <p class="text-sm text-gray-300">
-                        Cards animate in with staggered <code
-                            class="text-emerald-400">fadeInUp</code
-                        > animation. Links to clouds.sfruby.com.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Testimonials Section -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Testimonials Section
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Quote cards from community members with avatar, name, and
-                    role.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div
-                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
-                    >
-                        <div class="text-ruby-500 mb-4">
-                            <svg
-                                class="w-8 h-8 opacity-50"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
-                                ></path>
-                            </svg>
-                        </div>
-                        <blockquote class="text-gray-700 italic mb-4">
-                            "Truly the best meetup in SF. Had a great time
-                            tonight!"
-                        </blockquote>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-gray-200 rounded-full">
-                            </div>
-                            <div>
-                                <p class="font-medium text-gray-900">
-                                    Speaker Name
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    Role @ Company
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="p-4 bg-gray-900 rounded-xl flex flex-col justify-center"
-                    >
-                        <p class="text-xs text-gray-400 mb-2">
-                            File: <code class="text-emerald-400"
-                                >src/components/Testimonials.astro</code
-                            >
-                        </p>
-                        <p class="text-sm text-gray-300">
-                            Grid layout with quote icon, blockquote, and author
-                            info.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Key Topics Section -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Key Topics Section
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Four-column grid showcasing conference themes with icons.
-                </p>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div
-                        class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"
-                    >
-                        <div
-                            class="w-16 h-16 bg-gray-100 rounded-lg mb-3 flex items-center justify-center"
-                        >
-                            <span class="text-2xl">🛠️</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm mb-1">
-                            Open Source & AI
-                        </h4>
-                        <p class="text-xs text-gray-600">
-                            New tools for Ruby apps
-                        </p>
-                    </div>
-                    <div
-                        class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"
-                    >
-                        <div
-                            class="w-16 h-16 bg-gray-100 rounded-lg mb-3 flex items-center justify-center"
-                        >
-                            <span class="text-2xl">📈</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm mb-1">
-                            Ruby at Scale
-                        </h4>
-                        <p class="text-xs text-gray-600">Scaling stories</p>
-                    </div>
-                    <div
-                        class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"
-                    >
-                        <div
-                            class="w-16 h-16 bg-gray-100 rounded-lg mb-3 flex items-center justify-center"
-                        >
-                            <span class="text-2xl">👔</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm mb-1">
-                            CTO Panel
-                        </h4>
-                        <p class="text-xs text-gray-600">Learn from leaders</p>
-                    </div>
-                    <div
-                        class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"
-                    >
-                        <div
-                            class="w-16 h-16 bg-gray-100 rounded-lg mb-3 flex items-center justify-center"
-                        >
-                            <span class="text-2xl">🚀</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm mb-1">
-                            Startup Demos
-                        </h4>
-                        <p class="text-xs text-gray-600">Hot new products</p>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">
-                        File: <code class="text-emerald-400"
-                            >src/components/KeyTopics.astro</code
-                        >
-                    </p>
-                    <p class="text-sm text-gray-300">
-                        4-column responsive grid with custom icons for each
-                        topic.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Filters -->
-        <section id="filters" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Filters</h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Interactive filtering component with search and dropdowns.
-                    Used on listing pages to filter startups, jobs, and talks.
-                </p>
-            </div>
-
-            <!-- Filter Component -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Filter Bar</h3>
-                <p class="text-gray-600 mb-6">
-                    Combines search input with dropdown filters. Automatically
-                    shows/hides clear button and results count based on active
-                    filters.
-                </p>
-
-                <div
-                    class="bg-white rounded-xl border border-gray-200 p-4 mb-6"
-                >
-                    <div class="flex flex-col lg:flex-row gap-4">
-                        <div class="flex-1">
-                            <div class="relative">
-                                <svg
-                                    class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                    ></path>
-                                </svg>
-                                <input
-                                    type="text"
-                                    placeholder="Search startups..."
-                                    class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50"
-                                    disabled
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Sprites -->
+        <section id="sprites" class="mb-24 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Sprites
+            </h2>
+            <p class="text-gray-600 mb-8 max-w-2xl">
+                Cut from Anton's art or hand-mapped in
+                <code>scripts/px-sprites.mjs</code> using the token palette.
+                Always render with <code>.px-pixelated</code> and real
+                width/height attributes.
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                {
+                    sprites.map((s) => (
+                        <figure class="px-card bg-sky-50 p-4 flex flex-col items-center text-center">
+                            <div class="h-20 flex items-center justify-center">
+                                <img
+                                    src={s.src}
+                                    alt={s.name}
+                                    class="px-pixelated max-h-16 w-auto max-w-full"
                                 />
                             </div>
-                        </div>
-                        <div class="flex flex-wrap gap-3">
-                            <select
-                                class="appearance-none bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 pr-10 text-sm font-medium text-gray-700"
-                                disabled
-                            >
-                                <option>All Categories</option>
-                            </select>
-                            <select
-                                class="appearance-none bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 pr-10 text-sm font-medium text-gray-700"
-                                disabled
-                            >
-                                <option>Hiring Status</option>
-                            </select>
-                            <button
-                                class="px-4 py-2.5 text-sm font-medium text-ruby-500 hover:bg-ruby-50 rounded-lg"
-                                >Clear filters</button
-                            >
-                        </div>
-                    </div>
-                    <div class="mt-4 text-sm text-gray-500">
-                        Showing <span class="font-medium">24</span> results
-                    </div>
-                </div>
+                            <figcaption class="mt-3">
+                                <code class="text-xs text-gray-900">{s.name}</code>
+                                <p class="text-[11px] text-gray-500 mt-1">{s.note}</p>
+                            </figcaption>
+                        </figure>
+                    ))
+                }
+            </div>
+        </section>
 
-                <div class="p-4 bg-gray-900 rounded-xl mb-6">
-                    <p class="text-xs text-gray-400 mb-2">Usage</p>
-                    <code class="text-xs text-emerald-400 whitespace-pre-wrap"
-                        >&lt;Filters filters=&#123;filterArray&#125;
-                        searchPlaceholder="Search startups..." /&gt;</code
-                    >
-                    <p class="text-xs text-gray-400 mt-2">
-                        Where filterArray contains objects with id, label, and
-                        options properties.
+        <!-- Motion -->
+        <section id="motion" class="mb-24 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Motion
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="px-card bg-white p-6 text-center">
+                    <img src="/px-coin.png" alt="" width="135" height="139" class="px-pixelated h-10 w-auto mx-auto px-island-btn__item" />
+                    <p class="text-xs text-gray-500 mt-4">
+                        <code>px-bob</code>: idle float for item sprites.
+                        Stagger with <code>--px-bob-delay</code>.
                     </p>
                 </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">
-                        Data Attributes for Filterable Items
+                <div class="px-card bg-white p-6 text-center">
+                    <p class="px-font px-blink text-px10 text-ruby-600 mt-2">&#9654; Press Start &#9664;</p>
+                    <p class="text-xs text-gray-500 mt-5">
+                        <code>px-blink</code>: stepped blink for prompts. One
+                        per screen, maximum.
                     </p>
-                    <code class="text-xs text-emerald-400 whitespace-pre-wrap"
-                        >&lt;div data-filterable data-search="searchable text
-                        content" data-category="category-value"
-                        data-hiring="true" &gt;...&lt;/div&gt;</code
-                    >
                 </div>
-            </div>
-
-            <!-- Resource Card -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Resource Card
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Generic card for linking to resources with icon, title, and
-                    description.
-                </p>
-
-                <div class="grid md:grid-cols-3 gap-4 mb-6">
-                    <ResourceCard
-                        title="Watch Videos"
-                        description="Founder interviews, conference talks, and meetup recordings."
-                        href="/videos"
-                        icon="talks"
-                    />
-                    <ResourceCard
-                        title="Find Jobs"
-                        description="Explore opportunities at Ruby startups in SF."
-                        href="/jobs"
-                        icon="jobs"
-                    />
-                    <ResourceCard
-                        title="Join Slack"
-                        description="Connect with the SF Ruby community."
-                        href="#"
-                        icon="community"
-                        external={true}
-                    />
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">Props</p>
-                    <ul class="text-sm text-gray-300 space-y-1">
-                        <li>
-                            • <code class="text-emerald-400">title</code> - Card heading
-                        </li>
-                        <li>
-                            • <code class="text-emerald-400">description</code> -
-                            Short description
-                        </li>
-                        <li>
-                            • <code class="text-emerald-400">href</code> - Link destination
-                        </li>
-                        <li>
-                            • <code class="text-emerald-400">icon</code> - talks |
-                            community | jobs | newsletter | sponsor | startups
-                        </li>
-                        <li>
-                            • <code class="text-emerald-400">external</code> - Opens
-                            in new tab (optional)
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Distance Badge -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Distance Badge
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Compact badge for showing distance/time from venue. Used on
-                    dining page.
-                </p>
-
-                <div class="flex flex-wrap gap-3 mb-6">
-                    <DistanceBadge distance="5 min" type="walk" color="blue" />
-                    <DistanceBadge
-                        distance="10 min"
-                        type="walk"
-                        color="green"
-                    />
-                    <DistanceBadge
-                        distance="15 min"
-                        type="transit"
-                        color="amber"
-                    />
-                    <DistanceBadge
-                        distance="30 min"
-                        type="time"
-                        color="purple"
-                    />
-                </div>
-
-                <div class="p-4 bg-gray-900 rounded-xl">
-                    <p class="text-xs text-gray-400 mb-2">Props</p>
-                    <ul class="text-sm text-gray-300 space-y-1">
-                        <li>
-                            • <code class="text-emerald-400">distance</code> - Text
-                            to display (e.g., "5 min")
-                        </li>
-                        <li>
-                            • <code class="text-emerald-400">type</code> - walk |
-                            transit | time (sets icon)
-                        </li>
-                        <li>
-                            • <code class="text-emerald-400">color</code> - blue |
-                            green | amber | purple
-                        </li>
-                    </ul>
+                <div class="px-card bg-white p-6 text-center">
+                    <button class="px-btn px-btn--gold px-font text-px10 px-5 py-3">Press me</button>
+                    <p class="text-xs text-gray-500 mt-4">
+                        Press states translate into the shadow (no scale, no
+                        fade). All motion is disabled under
+                        <code>prefers-reduced-motion</code>.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- Card Components (Detailed) -->
-        <section id="card-components" class="mb-24 scroll-mt-24">
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    Card Components
-                </h2>
-                <p class="text-lg text-gray-600 max-w-3xl">
-                    Specialized card components for different content types
-                    across the site.
-                </p>
-            </div>
-
-            <!-- StartupCard -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    StartupCard
-                </h3>
-                <p class="text-gray-600 mb-6">
-                    Displays startup info with logo, speaker, funding, and
-                    status badges. Entire card is clickable and opens a modal.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div
-                        class="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all cursor-pointer p-4"
-                    >
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex gap-1.5">
-                                <span
-                                    class="px-2 py-0.5 bg-amber-400 text-amber-900 text-xs font-bold rounded-md"
-                                    >$700M</span
-                                >
-                                <span
-                                    class="px-2 py-0.5 bg-emerald-500 text-white text-xs font-bold rounded-md"
-                                    >Hiring</span
-                                >
-                                <span
-                                    class="px-2 py-0.5 bg-orange-500 text-white text-xs font-bold rounded-md"
-                                    >YC</span
-                                >
-                            </div>
-                            <div
-                                class="flex items-center gap-1 px-2 py-0.5 bg-gray-100 rounded-full"
-                            >
-                                <span class="text-xs text-gray-500">Demo</span>
-                            </div>
-                        </div>
-                        <div
-                            class="h-10 bg-gray-100 rounded mb-3 flex items-center justify-center text-gray-400 text-sm"
-                        >
-                            Logo
-                        </div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-                            <span class="text-sm text-gray-600"
-                                >Speaker Name</span
-                            >
-                        </div>
-                        <h4 class="font-bold text-gray-900 mb-2">
-                            Startup Name
-                        </h4>
-                        <div class="flex items-center gap-3 text-sm">
-                            <span class="text-gray-500"
-                                >Est. <span class="font-medium text-gray-700"
-                                    >2021</span
-                                ></span
-                            >
-                            <span class="text-gray-500"
-                                ><span class="font-medium text-emerald-600"
-                                    >$50M</span
-                                > raised</span
-                            >
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-900 rounded-xl">
-                        <p class="text-xs text-gray-400 mb-2">
-                            File: <code class="text-emerald-400"
-                                >src/components/StartupCard.astro</code
-                            >
-                        </p>
-                        <p class="text-sm text-gray-300 mb-3">
-                            Props: <code class="text-emerald-400">startup</code> object,
-                            <code class="text-emerald-400">compact</code>, <code
-                                class="text-emerald-400">hasJobs</code
-                            >
-                        </p>
-                        <p class="text-sm text-gray-300">
-                            Badges shown based on data: valuation (tier),
-                            hasJobs (Hiring), isYC (YC), youtubeId (Demo).
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- JobCard -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">JobCard</h3>
-                <p class="text-gray-600 mb-6">
-                    Job listing card with company logo, job details, and apply
-                    button.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all"
-                    >
-                        <Badge variant="ruby" class="mb-3">Featured</Badge>
-                        <div class="flex items-start gap-4">
-                            <div
-                                class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 text-xs"
-                            >
-                                Logo
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-gray-900 mb-1">
-                                    Senior Ruby Engineer
-                                </h4>
-                                <p class="text-gray-600 text-sm mb-2">
-                                    Company Name
-                                </p>
-                                <p
-                                    class="text-gray-500 text-sm mb-3 line-clamp-2"
-                                >
-                                    Build and scale our Ruby on Rails
-                                    platform...
-                                </p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <Badge variant="default">Full-time</Badge>
-                                    <Badge variant="outline"
-                                        >San Francisco</Badge
-                                    >
-                                    <Badge variant="ruby">Ruby/Rails</Badge>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-xs text-gray-500"
-                                        >Posted Jan 1, 2025</span
-                                    >
-                                    <span
-                                        class="px-4 py-2 bg-ruby-500 text-white text-sm font-medium rounded-lg"
-                                        >Apply</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-900 rounded-xl">
-                        <p class="text-xs text-gray-400 mb-2">
-                            File: <code class="text-emerald-400"
-                                >src/components/JobCard.astro</code
-                            >
-                        </p>
-                        <p class="text-sm text-gray-300 mb-3">
-                            Props: <code class="text-emerald-400">job</code> object
-                            (enriched with sponsor data)
-                        </p>
-                        <p class="text-sm text-gray-300">
-                            Featured badge shown for Pickaxe/Ruby tier sponsors.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MeetupCard -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">MeetupCard</h3>
-                <p class="text-gray-600 mb-6">
-                    Event card with date, location, registration count, and
-                    upcoming indicator.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div
-                        class="bg-white rounded-xl border border-ruby-200 bg-gradient-to-br from-white to-ruby-50/30 p-6"
-                    >
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-2">
-                                <Badge variant="ruby">Meetup</Badge>
-                                <Badge variant="success">Upcoming</Badge>
-                            </div>
-                            <span class="text-xs text-gray-500"
-                                >78 registered</span
-                            >
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">
-                            SF Ruby January Meetup
-                        </h4>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Join us for an evening of Ruby talks and
-                            networking...
-                        </p>
-                        <div class="text-sm text-gray-500 space-y-2">
-                            <div class="flex items-center gap-2">
-                                <span>📅</span>
-                                <span>Jan 15, 2025 at 6:00 PM</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span>📍</span>
-                                <span>GitHub HQ, San Francisco</span>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <span class="text-ruby-500 font-medium text-sm"
-                                >Register Now →</span
-                            >
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-900 rounded-xl">
-                        <p class="text-xs text-gray-400 mb-2">
-                            File: <code class="text-emerald-400"
-                                >src/components/MeetupCard.astro</code
-                            >
-                        </p>
-                        <p class="text-sm text-gray-300 mb-3">
-                            Props: <code class="text-emerald-400">meetup</code> object,
-                            <code class="text-emerald-400">compact</code>
-                        </p>
-                        <p class="text-sm text-gray-300">
-                            Upcoming events get ruby border and gradient
-                            background.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TalkCard -->
-            <div class="mb-12">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">TalkCard</h3>
-                <p class="text-gray-600 mb-6">
-                    Talk/session card with type badge, speaker, and tags.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 overflow-hidden p-5"
-                    >
-                        <div class="flex items-center gap-2 mb-2">
-                            <Badge variant="ruby">keynote</Badge>
-                            <span class="text-xs text-green-600">Confirmed</span
-                            >
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">
-                            Building the Future of Ruby
-                        </h4>
-                        <p class="text-sm text-gray-600 mb-2">Matz</p>
-                        <p class="text-sm text-gray-500 mb-3 line-clamp-3">
-                            A look at Ruby's roadmap and the exciting features
-                            coming in Ruby 4.0...
-                        </p>
-                        <div class="flex flex-wrap gap-1">
-                            <span
-                                class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full"
-                                >ruby</span
-                            >
-                            <span
-                                class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full"
-                                >future</span
-                            >
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-900 rounded-xl">
-                        <p class="text-xs text-gray-400 mb-2">
-                            File: <code class="text-emerald-400"
-                                >src/components/TalkCard.astro</code
-                            >
-                        </p>
-                        <p class="text-sm text-gray-300 mb-3">
-                            Props: <code class="text-emerald-400">talk</code> object
-                        </p>
-                        <p class="text-sm text-gray-300">
-                            Badge color varies by type: keynote (ruby), workshop
-                            (success), demo (outline).
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- NewsCard -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">NewsCard</h3>
-                <p class="text-gray-600 mb-6">
-                    News item card with category badge, headline, and source
-                    attribution.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div
-                        class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-all"
-                    >
-                        <div class="flex items-start justify-between mb-3">
-                            <Badge variant="success">Funding</Badge>
-                            <span class="text-xs text-gray-500"
-                                >Jan 5, 2025</span
-                            >
-                        </div>
-                        <h4 class="font-semibold text-gray-900 mb-2">
-                            Startup X Raises $50M Series B
-                        </h4>
-                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">
-                            The Ruby-powered startup continues its growth
-                            trajectory...
-                        </p>
-                        <div
-                            class="flex items-center justify-between text-xs text-gray-500"
-                        >
-                            <div>
-                                <span class="font-medium text-gray-700"
-                                    >Startup X</span
-                                >
-                                <span class="text-gray-400 ml-2"
-                                    >via TechCrunch</span
-                                >
-                            </div>
-                            <span class="text-ruby-400">↗</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-900 rounded-xl">
-                        <p class="text-xs text-gray-400 mb-2">
-                            File: <code class="text-emerald-400"
-                                >src/components/NewsCard.astro</code
-                            >
-                        </p>
-                        <p class="text-sm text-gray-300 mb-3">
-                            Props: <code class="text-emerald-400">news</code> object
-                        </p>
-                        <p class="text-sm text-gray-300">
-                            Badge color mapped by category: Funding (success),
-                            Release (info), Event (ruby), etc.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quick Reference -->
-        <section
-            class="p-8 bg-gradient-to-br from-gray-900 to-ruby-900 rounded-2xl text-white"
-        >
-            <h2 class="text-2xl font-bold mb-6">Quick Reference</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="font-semibold text-ruby-300 mb-3">Core Files</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li>
-                            <code class="text-emerald-400"
-                                >src/styles/design-tokens.css</code
-                            >
-                        </li>
-                        <li>
-                            <code class="text-emerald-400"
-                                >tailwind.config.mjs</code
-                            >
-                        </li>
-                        <li>
-                            <code class="text-emerald-400"
-                                >src/components/Button.astro</code
-                            >
-                        </li>
-                        <li>
-                            <code class="text-emerald-400"
-                                >src/components/Badge.astro</code
-                            >
-                        </li>
-                        <li>
-                            <code class="text-emerald-400"
-                                >src/components/Header.astro</code
-                            >
-                        </li>
-                        <li>
-                            <code class="text-emerald-400"
-                                >src/components/Footer.astro</code
-                            >
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-ruby-300 mb-3">Key Colors</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li>
-                            <code class="text-ruby-400">ruby-500</code> - Primary
-                            brand
-                        </li>
-                        <li>
-                            <code class="text-gray-400">gray-900</code> - Headings
-                        </li>
-                        <li>
-                            <code class="text-gray-400">gray-600</code> - Body text
-                        </li>
-                        <li>
-                            <code class="text-emerald-400">emerald-500</code> - Success
-                        </li>
-                        <li>
-                            <code class="text-amber-400">amber-500</code> - Warning
-                        </li>
-                        <li>
-                            <code class="text-orange-400">orange-500</code> - YC
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-ruby-300 mb-3">
-                        Common Patterns
+        <!-- Patterns -->
+        <section id="patterns" class="mb-24 scroll-mt-32">
+            <h2 class="px-font text-base md:text-xl text-gray-900 mb-6">
+                Page patterns
+            </h2>
+            <div class="space-y-6">
+                <div class="px-card bg-white p-6">
+                    <h3 class="px-font text-px10 text-gray-900 mb-3">
+                        Hero recipes
                     </h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li>
-                            <code class="text-emerald-400">rounded-xl</code> - Standard
-                            radius
-                        </li>
-                        <li>
-                            <code class="text-emerald-400">rounded-2xl</code> - Featured
-                            cards
-                        </li>
-                        <li>
-                            <code class="text-emerald-400"
-                                >transition-all duration-300</code
-                            >
-                        </li>
-                        <li>
-                            <code class="text-emerald-400">hover:shadow-lg</code
-                            > - Card hover
-                        </li>
-                        <li>
-                            <code class="text-emerald-400">hover:scale-105</code
-                            > - Button hover
-                        </li>
+                    <ul class="text-sm text-gray-600 space-y-2 list-none">
+                        <li><code>px-sky-grad-day</code> + lockup + crenel: conference, sponsor</li>
+                        <li><code>px-sky-grad-deep</code> + lockup + islands: homepage</li>
+                        <li><code>px-sky-grad-dusk</code> + pixel h1: jobs, videos, startups, about, host, contact</li>
+                        <li><code>px-night</code> + HUD masthead: news, everywhere stories live</li>
+                        <li>Light pages (<code>bg-sky-50</code> tops) pass <code>darkHero=false</code> so the header starts solid.</li>
                     </ul>
+                </div>
+                <div class="px-card bg-white p-6">
+                    <h3 class="px-font text-px10 text-gray-900 mb-3">
+                        z-index ladder (mobile)
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                        Page stickies <code>&le; z-30</code> &lt; bottom nav
+                        <code>z-40</code> &lt; jobs filter sheet
+                        <code>z-45/46</code> &lt; More sheet
+                        <code>z-50/51</code>. The floating dock is the only
+                        mobile nav; give content bottom clearance with
+                        <code>pb-tabbar</code>.
+                    </p>
+                </div>
+                <div class="px-card bg-white p-6">
+                    <h3 class="px-font text-px10 text-gray-900 mb-3">
+                        Regeneration workflow
+                    </h3>
+                    <p class="text-sm text-gray-600 font-mono">
+                        node scripts/sync-tokens.mjs && node scripts/px-gradients.mjs && node scripts/px-sprites.mjs
+                    </p>
+                    <p class="text-xs text-gray-500 mt-3">
+                        Run after any change to
+                        <code>src/design/tokens.mjs</code>. OG cards regenerate
+                        via <code>scripts/og-template.html</code> (recipe in
+                        the file header). Verify with <code>npm run qa</code>.
+                    </p>
                 </div>
             </div>
         </section>
     </div>
-
-    <!-- Demo Email Modal -->
-    <EmailModal
-        id="demo-email"
-        email="hello@sfruby.com"
-        subject="Design System Demo"
-        title="Contact SF Ruby"
-    />
 </BaseLayout>
