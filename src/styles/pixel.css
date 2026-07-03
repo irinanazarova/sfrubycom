@@ -61,28 +61,28 @@
    tiny PNGs (scripts/px-gradients.mjs). Stretched to the section height;
    repeat-x keeps the checker square at any viewport width. */
 .px-sky-grad-day {
-    background-color: #3ea3dd;
+    background-color: oklch(68.22% 0.1255 238.04);
     background-image: url("/px-sky-day.png");
     background-size: auto 100%;
     background-repeat: repeat-x;
     image-rendering: pixelated;
 }
 .px-sky-grad-deep {
-    background-color: #3ea3dd;
+    background-color: oklch(68.22% 0.1255 238.04);
     background-image: url("/px-sky-deep.png");
     background-size: auto 100%;
     background-repeat: repeat-x;
     image-rendering: pixelated;
 }
 .px-sky-grad-dusk {
-    background-color: #1d5378;
+    background-color: oklch(42.51% 0.0832 242.52);
     background-image: url("/px-sky-dusk.png");
     background-size: auto 100%;
     background-repeat: repeat-x;
     image-rendering: pixelated;
 }
 .px-royal-grad {
-    background-color: #002d95;
+    background-color: oklch(35.53% 0.1751 262.77);
     background-image: url("/px-royal.png");
     background-size: auto 100%;
     background-repeat: repeat-x;
@@ -92,11 +92,11 @@
 /* starry night: the news section's dark counterpart to the day skies.
    Two offset 1px star fields over a flat navy ramp. */
 .px-night {
-    background-color: #020617;
+    background-color: oklch(12.88% 0.0406 264.7);
     background-image:
-        radial-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1.5px),
-        radial-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1.5px),
-        linear-gradient(to bottom, #071f56 0%, #041030 25%, #020617 60%);
+        radial-gradient(oklch(100% 0 0 / 0.7) 1px, transparent 1.5px),
+        radial-gradient(oklch(100% 0 0 / 0.35) 1px, transparent 1.5px),
+        linear-gradient(to bottom in oklch, oklch(26.25% 0.1042 263.12) 0%, oklch(18.59% 0.0668 263.72) 25%, oklch(12.88% 0.0406 264.7) 60%);
     background-size:
         260px 260px,
         140px 140px,

@@ -80,10 +80,69 @@ export const palette = {
     500: "#da5513",
     600: "#b14416",
   },
+  // Neutral grays (UI text and surfaces)
+  dark: {
+    50: "#f9fafb",
+    100: "#f3f4f6",
+    200: "#e5e7eb",
+    300: "#d1d5db",
+    400: "#9ca3af",
+    500: "#6b7280",
+    600: "#4b5563",
+    700: "#374151",
+    800: "#1f2937",
+    900: "#111827",
+    950: "#030712",
+  },
   // Outline ink (pure black, per the logo) + fog shade
   ink: "#000000",
   cloudshade: "#c4d6ef",
 };
+
+// ---------------------------------------------------------------------------
+// oklch derivation. Hex stays the machine source (PNG generators and the
+// game canvas need RGB bytes); everything CSS-facing is emitted as oklch so
+// colors and gradient interpolation live in a perceptual space.
+// sRGB -> OKLab math per Björn Ottosson (https://bottosson.github.io/posts/oklab/).
+
+function srgbToLinear(c) {
+  return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+}
+
+export function hexToOklch(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  const r = srgbToLinear(((n >> 16) & 255) / 255);
+  const g = srgbToLinear(((n >> 8) & 255) / 255);
+  const b = srgbToLinear((n & 255) / 255);
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+  const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+  const s2 = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  const L = 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s2;
+  const A = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s2;
+  const B = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s2;
+  const C = Math.sqrt(A * A + B * B);
+  let H = (Math.atan2(B, A) * 180) / Math.PI;
+  if (H < 0) H += 360;
+  if (C < 0.0002) H = 0;
+  const round = (v, d) => Number(v.toFixed(d));
+  return { l: round(L * 100, 2), c: round(C, 4), h: round(H, 2) };
+}
+
+/** oklch() string; pass alpha "<alpha-value>" for Tailwind opacity support */
+export function oklch(hex, alpha) {
+  const { l, c, h } = hexToOklch(hex);
+  return alpha !== undefined
+    ? `oklch(${l}% ${c} ${h} / ${alpha})`
+    : `oklch(${l}% ${c} ${h})`;
+}
+
+const mapValues = (obj, fn) =>
+  Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));
+
+/** The palette as oklch strings with Tailwind alpha placeholders */
+export const cssPalette = mapValues(palette, (v) =>
+  typeof v === "string" ? oklch(v, "<alpha-value>") : mapValues(v, (hex) => oklch(hex, "<alpha-value>")),
+);
 
 // Press Start 2P renders on an 8px grid; these are the only sizes we use.
 // Classes: text-px8 / text-px9 / text-px10 (with .px-font / font-pixel).
@@ -96,7 +155,8 @@ export const pixelSizes = {
 // Hard "sprite" shadows (no blur) — ink at 90%.
 export const shadowInk = "rgba(0, 0, 0, 0.9)";
 
-// CSS custom properties written to src/styles/tokens.css by sync-tokens.mjs.
+// CSS custom properties written to src/styles/tokens.css by sync-tokens.mjs
+// (values are converted to oklch at generation time).
 export const cssVars = {
   "px-sky": palette.sky[400],
   "px-sky-deep": palette.sky[500],

@@ -4,7 +4,7 @@ import Button from "../components/Button.astro";
 import Badge from "../components/Badge.astro";
 import SocialLink from "../components/SocialLink.astro";
 import IslandNav from "../components/IslandNav.astro";
-import { palette, cssVars, pixelSizes } from "../design/tokens.mjs";
+import { palette, cssVars, pixelSizes, oklch } from "../design/tokens.mjs";
 
 // The living style guide for the 8-bit design language (2026 refresh).
 // Values render straight from src/design/tokens.mjs so docs cannot drift.
@@ -157,7 +157,12 @@ const skies = [
                 <code>src/design/tokens.mjs</code> is the single source of
                 truth. Tailwind imports it, <code>scripts/sync-tokens.mjs</code>
                 generates the CSS variables, and the sprite and gradient
-                generators consume the same object. Never edit
+                generators consume the same object. Hex is the machine source
+                (PNG generators and the game canvas need RGB bytes); every
+                CSS-facing color is emitted as <code>oklch()</code>, and real
+                CSS gradients interpolate <code>in oklch</code>. The dithered
+                skies mix optically, so they are colorspace-independent by
+                construction. Never edit
                 <code>src/styles/tokens.css</code> or <code>public/px-*.png</code>
                 by hand.
             </p>
@@ -173,7 +178,7 @@ const skies = [
                                     <span
                                         class="w-9 h-9 border-2 border-ink inline-block"
                                         style={`background:${hex}`}
-                                        title={`${name}-${step} ${hex}`}
+                                        title={`${name}-${step} ${oklch(hex)} (${hex})`}
                                     />
                                 ))}
                             </div>
@@ -183,11 +188,11 @@ const skies = [
                 <div class="flex flex-wrap gap-4 mt-5">
                     <span class="inline-flex items-center gap-2 text-sm text-gray-600">
                         <span class="w-9 h-9 border-2 border-ink inline-block" style={`background:${palette.ink}`}></span>
-                        <code>ink {palette.ink}</code>
+                        <code>ink {oklch(palette.ink)}</code>
                     </span>
                     <span class="inline-flex items-center gap-2 text-sm text-gray-600">
                         <span class="w-9 h-9 border-2 border-ink inline-block" style={`background:${palette.cloudshade}`}></span>
-                        <code>cloudshade {palette.cloudshade}</code>
+                        <code>cloudshade {oklch(palette.cloudshade)}</code>
                     </span>
                 </div>
             </div>
@@ -203,7 +208,7 @@ const skies = [
                                     class="w-4 h-4 border border-ink inline-block shrink-0"
                                     style={`background:${value}`}
                                 />
-                                --{name}: {value}
+                                --{name}: {oklch(value)}
                             </span>
                         ))
                     }
