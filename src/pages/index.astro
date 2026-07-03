@@ -17,6 +17,7 @@ import { getLatestMeetupRecordings, formatTimestamp } from "../data/meetup-recor
 import { getJobsBySponsor, getSortedJobs } from "../data/jobs.js";
 import { getAllPhotoAlbums, GCS_PHOTO_BASE } from "../data/events.js";
 import { getSponsor } from "../data/sponsors.js";
+import { newsItems } from "../data/homepage-news.js";
 import { getSpeaker } from "../data/speakers.js";
 import { getAllHosts, hosts as hostsData } from "../data/hosts.js";
 import HostCard from "../components/HostCard.astro";
@@ -111,26 +112,8 @@ const conference2026Sponsors = [
     { name: "WorkOS", logo: "/sponsor_workos.svg", url: "https://workos.com/" },
 ];
 
-// July 2026 news, one uniform card each (chip: ruby = story, gold = release/hiring)
-const newsItems = [
-    { cat: "Press", gold: false, title: "Anthropic Picks Persona to Verify Claude Users", meta: "Jun 22 · TechCrunch", blurb: "Starting July 8, Anthropic will verify the identity of flagged Claude accounts with a government ID and a selfie check, and it chose Persona, the SF identity platform that calls itself a Rails-first company, to run the verification. For Persona ($418M raised, $2B valuation), it lands a month after FedRAMP Moderate authorization.", href: "https://techcrunch.com/2026/06/22/anthropic-says-claude-may-want-to-see-your-id/", link: "Read the coverage", external: true },
-    { cat: "Conference", gold: false, title: "SF Ruby Conf: CFP July 6, Tickets July 15", meta: "Nov 10-12 · SFJAZZ", blurb: "Our first conference: three days at SFJAZZ in San Francisco, keynoted by Garry Tan, President & CEO of Y Combinator. The CFP opens July 6, early bird tickets go on sale for one day on July 15, and sponsorships are open now.", href: "/conference-2026", link: "Conference details", external: false },
-    { cat: "Event", gold: false, title: "RubyConf 2026: Matz Keynotes Vegas", meta: "Jul 14-16 · Red Rock Resort", blurb: "Ruby Central's flagship lands in Las Vegas with keynotes from Matz, Dave Thomas, Jessica Kerr, and Obie Fernandez, plus the first class of Ruby Fellows. SF meetup regulars fill the program: Cameron Dutro, Jeremy Evans, Alexander Baygeldin, Marco Roth.", href: "https://rubyconf.org/", link: "Register", external: true },
-    { cat: "Event", gold: false, title: "SF Ruby Meetup, July @ Sentry", meta: "Jul 22 · 45 Fremont St.", blurb: "A new format: fewer talks, more connecting, with a full round of stage intros. Cameron Dutro presents Garnet.js, his JavaScript implementation of the YARV virtual machine, joined by Alexander Baygeldin (Evil Martians) and Marco Roth. 83+ RSVPs already.", href: "https://lu.ma/qeg0w8on", link: "RSVP on Luma", external: true },
-    { cat: "AI + Ruby", gold: false, title: "RubyLLM Hits the Hacker News Front Page", meta: "Jun 24 · Hacker News", blurb: "RubyLLM spent June 24 on the Hacker News front page with 446 points and 82 comments, the loudest mainstream moment yet for Carmine Paolino's library. v1.16 shipped days earlier with concurrent AI tool execution, observability instrumentation, and proxy support for every provider.", href: "https://news.ycombinator.com/item?id=48660711", link: "Read the thread", external: true },
-    { cat: "AI + Ruby", gold: false, title: "Matz's AI-Built Compiler Runs Rails in 13MB of RAM", meta: "Jun 19", blurb: "Sam Ruby compiled a Rails blog app through Roundhouse into Spinel, the ahead-of-time Ruby compiler Matz is building with Claude's help, producing a native binary that runs in 13MB of RAM. Spinel covers a deliberate Ruby subset, and it points at Ruby on the edge and in embedded devices.", href: "https://intertwingly.net/blog/2026/06/19/Spinel-on-Rails.html", link: "Read the writeup", external: true },
-    { cat: "Press", gold: false, title: "Rails at 41 Million Requests an Hour", meta: "Jun 16", blurb: "Andrew Atkinson documents how Aura Frames survived Christmas Day: 41M API requests an hour and 226K database transactions a second across eight sharded Postgres primaries, on Rails' built-in Multiple Databases support with disable_joins, keyset pagination, and Memcached.", href: "https://andyatkinson.com/how-aura-frames-scales-for-peak-load-ruby-on-rails", link: "Read the case study", external: true },
-    { cat: "Release", gold: true, title: "Instacart Is Gemini's First Grocery Partner", meta: "May 19", blurb: "Gemini users can now connect Instacart and build a real, shoppable cart in conversation, then check out for delivery or pickup. Gemini joins Claude and ChatGPT among the major assistants with agentic Instacart shopping. In June the Rails-built platform shipped Immersive Feed, a shoppable video ad format.", href: "https://company.instacart.com/updates/instacart-brings-agentic-grocery-shopping-to-gemini", link: "Read more", external: true },
-    { cat: "Release", gold: true, title: "Chime Pushes Into Investing", meta: "Jun 1", blurb: "CEO Chris Britt says investment accounts arrive within months: individual stocks, ETFs, bonds, and robo-investing powered by Jade, Chime's generative-AI agent. The Rails-built neobank, 10.2M active members strong, keeps widening its lane after posting its first GAAP-profitable quarter this spring.", href: "https://finance.yahoo.com/markets/stocks/article/chime-ceo-says-hundreds-of-thousands-of-its-members-are-setting-up-trump-accounts-as-it-pushes-into-investing-161148607.html", link: "Read more", external: true },
-    { cat: "Event", gold: false, title: "Brighton Ruby Runs Its 12th Edition", meta: "Jun 25 · Brighton Dome", blurb: "Andy Croll's single-day seaside conference delivered 11 talks: Iliana Hadzhiatanasova on 15 years of upgrades in a 3-million-line monolith (Rails 3.0 to edge), Craig Norford on scaling multi-tenant Sidekiq, a performance-engineering session from Elena Tănăsoiu and Emma Gabriel, and Brian Casel on why your experience is your AI advantage.", href: "https://rubyevents.org/events/brightonruby-2026", link: "See the program", external: true },
-    { cat: "Event", gold: false, title: "SF Ruby Meetup @ PlanetScale", meta: "Jun 18 · San Francisco", blurb: "Hosted with Sam Lambert. Jeremy Evans (Ubicloud) walked through implementing Core Set, Hal Spitz delivered \"ActiveJob: Call Me Maybe,\" and Irina Nazarova demoed local-first Rails with pglite and Electric, plus making Ruby resources discoverable to LLMs.", href: "https://lu.ma/ltipgvuh", link: "Event page", external: true },
-    { cat: "Event", gold: false, title: "Blastoff Rails Recordings Are Live", meta: "Jun 11-12 · Albuquerque", blurb: "All 17 talks from the first-edition conference are up on rubyevents.org, including keynotes from Irina Nazarova (\"Startups on Rails\") and Kieran Klaassen (\"Building Cora Solo\"), plus Avi Flombaum's \"Don't Read the Code: Trusting AI With Your Rails Codebase.\"", href: "https://rubyevents.org/events/blastoffrails-2026", link: "Watch the talks", external: true },
-    { cat: "Release", gold: true, title: "Chatwoot Tops Ruby Trending, Ships Voice Calls", meta: "Jun 16", blurb: "The Rails-built open-source support platform (YC W21) added 4,100+ GitHub stars this month, the most of any Ruby repo, and launched voice calls in beta: Twilio phone calls and WhatsApp calling alongside Captain, its AI support agent.", href: "https://www.chatwoot.com/changelog", link: "See the changelog", external: true },
-    { cat: "Release", gold: true, title: "MCP Ruby SDK: Four Releases in Two Weeks", meta: "Jun", blurb: "The official mcp gem shipped v0.19 through v0.22 inside June: OAuth client-credentials support, W3C trace context propagation, ephemeral sessions, and a 5-100x speedup in tool schema validation. Ruby keeps pace as an agent-native backend language.", href: "https://github.com/modelcontextprotocol/ruby-sdk/releases", link: "Release notes", external: true },
-    { cat: "Release", gold: true, title: "rv 0.6: Ruby Installs in a Blink", meta: "Jun 13", blurb: "André Arko published the plan and progress for rv, his Rust-based, uv-inspired Ruby manager: v0.6 delivers near-instant Ruby installs and project setup. Bundler's longtime lead is rebuilding Ruby onboarding for the speed developers now expect.", href: "https://andre.arko.net/2026/06/13/rv-plan-and-progress/", link: "Read the plan", external: true },
-    { cat: "Hiring", gold: true, title: "Y Combinator Builds on Rails (and Is Hiring)", meta: "SF", blurb: "YC's software team, about 20 engineers behind Work at a Startup, Demo Day, GStack, and GBrain, is hiring Product Engineers in SF on a stack of Rails, React, Postgres, and LLM APIs. The accelerator whose president keynotes our conference in November ships on Ruby.", href: "https://www.ycombinator.com/software", link: "See the roles", external: true },
-    { cat: "Hiring", gold: true, title: "Ruby Roles on the Board", meta: "61+ open roles", blurb: "Gusto (Staff, Payments/Risk), Superconductor (Principal Rails), Koah Labs, Omada Health, CompanyCam, plus Thatch, Persona, Chime, Patch, Reset, and Finta. New Rails teams hiring this month: Y Combinator, WindBorne (Redwood City), Opendate, and Jukebox Health.", href: "/jobs", link: "Browse all jobs", external: false },
-];
+// Monthly news cards live in src/data/homepage-news.js
+
 
 ---
 
@@ -208,7 +191,7 @@ const newsItems = [
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[32%] right-[6%] w-40 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16 sm:py-32 text-center">
                     <div class="mb-8">
-                        <span class="px-plate px-font text-[0.5rem] md:text-[0.625rem] px-4 py-2">
+                        <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
                             <span class="text-gold-500">Year Two</span>
                             <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SF Jazz</span>
                         </span>
@@ -230,19 +213,19 @@ const newsItems = [
                         <a href="https://luma.com/sfrubyconf2026" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
                             <img src="/px-ticket.png" alt="" width="26" height="12" class="px-island-btn__item h-8 w-auto" />
                             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
-                            <span class="px-plate px-font text-[0.5rem] px-3 py-1.5">Buy tickets</span>
+                            <span class="px-plate px-font text-px8 px-3 py-1.5">Buy tickets</span>
                             <span class="text-xs text-white/85 mt-2">Early bird July 15</span>
                         </a>
                         <a href="https://cfp.sfruby.com" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
                             <img src="/px-quest.png" alt="" width="64" height="296" class="px-island-btn__item h-9 w-auto [animation-delay:-0.7s]" />
                             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
-                            <span class="px-plate px-font text-[0.5rem] px-3 py-1.5">Propose a talk</span>
+                            <span class="px-plate px-font text-px8 px-3 py-1.5">Propose a talk</span>
                             <span class="text-xs text-white/85 mt-2">CFP opens July 6</span>
                         </a>
                         <a href="/sponsor-2026" class="px-island-btn tap-press">
                             <img src="/px-coin.png" alt="" width="134" height="134" class="px-island-btn__item h-9 w-auto [animation-delay:-1.4s]" />
                             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
-                            <span class="px-plate px-font text-[0.5rem] px-3 py-1.5">Sponsor</span>
+                            <span class="px-plate px-font text-px8 px-3 py-1.5">Sponsor</span>
                             <span class="text-xs text-white/85 mt-2">Booths and more</span>
                         </a>
                     </div>
@@ -260,16 +243,16 @@ const newsItems = [
                     <div class="mb-12">
                         <div class="border-2 border-white/30 bg-white/5 px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
                             <h1 class="px-font text-sm md:text-base text-white">SF Ruby News</h1>
-                            <p class="px-font text-[0.625rem] md:text-xs text-gold-400">World 07-26 &#8226; July</p>
+                            <p class="px-font text-px10 md:text-xs text-gold-400">World 07-26 &#8226; July</p>
                         </div>
                         <!-- Past Issues -->
                         <div class="mt-3 flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-2">
-                            <span class="px-font text-[0.5rem] text-white/50">Select world:</span>
-                            <a href="/news/2026-02/" class="px-font text-[0.5rem] text-white/60 hover:text-gold-400 transition-colors">Feb</a>
-                            <a href="/news/2026-03/" class="px-font text-[0.5rem] text-white/60 hover:text-gold-400 transition-colors">Mar</a>
-                            <a href="/news/2026-04/" class="px-font text-[0.5rem] text-white/60 hover:text-gold-400 transition-colors">Apr</a>
-                            <a href="/news/2026-05/" class="px-font text-[0.5rem] text-white/60 hover:text-gold-400 transition-colors">May</a>
-                            <a href="/news/2026-06/" class="px-font text-[0.5rem] text-white/60 hover:text-gold-400 transition-colors">Jun</a>
+                            <span class="px-font text-px8 text-white/50">Select world:</span>
+                            <a href="/news/2026-02/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Feb</a>
+                            <a href="/news/2026-03/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Mar</a>
+                            <a href="/news/2026-04/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Apr</a>
+                            <a href="/news/2026-05/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">May</a>
+                            <a href="/news/2026-06/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Jun</a>
                         </div>
                     </div>
 
@@ -286,7 +269,7 @@ const newsItems = [
                             {newsItems.map((item) => (
                                 <article class="px-dialog relative snap-start shrink-0 w-[86%] sm:w-[24rem] p-5 md:p-6 flex flex-col text-left">
                                     <div class="flex items-center justify-between gap-3 mb-4">
-                                        <span class:list={["px-font inline-block px-2 py-1.5 text-[0.5rem] border-2 border-ink", item.gold ? "bg-gold-500 text-ink" : "bg-ruby-500 text-white"]}>{item.cat}</span>
+                                        <span class:list={["px-font inline-block px-2 py-1.5 text-px8 border-2 border-ink", item.gold ? "bg-gold-500 text-ink" : "bg-ruby-500 text-white"]}>{item.cat}</span>
                                         <span class="text-[0.6875rem] text-white/50 shrink-0">{item.meta}</span>
                                     </div>
                                     <h3 class="font-display text-lg md:text-xl font-bold text-white leading-snug mb-3">{item.title}</h3>
@@ -313,7 +296,7 @@ const newsItems = [
                             <button id="news-prev" aria-label="Previous story" class="w-11 h-11 border-2 border-white/40 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-colors disabled:opacity-20 disabled:cursor-default" disabled>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                             </button>
-                            <p id="news-count" class="px-font text-[0.625rem] text-gold-400" aria-live="polite">News 1 of {newsItems.length}</p>
+                            <p id="news-count" class="px-font text-px10 text-gold-400" aria-live="polite">News 1 of {newsItems.length}</p>
                             <button id="news-next" aria-label="Next story" class="w-11 h-11 border-2 border-white/40 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-colors disabled:opacity-20 disabled:cursor-default">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                             </button>
@@ -368,7 +351,7 @@ const newsItems = [
                     <div class="max-w-4xl mx-auto">
                         <!-- Section header -->
                         <div class="text-center mb-8">
-                            <span class="px-plate px-font text-[0.625rem] px-3 py-2 mb-5">
+                            <span class="px-plate px-font text-px10 px-3 py-2 mb-5">
                                 Monthly Meetup
                             </span>
                             <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
@@ -402,7 +385,7 @@ const newsItems = [
                                 href="https://lu.ma/sfruby"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="px-btn px-font text-[0.625rem] gap-2.5 px-6 py-3.5 bg-ruby-500 text-white hover:bg-ruby-400"
+                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-ruby-500 text-white hover:bg-ruby-400"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -413,7 +396,7 @@ const newsItems = [
                                 href="https://forms.gle/EZLqENWd5VjiLduq8"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="px-btn px-font text-[0.625rem] gap-2.5 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
+                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -422,7 +405,7 @@ const newsItems = [
                             </a>
                             <a
                                 href="/host"
-                                class="px-btn px-font text-[0.625rem] gap-2.5 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50"
+                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -445,7 +428,7 @@ const newsItems = [
                         <p class="text-sm text-gray-500 mb-8">Typesense and WorkOS are first in. Thank you!</p>
 
                         <div>
-                            <h3 class="px-font text-[0.625rem] text-ruby-600 text-center mb-5">
+                            <h3 class="px-font text-px10 text-ruby-600 text-center mb-5">
                                 Ruby Tier
                             </h3>
                             <div class="flex flex-wrap justify-center items-center gap-5 md:gap-8">
@@ -474,7 +457,7 @@ const newsItems = [
                         <div class="mt-10">
                             <a
                                 href="/sponsor-2026"
-                                class="px-btn px-font text-[0.5625rem] gap-2 px-5 py-3 bg-gold-500 text-ink hover:bg-gold-400"
+                                class="px-btn px-font text-px9 gap-2 px-5 py-3 bg-gold-500 text-ink hover:bg-gold-400"
                             >
                                 Join them: Sponsor 2026
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -695,7 +678,7 @@ const newsItems = [
                     <div class="text-center">
                         <a
                             href="/host"
-                            class="px-btn px-font text-[0.625rem] gap-2 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
+                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
                         >
                             Host the meetup
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

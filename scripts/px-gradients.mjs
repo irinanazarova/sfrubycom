@@ -6,6 +6,7 @@
 // Usage: node scripts/px-gradients.mjs   (requires `magick` on PATH)
 import { writeFileSync, unlinkSync } from "node:fs";
 import { execSync } from "node:child_process";
+import { skyRamps } from "../src/design/tokens.mjs";
 
 const BAYER = [
   [0, 8, 2, 10],
@@ -36,19 +37,7 @@ function ppm(height, hexes) {
   return `P3\n${W} ${height}\n255\n${body}`;
 }
 
-const GRADIENTS = {
-  // day sky: conference + sponsor heroes
-  "px-sky-day": { height: 384, stops: ["#62bbee", "#3ea3dd", "#2b86bd", "#236a97"] },
-  // deep sky: homepage hero, landing on the news masthead navy (#071f56)
-  "px-sky-deep": {
-    height: 576,
-    stops: ["#62bbee", "#3ea3dd", "#2b86bd", "#236a97", "#1d5378", "#123a57", "#071f56"],
-  },
-  // dusk: interior page heroes (jobs, videos, startups, host)
-  "px-sky-dusk": { height: 256, stops: ["#236a97", "#1d5378", "#123a57", "#071f56"] },
-  // royal: notify/CTA sections (the SAN FRANCISCO badge blues)
-  "px-royal": { height: 192, stops: ["#0047eb", "#002d95"] },
-};
+const GRADIENTS = skyRamps;
 
 for (const [name, { height, stops }] of Object.entries(GRADIENTS)) {
   const tmp = `/tmp/${name}.ppm`;

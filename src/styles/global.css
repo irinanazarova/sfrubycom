@@ -1,7 +1,7 @@
 /* @import must precede all other statements (including @tailwind) or the
    bundler drops it silently. */
-/* Design System Tokens */
-@import "./design-tokens.css";
+/* Design tokens (generated — see src/design/tokens.mjs) */
+@import "./tokens.css";
 /* 8-bit design language: palette vars, pixel font, px-* components */
 @import "./pixel.css";
 

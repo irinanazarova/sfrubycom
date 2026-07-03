@@ -6,18 +6,9 @@
 // Usage: node scripts/px-sprites.mjs   (requires `magick` on PATH)
 import { writeFileSync, unlinkSync } from "node:fs";
 import { execSync } from "node:child_process";
+import { spriteColors } from "../src/design/tokens.mjs";
 
-const PALETTE = {
-  ".": null, // transparent
-  K: "#00040c", // ink outline
-  W: "#ffffff", // paper / glint
-  S: "#c4d6ef", // fog shade
-  R: "#ff5545", // coral ruby
-  r: "#b52e27", // ruby shadow
-  L: "#ff9d94", // coral highlight
-  G: "#f4c700", // coin gold
-  g: "#c8a300", // gold shadow
-};
+const PALETTE = spriteColors;
 
 const SPRITES = {
   "px-envelope": [

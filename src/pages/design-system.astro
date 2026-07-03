@@ -1,4 +1,5 @@
 ---
+import { palette } from "../design/tokens.mjs";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Badge from "../components/Badge.astro";
@@ -120,36 +121,40 @@ import DistanceBadge from "../components/DistanceBadge.astro";
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-[0.625rem] text-gray-900 mb-4">Palette</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-ruby-500" title="ruby-500 #ff5545"></span>
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-ruby-900" title="ruby-900 #7c000a"></span>
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-sky-400" title="sky-400 #62bbee"></span>
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-sky-500" title="sky-500 #3ea3dd"></span>
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-indigo-500" title="indigo-500 #0047eb"></span>
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-indigo-700" title="indigo-700 #002d95"></span>
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-gold-500" title="gold-500 #f4c700"></span>
-                        <span class="w-10 h-10 border-2 border-ink inline-block bg-ink" title="ink #00040c"></span>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-4">ruby / sky / indigo / gold / ink, sampled from the logo.</p>
+                    <h3 class="px-font text-px10 text-gray-900 mb-4">Palette</h3>
+                    {["ruby", "sky", "indigo", "gold"].map((name) => (
+                        <div class="mb-3">
+                            <p class="text-xs text-gray-500 mb-1.5 font-mono">{name}</p>
+                            <div class="flex flex-wrap gap-1">
+                                {Object.entries(palette[name]).map(([step, hex]) => (
+                                    <span
+                                        class="w-8 h-8 border-2 border-ink inline-block"
+                                        style={`background:${hex}`}
+                                        title={`${name}-${step} ${hex}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                    <p class="text-sm text-gray-500 mt-4">Single source: <code>src/design/tokens.mjs</code> (plus ink <code>{palette.ink}</code>). Edit there, then run the sync scripts.</p>
                 </div>
                 <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-[0.625rem] text-gray-900 mb-4">Type</h3>
+                    <h3 class="px-font text-px10 text-gray-900 mb-4">Type</h3>
                     <p class="px-font text-sm text-gray-900 mb-2">Press Start 2P: display moments</p>
                     <p class="font-display font-bold text-lg text-gray-900 mb-2">Martian Grotesk: long headings</p>
                     <p class="text-sm text-gray-600">Martian Mono: body text. Pixel type only for short strings via <code>.px-font</code>.</p>
                 </div>
                 <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-[0.625rem] text-gray-900 mb-4">Components</h3>
+                    <h3 class="px-font text-px10 text-gray-900 mb-4">Components</h3>
                     <div class="flex flex-wrap items-center gap-4">
-                        <button class="px-btn px-font text-[0.625rem] px-5 py-3 bg-gold-500 text-ink">px-btn</button>
-                        <span class="px-plate px-font text-[0.625rem] px-3 py-2">px-plate</span>
-                        <span class="px-plate px-plate--gold px-font text-[0.625rem] px-3 py-2">gold</span>
+                        <button class="px-btn px-font text-px10 px-5 py-3 bg-gold-500 text-ink">px-btn</button>
+                        <span class="px-plate px-font text-px10 px-3 py-2">px-plate</span>
+                        <span class="px-plate px-plate--gold px-font text-px10 px-3 py-2">gold</span>
                     </div>
                     <p class="text-sm text-gray-500 mt-4">Also: px-card, px-dialog, px-bubble, px-crenel, px-island-btn (see IslandNav.astro), px-night, px-sky-grad-*.</p>
                 </div>
                 <div class="px-card bg-white p-6">
-                    <h3 class="px-font text-[0.625rem] text-gray-900 mb-4">Sprites</h3>
+                    <h3 class="px-font text-px10 text-gray-900 mb-4">Sprites</h3>
                     <div class="flex flex-wrap items-end gap-4">
                         <img src="/logo8bit-mascot.png" alt="mascot" class="px-pixelated h-12 w-auto" />
                         <img src="/px-island.png" alt="island" class="px-pixelated h-8 w-auto" />

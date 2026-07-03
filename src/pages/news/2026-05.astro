@@ -28,7 +28,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     <a href="/#news" class="px-font text-base md:text-xl text-white hover:text-gold-400 transition-colors">SF Ruby News</a>
                     <div class="flex-1 max-w-[120px] h-1 bg-white/25"></div>
                 </div>
-                <p class="px-font text-[0.625rem] text-gold-400">May 2026</p>
+                <p class="px-font text-px10 text-gold-400">May 2026</p>
             </div>
 
             <!-- News Carousel -->
@@ -38,7 +38,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 <div class="news-page" data-page="0">
                     <!-- Headline Story: GitHub adopts Herb -->
                     <div class="mb-10">
-                        <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-[0.5rem] border-2 border-ink mb-4">Ruby at Scale</span>
+                        <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">Ruby at Scale</span>
                         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">GitHub Adopts Herb Across 500K Lines of ERB</h2>
                         <div class="border-l-4 border-ruby-500 pl-6">
                             <p class="text-lg md:text-xl text-white/80 leading-relaxed">
@@ -64,7 +64,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
                         <!-- AI + Ruby: Matz Spinel -->
                         <div class="md:pr-8">
-                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-[0.5rem] border-2 border-ink mb-3">AI + Ruby</span>
+                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">AI + Ruby</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Matz Ships an AI-Built Ruby Compiler</h3>
                             <p class="text-xs text-white/40 mb-2">Apr 24, 2026</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">At RubyKaigi 2026, Matz unveils <strong class="text-white/80">Spinel</strong> — a native Ruby AOT compiler 11.6× faster than MiniRuby on Ruby 4.1. Ruby → AST → C → native binary. A three-year-old idea, implemented in weeks with Claude Code. MIT, 1.5K stars in two weeks.</p>
@@ -75,7 +75,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <!-- Stripe — merged CI + Sessions -->
                         <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-[0.5rem] border-2 border-ink mb-3">Release</span>
+                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink mb-3">Release</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Stripe: 50M-Line Ruby CI + 288 at Sessions</h3>
                             <p class="text-xs text-white/40 mb-2">Apr 9 · Apr 29–May 1, 2026</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">SF Ruby company (Sinatra + internal framework) bookends April with two big signals. Aditya Anchuri details Stripe's <strong class="text-white/80">50-million-line Ruby monolith</strong> and Selective Test Execution (~5% of tests per PR). Days later: <a href="https://stripe.com/newsroom/news/sessions-2026" class="underline hover:text-white/80">288 Sessions launches</a> — Agentic Commerce with Meta/Google, AI-agent wallet, 9,000 attendees at Moscone.</p>
@@ -86,7 +86,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <!-- Intercom Fin for Sales -->
                         <div class="md:border-l md:border-white/10 md:pl-8">
-                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-[0.5rem] border-2 border-ink mb-3">Release</span>
+                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink mb-3">Release</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Intercom Launches Fin for Sales</h3>
                             <p class="text-xs text-white/40 mb-2">Apr 24, 2026</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">Fin moves beyond support. New Fin for Sales qualifies leads, books meetings, starts trials; Fin Copilot adds a free tier (10 conversations/month per agent); Fin Insights ships CX Score. Fin growing 350% YoY across 8,000 companies — all on a 2M-line Rails monolith.</p>
@@ -101,7 +101,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
                         <div class="md:pr-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-[0.5rem] border-2 border-ink w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">RubyLLM 1.15: Image Editing + Cost Tracking</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Carmine Paolino's RubyLLM (≈5M downloads) ships image editing via <code class="text-white/80">paint</code>, conversation cost tracking with cache-read/write buckets, and Action Text plain-text extraction so HTML doesn't leak into prompts. Now the de-facto Ruby LangChain.</p>
                                 <a href="https://github.com/crmne/ruby_llm/releases/tag/1.15.0" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
@@ -112,7 +112,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-[0.5rem] border-2 border-ink w-fit">Event</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink w-fit">Event</span>
                                 <h3 class="font-display text-xl font-bold text-white">SF Ruby Meetup, May @ Checkr</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Thursday May 21, 5pm, One Montgomery St. Kurt Ude (Checkr) on engineering fraud at enterprise scale, Waldemar Quevedo (Synadia) on building agents in Ruby with DSPy, and Pranav Raj (Chatwoot CEO, YC W21). 116+ RSVPs.</p>
                                 <a href="https://luma.com/eyizxwjt" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
@@ -123,7 +123,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <div class="md:border-l md:border-white/10 md:pl-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-[0.5rem] border-2 border-ink w-fit">Event</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink w-fit">Event</span>
                                 <h3 class="font-display text-xl font-bold text-white">Rails World 2026: Austin, AI Track, 1,200 Seats</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Rails Foundation announces the biggest Rails World yet: Austin, Sep 23–24, 1,200-attendee capacity, dedicated AI / Agentic Systems and Trust &amp; Security tracks. CFP closes May 16. General admission ($699) on sale May 12, 10am CT.</p>
                                 <a href="https://rubyonrails.org/2026/4/23/big-rails-world-2026-update-CFP" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
@@ -139,7 +139,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         <!-- Event: Blue Ridge Ruby 2026 -->
                         <div class="md:pr-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-[0.5rem] border-2 border-ink w-fit">Event</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink w-fit">Event</span>
                                 <h3 class="font-display text-xl font-bold text-white">Blue Ridge Ruby 2026 in Asheville</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Two-day, single-track conference (April 30 - May 1), 21 talks. Agent thread again: "LLM Telemetry as a First-Class Rails Concern," "Instillment of Successful Practices in an Agentic World," a lightning talk on "Teaching Claude Code to Upgrade Rails." Joël Quenneville, Rachael Wright-Munn, Katya Sarmiento, Ifat Ribon on the bill.</p>
                                 <a href="https://blueridgeruby.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
@@ -151,7 +151,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         <!-- Press: Gusto Joins Ruby Alliance -->
                         <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-[0.5rem] border-2 border-ink w-fit">Press</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Press</span>
                                 <h3 class="font-display text-xl font-bold text-white">Gusto Joins Ruby Alliance</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Ruby Central launches the Ruby Alliance — a coalition of companies investing in long-term Ruby ecosystem health, resilience, and sustainability. SF-based $9.5B Rails unicorn Gusto signs on as the inaugural member (May 11).</p>
                                 <a href="https://rubycentral.org/news/gusto-joins-the-ruby-alliance/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
@@ -163,7 +163,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         <!-- Event: Blastoff Rails 2026 -->
                         <div class="md:border-l md:border-white/10 md:pl-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-[0.5rem] border-2 border-ink w-fit">Event</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink w-fit">Event</span>
                                 <h3 class="font-display text-xl font-bold text-white">Blastoff Rails 2026: Save the Date</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">June 11-12 in Albuquerque, NM. 9 talks, keynotes from Irina Nazarova (Evil Martians) and Kieran Klaassen. Topics: "How to Become a Famous Ruby/Rails Agentic Developer," "Why We're Still Training Rails Developers in an Age of AI," "Fewer Tests, More Confidence."</p>
                                 <a href="https://www.blastoffrails.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
@@ -179,7 +179,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 <div class="news-page hidden" data-page="1">
                     <!-- Headline Story: Q1 earnings -->
                     <div class="mb-10">
-                        <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-[0.5rem] border-2 border-ink mb-4">Earnings</span>
+                        <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">Earnings</span>
                         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Public Rails Companies Print Records</h2>
                         <div class="border-l-4 border-ruby-500 pl-6">
                             <p class="text-lg md:text-xl text-white/80 leading-relaxed">
@@ -205,7 +205,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
                         <!-- Release: AngelList USVC -->
                         <div class="md:pr-8">
-                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-[0.5rem] border-2 border-ink mb-3">Release</span>
+                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink mb-3">Release</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">AngelList USVC: $500 Minimum VC Fund</h3>
                             <p class="text-xs text-white/40 mb-2">Apr 22, 2026</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails platform opens a regulated venture fund to every U.S. investor at a $500 minimum. Naval Ravikant chairs. Holdings include OpenAI, Anthropic, xAI, Sierra, Crusoe, Vercel, Legora.</p>
@@ -216,7 +216,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <!-- Earnings: Omada -->
                         <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                            <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-[0.5rem] border-2 border-ink mb-3">Earnings</span>
+                            <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink mb-3">Earnings</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Omada Crosses 1M Members, Joins Optum Rx GLP-1</h3>
                             <p class="text-xs text-white/40 mb-2">May 7, 2026</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">SF Rails company posts Q1 revenue $78M (+42%), 1.02M members (+51%, first time over 1M), and adjusted EBITDA turned positive ($1M vs. -$4M a year ago). Joins Optum Rx's Weight Engage for GLP-1 access — now contracted with all three major PBMs — plus Eli Lilly Employer Connect. Raises 2026 guidance to $322–330M.</p>
@@ -227,7 +227,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <!-- Release: Doximity Clinical AI Suite -->
                         <div class="md:border-l md:border-white/10 md:pl-8">
-                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-[0.5rem] border-2 border-ink mb-3">Release</span>
+                            <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink mb-3">Release</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Doximity Ships Free Clinical AI Suite</h3>
                             <p class="text-xs text-white/40 mb-2">May 5, 2026</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">SF-based Rails Foundation Core member bundles Ask, Scribe, and Dialer into one free product for U.S. clinicians. Scribe is already generating millions of clinical notes for 10K+ Doximity members in beta.</p>
@@ -242,7 +242,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
                         <div class="md:pr-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-[0.5rem] border-2 border-ink w-fit">Acquisition</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Acquisition</span>
                                 <h3 class="font-display text-xl font-bold text-white">Shopify Acquires Vantage Discovery</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Rails Foundation Core member absorbs San Jose AI-search startup. Vantage's semantic search team joins Shopify's merchant + buyer AI stack. Adds to a Q1 of $3.2B revenue (+34%) and the first $100B+ GMV quarter.</p>
                                 <a href="https://betakit.com/shopify-acquires-search-startup-vantage-discovery-for-undisclosed-amount/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
@@ -253,7 +253,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-[0.5rem] border-2 border-ink w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">Gusto Spring Showcase Deepens Claude</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">SF Rails unicorn ships ~75 new features and expands its agent-accessible footprint. Owners now run payroll in Claude, ChatGPT, and Slack with natural-language questions about wages and overtime.</p>
                                 <a href="https://gusto.com/resources/company-news/spring-showcase-2026" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
@@ -264,7 +264,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                         </div>
                         <div class="md:border-l md:border-white/10 md:pl-8">
                             <div class="flex flex-col gap-3">
-                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-[0.5rem] border-2 border-ink w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">thoughtbot Ships Rails-Audit Claude Skill</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">A structured Claude Code skill that runs a full Rails code audit against thoughtbot's Ruby Science / Testing Rails playbooks and a security checklist, returning severity-tagged Markdown. MIT licensed. Tested on thoughtbot's own 10-year-old platform.</p>
                                 <a href="https://thoughtbot.com/blog/ai-in-focus:a-new-claude-skill-for-rails-code-audits" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
