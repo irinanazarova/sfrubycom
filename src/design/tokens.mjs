@@ -80,8 +80,8 @@ export const palette = {
     500: "#da5513",
     600: "#b14416",
   },
-  // Outline ink (near-black navy) + fog shade
-  ink: "#00040c",
+  // Outline ink (pure black, per the logo) + fog shade
+  ink: "#000000",
   cloudshade: "#c4d6ef",
 };
 
@@ -94,7 +94,7 @@ export const pixelSizes = {
 };
 
 // Hard "sprite" shadows (no blur) — ink at 90%.
-export const shadowInk = "rgba(0, 4, 12, 0.9)";
+export const shadowInk = "rgba(0, 0, 0, 0.9)";
 
 // CSS custom properties written to src/styles/tokens.css by sync-tokens.mjs.
 export const cssVars = {
