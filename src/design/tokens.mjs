@@ -116,9 +116,12 @@ export const cssVars = {
 
 // Dithered sky ramps (scripts/px-gradients.mjs).
 export const skyRamps = {
+  // Anton's logo sky: nearly flat, slightly darker up top and lighter
+  // toward the ground (his PRESS START sits navy-on-light). The full-height
+  // dither between the two logo blues reproduces that drift.
   "px-sky-day": {
     height: 384,
-    stops: [palette.sky[400], palette.sky[500], palette.sky[600], palette.sky[700]],
+    stops: [palette.sky[500], palette.sky[400]],
   },
   "px-sky-deep": {
     height: 576,
