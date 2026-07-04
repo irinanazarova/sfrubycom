@@ -160,10 +160,10 @@ const tiers2026 = [
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- 2025 Stats -->
                     <div
-                        class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12"
+                        class="px-card bg-white p-8 mb-12"
                     >
                         <h2
-                            class="text-xl font-bold text-gray-900 mb-6 text-center"
+                            class="px-font text-sm md:text-base text-gray-900 mb-6 text-center"
                         >
                             2025 in Numbers
                         </h2>
@@ -172,7 +172,7 @@ const tiers2026 = [
                         >
                             <div>
                                 <div
-                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                    class="px-font text-xl md:text-2xl text-ruby-600"
                                 >
                                     450+
                                 </div>
@@ -182,7 +182,7 @@ const tiers2026 = [
                             </div>
                             <div>
                                 <div
-                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                    class="px-font text-xl md:text-2xl text-ruby-600"
                                 >
                                     25+
                                 </div>
@@ -192,7 +192,7 @@ const tiers2026 = [
                             </div>
                             <div>
                                 <div
-                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                    class="px-font text-xl md:text-2xl text-ruby-600"
                                 >
                                     40+
                                 </div>
@@ -202,7 +202,7 @@ const tiers2026 = [
                             </div>
                             <div>
                                 <div
-                                    class="text-4xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent"
+                                    class="px-font text-xl md:text-2xl text-ruby-600"
                                 >
                                     550+
                                 </div>
@@ -215,7 +215,7 @@ const tiers2026 = [
 
                     <!-- Why Sponsor -->
                     <div
-                        class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12"
+                        class="px-card bg-white p-8 mb-12"
                     >
                         <h2 class="text-xl font-bold text-gray-900 mb-6">
                             Why Sponsor?
@@ -311,7 +311,7 @@ const tiers2026 = [
                     <!-- 2026 Sponsorship Tiers -->
                     <div class="mb-12">
                         <h2
-                            class="text-xl font-bold text-gray-900 mb-6 text-center"
+                            class="px-font text-sm md:text-base text-gray-900 mb-6 text-center"
                         >
                             2026 Sponsorship Tiers
                         </h2>
@@ -319,7 +319,7 @@ const tiers2026 = [
                             {
                                 tiers2026.map((tier) => (
                                     <div
-                                        class={`relative flex flex-col rounded-2xl border p-8 ${tier.featured ? "border-ruby-300 ring-1 ring-ruby-200 bg-gradient-to-br from-ruby-50/60 to-white shadow-lg shadow-ruby-500/10" : "border-gray-200 bg-white shadow-sm"}`}
+                                        class={`relative flex flex-col px-card p-8 ${tier.featured ? "bg-ruby-50" : "bg-white"}`}
                                     >
                                         {tier.featured && (
                                             <span class="absolute top-5 right-5 text-[11px] font-semibold uppercase tracking-wider text-ruby-600 bg-ruby-100 rounded-full px-2.5 py-1">
@@ -330,7 +330,7 @@ const tiers2026 = [
                                             {tier.name}
                                         </h3>
                                         {tier.price && (
-                                            <div class="mt-1 text-3xl font-bold bg-gradient-to-r from-ruby-500 to-pink-500 bg-clip-text text-transparent">
+                                            <div class="px-font mt-2 text-lg md:text-xl text-ruby-600">
                                                 {tier.price}
                                             </div>
                                         )}
@@ -359,7 +359,7 @@ const tiers2026 = [
                                         </ul>
                                         <button
                                             data-email-modal="sponsor-2026"
-                                            class="mt-6 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-ruby-500 to-pink-500 text-white text-sm font-semibold shadow-sm hover:shadow-md hover:from-ruby-400 hover:to-pink-400 transition-all"
+                                            class="mt-6 px-btn px-font text-px9 gap-2 px-5 py-3 bg-ruby-500 text-white hover:bg-ruby-400"
                                         >
                                             {tier.price ? "Sponsor this tier" : "Let's talk"}
                                         </button>
@@ -371,10 +371,10 @@ const tiers2026 = [
 
                     <!-- 2025 Sponsors -->
                     <div
-                        class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 mb-12"
+                        class="px-card bg-white p-8 mb-12"
                     >
                         <h2
-                            class="text-xl font-bold text-gray-900 mb-6 text-center"
+                            class="px-font text-sm md:text-base text-gray-900 mb-6 text-center"
                         >
                             2025 Sponsors
                         </h2>
@@ -471,7 +471,7 @@ const tiers2026 = [
 
                     <!-- Contact -->
                     <div
-                        class="bg-gradient-to-br from-ruby-50 to-pink-50 rounded-2xl border border-ruby-100 p-8 text-center"
+                        class="px-card bg-ruby-50 p-8 text-center"
                     >
                         <h2 class="text-xl font-bold text-gray-900 mb-4">
                             Questions, or want a custom package?
@@ -482,7 +482,7 @@ const tiers2026 = [
                         </p>
                         <button
                             data-email-modal="sponsor-2026"
-                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                            class="px-btn px-font text-px10 md:text-xs gap-2 px-8 py-4 bg-gold-500 text-ink hover:bg-gold-400"
                         >
                             <svg
                                 class="w-5 h-5"

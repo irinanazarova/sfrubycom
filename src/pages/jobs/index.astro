@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import EmailModal from "../../components/EmailModal.astro";
+import PostingRulesModal from "../../components/PostingRulesModal.astro";
 import { getSortedJobs } from "../../data/jobs.js";
 import { getSponsor } from "../../data/sponsors.js";
 import { getStartup } from "../../data/startups.js";
@@ -176,12 +177,19 @@ const facetGroups = [
                     </div>
                     <button
                         data-email-modal="post-job"
-                        class="tap-press inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-ruby-600 rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all"
+                        class="tap-press px-btn px-font text-px9 gap-2 px-5 py-3 bg-white text-ruby-600 hover:bg-gray-50"
                     >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
                         Post a Job
+                    </button>
+                    <button
+                        type="button"
+                        data-posting-rules-open
+                        class="tap-press px-font text-px9 text-white/80 hover:text-white underline decoration-white/40 hover:decoration-white transition-colors"
+                    >
+                        Posting rules
                     </button>
                 </div>
             </div>
@@ -1018,4 +1026,5 @@ const facetGroups = [
             });
         }
     </script>
+<PostingRulesModal />
 </BaseLayout>
