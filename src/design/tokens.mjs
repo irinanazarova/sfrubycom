@@ -206,4 +206,7 @@ export const spriteColors = {
   L: palette.ruby[300], // coral highlight
   G: palette.gold[500], // coin gold
   g: palette.gold[600], // gold shadow
+  N: "#46b957", // python green (sampled from the island grass)
+  n: "#91c568", // python light
+  m: "#2f7d3a", // python shade
 };
