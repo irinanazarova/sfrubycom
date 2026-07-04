@@ -2,6 +2,8 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
+import IslandNav from "../components/IslandNav.astro";
+import NewsRunner from "../components/NewsRunner.astro";
 import "../styles/global.css";
 import StartupCard from "../components/StartupCard.astro";
 import StartupModal from "../components/StartupModal.astro";
@@ -14,7 +16,8 @@ import { getTalk, talks } from "../data/talks.js";
 import { getLatestMeetupRecordings, formatTimestamp } from "../data/meetup-recordings.js";
 import { getJobsBySponsor, getSortedJobs } from "../data/jobs.js";
 import { getAllPhotoAlbums, GCS_PHOTO_BASE } from "../data/events.js";
-import { getSponsor, getSponsorsGroupedByTier } from "../data/sponsors.js";
+import { getSponsor } from "../data/sponsors.js";
+import { newsItems } from "../data/homepage-news.js";
 import { getSpeaker } from "../data/speakers.js";
 import { getAllHosts, hosts as hostsData } from "../data/hosts.js";
 import HostCard from "../components/HostCard.astro";
@@ -103,18 +106,15 @@ const totalPhotoCount = photoAlbums.reduce(
     0,
 );
 
-// Get sponsors grouped by tier - order: Pickaxe, Ruby, Post Production, Reception, Emerald, Travel
-const tierOrder = [
-    "Pickaxe ⛏️",
-    "Ruby",
-    "Post Production",
-    "Reception",
-    "Emerald",
-    "Travel",
+// First confirmed 2026 conference sponsors (Ruby tier)
+const conference2026Sponsors = [
+    { name: "Typesense", logo: "/sponsor_typesense.png", url: "https://typesense.org/" },
+    { name: "WorkOS", logo: "/sponsor_workos.svg", url: "https://workos.com/" },
 ];
-const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
-    return tierOrder.indexOf(a.name) - tierOrder.indexOf(b.name);
-});
+
+// Monthly news cards live in src/data/homepage-news.js
+
+
 ---
 
 <!doctype html>
@@ -164,9 +164,9 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
             property="og:description"
             content="Let's build the new generation of Ruby success stories. Join the SF Ruby community: monthly meetups, and the annual conference. Connect with founders and engineers building with Ruby."
         />
-        <meta property="og:image" content="https://iqtfijxk.ogplus.net/" />
+        <meta property="og:image" content="https://sfruby.com/og/home.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:image" content="https://iqtfijxk.ogplus.net/" />
+        <meta property="twitter:image" content="https://sfruby.com/og/home.png" />
 
         <script
             defer
@@ -183,408 +183,167 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
             <!-- Conference Announcement -->
             <!-- TODO before publish: replace href="#" with the real conference-page URL -->
             <!-- Gradient runs the full height sky -> navy, ending on the news color so the join is seamless -->
-            <section id="conf-announcement" class="relative min-h-[92vh] flex items-center text-white overflow-hidden" style="background-image: radial-gradient(900px 520px at 80% -5%, rgba(255,255,255,0.22), transparent 60%), linear-gradient(165deg in oklch, oklch(0.76 0.145 232) 0%, oklch(0.59 0.155 245) 45%, oklch(0.45 0.21 277) 100%);">
-                <!-- soft clouds -->
-                <div class="absolute top-24 left-1/5 w-80 h-36 bg-white/20 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute top-44 right-12 w-64 h-28 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute top-[30%] left-1/2 w-72 h-32 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+            <section id="conf-announcement" class="relative min-h-[92vh] flex items-center text-white overflow-hidden px-sky-grad-day">
+                <!-- blocky retro clouds -->
+                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-28 left-[12%] w-36 md:w-44 animate-float pointer-events-none" aria-hidden="true" />
+                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-48 right-[10%] w-24 md:w-32 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[32%] right-[6%] w-40 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16 sm:py-32 text-center">
-                    <div class="mb-6">
-                        <span class="inline-flex items-center gap-3 rounded-full bg-white/10 border border-white/30 py-1.5 pl-1.5 pr-4 align-middle">
-                            <span class="shrink-0 whitespace-nowrap rounded-full bg-gradient-to-r from-ruby-500 to-pink-500 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white">Year Two</span>
-                            <span class="text-xs md:text-sm tracking-[0.06em] uppercase text-white/90">Nov 10–12, 2026 · SF Jazz, San Francisco</span>
+                    <div class="mb-8">
+                        <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
+                            <span class="text-gold-500">Year Two</span>
+                            <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SF Jazz</span>
                         </span>
                     </div>
-                    <img src="/sfruby-startup-2026.png" alt="San Francisco Ruby Startup Conference" width="2048" height="1550" class="w-full max-w-lg lg:max-w-xl h-auto mb-8 mx-auto" />
+                    <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Startup Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[15rem] md:max-w-[17rem] h-auto mb-8 mx-auto" />
                     <!-- Photo: Seb Daly / Web Summit / Sportsfile, CC BY 2.0 (Wikimedia Commons) -->
-                    <div class="flex items-center justify-center gap-5">
-                        <img src="/speaker_garry_tan.jpg" alt="Garry Tan" width="500" height="667" loading="lazy" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover object-top ring-2 ring-white/40 shrink-0" />
+                    <div class="px-card bg-white max-w-2xl mx-auto p-5 md:p-6 flex items-center justify-center gap-5 text-left">
+                        <div class="shrink-0 animate-float"><img src="/garry_pixel_256.png" alt="Garry Tan, pixel character by Anton Lovchikov" width="256" height="256" loading="lazy" class="px-pixelated w-32 md:w-36 h-auto relative z-10 mx-auto" /><img src="/px-island.png" alt="" width="598" height="104" loading="lazy" class="px-pixelated w-36 md:w-40 h-auto -mt-3 mx-auto" /></div>
                         <div class="text-left">
-                            <p class="text-xl md:text-2xl lg:text-3xl text-white/90 leading-snug">
-                                Keynote: <strong class="text-white">Garry Tan</strong>, President &amp; CEO of <strong class="text-white">Y Combinator</strong>
+                            <p class="text-lg md:text-xl lg:text-2xl text-gray-800 leading-snug">
+                                Keynote: <strong class="text-ink font-bold">Garry Tan</strong>, President &amp; CEO of <strong class="text-ink font-bold">Y Combinator</strong>
                             </p>
-                            <p class="text-base md:text-lg text-white/70 mt-2">
-                                Rubyist, Creator of <a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener noreferrer" class="underline hover:text-white transition-colors">GStack</a>
+                            <p class="text-sm md:text-base text-gray-500 mt-2">
+                                Rubyist, Creator of <a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener noreferrer" class="text-ruby-600 underline hover:text-ruby-500 transition-colors">GStack</a>
                             </p>
                         </div>
                     </div>
-                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto text-center">
-                        <a href="https://luma.com/sfrubyconf2026" target="_blank" rel="noopener noreferrer" class="tap-press flex flex-col justify-center rounded-2xl bg-gradient-to-r from-ruby-500 to-pink-500 px-5 py-4 shadow-lg shadow-ruby-500/25 hover:from-ruby-400 hover:to-pink-400 transition-colors">
-                            <span class="font-bold text-white">Purchase ticket</span>
-                            <span class="text-xs text-white/85 mt-1">Early bird on sale for 1 day, July 15</span>
+                    <div class="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-10 max-w-3xl mx-auto text-center">
+                        <a href="https://luma.com/sfrubyconf2026" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
+                            <img src="/px-ticket.png" alt="" width="26" height="12" class="px-island-btn__item h-8 w-auto" />
+                            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
+                            <span class="px-plate px-font text-px8 px-3 py-1.5">Buy tickets</span>
+                            <span class="text-xs text-indigo-950/85 mt-2">Early bird July 15</span>
                         </a>
-                        <a href="https://cfp.sfruby.com" target="_blank" rel="noopener noreferrer" class="tap-press flex flex-col justify-center rounded-2xl bg-white/10 border border-white/30 px-5 py-4 backdrop-blur-sm hover:bg-white/20 transition-colors">
-                            <span class="font-bold text-white">Propose a talk</span>
-                            <span class="text-xs text-white/70 mt-1">CFP opens July 6</span>
+                        <a href="https://cfp.sfruby.com" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
+                            <img src="/px-quest.png" alt="" width="64" height="296" class="px-island-btn__item h-9 w-auto [animation-delay:-0.7s]" />
+                            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
+                            <span class="px-plate px-font text-px8 px-3 py-1.5">Propose a talk</span>
+                            <span class="text-xs text-indigo-950/85 mt-2">CFP opens July 6</span>
                         </a>
-                        <a href="/sponsor-2026" class="tap-press flex flex-col justify-center rounded-2xl bg-white/10 border border-white/30 px-5 py-4 backdrop-blur-sm hover:bg-white/20 transition-colors">
-                            <span class="font-bold text-white">Become a sponsor</span>
-                            <span class="text-xs text-white/70 mt-1">Host a booth at the conference</span>
+                        <a href="/sponsor-2026" class="px-island-btn tap-press">
+                            <img src="/px-coin.png" alt="" width="135" height="139" class="px-island-btn__item h-9 w-auto [animation-delay:-1.4s]" />
+                            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
+                            <span class="px-plate px-font text-px8 px-3 py-1.5">Sponsor</span>
+                            <span class="text-xs text-indigo-950/85 mt-2">Booths and more</span>
                         </a>
                     </div>
-                    <div class="mt-6">
-                        <a href="/conference-2026" class="inline-flex items-center gap-2 text-base md:text-lg text-white/90 hover:text-white transition-colors">
-                            Learn more<span class="sr-only"> about the San Francisco Ruby Startup Conference</span>
-                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    <div class="mt-10">
+                        <a href="/conference-2026" class="inline-flex items-center gap-2 px-font text-px9 text-indigo-950/90 hover:text-ink underline decoration-indigo-950/40 hover:decoration-ink transition-colors">
+                            Conference details<span class="sr-only"> about the San Francisco Ruby Startup Conference</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="square" d="M9 5l7 7-7 7" /></svg>
                         </a>
                     </div>
                 </div>
+
+                <!-- crenellated step into the news masthead -->
+                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#071f56]" aria-hidden="true"></div>
             </section>
 
             <!-- SF Ruby News Hero -->
-            <section id="news" class="relative text-white overflow-hidden" style="background-image: linear-gradient(to bottom in oklch, oklch(0.45 0.21 277) 0%, oklch(0.26 0.06 274) 22%, #020617 55%, #020617 100%);">
+            <section id="news" class="relative text-white overflow-hidden px-night">
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 pb-16">
 
-                    <!-- Masthead -->
-                    <div class="text-center mb-12 relative">
-                        <div class="flex items-center gap-4 justify-center mb-3">
-                            <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
-                            <h1 class="font-display text-2xl md:text-3xl tracking-wider uppercase text-white font-bold">SF Ruby News</h1>
-                            <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
+                    <!-- Masthead: game HUD -->
+                    <div class="mb-12">
+                        <div class="border-2 border-white/30 bg-white/5 px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
+                            <h1 class="px-font text-sm md:text-base text-white">SF Ruby News</h1>
+                            <p class="px-font text-px10 md:text-xs text-gold-400">World 07-26 &#8226; July</p>
                         </div>
-                        <p class="text-sm text-white/50 tracking-widest uppercase">July 2026</p>
                         <!-- Past Issues -->
-                        <div class="mt-4 flex justify-center sm:mt-0 sm:absolute sm:top-0 sm:right-0">
-                            <div class="flex items-center gap-3 text-xs text-white/40">
-                                <a href="/news/2026-02/" class="hover:text-white/70 transition-colors">Feb</a>
-                                <span class="text-white/20">·</span>
-                                <a href="/news/2026-03/" class="hover:text-white/70 transition-colors">Mar</a>
-                                <span class="text-white/20">·</span>
-                                <a href="/news/2026-04/" class="hover:text-white/70 transition-colors">Apr</a>
-                                <span class="text-white/20">·</span>
-                                <a href="/news/2026-05/" class="hover:text-white/70 transition-colors">May</a>
-                                <span class="text-white/20">·</span>
-                                <a href="/news/2026-06/" class="hover:text-white/70 transition-colors">Jun</a>
-                            </div>
+                        <div class="mt-3 flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-2">
+                            <span class="px-font text-px8 text-white/50">Select world:</span>
+                            <a href="/news/2026-02/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Feb</a>
+                            <a href="/news/2026-03/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Mar</a>
+                            <a href="/news/2026-04/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Apr</a>
+                            <a href="/news/2026-05/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">May</a>
+                            <a href="/news/2026-06/" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors">Jun</a>
                         </div>
                     </div>
 
-                    <!-- News Carousel -->
-                    <div class="relative" id="news-carousel">
+                    <NewsRunner />
 
-                        <!-- Page 1 -->
-                        <div class="news-page" data-page="0">
-                            <!-- Headline Story: Anthropic picks Persona -->
-                            <div class="mb-10">
-                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">Press</span>
-                                <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Anthropic Picks Persona to Verify Claude Users</h2>
-                                <div class="border-l-2 border-ruby-500/60 pl-6">
-                                    <p class="text-lg md:text-xl text-white/80 leading-relaxed">
-                                        Starting July 8, <strong class="text-white">Anthropic</strong> will verify the identity of flagged <strong class="text-white">Claude</strong> accounts with a government ID and a selfie check, and it chose <strong class="text-white">Persona</strong>, the SF identity platform that calls itself a Rails-first company, to run the verification.
-                                    </p>
-                                    <p class="text-sm text-white/60 leading-relaxed mt-4">
-                                        TechCrunch, Gizmodo, and PYMNTS all covered the rollout, which applies to a flagged subset of Free, Pro, and Max accounts. For Persona ($418M raised, $2B valuation), it lands a month after FedRAMP Moderate authorization: one of the most closely watched AI labs now runs its trust layer on a Ruby company.
-                                    </p>
-                                    <div class="mt-4">
-                                        <p class="text-xs text-white/50">June 22, 2026 · TechCrunch</p>
+                    <!-- News: uniform cards on a horizontal snap scroller -->
+                    <div class="relative">
+                        <div
+                            id="news-scroller"
+                            class="px-scroll-row flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4"
+                            tabindex="0"
+                            aria-label="News stories"
+                        >
+                            {newsItems.map((item) => (
+                                <article class="px-dialog relative snap-start shrink-0 w-[86%] sm:w-[24rem] p-5 md:p-6 flex flex-col text-left">
+                                    <div class="flex items-center justify-between gap-3 mb-4">
+                                        <span class:list={["px-font inline-block px-2 py-1.5 text-px8 border-2 border-ink", item.gold ? "bg-gold-500 text-ink" : "bg-ruby-500 text-white"]}>{item.cat}</span>
+                                        <span class="text-[0.6875rem] text-white/50 shrink-0">{item.meta}</span>
                                     </div>
-                                    <a href="https://techcrunch.com/2026/06/22/anthropic-says-claude-may-want-to-see-your-id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Read the coverage<span class="sr-only"> about Anthropic choosing Persona for Claude identity verification</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Divider -->
-                            <div class="h-px bg-white/10 mb-10"></div>
-
-                            <!-- Three Column Stories: Row 1 (events) -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
-                                <!-- Conference: SF Ruby Startup Conference -->
-                                <div class="md:pr-8">
-                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Conference</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Conf: CFP July 6, Tickets July 15</h3>
-                                    <p class="text-xs text-white/40 mb-2">November 10–12, 2026 · SFJAZZ</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Our first conference: three days at <strong class="text-white/80">SFJAZZ</strong> in San Francisco, keynoted by <strong class="text-white/80">Garry Tan</strong>, President &amp; CEO of Y Combinator. The CFP opens July 6, early bird tickets go on sale for one day on July 15, and sponsorships are open now.</p>
-                                    <a href="/conference-2026" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Conference details<span class="sr-only"> for the SF Ruby Startup Conference</span>
+                                    <h3 class="font-display text-lg md:text-xl font-bold text-white leading-snug mb-3">{item.title}</h3>
+                                    <p class="text-sm text-white/70 leading-relaxed flex-1">{item.blurb}</p>
+                                    <a
+                                        href={item.href}
+                                        target={item.external ? "_blank" : undefined}
+                                        rel={item.external ? "noopener noreferrer" : undefined}
+                                        class:list={["mt-4 inline-flex items-center gap-1.5 text-xs transition-colors", item.gold ? "text-gold-400 hover:text-gold-300" : "text-ruby-400 hover:text-ruby-300"]}
+                                    >
+                                        {item.link}
                                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                     </a>
-                                </div>
-                                <!-- Event: RubyConf 2026 Las Vegas -->
-                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">RubyConf 2026: Matz Keynotes Vegas</h3>
-                                    <p class="text-xs text-white/40 mb-2">July 14–16, 2026 · Red Rock Resort</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Ruby Central's flagship lands in Las Vegas with keynotes from <strong class="text-white/80">Matz</strong>, Dave Thomas, Jessica Kerr, and Obie Fernandez, plus the first class of Ruby Fellows. SF meetup regulars fill the program: Cameron Dutro, Jeremy Evans, Alexander Baygeldin, Marco Roth.</p>
-                                    <a href="https://rubyconf.org/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Register<span class="sr-only"> for RubyConf 2026 Las Vegas</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                                <!-- Event: SF Ruby Meetup July -->
-                                <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Meetup, July @ Sentry</h3>
-                                    <p class="text-xs text-white/40 mb-2">July 22, 2026 · 45 Fremont St.</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">A new format: fewer talks, more connecting, with a full round of stage intros. Cameron Dutro presents Garnet.js, his JavaScript implementation of the YARV virtual machine, joined by Alexander Baygeldin (Evil Martians) and Marco Roth, all three fresh off the RubyConf stage the week before. 83+ RSVPs already.</p>
-                                    <a href="https://lu.ma/qeg0w8on" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        RSVP on Luma<span class="sr-only"> - SF Ruby July meetup at Sentry</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Three Column Stories: Row 2 (business) -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                                <div class="md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Instacart Is Gemini's First Grocery Partner</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">Gemini users can now connect <strong class="text-white/80">Instacart</strong> and build a real, shoppable cart in conversation, then check out for delivery or pickup (May 19). Gemini joins Claude and ChatGPT among the major assistants with agentic Instacart shopping. In June the Rails-built platform shipped Immersive Feed, a shoppable video ad format launching with brands like Siete Foods and Hellmann's.</p>
-                                        <a href="https://company.instacart.com/updates/instacart-brings-agentic-grocery-shopping-to-gemini" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            Read more<span class="sr-only"> about Instacart's Gemini integration</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Chime Pushes Into Investing</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">CEO Chris Britt says investment accounts arrive within months: individual stocks, ETFs, bonds, and robo-investing powered by <strong class="text-white/80">Jade</strong>, Chime's generative-AI agent (June 1). The Rails-built neobank, 10.2M active members strong, keeps widening its lane after posting its first GAAP-profitable quarter this spring.</p>
-                                        <a href="https://finance.yahoo.com/markets/stocks/article/chime-ceo-says-hundreds-of-thousands-of-its-members-are-setting-up-trump-accounts-as-it-pushes-into-investing-161148607.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            Read more<span class="sr-only"> about Chime's investing products</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Press</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Gusto Crosses $1B in Revenue</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">A milestone we missed last month: the Rails-built payroll and HR platform passed <strong class="text-white/80">$1 billion</strong> in trailing twelve-month recognized revenue (May 7) and has been cash-flow positive for several years. Fortune and TechCrunch both read the announcement, at a $9.3B valuation, as a step toward public markets.</p>
-                                        <a href="https://techcrunch.com/2026/05/07/gusto-hits-1b-revenue-a-figure-that-brings-it-closer-to-public-markets/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
-                                            Read more<span class="sr-only"> about Gusto's $1B revenue milestone</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Hiring strip -->
-                            <div class="mt-4 mb-6 border border-white/10 rounded-lg px-6 py-4 flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
-                                <span class="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider rounded w-fit shrink-0">Hiring</span>
-                                <p class="text-sm text-white/60 leading-relaxed flex-1">Ruby roles on the board: <strong class="text-white/80">Gusto</strong> (Staff, Payments/Risk), <strong class="text-white/80">Superconductor</strong> (Principal Rails), <strong class="text-white/80">Koah Labs</strong>, <strong class="text-white/80">Omada Health</strong>, <strong class="text-white/80">CompanyCam</strong>, plus Thatch, Persona, Chime, Patch, Reset, and Finta. New Rails teams hiring this month: <strong class="text-white/80">Y Combinator</strong> (Product Eng, SF), <strong class="text-white/80">WindBorne</strong> (Redwood City), <strong class="text-white/80">Opendate</strong>, and <strong class="text-white/80">Jukebox Health</strong>.</p>
-                                <a href="/jobs" class="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors shrink-0">
-                                    Browse all jobs<span class="sr-only"> on the SF Ruby jobs board</span>
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                </a>
-                            </div>
+                                </article>
+                            ))}
                         </div>
 
-                        <!-- Page 2 -->
-                        <div class="news-page hidden" data-page="1">
-                            <!-- Headline Story: RubyLLM on HN -->
-                            <div class="mb-10">
-                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">AI + Ruby</span>
-                                <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">RubyLLM Hits the Hacker News Front Page</h2>
-                                <div class="border-l-2 border-ruby-500/60 pl-6">
-                                    <p class="text-lg md:text-xl text-white/80 leading-relaxed">
-                                        <strong class="text-white">RubyLLM</strong> spent June 24 on the Hacker News front page with 446 points and 82 comments, the loudest mainstream moment yet for <strong class="text-white">Carmine Paolino's</strong> library.
-                                    </p>
-                                    <p class="text-sm text-white/60 leading-relaxed mt-4">
-                                        The timing was earned: v1.16 shipped days earlier with concurrent AI tool execution in threads or fibers, observability instrumentation without monkey patching, and proxy support for every provider. At 4,200+ GitHub stars and climbing 250 a month, RubyLLM is maturing from a beloved API wrapper into production agent infrastructure.
-                                    </p>
-                                    <div class="mt-4">
-                                        <p class="text-xs text-white/50">June 24, 2026 · Hacker News</p>
-                                    </div>
-                                    <a href="https://news.ycombinator.com/item?id=48660711" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Read the thread<span class="sr-only"> - RubyLLM on Hacker News</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Divider -->
-                            <div class="h-px bg-white/10 mb-10"></div>
-
-                            <!-- Three Column Stories: Row 1 (community) -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
-                                <!-- Event: Brighton Ruby recap -->
-                                <div class="md:pr-8">
-                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">Brighton Ruby Runs Its 12th Edition</h3>
-                                    <p class="text-xs text-white/40 mb-2">June 25, 2026 · Brighton Dome</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Andy Croll's single-day seaside conference delivered 11 talks: Iliana Hadzhiatanasova on 15 years of upgrades in a 3-million-line monolith (Rails 3.0 to edge), Craig Norford on scaling multi-tenant Sidekiq, a performance-engineering session from Elena Tănăsoiu and Emma Gabriel, and Brian Casel on why your experience is your AI advantage.</p>
-                                    <a href="https://rubyevents.org/events/brightonruby-2026" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        See the program<span class="sr-only"> - Brighton Ruby 2026</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                                <!-- Event: June meetup recap -->
-                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Meetup @ PlanetScale</h3>
-                                    <p class="text-xs text-white/40 mb-2">June 18, 2026 · San Francisco</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">Hosted with Sam Lambert. Jeremy Evans (Ubicloud) walked through implementing Core Set, Hal Spitz delivered "ActiveJob: Call Me Maybe," and Irina Nazarova demoed local-first Rails with pglite and Electric, plus making Ruby resources discoverable to LLMs.</p>
-                                    <a href="https://lu.ma/ltipgvuh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Event page<span class="sr-only"> - SF Ruby June meetup at PlanetScale</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                                <!-- Event: Blastoff Rails recordings -->
-                                <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
-                                    <h3 class="font-display text-xl font-bold text-white mb-2">Blastoff Rails Recordings Are Live</h3>
-                                    <p class="text-xs text-white/40 mb-2">June 11–12, 2026 · Albuquerque</p>
-                                    <p class="text-sm text-white/60 leading-relaxed mb-3">All 17 talks from the first-edition conference are up on rubyevents.org, including keynotes from Irina Nazarova ("Startups on Rails") and Kieran Klaassen ("Building Cora Solo"), plus Avi Flombaum's "Don't Read the Code: Trusting AI With Your Rails Codebase."</p>
-                                    <a href="https://rubyevents.org/events/blastoffrails-2026" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                        Watch the talks<span class="sr-only"> - Blastoff Rails 2026 recordings</span>
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Three Column Stories: Row 2 -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                                <div class="md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Press</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Rails at 41 Million Requests an Hour</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">Andrew Atkinson documents how <strong class="text-white/80">Aura Frames</strong> survived Christmas Day: 41M API requests an hour and 226K database transactions a second across eight sharded Postgres primaries, on Rails' built-in Multiple Databases support with disable_joins, keyset pagination, and Memcached (June 16). A scaling proof point to bookmark.</p>
-                                        <a href="https://andyatkinson.com/how-aura-frames-scales-for-peak-load-ruby-on-rails" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
-                                            Read the case study<span class="sr-only"> about Aura Frames scaling Rails</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded w-fit">AI + Ruby</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Matz's AI-Built Compiler Runs Rails in 13MB of RAM</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">Sam Ruby compiled a Rails blog app through Roundhouse into <strong class="text-white/80">Spinel</strong>, the ahead-of-time Ruby compiler Matz is building with Claude's help, producing a native binary that runs in 13MB of RAM (June 19). Spinel covers a deliberate Ruby subset, and it points at Ruby on the edge and in embedded devices.</p>
-                                        <a href="https://intertwingly.net/blog/2026/06/19/Spinel-on-Rails.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
-                                            Read the writeup<span class="sr-only"> about Spinel on Rails</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Hiring</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Y Combinator Builds on Rails (and Is Hiring)</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">YC's software team, about 20 engineers behind Work at a Startup, Demo Day, GStack, and GBrain, is hiring Product Engineers in SF on a stack of Rails, React, Postgres, and LLM APIs. The accelerator whose president keynotes our conference in November ships on Ruby.</p>
-                                        <a href="https://www.ycombinator.com/software" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors">
-                                            See the roles<span class="sr-only"> on Y Combinator's software team</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Three Column Stories: Row 3 -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                                <div class="md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">Chatwoot Tops Ruby Trending, Ships Voice Calls</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">The Rails-built open-source support platform (YC W21) added 4,100+ GitHub stars this month, the most of any Ruby repo, and launched voice calls in beta: Twilio phone calls and WhatsApp calling alongside Captain, its AI support agent (June 16).</p>
-                                        <a href="https://www.chatwoot.com/changelog" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            See the changelog<span class="sr-only"> for Chatwoot voice calls</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">MCP Ruby SDK: Four Releases in Two Weeks</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">The official <strong class="text-white/80">mcp</strong> gem shipped v0.19 through v0.22 inside June: OAuth client-credentials support, W3C trace context propagation, ephemeral sessions, and a 5-100x speedup in tool schema validation. Ruby keeps pace as an agent-native backend language.</p>
-                                        <a href="https://github.com/modelcontextprotocol/ruby-sdk/releases" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            Release notes<span class="sr-only"> for the MCP Ruby SDK</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="md:border-l md:border-white/10 md:pl-8">
-                                    <div class="flex flex-col gap-3">
-                                        <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
-                                        <h3 class="font-display text-xl font-bold text-white">rv 0.6: Ruby Installs in a Blink</h3>
-                                        <p class="text-sm text-white/60 leading-relaxed">André Arko published the plan and progress for <strong class="text-white/80">rv</strong>, his Rust-based, uv-inspired Ruby manager: v0.6 delivers near-instant Ruby installs and project setup (June 13). Bundler's longtime lead is rebuilding Ruby onboarding for the speed developers now expect.</p>
-                                        <a href="https://andre.arko.net/2026/06/13/rv-plan-and-progress/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
-                                            Read the plan<span class="sr-only"> for rv, the Ruby manager</span>
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Navigation -->
-                        <div class="flex items-center justify-center gap-6 mt-4 mb-6">
-                            <button id="news-prev" aria-label="Previous news page" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-colors disabled:opacity-20 disabled:cursor-default" disabled>
+                        <!-- Pager -->
+                        <div class="flex items-center justify-center gap-6 mt-6 mb-6">
+                            <button id="news-prev" aria-label="Previous story" class="w-11 h-11 border-2 border-white/40 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-colors disabled:opacity-20 disabled:cursor-default" disabled>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                             </button>
-                            <div class="flex gap-2">
-                                <button class="news-dot w-8 h-8 rounded-full flex items-center justify-center transition-colors" data-page="0" aria-label="Go to news page 1"><span class="w-2.5 h-2.5 rounded-full bg-white block"></span></button>
-                                <button class="news-dot w-8 h-8 rounded-full flex items-center justify-center transition-colors" data-page="1" aria-label="Go to news page 2"><span class="w-2.5 h-2.5 rounded-full bg-white/30 block"></span></button>
-                            </div>
-                            <button id="news-next" aria-label="Next news page" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-colors disabled:opacity-20 disabled:cursor-default">
+                            <p id="news-count" class="px-font text-px10 text-gold-400" aria-live="polite">News 1 of {newsItems.length}</p>
+                            <button id="news-next" aria-label="Next story" class="w-11 h-11 border-2 border-white/40 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-colors disabled:opacity-20 disabled:cursor-default">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                             </button>
                         </div>
-
                     </div>
 
                     <!-- Divider + CTA -->
-                    <div class="h-px bg-white/10 mb-10"></div>
+                    <div class="h-[2px] bg-white/15 mb-10"></div>
 
                     <script>
                         (function() {
-                            const pages = document.querySelectorAll('.news-page');
-                            const dots = document.querySelectorAll('.news-dot');
-                            const prevBtn = document.getElementById('news-prev');
-                            const nextBtn = document.getElementById('news-next');
+                            const scroller = document.getElementById('news-scroller');
+                            const prevBtn = document.getElementById('news-prev') as HTMLButtonElement;
+                            const nextBtn = document.getElementById('news-next') as HTMLButtonElement;
+                            const counter = document.getElementById('news-count');
+                            if (!scroller || !prevBtn || !nextBtn || !counter) return;
+                            const cards = Array.from(scroller.children) as HTMLElement[];
+                            const total = cards.length;
+                            const step = () => (cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : scroller.clientWidth);
+
                             let current = 0;
-                            const total = pages.length;
-
-                            function goTo(index) {
-                                pages.forEach(p => p.classList.add('hidden'));
-                                pages[index].classList.remove('hidden');
-                                dots.forEach(d => { const s = d.querySelector('span'); s.classList.remove('bg-white'); s.classList.add('bg-white/30'); });
-                                const activeDot = dots[index].querySelector('span'); activeDot.classList.remove('bg-white/30'); activeDot.classList.add('bg-white');
-                                prevBtn.disabled = index === 0;
-                                nextBtn.disabled = index === total - 1;
-                                current = index;
+                            function update() {
+                                current = Math.min(total - 1, Math.max(0, Math.round(scroller.scrollLeft / step())));
+                                counter.textContent = `News ${current + 1} of ${total}`;
+                                prevBtn.disabled = current === 0;
+                                nextBtn.disabled = current === total - 1;
                             }
-
-                            prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
-                            nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
-                            document.addEventListener('keydown', (e) => {
-                                const carousel = document.getElementById('news-carousel');
-                                const rect = carousel.getBoundingClientRect();
-                                if (rect.top > window.innerHeight || rect.bottom < 0) return;
-                                if (e.key === 'ArrowRight' && current < total - 1) goTo(current + 1);
-                                if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+                            let raf = 0;
+                            scroller.addEventListener('scroll', () => {
+                                cancelAnimationFrame(raf);
+                                raf = requestAnimationFrame(update);
+                            }, { passive: true });
+                            prevBtn.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
+                            nextBtn.addEventListener('click', () => scroller.scrollBy({ left: step(), behavior: 'smooth' }));
+                            scroller.addEventListener('keydown', (e) => {
+                                if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn.click(); }
+                                if (e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
                             });
-                            dots.forEach(dot => {
-                                dot.addEventListener('click', () => goTo(parseInt(dot.dataset.page)));
-                            });
-
-                            const carousel = document.getElementById('news-carousel');
-                            let touchStartX = 0;
-                            let touchEndX = 0;
-                            carousel.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-                            carousel.addEventListener('touchend', (e) => {
-                                touchEndX = e.changedTouches[0].screenX;
-                                const diff = touchStartX - touchEndX;
-                                if (Math.abs(diff) > 50) {
-                                    if (diff > 0 && current < total - 1) goTo(current + 1);
-                                    if (diff < 0 && current > 0) goTo(current - 1);
-                                }
-                            });
+                            update();
                         })();
                     </script>
 
                 </div>
 
-                <!-- Wave transition to slate-50 -->
-                <div class="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
-                    <svg preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" class="absolute bottom-0 w-full h-full">
-                        <path d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z" fill="#f8fafc"></path>
-                    </svg>
-                </div>
+                <!-- crenellated step into slate-50 -->
+                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#f8fafc]" aria-hidden="true"></div>
             </section>
 
             <!-- Upcoming Events Section -->
@@ -593,10 +352,10 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     <div class="max-w-4xl mx-auto">
                         <!-- Section header -->
                         <div class="text-center mb-8">
-                            <span class="inline-block px-4 py-1.5 bg-ruby-100 text-ruby-700 text-sm font-semibold rounded-full mb-4">
+                            <span class="px-plate px-font text-px10 px-3 py-2 mb-5">
                                 Monthly Meetup
                             </span>
-                            <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
                                 Join the Next SF Ruby Meetup
                             </h2>
                             <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -606,7 +365,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                         </div>
 
                         <!-- Luma calendar embed -->
-                        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
+                        <div class="px-card bg-white overflow-hidden mb-8">
                             <div class="w-full">
                                 <iframe
                                     src="https://lu.ma/embed/calendar/cal-L4SDawu65B1grBV/events"
@@ -627,7 +386,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                 href="https://lu.ma/sfruby"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 hover:from-ruby-400 hover:to-pink-400 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-ruby-500 text-white hover:bg-ruby-400"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -638,7 +397,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                 href="https://forms.gle/EZLqENWd5VjiLduq8"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2.5 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-medium shadow-sm hover:shadow-md transition-all duration-300"
+                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -647,7 +406,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                             </a>
                             <a
                                 href="/host"
-                                class="inline-flex items-center gap-2.5 px-6 py-3 bg-white hover:bg-gray-50 text-gray-900 rounded-lg font-medium border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md transition-all duration-300"
+                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -659,11 +418,63 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                 </div>
             </section>
 
+            <!-- 2026 Conference Sponsors -->
+            <section id="sponsors-2026" class="py-16 bg-sky-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Conference Sponsors 2026 -->
+                    <div class="text-center mb-8">
+                        <h2 class="px-font text-base md:text-lg text-gray-900 mb-2">
+                            SF Ruby Conference 2026 Sponsors
+                        </h2>
+                        <p class="text-sm text-gray-500 mb-8">Typesense and WorkOS are first in. Thank you!</p>
+
+                        <div>
+                            <h3 class="px-font text-px10 text-ruby-600 text-center mb-5">
+                                Ruby Tier
+                            </h3>
+                            <div class="flex flex-wrap justify-center items-center gap-5 md:gap-8">
+                                {
+                                    conference2026Sponsors.map((sponsor) => (
+                                        <a
+                                            href={sponsor.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="px-card bg-white px-8 py-6 inline-flex items-center hover:-translate-y-0.5 transition-transform"
+                                        >
+                                            <img
+                                                src={sponsor.logo}
+                                                alt={sponsor.name}
+                                                class="h-8 md:h-9 w-auto"
+                                                width="126"
+                                                height="24"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    ))
+                                }
+                            </div>
+                        </div>
+
+                        <div class="mt-10">
+                            <a
+                                href="/sponsor-2026"
+                                class="px-btn px-font text-px9 gap-2 px-5 py-3 bg-gold-500 text-ink hover:bg-gold-400"
+                            >
+                                Join them: Sponsor 2026
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- New Ruby Jobs Section -->
             <section id="jobs" class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
                             New Ruby Jobs
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -678,7 +489,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                                     href={job.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="group flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300"
+                                    class="group flex items-center gap-4 p-4 bg-gray-50 border-2 border-ink shadow-md hover:bg-gray-100 transition-all duration-300"
                                 >
                                     {job.sponsor?.logo && (
                                         <div class="w-24 h-10 bg-white rounded-lg flex items-center justify-center px-2 flex-shrink-0 border border-gray-200">
@@ -730,7 +541,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
             <section id="videos" class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
                             New Videos
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -741,7 +552,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {
                             latestMeetupRecordings.map((recording: any) => (
-                                <div class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                                <div class="group bg-white border-2 border-ink shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
                                     <a
                                         href={`https://www.youtube.com/watch?v=${recording.youtubeId}`}
                                         target="_blank"
@@ -806,7 +617,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                             featuredKeynotes.map((talk: any) => (
                                 <a
                                     href={`/videos?talk=${talk.id}#${talk.id}`}
-                                    class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+                                    class="group block bg-white border-2 border-ink shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
                                 >
                                     <div class="aspect-video bg-gray-900 relative overflow-hidden">
                                         <img
@@ -851,7 +662,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
             <section id="hosts" class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
                             Our Hosts
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -868,7 +679,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                     <div class="text-center">
                         <a
                             href="/host"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
+                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
                         >
                             Host the meetup
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -883,7 +694,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
             <section id="startups" class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12">
-                        <h2 class="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
                             Our Startups
                         </h2>
                         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -926,7 +737,7 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
 
                     <!-- Community Links -->
                     <div class="text-center mb-8">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                        <h2 class="px-font text-base md:text-lg text-gray-900 mb-6">
                             Join the Community
                         </h2>
                         <div class="flex flex-wrap justify-center gap-3">
@@ -972,91 +783,32 @@ const sponsorsByTier = getSponsorsGroupedByTier().sort((a, b) => {
                         </div>
                     </div>
 
-                    <!-- Divider -->
-                    <div class="h-px bg-gray-200 my-10"></div>
 
-                    <!-- Conference Sponsors -->
-                    <div class="text-center mb-8">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2">
-                            SF Ruby Conference 2025 Sponsors
-                        </h2>
-                        <p class="text-sm text-gray-500 mb-8">Thank you to our amazing sponsors who made the conference possible.</p>
 
-                        <div class="space-y-8">
-                            {
-                                sponsorsByTier.map((tier) => (
-                                    <div>
-                                        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider text-center mb-4">
-                                            {tier.name}
-                                        </h3>
-                                        <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-                                            {tier.sponsors.map((sponsor) => (
-                                                <a
-                                                    href={sponsor.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    class="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
-                                                >
-                                                    <img
-                                                        src={sponsor.logo}
-                                                        alt={sponsor.name}
-                                                        class={tier.name === "Pickaxe ⛏️" ? "h-8 md:h-12 w-auto" : "h-6 md:h-8 w-auto"}
-                                                        width={tier.name === "Pickaxe ⛏️" ? 120 : 80}
-                                                        height={tier.name === "Pickaxe ⛏️" ? 48 : 32}
-                                                        loading="lazy"
-                                                    />
-                                                </a>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-
-                        <div class="mt-8">
-                            <a
-                                href="/sponsor-2026"
-                                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-all duration-300"
-                            >
-                                Sponsor 2026
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
 
 
                 </div>
             </section>
 
-            <!-- Final CTA Section -->
-            <section class="py-12 bg-gradient-to-r from-ruby-500 to-pink-500">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
-                        Ready to join the Ruby community?
-                    </h2>
-                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                        <a
-                            href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ruby-500 font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                        >
-                            Join Slack
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
-                        <a
-                            href="/sponsor-2026"
-                            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300"
-                        >
-                            Sponsor 2026
-                        </a>
-                    </div>
-                </div>
-            </section>
+            <!-- Final CTA: overworld exits -->
+            <IslandNav
+                title="Ready to join the Ruby community?"
+                items={[
+                    {
+                        href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
+                        label: "Join Slack",
+                        icon: "heart",
+                        external: true,
+                    },
+                    {
+                        href: "/conference-2026",
+                        label: "The conference",
+                        icon: "ticket",
+                    },
+                    { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
+                    { href: "/contact", label: "Contact us", icon: "envelope" },
+                ]}
+            />
         </main>
 
         <!-- Startup Modal -->

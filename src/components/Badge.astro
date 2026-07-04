@@ -41,9 +41,9 @@ const variants: Record<string, string> = {
     default: "bg-gray-100 text-gray-700",
     ruby: "bg-ruby-100 text-ruby-700",
     success: "bg-emerald-100 text-emerald-700",
-    warning: "bg-amber-100 text-amber-700",
-    info: "bg-blue-100 text-blue-700",
-    outline: "bg-transparent border border-gray-300 text-gray-600",
+    warning: "bg-gold-100 text-gold-700",
+    info: "bg-sky-100 text-sky-700",
+    outline: "bg-transparent text-gray-600",
 
     // Special variants
     yc: "bg-orange-700 text-white font-bold",
@@ -53,10 +53,11 @@ const variants: Record<string, string> = {
 };
 
 // Standardized sizes
+// Pixel type runs wide; sizes are stepped down accordingly.
 const sizes: Record<string, string> = {
-    xs: "text-xs px-2 py-0.5", // Compact: YC, Hiring badges
-    sm: "text-xs px-3 py-1", // Standard: Talk types, tags
-    md: "text-sm px-4 py-1.5", // Prominent: Featured badges
+    xs: "text-px8 px-1.5 py-1", // Compact: YC, Hiring badges
+    sm: "text-px8 px-2 py-1", // Standard: Talk types, tags
+    md: "text-px10 px-3 py-1.5", // Prominent: Featured badges
 };
 
 // Font weight (some variants override with font-bold)
@@ -67,7 +68,7 @@ const fontWeight = ["yc", "hiring", "featured", "tier"].includes(variant)
 
 <span
     class:list={[
-        "inline-flex items-center rounded-full",
+        "px-font inline-flex items-center border-2 border-ink",
         fontWeight,
         variants[variant],
         sizes[size],

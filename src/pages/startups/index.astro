@@ -1,4 +1,5 @@
 ---
+import IslandNav from "../../components/IslandNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import StartupCard from "../../components/StartupCard.astro";
 import StartupModal from "../../components/StartupModal.astro";
@@ -67,13 +68,14 @@ for (const [id, startup] of Object.entries(startupsData)) {
 ---
 
 <BaseLayout
+    ogImage="/og/startups.png"
     darkHero={false}
     title="Ruby Startups - SF Ruby"
     description="From seed-stage to unicorns, discover the startups building the future with Ruby and Rails."
 >
     <!-- Hero Section -->
     <section
-        class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden"
+        class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden"
     >
         <!-- Background pattern -->
         <div class="absolute inset-0 opacity-10">
@@ -106,7 +108,7 @@ for (const [id, startup] of Object.entries(startupsData)) {
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl">
                 <h1
-                    class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+                    class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-6"
                 >
                     Ruby Startups
                     <span class="block text-ruby-400">new generation</span>
@@ -201,7 +203,7 @@ for (const [id, startup] of Object.entries(startupsData)) {
     <section class="py-16 bg-white border-t border-gray-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                <h2 class="px-font text-base md:text-lg text-gray-900 mb-5">
                     How to add your startup here
                 </h2>
                 <p class="text-lg text-gray-600">
@@ -320,6 +322,23 @@ for (const [id, startup] of Object.entries(startupsData)) {
 
     <!-- Startup Modal -->
     <StartupModal />
+    <IslandNav
+        title="More quests"
+        items={[
+            { href: "/jobs", label: "Ruby jobs", icon: "briefcase" },
+            {
+                href: "/conference-2026",
+                label: "The conference",
+                icon: "ticket",
+            },
+            {
+                href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
+                label: "Join Slack",
+                icon: "heart",
+                external: true,
+            },
+        ]}
+    />
 </BaseLayout>
 
 <script define:vars={{ enhancedStartupsData }}>

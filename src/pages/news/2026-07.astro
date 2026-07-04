@@ -6,8 +6,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     title="SF Ruby News - July 2026"
     description="July 2026 edition of SF Ruby News: Anthropic picks Persona to verify Claude users. Instacart becomes Gemini's first grocery partner. Gusto crosses $1B in revenue. RubyLLM hits the Hacker News front page. RubyConf 2026 in Las Vegas with Matz and Ruby Runway. SF Ruby Conf CFP opens July 6, early bird tickets July 15."
 >
-    <section class="relative bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden min-h-screen">
-        <div class="absolute inset-0 bg-ruby-950/30"></div>
+    <section class="relative px-night text-white overflow-hidden min-h-screen">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-16">
 
             <!-- Issue Navigation -->
@@ -20,13 +19,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </div>
 
             <!-- Masthead -->
-            <div class="text-center mb-12">
-                <div class="flex items-center gap-4 justify-center mb-3">
-                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
-                    <a href="/#news" class="font-display text-2xl md:text-3xl tracking-wider uppercase text-white font-bold hover:text-ruby-400 transition-colors">SF Ruby News</a>
-                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
-                </div>
-                <p class="text-sm text-white/50 tracking-widest uppercase">July 2026</p>
+            <div class="border-2 border-white/30 bg-white/5 px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 mb-12">
+                <a href="/#news" class="px-font text-sm md:text-base text-white hover:text-gold-400 transition-colors">SF Ruby News</a>
+                <p class="px-font text-px10 md:text-xs text-gold-400">World 07-26 &#8226; July</p>
             </div>
 
             <!-- News Carousel -->
@@ -35,10 +30,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 <!-- Page 1 -->
                 <div class="news-page" data-page="0">
                     <!-- Headline Story: Anthropic picks Persona -->
-                    <div class="mb-10">
-                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">Press</span>
+                    <div class="px-dialog p-6 md:p-8 mb-10">
+                        <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">Press</span>
                         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Anthropic Picks Persona to Verify Claude Users</h2>
-                        <div class="border-l-2 border-ruby-500/60 pl-6">
+                        <div class="border-l-4 border-ruby-500 pl-6">
                             <p class="text-lg md:text-xl text-white/80 leading-relaxed">
                                 Starting July 8, <strong class="text-white">Anthropic</strong> will verify the identity of flagged <strong class="text-white">Claude</strong> accounts with a government ID and a selfie check, and it chose <strong class="text-white">Persona</strong>, the SF identity platform that calls itself a Rails-first company, to run the verification.
                             </p>
@@ -56,13 +51,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Divider -->
-                    <div class="h-px bg-white/10 mb-10"></div>
+                    <div class="h-[2px] bg-white/15 mb-10"></div>
 
                     <!-- Three Column Stories: Row 1 (events) -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
                         <!-- Conference: SF Ruby Startup Conference -->
-                        <div class="md:pr-8">
-                            <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Conference</span>
+                        <div class="px-dialog p-5 md:p-6">
+                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Conference</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Conf: CFP July 6, Tickets July 15</h3>
                             <p class="text-xs text-white/40 mb-2">November 10–12, 2026 · SFJAZZ</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">Our first conference: three days at <strong class="text-white/80">SFJAZZ</strong> in San Francisco, keynoted by <strong class="text-white/80">Garry Tan</strong>, President &amp; CEO of Y Combinator. The CFP opens July 6, early bird tickets go on sale for one day on July 15, and sponsorships are open now.</p>
@@ -72,8 +67,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Event: RubyConf 2026 Las Vegas -->
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                            <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
+                        <div class="px-dialog p-5 md:p-6">
+                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">RubyConf 2026: Matz Keynotes Vegas</h3>
                             <p class="text-xs text-white/40 mb-2">July 14–16, 2026 · Red Rock Resort</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">Ruby Central's flagship lands in Las Vegas with keynotes from <strong class="text-white/80">Matz</strong>, Dave Thomas, Jessica Kerr, and Obie Fernandez, plus the first class of Ruby Fellows. SF meetup regulars fill the program: Cameron Dutro, Jeremy Evans, Alexander Baygeldin, Marco Roth.</p>
@@ -83,8 +78,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Event: SF Ruby Meetup July -->
-                        <div class="md:border-l md:border-white/10 md:pl-8">
-                            <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
+                        <div class="px-dialog p-5 md:p-6">
+                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Meetup, July @ Sentry</h3>
                             <p class="text-xs text-white/40 mb-2">July 22, 2026 · 45 Fremont St.</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">A new format: fewer talks, more connecting, with a full round of stage intros. Cameron Dutro presents Garnet.js, his JavaScript implementation of the YARV virtual machine, joined by Alexander Baygeldin (Evil Martians) and Marco Roth, all three fresh off the RubyConf stage the week before. 83+ RSVPs already.</p>
@@ -96,32 +91,32 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Three Column Stories: Row 2 (business) -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                        <div class="md:pr-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">Instacart Is Gemini's First Grocery Partner</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Gemini users can now connect <strong class="text-white/80">Instacart</strong> and build a real, shoppable cart in conversation, then check out for delivery or pickup (May 19). Gemini joins Claude and ChatGPT among the major assistants with agentic Instacart shopping. In June the Rails-built platform shipped Immersive Feed, a shoppable video ad format launching with brands like Siete Foods and Hellmann's.</p>
-                                <a href="https://company.instacart.com/updates/instacart-brings-agentic-grocery-shopping-to-gemini" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                <a href="https://company.instacart.com/updates/instacart-brings-agentic-grocery-shopping-to-gemini" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
                                     Read more<span class="sr-only"> about Instacart's Gemini integration</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">Chime Pushes Into Investing</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">CEO Chris Britt says investment accounts arrive within months: individual stocks, ETFs, bonds, and robo-investing powered by <strong class="text-white/80">Jade</strong>, Chime's generative-AI agent (June 1). The Rails-built neobank, 10.2M active members strong, keeps widening its lane after posting its first GAAP-profitable quarter this spring.</p>
-                                <a href="https://finance.yahoo.com/markets/stocks/article/chime-ceo-says-hundreds-of-thousands-of-its-members-are-setting-up-trump-accounts-as-it-pushes-into-investing-161148607.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                <a href="https://finance.yahoo.com/markets/stocks/article/chime-ceo-says-hundreds-of-thousands-of-its-members-are-setting-up-trump-accounts-as-it-pushes-into-investing-161148607.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
                                     Read more<span class="sr-only"> about Chime's investing products</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Press</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Press</span>
                                 <h3 class="font-display text-xl font-bold text-white">Gusto Crosses $1B in Revenue</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">A milestone we missed last month: the Rails-built payroll and HR platform passed <strong class="text-white/80">$1 billion</strong> in trailing twelve-month recognized revenue (May 7) and has been cash-flow positive for several years. Fortune and TechCrunch both read the announcement, at a $9.3B valuation, as a step toward public markets.</p>
                                 <a href="https://techcrunch.com/2026/05/07/gusto-hits-1b-revenue-a-figure-that-brings-it-closer-to-public-markets/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
@@ -133,10 +128,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Hiring strip -->
-                    <div class="mt-4 mb-6 border border-white/10 rounded-lg px-6 py-4 flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
-                        <span class="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider rounded w-fit shrink-0">Hiring</span>
+                    <div class="mt-4 mb-6 border-2 border-gold-500/50 px-6 py-4 flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
+                        <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit shrink-0">Hiring</span>
                         <p class="text-sm text-white/60 leading-relaxed flex-1">Ruby roles on the board: <strong class="text-white/80">Gusto</strong> (Staff, Payments/Risk), <strong class="text-white/80">Superconductor</strong> (Principal Rails), <strong class="text-white/80">Koah Labs</strong>, <strong class="text-white/80">Omada Health</strong>, <strong class="text-white/80">CompanyCam</strong>, plus Thatch, Persona, Chime, Patch, Reset, and Finta. New Rails teams hiring this month: <strong class="text-white/80">Y Combinator</strong> (Product Eng, SF), <strong class="text-white/80">WindBorne</strong> (Redwood City), <strong class="text-white/80">Opendate</strong>, and <strong class="text-white/80">Jukebox Health</strong>.</p>
-                        <a href="/jobs" class="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors shrink-0">
+                        <a href="/jobs" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors shrink-0">
                             Browse all jobs<span class="sr-only"> on the SF Ruby jobs board</span>
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                         </a>
@@ -146,10 +141,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 <!-- Page 2 -->
                 <div class="news-page hidden" data-page="1">
                     <!-- Headline Story: RubyLLM on HN -->
-                    <div class="mb-10">
-                        <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">AI + Ruby</span>
+                    <div class="px-dialog p-6 md:p-8 mb-10">
+                        <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">AI + Ruby</span>
                         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">RubyLLM Hits the Hacker News Front Page</h2>
-                        <div class="border-l-2 border-ruby-500/60 pl-6">
+                        <div class="border-l-4 border-ruby-500 pl-6">
                             <p class="text-lg md:text-xl text-white/80 leading-relaxed">
                                 <strong class="text-white">RubyLLM</strong> spent June 24 on the Hacker News front page with 446 points and 82 comments, the loudest mainstream moment yet for <strong class="text-white">Carmine Paolino's</strong> library.
                             </p>
@@ -167,13 +162,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Divider -->
-                    <div class="h-px bg-white/10 mb-10"></div>
+                    <div class="h-[2px] bg-white/15 mb-10"></div>
 
                     <!-- Three Column Stories: Row 1 (community) -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
                         <!-- Event: Brighton Ruby recap -->
-                        <div class="md:pr-8">
-                            <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
+                        <div class="px-dialog p-5 md:p-6">
+                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Brighton Ruby Runs Its 12th Edition</h3>
                             <p class="text-xs text-white/40 mb-2">June 25, 2026 · Brighton Dome</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">Andy Croll's single-day seaside conference delivered 11 talks: Iliana Hadzhiatanasova on 15 years of upgrades in a 3-million-line monolith (Rails 3.0 to edge), Craig Norford on scaling multi-tenant Sidekiq, a performance-engineering session from Elena Tănăsoiu and Emma Gabriel, and Brian Casel on why your experience is your AI advantage.</p>
@@ -183,8 +178,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Event: June meetup recap -->
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                            <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
+                        <div class="px-dialog p-5 md:p-6">
+                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Meetup @ PlanetScale</h3>
                             <p class="text-xs text-white/40 mb-2">June 18, 2026 · San Francisco</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">Hosted with Sam Lambert. Jeremy Evans (Ubicloud) walked through implementing Core Set, Hal Spitz delivered "ActiveJob: Call Me Maybe," and Irina Nazarova demoed local-first Rails with pglite and Electric, plus making Ruby resources discoverable to LLMs.</p>
@@ -194,8 +189,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Event: Blastoff Rails recordings -->
-                        <div class="md:border-l md:border-white/10 md:pl-8">
-                            <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Event</span>
+                        <div class="px-dialog p-5 md:p-6">
+                            <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Blastoff Rails Recordings Are Live</h3>
                             <p class="text-xs text-white/40 mb-2">June 11–12, 2026 · Albuquerque</p>
                             <p class="text-sm text-white/60 leading-relaxed mb-3">All 17 talks from the first-edition conference are up on rubyevents.org, including keynotes from Irina Nazarova ("Startups on Rails") and Kieran Klaassen ("Building Cora Solo"), plus Avi Flombaum's "Don't Read the Code: Trusting AI With Your Rails Codebase."</p>
@@ -207,10 +202,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Three Column Stories: Row 2 -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                        <div class="md:pr-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Press</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Press</span>
                                 <h3 class="font-display text-xl font-bold text-white">Rails at 41 Million Requests an Hour</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Andrew Atkinson documents how <strong class="text-white/80">Aura Frames</strong> survived Christmas Day: 41M API requests an hour and 226K database transactions a second across eight sharded Postgres primaries, on Rails' built-in Multiple Databases support with disable_joins, keyset pagination, and Memcached (June 16). A scaling proof point to bookmark.</p>
                                 <a href="https://andyatkinson.com/how-aura-frames-scales-for-peak-load-ruby-on-rails" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
@@ -219,9 +214,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded w-fit">AI + Ruby</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink w-fit">AI + Ruby</span>
                                 <h3 class="font-display text-xl font-bold text-white">Matz's AI-Built Compiler Runs Rails in 13MB of RAM</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">Sam Ruby compiled a Rails blog app through Roundhouse into <strong class="text-white/80">Spinel</strong>, the ahead-of-time Ruby compiler Matz is building with Claude's help, producing a native binary that runs in 13MB of RAM (June 19). Spinel covers a deliberate Ruby subset, and it points at Ruby on the edge and in embedded devices.</p>
                                 <a href="https://intertwingly.net/blog/2026/06/19/Spinel-on-Rails.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-ruby-400 hover:text-ruby-300 transition-colors">
@@ -230,12 +225,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Hiring</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Hiring</span>
                                 <h3 class="font-display text-xl font-bold text-white">Y Combinator Builds on Rails (and Is Hiring)</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">YC's software team, about 20 engineers behind Work at a Startup, Demo Day, GStack, and GBrain, is hiring Product Engineers in SF on a stack of Rails, React, Postgres, and LLM APIs. The accelerator whose president keynotes our conference in November ships on Ruby.</p>
-                                <a href="https://www.ycombinator.com/software" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors">
+                                <a href="https://www.ycombinator.com/software" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
                                     See the roles<span class="sr-only"> on Y Combinator's software team</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
@@ -244,35 +239,35 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Three Column Stories: Row 3 -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                        <div class="md:pr-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">Chatwoot Tops Ruby Trending, Ships Voice Calls</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">The Rails-built open-source support platform (YC W21) added 4,100+ GitHub stars this month, the most of any Ruby repo, and launched voice calls in beta: Twilio phone calls and WhatsApp calling alongside Captain, its AI support agent (June 16).</p>
-                                <a href="https://www.chatwoot.com/changelog" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                <a href="https://www.chatwoot.com/changelog" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
                                     See the changelog<span class="sr-only"> for Chatwoot voice calls</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">MCP Ruby SDK: Four Releases in Two Weeks</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">The official <strong class="text-white/80">mcp</strong> gem shipped v0.19 through v0.22 inside June: OAuth client-credentials support, W3C trace context propagation, ephemeral sessions, and a 5-100x speedup in tool schema validation. Ruby keeps pace as an agent-native backend language.</p>
-                                <a href="https://github.com/modelcontextprotocol/ruby-sdk/releases" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                <a href="https://github.com/modelcontextprotocol/ruby-sdk/releases" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
                                     Release notes<span class="sr-only"> for the MCP Ruby SDK</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
-                                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Release</span>
+                                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">rv 0.6: Ruby Installs in a Blink</h3>
                                 <p class="text-sm text-white/60 leading-relaxed">André Arko published the plan and progress for <strong class="text-white/80">rv</strong>, his Rust-based, uv-inspired Ruby manager: v0.6 delivers near-instant Ruby installs and project setup (June 13). Bundler's longtime lead is rebuilding Ruby onboarding for the speed developers now expect.</p>
-                                <a href="https://andre.arko.net/2026/06/13/rv-plan-and-progress/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                                <a href="https://andre.arko.net/2026/06/13/rv-plan-and-progress/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
                                     Read the plan<span class="sr-only"> for rv, the Ruby manager</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
@@ -298,7 +293,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </div>
 
             <!-- Divider + CTA -->
-            <div class="h-px bg-white/10 mb-10"></div>
+            <div class="h-[2px] bg-white/15 mb-10"></div>
 
             <div class="text-center">
                 <a href="/#news" class="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">

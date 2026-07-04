@@ -1,0 +1,357 @@
+---
+/**
+ * NewsRunner: an endless-runner easter egg for the news section, in the
+ * spirit of Chrome's offline dino game. The fog mascot runs across the
+ * night; grab coins and rubies, jump over the pythons. Pure score-chasing
+ * delight — deliberately decoupled from reading the news (testing showed
+ * a gameplay-to-content link was too subtle to understand).
+ *
+ * Renders paused with a PRESS START overlay; nothing autoplays.
+ */
+---
+
+<div id="news-game-wrap" class="relative mb-8">
+    <canvas
+        id="news-game"
+        height="220"
+        class="w-full border-2 border-white/30 bg-white/5 cursor-pointer touch-none"
+        aria-label="News runner mini game. Press space or tap to jump; grab coins and rubies, jump over the pythons."
+    ></canvas>
+    <button
+        id="news-game-start"
+        type="button"
+        class="absolute inset-0 flex items-center justify-center bg-ink/30 hover:bg-ink/20 transition-colors"
+    >
+        <span class="px-font px-blink text-px10 md:text-sm text-white px-shadow-ink"
+            >&#9654; Press Start &#9664;</span
+        >
+    </button>
+    <p class="px-font text-px8 text-white/60 mt-3 text-center">
+        Space / tap to jump &#183; grab coins and rubies &#183; dodge the
+        pythons
+    </p>
+</div>
+
+<script>
+    (function () {
+        const wrap = document.getElementById("news-game-wrap");
+        const canvas = document.getElementById(
+            "news-game",
+        ) as HTMLCanvasElement | null;
+        const startBtn = document.getElementById(
+            "news-game-start",
+        ) as HTMLButtonElement | null;
+        if (!wrap || !canvas || !startBtn) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        // sprites
+        const load = (src: string) => {
+            const img = new Image();
+            img.src = src;
+            return img;
+        };
+        const S = {
+            mascot: load("/logo8bit-mascot.png"),
+            coin: load("/px-coin.png"),
+            ruby: load("/px-ruby.png"),
+            snake: load("/px-snake.png"),
+            island: load("/px-island.png"),
+            cloud: load("/px-cloud.png"),
+        };
+
+        const GROUND_H = 44;
+        let W = 0,
+            H = canvas.height;
+        let running = false;
+        let over = false;
+        let raf = 0;
+        let last = 0;
+        let speed = 220;
+        let groundX = 0;
+        let coinsScore = 0;
+        let rubies = 0;
+        let best = 0;
+
+        const player = { x: 70, y: 0, vy: 0, w: 42, h: 48, onGround: true };
+        type Item = {
+            x: number;
+            y: number;
+            taken: boolean;
+            kind: "coin" | "ruby" | "snake";
+        };
+        type Pop = { x: number; y: number; t: number; text: string };
+        let items: Item[] = [];
+        let pops: Pop[] = [];
+        let spawnIn = 0.9;
+        const clouds = [
+            { x: 80, y: 24, s: 0.25, w: 90 },
+            { x: 460, y: 58, s: 0.35, w: 64 },
+            { x: 900, y: 30, s: 0.2, w: 110 },
+        ];
+
+        const groundY = () => H - GROUND_H;
+
+        function resize() {
+            W = canvas.clientWidth;
+            canvas.width = W;
+            H = canvas.height = 220;
+        }
+
+        function jump() {
+            if (player.onGround) {
+                player.vy = -520;
+                player.onGround = false;
+            }
+        }
+
+        function reset() {
+            items = [];
+            pops = [];
+            coinsScore = 0;
+            rubies = 0;
+            over = false;
+            speed = 220;
+            spawnIn = 0.9;
+            player.y = 0;
+            player.vy = 0;
+            player.onGround = true;
+        }
+
+        function spawn() {
+            const roll = Math.random();
+            if (roll < 0.3) {
+                // python on the ground: jump over it
+                items.push({ x: W + 40, y: 0, taken: false, kind: "snake" });
+            } else if (roll < 0.48) {
+                items.push({ x: W + 40, y: 132, taken: false, kind: "ruby" });
+            } else {
+                const high = Math.random() > 0.5;
+                items.push({
+                    x: W + 40,
+                    y: high ? 118 : 36,
+                    taken: false,
+                    kind: "coin",
+                });
+            }
+            spawnIn = 0.9 + Math.random() * 1.0;
+        }
+
+        function step(dt: number) {
+            player.vy += 1500 * dt;
+            player.y += player.vy * dt;
+            if (player.y >= 0) {
+                player.y = 0;
+                player.vy = 0;
+                player.onGround = true;
+            }
+
+            groundX = (groundX - speed * dt) % 160;
+            clouds.forEach((c) => {
+                c.x -= speed * c.s * dt;
+                if (c.x < -c.w) c.x = W + 40;
+            });
+
+            spawnIn -= dt;
+            if (spawnIn <= 0) spawn();
+
+            const px = player.x,
+                py = groundY() - player.h + player.y;
+            items.forEach((it) => {
+                it.x -= speed * dt;
+                if (it.taken) return;
+                if (it.kind === "snake") {
+                    // snake sits on the ground (44x29 drawn); forgiving hitbox
+                    const sw = 38,
+                        sh = 22;
+                    const sx = it.x + 3,
+                        sy = groundY() - sh;
+                    if (
+                        px + 6 < sx + sw &&
+                        px + player.w - 6 > sx &&
+                        py + 6 < sy + sh &&
+                        py + player.h > sy + 4
+                    ) {
+                        over = true;
+                        best = Math.max(best, coinsScore + rubies * 3);
+                    }
+                    return;
+                }
+                const cy = groundY() - it.y - 28;
+                if (
+                    px < it.x + 28 &&
+                    px + player.w > it.x &&
+                    py < cy + 28 &&
+                    py + player.h > cy
+                ) {
+                    it.taken = true;
+                    if (it.kind === "ruby") {
+                        rubies++;
+                        pops.push({ x: it.x, y: cy, t: 0, text: "+3" });
+                    } else {
+                        coinsScore++;
+                        pops.push({ x: it.x, y: cy, t: 0, text: "+1" });
+                    }
+                    speed = Math.min(speed + 5, 400);
+                }
+            });
+            items = items.filter((it) => it.x > -60 && !it.taken);
+            pops.forEach((p) => (p.t += dt));
+            pops = pops.filter((p) => p.t < 0.7);
+        }
+
+        function drawScene() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.imageSmoothingEnabled = false;
+
+            clouds.forEach((c) => {
+                const r = S.cloud.width ? c.w / S.cloud.width : 1;
+                ctx.globalAlpha = 0.8;
+                ctx.drawImage(S.cloud, c.x, c.y, c.w, S.cloud.height * r);
+                ctx.globalAlpha = 1;
+            });
+
+            if (S.island.width) {
+                const gw = 160;
+                const gh = (S.island.height / S.island.width) * gw;
+                for (let x = groundX - gw; x < W + gw; x += gw - 8) {
+                    ctx.drawImage(S.island, x, groundY() - 6, gw, gh);
+                }
+            }
+
+            items.forEach((it) => {
+                if (it.taken) return;
+                if (it.kind === "snake")
+                    ctx.drawImage(S.snake, it.x, groundY() - 28, 44, 29);
+                else if (it.kind === "ruby")
+                    ctx.drawImage(S.ruby, it.x, groundY() - it.y - 28, 32, 27);
+                else
+                    ctx.drawImage(S.coin, it.x, groundY() - it.y - 28, 28, 28);
+            });
+
+            const bob =
+                running && !over && player.onGround
+                    ? Math.sin(performance.now() / 90) * 2
+                    : 0;
+            ctx.drawImage(
+                S.mascot,
+                player.x,
+                groundY() - player.h + player.y + bob,
+                player.w,
+                player.h,
+            );
+
+            ctx.font = "10px 'Press Start 2P', monospace";
+            ctx.fillStyle = "#f4c700";
+            pops.forEach((p) => {
+                ctx.globalAlpha = 1 - p.t / 0.7;
+                ctx.fillText(p.text, p.x + 6, p.y - p.t * 40);
+                ctx.globalAlpha = 1;
+            });
+
+            // HUD: coin count, ruby count, score (right)
+            ctx.fillStyle = "#ffffff";
+            if (S.coin.width) ctx.drawImage(S.coin, 12, 10, 16, 16);
+            ctx.fillText(`x${coinsScore}`, 34, 23);
+            if (S.ruby.width) ctx.drawImage(S.ruby, 78, 11, 18, 15);
+            ctx.fillText(`x${rubies}`, 102, 23);
+            const score = coinsScore + rubies * 3;
+            const label = `SCORE ${score}${best ? `  BEST ${Math.max(best, score)}` : ""}`;
+            ctx.fillText(label, W - ctx.measureText(label).width - 12, 23);
+
+            if (over) {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
+                ctx.fillRect(0, 0, W, H);
+                ctx.fillStyle = "#ff5545";
+                ctx.font = "16px 'Press Start 2P', monospace";
+                const msg = "GAME OVER";
+                ctx.fillText(
+                    msg,
+                    (W - ctx.measureText(msg).width) / 2,
+                    H / 2 - 14,
+                );
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "8px 'Press Start 2P', monospace";
+                const sub = `SCORE ${score} - THE PYTHON GOT YOU - TAP TO RETRY`;
+                ctx.fillText(
+                    sub,
+                    (W - ctx.measureText(sub).width) / 2,
+                    H / 2 + 12,
+                );
+            }
+        }
+
+        function loop(t: number) {
+            if (!running) return;
+            const dt = Math.min((t - last) / 1000, 0.05);
+            last = t;
+            if (!over) step(dt);
+            drawScene();
+            raf = requestAnimationFrame(loop);
+        }
+
+        // paused preview: a static scene so the section shows the game world
+        function drawPreview() {
+            resize();
+            items = [
+                { x: W * 0.55, y: 36, taken: false, kind: "coin" },
+                { x: W * 0.78, y: 0, taken: false, kind: "snake" },
+            ];
+            drawScene();
+            items = [];
+        }
+
+        function start() {
+            startBtn.classList.add("hidden");
+            reset();
+            resize();
+            running = true;
+            last = performance.now();
+            raf = requestAnimationFrame(loop);
+        }
+
+        function pause() {
+            running = false;
+            cancelAnimationFrame(raf);
+            startBtn.classList.remove("hidden");
+            drawPreview();
+        }
+
+        startBtn.addEventListener("click", start);
+        canvas.addEventListener("pointerdown", () => {
+            if (!running) return;
+            if (over) reset();
+            else jump();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (!running) return;
+            if (e.key === " " || e.key === "ArrowUp") {
+                const r = canvas.getBoundingClientRect();
+                if (r.bottom > 0 && r.top < innerHeight) {
+                    e.preventDefault();
+                    if (over) reset();
+                    else jump();
+                }
+            }
+            if (e.key === "Escape") pause();
+        });
+        window.addEventListener("resize", () => {
+            if (running) resize();
+            else drawPreview();
+        });
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden && running) pause();
+        });
+
+        // draw the paused preview once the sprites arrive
+        let pending = Object.values(S).length;
+        Object.values(S).forEach((img) => {
+            const done = () => {
+                pending--;
+                if (pending === 0 && !running) drawPreview();
+            };
+            if (img.complete) done();
+            else img.addEventListener("load", done, { once: true });
+        });
+    })();
+</script>

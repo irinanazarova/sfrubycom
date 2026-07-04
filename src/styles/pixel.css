@@ -1,0 +1,312 @@
+/*
+ * pixel.css: the site-wide 8-bit design language.
+ * Palette is sampled directly from the 2026 pixel logo (public/logo8bit.png).
+ * Imported once via global.css; components are prefixed .px-*.
+ */
+
+@font-face {
+    font-family: "Press Start 2P";
+    src: url("/fonts/PressStart2P.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* CSS custom properties live in tokens.css (generated from
+   src/design/tokens.mjs by scripts/sync-tokens.mjs). */
+
+/* ---------- type ---------- */
+
+.px-font {
+    font-family: "Press Start 2P", "Martian Mono", monospace;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+/* chunky extruded heading, like the RUBY STARTUP letters */
+.px-shadow-ink {
+    text-shadow: 3px 3px 0 var(--px-ink);
+}
+.px-shadow-ruby {
+    text-shadow: 3px 3px 0 var(--px-ruby-dark);
+}
+
+/* ---------- surfaces ---------- */
+
+/* 2x2 checkerboard dither, like the logo's sky */
+.px-dither-sky {
+    background-color: var(--px-sky);
+    background-image: conic-gradient(
+        var(--px-sky-deep) 25%,
+        var(--px-sky) 0 50%,
+        var(--px-sky-deep) 0 75%,
+        var(--px-sky) 0
+    );
+    background-size: 8px 8px;
+}
+
+.px-dither-royal {
+    background-color: var(--px-blue);
+    background-image: conic-gradient(
+        var(--px-blue-dark) 25%,
+        var(--px-blue) 0 50%,
+        var(--px-blue-dark) 0 75%,
+        var(--px-blue) 0
+    );
+    background-size: 8px 8px;
+}
+
+/* Ordered-dither (Bayer 4x4) gradient skies rebuilt from the logo blues as
+   tiny PNGs (scripts/px-gradients.mjs). Stretched to the section height;
+   repeat-x keeps the checker square at any viewport width. */
+.px-sky-grad-day {
+    background-color: oklch(68.22% 0.1255 238.04);
+    background-image: url("/px-sky-day.png");
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    image-rendering: pixelated;
+}
+.px-sky-grad-dusk {
+    background-color: oklch(42.51% 0.0832 242.52);
+    background-image: url("/px-sky-dusk.png");
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    image-rendering: pixelated;
+}
+.px-royal-grad {
+    background-color: oklch(35.53% 0.1751 262.77);
+    background-image: url("/px-royal.png");
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    image-rendering: pixelated;
+}
+
+/* starry night: the news section's dark counterpart to the day skies.
+   Two offset 1px star fields over a flat navy ramp. */
+.px-night {
+    background-color: oklch(12.88% 0.0406 264.7);
+    background-image:
+        radial-gradient(oklch(100% 0 0 / 0.7) 1px, transparent 1.5px),
+        radial-gradient(oklch(100% 0 0 / 0.35) 1px, transparent 1.5px),
+        linear-gradient(to bottom in oklch, oklch(26.25% 0.1042 263.12) 0%, oklch(18.59% 0.0668 263.72) 25%, oklch(12.88% 0.0406 264.7) 60%);
+    background-size:
+        260px 260px,
+        140px 140px,
+        100% 100%;
+    background-position:
+        24px 44px,
+        104px 128px,
+        0 0;
+}
+
+/* ---------- boxes ---------- */
+
+/* card with ink border + hard offset shadow; no rounding anywhere */
+.px-card {
+    border: 4px solid var(--px-ink);
+    border-radius: 0;
+    box-shadow: 8px 8px 0 0 var(--px-ink);
+}
+
+/* NES dialog box: ink panel with a white inner frame */
+.px-dialog {
+    border: 4px solid var(--px-cloud);
+    border-radius: 0;
+    outline: 4px solid var(--px-ink);
+    background: var(--px-blue-dark);
+    box-shadow: 8px 8px 0 0 var(--px-ink);
+}
+
+/* small label plate, like the SAN FRANCISCO badge */
+.px-plate {
+    display: inline-block;
+    border: 3px solid var(--px-ink);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 0 var(--px-ink);
+    background: var(--px-blue);
+    color: var(--px-cloud);
+}
+.px-plate--gold {
+    background: var(--px-gold);
+    color: var(--px-ink);
+}
+.px-plate--orange {
+    background: var(--px-orange);
+    color: var(--px-cloud);
+}
+
+/* ---------- buttons ---------- */
+
+.px-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    border: 4px solid var(--px-ink);
+    border-radius: 0;
+    box-shadow: 5px 5px 0 0 var(--px-ink);
+    transition:
+        transform 0.06s ease-out,
+        box-shadow 0.06s ease-out;
+}
+.px-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 0 0 var(--px-ink);
+}
+.px-btn:active {
+    transform: translate(5px, 5px);
+    box-shadow: 0 0 0 0 var(--px-ink);
+}
+.px-btn--white {
+    background: var(--px-cloud);
+    color: var(--px-ink);
+}
+.px-btn--gold {
+    background: var(--px-gold);
+    color: var(--px-ink);
+}
+.px-btn--sky {
+    background: var(--px-sky);
+    color: var(--px-ink);
+}
+
+/* ---------- details ---------- */
+
+.px-pixelated {
+    image-rendering: pixelated;
+}
+
+/* crenellated section divider: next section's color rises in battlements.
+   Set --px-crenel-color to the next section's background. */
+.px-crenel {
+    height: 16px;
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+            var(--px-crenel-color) 0 8px,
+            transparent 8px 16px
+        ),
+        linear-gradient(var(--px-crenel-color), var(--px-crenel-color));
+    background-size:
+        100% 8px,
+        100% 8px;
+    background-position:
+        0 0,
+        0 8px;
+    background-repeat: repeat-x, no-repeat;
+}
+
+/* pixel speech bubble: white plate with a stepped tail (ink block behind
+   a white block). Pair with .px-font text inside. */
+.px-bubble {
+    position: relative;
+    display: inline-block;
+    background: var(--px-cloud);
+    border: 4px solid var(--px-ink);
+    box-shadow: 5px 5px 0 0 var(--px-ink);
+}
+.px-bubble::before {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 36px;
+    width: 22px;
+    height: 14px;
+    background: var(--px-ink);
+}
+.px-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 40px;
+    width: 14px;
+    height: 10px;
+    background: var(--px-cloud);
+}
+
+
+/* ---------- interactive islands ---------- */
+
+/* A floating island as a button: an item sprite bobs above the island,
+   the label is a plate below. Hover speeds the bob and lights the plate
+   gold; press pushes the whole island down. */
+@keyframes px-bob {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+.px-island-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+.px-island-btn__item {
+    image-rendering: pixelated;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.375rem;
+    animation: px-bob 2.4s ease-in-out infinite;
+    animation-delay: var(--px-bob-delay, 0s);
+}
+.px-island-btn:hover .px-island-btn__item {
+    animation-duration: 0.9s;
+}
+.px-island-btn:active {
+    transform: translateY(4px);
+}
+.px-island-btn .px-plate {
+    margin-top: 0.875rem;
+}
+.px-island-btn:hover .px-plate {
+    background: var(--px-gold);
+    color: var(--px-ink);
+}
+
+/* horizontal snap row with the scrollbar hidden (pager provides state) */
+.px-scroll-row {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    scroll-padding-left: 0.25rem;
+}
+.px-scroll-row::-webkit-scrollbar {
+    display: none;
+}
+
+/* PRESS START blink */
+@keyframes px-blink {
+    0%,
+    49% {
+        opacity: 1;
+    }
+    50%,
+    100% {
+        opacity: 0;
+    }
+}
+.px-blink {
+    animation: px-blink 1.1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .px-blink {
+        animation: none;
+    }
+    .px-island-btn__item {
+        animation: none;
+    }
+    .px-island-btn:active {
+        transform: none;
+    }
+    .px-btn,
+    .px-btn:hover,
+    .px-btn:active {
+        transform: none;
+    }
+}

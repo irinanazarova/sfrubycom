@@ -15,78 +15,46 @@ const slackMembers = 550; // Approximate
 ---
 
 <BaseLayout
-    darkHero={false}
     title="About SF Ruby - SF Ruby"
     description="Learn about SF Ruby, the community for Ruby developers, founders, and enthusiasts in San Francisco."
 >
-    <!-- Hero Section with dark background for nav visibility -->
-    <section
-        class="relative pt-32 pb-16 bg-gradient-to-br from-gray-900 via-gray-800 to-ruby-900 overflow-hidden"
-    >
-        <div class="absolute inset-0 opacity-10">
-            <div
-                class="absolute inset-0"
-                style="background-image: url('data:image/svg+xml,%3Csvg width=\"
-                60\"
-                height='\"60\"'
-                viewBox='\"0'
-                0
-                60
-                60\"
-                xmlns='\"http://www.w3.org/2000/svg\"%3E%3Cg'
-                fill='\"none\"'
-                fill-rule='\"evenodd\"%3E%3Cg'
-                fill='\"%23ffffff\"'
-                fill-opacity='\"0.4\"%3E%3Cpath'
-                d='\"M36'
-                34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6
-                34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6
-                4V0H4v4H0v2h4v4h2V6h4V4H6z\"
-                %3E%3C
-                g%3E%3C
-                g%3E%3C
-                svg%3E')"
-            >
-            </div>
-        </div>
-
+    <!-- Hero: dusk sky with HUD stats -->
+    <section class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden">
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl">
-                <h1
-                    class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
-                >
+                <h1 class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-6">
                     About SF Ruby
                 </h1>
-                <p class="text-lg md:text-xl text-gray-300 mb-8">
+                <p class="text-lg md:text-xl text-white/90 mb-10">
                     The community for Ruby developers and founders in
                     San&nbsp;Francisco.
                 </p>
 
-                <!-- Stats -->
-                <div class="flex flex-wrap gap-8">
+                <!-- Stats: HUD counters -->
+                <div class="flex flex-wrap gap-x-10 gap-y-6">
                     <div>
-                        <div class="text-3xl font-bold text-white">
+                        <div class="px-font text-base md:text-lg text-white">
                             {startupCount}
                         </div>
-                        <div class="text-sm text-gray-400">Ruby Startups</div>
+                        <div class="text-sm text-white/60 mt-1.5">Ruby Startups</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-bold text-ruby-400">
+                        <div class="px-font text-base md:text-lg text-ruby-400">
                             {talkCount}+
                         </div>
-                        <div class="text-sm text-gray-400">Recorded Talks</div>
+                        <div class="text-sm text-white/60 mt-1.5">Recorded Talks</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-bold text-emerald-400">
+                        <div class="px-font text-base md:text-lg text-gold-400">
                             {jobCount}
                         </div>
-                        <div class="text-sm text-gray-400">Open Jobs</div>
+                        <div class="text-sm text-white/60 mt-1.5">Open Jobs</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-bold text-sky-400">
+                        <div class="px-font text-base md:text-lg text-sky-300">
                             {slackMembers}+
                         </div>
-                        <div class="text-sm text-gray-400">Slack Members</div>
+                        <div class="text-sm text-white/60 mt-1.5">Slack Members</div>
                     </div>
                 </div>
             </div>
@@ -97,7 +65,7 @@ const slackMembers = 550; // Approximate
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Mission -->
             <div class="prose prose-lg max-w-none mb-12">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                <h2 class="px-font text-base md:text-lg text-gray-900 mb-5">
                     Our Mission
                 </h2>
                 <p class="text-gray-600 leading-relaxed">
@@ -115,27 +83,11 @@ const slackMembers = 550; // Approximate
             </div>
 
             <!-- What We Do -->
-            <div class="bg-white rounded-2xl border border-gray-200 p-8 mb-12">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">What We Do</h2>
+            <div class="px-card bg-white p-8 mb-12">
+                <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">What We Do</h2>
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
-                        <div
-                            class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
-                        >
-                            <svg
-                                class="w-5 h-5 text-ruby-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                ></path>
-                            </svg>
-                        </div>
+                        <img src="/px-heart.png" alt="" width="14" height="13" class="px-pixelated h-8 w-auto flex-shrink-0 mt-1" />
                         <div>
                             <h3 class="font-semibold text-gray-900">
                                 Monthly Meetups
@@ -153,23 +105,7 @@ const slackMembers = 550; // Approximate
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div
-                            class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
-                        >
-                            <svg
-                                class="w-5 h-5 text-ruby-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                                ></path>
-                            </svg>
-                        </div>
+                        <img src="/px-ticket.png" alt="" width="26" height="12" class="px-pixelated h-7 w-auto flex-shrink-0 mt-1" />
                         <div>
                             <h3 class="font-semibold text-gray-900">
                                 Annual Conference
@@ -182,22 +118,7 @@ const slackMembers = 550; // Approximate
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div
-                            class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
-                        >
-                            <svg
-                                class="w-5 h-5 text-ruby-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
+                        <img src="/px-quest.png" alt="" width="64" height="296" class="px-pixelated h-9 w-auto flex-shrink-0" />
                         <div>
                             <h3 class="font-semibold text-gray-900">
                                 Startup Directory
@@ -209,23 +130,7 @@ const slackMembers = 550; // Approximate
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div
-                            class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
-                        >
-                            <svg
-                                class="w-5 h-5 text-ruby-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                ></path>
-                            </svg>
-                        </div>
+                        <img src="/px-briefcase.png" alt="" width="18" height="11" class="px-pixelated h-7 w-auto flex-shrink-0 mt-1" />
                         <div>
                             <h3 class="font-semibold text-gray-900">
                                 Job Board
@@ -240,8 +145,8 @@ const slackMembers = 550; // Approximate
             </div>
 
             <!-- Organized By -->
-            <div class="bg-white rounded-2xl border border-gray-200 p-8 mb-12">
-                <h2 class="text-xl font-bold text-gray-900 mb-6">
+            <div class="px-card bg-white p-8 mb-12">
+                <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
                     Organized By
                 </h2>
                 <div class="flex flex-col md:flex-row items-center gap-6">
@@ -274,17 +179,15 @@ const slackMembers = 550; // Approximate
             </div>
 
             <!-- Contact -->
-            <div
-                class="bg-gradient-to-r from-ruby-500 to-pink-500 rounded-2xl p-8 text-center text-white"
-            >
-                <h2 class="text-2xl font-bold mb-4">Get in Touch</h2>
-                <p class="text-ruby-100 mb-6">
+            <div class="px-card bg-ruby-500 p-8 text-center text-white">
+                <h2 class="px-font px-shadow-ink text-sm md:text-base mb-5">Get in Touch</h2>
+                <p class="text-white/90 mb-6">
                     Have questions, want to sponsor, or just want to say hi?
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
                         href="mailto:conference@sfruby.com"
-                        class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ruby-500 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        class="px-btn px-font text-px9 md:text-px10 gap-2 px-5 py-3.5 bg-white text-ruby-600 hover:bg-gray-50 normal-case"
                     >
                         <svg
                             class="w-5 h-5"
@@ -305,7 +208,7 @@ const slackMembers = 550; // Approximate
                         href="https://x.com/inazarova"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300"
+                        class="px-btn px-font text-px9 md:text-px10 gap-2 px-5 py-3.5 bg-gold-500 text-ink hover:bg-gold-400 normal-case"
                     >
                         <svg
                             class="w-5 h-5"

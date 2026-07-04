@@ -1,0 +1,136 @@
+---
+/**
+ * PostingRulesModal: who can post on the /jobs board, as a pixel dialog.
+ * Native <dialog>; open with any element carrying data-posting-rules-open.
+ * Mirrors the editorial inclusion policy (sponsors / hosts / early-stage /
+ * entry-level, SF Bay Area in-person or US-remote only).
+ */
+
+const rules = [
+    {
+        icon: "/px-coin.png",
+        w: 135,
+        h: 139,
+        cls: "h-6",
+        text: "Sponsors of the SF Ruby Conference",
+        href: "/sponsor-2026",
+        linkLabel: "become a sponsor",
+    },
+    {
+        icon: "/px-heart.png",
+        w: 14,
+        h: 13,
+        cls: "h-5",
+        text: "Hosts of the SF Ruby meetup",
+    },
+    {
+        icon: "/px-quest.png",
+        w: 64,
+        h: 296,
+        cls: "h-6",
+        text: "Early-stage Ruby startups (below $1B valuation)",
+    },
+    {
+        icon: "/px-briefcase.png",
+        w: 18,
+        h: 11,
+        cls: "h-5",
+        text: "Any entry-level Ruby jobs",
+    },
+];
+---
+
+<dialog
+    id="posting-rules-modal"
+    class="fixed inset-0 z-50 m-auto p-0 bg-transparent backdrop:bg-black/50"
+>
+    <div class="px-card bg-white max-w-md w-full mx-4 overflow-hidden">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-5">
+                <h3 class="px-font text-xs md:text-sm text-gray-900">
+                    Posting rules
+                </h3>
+                <button
+                    type="button"
+                    data-posting-rules-close
+                    aria-label="Close"
+                    class="w-9 h-9 flex items-center justify-center border-2 border-ink bg-gray-100 hover:bg-gray-200 transition-colors px-font text-px10"
+                >
+                    X
+                </button>
+            </div>
+
+            <p class="text-sm text-gray-600 mb-5">
+                We list roles from:
+            </p>
+
+            <ul class="space-y-4 mb-6">
+                {
+                    rules.map((rule) => (
+                        <li class="flex items-start gap-3">
+                            <img
+                                src={rule.icon}
+                                alt=""
+                                width={rule.w}
+                                height={rule.h}
+                                class:list={[
+                                    "px-pixelated w-auto shrink-0 mt-0.5",
+                                    rule.cls,
+                                ]}
+                            />
+                            <span class="text-sm text-gray-700">
+                                {rule.text}
+                                {rule.href && (
+                                    <>
+                                        {" ("}
+                                        <a
+                                            href={rule.href}
+                                            class="text-ruby-600 underline hover:text-ruby-500"
+                                        >
+                                            {rule.linkLabel}
+                                        </a>
+                                        {")"}
+                                    </>
+                                )}
+                            </span>
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <div class="border-2 border-ink bg-sky-50 p-4 flex items-start gap-3">
+                <img
+                    src="/px-island.png"
+                    alt=""
+                    width="598"
+                    height="104"
+                    class="px-pixelated h-4 w-auto shrink-0 mt-1"
+                />
+                <p class="text-sm text-gray-700">
+                    All jobs must be for in-person work in the SF Bay Area or
+                    remote within the United States.
+                </p>
+            </div>
+        </div>
+    </div>
+</dialog>
+
+<script>
+    (function () {
+        const modal = document.getElementById(
+            "posting-rules-modal",
+        ) as HTMLDialogElement | null;
+        if (!modal) return;
+        document
+            .querySelectorAll("[data-posting-rules-open]")
+            .forEach((el) =>
+                el.addEventListener("click", () => modal.showModal()),
+            );
+        modal
+            .querySelector("[data-posting-rules-close]")
+            ?.addEventListener("click", () => modal.close());
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.close();
+        });
+    })();
+</script>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import NewsCard from "../../components/NewsCard.astro";
+import IslandNav from "../../components/IslandNav.astro";
 import Filters from "../../components/Filters.astro";
 
 import newsData from "../../content/news.json";
@@ -27,14 +28,15 @@ const filters = [
 ---
 
 <BaseLayout
+    ogImage="/og/news.png"
     darkHero={false}
     title="Ruby Startup News - SF Ruby"
     description="Stay updated with the latest Ruby startup news, funding rounds, releases, and community events."
 >
-    <section class="pt-28 pb-12 bg-gradient-to-br from-gray-50 to-white">
+    <section class="pt-28 pb-12 bg-sky-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h1 class="px-font text-lg md:text-2xl text-gray-900 mb-5">
                     Ruby Startup News
                 </h1>
                 <p class="text-lg text-gray-600">
@@ -119,37 +121,25 @@ const filters = [
     </section>
 
     <!-- Newsletter CTA -->
-    <section class="py-16 bg-white border-t border-gray-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Get news in your inbox
-            </h2>
-            <p class="text-lg text-gray-600 mb-8">
-                Subscribe to our weekly newsletter for Ruby startup updates.
-            </p>
-            <a
-                href="https://sfruby.substack.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-ruby-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-                Subscribe to Newsletter
-                <svg
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    ></path>
-                </svg>
-            </a>
-        </div>
-    </section>
+    <IslandNav
+        title="Get news in your inbox"
+        lede="The monthly SF Ruby issue, plus tips from the community."
+        items={[
+            {
+                href: "https://sfruby.substack.com",
+                label: "Newsletter",
+                icon: "envelope",
+                external: true,
+            },
+            {
+                href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
+                label: "Join Slack",
+                icon: "heart",
+                external: true,
+            },
+            { href: "/contact", label: "Share a tip", icon: "quest" },
+        ]}
+    />
 </BaseLayout>
 
 <script>

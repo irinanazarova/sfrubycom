@@ -53,37 +53,31 @@ const {
 
 const Tag = href ? "a" : "button";
 
-// Core variants
+// Core variants: colors only — the 8-bit chrome (ink border, hard shadow,
+// press state, pixel type) comes from .px-btn/.px-font. Ghost stays flat.
 const variants: Record<string, string> = {
     // Standard variants
-    primary:
-        "bg-gradient-to-r from-ruby-500 to-pink-500 text-white shadow-lg hover:shadow-xl hover:from-ruby-400 hover:to-pink-400",
-    secondary: "bg-gray-900 text-white hover:bg-gray-800",
-    outline:
-        "bg-transparent border-2 border-ruby-500 text-ruby-500 hover:bg-ruby-50",
+    primary: "bg-ruby-500 text-white hover:bg-ruby-400",
+    secondary: "bg-ink text-white hover:bg-gray-800",
+    outline: "bg-transparent text-ruby-600 hover:bg-ruby-50",
     ghost: "bg-transparent text-gray-700 hover:bg-gray-100",
-    white: "bg-white text-ruby-600 shadow-lg hover:shadow-xl hover:bg-gray-50",
+    white: "bg-white text-ruby-600 hover:bg-gray-50",
 
-    // Social variants (consistent height with standard buttons)
-    slack: "bg-[#4A154B] text-white hover:bg-[#3e1240] shadow-sm hover:shadow-md",
-    substack:
-        "bg-[#FF6719] text-white hover:bg-[#e55a14] shadow-sm hover:shadow-md",
-    twitter: "bg-black text-white hover:bg-gray-800 shadow-sm hover:shadow-md",
-    bluesky:
-        "bg-[#0085FF] text-white hover:bg-[#0070d6] shadow-sm hover:shadow-md",
-    linkedin:
-        "bg-[#0A66C2] text-white hover:bg-[#084d94] shadow-sm hover:shadow-md",
-    ruby: "bg-ruby-500 text-white hover:bg-ruby-600 shadow-sm hover:shadow-md",
+    // Social variants (brand colors, same 8-bit chrome)
+    slack: "bg-[#4A154B] text-white hover:bg-[#3e1240]",
+    substack: "bg-[#FF6719] text-white hover:bg-[#e55a14]",
+    twitter: "bg-black text-white hover:bg-gray-800",
+    bluesky: "bg-[#0085FF] text-white hover:bg-[#0070d6]",
+    linkedin: "bg-[#0A66C2] text-white hover:bg-[#084d94]",
+    ruby: "bg-ruby-500 text-white hover:bg-ruby-600",
 };
 
-// Standardized sizes (consistent across all variants)
+// Pixel type runs wide; sizes are tuned down from the old text-sm/base/lg.
 const sizes: Record<string, string> = {
-    sm: "px-4 py-2 text-sm",
-    md: "px-6 py-3 text-base",
-    lg: "px-8 py-4 text-lg",
+    sm: "px-4 py-2.5 text-px9",
+    md: "px-6 py-3.5 text-px10",
+    lg: "px-8 py-4 text-xs",
 };
-
-const scaleClass = noScale ? "" : "hover:scale-105";
 ---
 
 <Tag
@@ -91,8 +85,9 @@ const scaleClass = noScale ? "" : "hover:scale-105";
     target={external ? "_blank" : undefined}
     rel={external ? "noopener noreferrer" : undefined}
     class:list={[
-        "inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-300",
-        scaleClass,
+        variant === "ghost"
+            ? "inline-flex items-center justify-center gap-2 font-semibold transition-colors duration-200"
+            : "px-btn px-font",
         variants[variant],
         sizes[size],
         className,

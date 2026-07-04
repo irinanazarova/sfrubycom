@@ -67,6 +67,15 @@ Required for `npm run build` (data fetching):
 - **Modal System**: TalkModal, StartupModal, EmailModal components use embedded JavaScript
 - **URL Parameters**: Shareable URLs for talks via `?talk=id` query param
 
+## 8-bit Design System (2026 refresh)
+
+The visual language derives from the pixel logo (`public/logo8bit.png`).
+
+- **Tokens**: `src/design/tokens.mjs` is the single source of truth (palette, pixel type sizes, sky ramps, sprite legend). Consumed by `tailwind.config.mjs` and the generator scripts. After editing run `node scripts/sync-tokens.mjs && node scripts/px-gradients.mjs && node scripts/px-sprites.mjs` — never edit `src/styles/tokens.css` (generated) or the `public/px-*.png` assets by hand.
+- **Components**: `src/styles/pixel.css` holds the `px-*` classes (px-card, px-plate, px-btn, px-dialog, px-bubble, px-crenel, px-island-btn, px-night, dithered skies). `IslandNav.astro` renders island-button rows; `NewsRunner.astro` is the news mini game. `Button`/`Badge`/`SocialLink` carry the pixel chrome — prefer them over hand-rolled markup.
+- **Type**: Press Start 2P only for short display strings via `.px-font`/`font-pixel` at the pixel sizes `text-px8/px9/px10`; Martian Grotesk (`font-display`) for long headings; Martian Mono body. Never fake-bold the pixel font.
+- **Docs**: `/design-system#pixel` renders the palette live from the token source.
+
 ## Data Quality & Editorial Conventions
 
 These rules apply to all content edits (jobs, talks, news, startups, meetup recordings, drafts).

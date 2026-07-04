@@ -1,11 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IslandNav from "../components/IslandNav.astro";
 
 const contactMethods = [
     {
         title: "General Inquiries",
         email: "conference@sfruby.com",
-        description: "For general questions about the conference",
+        description: "For general questions about SF Ruby and the conference",
     },
     {
         title: "Sponsorship",
@@ -31,67 +32,121 @@ const faqs = [
 ];
 ---
 
-<Layout title="Contact Us - San Francisco Ruby Conference 2025">
-    <div
-        class="bg-gradient-to-b from-ruby-100 to-ruby-700 text-white pt-32 pb-16"
-    >
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-center">
+<BaseLayout
+    title="Contact Us - SF Ruby"
+    description="Get in touch with the SF Ruby team: general inquiries, sponsorship, and conference questions."
+>
+    <!-- Hero -->
+    <section class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <img
+                src="/px-envelope.png"
+                alt=""
+                width="24"
+                height="13"
+                class="px-pixelated h-10 w-auto mx-auto mb-6 animate-float"
+            />
+            <h1 class="px-font px-shadow-ink text-xl md:text-3xl text-white">
                 Contact Us
             </h1>
-            <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-                Get in touch with the Conference team
+            <p class="mt-5 text-lg md:text-xl text-white/90">
+                Get in touch with the SF Ruby team
             </p>
         </div>
-    </div>
+    </section>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {
-                contactMethods.map((method) => (
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-xl font-bold text-dark-900 mb-2">
-                            {method.title}
-                        </h2>
-                        <p class="text-dark-600 mb-4">{method.description}</p>
-                        <a
-                            href={`mailto:${method.email}`}
-                            class="inline-flex items-center text-ruby-500 hover:text-ruby-600 font-medium"
-                        >
-                            {method.email}
-                        </a>
-                    </div>
-                ))
-            }
-        </div>
-
-        <!-- FAQ Section -->
-        <div class="bg-dark-50 rounded-lg p-8">
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
-                Frequently Asked Questions
-            </h2>
-
-            <div class="space-y-4">
+    <section class="py-12 bg-sky-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                 {
-                    faqs.map((faq) => (
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h3 class="font-bold text-dark-900 mb-2">
-                                {faq.question}
-                            </h3>
-                            <p class="text-dark-600">{faq.answer}</p>
+                    contactMethods.map((method) => (
+                        <div class="px-card bg-white p-6">
+                            <h2 class="px-font text-xs md:text-sm text-gray-900 mb-3">
+                                {method.title}
+                            </h2>
+                            <p class="text-gray-600 mb-4">
+                                {method.description}
+                            </p>
+                            <a
+                                href={`mailto:${method.email}`}
+                                class="inline-flex items-center gap-2 text-ruby-600 hover:text-ruby-500 font-medium"
+                            >
+                                <img
+                                    src="/px-envelope.png"
+                                    alt=""
+                                    width="24"
+                                    height="13"
+                                    class="px-pixelated h-4 w-auto"
+                                />
+                                {method.email}
+                            </a>
                         </div>
                     ))
                 }
             </div>
-        </div>
 
-        <!-- Location -->
-        <div class="mt-16 text-center">
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-4">
-                Conference Venue
-            </h2>
-            <p class="text-dark-600 mb-2">Fort Mason Center</p>
-            <p class="text-dark-600">2 Marina Blvd, San Francisco, CA 94123</p>
+            <!-- FAQ Section -->
+            <div class="px-card bg-white p-8 mb-16">
+                <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                    Frequently Asked Questions
+                </h2>
+
+                <div class="space-y-4">
+                    {
+                        faqs.map((faq) => (
+                            <div class="border-2 border-ink bg-gray-50 p-6">
+                                <h3 class="font-bold text-gray-900 mb-2">
+                                    {faq.question}
+                                </h3>
+                                <p class="text-gray-600">{faq.answer}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Venue -->
+            <div class="text-center">
+                <h2 class="px-font text-sm md:text-base text-gray-900 mb-5">
+                    Conference Venue
+                </h2>
+                <p class="text-gray-600 mb-2">
+                    <a
+                        href="https://www.sfjazz.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-ruby-600 hover:text-ruby-500 underline"
+                        >SFJAZZ Center</a
+                    >
+                </p>
+                <p class="text-gray-600">
+                    201 Franklin St, San Francisco, CA 94102
+                </p>
+            </div>
         </div>
-    </div>
-</Layout>
+    </section>
+
+    <IslandNav
+        title="More ways to reach us"
+        items={[
+            {
+                href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
+                label: "Join Slack",
+                icon: "heart",
+                external: true,
+            },
+            {
+                href: "https://x.com/sfrubyconf",
+                label: "On X",
+                icon: "quest",
+                external: true,
+            },
+            {
+                href: "https://sfruby.substack.com",
+                label: "Newsletter",
+                icon: "envelope",
+                external: true,
+            },
+        ]}
+    />
+</BaseLayout>

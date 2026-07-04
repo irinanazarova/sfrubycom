@@ -6,8 +6,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     title="SF Ruby News - February 2026"
     description="February 2026 edition of SF Ruby News: Garry Tan on Rails + AI, Sixfold $30M Series B, Whop $1.6B unicorn, RubyLLM agents DSL."
 >
-    <section class="relative bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden min-h-screen">
-        <div class="absolute inset-0 bg-ruby-950/30"></div>
+    <section class="relative px-night text-white overflow-hidden min-h-screen">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-16">
 
             <!-- Issue Navigation -->
@@ -20,20 +19,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </div>
 
             <!-- Masthead -->
-            <div class="text-center mb-12">
-                <div class="flex items-center gap-4 justify-center mb-3">
-                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
-                    <a href="/#news" class="font-display text-2xl md:text-3xl tracking-wider uppercase text-white font-bold hover:text-ruby-400 transition-colors">SF Ruby News</a>
-                    <div class="flex-1 max-w-[120px] h-px bg-white/20"></div>
-                </div>
-                <p class="text-sm text-white/50 tracking-widest uppercase">February 2026</p>
+            <div class="border-2 border-white/30 bg-white/5 px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 mb-12">
+                <a href="/#news" class="px-font text-sm md:text-base text-white hover:text-gold-400 transition-colors">SF Ruby News</a>
+                <p class="px-font text-px10 md:text-xs text-gold-400">World 02-26 &#8226; February</p>
             </div>
 
             <!-- Headline Story -->
-            <div class="mb-10">
-                <span class="inline-block px-2.5 py-1 bg-ruby-500/20 text-ruby-400 text-xs font-bold uppercase tracking-wider rounded mb-4">AI + Ruby</span>
+            <div class="px-dialog p-6 md:p-8 mb-10">
+                <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">AI + Ruby</span>
                 <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">The Crazy Unlock</h2>
-                <div class="border-l-2 border-ruby-500/60 pl-6 relative">
+                <div class="border-l-4 border-ruby-500 pl-6 relative">
                     <span class="absolute -left-1 -top-4 text-5xl text-ruby-500/30 font-serif leading-none">&ldquo;</span>
                     <p class="text-lg md:text-xl text-white/80 leading-relaxed italic">
                         I think people are sleeping a bit on how much Ruby on Rails + Claude Code is a <strong class="text-white not-italic">crazy unlock</strong> — I mean Rails was designed for people who love syntactic sugar, and LLMs are sugar fiends.
@@ -52,13 +47,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </div>
 
             <!-- Divider -->
-            <div class="h-px bg-white/10 mb-10"></div>
+            <div class="h-[2px] bg-white/15 mb-10"></div>
 
             <!-- Three Column Stories -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
                 <!-- Funding: Sixfold -->
-                <div class="md:pr-8">
-                    <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Funding</span>
+                <div class="px-dialog p-5 md:p-6">
+                    <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink mb-3">Funding</span>
                     <h3 class="font-display text-xl font-bold text-white mb-2">Sixfold Closes $30M Series B</h3>
                     <p class="text-xs text-white/40 mb-2">Jan 30, 2026</p>
                     <p class="text-sm text-white/60 leading-relaxed mb-3">AI underwriting insurtech hits $51.5M total, 1M+ submissions processed.</p>
@@ -68,8 +63,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </a>
                 </div>
                 <!-- Funding: Simple AI -->
-                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
-                    <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Funding</span>
+                <div class="px-dialog p-5 md:p-6">
+                    <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink mb-3">Funding</span>
                     <h3 class="font-display text-xl font-bold text-white mb-2">Simple AI Raises $14M Seed Round</h3>
                     <p class="text-xs text-white/40 mb-2">Feb 2026</p>
                     <p class="text-sm text-white/60 leading-relaxed mb-3">YC-backed voice AI startup, $14M led by First Harmonic.</p>
@@ -79,8 +74,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </a>
                 </div>
                 <!-- Funding: Whop -->
-                <div class="md:border-l md:border-white/10 md:pl-8">
-                    <span class="inline-block px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded mb-3">Funding</span>
+                <div class="px-dialog p-5 md:p-6">
+                    <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink mb-3">Funding</span>
                     <h3 class="font-display text-xl font-bold text-white mb-2">Whop Valued at $1.6B</h3>
                     <p class="text-xs text-white/40 mb-2">Feb 2025</p>
                     <p class="text-sm text-white/60 leading-relaxed mb-3">Rails-powered internet marketplace raises $200M from Tether. Built by 15 engineers on a Rails monolith.</p>
@@ -93,18 +88,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
             <!-- Second Row: RubyLLM -->
             <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-6 mb-12">
-                <span class="inline-block px-2.5 py-1 bg-violet-500/20 text-violet-400 text-xs font-bold uppercase tracking-wider rounded w-fit">Open Source</span>
+                <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Open Source</span>
                 <h3 class="font-display text-xl font-bold text-white">RubyLLM 1.12: The Agents DSL</h3>
                 <p class="text-sm text-white/60 leading-relaxed">First-class agent DSL for Ruby developers.</p>
                 <span class="text-xs text-white/40">Feb 14, 2026</span>
-                <a href="https://paolino.me/rubyllm-1-12-agents/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 transition-colors">
+                <a href="https://paolino.me/rubyllm-1-12-agents/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-gold-400 hover:text-gold-300 transition-colors">
                     Read more
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </a>
             </div>
 
             <!-- Divider + CTA -->
-            <div class="h-px bg-white/10 mb-10"></div>
+            <div class="h-[2px] bg-white/15 mb-10"></div>
 
             <div class="text-center">
                 <a href="/#news" class="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">

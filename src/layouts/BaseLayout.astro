@@ -10,6 +10,8 @@ export interface Props {
     ogUrl?: string;
     ogType?: string;
     darkHero?: boolean;
+    /** Curated social card path (e.g. "/og/jobs.png"); defaults to the ogplus live render */
+    ogImage?: string;
 }
 
 const {
@@ -18,10 +20,13 @@ const {
     ogUrl = Astro.url.href,
     ogType = "website",
     darkHero = true,
+    ogImage,
 } = Astro.props;
 
 const ogPlusPath = Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "");
-const ogPlusImage = `https://iqtfijxk.ogplus.net${ogPlusPath}`;
+const ogPlusImage = ogImage
+    ? new URL(ogImage, Astro.site ?? "https://sfruby.com").href
+    : `https://iqtfijxk.ogplus.net${ogPlusPath}`;
 ---
 
 <!doctype html>
