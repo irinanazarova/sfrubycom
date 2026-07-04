@@ -302,7 +302,7 @@
         }
 
         function start() {
-            startBtn.hidden = true;
+            startBtn.classList.add("hidden");
             reset();
             resize();
             running = true;
@@ -313,7 +313,7 @@
         function pause() {
             running = false;
             cancelAnimationFrame(raf);
-            startBtn.hidden = false;
+            startBtn.classList.remove("hidden");
             drawPreview();
         }
 
