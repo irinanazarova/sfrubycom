@@ -22,13 +22,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </div>
 
             <!-- Masthead -->
-            <div class="text-center mb-12">
-                <div class="flex items-center gap-4 justify-center mb-3">
-                    <div class="flex-1 max-w-[120px] h-1 bg-white/25"></div>
-                    <a href="/#news" class="px-font text-base md:text-xl text-white hover:text-gold-400 transition-colors">SF Ruby News</a>
-                    <div class="flex-1 max-w-[120px] h-1 bg-white/25"></div>
-                </div>
-                <p class="px-font text-px10 text-gold-400">June 2026</p>
+            <div class="border-2 border-white/30 bg-white/5 px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 mb-12">
+                <a href="/#news" class="px-font text-sm md:text-base text-white hover:text-gold-400 transition-colors">SF Ruby News</a>
+                <p class="px-font text-px10 md:text-xs text-gold-400">World 06-26 &#8226; June</p>
             </div>
 
             <!-- News Carousel -->
@@ -37,7 +33,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 <!-- Page 1 -->
                 <div class="news-page" data-page="0">
                     <!-- Headline Story: Salesforce acquires Fin -->
-                    <div class="mb-10">
+                    <div class="px-dialog p-6 md:p-8 mb-10">
                         <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">Acquisition</span>
                         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Salesforce Acquires Fin for $3.6B</h2>
                         <div class="border-l-4 border-ruby-500 pl-6">
@@ -61,9 +57,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     <div class="h-[2px] bg-white/15 mb-10"></div>
 
                     <!-- Three Column Stories: Row 1 (events) -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
                         <!-- Conference: SF Ruby Startup Conference -->
-                        <div class="md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Conference</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Startup Conference Announced</h3>
                             <p class="text-xs text-white/40 mb-2">November 10–12, 2026 · SFJAZZ</p>
@@ -74,7 +70,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Event: RubyConf 2026 Las Vegas -->
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">RubyConf 2026 Heads to Las Vegas</h3>
                             <p class="text-xs text-white/40 mb-2">July 14–16, 2026 · Red Rock Resort</p>
@@ -85,7 +81,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Event: SF Ruby Meetup -->
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">SF Ruby Meetup, June @ PlanetScale</h3>
                             <p class="text-xs text-white/40 mb-2">June 18, 2026 · 108 Natoma St.</p>
@@ -98,8 +94,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Three Column Stories: Row 2 (business) -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                        <div class="md:pr-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Acquisition</span>
                                 <h3 class="font-display text-xl font-bold text-white">1Password Acquires Apono</h3>
@@ -110,7 +106,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Funding</span>
                                 <h3 class="font-display text-xl font-bold text-white">Factorial Raises $150M at $2.5B</h3>
@@ -121,7 +117,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Press</span>
                                 <h3 class="font-display text-xl font-bold text-white">Clio Crosses $500M ARR</h3>
@@ -148,7 +144,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                 <!-- Page 2 -->
                 <div class="news-page hidden" data-page="1">
                     <!-- Headline Story: RubyConf Austria -->
-                    <div class="mb-10">
+                    <div class="px-dialog p-6 md:p-8 mb-10">
                         <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">Event</span>
                         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">RubyConf Austria Draws the Legends to Vienna</h2>
                         <div class="border-l-4 border-ruby-500 pl-6">
@@ -172,9 +168,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     <div class="h-[2px] bg-white/15 mb-10"></div>
 
                     <!-- Three Column Stories: Row 1 -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
                         <!-- Event: Balkan Ruby -->
-                        <div class="md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Balkan Ruby 2026 in Sofia</h3>
                             <p class="text-xs text-white/40 mb-2">May 15–16, 2026</p>
@@ -185,7 +181,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Event: Brighton Ruby -->
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-3">Event</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Brighton Ruby Returns June 25</h3>
                             <p class="text-xs text-white/40 mb-2">June 25, 2026</p>
@@ -196,7 +192,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </a>
                         </div>
                         <!-- Release: Shopify Summer '26 Edition -->
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink mb-3">Release</span>
                             <h3 class="font-display text-xl font-bold text-white mb-2">Shopify Summer '26: Horizon Themes, AI Blocks</h3>
                             <p class="text-xs text-white/40 mb-2">May 2026</p>
@@ -209,8 +205,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Three Column Stories: Row 2 -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                        <div class="md:pr-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Press</span>
                                 <h3 class="font-display text-xl font-bold text-white">Persona Clears FedRAMP Moderate</h3>
@@ -221,7 +217,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Funding</span>
                                 <h3 class="font-display text-xl font-bold text-white">Great Question Raises $13M Series A</h3>
@@ -232,7 +228,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink w-fit">AI + Ruby</span>
                                 <h3 class="font-display text-xl font-bold text-white">Natural: Agentic Payments, Built on Rails</h3>
@@ -246,9 +242,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Three Column Stories: Row 3 -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
                         <!-- Press: RubyGems security -->
-                        <div class="md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Press</span>
                                 <h3 class="font-display text-xl font-bold text-white">RubyGems Repels a Supply-Chain Attack</h3>
@@ -260,7 +256,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </div>
                         </div>
                         <!-- Acquisition: Toptal + Adeva -->
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Acquisition</span>
                                 <h3 class="font-display text-xl font-bold text-white">Toptal Acquires Adeva</h3>
@@ -272,7 +268,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                             </div>
                         </div>
                         <!-- Hidden Ruby: Handshake AI -->
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink w-fit">Hidden Ruby</span>
                                 <h3 class="font-display text-xl font-bold text-white">Handshake AI: $1.1B Run Rate on Rails</h3>
@@ -286,8 +282,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </div>
 
                     <!-- Three Column Stories: Row 4 -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-6">
-                        <div class="md:pr-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Earnings</span>
                                 <h3 class="font-display text-xl font-bold text-white">GitLab: $264M Quarter, Agentic Tailwinds</h3>
@@ -298,7 +294,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink w-fit">Earnings</span>
                                 <h3 class="font-display text-xl font-bold text-white">Doximity: $645M Year, 800K Prescribers</h3>
@@ -309,7 +305,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                                 </a>
                             </div>
                         </div>
-                        <div class="md:border-l md:border-white/10 md:pl-8">
+                        <div class="px-dialog p-5 md:p-6">
                             <div class="flex flex-col gap-3">
                                 <span class="px-font inline-block px-2 py-1.5 bg-gold-500 text-ink text-px8 border-2 border-ink w-fit">Release</span>
                                 <h3 class="font-display text-xl font-bold text-white">Checkr Launches Profiles: Identity That Travels</h3>

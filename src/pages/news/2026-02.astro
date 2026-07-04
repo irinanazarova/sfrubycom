@@ -19,17 +19,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             </div>
 
             <!-- Masthead -->
-            <div class="text-center mb-12">
-                <div class="flex items-center gap-4 justify-center mb-3">
-                    <div class="flex-1 max-w-[120px] h-1 bg-white/25"></div>
-                    <a href="/#news" class="px-font text-base md:text-xl text-white hover:text-gold-400 transition-colors">SF Ruby News</a>
-                    <div class="flex-1 max-w-[120px] h-1 bg-white/25"></div>
-                </div>
-                <p class="px-font text-px10 text-gold-400">February 2026</p>
+            <div class="border-2 border-white/30 bg-white/5 px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2 mb-12">
+                <a href="/#news" class="px-font text-sm md:text-base text-white hover:text-gold-400 transition-colors">SF Ruby News</a>
+                <p class="px-font text-px10 md:text-xs text-gold-400">World 02-26 &#8226; February</p>
             </div>
 
             <!-- Headline Story -->
-            <div class="mb-10">
+            <div class="px-dialog p-6 md:p-8 mb-10">
                 <span class="px-font inline-block px-2 py-1.5 bg-ruby-500 text-white text-px8 border-2 border-ink mb-4">AI + Ruby</span>
                 <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">The Crazy Unlock</h2>
                 <div class="border-l-4 border-ruby-500 pl-6 relative">
@@ -54,9 +50,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <div class="h-[2px] bg-white/15 mb-10"></div>
 
             <!-- Three Column Stories -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
                 <!-- Funding: Sixfold -->
-                <div class="md:pr-8">
+                <div class="px-dialog p-5 md:p-6">
                     <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink mb-3">Funding</span>
                     <h3 class="font-display text-xl font-bold text-white mb-2">Sixfold Closes $30M Series B</h3>
                     <p class="text-xs text-white/40 mb-2">Jan 30, 2026</p>
@@ -67,7 +63,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </a>
                 </div>
                 <!-- Funding: Simple AI -->
-                <div class="md:border-l md:border-white/10 md:pl-8 md:pr-8">
+                <div class="px-dialog p-5 md:p-6">
                     <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink mb-3">Funding</span>
                     <h3 class="font-display text-xl font-bold text-white mb-2">Simple AI Raises $14M Seed Round</h3>
                     <p class="text-xs text-white/40 mb-2">Feb 2026</p>
@@ -78,7 +74,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
                     </a>
                 </div>
                 <!-- Funding: Whop -->
-                <div class="md:border-l md:border-white/10 md:pl-8">
+                <div class="px-dialog p-5 md:p-6">
                     <span class="px-font inline-block px-2 py-1.5 bg-emerald-600 text-white text-px8 border-2 border-ink mb-3">Funding</span>
                     <h3 class="font-display text-xl font-bold text-white mb-2">Whop Valued at $1.6B</h3>
                     <p class="text-xs text-white/40 mb-2">Feb 2025</p>
