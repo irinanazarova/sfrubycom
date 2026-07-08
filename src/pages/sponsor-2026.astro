@@ -360,23 +360,24 @@ const tiers2026 = [
                                                 </li>
                                             ))}
                                         </ul>
-                                        {tier.paymentLink ? (
-                                            <a
-                                                href={tier.paymentLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="mt-6 px-btn px-font text-px9 gap-2 px-5 py-3 bg-ruby-500 text-white hover:bg-ruby-400 text-center justify-center"
-                                            >
-                                                Sponsor this tier
-                                            </a>
-                                        ) : (
+                                        <div class="mt-6 flex flex-wrap gap-3">
                                             <button
                                                 data-email-modal="sponsor-2026"
-                                                class="mt-6 px-btn px-font text-px9 gap-2 px-5 py-3 bg-ruby-500 text-white hover:bg-ruby-400"
+                                                class="flex-1 px-btn px-btn--white px-font text-px9 gap-2 px-5 py-3 justify-center"
                                             >
-                                                {tier.price ? "Sponsor this tier" : "Let's talk"}
+                                                Contact
                                             </button>
-                                        )}
+                                            {tier.paymentLink && (
+                                                <a
+                                                    href={tier.paymentLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="flex-1 px-btn px-font text-px9 gap-2 px-5 py-3 bg-ruby-500 text-white hover:bg-ruby-400 text-center justify-center"
+                                                >
+                                                    Pay (Stripe)
+                                                </a>
+                                            )}
+                                        </div>
                                     </div>
                                 ))
                             }
