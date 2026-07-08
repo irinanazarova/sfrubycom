@@ -159,18 +159,18 @@ export const jobs = {
     url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
     postedDate: "2026-04-27",
   },
-  "staff-software-engineer-payments-risk-gusto": {
-    id: "staff-software-engineer-payments-risk-gusto",
-    title: "Staff Software Engineer, Payments / Risk",
+  "senior-staff-software-engineer-money-group-gusto": {
+    id: "senior-staff-software-engineer-money-group-gusto",
+    title: "Senior Staff Software Engineer, Money Group",
     sponsorId: "gusto",
-    location: "San Francisco or New York (Hybrid)",
+    location: "San Francisco, Denver, or New York City",
     type: "Full-time",
-    salary: "$197K - $247K",
+    salary: "$189K - $236K ($223K+ in SF/NY)",
     description:
-      "Gusto is hiring Staff Software Engineers for the teams behind its payments and risk platforms. Design, build, and test core money-movement and risk services — payment rails, ledgering, wallets, fraud, decisioning engines, KYC, AML, and compliance capabilities. Help scale one of the largest Ruby/Rails and JavaScript/React applications in the world, mentor engineers, and own multi-quarter projects in complex financial domains. 8+ years of experience. $197k-$247k base in SF/NY ($163k-$204k Denver and most remote locations) + bonus + equity.",
+      "Gusto is hiring a Senior Staff Engineer to serve as a Technical Lead across the Money Group — its fastest-growing org and the cornerstone of Gusto's shift into a Small Business Finance Platform. Shape the technical vision for the systems powering financial accounts, money movement, lending, and expense controls, guiding architectural direction across 15-20 engineers while still prototyping and shipping. Help scale one of the largest Ruby/Rails and JavaScript/React applications in the world. $189k-$236k base in Denver and most remote locations, $223k+ in SF/NY + bonus + equity.",
     chips: ["Payments", "Backend", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/gusto/jobs/7822587",
-    postedDate: "2026-06-05",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7654934",
+    postedDate: "2026-07-07",
   },
   "principal-software-engineer-pay-group-gusto": {
     id: "principal-software-engineer-pay-group-gusto",
@@ -837,19 +837,19 @@ export const jobs = {
     url: "https://jobs.rubyonrails.org/jobs/32638-staff-software-developer-backerkit",
     postedDate: "2026-06-20",
   },
-  "software-engineer-operational-systems-windborne": {
-    id: "software-engineer-operational-systems-windborne",
-    title: "Software Engineer, Operational Systems",
+  "lead-software-engineer-gov-platforms-windborne": {
+    id: "lead-software-engineer-gov-platforms-windborne",
+    title: "Lead Software Engineer, Gov Platforms",
     companyId: "windborne",
     companyName: "WindBorne Systems",
-    location: "Redwood City, CA (In-person)",
+    location: "Redwood City, CA / Remote (US)",
     type: "Full-time",
     salary: "$150K - $220K + equity",
     description:
-      "WindBorne flies the world's largest smart weather-balloon constellation and builds WeatherMesh, the AI forecast model that has beaten DeepMind's GraphCast. This is a force-multiplier role on operational systems: you set priorities other engineers execute on, across Ruby on Rails, Python, and Rust with Postgres. Khosla-backed (~$25M raised, Series A). Redwood City, in person.",
-    chips: ["Platform", "Backend", "Polyglot", "Mentorship"],
-    url: "https://windbornesystems.com/careers/software-engineer---operational-systems",
-    postedDate: "2026-07-01",
+      "WindBorne flies the world's largest smart weather-balloon constellation and builds WeatherMesh, the AI forecast model that has beaten DeepMind's GraphCast. The Gov Platforms team builds government-compliant versions of WindBorne's core platforms (FedRAMP, ITAR, NIST 800-53), adapting the data pipelines, APIs, and analysis tools for federal customers. Full-stack across Ruby on Rails (frontend), Python and Rust (backend), and Postgres; 5+ years. Khosla-backed (~$25M raised, Series A). Redwood City or remote (US).",
+    chips: ["Backend", "Polyglot", "High compliance", "Mentorship"],
+    url: "https://windbornesystems.com/careers/lead-software-engineer---gov-platforms",
+    postedDate: "2026-07-07",
   },
   "software-engineer-platforms-integrations-salma": {
     id: "software-engineer-platforms-integrations-salma",
@@ -905,6 +905,48 @@ export const jobs = {
     chips: ["Fullstack", "React", "Sidekiq", "AI-native"],
     url: "https://jobs.rubyonrails.org/jobs/34523-senior-full-stack-engineer-ruby-on-rails-reactjs-checkmate",
     postedDate: "2026-07-01",
+  },
+  "ruby-on-rails-engineer-hudu": {
+    id: "ruby-on-rails-engineer-hudu",
+    title: "Ruby on Rails Engineer",
+    companyId: "hudu",
+    companyName: "Hudu",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$90K - $110K",
+    description:
+      "Hudu is a fast-growing SaaS building IT documentation for Managed Service Providers and IT teams — one secure place for passwords, network docs, processes, assets, and client knowledge, replacing scattered spreadsheets and wikis. This full-stack role builds on the latest Ruby on Rails with Hotwire, RSpec, and test-driven development, on REST APIs documented with Swagger. YC-backed, ~30 people. Remote, US.",
+    chips: ["Fullstack", "Hotwire"],
+    url: "https://jobs.ashbyhq.com/hudu/da7eb34e-cd78-4db1-9bf1-7c7fba710825",
+    postedDate: "2026-07-07",
+  },
+  "junior-fullstack-engineer-serpapi": {
+    id: "junior-fullstack-engineer-serpapi",
+    title: "Junior Fullstack Engineer",
+    companyId: "serpapi",
+    companyName: "SerpApi",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$80K - $100K + profit share",
+    description:
+      "SerpApi is a profitable, bootstrapped API for real-time search-engine results (Google and dozens more), trusted by developers at scale and a Rails Foundation member. This junior full-stack role builds and maintains the product across Ruby, Rails, MongoDB, and JavaScript, deployed on AWS. Remote-first, US-eligible; the team is based in Austin, TX. $80K-$100K base plus profit share.",
+    chips: ["Fullstack", "Profitable"],
+    url: "https://serpapi.com/careers/junior-fullstack-engineer",
+    postedDate: "2026-07-07",
+  },
+  "senior-product-engineer-mxu": {
+    id: "senior-product-engineer-mxu",
+    title: "Senior Product Engineer",
+    companyId: "mxu",
+    companyName: "MxU",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$120K - $220K",
+    description:
+      "MxU builds training and live-production software for churches — video courses plus production tooling. This senior product-engineering role ships across a Ruby on Rails monolith with a React frontend, React Native (Expo) iOS/Android apps, and a Tauri/Rust macOS app. Remote (US), contract-to-hire. Founded 2019, small senior team.",
+    chips: ["Fullstack", "React Native", "Polyglot"],
+    url: "https://jobs.rubyonrails.org/jobs/34946-senior-product-engineer-mxu",
+    postedDate: "2026-07-07",
   },
 
   /* ─────────────────────────────────────────────────────────────────
@@ -1147,6 +1189,25 @@ export const jobs = {
    *   sponsorId: "planetscale",
    *   url: "https://job-boards.greenhouse.io/planetscale/jobs/4091110009",
    *   postedDate: "2026-06-19",
+   * },
+   *
+   * Gusto — Staff SWE Payments / Risk (Greenhouse 7822587) closed (July 7, 2026
+   * audit); GH boards-api 404. Replaced in-place with Senior Staff SWE, Money
+   * Group (id 7654934), Gusto's money-movement / lending / financial-accounts org.
+   * "staff-software-engineer-payments-risk-gusto": {
+   *   sponsorId: "gusto",
+   *   url: "https://job-boards.greenhouse.io/gusto/jobs/7822587",
+   *   postedDate: "2026-06-05",
+   * },
+   *
+   * WindBorne — Software Engineer, Operational Systems closed (July 7, 2026
+   * audit); careers URL 404s and the role is gone from /open-roles. Replaced
+   * in-place with Lead Software Engineer, Gov Platforms (same Rails + Python +
+   * Rust + Postgres stack, Redwood City / remote-US).
+   * "software-engineer-operational-systems-windborne": {
+   *   companyId: "windborne",
+   *   url: "https://windbornesystems.com/careers/software-engineer---operational-systems",
+   *   postedDate: "2026-07-01",
    * },
    */
 };

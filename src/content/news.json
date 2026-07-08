@@ -1,5 +1,35 @@
 [
   {
+    "id": "hanami-3-0-hanakai",
+    "date": "2026-06-30",
+    "headline": "Hanami 3.0 ships \"in full bloom\" as Hanami, dry-rb, and rom.rb unite under Hanakai",
+    "summary": "The leading full-featured Ruby web framework outside Rails reaches 3.0 with built-in mailers, i18n, and Minitest support, plus ~3.7x HTTP throughput and 14x fewer allocations per request. Hanami, dry-rb, and rom.rb now sit under one umbrella org, Hanakai.",
+    "link": "https://hanakai.org/blog/2026/06/30/hanami-3-0-in-full-bloom",
+    "category": "Release",
+    "startupName": "",
+    "source": "Hanakai"
+  },
+  {
+    "id": "clio-acquires-jurisage",
+    "date": "2026-06-10",
+    "headline": "Clio acquires Jurisage to power its Canadian legal-AI launch",
+    "summary": "The Rails-built legal-practice platform (a $5B business) buys Canadian legal-AI company Jurisage, whose dataset spans 470,000+ Canadian cases across 40+ courts and includes the CiteRight drafting tool. The data foundation accelerates Clio Work's Canadian rollout. Terms undisclosed.",
+    "link": "https://www.clio.com/about/press/jurisage-clio-canadian-legal-ai/",
+    "category": "Acquisition",
+    "startupName": "Clio",
+    "source": "Clio"
+  },
+  {
+    "id": "ruby-central-security-engineers-residence",
+    "date": "2026-06-10",
+    "headline": "Ruby Central stands up Security Engineers in Residence for the gem ecosystem",
+    "summary": "Backed by an Alpha-Omega grant, Ruby Central launches a team that finds, verifies, and reports real vulnerabilities in widely-used gems, prioritizing human review over raw AI signals. Its first fix: a ReDoS flaw in Nokogiri's CSS query tokenizer.",
+    "link": "https://rubycentral.org/news/strengthening-security-for-the-ruby-ecosystem/",
+    "category": "Press",
+    "startupName": "",
+    "source": "Ruby Central"
+  },
+  {
     "id": "factorial-150m-series-d",
     "date": "2026-06-03",
     "headline": "Factorial raises $150M Series D at $2.5B valuation — one of Europe's most valuable AI scale-ups, built on Rails",
