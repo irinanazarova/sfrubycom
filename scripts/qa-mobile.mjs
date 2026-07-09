@@ -19,7 +19,7 @@ import { mkdirSync } from "node:fs";
 
 const ROUTES = [
     "/", "/jobs", "/jobs/post", "/videos", "/startups", "/about", "/news",
-    "/sponsor-2026", "/conference-2026", "/schedule", "/speakers", "/sponsors",
+    "/sponsor-2026", "/conference-2026", "/schedule", "/speakers", "/sponsors-2025",
     "/photos", "/scholarship", "/host", "/contact", "/register",
     "/startup-demos", "/wifi", "/404",
 ];
