@@ -60,6 +60,34 @@
             cloud: load("/px-cloud.png"),
         };
 
+        // Python-logo tints for the snake obstacle: blue (#4B8BBE) or yellow
+        // (#FFD43B), chosen at random per spawn. Built lazily once the sprite
+        // loads; source-atop keeps the pixel shading while shifting the hue.
+        const snakeTints: Record<string, HTMLCanvasElement> = {};
+        function tintSprite(img: HTMLImageElement, hex: string) {
+            const c = document.createElement("canvas");
+            c.width = img.width || 44;
+            c.height = img.height || 29;
+            const cx = c.getContext("2d");
+            if (cx) {
+                cx.imageSmoothingEnabled = false;
+                cx.drawImage(img, 0, 0);
+                cx.globalCompositeOperation = "source-atop";
+                cx.globalAlpha = 0.85;
+                cx.fillStyle = hex;
+                cx.fillRect(0, 0, c.width, c.height);
+            }
+            return c;
+        }
+        function snakeSprite(color?: "blue" | "yellow") {
+            if (!color || !S.snake.width) return S.snake;
+            if (!snakeTints.blue) {
+                snakeTints.blue = tintSprite(S.snake, "#4B8BBE");
+                snakeTints.yellow = tintSprite(S.snake, "#FFD43B");
+            }
+            return snakeTints[color] || S.snake;
+        }
+
         const GROUND_H = 44;
         let W = 0,
             H = canvas.height;
@@ -79,6 +107,7 @@
             y: number;
             taken: boolean;
             kind: "coin" | "ruby" | "snake";
+            color?: "blue" | "yellow";
         };
         type Pop = { x: number; y: number; t: number; text: string };
         let items: Item[] = [];
@@ -121,8 +150,15 @@
         function spawn() {
             const roll = Math.random();
             if (roll < 0.3) {
-                // python on the ground: jump over it
-                items.push({ x: W + 40, y: 0, taken: false, kind: "snake" });
+                // python on the ground: jump over it. Colored like the Python
+                // logo — blue or yellow at random.
+                items.push({
+                    x: W + 40,
+                    y: 0,
+                    taken: false,
+                    kind: "snake",
+                    color: Math.random() < 0.5 ? "blue" : "yellow",
+                });
             } else if (roll < 0.48) {
                 items.push({ x: W + 40, y: 132, taken: false, kind: "ruby" });
             } else {
@@ -135,6 +171,8 @@
                 });
             }
             spawnIn = 0.9 + Math.random() * 1.0;
+            // quicken the pace by a random amount so the run accelerates unevenly
+            speed = Math.min(speed + Math.random() * 6, 460);
         }
 
         function step(dt: number) {
@@ -192,7 +230,8 @@
                         coinsScore++;
                         pops.push({ x: it.x, y: cy, t: 0, text: "+1" });
                     }
-                    speed = Math.min(speed + 5, 400);
+                    // random speed-up on pickup (was a flat +5)
+                    speed = Math.min(speed + 3 + Math.random() * 9, 460);
                 }
             });
             items = items.filter((it) => it.x > -60 && !it.taken);
@@ -222,7 +261,7 @@
             items.forEach((it) => {
                 if (it.taken) return;
                 if (it.kind === "snake")
-                    ctx.drawImage(S.snake, it.x, groundY() - 28, 44, 29);
+                    ctx.drawImage(snakeSprite(it.color), it.x, groundY() - 28, 44, 29);
                 else if (it.kind === "ruby")
                     ctx.drawImage(S.ruby, it.x, groundY() - it.y - 28, 32, 27);
                 else
@@ -295,7 +334,13 @@
             resize();
             items = [
                 { x: W * 0.55, y: 36, taken: false, kind: "coin" },
-                { x: W * 0.78, y: 0, taken: false, kind: "snake" },
+                {
+                    x: W * 0.78,
+                    y: 0,
+                    taken: false,
+                    kind: "snake",
+                    color: Math.random() < 0.5 ? "blue" : "yellow",
+                },
             ];
             drawScene();
             items = [];
