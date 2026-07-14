@@ -962,6 +962,20 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/fathom.video/50323c12-96b2-4e6a-b8ea-98f21ea6e960",
     postedDate: "2026-07-14",
   },
+  "senior-security-engineer-pairteam": {
+    id: "senior-security-engineer-pairteam",
+    title: "Senior Security Engineer",
+    companyId: "pairteam",
+    companyName: "Pair Team",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$170K - $190K",
+    description:
+      "Pair Team is building whole-person care for the 115 million Americans on Medicaid, Medicare, and public assistance — a public benefit corporation and AI-enabled medical group, and the largest complex-care provider in California. This Senior Security Engineer secures a regulated HIPAA / SOC 2 / HITRUST / PCI environment and is hands-on in the codebase, shipping production Ruby (and/or TypeScript). Remote, US. Series B.",
+    chips: ["Security", "High compliance", "Public benefit"],
+    url: "https://job-boards.greenhouse.io/pairteam/jobs/8580695002",
+    postedDate: "2026-07-14",
+  },
 
   /* ─────────────────────────────────────────────────────────────────
    * OUT OF ICP SCOPE — verified-open Ruby/Rails roles removed because they

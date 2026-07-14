@@ -126,6 +126,7 @@ export const COMPANY_META = {
   jukeboxhealth: { industry: "Healthtech", stage: "Early-stage" },
   checkmate: { industry: "Enterprise SaaS", stage: "Growth" },
   fathom: { industry: "AI / Dev Tools", stage: "Growth" },
+  pairteam: { industry: "Healthtech", stage: "Growth" },
 };
 
 // ── Matching chips ──────────────────────────────────────────────────────────
