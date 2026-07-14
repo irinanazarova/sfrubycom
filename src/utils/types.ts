@@ -46,7 +46,7 @@ export interface NewsItem {
   headline: string;
   summary: string;
   link: string;
-  category: 'Funding' | 'Release' | 'Press' | 'Acquisition' | 'Hiring' | 'Event' | string;
+  category: 'Funding' | 'Acquisition' | 'Product' | 'Traction' | 'Community' | string;
   startupName: string;
   source: string;
 }

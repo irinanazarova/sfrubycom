@@ -11,11 +11,10 @@ const { news } = Astro.props;
 
 const categoryColors: Record<string, string> = {
     Funding: "success",
-    Release: "info",
-    Press: "default",
     Acquisition: "warning",
-    Hiring: "success",
-    Event: "ruby",
+    Product: "info",
+    Traction: "default",
+    Community: "ruby",
 };
 
 const variant = categoryColors[news.category] || "default";

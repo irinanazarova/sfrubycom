@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import IslandNav from "../../components/IslandNav.astro";
-import Filters from "../../components/Filters.astro";
 import Badge from "../../components/Badge.astro";
 import { formatDate } from "../../utils/helpers";
 
@@ -13,32 +12,25 @@ const news = (newsData as NewsItem[])
     .slice()
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 
-// Unique categories for the filter control.
-const categories = [...new Set(news.map((n) => n.category))].sort();
-
-const filters = [
-    {
-        id: "category",
-        label: "Category",
-        options: [
-            { value: "all", label: "All Categories" },
-            ...categories.map((cat) => ({
-                value: cat.toLowerCase(),
-                label: cat,
-            })),
-        ],
-    },
+// Consolidated, ICP-first category set (money → product → traction → community).
+// Only categories actually present are shown as filter tags.
+const CATEGORY_ORDER = [
+    "Funding",
+    "Acquisition",
+    "Product",
+    "Traction",
+    "Community",
 ];
+const present = new Set(news.map((n) => n.category));
+const categories = CATEGORY_ORDER.filter((c) => present.has(c));
 
 // Badge color per category (mirrors NewsCard).
 const categoryVariant: Record<string, string> = {
     Funding: "success",
-    Release: "info",
-    Press: "default",
     Acquisition: "warning",
-    Hiring: "success",
-    Event: "ruby",
-    IPO: "featured",
+    Product: "info",
+    Traction: "default",
+    Community: "ruby",
 };
 
 // Aggregator-style source label: the bare hostname, HN-style.
@@ -83,7 +75,29 @@ function sourceHost(link: string): string {
                 </p>
             </div>
 
-            <Filters filters={filters} searchPlaceholder="Search the feed..." />
+            <div class="mb-5 space-y-3">
+                <div class="relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input
+                        type="text"
+                        id="news-search"
+                        placeholder="Search the feed..."
+                        class="w-full pl-10 pr-4 py-2.5 border-2 border-ink bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-ruby-500 focus:border-transparent transition-all"
+                    />
+                </div>
+                <div id="cat-tags" class="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+                    <button type="button" data-cat="all" class="news-tag is-active" aria-pressed="true">All</button>
+                    {
+                        categories.map((cat) => (
+                            <button type="button" data-cat={cat} class="news-tag" aria-pressed="false">
+                                {cat}
+                            </button>
+                        ))
+                    }
+                </div>
+            </div>
 
             <ol id="news-list" class="border-t-2 border-ink mt-4">
                 {
@@ -172,28 +186,83 @@ function sourceHost(link: string): string {
     />
 </BaseLayout>
 
+<style>
+    .news-tag {
+        font-size: 0.75rem;
+        line-height: 1;
+        font-weight: 600;
+        padding: 0.5rem 0.75rem;
+        border: 2px solid #000;
+        background: #fff;
+        color: #374151;
+        cursor: pointer;
+        transition:
+            background-color 0.15s ease,
+            color 0.15s ease;
+    }
+    .news-tag:hover {
+        background: #f3f4f6;
+    }
+    .news-tag.is-active {
+        background: #ff5545;
+        color: #fff;
+    }
+    .news-tag.is-active:hover {
+        background: #e6472f;
+    }
+</style>
+
 <script>
-    function updateNoResults() {
-        const items = document.querySelectorAll("[data-filterable]");
-        const noResults = document.getElementById("no-results");
+    // Toggle-tag category filter (multi-select) + text search for the news feed.
+    const tags = Array.from(
+        document.querySelectorAll<HTMLButtonElement>("#cat-tags [data-cat]"),
+    );
+    const items = Array.from(
+        document.querySelectorAll<HTMLElement>("#news-list [data-filterable]"),
+    );
+    const search = document.getElementById("news-search") as HTMLInputElement | null;
+    const noResults = document.getElementById("no-results");
+    const active = new Set<string>(); // lowercased categories; empty = show all
 
-        let visibleCount = 0;
-        items.forEach((item) => {
-            if ((item as HTMLElement).style.display !== "none") {
-                visibleCount++;
-            }
+    function apply() {
+        const q = (search?.value || "").trim().toLowerCase();
+        let visible = 0;
+        items.forEach((it) => {
+            const cat = it.getAttribute("data-category") || "";
+            const hay = (it.getAttribute("data-search") || "").toLowerCase();
+            const catOk = active.size === 0 || active.has(cat);
+            const searchOk = !q || hay.includes(q);
+            const show = catOk && searchOk;
+            it.style.display = show ? "" : "none";
+            if (show) visible++;
         });
-
-        if (noResults) {
-            noResults.classList.toggle("hidden", visibleCount > 0);
-        }
+        noResults?.classList.toggle("hidden", visible > 0);
     }
 
-    const observer = new MutationObserver(updateNoResults);
-    document.querySelectorAll("[data-filterable]").forEach((item) => {
-        observer.observe(item, {
-            attributes: true,
-            attributeFilter: ["style"],
+    function syncTagStates() {
+        tags.forEach((b) => {
+            const c = (b.getAttribute("data-cat") || "").toLowerCase();
+            const on = c === "all" ? active.size === 0 : active.has(c);
+            b.classList.toggle("is-active", on);
+            b.setAttribute("aria-pressed", String(on));
+        });
+    }
+
+    tags.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const cat = (btn.getAttribute("data-cat") || "").toLowerCase();
+            if (cat === "all") {
+                active.clear();
+            } else if (active.has(cat)) {
+                active.delete(cat);
+            } else {
+                active.add(cat);
+            }
+            syncTagStates();
+            apply();
         });
     });
+
+    search?.addEventListener("input", apply);
+    apply();
 </script>
