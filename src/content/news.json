@@ -10,6 +10,136 @@
     "source": "TechCrunch"
   },
   {
+    "id": "forge-schwab-acquisition",
+    "date": "2026-03-02",
+    "headline": "Charles Schwab completes $636M acquisition of Forge Global",
+    "summary": "Forge, the Rails-built private-markets marketplace whose careers page says all future development happens in Ruby on Rails, is acquired by Charles Schwab for $636M. The deal gives Schwab clients access to pre-IPO shares. Forge trades under NYSE: FRGE.",
+    "link": "https://pressroom.aboutschwab.com/press-releases/press-release/2026/Charles-Schwab-Completes-Acquisition-of-Forge-Global/default.aspx",
+    "category": "Acquisition",
+    "startupName": "Forge",
+    "source": "Charles Schwab"
+  },
+  {
+    "id": "salesforce-acquires-qualified",
+    "date": "2026-04-01",
+    "headline": "Salesforce acquires Qualified, maker of the Piper AI SDR",
+    "summary": "Qualified, the Rails-built agentic-marketing company (GraphQL, ClickHouse; $163M raised), is acquired by Salesforce. Its Piper AI agent turns website visitors into sales pipeline through real-time conversations, and now ships inside the Salesforce ecosystem.",
+    "link": "https://www.salesforce.com/news/stories/salesforce-signs-definitive-agreement-to-acquire-qualified/",
+    "category": "Acquisition",
+    "startupName": "Qualified",
+    "source": "Salesforce"
+  },
+  {
+    "id": "miro-acquires-reforge",
+    "date": "2026-03-24",
+    "headline": "Miro acquires Reforge to build AI-first product tools",
+    "summary": "Reforge, the Rails-built growth and product-education platform, is acquired by Miro to accelerate AI-first tools for product teams. The deal folds Reforge's programs and expertise into Miro's innovation workspace.",
+    "link": "https://miro.com/newsroom/miro-acquires-reforge-to-help-organizations-navigate-the-transition-to-ai/",
+    "category": "Acquisition",
+    "startupName": "Reforge",
+    "source": "Miro"
+  },
+  {
+    "id": "atob-acquires-logipe",
+    "date": "2026-04-08",
+    "headline": "AtoB to acquire India's LogiPe for global fleet payments",
+    "summary": "AtoB, the Ruby-based \"Stripe for transportation\" fuel-and-payments platform (YC S20), acquires India's LogiPe to build a next-generation global fleet-payments platform spanning US trucking and international logistics.",
+    "link": "https://telematicswire.net/atob-to-acquire-indias-logipe-to-build-next-gen-global-fleet-payments-platform/",
+    "category": "Acquisition",
+    "startupName": "AtoB",
+    "source": "Telematics Wire"
+  },
+  {
+    "id": "bugcrowd-acquires-mayhem",
+    "date": "2025-11-04",
+    "headline": "Bugcrowd acquires Mayhem Security to add AI to pentesting",
+    "summary": "Bugcrowd, the Rails-built crowdsourced-security platform, acquires Mayhem Security to pair its human hacker network with AI-driven automation across penetration testing and vulnerability discovery.",
+    "link": "https://www.prnewswire.com/news-releases/bugcrowd-acquires-mayhem-security-to-bring-human-augmented-ai-automation-to-security-testing-302603363.html",
+    "category": "Acquisition",
+    "startupName": "Bugcrowd",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "sensortower-acquires-appmagic",
+    "date": "2026-05-12",
+    "headline": "Sensor Tower acquires app-intelligence rival AppMagic",
+    "summary": "Sensor Tower, the Rails-built mobile-market-intelligence company, acquires AppMagic to broaden its data coverage and add an SMB tier. Sensor Tower's Ruby stack tracks app installs and revenue across the mobile economy.",
+    "link": "https://www.pocketgamer.biz/hot-five-sensor-tower-acquiring-appmagic-grand-games-70m-series-b-and-switch-2-nears-20m-unit-sales/",
+    "category": "Acquisition",
+    "startupName": "Sensor Tower",
+    "source": "PocketGamer.biz"
+  },
+  {
+    "id": "donorbox-4-billion",
+    "date": "2026-06-17",
+    "headline": "Nonprofits surpass $4 billion raised through Donorbox",
+    "summary": "Donorbox, the bootstrapped and profitable Rails-built fundraising platform, crosses $4 billion in total donations processed for nonprofits worldwide. A quiet San Francisco hidden winner built on Ruby on Rails.",
+    "link": "https://www.businesswire.com/news/home/20260617000724/en/Nonprofits-Raise-$4-Billion-Through-Donorbox-as-Giving-Continues-to-Evolve",
+    "category": "Press",
+    "startupName": "Donorbox",
+    "source": "Business Wire"
+  },
+  {
+    "id": "hinge-health-q1-2026",
+    "date": "2026-05-05",
+    "headline": "Hinge Health revenue jumps 47% to $182M in Q1",
+    "summary": "Hinge Health, the digital musculoskeletal-care platform running Ruby on Rails microservices (NYSE: HNGE), beats first-quarter estimates with revenue up 47% year over year to $182M.",
+    "link": "https://www.fool.com/earnings/call-transcripts/2026/05/05/hinge-health-hnge-q1-2026-earnings-transcript/",
+    "category": "Press",
+    "startupName": "Hinge Health",
+    "source": "The Motley Fool"
+  },
+  {
+    "id": "pagerduty-fy2026",
+    "date": "2026-03-12",
+    "headline": "PagerDuty posts $493M in FY2026 revenue and a third straight profitable quarter",
+    "summary": "PagerDuty, the Rails-built incident-management platform (NYSE: PD), reports $493M in full-year revenue and its third consecutive quarter of GAAP profitability as it leans into agentic operations.",
+    "link": "https://www.businesswire.com/news/home/20260312052737/en/PagerDuty-Announces-Fourth-Quarter-and-Full-Year-Fiscal-2026-Financial-Results",
+    "category": "Press",
+    "startupName": "PagerDuty",
+    "source": "Business Wire"
+  },
+  {
+    "id": "codecrafters-seed",
+    "date": "2026-02-05",
+    "headline": "CodeCrafters raises $1.8M seed for advanced developer courses",
+    "summary": "CodeCrafters, the Rails-and-Ember platform for hands-on \"build your own Redis / Git / SQLite\" programming challenges (YC S22), raises a $1.8M seed round to grow its catalog for experienced developers.",
+    "link": "https://codecrafters.io/blog/seed",
+    "category": "Funding",
+    "startupName": "CodeCrafters",
+    "source": "CodeCrafters"
+  },
+  {
+    "id": "boltnew-microsoft-azure",
+    "date": "2026-05-05",
+    "headline": "Bolt.new comes to Microsoft Azure and Microsoft 365",
+    "summary": "StackBlitz's Rails-backed AI app builder Bolt.new partners with Microsoft to reach Azure and Microsoft 365 customers, bringing prompt-to-app development to the enterprise. The core backend runs on Ruby on Rails.",
+    "link": "https://bolt.new/blog/news-press-release-bolt.new-on-microsoft-azure",
+    "category": "Press",
+    "startupName": "Bolt.new",
+    "source": "Bolt.new"
+  },
+  {
+    "id": "snapdocs-bny-ecustody",
+    "date": "2026-05-14",
+    "headline": "Snapdocs and BNY launch automated eCustody for mortgages",
+    "summary": "Snapdocs, the Rails-built digital mortgage-closing platform, partners with BNY to automate collateral delivery and electronic custody, connecting Snapdocs' eVault to one of the world's largest custodians.",
+    "link": "https://www.businesswire.com/news/home/20260514744846/en/Snapdocs-and-BNY-To-Launch-Automated-Collateral-Delivery-and-eCustody-Solution",
+    "category": "Press",
+    "startupName": "Snapdocs",
+    "source": "Business Wire"
+  },
+  {
+    "id": "shippo-mcp",
+    "date": "2025-12-10",
+    "headline": "Shippo ships the first agentic shipping platform, Shippo MCP",
+    "summary": "Shippo, the Rails-built multi-carrier shipping API, launches Shippo MCP, an agentic layer that lets AI assistants buy labels, compare rates, and track packages on behalf of merchants.",
+    "link": "https://www.prnewswire.com/news-releases/introducing-the-first-agentic-shipping-platform-shippo-mcp-302637453.html",
+    "category": "Release",
+    "startupName": "Shippo",
+    "source": "PR Newswire"
+  },
+  {
     "id": "hanami-3-0-hanakai",
     "date": "2026-06-30",
     "headline": "Hanami 3.0 ships \"in full bloom\" as Hanami, dry-rb, and rom.rb unite under Hanakai",

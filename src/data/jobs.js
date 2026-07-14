@@ -948,6 +948,20 @@ export const jobs = {
     url: "https://jobs.rubyonrails.org/jobs/34946-senior-product-engineer-mxu",
     postedDate: "2026-07-07",
   },
+  "backend-engineer-fathom": {
+    id: "backend-engineer-fathom",
+    title: "Backend Engineer",
+    companyId: "fathom",
+    companyName: "Fathom",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$180K - $240K + equity",
+    description:
+      "Fathom is the AI meeting assistant that captures, summarizes, and organizes calls so teams stay present without losing context — a fast-growing, YC-born consumer AI product. This backend role builds the core platform on Ruby on Rails and Sidekiq alongside Go services, running on GKE with MySQL, Redis, and Kafka. Remote (US). $180K-$240K plus equity.",
+    chips: ["Backend", "Sidekiq", "Go", "AI-native"],
+    url: "https://jobs.ashbyhq.com/fathom.video/50323c12-96b2-4e6a-b8ea-98f21ea6e960",
+    postedDate: "2026-07-14",
+  },
 
   /* ─────────────────────────────────────────────────────────────────
    * OUT OF ICP SCOPE — verified-open Ruby/Rails roles removed because they
