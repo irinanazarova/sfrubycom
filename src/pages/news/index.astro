@@ -1,15 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import NewsCard from "../../components/NewsCard.astro";
 import IslandNav from "../../components/IslandNav.astro";
 import Filters from "../../components/Filters.astro";
+import Badge from "../../components/Badge.astro";
+import { formatDate } from "../../utils/helpers";
 
 import newsData from "../../content/news.json";
 import type { NewsItem } from "../../utils/types";
 
-const news = newsData as NewsItem[];
+// Newest first.
+const news = (newsData as NewsItem[])
+    .slice()
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 
-// Get unique categories
+// Unique categories for the filter control.
 const categories = [...new Set(news.map((n) => n.category))].sort();
 
 const filters = [
@@ -25,96 +29,122 @@ const filters = [
         ],
     },
 ];
+
+// Badge color per category (mirrors NewsCard).
+const categoryVariant: Record<string, string> = {
+    Funding: "success",
+    Release: "info",
+    Press: "default",
+    Acquisition: "warning",
+    Hiring: "success",
+    Event: "ruby",
+    IPO: "featured",
+};
+
+// Aggregator-style source label: the bare hostname, HN-style.
+function sourceHost(link: string): string {
+    if (!link || link.startsWith("/") || link.startsWith("#")) return "sfruby.com";
+    try {
+        return new URL(link).hostname.replace(/^www\./, "");
+    } catch {
+        return "";
+    }
+}
 ---
 
 <BaseLayout
     ogImage="/og/news.png"
     darkHero={false}
     title="Ruby Startup News - SF Ruby"
-    description="Stay updated with the latest Ruby startup news, funding rounds, releases, and community events."
+    description="A running feed of Ruby startup news: funding rounds, IPOs, acquisitions, releases, and community events."
 >
-    <section class="pt-28 pb-12 bg-sky-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mb-12">
-                <h1 class="px-font text-lg md:text-2xl text-gray-900 mb-5">
-                    Ruby Startup News
-                </h1>
-                <p class="text-lg text-gray-600">
-                    The latest from the Ruby ecosystem: funding rounds, product
-                    launches, and community updates.
+    <section class="pt-24 pb-16 bg-sky-50 min-h-screen">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="mb-6">
+                <div class="flex items-end justify-between gap-4 mb-3">
+                    <h1 class="px-font text-lg md:text-2xl text-gray-900">
+                        Ruby News
+                    </h1>
+                    <a
+                        href="/news/rss.xml"
+                        class="inline-flex items-center gap-1.5 text-xs font-pixel text-px8 text-gray-500 hover:text-ruby-600 transition-colors flex-shrink-0"
+                        aria-label="Subscribe to the RSS feed"
+                    >
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M4 11a9 9 0 019 9h2.5A11.5 11.5 0 004 8.5V11zm0 5a3 3 0 013 3H4v-3zm0-9a15 15 0 0115 15h2.5A17.5 17.5 0 004 4.5V7z"/>
+                        </svg>
+                        RSS
+                    </a>
+                </div>
+                <p class="text-base text-gray-600">
+                    A running feed of the Ruby ecosystem: funding, IPOs,
+                    acquisitions, releases, and the community showing up.
+                    <a href="https://sfruby.substack.com" class="text-ruby-600 underline decoration-ruby-300 underline-offset-2 hover:decoration-ruby-600" target="_blank" rel="noopener">Subscribe to the monthly issue</a>.
                 </p>
             </div>
 
-            <Filters filters={filters} searchPlaceholder="Search news..." />
+            <Filters filters={filters} searchPlaceholder="Search the feed..." />
 
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                id="news-grid"
-            >
+            <ol id="news-list" class="border-t-2 border-ink mt-4">
                 {
-                    news.map((item) => (
-                        <div
-                            data-filterable
-                            data-search={`${item.headline} ${item.summary} ${item.startupName} ${item.source}`}
-                            data-category={item.category.toLowerCase()}
-                        >
-                            <NewsCard news={item} />
-                        </div>
-                    ))
-                }
-            </div>
-
-            {
-                news.length === 0 && (
-                    <div class="text-center py-12">
-                        <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                            <svg
-                                class="w-8 h-8 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                    news.map((item) => {
+                        const variant = categoryVariant[item.category] || "default";
+                        const host = sourceHost(item.link);
+                        const internal = !item.link || item.link.startsWith("/") || item.link.startsWith("#");
+                        return (
+                            <li
+                                data-filterable
+                                data-search={`${item.headline} ${item.summary} ${item.startupName} ${item.source}`}
+                                data-category={item.category.toLowerCase()}
+                                class="border-b-2 border-ink/15"
                             >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                />
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-medium text-gray-900 mb-2">
-                            No news yet
-                        </h3>
-                        <p class="text-gray-500">
-                            Check back soon for Ruby startup updates.
-                        </p>
-                    </div>
-                )
-            }
+                                <a
+                                    href={item.link}
+                                    target={internal ? undefined : "_blank"}
+                                    rel={internal ? undefined : "noopener noreferrer"}
+                                    class="group block px-1 py-3.5 hover:bg-white/70 transition-colors tap-press"
+                                >
+                                    <div class="flex items-center gap-2 mb-1.5">
+                                        <Badge variant={variant} size="xs">{item.category}</Badge>
+                                        {item.startupName && (
+                                            <span class="text-xs font-semibold text-gray-600 truncate">
+                                                {item.startupName}
+                                            </span>
+                                        )}
+                                        <time class="ml-auto flex-shrink-0 text-xs text-gray-400 tabular-nums">
+                                            {formatDate(item.date, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })}
+                                        </time>
+                                    </div>
+                                    <h2 class="font-display text-base sm:text-lg leading-snug text-gray-900 group-hover:text-ruby-600 transition-colors">
+                                        {item.headline}
+                                        {host && (
+                                            <span class="ml-1 text-sm font-normal text-gray-400 whitespace-nowrap">
+                                                ({host})
+                                            </span>
+                                        )}
+                                    </h2>
+                                    <p class="mt-1 text-sm text-gray-500 line-clamp-1 sm:line-clamp-2">
+                                        {item.summary}
+                                    </p>
+                                    {item.source && (
+                                        <div class="mt-1.5 text-xs text-gray-400 flex items-center gap-1">
+                                            <span>via {item.source}</span>
+                                            <svg class="w-3 h-3 text-ruby-300 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </div>
+                                    )}
+                                </a>
+                            </li>
+                        );
+                    })
+                }
+            </ol>
 
-            <div id="no-results" class="hidden text-center py-12">
-                <div
-                    class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center"
-                >
-                    <svg
-                        class="w-8 h-8 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        ></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">
-                    No news matches your search
-                </h3>
-                <p class="text-gray-500">
-                    Try adjusting your filters or search terms.
+            <div id="no-results" class="hidden text-center py-16">
+                <p class="px-font text-px10 text-gray-400 mb-2">No matches</p>
+                <p class="text-gray-500 text-sm">
+                    Try a different category or search term.
                 </p>
             </div>
         </div>
@@ -132,12 +162,12 @@ const filters = [
                 external: true,
             },
             {
-                href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
-                label: "Join Slack",
-                icon: "heart",
+                href: "/news/rss.xml",
+                label: "RSS feed",
+                icon: "quest",
                 external: true,
             },
-            { href: "/contact", label: "Share a tip", icon: "quest" },
+            { href: "/contact", label: "Share a tip", icon: "heart" },
         ]}
     />
 </BaseLayout>

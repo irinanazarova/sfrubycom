@@ -1,5 +1,15 @@
 [
   {
+    "id": "lime-ipo-nasdaq",
+    "date": "2026-07-01",
+    "headline": "Lime goes public on Nasdaq, ending a decade as a private company",
+    "summary": "The San Francisco micromobility company, whose scooters and e-bikes run on a Ruby on Rails backend, raised about $167M in its IPO: 6.68M shares at $25, a roughly $1.66B valuation, trading under the ticker LIME. Uber, which owns 24% of Lime, anchored the offering. Lime booked $886.7M in revenue last year, up from $686.6M in 2024.",
+    "link": "https://techcrunch.com/2026/07/01/lime-begins-life-as-a-public-company-after-years-of-uncertainty/",
+    "category": "Funding",
+    "startupName": "Lime",
+    "source": "TechCrunch"
+  },
+  {
     "id": "hanami-3-0-hanakai",
     "date": "2026-06-30",
     "headline": "Hanami 3.0 ships \"in full bloom\" as Hanami, dry-rb, and rom.rb unite under Hanakai",
