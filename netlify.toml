@@ -45,6 +45,12 @@
   to = "/startups"
   status = 301
 
+# Retired monthly issue archive pages now point at the running feed
+[[redirects]]
+  from = "/news/2026-*"
+  to = "/news"
+  status = 301
+
 # SPA fallback for 404
 [[redirects]]
   from = "/*"
