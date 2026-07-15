@@ -51,7 +51,7 @@ function sourceHost(link: string): string {
     description="A running feed of Ruby startup news: funding rounds, IPOs, acquisitions, releases, and community events."
 >
     <section class="pt-24 pb-16 bg-sky-50 min-h-screen">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="mb-6">
                 <div class="flex items-end justify-between gap-4 mb-3">
                     <h1 class="px-font text-lg md:text-2xl text-gray-900">
@@ -68,12 +68,12 @@ function sourceHost(link: string): string {
                         RSS
                     </a>
                 </div>
-                <p class="text-base text-gray-600">
+                <p class="max-w-2xl text-base text-gray-600">
                     A running feed of the Ruby ecosystem: funding, IPOs,
                     acquisitions, releases, and the community showing up.
                     <a href="https://sfruby.substack.com" class="text-ruby-600 underline decoration-ruby-300 underline-offset-2 hover:decoration-ruby-600" target="_blank" rel="noopener">Subscribe to the monthly issue</a>.
                 </p>
-                <div class="mt-4 flex items-start gap-2.5 border-2 border-ink bg-white px-3.5 py-3">
+                <div class="mt-4 max-w-2xl flex items-start gap-2.5 border-2 border-ink bg-white px-3.5 py-3">
                     <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-ruby-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M4 11a9 9 0 019 9h2.5A11.5 11.5 0 004 8.5V11zm0 5a3 3 0 013 3H4v-3zm0-9a15 15 0 0115 15h2.5A17.5 17.5 0 004 4.5V7z"/>
                     </svg>
@@ -110,7 +110,7 @@ function sourceHost(link: string): string {
                 </div>
             </div>
 
-            <ol id="news-list" class="border-t-2 border-ink mt-4">
+            <ol id="news-list" class="mt-4 border-t-2 border-ink columns-1 md:columns-2 xl:columns-3 gap-x-10">
                 {
                     news.map((item) => {
                         const variant = categoryVariant[item.category] || "default";
@@ -121,13 +121,13 @@ function sourceHost(link: string): string {
                                 data-filterable
                                 data-search={`${item.headline} ${item.summary} ${item.startupName} ${item.source}`}
                                 data-category={item.category.toLowerCase()}
-                                class="border-b-2 border-ink/15"
+                                class="break-inside-avoid border-b-2 border-ink/15"
                             >
                                 <a
                                     href={item.link}
                                     target={internal ? undefined : "_blank"}
                                     rel={internal ? undefined : "noopener noreferrer"}
-                                    class="group block px-1 py-3.5 hover:bg-white/70 transition-colors tap-press"
+                                    class="group block px-1 py-3 hover:bg-white/70 transition-colors tap-press"
                                 >
                                     <div class="flex items-center gap-2 mb-1.5">
                                         <Badge variant={variant} size="xs">{item.category}</Badge>
@@ -140,7 +140,7 @@ function sourceHost(link: string): string {
                                             {formatDate(item.date, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })}
                                         </time>
                                     </div>
-                                    <h2 class="font-display text-base sm:text-lg leading-snug text-gray-900 group-hover:text-ruby-600 transition-colors">
+                                    <h2 class="font-display text-base leading-snug text-gray-900 group-hover:text-ruby-600 transition-colors">
                                         {item.headline}
                                         {host && (
                                             <span class="ml-1 text-sm font-normal text-gray-400 whitespace-nowrap">
