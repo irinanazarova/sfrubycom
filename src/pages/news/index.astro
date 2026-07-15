@@ -42,6 +42,40 @@ function sourceHost(link: string): string {
         return "";
     }
 }
+
+// Show the summary's lead sentence in full (no truncation). Splits on . ! ?
+// but not inside decimals/versions ($2.5B, v0.10) or abbreviations (U.S.),
+// and keeps going past a tiny lead fragment (e.g. a bare date "May 15-16.")
+// until it has one substantive sentence.
+function leadSentence(text: string): string {
+    const s = (text || "").replace(/\s+/g, " ").trim();
+    if (!s) return "";
+    const out: string[] = [];
+    let i = 0;
+    let start = 0;
+    while (i < s.length) {
+        const c = s[i];
+        if (c === "." || c === "!" || c === "?") {
+            const prev = s[i - 1];
+            const next = s[i + 1];
+            const nextNext = s[i + 2];
+            const isDecimal = /\d/.test(prev || "") && /\d/.test(next || "");
+            const boundary =
+                next === undefined ||
+                (next === " " && /[A-Z0-9"“(]/.test(nextNext || ""));
+            const seg = s.slice(start, i);
+            const abbrev = /\b([A-Z]|U\.S|Inc|Corp|Ltd|vs|Mr|Ms|Dr|Jr|Sr|St|e\.g|i\.e|No)$/.test(seg);
+            if (!isDecimal && boundary && !abbrev) {
+                out.push(s.slice(start, i + 1).trim());
+                start = i + 1;
+                const acc = out.join(" ").trim();
+                if (acc.replace(/^[^A-Za-z]*/, "").length >= 40) return acc;
+            }
+        }
+        i++;
+    }
+    return (out.join(" ") || s).trim();
+}
 ---
 
 <BaseLayout
@@ -55,7 +89,7 @@ function sourceHost(link: string): string {
             <div class="mb-6">
                 <div class="flex items-end justify-between gap-4 mb-3">
                     <h1 class="px-font text-lg md:text-2xl text-gray-900">
-                        Ruby News
+                        SF Ruby News Feed
                     </h1>
                     <a
                         href="/news/rss.xml"
@@ -68,20 +102,13 @@ function sourceHost(link: string): string {
                         RSS
                     </a>
                 </div>
-                <p class="max-w-2xl text-base text-gray-600">
-                    A running feed of the Ruby ecosystem: funding, IPOs,
-                    acquisitions, releases, and the community showing up.
-                    <a href="https://sfruby.substack.com" class="text-ruby-600 underline decoration-ruby-300 underline-offset-2 hover:decoration-ruby-600" target="_blank" rel="noopener">Subscribe to the monthly issue</a>.
-                </p>
-                <div class="mt-4 max-w-2xl flex items-start gap-2.5 border-2 border-ink bg-white px-3.5 py-3">
-                    <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-ruby-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <div class="mt-3 max-w-2xl flex items-center gap-2.5 border-2 border-ink bg-white px-3.5 py-2.5">
+                    <svg class="w-4 h-4 flex-shrink-0 text-ruby-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M4 11a9 9 0 019 9h2.5A11.5 11.5 0 004 8.5V11zm0 5a3 3 0 013 3H4v-3zm0-9a15 15 0 0115 15h2.5A17.5 17.5 0 004 4.5V7z"/>
                     </svg>
-                    <p class="text-sm text-gray-600 leading-relaxed">
+                    <p class="text-sm text-gray-600">
                         Follow along in your reader: the feed publishes over
                         <a href="/news/rss.xml" class="text-ruby-600 underline decoration-ruby-300 underline-offset-2 hover:decoration-ruby-600">RSS</a>.
-                        Paste <span class="font-pixel text-px8 text-gray-900">sfruby.com/news/rss.xml</span>
-                        into Feedly, NetNewsWire, or any feed reader to get every story as it lands.
                     </p>
                 </div>
             </div>
@@ -148,8 +175,8 @@ function sourceHost(link: string): string {
                                             </span>
                                         )}
                                     </h2>
-                                    <p class="mt-1 text-sm text-gray-500 line-clamp-1 sm:line-clamp-2">
-                                        {item.summary}
+                                    <p class="mt-1 text-sm text-gray-500">
+                                        {leadSentence(item.summary)}
                                     </p>
                                     {item.source && (
                                         <div class="mt-1.5 text-xs text-gray-400 flex items-center gap-1">
