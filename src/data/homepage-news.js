@@ -1,7 +1,7 @@
 // Homepage news cards (one object per story, uniform card layout).
-// Refreshed monthly alongside the Substack issue: replace the array,
-// update the World NN-YY label in index.astro's news masthead, and add
-// the previous month to the "Select world" links.
+// Refreshed monthly alongside the Substack issue: replace the array and
+// update the World NN-YY label in index.astro's news masthead. The masthead
+// links to the full running feed at /news (no per-issue archive pages).
 //
 // Fields: cat (chip label), gold (chip color: true = gold, false = ruby),
 // title, meta (date · source), blurb (full text, no truncation),

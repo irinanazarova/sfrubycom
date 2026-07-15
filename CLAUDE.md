@@ -44,7 +44,7 @@ Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The 
 - `src/utils/` - TypeScript utilities and type definitions
 - `scripts/` - Build-time data fetching scripts
 - `drafts/` - Gitignored. Monthly Substack drafts live here as a pair: `substack-YYYY-MM-[month].md` (working draft) and `.html` (paste-ready, since Substack's editor doesn't parse Markdown).
-- `src/pages/news/YYYY-MM.astro` - Per-issue archive pages. When publishing a new monthly issue, keep prior issue pages intact for archive linking.
+- `src/pages/news/index.astro` - The news page: a single running feed of items from `src/content/news.json`, with search + category filters, rendered as a dense multi-column list. `src/pages/news/rss.xml.ts` generates the `/news/rss.xml` feed from the same data. There are no per-issue archive pages: the old `news/YYYY-MM.astro` monthly pages were retired in favor of the feed (with a `netlify.toml` 301 from `/news/2026-*` to `/news`). The monthly issue still ships on Substack; the site just links to it.
 
 ### Key Types (src/utils/types.ts)
 
@@ -168,7 +168,7 @@ Quick check (390x844): `document.getElementById('bottom-nav')` exists and is vis
 
 `Header.astro` (the `BaseLayout` shell) starts as a **transparent** header with the **white** logo, then swaps to a solid white header with the **dark** logo once scrolled past 50px. That transparent/white-logo state only reads on a **dark hero**. A `BaseLayout` page whose top section is light (`bg-white`, `bg-gray-50`, `from-gray-50`, etc.) must pass **`darkHero={false}`**, which starts the header solid with the dark logo so the logo isn't invisible on a light background at the top.
 
-Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/jobs`, `/videos`, `/photos`, `/host`, the monthly `news/YYYY-MM`, `conference-2026`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
+Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/jobs`, `/videos`, `/photos`, `/host`, `conference-2026`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
 
 When adding a `BaseLayout` page, check the first section's background and set `darkHero` accordingly. QA: at 390x844, the header logo must be legible at scroll-top (`.header-logo-white` visible only over a dark hero; otherwise `.header-logo-dark` on a solid header).
 
