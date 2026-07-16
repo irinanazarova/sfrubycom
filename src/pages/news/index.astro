@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import IslandNav from "../../components/IslandNav.astro";
-import Badge from "../../components/Badge.astro";
 import { formatDate } from "../../utils/helpers";
 
 import newsData from "../../content/news.json";
@@ -24,24 +23,6 @@ const CATEGORY_ORDER = [
 const present = new Set(news.map((n) => n.category));
 const categories = CATEGORY_ORDER.filter((c) => present.has(c));
 
-// Badge color per category (mirrors NewsCard).
-const categoryVariant: Record<string, string> = {
-    Funding: "success",
-    Acquisition: "warning",
-    Product: "info",
-    Traction: "default",
-    Community: "ruby",
-};
-
-// Aggregator-style source label: the bare hostname, HN-style.
-function sourceHost(link: string): string {
-    if (!link || link.startsWith("/") || link.startsWith("#")) return "sfruby.com";
-    try {
-        return new URL(link).hostname.replace(/^www\./, "");
-    } catch {
-        return "";
-    }
-}
 
 // Show the summary's lead sentence in full (no truncation). Splits on . ! ?
 // but not inside decimals/versions ($2.5B, v0.10) or abbreviations (U.S.),
@@ -126,8 +107,6 @@ function leadSentence(text: string): string {
             <ol id="news-list" class="mt-4 border-t border-gray-200">
                 {
                     news.map((item) => {
-                        const variant = categoryVariant[item.category] || "default";
-                        const host = sourceHost(item.link);
                         const internal = !item.link || item.link.startsWith("/") || item.link.startsWith("#");
                         return (
                             <li
@@ -150,13 +129,12 @@ function leadSentence(text: string): string {
                                             {formatDate(item.date, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })}
                                         </time>
                                     </div>
-                                    <p class="font-display font-normal text-sm leading-relaxed text-gray-600">
+                                    <p class="news-body font-display text-sm leading-relaxed text-gray-600">
                                         {leadSentence(item.summary)}
                                     </p>
-                                    <div class="mt-2.5 flex items-center gap-2 text-xs text-gray-400">
-                                        <Badge variant={variant} size="xs">{item.category}</Badge>
-                                        {item.source && <span>{item.source}</span>}
-                                    </div>
+                                    {item.source && (
+                                        <p class="mt-2.5 text-xs text-gray-400">{item.source}</p>
+                                    )}
                                 </a>
                             </li>
                         );
@@ -196,6 +174,11 @@ function leadSentence(text: string): string {
 </BaseLayout>
 
 <style>
+    /* Martian Grotesk is loaded pinned wide (font-stretch: 150%); render the
+       reading body at normal width for a calmer, less-stretched line. */
+    .news-body {
+        font-variation-settings: "wght" 400, "wdth" 100;
+    }
     .news-tag {
         font-size: 0.75rem;
         line-height: 1;
