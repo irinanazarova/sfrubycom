@@ -167,7 +167,7 @@ function leadSentence(text: string): string {
                                             {formatDate(item.date, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })}
                                         </time>
                                     </div>
-                                    <h2 class="font-display text-base leading-snug text-gray-900 group-hover:text-ruby-600 transition-colors">
+                                    <h2 class="font-display font-semibold text-base leading-snug text-gray-900 group-hover:text-ruby-600 transition-colors">
                                         {item.headline}
                                         {host && (
                                             <span class="ml-1 text-sm font-normal text-gray-400 whitespace-nowrap">
@@ -175,7 +175,7 @@ function leadSentence(text: string): string {
                                             </span>
                                         )}
                                     </h2>
-                                    <p class="mt-1 text-sm text-gray-500">
+                                    <p class="mt-1 font-display font-normal text-sm leading-relaxed text-gray-700">
                                         {leadSentence(item.summary)}
                                     </p>
                                     {item.source && (
