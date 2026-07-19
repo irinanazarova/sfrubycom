@@ -1,78 +1,237 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-const SCHOLARSHIP_APPLICATION_URL = "https://forms.fillout.com/t/hQfwLxhe9zus";
+// TODO: swap in the real 2026 application form URL once it's built (next
+// step after this page). Placeholder keeps the CTA functional in the
+// meantime by routing to email instead of a dead link.
+const SCHOLARSHIP_APPLICATION_URL =
+    "mailto:conference@sfruby.com?subject=SF%20Ruby%202026%20Scholarship%20Application";
 const SCHOLARSHIP_EMAIL = "conference@sfruby.com";
-const PRIORITY_DEADLINE = "2025-11-08T23:59:59-08:00";
-const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
+const SCHOLAR_COUNT = 10;
+const PRIORITY_DEADLINE = "2026-09-01T23:59:59-07:00";
+const PRIORITY_DEADLINE_DISPLAY = "September 1, 2026";
+const ANNOUNCE_BY_DISPLAY = "September 18, 2026";
+
+// Single source of truth for the FAQ: drives both the visible section below
+// and the FAQPage structured data. `answer` is a trusted, hand-authored HTML
+// string (rendered with set:html) so the one item needing a real link can
+// have one; stripHtml() below derives the plain text schema.org wants.
+const FAQ_ITEMS = [
+    {
+        question: "Who can apply?",
+        answer: "Students, recent grads, career changers, and self-taught developers of any age or background: high schoolers, university students, bootcamp attendees, people switching into tech from another career, or anyone teaching themselves. All ages and experience levels are welcome, as long as you haven't been a SF Ruby scholar before.",
+    },
+    {
+        question: "What does the scholarship cover?",
+        answer: `The scholarship provides a free ticket to the full conference experience (November 10–12, 2026 at SFJAZZ). Travel, lodging, and meals are not included.`,
+    },
+    {
+        question: "How many scholars will be selected?",
+        answer: `We're selecting ${SCHOLAR_COUNT} scholars this year: a small, curated cohort so we can give each scholar a bit more attention.`,
+    },
+    {
+        question: "Is the application competitive?",
+        answer: `We look for enthusiasm, curiosity, and how much you'd benefit from attending in person, not how much Ruby experience you already have. Spots are limited, so please apply anyway and tell us your story.`,
+    },
+    {
+        question: "When will I hear back?",
+        answer: `Applications are reviewed as they come in. Priority goes to applications submitted by ${PRIORITY_DEADLINE_DISPLAY}, and we expect to notify everyone by ${ANNOUNCE_BY_DISPLAY} at the latest.`,
+    },
+    {
+        question: "Do I need to live in the U.S.?",
+        answer: "No! The program is open internationally. You're welcome to apply from anywhere, as long as you can attend in person in San Francisco.",
+    },
+    {
+        question: "I'll need a U.S. visa to attend. Will there be enough time?",
+        answer: `Maybe not, depending on where you live. Please check before you apply, not after. Visitor visa interview wait times vary enormously by country, from a few weeks at some consulates to many months (or longer) at others, and that's on top of processing time after the interview. We review applications on a rolling basis, so applying as early as possible can mean hearing back well before our ${ANNOUNCE_BY_DISPLAY} announce-by date. Worth knowing if you're racing a visa clock. You can check current wait times for your country at <a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html" target="_blank" rel="noopener noreferrer" class="text-ruby-700 hover:text-ruby-800 underline">travel.state.gov</a>. If wait times where you live are long, start that process immediately, even before you hear back from us, and let us know in your application. We're happy to provide an official invitation letter, which can support a request for an expedited appointment at many embassies for a time-sensitive event like a conference. And if you're selected but ultimately can't get a visa in time, just let us know as early as possible. There's no cost to you either way, and it helps us offer the spot to someone else.`,
+    },
+    {
+        question: "What happens if I'm not selected?",
+        answer: `With only ${SCHOLAR_COUNT} spots, we won't be able to accept everyone who'd be a great fit. Strong applicants who don't make the cohort may be offered a discount code for a ticket and a standing invite to our community Slack.`,
+    },
+    {
+        question: "How can I connect with other scholars?",
+        answer: "Accepted scholars will be invited to a private Slack channel to introduce themselves, share lodging plans, and connect before the event, plus a reserved meet-up moment early in the conference itself.",
+    },
+    {
+        question: "I have accessibility needs. Can you accommodate them?",
+        answer: "Absolutely. Please share any accessibility needs in your application, and we'll do our best to accommodate.",
+    },
+    {
+        question: "I'm under 18. Can I still apply?",
+        answer: "Yes. The application will ask for your date of birth. If you're under 18, we'll ask for a parent or guardian's contact info and consent before you can accept a scholarship, since you'll be arranging your own travel and lodging. We'd recommend talking to your parent or guardian before you apply, so there are no surprises if you're selected. If you're under 16, we'll connect you with your cohort in a different way instead of the open Slack channel, since Slack's own terms require members to be 16 or older. We'll share the details if you're selected.",
+    },
+    {
+        question: "Can I apply if I was a scholar last year?",
+        answer: `Not this round: the program is for first-time scholars only this year, so these ${SCHOLAR_COUNT} spots go to new Rubyists. If you were a 2025 scholar, thank you. You're part of why this program exists, and we'd love to see you at the conference again as an attendee.`,
+    },
+    {
+        question: "Know someone who'd be a great scholar?",
+        answer: "Word of mouth is how we find our best scholars. Feel free to share this page with a student, bootcamp classmate, or career-changer you think would love it.",
+    },
+];
+
+const stripHtml = (html) => html.replace(/<[^>]*>/g, "");
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: stripHtml(item.answer),
+        },
+    })),
+};
 ---
 
-<Layout
-    title="Scholarship Program - San Francisco Ruby Conference 2025"
-    description="Apply for the SF Ruby Conf 2025 Scholarship Program. We're committed to making our conference accessible to everyone in our community."
+<BaseLayout
+    title="Scholarship Program - San Francisco Ruby Startup Conference 2026"
+    description="Apply for the SF Ruby Startup Conference 2026 Scholarship Program: free tickets for students, recent grads, and career-changers new to Ruby."
 >
-    <div
-        class="px-sky-grad-dusk text-white pt-32 pb-16"
-    >
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="px-font text-lg md:text-2xl text-center">
-                Scholarship Program
-            </h1>
-            <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-                Your invitation to learn, connect, and build with Ruby.
-            </p>
-        </div>
-    </div>
+    <!-- Hero: dusk sky with HUD stats, matching /about -->
+    <section class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-6">
+                    Scholarship Program
+                </h1>
+                <p class="text-lg md:text-xl text-white/90 mb-10">
+                    Your invitation to learn, connect, and build with Ruby.
+                </p>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-        <!-- Program Overview -->
-        <section>
-            <div class="prose prose-lg max-w-none">
-                <p class="text-dark-700 leading-relaxed mb-6">
-                    We're thrilled to welcome new and emerging Rubyists to SF
-                    Ruby Conf 2025 through our Scholarship Program — created to
-                    make the conference more accessible for students, recent
-                    graduates, and folks early in their software careers.
-                </p>
-                <p class="text-dark-700 leading-relaxed mb-6">
-                    This is your chance to meet inspiring Ruby and Rails
-                    engineers, learn from industry leaders, and connect with the
-                    vibrant community that keeps Ruby thriving.
-                </p>
-                <div class="flex items-center gap-2">
-                    <span
-                        id="countdown"
-                        class="text-sm text-dark-600 font-medium"></span>
+                <!-- Stats: HUD counters -->
+                <div class="flex flex-wrap gap-x-10 gap-y-6">
+                    <div>
+                        <div class="px-font text-base md:text-lg text-white">
+                            {SCHOLAR_COUNT}
+                        </div>
+                        <div class="text-sm text-white/90 mt-1.5">Scholars</div>
+                    </div>
+                    <div>
+                        <div class="px-font text-base md:text-lg text-white">
+                            Nov 10&ndash;12
+                        </div>
+                        <div class="text-sm text-white/90 mt-1.5">2026</div>
+                    </div>
+                    <div>
+                        <div class="px-font text-base md:text-lg text-gold-100">
+                            SFJAZZ
+                        </div>
+                        <div class="text-sm text-white/90 mt-1.5">San Francisco</div>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+        <!-- Program overview -->
+        <section>
+            <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                The Program
+            </h2>
+            <div class="px-card bg-white p-8">
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    We're thrilled to welcome new and emerging Rubyists to the
+                    San Francisco Ruby Startup Conference 2026 through our
+                    Scholarship Program, created to make the conference
+                    accessible to students, recent graduates, career
+                    changers, and folks early in their software careers.
+                    (Never written a line of Ruby? That's fine, most of our
+                    scholars start here. Ruby is a programming language,
+                    similar in spirit to Python or JavaScript, that a lot of
+                    well-known startups are built on.)
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    This is your chance to meet Ruby and Rails engineers,
+                    learn from people building real companies with it, and
+                    connect with the community around it. We're keeping the
+                    cohort small and curated: {SCHOLAR_COUNT}{" "}
+                    scholars, open to first-time scholars only so those spots
+                    reach new Rubyists. We're announcing early, so you have
+                    plenty of time to plan.
+                </p>
             </div>
         </section>
 
         <!-- What's Included -->
         <section>
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
-                🧠 What the Scholarship Includes
+            <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                What the Scholarship Includes
             </h2>
-            <div class="bg-white border border-green-200 rounded-lg p-6">
-                <ul class="text-dark-700 space-y-3">
-                    <li>
-                        • A free ticket to the full SF Ruby Conf experience
-                        (November 19–21, 2025) at Fort Mason, San Francisco —
-                        including main conference days (Nov 19–20) and Community
-                        Day (Nov 21).
-                    </li>
-                    <li>
-                        • Invitation to a private Slack channel to meet other
-                        scholars, share lodging ideas, and connect before &
-                        after the conference.
-                    </li>
-                </ul>
-                <div
-                    class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg"
-                >
+            <div class="px-card bg-white p-8">
+                <div class="space-y-6">
+                    <div class="grid grid-cols-[4rem_1fr] gap-4 items-start">
+                        <img
+                            src="/px-ticket.png"
+                            alt=""
+                            width="26"
+                            height="12"
+                            class="px-pixelated h-7 w-auto justify-self-center mt-1"
+                        />
+                        <div>
+                            <h3 class="font-semibold text-gray-900">
+                                A full conference ticket
+                            </h3>
+                            <p class="text-gray-600 text-sm">
+                                All three days (Nov 10&ndash;12, 2026) at
+                                SFJAZZ: every talk, workshop, and
+                                networking session.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[4rem_1fr] gap-4 items-start">
+                        <img
+                            src="/px-heart.png"
+                            alt=""
+                            width="14"
+                            height="13"
+                            class="px-pixelated h-8 w-auto justify-self-center mt-1"
+                        />
+                        <div>
+                            <h3 class="font-semibold text-gray-900">
+                                Your scholar cohort
+                            </h3>
+                            <p class="text-gray-600 text-sm">
+                                An invitation to a private Slack channel to
+                                meet the rest of your scholar cohort, swap
+                                lodging ideas, and connect before, during, and
+                                after the conference.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[4rem_1fr] gap-4 items-start">
+                        <img
+                            src="/px-matz.png"
+                            alt=""
+                            width="18"
+                            height="21"
+                            class="px-pixelated h-9 w-auto justify-self-center mt-1"
+                        />
+                        <div>
+                            <h3 class="font-semibold text-gray-900">
+                                A friendly face from day one
+                            </h3>
+                            <p class="text-gray-600 text-sm">
+                                We'll set up a reserved meet-up moment early in
+                                the conference so every scholar has a place to
+                                start. No wandering into a big room of
+                                strangers alone.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 border-2 border-ink bg-amber-50">
                     <p class="text-amber-800 text-sm font-medium">
-                        Please note: scholarships do not include travel or
-                        accommodations — recipients are responsible for their
-                        own arrangements.
+                        Please note: the scholarship does not cover travel,
+                        lodging, or meals. Scholars are
+                        responsible for their own arrangements. Need a U.S.
+                        visa? Read the visa FAQ below before applying: wait
+                        times vary widely by country and can exceed our
+                        whole application window.
                     </p>
                 </div>
             </div>
@@ -80,240 +239,176 @@ const PRIORITY_DEADLINE_DISPLAY = "November 8th, 2025";
 
         <!-- Who Can Apply -->
         <section>
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
-                🧾 Who Can Apply
+            <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                Who Can Apply
             </h2>
-            <div class="bg-white border border-ruby-200 rounded-lg p-6">
-                <ul class="text-dark-700 space-y-3">
+            <div class="px-card bg-white p-8">
+                <ul class="text-gray-600 space-y-3 list-disc list-outside pl-5">
                     <li>
-                        • Active students or recent graduates (high school,
-                        college, bootcamp, or self-taught career changers).
+                        Active students or recent graduates, including high
+                        schoolers, college students, bootcamp grads, and
+                        self-taught career changers.
                     </li>
                     <li>
-                        • You should have a strong interest in Ruby or Rails —
-                        whether you're just starting to learn or already writing
-                        code.
+                        You should have a strong interest in Ruby or Rails,
+                        whether you're just starting to learn or already
+                        writing code.
                     </li>
                     <li>
-                        • Open to applicants worldwide, as long as you can
+                        Open to applicants worldwide, as long as you can
                         attend in person in San Francisco.
                     </li>
                     <li>
-                        • We especially encourage applications from
+                        We especially encourage applications from
                         underrepresented groups in tech and those who would
                         benefit most from attending, although everyone is
                         welcome to apply.
+                    </li>
+                    <li>
+                        First-time scholars only, so these spots reach as
+                        many new people as possible.
+                    </li>
+                    <li>
+                        Open to all ages, including under 18. If selected,
+                        we'll need a parent or guardian's consent, so it's
+                        worth talking to them before you apply.
                     </li>
                 </ul>
             </div>
         </section>
 
+        <!-- What We Look For -->
+        <section>
+            <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                What We Look For
+            </h2>
+            <div class="px-card bg-white p-8">
+                <p class="text-gray-600 leading-relaxed">
+                    We're weighing genuine enthusiasm and curiosity about
+                    Ruby, how much you'd benefit from attending, and whether
+                    you've never been able to attend a Ruby conference
+                    before, not how much coding experience you already have.
+                    If you're switching in from another career, the
+                    professional experience you already have counts for
+                    something too, tell us about it. If you're wondering
+                    whether you're "ready" or experienced enough to apply,
+                    that doubt is exactly what we want to help you push
+                    past. Apply anyway. Spots are limited, so strong
+                    applicants who don't make the cohort may be offered a
+                    discount code and a standing invite to the community
+                    Slack, so a "not this time" doesn't have to be a dead
+                    end.
+                </p>
+            </div>
+        </section>
+
         <!-- Timeline -->
         <section>
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
-                ⏰ Applications Closed
+            <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                Timeline
             </h2>
-            <div
-                class="bg-gradient-to-r from-slate-50 to-gray-50 border border-slate-200 rounded-lg p-6"
-            >
-                <p class="text-dark-700">
-                    <strong
-                        >Applications for the 2025 scholarship program have
-                        closed.</strong
-                    > Thank you to everyone who applied!
+            <div class="px-card bg-white p-8">
+                <p class="text-gray-600">
+                    <strong class="text-gray-900"
+                        >Applications are open now.</strong
+                    > We review them as they come in (a rolling basis)
+                    rather than waiting for one single deadline, so applying
+                    early can mean hearing back sooner. Priority is given to
+                    applications submitted by {PRIORITY_DEADLINE_DISPLAY}
+                    <span id="countdown" class="text-gray-500"></span>, and we
+                    expect to notify all scholars by {ANNOUNCE_BY_DISPLAY} at
+                    the latest, so you have real time to plan travel. If
+                    you'll need a visa, apply as
+                    early as you can: rolling review means you may hear back
+                    well before that date.
                 </p>
+            </div>
+        </section>
+
+        <!-- FAQ (before the CTA on purpose: this is where the decision-critical
+             answers live, e.g. visa timing, eligibility, what happens if
+             you're not selected, so it needs to be resolved before the ask,
+             not after) -->
+        <section>
+            <div class="px-card bg-white p-8">
+                <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                    Frequently Asked Questions
+                </h2>
+                <div class="space-y-4">
+                    {FAQ_ITEMS.map((item) => (
+                        <div class="border-2 border-ink bg-gray-50 p-6">
+                            <h3 class="font-bold text-gray-900 mb-2">
+                                {item.question}
+                            </h3>
+                            <p class="text-gray-600" set:html={item.answer} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
 
         <!-- Call to Action -->
         <section class="text-center">
-            <div
-                class="bg-gradient-to-r from-ruby-500 to-ruby-700 text-white rounded-lg p-8"
-            >
-                <h2 class="text-2xl font-display font-bold mb-4">
+            <div class="px-card bg-ruby-700 p-8 text-white">
+                <h2 class="px-font px-shadow-ink text-sm md:text-base mb-5">
                     Ready to Apply?
                 </h2>
-                <p class="text-lg mb-6 opacity-90">
-                    Grab your free ticket to an unforgettable Ruby experience!
+                <p class="text-lg mb-6 text-white">
+                    Only {SCHOLAR_COUNT} spots this year. We'd love
+                    yours to be one of them.
                 </p>
-                <span
-                    class="inline-block bg-white/80 text-ruby-800 font-semibold py-3 px-8 rounded-lg cursor-not-allowed"
+                <a
+                    href={SCHOLARSHIP_APPLICATION_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-btn px-font text-px9 md:text-px10 gap-2 px-6 py-4 bg-white text-ruby-700 hover:bg-gray-50 normal-case focus-visible:outline-white"
                 >
-                    Applications Closed
-                </span>
-                <p class="text-sm mt-4 opacity-75">
+                    Apply for the Scholarship
+                </a>
+                <p class="text-sm mt-4 text-white/90">
+                    In your email, tell us: what draws you to Ruby, where
+                    you're at with it today, and why this conference would
+                    help.
+                </p>
+                <p class="text-sm mt-2 text-white">
                     Questions? Email us at <a
                         href={`mailto:${SCHOLARSHIP_EMAIL}`}
-                        class="underline">{SCHOLARSHIP_EMAIL}</a
+                        class="underline focus-visible:outline-white">{SCHOLARSHIP_EMAIL}</a
                     >
                 </p>
             </div>
         </section>
-
-        <!-- FAQ -->
-        <section>
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-6">
-                💬 Frequently Asked Questions
-            </h2>
-            <div class="space-y-6">
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">Who can apply?</h3>
-                    <p class="text-dark-700">
-                        Anyone who is a current student or recent graduate
-                        interested in Ruby or Rails — including high schoolers,
-                        university students, bootcamp attendees, or self-taught
-                        developers. All ages and experience levels are welcome.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        Do I need to live in the U.S.?
-                    </h3>
-                    <p class="text-dark-700">
-                        No! The program is open internationally. You're welcome
-                        to apply from anywhere, as long as you can attend in
-                        person in San Francisco.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        What does the scholarship cover?
-                    </h3>
-                    <p class="text-dark-700">
-                        The scholarship provides a free ticket to the full SF
-                        Ruby Conf experience (November 19–21). This includes the
-                        main conference days with talks and workshops (Nov
-                        19–20) plus Community Day (Nov 21). Travel, lodging, and
-                        meals are not included.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        How many scholars will be selected?
-                    </h3>
-                    <p class="text-dark-700">
-                        We expect to select around 30 scholars this year.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        When will I hear back?
-                    </h3>
-                    <p class="text-dark-700">
-                        Applications are reviewed on a rolling basis. Priority
-                        is given to applications submitted by {
-                            PRIORITY_DEADLINE_DISPLAY
-                        }.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        What happens after I apply?
-                    </h3>
-                    <p class="text-dark-700">
-                        Accepted and waitlisted scholars will receive an email
-                        with next steps, which includes a link to collect your
-                        free ticket and an invitation to our private Slack
-                        channel.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        Can I attend only one day?
-                    </h3>
-                    <p class="text-dark-700">
-                        To be eligible for the scholarship, you'll need to
-                        attend both main conference days (Nov 19 & 20) which
-                        feature talks and workshops. Community Day (Nov 21) is
-                        included in your ticket but optional — though highly
-                        encouraged for networking!
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        Is the application competitive?
-                    </h3>
-                    <p class="text-dark-700">
-                        We look for people who will benefit most from attending
-                        — that means enthusiasm, curiosity, and a love for
-                        learning Ruby matter more than experience.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        How can I connect with other scholars?
-                    </h3>
-                    <p class="text-dark-700">
-                        Accepted scholars will be invited to a private Slack
-                        channel to introduce themselves, share lodging plans,
-                        and connect before the event.
-                    </p>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-lg p-6">
-                    <h3 class="font-bold text-dark-900 mb-2">
-                        I have accessibility needs — can you accommodate them?
-                    </h3>
-                    <p class="text-dark-700">
-                        Absolutely. Please share any accessibility needs in your
-                        application, and we'll do our best to accommodate.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Small CTA -->
-        <section class="text-center">
-            <div class="bg-white border border-slate-200 rounded-lg p-6">
-                <p class="text-dark-700 mb-4">
-                    Applications for the 2025 scholarship program have closed.
-                </p>
-                <span
-                    class="inline-block bg-slate-300 text-slate-500 font-semibold py-2 px-6 rounded-lg cursor-not-allowed"
-                >
-                    Applications Closed
-                </span>
-            </div>
-        </section>
     </div>
-</Layout>
+
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</BaseLayout>
 
 <script define:vars={{ PRIORITY_DEADLINE }}>
     function updateCountdown() {
+        const el = document.getElementById("countdown");
+        if (!el) return;
+
         const priorityDeadline = new Date(PRIORITY_DEADLINE);
         const now = new Date();
         const diff = priorityDeadline.getTime() - now.getTime();
 
-        const countdownEl = document.getElementById("countdown");
-        if (!countdownEl) return;
-
+        let text;
         if (diff <= 0) {
-            countdownEl.textContent = "(Applications closed)";
-            return;
-        }
-
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const days = Math.floor(hours / 24);
-
-        if (hours < 3) {
-            countdownEl.textContent =
-                "(Priority deadline in a couple of hours)";
-        } else if (days > 0) {
-            countdownEl.textContent = `(${days} day${days !== 1 ? "s" : ""} until priority deadline)`;
+            text = "(priority deadline has passed, but we're still accepting applications)";
         } else {
-            countdownEl.textContent = `(${hours} hour${hours !== 1 ? "s" : ""} until priority deadline)`;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const days = Math.floor(hours / 24);
+            if (days > 0) {
+                text = `(${days} day${days !== 1 ? "s" : ""} until the priority deadline)`;
+            } else if (hours < 3) {
+                text = "(priority deadline in a couple of hours)";
+            } else {
+                text = `(${hours} hour${hours !== 1 ? "s" : ""} until the priority deadline)`;
+            }
         }
+        el.textContent = text;
     }
 
-    // Update immediately and then every minute
     updateCountdown();
     setInterval(updateCountdown, 60000);
 </script>
