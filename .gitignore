@@ -37,3 +37,6 @@ drafts/
 
 # Raw YouTube transcripts pulled by scripts/fetch-subtitles.rb (summaries are the committed artifact)
 transcripts/
+
+# Claude Code local settings (personal, machine-specific)
+.claude/settings.local.json
