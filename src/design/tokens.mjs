@@ -270,4 +270,6 @@ export const spriteColors = {
   b: palette.indigo[700], // royal blue shade
   A: palette.sky[300], // sky-blue highlight
   D: palette.indigo[900], // night navy (the footer's sky, skyline silhouette)
+  P: "#eeb188", // warm skin (faces) — base
+  p: "#bd7748", // skin shadow
 };
