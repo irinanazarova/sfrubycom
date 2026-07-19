@@ -114,6 +114,35 @@ const SPRITES = {
     ".KKKKKKKKKKKK.",
     "..............",
   ],
+  // Matz (MINASWAN): a warm, friendly caricature drawn from a real photo — full
+  // tousled dark hair (with a cowlick) framing an OVAL head that tapers to a
+  // rounded chin (a square head reads robotic), oval glasses, big eyes with a W
+  // glint + K pupil looking at you, coral cheeks, a broad smile, and a soft-brown
+  // (p, not black) mustache + goatee. Warm skin (P/p) throughout. Sits friendly
+  // next to the coral ticket/heart on /scholarship.
+  "px-matz": [
+    "..................",
+    ".........K........",
+    "......KKKKKK......",
+    "....KKKKKKKKKK....",
+    "...KKKKKKKKKKKK...",
+    "..KKKKKKKKKKKKKK..",
+    "..KKKKKKKKKKKKKK..",
+    "..KKKKPPPPPPKKKK..",
+    "..KPPKKPPPPKKPPK..",
+    "..KPKWWKPPKWWKPK..",
+    "..KPKWKKPPKKWKPK..",
+    "..KPPKKPPPPKKPPK..",
+    "..KPPPPPPPPPPPPK..",
+    "..KRPPPppppPPPRK..",
+    "..KPPPKPPPPKPPPK..",
+    "..KPPPPKKKKPPPPK..",
+    "..KPPPPPppPPPPpK..",
+    "...KPPPPPPPPppK...",
+    "....KPPPPPPPPK....",
+    ".....KKKKKKKK.....",
+    "..................",
+  ],
   "px-briefcase": [
     "..................",
     "......KKKKKK......",

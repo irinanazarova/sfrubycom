@@ -209,4 +209,6 @@ export const spriteColors = {
   N: "#46b957", // python green (sampled from the island grass)
   n: "#91c568", // python light
   m: "#2f7d3a", // python shade
+  P: "#eeb188", // warm skin (faces) — base
+  p: "#bd7748", // skin shadow
 };
