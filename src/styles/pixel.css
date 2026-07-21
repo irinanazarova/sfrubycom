@@ -135,6 +135,18 @@
     background: var(--px-orange);
     color: var(--px-cloud);
 }
+/* diagonal "SOLD OUT" stamp, slapped over the early-bird sign the dragon holds.
+   Put it inside a position:relative wrapper around the image and set top/left. */
+.px-sold-stamp {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(-9deg);
+    background: var(--px-ruby);
+    color: var(--px-cloud);
+    border: 3px solid var(--px-ink);
+    box-shadow: 4px 4px 0 0 var(--px-ink);
+    white-space: nowrap;
+    pointer-events: none;
+}
 
 /* ---------- buttons ---------- */
 
@@ -169,6 +181,17 @@
 .px-btn--sky {
     background: var(--px-sky);
     color: var(--px-ink);
+}
+/* spent/unavailable button — greyed, and it does not lift or press on hover */
+.px-btn--disabled {
+    background: #9aa3b2;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: not-allowed;
+}
+.px-btn--disabled:hover,
+.px-btn--disabled:active {
+    transform: none;
+    box-shadow: 5px 5px 0 0 var(--px-ink);
 }
 
 /* ---------- details ---------- */
