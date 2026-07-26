@@ -1,0 +1,104 @@
+---
+// The full price ladder with dates. Publishing every step is what removes
+// "I'll decide later" — the visitor can see exactly what waiting costs.
+import { ticketTiers, LUMA_URL } from "../data/conference-2026.js";
+---
+
+<section id="tickets" class="py-20 md:py-24 bg-sky-50 border-t-4 border-ink">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <p class="px-font text-xs md:text-sm text-ruby-600">Tickets</p>
+            <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
+                The price only goes up
+            </h2>
+            <p class="text-base md:text-lg text-gray-600 mt-4">
+                Three days at SFJAZZ: all talks, all networking sessions, and
+                the community day.
+            </p>
+        </div>
+
+        <ul class="mt-12 flex flex-col gap-3 list-none p-0">
+            {
+                ticketTiers.map((t) => (
+                    <li
+                        class:list={[
+                            "px-card p-4 md:p-5 flex items-center justify-between gap-4",
+                            t.state === "gone"
+                                ? "bg-gray-100 opacity-70"
+                                : "bg-white",
+                            t.state === "live" &&
+                                t.name === "Regular" &&
+                                "ring-4 ring-ruby-500",
+                        ]}
+                    >
+                        <span class="flex flex-col gap-2 min-w-0">
+                            <span class="px-font text-px9 md:text-px10 text-gray-900">
+                                {t.name}
+                            </span>
+                            <span class="text-xs md:text-sm text-gray-600">
+                                {t.note}
+                            </span>
+                        </span>
+                        <span
+                            class:list={[
+                                "px-font text-px10 md:text-xs shrink-0",
+                                t.state === "gone"
+                                    ? "text-gray-400 line-through"
+                                    : "text-gray-900",
+                            ]}
+                        >
+                            ${t.price}
+                        </span>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <div class="mt-10 flex justify-center">
+            <a
+                href={LUMA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+            >
+                <img
+                    src="/px-ticket.png"
+                    alt=""
+                    width="64"
+                    height="64"
+                    class="px-pixelated h-5 w-auto"
+                />
+                Get tickets
+            </a>
+        </div>
+
+        <!-- Team offer: the strongest differentiated pitch, and it needs a manager-facing frame -->
+        <div class="px-dialog bg-white p-6 md:p-8 mt-14">
+            <h3 class="px-font text-px10 md:text-xs text-gray-900">
+                Bringing your team?
+            </h3>
+            <p class="text-base text-gray-600 leading-relaxed mt-5">
+                Teams of 5 or more get time on our networking stage to present
+                their company to a room of Ruby engineers, which is the cheapest
+                senior hire you will make this year. Group registration is open
+                on Luma, and we invoice.
+            </p>
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                <a
+                    href={LUMA_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-btn px-btn--sky px-font text-px8 px-5 py-3 tap-press"
+                >
+                    Register a team
+                </a>
+                <a
+                    href="/contact"
+                    class="px-btn px-btn--white px-font text-px8 px-5 py-3 tap-press"
+                >
+                    Ask for an invoice
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

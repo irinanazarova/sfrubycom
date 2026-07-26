@@ -4,6 +4,8 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import IslandNav from "../components/IslandNav.astro";
 import NewsRunner from "../components/NewsRunner.astro";
+import SpeakerRoster from "../components/SpeakerRoster.astro";
+import TicketScarcity from "../components/TicketScarcity.astro";
 import "../styles/global.css";
 import StartupCard from "../components/StartupCard.astro";
 import StartupModal from "../components/StartupModal.astro";
@@ -208,7 +210,7 @@ const conference2026Sponsors = [
                                 Buy tickets
                             </a>
                         </div>
-                        <span class="px-font text-px8 text-indigo-950/90">General admission on sale</span>
+                        <TicketScarcity />
                     </div>
                     <!-- Photo: Seb Daly / Web Summit / Sportsfile, CC BY 2.0 (Wikimedia Commons) -->
                     <div class="px-card bg-white max-w-2xl mx-auto p-5 md:p-6 flex items-center justify-center gap-5 text-left">
@@ -256,9 +258,10 @@ const conference2026Sponsors = [
                     </div>
                 </div>
 
-                <!-- crenellated step into the news masthead -->
-                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#071f56]" aria-hidden="true"></div>
             </section>
+
+            <!-- The lineup, straight under the hero: names are what sell the ticket -->
+            <SpeakerRoster heading="Who you'll hear" limit={8} compact={true} />
 
             <!-- SF Ruby News Hero -->
             <section id="news" class="relative text-white overflow-hidden px-night">

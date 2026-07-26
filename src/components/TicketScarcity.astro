@@ -1,0 +1,82 @@
+---
+// Price + remaining + deadline in one line. This is the reason to buy today rather
+// than in October, so it belongs anywhere a ticket CTA appears.
+import {
+    regularTier,
+    regularRemaining,
+    LUMA_URL,
+} from "../data/conference-2026.js";
+
+interface Props {
+    variant?: "light" | "dark";
+    withCta?: boolean;
+}
+
+const { variant = "dark", withCta = false } = Astro.props;
+
+const remaining = regularRemaining();
+const closes = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "America/Los_Angeles",
+});
+const pct = Math.round((regularTier.sold / regularTier.total) * 100);
+// Early in the sale the honest count undersells the event, so lead with the cap
+// and the deadline until the remaining number carries its own urgency.
+const showCount = remaining <= regularTier.showCountBelow;
+---
+
+<div
+    class:list={[
+        "px-card inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5 px-4 py-3",
+        variant === "dark" ? "bg-white/95" : "bg-white",
+    ]}
+>
+    <span class="px-font text-px10 md:text-xs text-gray-900">$450</span>
+
+    <span class="hidden sm:block w-px h-6 bg-gray-200" aria-hidden="true"></span>
+
+    <span class="flex flex-col items-center sm:items-start gap-1.5">
+        <span class="px-font text-px8 text-ruby-600">
+            {
+                showCount
+                    ? `${remaining} of ${regularTier.total} left`
+                    : `Only ${regularTier.total} at this price`
+            }
+        </span>
+        {
+            showCount && (
+                /* sold-progress meter, read as a game health bar */
+                <span
+                    class="block w-32 h-2 bg-gray-200 border-2 border-ink"
+                    role="img"
+                    aria-label={`${regularTier.sold} of ${regularTier.total} regular tickets sold`}
+                >
+                    <span
+                        class="block h-full bg-ruby-500"
+                        style={`width:${Math.max(pct, 2)}%`}
+                    />
+                </span>
+            )
+        }
+    </span>
+
+    <span class="hidden sm:block w-px h-6 bg-gray-200" aria-hidden="true"></span>
+
+    <span class="text-xs md:text-sm text-gray-600 text-center sm:text-left">
+        Until {closes}, then ${regularTier.nextPrice}
+    </span>
+
+    {
+        withCta && (
+            <a
+                href={LUMA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-btn px-btn--gold px-font text-px8 px-4 py-3 tap-press"
+            >
+                Get tickets
+            </a>
+        )
+    }
+</div>

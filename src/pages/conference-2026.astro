@@ -3,6 +3,9 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import IslandNav from "../components/IslandNav.astro";
+import SpeakerRoster from "../components/SpeakerRoster.astro";
+import TicketScarcity from "../components/TicketScarcity.astro";
+import TicketLadder from "../components/TicketLadder.astro";
 import "../styles/global.css";
 ---
 
@@ -138,11 +141,36 @@ import "../styles/global.css";
                         > · San Francisco
                     </p>
 
-                    <a
-                        href="#notify"
-                        class="px-font px-blink inline-block mt-10 text-sm md:text-base text-indigo-900"
-                        >&#9654; Press Start &#9664;</a
+                    <!-- Scarcity above the fold: price, seats left, deadline -->
+                    <div class="mt-10 flex justify-center">
+                        <TicketScarcity />
+                    </div>
+
+                    <div
+                        class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
+                        <a
+                            href="https://luma.com/sfrubyconf2026"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                        >
+                            <img
+                                src="/px-ticket.png"
+                                alt=""
+                                width="64"
+                                height="64"
+                                class="px-pixelated h-5 w-auto"
+                            />
+                            Get tickets
+                        </a>
+                        <a
+                            href="#speakers"
+                            class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                        >
+                            See the lineup
+                        </a>
+                    </div>
 
                     <!-- Organized by -->
                     <div class="mt-12 flex flex-col items-center gap-3">
@@ -237,6 +265,12 @@ import "../styles/global.css";
                     </div>
                 </div>
             </section>
+
+            <!-- The lineup: what actually sells a $450 ticket -->
+            <SpeakerRoster />
+
+            <!-- Price ladder + team offer -->
+            <TicketLadder />
 
             <!-- Call for proposals: Anton's island scene -->
             <section
