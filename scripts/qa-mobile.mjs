@@ -13,6 +13,11 @@
 //     are skipped (they always render the dark logo on a solid header).
 // Plus a cold-load deep-link check on /jobs#<id>.
 // Screenshots are written to .qa-shots/ (gitignored). Exits non-zero on failure.
+//
+// The preview port is read back from the server banner, not assumed: `astro
+// preview` silently binds the next free port when PORT is taken, and the sweep
+// would otherwise test whatever else is listening. A marker check on / then
+// makes a wrong server one clear error instead of 20 bogus per-route failures.
 import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { mkdirSync } from "node:fs";
@@ -47,6 +52,49 @@ async function waitForServer(url, ms = 30000) {
         await new Promise((r) => setTimeout(r, 300));
     }
     return false;
+}
+
+// `astro preview` does not fail on a busy port, it silently binds the next free
+// one. Assuming PORT then means the sweep happily tests whatever else is
+// listening (any other project's dev server), and every route 404s. So read the
+// port back from the server's own banner rather than trusting PORT.
+function spawnPreview(port) {
+    const proc = spawn("npm", ["run", "preview", "--", "--port", String(port)], {
+        stdio: ["ignore", "pipe", "pipe"],
+        detached: true,
+    });
+    const url = new Promise((resolve, reject) => {
+        let buf = "";
+        const onChunk = (c) => {
+            buf += c;
+            const m = buf.match(/https?:\/\/localhost:(\d+)\/?/);
+            if (m) resolve(`http://localhost:${m[1]}`);
+        };
+        proc.stdout.on("data", onChunk);
+        proc.stderr.on("data", onChunk);
+        proc.on("exit", (code) =>
+            reject(new Error(`preview exited (code ${code}) before reporting a URL:\n${buf}`)),
+        );
+        setTimeout(
+            () => reject(new Error(`preview never reported a URL within 30s:\n${buf}`)),
+            30000,
+        );
+    });
+    return { proc, url };
+}
+
+// A reachable server is not necessarily *our* server. Without this, a squatter on
+// the port produces 20 confident "bottom tab bar missing" failures instead of one
+// honest "wrong site" error.
+async function assertIsThisSite(base) {
+    const res = await fetch(base + "/");
+    const html = await res.text();
+    if (!/sfruby\.com|SF Ruby/i.test(html)) {
+        throw new Error(
+            `${base} is serving something else (no SF Ruby marker in / ).\n` +
+                `Another dev server is probably on that port. Free it, or pass BASE_URL=<url>.`,
+        );
+    }
 }
 
 async function run(base) {
@@ -178,16 +226,14 @@ const provided = process.env.BASE_URL;
 let server = null;
 let base = provided;
 if (!base) {
-    base = `http://localhost:${PORT}`;
-    // Explicit port so a busy port fails loudly here rather than silently
-    // binding elsewhere and timing out the reachability check.
-    server = spawn("npm", ["run", "preview", "--", "--port", String(PORT)], {
-        stdio: "ignore",
-        detached: true,
-    });
+    const preview = spawnPreview(PORT);
+    server = preview.proc;
+    // Whatever port it actually landed on, not the one we asked for.
+    base = await preview.url;
 }
 try {
     if (!(await waitForServer(base + "/"))) throw new Error(`server not reachable at ${base}`);
+    await assertIsThisSite(base);
     console.log(`QA sweep against ${base}`);
     const failures = await run(base);
     console.log("");
