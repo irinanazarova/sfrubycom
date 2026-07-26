@@ -1,6 +1,8 @@
 ---
-// Price + remaining + deadline in one line. This is the reason to buy today rather
-// than in October, so it belongs anywhere a ticket CTA appears.
+// Price and the date it holds until. A deadline states itself; spelling out the
+// cap and the coming rise turns a fact into a pitch, so neither is written down.
+// The remaining count appears only once it is genuinely small, where it is
+// information rather than pressure.
 import {
     regularTier,
     regularRemaining,
@@ -20,9 +22,6 @@ const closes = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
     day: "numeric",
     timeZone: "America/Los_Angeles",
 });
-const pct = Math.round((regularTier.sold / regularTier.total) * 100);
-// Early in the sale the honest count undersells the event, so lead with the cap
-// and the deadline until the remaining number carries its own urgency.
 const showCount = remaining <= regularTier.showCountBelow;
 ---
 
@@ -36,40 +35,23 @@ const showCount = remaining <= regularTier.showCountBelow;
 
     <span class="hidden sm:block w-px h-6 bg-gray-200" aria-hidden="true"></span>
 
-    <span class="flex flex-col items-center sm:items-start gap-1.5">
-        <span class="px-font text-px8 text-ruby-600">
-            {
-                showCount
-                    ? `${remaining} of ${regularTier.total} left`
-                    : `Only ${regularTier.total} at this price`
-            }
-        </span>
-        {
-            showCount && (
-                /* sold-progress meter, read as a game health bar */
-                <span
-                    class="block w-32 h-2 bg-gray-200 border-2 border-ink"
-                    role="img"
-                    aria-label={`${regularTier.sold} of ${regularTier.total} regular tickets sold`}
-                >
-                    <span
-                        class="block h-full bg-ruby-500"
-                        style={`width:${Math.max(pct, 2)}%`}
-                    />
-                </span>
-            )
-        }
-    </span>
-
-    <span class="hidden sm:block w-px h-6 bg-gray-200" aria-hidden="true"></span>
-
     <span class="text-xs md:text-sm text-gray-600 text-center sm:text-left">
-        {
-            regularTier.nextPrice
-                ? `Until ${closes}, then $${regularTier.nextPrice}`
-                : `Until ${closes}, then prices rise`
-        }
+        Until {closes}
     </span>
+
+    {
+        showCount && (
+            <>
+                <span
+                    class="hidden sm:block w-px h-6 bg-gray-200"
+                    aria-hidden="true"
+                />
+                <span class="text-xs md:text-sm text-gray-600">
+                    {remaining} left
+                </span>
+            </>
+        )
+    }
 
     {
         withCta && (

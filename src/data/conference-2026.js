@@ -10,6 +10,9 @@ export const conferenceSpeakers = [
     role: "President & CEO",
     track: "startups",
     keynote: true,
+    // `pin` fixes a speaker to either end of the grid; everyone else is ordered
+    // by whether their sprite has landed, so the roster opens on real faces.
+    pin: "first",
     pixel: "/garry_pixel_256.png",
   },
   {
@@ -73,6 +76,8 @@ export const conferenceSpeakers = [
     name: "Irina Nazarova",
     company: "Evil Martians",
     track: "startups",
+    keynote: true,
+    pin: "last",
   },
 ];
 
@@ -87,7 +92,7 @@ export const ticketTiers = [
   {
     name: "Regular",
     price: 450,
-    note: "175 only, until Sep 9",
+    note: "Until Sep 9",
     state: "live",
   },
   {
