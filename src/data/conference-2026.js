@@ -76,7 +76,12 @@ export const conferenceSpeakers = [
   },
 ];
 
-// The ladder is the argument for buying today. Keep `until` in sync with Luma.
+// The ladder is the argument for buying today. Keep it in sync with Luma.
+//
+// No late-bird tier is published on purpose: pricing after Regular is undecided,
+// and announcing a tier that may not exist is worse than announcing none. Until
+// one is set, Corporate is the only ticket on sale once Regular closes or sells
+// out, so the copy promises a rise without naming a number.
 export const ticketTiers = [
   { name: "Early bird", price: 350, note: "Sold out", state: "gone" },
   {
@@ -85,7 +90,6 @@ export const ticketTiers = [
     note: "175 only, until Sep 9",
     state: "live",
   },
-  { name: "Late bird", price: 550, note: "From Sep 10", state: "upcoming" },
   {
     name: "Corporate / Supporter",
     price: 650,
@@ -101,7 +105,9 @@ export const regularTier = {
   sold: 3,
   total: 175,
   closesOn: "2026-09-09T23:59:00-07:00",
-  nextPrice: 550,
+  // Set once the post-Regular tier is decided; until then the strip says prices
+  // rise without quoting a figure we might not honour.
+  nextPrice: null,
   // A remaining-count only reads as scarcity once it is small. Above this it reads
   // as "nobody is buying", so the strip shows the deadline instead. Raise it as the
   // tier fills; below it the live count and the sold meter appear on their own.

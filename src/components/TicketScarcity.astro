@@ -64,7 +64,11 @@ const showCount = remaining <= regularTier.showCountBelow;
     <span class="hidden sm:block w-px h-6 bg-gray-200" aria-hidden="true"></span>
 
     <span class="text-xs md:text-sm text-gray-600 text-center sm:text-left">
-        Until {closes}, then ${regularTier.nextPrice}
+        {
+            regularTier.nextPrice
+                ? `Until ${closes}, then $${regularTier.nextPrice}`
+                : `Until ${closes}, then prices rise`
+        }
     </span>
 
     {
