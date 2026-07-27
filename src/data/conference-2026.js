@@ -82,14 +82,14 @@ export const conferenceSpeakers = [
   },
   {
     name: "Neha Abraham",
-    bio: "Builds the Rails systems behind a nationwide home remodeling business.",
+    bio: "Builds the data tools a nationwide remodeling business runs on, in Rails.",
     company: "Power Home Remodeling",
     track: "scaleups",
     pixel: "/speaker_neha_abraham_pixel_256.png",
   },
   {
     name: "Irina Nazarova",
-    bio: "CEO. Organizes the SF Ruby meetups, and put this conference together.",
+    bio: "CEO, and co-founder of AnyCable, the WebSocket server for Ruby.",
     company: "Evil Martians",
     track: "startups",
     keynote: true,
