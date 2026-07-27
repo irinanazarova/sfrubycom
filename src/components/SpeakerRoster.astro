@@ -113,8 +113,13 @@ const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
             }
         </ul>
 
-        <p class="text-center text-sm text-white/80 mt-8">
-            {revealed} characters unlocked. The rest are revealed as their art lands.
-        </p>
+        {
+            revealed < conferenceSpeakers.length && (
+                <p class="text-center text-sm text-white/80 mt-8">
+                    {revealed} characters unlocked. The rest are revealed as
+                    their art lands.
+                </p>
+            )
+        }
     </div>
 </section>

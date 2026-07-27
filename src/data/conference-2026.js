@@ -51,26 +51,31 @@ export const conferenceSpeakers = [
     name: "Carmine Paolino",
     company: "RubyLLM",
     track: "startups",
+    pixel: "/speaker_carmine_paolino_pixel_256.png",
   },
   {
     name: "Vladimir Dementyev",
     company: "Evil Martians",
     track: "startups",
+    pixel: "/speaker_vladimir_dementyev_pixel_256.png",
   },
   {
     name: "Andrey Novikov",
     company: "Evil Martians",
     track: "scaleups",
+    pixel: "/speaker_andrey_novikov_pixel_256.png",
   },
   {
     name: "Jason Thomas",
     company: "OpenC3",
     track: "startups",
+    pixel: "/speaker_jason_thomas_pixel_256.png",
   },
   {
     name: "Neha Abraham",
     company: "Power Home Remodeling",
     track: "scaleups",
+    pixel: "/speaker_neha_abraham_pixel_256.png",
   },
   {
     name: "Irina Nazarova",
@@ -78,6 +83,7 @@ export const conferenceSpeakers = [
     track: "startups",
     keynote: true,
     pin: "last",
+    pixel: "/speaker_irina_nazarova_pixel_256.png",
   },
 ];
 

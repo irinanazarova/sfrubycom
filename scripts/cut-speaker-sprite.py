@@ -67,20 +67,66 @@ def grass_top(raw, w, h, x_end, y_start):
     return None
 
 
+def cut_plain(src, out_path, fuzz="14%"):
+    """Standalone sprite on a flat background: keep the largest blob.
+
+    Some speakers arrive as a plain portrait rather than an announcement card.
+    Trimming alone is not enough, because Irina's sprite has a cat below her; a
+    trim would include it and shrink her to half height once normalised.
+    """
+    bg = subprocess.run(["magick", src, "-format", "%[pixel:p{3,3}]", "info:"],
+                        capture_output=True, text=True, check=True).stdout.strip()
+    report = subprocess.run(
+        ["magick", src, "-alpha", "set", "-fuzz", fuzz, "-transparent", bg,
+         "-alpha", "extract", "-threshold", "50%",
+         "-define", "connected-components:verbose=true",
+         "-define", "connected-components:area-threshold=120",
+         "-connected-components", "8", "null:"],
+        capture_output=True, text=True, check=True).stdout
+
+    best = None
+    for line in report.splitlines()[1:]:
+        parts = line.split()
+        if len(parts) < 5:
+            continue
+        geom, area, colour = parts[1], float(parts[3]), parts[4]
+        if colour.startswith("gray(0)") or colour.startswith("srgb(0,0,0)"):
+            continue                      # background component
+        wh, off = geom.split("+", 1)
+        cw, ch = map(int, wh.split("x"))
+        ox, oy = map(int, off.split("+"))
+        if best is None or area > best[0]:
+            best = (area, cw, ch, ox, oy)
+    if best is None:
+        raise SystemExit(f"{src}: no subject found")
+
+    _, cw, ch, ox, oy = best
+    pad = 4
+    subprocess.run(
+        ["magick", src, "-crop", f"{cw + 2 * pad}x{ch + 2 * pad}+{max(0, ox - pad)}+{max(0, oy - pad)}",
+         "+repage", "-alpha", "set", "-fuzz", fuzz, "-transparent", bg,
+         "-trim", "+repage", "-filter", "point", "-resize", "x240",
+         "-background", "none", "-gravity", "south", "-extent", "256x256",
+         out_path], check=True)
+    print(f"{os.path.basename(src):28s} subject {cw}x{ch}+{ox}+{oy}  bg={bg}")
+
+
 def cut(card, out_path, slab=0.40, top_skip=0.10):
     w, h = map(int, subprocess.run(
         ["magick", card, "-format", "%w %h", "info:"],
         capture_output=True, text=True, check=True).stdout.split())
     rgb = subprocess.run(["magick", card, "-depth", "8", "rgb:-"],
                          capture_output=True, check=True).stdout
-    blues = sky_colours(rgb, w, h)
-    mask = build_mask(card, w, h, blues[0])
 
     x_end = int(w * slab)
     y_start = int(h * top_skip)
     ground = grass_top(rgb, w, h, x_end, y_start)
     if ground is None:
-        raise SystemExit(f"{card}: could not find the grass line")
+        # No platform: this is a standalone sprite, not an announcement card.
+        return cut_plain(card, out_path)
+
+    blues = sky_colours(rgb, w, h)
+    mask = build_mask(card, w, h, blues[0])
 
     # Seed on the widest opaque run a little above the grass: the legs.
     seed = None
