@@ -100,9 +100,14 @@ const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
                         <p class="font-display font-semibold text-sm md:text-base text-gray-900 mt-3 leading-snug flex items-center justify-center min-h-[2.75rem]">
                             {s.name}
                         </p>
-                        <p class="text-xs md:text-sm text-gray-600 mt-2">
+                        <p class="text-xs md:text-sm text-ruby-600 mt-2">
                             {s.company}
                         </p>
+                        {s.bio && (
+                            <p class="text-xs text-gray-600 leading-relaxed mt-3">
+                                {s.bio}
+                            </p>
+                        )}
                         {s.keynote && (
                             <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 mt-3">
                                 Keynote

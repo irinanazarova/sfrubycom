@@ -6,6 +6,7 @@
 export const conferenceSpeakers = [
   {
     name: "Garry Tan",
+    bio: "Runs Y Combinator, and built its internal platform Bookface on Rails.",
     company: "Y Combinator",
     role: "President & CEO",
     track: "startups",
@@ -17,24 +18,28 @@ export const conferenceSpeakers = [
   },
   {
     name: "Rosa Gutiérrez",
+    bio: "Built Solid Queue, the job backend that ships with Rails 8.",
     company: "37signals",
     track: "scaleups",
     pixel: "/speaker_rosa_gutierrez_pixel_256.png",
   },
   {
     name: "Chris Oliver",
+    bio: "Teaches Rails to thousands through GoRails; maintains Pay, Noticed and Jumpstart.",
     company: "GoRails",
     track: "startups",
     pixel: "/speaker_chris_oliver_pixel_256.png",
   },
   {
     name: "Jason Bosco",
+    bio: "Bootstrapped Typesense, an open-source search engine on Rails serving 10B+ searches a month.",
     company: "Typesense",
     track: "startups",
     pixel: "/speaker_jason_bosco_pixel_256.png",
   },
   {
     name: "Cole Robertson",
+    bio: "CTO of Rebulk (YC S25), measuring bulk inventory with LiDAR and computer vision.",
     company: "Rebulk",
     track: "startups",
     pixel: "/speaker_cole_robertson_pixel_256.png",
@@ -49,36 +54,42 @@ export const conferenceSpeakers = [
   // },
   {
     name: "Carmine Paolino",
+    bio: "Created RubyLLM, which brought modern AI tooling to Ruby.",
     company: "RubyLLM",
     track: "startups",
     pixel: "/speaker_carmine_paolino_pixel_256.png",
   },
   {
     name: "Vladimir Dementyev",
+    bio: "Author of AnyCable, TestProf and Layered Design for Ruby on Rails Applications.",
     company: "Evil Martians",
     track: "startups",
     pixel: "/speaker_vladimir_dementyev_pixel_256.png",
   },
   {
     name: "Andrey Novikov",
+    bio: "Maintains after_commit_everywhere and pgtrunk, and teaches Rubyists what Postgres can really do.",
     company: "Evil Martians",
     track: "scaleups",
     pixel: "/speaker_andrey_novikov_pixel_256.png",
   },
   {
     name: "Jason Thomas",
+    bio: "Co-created COSMOS, the Ruby stack used to build, test and fly satellites and robots.",
     company: "OpenC3",
     track: "startups",
     pixel: "/speaker_jason_thomas_pixel_256.png",
   },
   {
     name: "Neha Abraham",
+    bio: "Ships Rails in production at Power Home Remodeling.",
     company: "Power Home Remodeling",
     track: "scaleups",
     pixel: "/speaker_neha_abraham_pixel_256.png",
   },
   {
     name: "Irina Nazarova",
+    bio: "Runs Evil Martians and organizes SF Ruby.",
     company: "Evil Martians",
     track: "startups",
     keynote: true,
@@ -102,9 +113,9 @@ export const ticketTiers = [
     state: "live",
   },
   {
-    name: "Corporate / Supporter",
+    name: "Company-sponsored",
     price: 650,
-    note: "Backs a scholarship seat",
+    note: "Invoiced, expensable, no deadline",
     state: "live",
   },
 ];

@@ -4,6 +4,8 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import IslandNav from "../components/IslandNav.astro";
 import SpeakerRoster from "../components/SpeakerRoster.astro";
+import ConferenceThesis from "../components/ConferenceThesis.astro";
+import ConferenceNetworking from "../components/ConferenceNetworking.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import TicketLadder from "../components/TicketLadder.astro";
 import "../styles/global.css";
@@ -203,6 +205,9 @@ import "../styles/global.css";
                 </div>
             </section>
 
+            <!-- Who it is for, before any proof or ask -->
+            <ConferenceThesis />
+
             <!-- Keynote -->
             <section class="py-20 md:py-24 bg-sky-50">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -268,6 +273,9 @@ import "../styles/global.css";
 
             <!-- The lineup: what actually sells a $450 ticket -->
             <SpeakerRoster />
+
+            <!-- What you get beyond the talks -->
+            <ConferenceNetworking />
 
             <!-- Price ladder + team offer -->
             <TicketLadder />
