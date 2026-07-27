@@ -463,6 +463,7 @@ export const jobs = {
     title: "Software Engineer, Ruby on Rails",
     companyId: "mudflap",
     companyName: "Mudflap",
+    companyLogo: "/company_mudflap.png",
     location: "Remote (US, Pacific hours)",
     type: "Full-time",
     salary: "$150K - $250K",
@@ -650,19 +651,6 @@ export const jobs = {
     url: "https://jobs.lever.co/decilegroup/3a1e9b3d-37b0-47d8-a40e-4ea5ac16d06c",
     postedDate: "2026-07-26",
   },
-  "core-payments-engineer-natural": {
-    id: "core-payments-engineer-natural",
-    title: "Core Payments Engineer",
-    companyId: "natural",
-    companyName: "Natural",
-    location: "San Francisco, CA (In-office)",
-    type: "Full-time",
-    description:
-      "Natural builds owned payment rails for AI agents — wallets, pay, request, credit, and billing across traditional banking and stablecoins — founded by ex-Stripe and Method engineers. This role builds the Ruby on Rails payments infrastructure; the team runs Rails under the hood. 16-person team, all in SF, in-office. (Seed, $9.8M.)",
-    chips: ["Payments", "Backend"],
-    url: "https://www.natural.com/careers/core-payments-engineer",
-    postedDate: "2026-06-19",
-  },
   "software-engineer-middesk": {
     id: "software-engineer-middesk",
     title: "Software Engineer",
@@ -713,6 +701,7 @@ export const jobs = {
     title: "Senior Full Stack Engineer",
     companyId: "edo",
     companyName: "EDO",
+    companyLogo: "/company_edo.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$150K - $180K + equity",
@@ -741,6 +730,7 @@ export const jobs = {
     title: "Software Engineer",
     companyId: "relevanthealthcare",
     companyName: "Relevant Healthcare",
+    companyLogo: "/company_relevanthealthcare.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$115K - $165K",
@@ -755,6 +745,7 @@ export const jobs = {
     title: "Lead Engineer",
     companyId: "relevanthealthcare",
     companyName: "Relevant Healthcare",
+    companyLogo: "/company_relevanthealthcare.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$165K - $190K + equity",
@@ -784,6 +775,7 @@ export const jobs = {
     title: "Lead Software Engineer, Gov Platforms",
     companyId: "windborne",
     companyName: "WindBorne Systems",
+    companyLogo: "/company_windborne.png",
     location: "Redwood City, CA / Remote (US)",
     type: "Full-time",
     salary: "$150K - $220K + equity",
@@ -798,6 +790,7 @@ export const jobs = {
     title: "Software Engineer, Platforms & Integrations",
     companyId: "salmahealth",
     companyName: "Salma Health",
+    companyLogo: "/company_salmahealth.png",
     location: "Hybrid (Bay Area preferred) / Remote (US)",
     type: "Full-time",
     salary: "$123K - $183K",
@@ -812,6 +805,7 @@ export const jobs = {
     title: "Senior Full-Stack Software Engineer",
     companyId: "opendate",
     companyName: "Opendate",
+    companyLogo: "/company_opendate.png",
     location: "Remote (US)",
     type: "Full-time",
     description:
@@ -825,6 +819,7 @@ export const jobs = {
     title: "Senior Fullstack Engineer",
     companyId: "jukeboxhealth",
     companyName: "Jukebox Health",
+    companyLogo: "/company_jukeboxhealth.svg",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$180K - $210K + equity",
@@ -839,6 +834,7 @@ export const jobs = {
     title: "Senior Full Stack Engineer",
     companyId: "checkmate",
     companyName: "Checkmate",
+    companyLogo: "/company_checkmate.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$180K",
@@ -853,6 +849,7 @@ export const jobs = {
     title: "Ruby on Rails Engineer",
     companyId: "hudu",
     companyName: "Hudu",
+    companyLogo: "/company_hudu.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$90K - $110K",
@@ -867,6 +864,7 @@ export const jobs = {
     title: "Junior Fullstack Engineer",
     companyId: "serpapi",
     companyName: "SerpApi",
+    companyLogo: "/company_serpapi.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$80K - $100K + profit share",
@@ -881,6 +879,7 @@ export const jobs = {
     title: "Backend Engineer",
     companyId: "fathom",
     companyName: "Fathom",
+    companyLogo: "/company_fathom.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$180K - $240K + equity",
@@ -895,6 +894,7 @@ export const jobs = {
     title: "Senior Security Engineer",
     companyId: "pairteam",
     companyName: "Pair Team",
+    companyLogo: "/company_pairteam.png",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$170K - $190K",
@@ -1191,10 +1191,15 @@ export const jobs = {
    * URL updated in-place to https://betterstack.com/careers (Typeform apply, no
    * per-role permalink). Listing kept.
    *
-   * Natural — URL updated natural.co → natural.com (domain migration). Core
-   * Payments Engineer still open (SF, seed). NOTE: the current public posting no
-   * longer names Ruby/Rails (payments-infra copy only); Rails is unconfirmed
-   * from the live source. Re-verify the stack next cycle or drop if still absent.
+   * Natural — Core Payments Engineer removed. Role still open (natural.co →
+   * natural.com domain migration, SF, seed), but the current public posting no
+   * longer names Ruby/Rails anywhere (all "rails" are payment rails); Rails not
+   * substantiated from the live source, so it's no longer a genuine Rails role.
+   * "core-payments-engineer-natural": {
+   *   companyId: "natural",
+   *   url: "https://www.natural.com/careers/core-payments-engineer",
+   *   postedDate: "2026-06-19",
+   * },
    *
    * Thatch — "Software Engineer: Backend" (GH 5113759008) closed; Thatch's
    * Greenhouse board (org "thatch") has no Backend replacement (only Analytics
