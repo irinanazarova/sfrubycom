@@ -6,7 +6,7 @@
 export const conferenceSpeakers = [
   {
     name: "Garry Tan",
-    bio: "Runs Y Combinator, and built its internal platform Bookface on Rails.",
+    bio: "Built Bookface, YC's internal platform, on Rails. Now runs the place.",
     company: "Y Combinator",
     role: "President & CEO",
     track: "startups",
@@ -25,21 +25,21 @@ export const conferenceSpeakers = [
   },
   {
     name: "Chris Oliver",
-    bio: "Teaches Rails to thousands through GoRails; maintains Pay, Noticed and Jumpstart.",
+    bio: "Has taught Rails to a generation of developers. Maintains Pay, Noticed and Jumpstart.",
     company: "GoRails",
     track: "startups",
     pixel: "/speaker_chris_oliver_pixel_256.png",
   },
   {
     name: "Jason Bosco",
-    bio: "Bootstrapped Typesense, an open-source search engine on Rails serving 10B+ searches a month.",
+    bio: "Bootstrapped an open-source search engine on Rails. It answers 10B+ searches a month.",
     company: "Typesense",
     track: "startups",
     pixel: "/speaker_jason_bosco_pixel_256.png",
   },
   {
     name: "Cole Robertson",
-    bio: "CTO of Rebulk (YC S25), measuring bulk inventory with LiDAR and computer vision.",
+    bio: "YC S25. Measures bulk inventory nobody can barcode, with LiDAR and computer vision.",
     company: "Rebulk",
     track: "startups",
     pixel: "/speaker_cole_robertson_pixel_256.png",
@@ -54,8 +54,8 @@ export const conferenceSpeakers = [
   // },
   {
     name: "Carmine Paolino",
-    bio: "Created RubyLLM, which brought modern AI tooling to Ruby.",
-    company: "RubyLLM",
+    bio: "Creator of RubyLLM, the Ruby framework for every major AI provider.",
+    company: "Chat with Work",
     track: "startups",
     pixel: "/speaker_carmine_paolino_pixel_256.png",
   },
@@ -68,7 +68,7 @@ export const conferenceSpeakers = [
   },
   {
     name: "Andrey Novikov",
-    bio: "Maintains after_commit_everywhere and pgtrunk, and teaches Rubyists what Postgres can really do.",
+    bio: "Author of Yabeda, the Ruby instrumentation framework with over 10 million downloads.",
     company: "Evil Martians",
     track: "scaleups",
     pixel: "/speaker_andrey_novikov_pixel_256.png",
@@ -82,14 +82,14 @@ export const conferenceSpeakers = [
   },
   {
     name: "Neha Abraham",
-    bio: "Ships Rails in production at Power Home Remodeling.",
+    bio: "Builds the Rails systems behind a nationwide home remodeling business.",
     company: "Power Home Remodeling",
     track: "scaleups",
     pixel: "/speaker_neha_abraham_pixel_256.png",
   },
   {
     name: "Irina Nazarova",
-    bio: "Runs Evil Martians and organizes SF Ruby.",
+    bio: "CEO. Organizes the SF Ruby meetups, and put this conference together.",
     company: "Evil Martians",
     track: "startups",
     keynote: true,
