@@ -7,12 +7,18 @@ interface Props {
     heading?: string;
     limit?: number;
     compact?: boolean;
+    // Set on the homepage: the roster is the last conference content before the
+    // page moves on to news, so it needs a way through to the full page.
+    ctaHref?: string;
+    ctaLabel?: string;
 }
 
 const {
     heading = "The lineup",
     limit,
     compact = false,
+    ctaHref,
+    ctaLabel = "Everything about the conference",
 } = Astro.props;
 
 // Pinned speakers hold the ends of the grid; the rest sort artwork-first so the
@@ -124,6 +130,29 @@ const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
                     {revealed} characters unlocked. The rest are revealed as
                     their art lands.
                 </p>
+            )
+        }
+
+        {
+            ctaHref && (
+                <div class="mt-12 flex justify-center">
+                    <a
+                        href={ctaHref}
+                        class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                    >
+                        {ctaLabel}
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path stroke-linecap="square" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
             )
         }
     </div>
