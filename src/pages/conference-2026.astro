@@ -3,6 +3,11 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import IslandNav from "../components/IslandNav.astro";
+import SpeakerRoster from "../components/SpeakerRoster.astro";
+import ConferenceThesis from "../components/ConferenceThesis.astro";
+import ConferenceNetworking from "../components/ConferenceNetworking.astro";
+import TicketScarcity from "../components/TicketScarcity.astro";
+import TicketLadder from "../components/TicketLadder.astro";
 import "../styles/global.css";
 ---
 
@@ -138,11 +143,36 @@ import "../styles/global.css";
                         > · San Francisco
                     </p>
 
-                    <a
-                        href="#notify"
-                        class="px-font px-blink inline-block mt-10 text-sm md:text-base text-indigo-900"
-                        >&#9654; Press Start &#9664;</a
+                    <!-- Scarcity above the fold: price, seats left, deadline -->
+                    <div class="mt-10 flex justify-center">
+                        <TicketScarcity />
+                    </div>
+
+                    <div
+                        class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
+                        <a
+                            href="https://luma.com/sfrubyconf2026"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                        >
+                            <img
+                                src="/px-ticket.png"
+                                alt=""
+                                width="64"
+                                height="64"
+                                class="px-pixelated h-5 w-auto"
+                            />
+                            Get tickets
+                        </a>
+                        <a
+                            href="#speakers"
+                            class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                        >
+                            See the lineup
+                        </a>
+                    </div>
 
                     <!-- Organized by -->
                     <div class="mt-12 flex flex-col items-center gap-3">
@@ -174,6 +204,9 @@ import "../styles/global.css";
                 >
                 </div>
             </section>
+
+            <!-- Who it is for, before any proof or ask -->
+            <ConferenceThesis />
 
             <!-- Keynote -->
             <section class="py-20 md:py-24 bg-sky-50">
@@ -237,6 +270,15 @@ import "../styles/global.css";
                     </div>
                 </div>
             </section>
+
+            <!-- The lineup: what actually sells a $450 ticket -->
+            <SpeakerRoster />
+
+            <!-- What you get beyond the talks -->
+            <ConferenceNetworking />
+
+            <!-- Price ladder + team offer -->
+            <TicketLadder />
 
             <!-- Call for proposals: Anton's island scene -->
             <section
@@ -330,39 +372,22 @@ import "../styles/global.css";
                 <div
                     class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
                 >
-                    <div class="relative w-full max-w-xl mx-auto mb-10">
-                        <img
-                            src="/early_birds.png"
-                            alt="A pixel dragon holding a sign that reads Early Bird Tickets, with a Sold Out stamp"
-                            width="1980"
-                            height="1368"
-                            loading="lazy"
-                            class="px-pixelated px-card w-full h-auto"
-                        />
-                        <span
-                            class="px-sold-stamp px-font text-xs md:text-sm px-3 py-1.5"
-                            style="top:60%;left:68%"
-                            >Sold out</span
-                        >
-                    </div>
                     <h2
                         class="px-font px-shadow-ink text-lg md:text-2xl text-white mb-8"
                     >
                         Tickets are on sale
                     </h2>
 
-                    <!-- Primary: early bird sold out, general admission on sale -->
+                    <!-- Sold-out belongs in the ladder, where a spent tier argues
+                         that the price is climbing. Here it would be the largest
+                         thing in the section and read as "the conference is full". -->
                     <div class="flex flex-col items-center gap-4">
-                        <!-- matched pair: early bird spent, general admission live -->
+                        <div class="mb-2">
+                            <TicketScarcity />
+                        </div>
                         <div
                             class="flex flex-col sm:flex-row items-stretch justify-center gap-4"
                         >
-                            <span
-                                class="px-btn px-btn--disabled px-font px-6 py-3 flex-col gap-0 leading-tight sm:w-56"
-                            >
-                                <span class="text-px8 opacity-80">Early bird</span>
-                                <span class="text-px10 md:text-xs">Sold out</span>
-                            </span>
                             <a
                                 href="https://luma.com/sfrubyconf2026"
                                 target="_blank"

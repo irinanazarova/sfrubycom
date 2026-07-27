@@ -4,6 +4,8 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import IslandNav from "../components/IslandNav.astro";
 import NewsRunner from "../components/NewsRunner.astro";
+import SpeakerRoster from "../components/SpeakerRoster.astro";
+import TicketScarcity from "../components/TicketScarcity.astro";
 import "../styles/global.css";
 import StartupCard from "../components/StartupCard.astro";
 import StartupModal from "../components/StartupModal.astro";
@@ -198,17 +200,16 @@ const conference2026Sponsors = [
                     <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Startup Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[15rem] md:max-w-[17rem] h-auto mb-8 mx-auto" />
                     <!-- Primary CTA: Buy tickets, front and central, above the fold -->
                     <div class="mb-10 flex flex-col items-center gap-3">
+                        <!-- No spent-tier button beside the live one: a disabled
+                             control at equal weight spends the primary CTA slot
+                             saying "you already missed it". -->
                         <div class="flex flex-col sm:flex-row items-stretch justify-center gap-3">
-                            <span class="px-btn px-btn--disabled px-font px-8 py-3 flex-col gap-0 leading-tight text-center sm:w-72">
-                                <span class="text-px8 opacity-80">Early bird</span>
-                                <span class="text-xs md:text-sm">Sold out</span>
-                            </span>
                             <a href="https://luma.com/sfrubyconf2026" target="_blank" rel="noopener noreferrer" class="px-btn px-btn--gold tap-press px-font text-xs md:text-sm px-8 py-5 sm:w-72">
                                 <img src="/px-ticket.png" alt="" width="26" height="12" class="px-pixelated h-5 w-auto" />
                                 Buy tickets
                             </a>
                         </div>
-                        <span class="px-font text-px8 text-indigo-950/90">General admission on sale</span>
+                        <TicketScarcity />
                     </div>
                     <!-- Photo: Seb Daly / Web Summit / Sportsfile, CC BY 2.0 (Wikimedia Commons) -->
                     <div class="px-card bg-white max-w-2xl mx-auto p-5 md:p-6 flex items-center justify-center gap-5 text-left">
@@ -222,13 +223,7 @@ const conference2026Sponsors = [
                             </p>
                         </div>
                     </div>
-                    <div class="mt-12 flex justify-center">
-                        <div class="relative inline-block animate-float w-full max-w-[15rem] sm:max-w-[18rem]">
-                            <img src="/early_bird_dragon.png" alt="A pixel dragon holding a sign that reads Early Bird Tickets, with a Sold Out stamp" width="1064" height="696" class="px-pixelated w-full h-auto" />
-                            <span class="px-sold-stamp px-font text-px8 px-2.5 py-1" style="top:74%;left:48%">Sold out</span>
-                        </div>
-                    </div>
-                    <div class="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-10 max-w-3xl mx-auto text-center">
+                    <div class="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-10 max-w-3xl mx-auto text-center">
                         <a href="https://luma.com/sfrubyconf2026" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
                             <img src="/px-ticket.png" alt="" width="26" height="12" class="px-island-btn__item h-8 w-auto" />
                             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
@@ -256,9 +251,10 @@ const conference2026Sponsors = [
                     </div>
                 </div>
 
-                <!-- crenellated step into the news masthead -->
-                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#071f56]" aria-hidden="true"></div>
             </section>
+
+            <!-- The lineup, straight under the hero: names are what sell the ticket -->
+            <SpeakerRoster heading="Who you'll hear" compact={true} />
 
             <!-- SF Ruby News Hero -->
             <section id="news" class="relative text-white overflow-hidden px-night">

@@ -1,0 +1,130 @@
+---
+// Character-select grid for the 2026 lineup. Speakers without pixel art yet render
+// as an unrevealed "?" slot, which keeps the name (the thing that sells) on the page.
+import { conferenceSpeakers } from "../data/conference-2026.js";
+
+interface Props {
+    heading?: string;
+    limit?: number;
+    compact?: boolean;
+}
+
+const {
+    heading = "The lineup",
+    limit,
+    compact = false,
+} = Astro.props;
+
+// Pinned speakers hold the ends of the grid; the rest sort artwork-first so the
+// roster opens on real faces rather than a wall of unrevealed slots.
+const rank = (s) => (s.pin === "first" ? -1 : s.pin === "last" ? 1 : 0);
+const ordered = [...conferenceSpeakers].sort(
+    (a, b) =>
+        rank(a) - rank(b) ||
+        Number(Boolean(b.pixel)) - Number(Boolean(a.pixel)),
+);
+// A limit would silently drop whoever sorts last, so it only ever trims the
+// unpinned middle.
+const speakers = limit
+    ? [
+          ...ordered.filter((s) => s.pin === "first"),
+          ...ordered
+              .filter((s) => !s.pin)
+              .slice(0, Math.max(0, limit - ordered.filter((s) => s.pin).length)),
+          ...ordered.filter((s) => s.pin === "last"),
+      ]
+    : ordered;
+const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
+---
+
+<section
+    id="speakers"
+    class:list={[
+        "relative overflow-hidden border-t-4 border-ink px-dither-sky",
+        compact ? "py-14" : "py-20 md:py-24",
+    ]}
+>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center">
+            <span class="px-plate px-font text-px8 px-3 py-1.5"
+                >{conferenceSpeakers.length} confirmed</span
+            >
+            <h2
+                class="px-font px-shadow-ink text-lg md:text-2xl text-white mt-6"
+            >
+                {heading}
+            </h2>
+            <p class="text-base md:text-lg text-white/90 mt-4">
+                Founders and engineers shipping Ruby in production. More
+                announced every week.
+            </p>
+        </div>
+
+        <ul
+            class="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 list-none p-0"
+        >
+            {
+                speakers.map((s) => (
+                    <li class="px-card bg-white p-4 flex flex-col items-center text-center">
+                        {s.pixel ? (
+                            <img
+                                src={s.pixel}
+                                alt={`${s.name}, pixel character`}
+                                width="256"
+                                height="256"
+                                loading="lazy"
+                                class="px-pixelated w-24 md:w-28 h-auto"
+                            />
+                        ) : (
+                            <div
+                                class="w-24 md:w-28 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
+                                aria-hidden="true"
+                            >
+                                <span class="px-font text-2xl text-sky-500">
+                                    ?
+                                </span>
+                            </div>
+                        )}
+                        <img
+                            src="/px-island.png"
+                            alt=""
+                            width="598"
+                            height="104"
+                            loading="lazy"
+                            class="px-pixelated w-28 md:w-32 h-auto -mt-2"
+                        />
+                        {/* Grotesk, not the pixel font: Press Start 2P has no accented
+                            capitals and would mangle names like Gutiérrez. */}
+                        {/* fixed two-line box so cards whose names wrap keep the
+                            company line on the same baseline across the row */}
+                        <p class="font-display font-semibold text-sm md:text-base text-gray-900 mt-3 leading-snug flex items-center justify-center min-h-[2.75rem]">
+                            {s.name}
+                        </p>
+                        <p class="text-xs md:text-sm text-ruby-600 mt-2">
+                            {s.company}
+                        </p>
+                        {s.bio && (
+                            <p class="text-xs text-gray-600 leading-relaxed mt-3">
+                                {s.bio}
+                            </p>
+                        )}
+                        {s.keynote && (
+                            <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 mt-3">
+                                Keynote
+                            </span>
+                        )}
+                    </li>
+                ))
+            }
+        </ul>
+
+        {
+            revealed < conferenceSpeakers.length && (
+                <p class="text-center text-sm text-white/80 mt-8">
+                    {revealed} characters unlocked. The rest are revealed as
+                    their art lands.
+                </p>
+            )
+        }
+    </div>
+</section>

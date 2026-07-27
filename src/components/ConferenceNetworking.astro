@@ -1,0 +1,86 @@
+---
+// The networking format is the thing this conference has that a stream of talks
+// does not, and none of it appeared anywhere on the site. Given it is also the
+// reason a company sends five people instead of one, it gets its own section
+// above the ticket ladder.
+import { LUMA_URL } from "../data/conference-2026.js";
+
+// Numbered plates rather than sprite icons: the px-* set has no third icon that
+// reads as "founders' session", and the numbers frame this as a sequence anyway.
+const formats = [
+    {
+        title: "Facilitated, in small groups",
+        body: "Networking is on the agenda, not left to the coffee queue. You are put in small groups with people worth meeting, with someone running the room.",
+    },
+    {
+        title: "Bring 5+, take the stage",
+        body: "Teams of five or more get time on the networking stage to introduce their company to a room of Ruby engineers. The cheapest recruiting you will do this year.",
+    },
+    {
+        title: "Founders' round with Garry Tan",
+        body: "A dedicated session for founders and founding teams with the President and CEO of Y Combinator.",
+    },
+];
+---
+
+<section
+    id="networking"
+    class="relative overflow-hidden py-20 md:py-24 px-royal-grad text-white border-t-4 border-ink"
+>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-2xl mx-auto text-center">
+            <span class="px-plate px-font text-px8 px-3 py-1.5">Day 1–3</span>
+            <h2
+                class="px-font px-shadow-ink text-lg md:text-2xl text-white mt-6"
+            >
+                More than a room of talks
+            </h2>
+            <p class="text-base md:text-lg text-white/90 leading-relaxed mt-5">
+                Half the value of a conference is who you meet, so we run that
+                half deliberately instead of hoping it happens.
+            </p>
+        </div>
+
+        <ul class="mt-14 grid gap-5 md:grid-cols-3 list-none p-0">
+            {
+                formats.map((f, i) => (
+                    <li class="px-card bg-white p-6 flex flex-col">
+                        <span class="px-plate px-plate--gold px-font text-px8 px-2.5 py-1 self-start">
+                            {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <h3 class="px-font text-px9 md:text-px10 text-gray-900 mt-5 leading-relaxed">
+                            {f.title}
+                        </h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mt-4">
+                            {f.body}
+                        </p>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+                href={LUMA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+            >
+                <img
+                    src="/px-ticket.png"
+                    alt=""
+                    width="64"
+                    height="64"
+                    class="px-pixelated h-5 w-auto"
+                />
+                Bring your team
+            </a>
+            <a
+                href="/contact"
+                class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+            >
+                Ask for an invoice
+            </a>
+        </div>
+    </div>
+</section>
