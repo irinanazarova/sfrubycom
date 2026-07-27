@@ -67,48 +67,107 @@ def grass_top(raw, w, h, x_end, y_start):
     return None
 
 
-def cut_plain(src, out_path, fuzz="14%"):
-    """Standalone sprite on a flat background: keep the largest blob.
+def cut_plain(src, out_path, tol=34):
+    """Standalone sprite on a flat background.
 
-    Some speakers arrive as a plain portrait rather than an announcement card.
-    Trimming alone is not enough, because Irina's sprite has a cat below her; a
-    trim would include it and shrink her to half height once normalised.
+    The background is flooded from the image border rather than keyed by colour.
+    Colour keying looked fine until you notice it also matches skin: these cards
+    sit on tan, so `-transparent` punched holes straight through faces, arms and
+    legs. Flooding from outside cannot reach an enclosed face, whatever colour it
+    happens to be, because the pixel-art outline stops it.
+
+    Then keep the largest subject blob, because Irina's sprite has a cat below
+    her that a plain trim would include, halving her height once normalised.
     """
-    bg = subprocess.run(["magick", src, "-format", "%[pixel:p{3,3}]", "info:"],
-                        capture_output=True, text=True, check=True).stdout.strip()
-    report = subprocess.run(
-        ["magick", src, "-alpha", "set", "-fuzz", fuzz, "-transparent", bg,
-         "-alpha", "extract", "-threshold", "50%",
-         "-define", "connected-components:verbose=true",
-         "-define", "connected-components:area-threshold=120",
-         "-connected-components", "8", "null:"],
-        capture_output=True, text=True, check=True).stdout
+    w, h = map(int, subprocess.run(
+        ["magick", src, "-format", "%w %h", "info:"],
+        capture_output=True, text=True, check=True).stdout.split())
+    raw = subprocess.run(["magick", src, "-depth", "8", "rgb:-"],
+                         capture_output=True, check=True).stdout
 
+    def px(i):
+        j = i * 3
+        return raw[j], raw[j + 1], raw[j + 2]
+
+    br, bg_, bb = px(3 * w + 3)                    # a border pixel: the backdrop
+    near = lambda c: (abs(c[0] - br) <= tol and abs(c[1] - bg_) <= tol
+                      and abs(c[2] - bb) <= tol)
+
+    back = bytearray(w * h)
+    q = deque()
+    for x in range(w):
+        for y in (0, h - 1):
+            i = y * w + x
+            if not back[i] and near(px(i)):
+                back[i] = 1
+                q.append(i)
+    for y in range(h):
+        for x in (0, w - 1):
+            i = y * w + x
+            if not back[i] and near(px(i)):
+                back[i] = 1
+                q.append(i)
+    while q:
+        i = q.popleft()
+        x, y = i % w, i // w
+        for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+            if 0 <= nx < w and 0 <= ny < h:
+                j = ny * w + nx
+                if not back[j] and near(px(j)):
+                    back[j] = 1
+                    q.append(j)
+
+    # Largest subject component, 4-connected over everything the flood missed.
+    seenc = bytearray(w * h)
     best = None
-    for line in report.splitlines()[1:]:
-        parts = line.split()
-        if len(parts) < 5:
+    for start in range(w * h):
+        if back[start] or seenc[start]:
             continue
-        geom, area, colour = parts[1], float(parts[3]), parts[4]
-        if colour.startswith("gray(0)") or colour.startswith("srgb(0,0,0)"):
-            continue                      # background component
-        wh, off = geom.split("+", 1)
-        cw, ch = map(int, wh.split("x"))
-        ox, oy = map(int, off.split("+"))
+        q = deque([start])
+        seenc[start] = 1
+        area = 0
+        x0 = x1 = start % w
+        y0 = y1 = start // w
+        while q:
+            i = q.popleft()
+            area += 1
+            x, y = i % w, i // w
+            if x < x0: x0 = x
+            if x > x1: x1 = x
+            if y < y0: y0 = y
+            if y > y1: y1 = y
+            for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                if 0 <= nx < w and 0 <= ny < h:
+                    j = ny * w + nx
+                    if not back[j] and not seenc[j]:
+                        seenc[j] = 1
+                        q.append(j)
         if best is None or area > best[0]:
-            best = (area, cw, ch, ox, oy)
+            best = (area, x0, y0, x1, y1)
     if best is None:
         raise SystemExit(f"{src}: no subject found")
+    _, x0, y0, x1, y1 = best
 
-    _, cw, ch, ox, oy = best
-    pad = 4
+    alpha = os.path.join(os.path.dirname(out_path) or ".", ".alpha.pgm")
+    with open(alpha, "wb") as fh:
+        fh.write(f"P5\n{w} {h}\n255\n".encode())
+        fh.write(bytes(0 if v else 255 for v in back))
+    masked = alpha + ".cut.png"
+    subprocess.run(["magick", src, alpha, "-alpha", "off",
+                    "-compose", "CopyOpacity", "-composite", masked], check=True)
+
+    pad = 3
+    cw = min(w - 1, x1 + pad) - max(0, x0 - pad) + 1
+    ch = min(h - 1, y1 + pad) - max(0, y0 - pad) + 1
     subprocess.run(
-        ["magick", src, "-crop", f"{cw + 2 * pad}x{ch + 2 * pad}+{max(0, ox - pad)}+{max(0, oy - pad)}",
-         "+repage", "-alpha", "set", "-fuzz", fuzz, "-transparent", bg,
-         "-trim", "+repage", "-filter", "point", "-resize", "x240",
+        ["magick", masked, "-crop", f"{cw}x{ch}+{max(0, x0 - pad)}+{max(0, y0 - pad)}",
+         "+repage", "-trim", "+repage", "-filter", "point", "-resize", "x240",
          "-background", "none", "-gravity", "south", "-extent", "256x256",
          out_path], check=True)
-    print(f"{os.path.basename(src):28s} subject {cw}x{ch}+{ox}+{oy}  bg={bg}")
+    for f in (alpha, masked):
+        os.remove(f)
+    print(f"{os.path.basename(src):30s} subject {x1-x0+1}x{y1-y0+1}+{x0}+{y0}  "
+          f"bg=rgb({br},{bg_},{bb})")
 
 
 def cut(card, out_path, slab=0.40, top_skip=0.10):
