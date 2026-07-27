@@ -94,18 +94,18 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7997294",
     postedDate: "2026-06-18",
   },
-  "senior-software-engineer-omada": {
-    id: "senior-software-engineer-omada",
-    title: "Senior Software Engineer",
+  "senior-software-engineer-core-systems-omada": {
+    id: "senior-software-engineer-core-systems-omada",
+    title: "Senior Software Engineer, Core Systems & Integrations",
     sponsorId: "omada",
     location: "Remote (US Only)",
     type: "Full-time",
     salary: "$179K - $224K",
     description:
-      "Omada Health is hiring a Senior Software Engineer to build and integrate tools that optimize contracting, eligibility, and billing processes. Be an informal team leader, mentor others, lead large projects, and leverage AI/ML tooling to deliver innovative solutions. 7+ years experience required, with Rails or Python, modern front-end frameworks (React/Vue), and PostgreSQL. Stack: AWS, Ruby, Rails, Postgres, Kafka. $179-224K base in CA/NY/WA ($172-215K in CO) + bonus + equity. US-based.",
-    chips: ["Fullstack", "PostgreSQL", "Kafka", "Polyglot", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7137954",
-    postedDate: "2026-06-05",
+      "Omada Health is hiring a Senior Software Engineer on Core Systems & Integrations to build and scale the platform capabilities that integrate and validate critical health data, delivering real-time, clinically meaningful insights for care teams and members. Own projects end-to-end from technical design through deployment, working at the intersection of data integrations, backend systems, and healthcare workflows. 7+ years with a strong backend focus (Ruby on Rails or Python), a relational database (PostgreSQL/MySQL), and experience operating distributed, event-driven systems with high reliability. Stack: AWS, Ruby, Rails, Postgres, GraphQL, Docker, Kubernetes. $179-224K base in CA/NY/WA + bonus + equity. US-based.",
+    chips: ["Backend", "Data", "PostgreSQL", "GraphQL", "Polyglot"],
+    url: "https://job-boards.greenhouse.io/omadahealth/jobs/8051562",
+    postedDate: "2026-07-26",
   },
   "senior-software-engineer-member-omada": {
     id: "senior-software-engineer-member-omada",
@@ -119,19 +119,6 @@ export const jobs = {
     chips: ["Backend", "PostgreSQL", "Polyglot", "Mentorship"],
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7822840",
     postedDate: "2026-05-10",
-  },
-  "software-engineer-backend-thatch": {
-    id: "software-engineer-backend-thatch",
-    title: "Software Engineer: Backend",
-    sponsorId: "thatch",
-    location: "Remote (US) / San Francisco",
-    type: "Full-time",
-    salary: "$161K - $230K",
-    description:
-      "Thatch is hiring a Backend Engineer to design and build core systems powering its health benefits platform — data models, fund flows, and integrations with payroll and insurance providers. Own production systems handling financial transactions and complex business logic. Strong skills in data modeling and system design required, ideally with healthcare or finance experience. $161k-$230k.",
-    chips: ["Backend", "Payments", "Data", "PostgreSQL"],
-    url: "https://thatch.com/jobs/software-engineer-backend-5113759008",
-    postedDate: "2026-04-27",
   },
   "software-engineer-fullstack-thatch": {
     id: "software-engineer-fullstack-thatch",
@@ -471,21 +458,6 @@ export const jobs = {
     url: "https://www.monami.io/jobs/senior-rails-engineer",
     postedDate: "2026-05-01",
   },
-  "software-engineer-rails-levelpath": {
-    id: "software-engineer-rails-levelpath",
-    title: "Software Engineer, Ruby on Rails (Backend)",
-    companyId: "levelpath",
-    companyLogo: "/company_levelpath.png",
-    companyName: "Levelpath",
-    location: "San Francisco, CA (On-site)",
-    type: "Full-time",
-    salary: "$165K - $240K + equity",
-    description:
-      "Levelpath is an AI-native, mobile-first enterprise procurement platform (Series B, ~$100M raised from Redpoint, Benchmark, and Battery; founded 2022 by the team behind Scout RFP). This backend role builds the customer-facing Ruby on Rails application that powers sourcing, contract management, and procurement workflows; 3+ years of Ruby on Rails required. Stack: Ruby on Rails, PostgreSQL/MySQL, GraphQL + REST, React/TypeScript, Docker.",
-    chips: ["Backend", "GraphQL", "React"],
-    url: "https://jobs.ashbyhq.com/levelpath/140eb34a-a723-4b29-9cda-b894c01c67f3",
-    postedDate: "2026-06-19",
-  },
   "software-engineer-rails-mudflap": {
     id: "software-engineer-rails-mudflap",
     title: "Software Engineer, Ruby on Rails",
@@ -528,20 +500,6 @@ export const jobs = {
       "Authorium is a SF GovTech startup automating procurement, grants, and budgeting for state and local governments. This mid-level full-stack role builds features across a Ruby on Rails modular monolith that manages billions in public funds. Stack: Rails, Hotwire, PostgreSQL, Next.js. Hybrid in SF, Mon-Thu in office.",
     chips: ["Fullstack", "Hotwire", "Packwerk"],
     url: "https://jobs.ashbyhq.com/Authorium/b59ff28c-3e3c-4190-abaa-ab8572052740",
-    postedDate: "2026-06-19",
-  },
-  "senior-software-engineer-truelink": {
-    id: "senior-software-engineer-truelink",
-    title: "Senior Software Engineer",
-    companyId: "truelink",
-    companyLogo: "/company_truelink.png",
-    companyName: "True Link Financial",
-    location: "Remote (US)",
-    type: "Full-time",
-    description:
-      "True Link Financial is a profitable, mission-driven fintech (Forbes Fintech 50) building financial products for people with disabilities, older adults, and people in recovery. This hands-on senior role spends most of its time coding in the Rails/React stack, owning complex features end-to-end and mentoring, in a high-compliance (PCI/HIPAA/SOC) environment. SF and Kingston, NY offices; remote-first across the US.",
-    chips: ["Fullstack", "React", "High compliance"],
-    url: "https://jobs.ashbyhq.com/truelinkfinancial/79a24a30-5f5a-4147-a5c2-c35e24f56802",
     postedDate: "2026-06-19",
   },
   "software-engineer-rails-luthor": {
@@ -678,20 +636,19 @@ export const jobs = {
     url: "https://jobs.lever.co/UpMetrics/62b78791-e881-44c7-bf21-c82bce483081",
     postedDate: "2026-06-19",
   },
-  "senior-rails-engineer-decile": {
-    id: "senior-rails-engineer-decile",
-    title: "Senior Ruby on Rails Engineer",
+  "rails-engineer-decile": {
+    id: "rails-engineer-decile",
+    title: "Ruby on Rails Engineer (front-end skills)",
     companyId: "decile",
     companyName: "Decile Group",
     companyLogo: "/company_decile.png",
     location: "Remote (US, Pacific overlap)",
     type: "Full-time",
-    salary: "$120K - $170K",
     description:
-      "Decile Group runs VC Lab, a venture-capital accelerator and fund-operations platform. This senior role owns complex Ruby on Rails features end-to-end (ActiveRecord, Sidekiq, RESTful APIs); 5+ years of production Rails required. Palo Alto HQ.",
-    chips: ["Backend", "Sidekiq"],
-    url: "https://jobs.lever.co/decilegroup/4804b6c2-0ba8-4a1b-8024-84c8ab95fb2f",
-    postedDate: "2026-06-19",
+      "Decile Group runs VC Lab, the leading venture-capital accelerator, and the Decile Hub fund-operations platform. This role is for an experienced Ruby on Rails developer with an emphasis on front-end work, owning projects end-to-end and building directly with the people who use the tools (the interview includes a Rails coding challenge). Must work within a few time zones of Pacific. Palo Alto HQ, remote.",
+    chips: ["Fullstack", "Frontend"],
+    url: "https://jobs.lever.co/decilegroup/3a1e9b3d-37b0-47d8-a40e-4ea5ac16d06c",
+    postedDate: "2026-07-26",
   },
   "core-payments-engineer-natural": {
     id: "core-payments-engineer-natural",
@@ -703,7 +660,7 @@ export const jobs = {
     description:
       "Natural builds owned payment rails for AI agents — wallets, pay, request, credit, and billing across traditional banking and stablecoins — founded by ex-Stripe and Method engineers. This role builds the Ruby on Rails payments infrastructure; the team runs Rails under the hood. 16-person team, all in SF, in-office. (Seed, $9.8M.)",
     chips: ["Payments", "Backend"],
-    url: "https://www.natural.co/careers/core-payments-engineer",
+    url: "https://www.natural.com/careers/core-payments-engineer",
     postedDate: "2026-06-19",
   },
   "software-engineer-middesk": {
@@ -776,22 +733,7 @@ export const jobs = {
     description:
       "Better Stack is building an AI-native incident-response and observability platform. This full-stack role works on a Ruby on Rails backend with a Vue.js frontend, on PostgreSQL, Redis, ClickHouse, and Redpanda. Remote across North America (US-eligible). (Series A.)",
     chips: ["Fullstack", "Vue", "ClickHouse"],
-    url: "https://jobs.rubyonrails.org/jobs/28439-full-stack-engineer-i-better-stack",
-    postedDate: "2026-06-20",
-  },
-  "senior-software-engineer-ii-nomad": {
-    id: "senior-software-engineer-ii-nomad",
-    title: "Senior Software Engineer II",
-    companyId: "nomad",
-    companyName: "Nomad",
-    companyLogo: "/company_nomad.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$150K - $190K",
-    description:
-      "Nomad is a real-estate fintech offering guaranteed rent for long-term rentals. This full-stack senior role ships features across a Ruby on Rails backend and a TypeScript + React frontend. Remote, continental US. (Series A.)",
-    chips: ["Fullstack", "React"],
-    url: "https://jobs.rubyonrails.org/jobs/28550-senior-software-engineer-ii-nomad",
+    url: "https://betterstack.com/careers",
     postedDate: "2026-06-20",
   },
   "software-engineer-relevant-healthcare": {
@@ -932,20 +874,6 @@ export const jobs = {
       "SerpApi is a profitable, bootstrapped API for real-time search-engine results (Google and dozens more), trusted by developers at scale and a Rails Foundation member. This junior full-stack role builds and maintains the product across Ruby, Rails, MongoDB, and JavaScript, deployed on AWS. Remote-first, US-eligible; the team is based in Austin, TX. $80K-$100K base plus profit share.",
     chips: ["Fullstack", "Profitable"],
     url: "https://serpapi.com/careers/junior-fullstack-engineer",
-    postedDate: "2026-07-07",
-  },
-  "senior-product-engineer-mxu": {
-    id: "senior-product-engineer-mxu",
-    title: "Senior Product Engineer",
-    companyId: "mxu",
-    companyName: "MxU",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$120K - $220K",
-    description:
-      "MxU builds training and live-production software for churches — video courses plus production tooling. This senior product-engineering role ships across a Ruby on Rails monolith with a React frontend, React Native (Expo) iOS/Android apps, and a Tauri/Rust macOS app. Remote (US), contract-to-hire. Founded 2019, small senior team.",
-    chips: ["Fullstack", "React Native", "Polyglot"],
-    url: "https://jobs.rubyonrails.org/jobs/34946-senior-product-engineer-mxu",
     postedDate: "2026-07-07",
   },
   "backend-engineer-fathom": {
@@ -1236,6 +1164,82 @@ export const jobs = {
    *   companyId: "windborne",
    *   url: "https://windbornesystems.com/careers/software-engineer---operational-systems",
    *   postedDate: "2026-07-01",
+   * },
+   *
+   * ── July 26, 2026 audit ──────────────────────────────────────────
+   *
+   * Omada — "Senior Software Engineer" (GH 7137954, contracting/eligibility/
+   * billing) closed; GH boards-api 404. Replaced in-place with Senior Software
+   * Engineer, Core Systems & Integrations (GH 8051562), same backend/data-
+   * integrations scope, confirmed Rails (AWS, Ruby, Rails, Postgres, GraphQL).
+   * "senior-software-engineer-omada": {
+   *   url: "https://job-boards.greenhouse.io/omadahealth/jobs/7137954",
+   *   postedDate: "2026-06-05",
+   * },
+   *
+   * Decile Group — "Senior Ruby on Rails Engineer" (Lever 4804b6c2) closed;
+   * replaced in-place with the current "Ruby on Rails Engineer w/ front-end
+   * skills" (Lever 3a1e9b3d), same VC Lab / Decile Hub Rails codebase, Palo
+   * Alto / Pacific-remote.
+   * "senior-rails-engineer-decile": {
+   *   url: "https://jobs.lever.co/decilegroup/4804b6c2-0ba8-4a1b-8024-84c8ab95fb2f",
+   *   postedDate: "2026-06-19",
+   * },
+   *
+   * Better Stack — jobs.rubyonrails.org aggregator posting (28439) expired
+   * (HTTP 410). The Full-stack Engineer role is still open on the company site;
+   * URL updated in-place to https://betterstack.com/careers (Typeform apply, no
+   * per-role permalink). Listing kept.
+   *
+   * Natural — URL updated natural.co → natural.com (domain migration). Core
+   * Payments Engineer still open (SF, seed). NOTE: the current public posting no
+   * longer names Ruby/Rails (payments-infra copy only); Rails is unconfirmed
+   * from the live source. Re-verify the stack next cycle or drop if still absent.
+   *
+   * Thatch — "Software Engineer: Backend" (GH 5113759008) closed; Thatch's
+   * Greenhouse board (org "thatch") has no Backend replacement (only Analytics
+   * Engineer, non-Rails). Removed; three other Thatch roles remain on the board.
+   * "software-engineer-backend-thatch": {
+   *   sponsorId: "thatch",
+   *   url: "https://thatch.com/jobs/software-engineer-backend-5113759008",
+   *   postedDate: "2026-04-27",
+   * },
+   *
+   * Levelpath — "Software Engineer, Ruby on Rails (Backend)" (Ashby 140eb34a)
+   * closed. Levelpath's live board has no US Rails role: the remaining SF roles
+   * (Forward Deployed Engineer, Integrations Engineer) don't mention Ruby/Rails,
+   * and the only Rails/full-stack role is in Riga, Latvia (out of geo). Removed.
+   * "software-engineer-rails-levelpath": {
+   *   companyId: "levelpath",
+   *   url: "https://jobs.ashbyhq.com/levelpath/140eb34a-a723-4b29-9cda-b894c01c67f3",
+   *   postedDate: "2026-06-19",
+   * },
+   *
+   * True Link Financial — "Senior Software Engineer" (Ashby 79a24a30) closed.
+   * Only a "Senior Front End Engineer" (React) and a Principal Product Designer
+   * remain open — no Rails backend/full-stack equivalent. Removed.
+   * "senior-software-engineer-truelink": {
+   *   companyId: "truelink",
+   *   url: "https://jobs.ashbyhq.com/truelinkfinancial/79a24a30-5f5a-4147-a5c2-c35e24f56802",
+   *   postedDate: "2026-06-19",
+   * },
+   *
+   * Nomad (Nomad Labs Inc, guaranteed-rent fintech) — aggregator posting (28550)
+   * expired (HTTP 410). Ashby board (org "nomad") now lists only a non-eng
+   * Applications Coordinator; no Rails role open. Removed, no replacement.
+   * "senior-software-engineer-ii-nomad": {
+   *   companyId: "nomad",
+   *   url: "https://jobs.rubyonrails.org/jobs/28550-senior-software-engineer-ii-nomad",
+   *   postedDate: "2026-06-20",
+   * },
+   *
+   * MxU — aggregator posting (34946) expired (HTTP 404). mxu.com is a parked
+   * domain; the real site (getmxu.com) has no careers page and no open role.
+   * Removed, no durable URL to point to.
+   * "senior-product-engineer-mxu": {
+   *   companyId: "mxu",
+   *   url: "https://jobs.rubyonrails.org/jobs/34946-senior-product-engineer-mxu",
+   *   postedDate: "2026-07-07",
    * },
    */
 };

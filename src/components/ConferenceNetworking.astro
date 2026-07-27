@@ -7,18 +7,21 @@ import { LUMA_URL } from "../data/conference-2026.js";
 
 // Numbered plates rather than sprite icons: the px-* set has no third icon that
 // reads as "founders' session", and the numbers frame this as a sequence anyway.
+// The mechanics are the pitch here, so they are stated exactly: two groups, 70
+// to 100 people, 60 seconds each. Earlier copy said "small groups", which is
+// both vaguer and wrong at this size.
 const formats = [
     {
-        title: "Facilitated, in small groups",
-        body: "Networking is on the agenda, not left to the coffee queue. You are put in small groups with people worth meeting, with someone running the room.",
+        title: "Everyone gets a mic",
+        body: "You are matched into at least two networking groups of 70 to 100 people. In each one you get 60 seconds on the mic to say who you are and what you are building.",
     },
     {
-        title: "Bring 5+, take the stage",
-        body: "Teams of five or more get time on the networking stage to introduce their company to a room of Ruby engineers. The cheapest recruiting you will do this year.",
+        title: "Teams of 5+ get a longer slot",
+        body: "Bring five or more from your company and you get extended time, and slides, to introduce the team to the room.",
     },
     {
         title: "Founders' round with Garry Tan",
-        body: "A dedicated session for founders and founding teams with the President and CEO of Y Combinator.",
+        body: "A dedicated group for founders and founding teams with the President and CEO of Y Combinator.",
     },
 ];
 ---
@@ -36,8 +39,8 @@ const formats = [
                 More than a room of talks
             </h2>
             <p class="text-base md:text-lg text-white/90 leading-relaxed mt-5">
-                Half the value of a conference is who you meet, so we run that
-                half deliberately instead of hoping it happens.
+                Half the value of a conference is who you meet, so it is on the
+                schedule rather than left to the coffee queue.
             </p>
         </div>
 
