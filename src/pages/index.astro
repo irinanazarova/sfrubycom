@@ -7,6 +7,11 @@ import NewsRunner from "../components/NewsRunner.astro";
 import SpeakerRoster from "../components/SpeakerRoster.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import "../styles/global.css";
+
+// Same build-time CFP deadline as /conference-2026, so the two pages cannot
+// disagree about whether proposals are still open.
+const CFP_CLOSES = new Date("2026-07-28T06:59:00Z");
+const cfpOpen = new Date() < CFP_CLOSES;
 import StartupCard from "../components/StartupCard.astro";
 import StartupModal from "../components/StartupModal.astro";
 import ResourceCard from "../components/ResourceCard.astro";
@@ -230,12 +235,14 @@ const conference2026Sponsors = [
                             <span class="px-plate px-font text-px8 px-3 py-1.5">Buy tickets</span>
                             <span class="text-xs text-indigo-950/85 mt-2">General admission on sale</span>
                         </a>
+                        {cfpOpen && (
                         <a href="https://cfp.sfruby.com" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
                             <img src="/px-quest.png" alt="" width="64" height="296" class="px-island-btn__item h-9 w-auto [animation-delay:-0.7s]" />
                             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
                             <span class="px-plate px-font text-px8 px-3 py-1.5">Propose a talk</span>
                             <span class="text-xs text-indigo-950/85 mt-2">CFP is open</span>
                         </a>
+                        )}
                         <a href="/sponsor-2026" class="px-island-btn tap-press">
                             <img src="/px-coin.png" alt="" width="135" height="139" class="px-island-btn__item h-9 w-auto [animation-delay:-1.4s]" />
                             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />

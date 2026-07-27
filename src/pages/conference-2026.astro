@@ -9,6 +9,12 @@ import ConferenceNetworking from "../components/ConferenceNetworking.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import TicketLadder from "../components/TicketLadder.astro";
 import "../styles/global.css";
+
+// The CFP closes 11:59 PM Pacific on Jul 27. Evaluated at build time, so a
+// closed CFP swaps itself for the program tease on the next deploy instead of
+// sitting there inviting talks nobody can submit.
+const CFP_CLOSES = new Date("2026-07-28T06:59:00Z");
+const cfpOpen = new Date() < CFP_CLOSES;
 ---
 
 <!doctype html>
@@ -292,7 +298,7 @@ import "../styles/global.css";
                         <div
                             class="px-bubble px-font text-px10 md:text-xs text-ruby-600 px-5 py-4"
                         >
-                            CFP is open!
+                            {cfpOpen ? "CFP is open!" : "CFP is closed"}
                         </div>
                     </div>
                     <img
@@ -306,27 +312,47 @@ import "../styles/global.css";
                     <h2
                         class="px-font px-shadow-ink text-lg md:text-2xl text-white mt-10"
                     >
-                        Speak at the conference
+                        {cfpOpen ? "Speak at the conference" : "The full programme is coming"}
                     </h2>
-                    <p class="text-lg text-white mt-4 mb-8">
-                        Have a Ruby story to tell? The stage is yours: propose a
-                        talk for 2026.
-                    </p>
-                    <a
-                        href="https://cfp.sfruby.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4"
-                    >
-                        <img
-                            src="/px-quest.png"
-                            alt=""
-                            width="64"
-                            height="296"
-                            class="px-pixelated h-5 w-auto"
-                        />
-                        Propose a talk
-                    </a>
+                    {
+                        cfpOpen ? (
+                            <>
+                                <p class="text-lg text-white mt-4 mb-8">
+                                    Have a Ruby story to tell? The stage is
+                                    yours: propose a talk for 2026.
+                                </p>
+                                <a
+                                    href="https://cfp.sfruby.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                                >
+                                    <img
+                                        src="/px-quest.png"
+                                        alt=""
+                                        width="64"
+                                        height="296"
+                                        class="px-pixelated h-5 w-auto"
+                                    />
+                                    Propose a talk
+                                </a>
+                            </>
+                        ) : (
+                            <>
+                                <p class="text-lg text-white mt-4 mb-8">
+                                    Proposals are in and we are reading them.
+                                    The full schedule lands here shortly; the
+                                    confirmed speakers are already above.
+                                </p>
+                                <a
+                                    href="#speakers"
+                                    class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                                >
+                                    See the lineup
+                                </a>
+                            </>
+                        )
+                    }
                 </div>
             </section>
 
@@ -514,12 +540,16 @@ import "../styles/global.css";
                         icon: "ticket",
                         external: true,
                     },
-                    {
-                        href: "https://cfp.sfruby.com",
-                        label: "Propose a talk",
-                        icon: "quest",
-                        external: true,
-                    },
+                    ...(cfpOpen
+                        ? [
+                              {
+                                  href: "https://cfp.sfruby.com",
+                                  label: "Propose a talk",
+                                  icon: "quest",
+                                  external: true,
+                              },
+                          ]
+                        : []),
                     { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
                     { href: "/contact", label: "Contact us", icon: "envelope" },
                 ]}
