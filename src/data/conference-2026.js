@@ -109,7 +109,7 @@ export const ticketTiers = [
   {
     name: "Regular",
     price: 450,
-    note: "Until Sep 9",
+    note: "Until Sep 30",
     state: "live",
   },
   {
@@ -126,7 +126,7 @@ export const ticketTiers = [
 export const regularTier = {
   sold: 3,
   total: 175,
-  closesOn: "2026-09-09T23:59:00-07:00",
+  closesOn: "2026-09-30T23:59:00-07:00",
   // Set once the post-Regular tier is decided; until then the strip says prices
   // rise without quoting a figure we might not honour.
   nextPrice: null,
