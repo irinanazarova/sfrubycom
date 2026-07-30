@@ -1,6 +1,5 @@
 [build]
-  # TEMPORARY: intentional failure to inspect Netlify's failed-build UI. Revert me.
-  command = "echo 'Intentional build failure (testing Netlify failure UI)' && exit 1"
+  command = "npm run build"
   publish = "dist"
 
 [build.environment]
