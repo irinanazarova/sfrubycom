@@ -125,7 +125,7 @@ export const ticketTiers = [
 // src/content/. Deliberately a plain number so a non-engineer can bump it.
 export const regularTier = {
   sold: 3,
-  total: 175,
+  total: 174,
   closesOn: "2026-09-30T23:59:00-07:00",
   // Set once the post-Regular tier is decided; until then the strip says prices
   // rise without quoting a figure we might not honour.
