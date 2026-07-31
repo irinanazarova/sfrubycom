@@ -77,6 +77,15 @@ export interface Meetup {
   registeredCount: number;
   coverImageUrl?: string;
   type: 'meetup' | 'talks' | 'workshop' | 'conference' | 'social' | string;
+  // Synced from the Luma API (see scripts/fetch-luma-events.js).
+  venue?: string;
+  registrationOpen?: boolean | null;
+  spotsRemaining?: number | null;
+  hostName?: string;
+  hostAvatar?: string;
+  startAt?: string; // raw ISO timestamp, for timezone-safe formatting
+  endAt?: string;
+  timezone?: string; // IANA zone, e.g. "America/Los_Angeles"
 }
 
 export interface Resource {
