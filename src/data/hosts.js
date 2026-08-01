@@ -323,6 +323,57 @@ export const hosts = {
       { name: "cached_counts", url: "https://github.com/academia-edu/cached_counts", desc: "Rails counter cache replacement using memcached" },
     ],
   },
+  checkr: {
+    id: "checkr",
+    name: "Checkr",
+    logo: "/host_checkr.png",
+    url: "https://checkr.com",
+    summary:
+      "The API-first, AI-driven background check platform built for modern hiring and the gig economy.",
+    rubyConnection:
+      "Ruby + Sinatra monolith, dozens of Ruby and Go microservices. 30M+ checks a year",
+    tag: "Built with Ruby",
+    founded: "2014",
+    founders: "Daniel Yanisse, Jonathan Perichon",
+    leadership: "Daniel Yanisse, co-founder & CEO (since 2014)",
+    product:
+      "An API-first background and identity check platform. Checkr runs more than 30 million checks a year for companies like Uber, Lyft, Airbnb, DoorDash, Instacart, and Netflix, and has become core infrastructure for the gig economy. A Y Combinator alum (S14), it crossed $200M in revenue and turned profitable in 2021, and now leans heavily into AI for adjudication and catching identity fraud.",
+    history:
+      "Daniel Yanisse and Jonathan Perichon met building driver onboarding at delivery startup Deliv, where the slow, API-less background check process inspired Checkr. They launched through Y Combinator in 2014; an early $9M Series A brought Uber on as a flagship customer and revenue scaled fast. Checkr raised a $250M Series E in 2021 at a $4.6B valuation, reaching roughly $5B the following year. It remains private.",
+    rubyEcosystem:
+      "Checkr's core is a long-running Ruby monolith built on Sinatra, surrounded by dozens of supporting microservices written in Ruby and Go. Go handles the most performance-sensitive services, while the Sinatra monolith and its Ruby services carry much of the product surface. It's a genuinely polyglot shop and a strong example of Ruby running high-stakes infrastructure at scale for the gig economy.",
+    openSource: [
+      { name: "checkr-ruby", url: "https://github.com/checkr/checkr-ruby", desc: "Official Ruby API bindings (the checkr-official gem)" },
+      { name: "goodcheckr", url: "https://github.com/checkr/goodcheckr", desc: "Regexp-based customizable linter for enforcing conventions" },
+    ],
+  },
+  gusto: {
+    id: "gusto",
+    name: "Gusto",
+    logo: "/sponsor_gusto.png",
+    url: "https://www.gusto.com",
+    sponsorId: "gusto",
+    summary:
+      "Cloud payroll, benefits, and HR for hundreds of thousands of small and medium-sized businesses.",
+    rubyConnection:
+      "One of the largest Rails shops anywhere. Two Rails monoliths, 150M+ Sidekiq jobs a day",
+    tag: "Built with Rails",
+    founded: "2011",
+    founders: "Josh Reeves, Tomer London, Edward Kim",
+    leadership: "Joshua Reeves, co-founder & CEO",
+    product:
+      "A cloud platform that handles payroll, health benefits, workers' comp, and HR for more than 400,000 small and medium businesses. Gusto crossed $1B in revenue in early 2026 and was last valued around $9.3B. It launched in 2012 as ZenPayroll, then rebranded to Gusto in 2015 as it expanded past payroll into full-service benefits and HR.",
+    history:
+      "Josh Reeves, Tomer London, and Edward Kim founded the company as ZenPayroll, launching out of Y Combinator's W2012 batch with a then-record $6.1M seed round. The three set out to fix the payroll and tax-compliance pain they had felt firsthand as founders and as children of small-business owners. Gusto hit a $1B valuation in 2015, $3.8B in 2019, and roughly $9.3B by 2025 on about $718M raised. It remains private and is widely expected to head toward the public markets.",
+    rubyEcosystem:
+      "Gusto has run on Ruby on Rails since 2012 and is one of the most influential Rails-at-scale companies in the world. The platform is built as two large Rails monoliths plus many smaller apps talking over Kafka via the Karafka gem, with a GraphQL-fronted single-page frontend. Gusto is a leader in gradual monolith modularization, adopting Packwerk and building the surrounding rubyatscale toolchain, and it joined the Rails Foundation as a contributing member in December 2024. It hosts the SF Ruby meetup at its San Francisco office.",
+    openSource: [
+      { name: "packs", url: "https://github.com/rubyatscale/packs", desc: "A spec for an extensible Ruby packaging system (rubyatscale org)" },
+      { name: "use_packs", url: "https://github.com/rubyatscale/use_packs", desc: "Create and maintain Packwerk packages" },
+      { name: "pack_stats", url: "https://github.com/rubyatscale/pack_stats", desc: "Track modularization progress across a Packwerk app" },
+      { name: "packwerk-extensions", url: "https://github.com/rubyatscale/packwerk-extensions", desc: "Extensions for enforcing Packwerk package boundaries" },
+    ],
+  },
   evilmartians: {
     id: "evilmartians",
     name: "Evil Martians",
