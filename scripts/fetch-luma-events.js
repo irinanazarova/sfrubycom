@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const CONTENT_DIR = path.join(__dirname, '..', 'src', 'content');
+const OUTPUT_PATH = path.join(CONTENT_DIR, 'meetups.json');
 
 // Ensure content directory exists
 if (!fs.existsSync(CONTENT_DIR)) {
@@ -14,115 +15,176 @@ if (!fs.existsSync(CONTENT_DIR)) {
 }
 
 /**
- * Fetch JSON from Luma API
+ * Minimal .env loader so local `npm run build` picks up LUMA_* without dotenv.
+ * Never overrides vars already present (e.g. Netlify's build env wins in prod).
  */
-function fetchLumaEvents(apiKey, calendarId) {
+function loadDotEnv() {
+  const envPath = path.join(__dirname, '..', '.env');
+  if (!fs.existsSync(envPath)) return;
+  for (const line of fs.readFileSync(envPath, 'utf8').split('\n')) {
+    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/);
+    if (!m) continue;
+    const key = m[1];
+    if (process.env[key] === undefined) {
+      process.env[key] = m[2].replace(/^["']|["']$/g, '');
+    }
+  }
+}
+
+/**
+ * Fetch the calendar's events from the Luma public API.
+ * Uses /public/v1 (v2 returns 404 for this endpoint) and follows pagination.
+ */
+function fetchLumaPage(apiKey, calendarId, cursor) {
   return new Promise((resolve, reject) => {
-    const options = {
-      hostname: 'api.lu.ma',
-      path: `/public/v2/calendar/list-events?calendar_api_id=${calendarId}`,
-      method: 'GET',
-      headers: {
-        'accept': 'application/json',
-        'x-luma-api-key': apiKey
-      }
-    };
+    let queryPath = `/public/v1/calendar/list-events?calendar_api_id=${encodeURIComponent(calendarId)}`;
+    if (cursor) queryPath += `&pagination_cursor=${encodeURIComponent(cursor)}`;
 
-    const req = https.request(options, (res) => {
-      if (res.statusCode !== 200) {
-        reject(new Error(`Luma API error: ${res.statusCode}`));
-        return;
-      }
-
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(data));
-        } catch (e) {
-          reject(new Error('Failed to parse Luma response'));
+    const req = https.request(
+      {
+        hostname: 'api.lu.ma',
+        path: queryPath,
+        method: 'GET',
+        headers: { accept: 'application/json', 'x-luma-api-key': apiKey },
+      },
+      (res) => {
+        if (res.statusCode !== 200) {
+          reject(new Error(`Luma API error: ${res.statusCode}`));
+          return;
         }
-      });
-      res.on('error', reject);
-    });
-
+        let data = '';
+        res.on('data', (chunk) => (data += chunk));
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error('Failed to parse Luma response'));
+          }
+        });
+        res.on('error', reject);
+      }
+    );
     req.on('error', reject);
     req.end();
   });
 }
 
+async function fetchAllEvents(apiKey, calendarId) {
+  const all = [];
+  let cursor = null;
+  do {
+    const page = await fetchLumaPage(apiKey, calendarId, cursor);
+    all.push(...(page.entries || []));
+    cursor = page.has_more ? page.next_cursor : null;
+  } while (cursor);
+  return all;
+}
+
 /**
- * Transform Luma event to our format
+ * Break an ISO timestamp into date (YYYY-MM-DD) and time (HH:MM) in a given
+ * IANA timezone, so an event stored as UTC renders on its local calendar day.
+ */
+function partsInTimezone(iso, timezone) {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return { date: '', time: '' };
+  const fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: timezone || 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+  const p = Object.fromEntries(fmt.formatToParts(d).map((x) => [x.type, x.value]));
+  const hour = p.hour === '24' ? '00' : p.hour; // Intl edge: midnight can format as 24
+  return { date: `${p.year}-${p.month}-${p.day}`, time: `${hour}:${p.minute}` };
+}
+
+function classifyType(name) {
+  const n = (name || '').toLowerCase();
+  if (n.includes('workshop')) return 'workshop';
+  if (n.includes('hackathon')) return 'workshop';
+  if (n.includes('conference') || n.includes('conf')) return 'conference';
+  if (n.includes('social') || n.includes('happy hour')) return 'social';
+  return 'meetup';
+}
+
+/**
+ * Transform a Luma entry into our Meetup shape (see src/utils/types.ts).
  */
 function transformEvent(entry) {
   const event = entry.event || entry;
+  const tz = event.timezone || 'America/Los_Angeles';
+  const start = partsInTimezone(event.start_at, tz);
+  const end = event.end_at ? partsInTimezone(event.end_at, tz) : { time: '' };
 
-  const startDate = new Date(event.start_at);
-  const endDate = event.end_at ? new Date(event.end_at) : null;
+  const geo = event.geo_address_json || {};
+  const location =
+    geo.full_address ||
+    [geo.address, geo.city_state].filter(Boolean).join(', ') ||
+    'San Francisco, CA';
 
-  // Determine event type based on name or description
-  let type = 'meetup';
-  const name = (event.name || '').toLowerCase();
-  if (name.includes('workshop')) type = 'workshop';
-  else if (name.includes('talk') || name.includes('speaker')) type = 'talks';
-  else if (name.includes('conference') || name.includes('conf')) type = 'conference';
-  else if (name.includes('social') || name.includes('happy hour')) type = 'social';
+  const host = entry.submitted_by || {};
 
   return {
-    id: event.api_id || event.id || `luma_${Date.now()}`,
+    id: event.api_id || event.id,
     title: event.name || 'SF Ruby Event',
-    description: event.description || '',
-    date: startDate.toISOString().split('T')[0],
-    time: startDate.toTimeString().slice(0, 5),
-    endTime: endDate ? endDate.toTimeString().slice(0, 5) : '',
-    location: event.geo_address_info?.full_address || event.location || 'San Francisco',
-    lumaUrl: event.url || `https://lu.ma/${event.api_id || ''}`,
-    registeredCount: entry.guest_count || event.guest_count || 0,
+    description: '', // Not returned by list-events; curate manually if needed.
+    date: start.date,
+    time: start.time,
+    endTime: end.time,
+    location,
+    venue: geo.address || '',
+    lumaUrl: event.url || `https://luma.com/${event.api_id || ''}`,
+    registeredCount: 0, // list-events omits guest counts.
     coverImageUrl: event.cover_url || '',
-    type: type
+    registrationOpen: event.registration_open ?? null,
+    spotsRemaining: event.spots_remaining ?? null,
+    hostName: host.name || '',
+    hostAvatar: host.avatar_url || '',
+    startAt: event.start_at,
+    endAt: event.end_at || '',
+    timezone: tz,
+    type: classifyType(event.name),
   };
 }
 
 async function main() {
   console.log('Fetching events from Luma...');
+  loadDotEnv();
 
   const { LUMA_API_KEY, LUMA_CALENDAR_ID } = process.env;
 
   if (!LUMA_API_KEY || !LUMA_CALENDAR_ID) {
     console.log('LUMA_API_KEY or LUMA_CALENDAR_ID not set, skipping Luma fetch');
-
-    // Write empty array if no API access
-    const existingPath = path.join(CONTENT_DIR, 'meetups.json');
-    if (!fs.existsSync(existingPath)) {
-      fs.writeFileSync(existingPath, JSON.stringify([], null, 2));
+    if (!fs.existsSync(OUTPUT_PATH)) {
+      fs.writeFileSync(OUTPUT_PATH, JSON.stringify([], null, 2));
       console.log('Created empty meetups.json');
     }
     return;
   }
 
   try {
-    const data = await fetchLumaEvents(LUMA_API_KEY, LUMA_CALENDAR_ID);
+    const entries = await fetchAllEvents(LUMA_API_KEY, LUMA_CALENDAR_ID);
+    const now = Date.now();
 
-    // Luma API returns { entries: [...] }
-    const entries = data.entries || data.events || [];
-
-    const meetups = entries
+    // Keep only events that haven't ended yet (soonest first).
+    const upcoming = entries
       .map(transformEvent)
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
+      .filter((m) => {
+        const ends = new Date(m.endAt || m.startAt).getTime();
+        return !isNaN(ends) && ends >= now;
+      })
+      .sort((a, b) => new Date(a.startAt) - new Date(b.startAt));
 
-    fs.writeFileSync(
-      path.join(CONTENT_DIR, 'meetups.json'),
-      JSON.stringify(meetups, null, 2)
-    );
-
-    console.log(`Wrote ${meetups.length} meetups`);
+    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(upcoming, null, 2));
+    console.log(`Wrote ${upcoming.length} upcoming meetup(s) (from ${entries.length} total).`);
   } catch (err) {
     console.error('Error fetching Luma events:', err.message);
-
-    // Write empty array on error if file doesn't exist
-    const existingPath = path.join(CONTENT_DIR, 'meetups.json');
-    if (!fs.existsSync(existingPath)) {
-      fs.writeFileSync(existingPath, JSON.stringify([], null, 2));
+    // Preserve the last good file on transient failure; only seed if missing.
+    if (!fs.existsSync(OUTPUT_PATH)) {
+      fs.writeFileSync(OUTPUT_PATH, JSON.stringify([], null, 2));
       console.log('Created empty meetups.json due to error');
     }
   }

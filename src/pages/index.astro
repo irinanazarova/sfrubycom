@@ -6,6 +6,7 @@ import IslandNav from "../components/IslandNav.astro";
 import NewsRunner from "../components/NewsRunner.astro";
 import SpeakerRoster from "../components/SpeakerRoster.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
+import UpcomingMeetups from "../components/UpcomingMeetups.astro";
 import "../styles/global.css";
 
 // Same build-time CFP deadline as /conference-2026, so the two pages cannot
@@ -390,21 +391,8 @@ const conference2026Sponsors = [
                             </p>
                         </div>
 
-                        <!-- Luma calendar embed -->
-                        <div class="px-card bg-white overflow-hidden mb-8">
-                            <div class="w-full">
-                                <iframe
-                                    src="https://lu.ma/embed/calendar/cal-L4SDawu65B1grBV/events"
-                                    title="SF Ruby upcoming meetup events"
-                                    class="w-full border-0"
-                                    style="min-height: 450px;"
-                                    allowfullscreen
-                                    aria-hidden="false"
-                                    tabindex="0"
-                                    loading="lazy"
-                                ></iframe>
-                            </div>
-                        </div>
+                        <!-- Next meetup, synced from Luma at build time -->
+                        <UpcomingMeetups />
 
                         <!-- CTAs -->
                         <div class="flex flex-wrap justify-center gap-3">
@@ -412,12 +400,12 @@ const conference2026Sponsors = [
                                 href="https://lu.ma/sfruby"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-ruby-500 text-white hover:bg-ruby-400"
+                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50"
                             >
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
-                                RSVP on Luma
+                                See all events
                             </a>
                             <a
                                 href="https://forms.gle/EZLqENWd5VjiLduq8"

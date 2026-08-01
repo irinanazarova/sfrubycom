@@ -1,0 +1,150 @@
+---
+/**
+ * UpcomingMeetups
+ *
+ * Replaces the Luma calendar iframe on the homepage with a styled card for the
+ * next SF Ruby meetup, synced from Luma at build time (see src/data/meetups.js).
+ * Falls back to a "follow on Luma" state when nothing is scheduled.
+ */
+import { getUpcomingMeetups } from "../data/meetups.js";
+
+const meetups = getUpcomingMeetups();
+const next = meetups[0] || null;
+const rest = meetups.slice(1);
+
+// Format from the raw timestamp + event timezone so the day never shifts,
+// regardless of the build machine's local timezone.
+function fmt(iso, timezone, opts) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    return new Intl.DateTimeFormat("en-US", {
+        timeZone: timezone || "America/Los_Angeles",
+        ...opts,
+    }).format(d);
+}
+
+function dayLabel(m) {
+    return fmt(m.startAt, m.timezone, {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+    });
+}
+function timeRange(m) {
+    const start = fmt(m.startAt, m.timezone, { hour: "numeric", minute: "2-digit" });
+    const end = fmt(m.endAt, m.timezone, { hour: "numeric", minute: "2-digit" });
+    return end ? `${start} – ${end}` : start;
+}
+function statusLabel(m) {
+    if (typeof m.spotsRemaining === "number" && m.spotsRemaining > 0) {
+        return `${m.spotsRemaining} spots left`;
+    }
+    if (m.registrationOpen) return "Registration open";
+    return "";
+}
+---
+
+{
+    next ? (
+        <div class="px-card bg-white overflow-hidden mb-8">
+            <div class="grid md:grid-cols-2">
+                {/* Cover */}
+                <a
+                    href={next.lumaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="relative block bg-slate-100 aspect-[16/10] md:aspect-auto md:min-h-[300px] group"
+                >
+                    {next.coverImageUrl && (
+                        <img
+                            src={next.coverImageUrl}
+                            alt={next.title}
+                            loading="lazy"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                        />
+                    )}
+                    <span class="px-plate px-plate--gold px-font text-px8 absolute top-4 left-4 px-2.5 py-1.5">
+                        Next Meetup
+                    </span>
+                </a>
+
+                {/* Details */}
+                <div class="p-6 md:p-8 flex flex-col">
+                    <h3 class="font-display font-bold text-xl md:text-2xl text-gray-900 leading-tight mb-5">
+                        {next.title}
+                    </h3>
+
+                    <div class="flex flex-col gap-3 text-gray-700 mb-6">
+                        <div class="flex items-start gap-2.5">
+                            <svg class="w-5 h-5 flex-shrink-0 text-ruby-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span>
+                                <span class="font-medium text-gray-900">{dayLabel(next)}</span>
+                                <span class="text-gray-500"> · {timeRange(next)}</span>
+                            </span>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <svg class="w-5 h-5 flex-shrink-0 text-ruby-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>{next.location}</span>
+                        </div>
+                        {statusLabel(next) && (
+                            <div class="flex items-center gap-2.5">
+                                <svg class="w-5 h-5 flex-shrink-0 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-emerald-700 font-medium">{statusLabel(next)}</span>
+                            </div>
+                        )}
+                    </div>
+
+                    <a
+                        href={next.lumaUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-ruby-500 text-white hover:bg-ruby-400 tap-press mt-auto"
+                    >
+                        RSVP on Luma
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    ) : (
+        <div class="px-card bg-white p-8 text-center mb-8">
+            <p class="text-lg text-gray-700 mb-2">No meetup on the calendar just yet.</p>
+            <p class="text-gray-500">
+                We host monthly. Follow us on Luma to catch the next one.
+            </p>
+        </div>
+    )
+}
+
+{
+    rest.length > 0 && (
+        <div class="mb-8">
+            <p class="px-font text-px8 text-gray-500 mb-3">More upcoming</p>
+            <ul class="flex flex-col gap-2">
+                {rest.map((m) => (
+                    <li>
+                        <a
+                            href={m.lumaUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center justify-between gap-3 bg-white border-2 border-gray-900 px-4 py-3 hover:bg-slate-50 transition-colors tap-press"
+                        >
+                            <span class="font-medium text-gray-900 truncate">{m.title}</span>
+                            <span class="text-sm text-gray-500 flex-shrink-0">{dayLabel(m)}</span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
