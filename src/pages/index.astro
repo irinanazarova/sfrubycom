@@ -122,6 +122,16 @@ const conference2026Sponsors = [
 
 // Monthly news cards live in src/data/homepage-news.js
 
+// Open roles per host (by sponsorId), passed to the host modal so it can link
+// each role to our job board. Only the fields the modal needs.
+const hostJobs: Record<string, { id: string; title: string; location?: string }[]> = {};
+for (const h of getAllHosts()) {
+    if (!h.sponsorId) continue;
+    const roles = getJobsBySponsor(h.sponsorId);
+    if (roles.length) {
+        hostJobs[h.id] = roles.map((j) => ({ id: j.id, title: j.title, location: j.location }));
+    }
+}
 
 ---
 
@@ -1025,8 +1035,29 @@ const conference2026Sponsors = [
     });
 </script>
 
-<script define:vars={{ hostsData }}>
+<script define:vars={{ hostsData, hostJobs }}>
     function buildHostModalContent(host) {
+        // Open roles on our job board for this host, linked high in the modal.
+        const jobs = hostJobs[host.id] || [];
+        let jobsHtml = "";
+        if (jobs.length > 0) {
+            const roleLinks = jobs.map(job =>
+                `<a href="/jobs#${job.id}" class="flex items-center justify-between gap-3 py-1.5 text-sm text-emerald-800 hover:text-emerald-900 hover:underline">
+                    <span class="font-medium">${job.title}</span>
+                    <svg class="w-4 h-4 flex-shrink-0 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </a>`
+            ).join("");
+            jobsHtml = `
+                <div class="mb-5 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                    <h4 class="text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        Now hiring · ${jobs.length} open ${jobs.length === 1 ? "role" : "roles"} on our board
+                    </h4>
+                    <div class="divide-y divide-emerald-100">${roleLinks}</div>
+                </div>
+            `;
+        }
+
         // Tag color
         let tagClass = "bg-red-50 text-red-700";
         if (host.tag === "Ruby SDK") tagClass = "bg-purple-50 text-purple-700";
@@ -1095,6 +1126,17 @@ const conference2026Sponsors = [
                     </div>
                 `;
             }
+            let sourceHtml = "";
+            if (host.rubySource) {
+                sourceHtml = `
+                    <a href="${host.rubySource.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs font-medium text-red-700 hover:text-red-900 hover:underline">
+                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.247m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.247" />
+                        </svg>
+                        Read more: ${host.rubySource.label}
+                    </a>
+                `;
+            }
             ecosystemHtml = `
                 <div class="mb-5 p-4 bg-gradient-to-br from-red-50 to-rose-50 rounded-xl border border-red-100">
                     <h4 class="text-xs font-semibold text-red-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
@@ -1104,6 +1146,7 @@ const conference2026Sponsors = [
                         Ruby & Rails Ecosystem
                     </h4>
                     <p class="text-sm text-gray-700 leading-relaxed">${host.rubyEcosystem}</p>
+                    ${sourceHtml}
                     ${openSourceHtml}
                 </div>
             `;
@@ -1133,6 +1176,13 @@ const conference2026Sponsors = [
                     </div>
                 </div>
 
+                ${host.rubyConnection ? `
+                <div class="flex items-start gap-2 mb-5">
+                    <svg class="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/></svg>
+                    <p class="text-sm font-semibold text-gray-900 leading-snug">${host.rubyConnection}</p>
+                </div>` : ""}
+
+                ${jobsHtml}
                 ${productHtml}
                 ${historyHtml}
                 ${ecosystemHtml}
