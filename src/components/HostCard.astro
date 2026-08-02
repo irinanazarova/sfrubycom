@@ -48,19 +48,19 @@ const jobs = host.sponsorId ? getJobsBySponsor(host.sponsorId) : [];
         }
     </div>
 
-    <!-- Logo -->
-    <div class="px-4 py-4 flex items-center justify-center h-28">
+    <!-- Logo (files are pre-trimmed; cap-height keeps every logo a consistent size) -->
+    <div class="px-5 flex items-center justify-center h-20">
         <img
             src={host.logo}
             alt={host.name}
-            class="w-full h-full object-contain group-hover:scale-105 transition-transform"
+            class="max-h-10 max-w-[85%] w-auto object-contain group-hover:scale-105 transition-transform"
             loading="lazy"
         />
     </div>
 
     <!-- Content -->
     <div class="px-4 pb-4 pt-1 flex flex-col flex-1">
-        <p class="text-xs text-gray-500 mt-auto">{host.rubyConnection}</p>
+        <p class="text-sm text-gray-600 leading-snug mt-auto">{host.rubyConnection}</p>
     </div>
 
     <!-- Jobs footer -->
