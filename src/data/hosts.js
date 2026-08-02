@@ -19,6 +19,10 @@ export const hosts = {
       "Paul Graham launched YC in Cambridge in 2005 with the radical idea of funding hackers, not MBAs. The first batch was 8 startups including Reddit and Loopt. YC moved to Mountain View, then San Francisco, growing from funding a handful of startups to 400+ per batch. Sam Altman took over as president in 2014, scaling the program massively before departing to lead OpenAI. Garry Tan, a former YC partner who had built Bookface and the Demo Day website, returned as President & CEO in January 2023.",
     rubyEcosystem:
       "YC's internal platform — from the application system to Bookface (their private social network for founders) to batch management — runs on Rails, React, and Postgres, maintained by a team of about 15 full-stack engineers. Many of the most iconic Rails startups in the world got their start at YC. YC keeps all their Ruby code proprietary, but their commitment to Rails as the backbone of a $600B+ accelerator speaks for itself.",
+    rubySource: {
+      url: "https://www.ycombinator.com/software",
+      label: "Y Combinator: Software at YC (Rails, React, Postgres)",
+    },
   },
   github: {
     id: "github",
@@ -39,6 +43,10 @@ export const hosts = {
       "Chris Wanstrath and PJ Hyett started GitHub in 2007 as a weekend project to make Git easier to use. Tom Preston-Werner joined as the technical visionary. They launched in 2008 and grew entirely through word-of-mouth — by 2013 they had 3M users without a single salesperson. GitHub defined the modern open source workflow: fork, branch, pull request, merge. Microsoft acquired GitHub for $7.5B in 2018. Thomas Dohmke served as CEO from 2021 until departing at the end of 2025.",
     rubyEcosystem:
       "GitHub is the largest Rails application in the world — nearly 2 million lines of Ruby. The team upgrades Rails every single week. GitHub has contributed massively to the Ruby ecosystem with 30+ open-source Ruby repos. Tom Preston-Werner created Jekyll.",
+    rubySource: {
+      url: "https://github.blog/engineering/architecture-optimization/building-github-with-ruby-and-rails/",
+      label: "The GitHub Blog: Building GitHub with Ruby and Rails",
+    },
     openSource: [
       { name: "Linguist", url: "https://github.com/github-linguist/linguist", desc: "Language detection powering every GitHub repo (13K+ stars)" },
       { name: "Scientist", url: "https://github.com/github/scientist", desc: "Safe refactoring pattern, ported to many languages (7.7K stars)" },
@@ -52,7 +60,7 @@ export const hosts = {
   chime: {
     id: "chime",
     name: "Chime",
-    logo: "/sponsor_chime.png",
+    logo: "/host_chime.png",
     url: "https://www.chime.com",
     sponsorId: "chime",
     summary:
@@ -68,6 +76,10 @@ export const hosts = {
       "Chris Britt and Ryan King founded Chime in 2012 with a simple thesis: banking should be free and helpful, not extractive. They launched the Chime debit card in 2014, offering early direct deposit — a feature that became their main growth driver. The company reached a $25B valuation in 2021, making it one of the most valuable fintechs in the US.",
     rubyEcosystem:
       "Chime runs a massive Rails monolith that processes millions of financial transactions daily. In a domain where many companies reach for Java or Go, Chime has proven that Rails can handle high-stakes, high-throughput financial infrastructure at scale.",
+    rubySource: {
+      url: "https://medium.com/life-at-chime/increasing-application-performance-and-deep-diving-into-open-source-code-d1f0b1336bf0",
+      label: "Life at Chime: performance and open source on Rails",
+    },
     openSource: [
       { name: "sql_enum", url: "https://github.com/1debit/sql_enum", desc: "Native SQL enums for ActiveRecord (~3M downloads)" },
       { name: "rails-properties", url: "https://github.com/1debit/rails-properties", desc: "Rails properties (~2.8M downloads)" },
@@ -92,6 +104,10 @@ export const hosts = {
       "David Cramer built the first version of Sentry in 2008 as a Django error logger called django-db-log. He open-sourced it, and it quickly gained traction across language communities. In 2012, Cramer and Chris Jennings co-founded Functional Software (later renamed Sentry) to build a hosted version. Sentry has since raised $217M and grown to support every major programming language, while keeping the core product open source. Milin Desai joined as CEO, with Cramer transitioning to Chief Product Officer.",
     rubyEcosystem:
       "Sentry's Ruby gems have over 400 million total downloads across the ecosystem. Their Ruby SDK team actively maintains first-class support for Rails with automatic error capturing, performance tracing, profiling, and Sidekiq integration. Sentry sponsors Ruby conferences and meetups worldwide.",
+    rubySource: {
+      url: "https://blog.sentry.io/sentry-ruby-sdk/",
+      label: "Sentry: inside the sentry-ruby SDK",
+    },
     openSource: [
       { name: "sentry-ruby", url: "https://github.com/getsentry/sentry-ruby", desc: "Core Ruby SDK + sentry-rails, sentry-sidekiq (124M+ downloads)" },
     ],
@@ -99,7 +115,7 @@ export const hosts = {
   cisco: {
     id: "cisco",
     name: "Cisco Meraki",
-    logo: "/sponsor_cisco.png",
+    logo: "/host_cisco.png",
     url: "https://meraki.cisco.com",
     sponsorId: "cisco",
     summary:
@@ -115,6 +131,10 @@ export const hosts = {
       "Founded at MIT in 2006, Meraki started as a research project to build low-cost mesh networking for developing countries. Sanjit Biswas and John Bicket pivoted to enterprise cloud-managed networking, raising early funding and growing quickly. Cisco acquired Meraki for $1.2B in 2012 — at the time one of the largest enterprise startup acquisitions. Today Meraki is one of Cisco's fastest-growing divisions, generating billions in annual revenue.",
     rubyEcosystem:
       "Meraki's 2-million-line Rails monolith has been running since 2007 — one of the oldest and largest Rails apps in the world. The dashboard that manages millions of network devices worldwide is pure Rails. Their SF engineering team regularly presents at Ruby meetups about scaling Rails in enterprise environments, and they're one of the largest employers of Rails engineers in the Bay Area.",
+    rubySource: {
+      url: "https://www.youtube.com/watch?v=C7SunETD9Ng",
+      label: "Inside the 3rd largest Rails monolith in the world (Cisco Meraki)",
+    },
   },
   newrelic: {
     id: "newrelic",
@@ -135,6 +155,10 @@ export const hosts = {
       "Lew Cirne founded New Relic in 2008, having previously built Wily Technology (Java APM, sold to CA for $375M). New Relic started as a Ruby-only APM tool — the newrelic_rpm gem was one of the first production monitoring tools for Rails. The name \"New Relic\" is an anagram of Lew Cirne. The company rode the Rails wave to early success, then expanded to support every major language. IPO'd in 2014, taken private in 2023 for $6.5B. Ashan Willy took over as CEO.",
     rubyEcosystem:
       "New Relic didn't just use Ruby — it helped create the entire APM industry from within the Ruby ecosystem. The newrelic_rpm gem has over 176 million downloads, making it one of the most downloaded Ruby gems of all time. Their Ruby agent remains one of the most mature APM tools available, with deep Rails integration for ActiveRecord, ActionController, and background jobs.",
+    rubySource: {
+      url: "https://techcrunch.com/2008/11/12/new-relic-raises-6-million-for-rails-performance-monitoring/",
+      label: "TechCrunch (2008): New Relic's Rails performance monitoring",
+    },
     openSource: [
       { name: "newrelic-ruby-agent", url: "https://github.com/newrelic/newrelic-ruby-agent", desc: "Core APM agent for Ruby (176M+ downloads, 1.2K stars)" },
       { name: "centurion", url: "https://github.com/newrelic/centurion", desc: "Docker fleet deployment tool (1.7K stars, archived)" },
@@ -158,6 +182,10 @@ export const hosts = {
       "Hubert Palan, a Czech product manager frustrated with spreadsheet-based product planning, founded Productboard in 2014 with Daniel Hejl. They launched from Prague and quickly attracted Silicon Valley attention. The company raised multiple rounds — including a $125M Series D in 2022 — reaching unicorn status at $1.7B. Productboard has offices in San Francisco, Prague, and Dublin.",
     rubyEcosystem:
       "Productboard's core platform is a Rails monolith that serves thousands of companies. Their engineering team in San Francisco actively participates in the Ruby community, hosting meetups at their office and speaking about how they scale Rails for a complex, feature-rich SaaS product.",
+    rubySource: {
+      url: "https://www.productboard.com/blog/inside-productboards-platform-tribe/",
+      label: "Productboard Engineering: inside our Rails monolith",
+    },
   },
   figma: {
     id: "figma",
@@ -177,26 +205,34 @@ export const hosts = {
       "Dylan Field dropped out of Brown University in 2012 to start Figma, inspired by Google Docs' real-time collaboration. He teamed up with Evan Wallace, who had built WebGL graphics demos including a real-time water simulation. They spent 4 years in stealth, launching publicly in 2016. Figma grew explosively through word-of-mouth, becoming the default design tool at most tech companies by 2020. Adobe's $20B acquisition attempt in 2022 (later abandoned) validated Figma as one of the most valuable design companies ever built.",
     rubyEcosystem:
       "Figma is a fascinating Ruby story — while the design editor is built with C++/WebAssembly, the entire backend is a Ruby monolith running Sinatra and ActiveRecord (not Rails). This monolith handles authentication, file management, team collaboration, billing, and API requests. Figma's engineering team has written extensively about scaling this Ruby monolith. Internally they use forks of popular Ruby tools like Shopify's packwerk, Sorbet for type checking, and ci-queue for distributed testing — proving that Ruby isn't just for Rails.",
+    rubySource: {
+      url: "https://www.figma.com/blog/how-we-rolled-out-our-own-permissions-dsl-at-figma/",
+      label: "Figma Engineering: our Ruby (Sinatra + ActiveRecord) monolith",
+    },
   },
   intercom: {
     id: "intercom",
-    name: "Intercom",
-    logo: "/sponsor_intercom.png",
+    name: "Fin",
+    logo: "/host_fin.svg",
     url: "https://intercom.com",
     sponsorId: "intercom",
     summary:
-      "AI-first customer service platform transforming how businesses connect with customers.",
+      "Fin (formerly Intercom), the AI-first customer service company behind the Fin AI agent.",
     rubyConnection:
-      "2M-line Rails majestic monolith. 100K+ tests per PR in 6 minutes",
+      "Ex-Intercom. 2M-line Rails majestic monolith, 100K+ tests per PR in 6 minutes",
     tag: "Built with Rails",
     founded: "2011",
     founders: "Eoghan McCabe, Des Traynor, Ciaran Lee, David Barrett",
     product:
-      "An AI-first customer service platform that combines a messenger, help center, bots, and a shared inbox to help businesses communicate with customers. Intercom's Fin AI agent can resolve over 50% of support conversations autonomously. Used by 25,000+ businesses including Atlassian, Amazon, and Lyft.",
+      "An AI-first customer service platform combining a messenger, help center, bots, and a shared inbox. Its Fin AI agent resolves a large share of support conversations autonomously, and the customer service software still ships under the Intercom name. Used by 25,000+ businesses including Atlassian, Amazon, and Lyft.",
     history:
-      "Four Irish co-founders — Eoghan McCabe, Des Traynor, Ciaran Lee, and David Barrett — started Intercom in California in 2011 with the vision of making internet business personal. Des Traynor, a prolific blogger and speaker, helped build Intercom's brand through content marketing. The company grew rapidly, reaching unicorn status. Eoghan McCabe, who had stepped back in 2020, returned as CEO in October 2022 to lead Intercom's AI-first transformation with the Fin AI agent.",
+      "Four Irish co-founders (Eoghan McCabe, Des Traynor, Ciaran Lee, and David Barrett) started Intercom in California in 2011 to make internet business personal. The company grew into a unicorn, and Eoghan McCabe returned as CEO in 2022 to lead an AI-first pivot around the Fin AI agent. In May 2026 the company renamed itself Fin after that agent, keeping Intercom as the name of its customer service product. In June 2026, Salesforce agreed to acquire Fin for about $3.6 billion, a deal expected to close in Salesforce's fiscal 2027.",
     rubyEcosystem:
-      "Intercom proudly runs what they call a 'majestic monolith' — a 2-million-line Rails application. Their CI runs 100K+ tests per PR in just 6 minutes. Intercom's engineering team has been one of the most vocal advocates for the Rails monolith architecture, regularly publishing talks about why they chose to stay on Rails rather than break into microservices.",
+      "The company runs what it calls a 'majestic monolith,' a roughly 2-million-line Rails application, with CI running 100K+ tests per pull request in about 6 minutes. Its engineering team is one of the most vocal advocates for the Rails monolith architecture, and Rails has been at the core of the Fin and Intercom product since day one.",
+    rubySource: {
+      url: "https://www.intercom.com/blog/the-safety-of-speed-shipping-code-at-intercom/",
+      label: "Intercom (now Fin): shipping code on a Rails monolith",
+    },
     openSource: [
       { name: "intercom-rails", url: "https://github.com/intercom/intercom-rails", desc: "Install Intercom in a Rails app (287 stars)" },
       { name: "intercom-ruby", url: "https://github.com/intercom/intercom-ruby", desc: "Ruby bindings for the Intercom API (281 stars)" },
@@ -207,7 +243,7 @@ export const hosts = {
   angellist: {
     id: "angellist",
     name: "AngelList",
-    logo: "/sponsor_angellist.png",
+    logo: "/host_angellist.png",
     url: "https://angellist.com",
     sponsorId: "angellist",
     summary:
@@ -224,6 +260,10 @@ export const hosts = {
       "Naval Ravikant and Babak Nivi, who had previously co-created the influential Venture Hacks blog, launched AngelList in 2010 as a simple list connecting startups with angel investors. It evolved into a full platform for startup fundraising, then expanded into fund management, syndicates, and rolling funds. The company has since spun off into multiple entities: AngelList Venture (fund management) and Wellfound (formerly AngelList Talent). Avlok Kohli took over as CEO in 2019, transforming AngelList into a fintech infrastructure platform.",
     rubyEcosystem:
       "AngelList administers $171B in assets through a Rails modular monolith — one of the highest-stakes Rails applications in production. Their engineering team made the deliberate choice to consolidate microservices back into a monolith, and they've spoken publicly about the productivity gains.",
+    rubySource: {
+      url: "https://podcast.rubyonrails.org/2462975/episodes/17978596-alexander-stathis-scaling-a-modular-rails-monolith-at-angellist",
+      label: "On Rails podcast: scaling a modular Rails monolith at AngelList",
+    },
     openSource: [
       { name: "zaxcel", url: "https://github.com/angellist/zaxcel", desc: "Ruby DSL for building Excel spreadsheets (70 stars)" },
       { name: "boba", url: "https://github.com/angellist/boba", desc: "Custom Tapioca compilers for Sorbet type-checking (24 stars)" },
@@ -232,7 +272,7 @@ export const hosts = {
   planetscale: {
     id: "planetscale",
     name: "PlanetScale",
-    logo: "/sponsor_planetscale.png",
+    logo: "/host_planetscale.png",
     url: "https://planetscale.com",
     sponsorId: "planetscale",
     summary:
@@ -249,6 +289,10 @@ export const hosts = {
       "Jiten Vaidya and Sugu Sougoumarane, who worked on Vitess at YouTube, founded PlanetScale in 2018 to bring YouTube-scale database technology to every company. Vitess was originally built to scale YouTube's MySQL database when no existing solution could handle the load. PlanetScale raised $105M and launched their serverless database platform, pioneering the concept of database branching. Sam Lambert, formerly VP of Engineering at GitHub, took over as CEO in January 2026.",
     rubyEcosystem:
       "In a delightful twist, the database company runs on Rails. PlanetScale's dashboard, API, and control plane are all built with Ruby on Rails. PlanetScale also champions the Trilogy MySQL adapter (built by GitHub) for Rails apps.",
+    rubySource: {
+      url: "https://planetscale.com/blog/building-planetscale-with-planetscale",
+      label: "PlanetScale: building the dashboard on a Rails API",
+    },
     openSource: [
       { name: "fast_page", url: "https://github.com/planetscale/fast_page", desc: "Blazing fast ActiveRecord pagination with deferred joins (327 stars)" },
       { name: "planetscale_rails", url: "https://github.com/planetscale/planetscale_rails", desc: "Zero-downtime schema migrations for PlanetScale" },
@@ -258,7 +302,7 @@ export const hosts = {
   binti: {
     id: "binti",
     name: "Binti",
-    logo: "/sponsor_binti.png",
+    logo: "/host_binti.png",
     url: "https://binti.com",
     sponsorId: "binti",
     summary:
@@ -274,11 +318,15 @@ export const hosts = {
       "Felicia Curcuru founded Binti in 2014 after volunteering as a Court Appointed Special Advocate (CASA) for foster youth in San Francisco. She witnessed a nine-year-old being placed in a group home due to a shortage of foster families — and saw how outdated paper-based processes slowed down placements. Binti (named after the Swahili word for 'daughter') started by digitizing the home study process, then expanded to cover the entire child welfare workflow. The company has grown to serve nearly half of all US foster children.",
     rubyEcosystem:
       "Binti's Rails application is one of the most impactful uses of Ruby in the world — it directly serves 47% of US foster children across 550+ agencies in 36 states. The platform handles sensitive, regulated workflows where reliability and data integrity are critical. Binti is a powerful example of Rails being used for mission-critical government technology that improves lives.",
+    rubySource: {
+      url: "https://www.rubyevents.org/talks/how-to-translate-your-rails-app-into-over-20-languages-and-why-you-should",
+      label: "Binti: translating a Rails app into 20+ languages (talk)",
+    },
   },
   persona: {
     id: "persona",
     name: "Persona",
-    logo: "/host_persona.png",
+    logo: "/host_persona_card.png",
     url: "https://withpersona.com",
     sponsorId: "persona",
     summary:
@@ -294,6 +342,10 @@ export const hosts = {
       "Rick Song and Charles Yeh founded Persona in 2018 after seeing how fragmented and painful identity verification was for businesses. Most companies were stitching together multiple vendors for document checks, database lookups, and fraud signals. Persona unified all of this into a single, customizable platform. The company raised over $400M — including a $200M Series D in 2025 — and is valued at $2B, making it one of the most valuable identity companies in the world.",
     rubyEcosystem:
       "Persona's Rails application powers identity verification across 200+ countries — handling government IDs, biometric checks, and sensitive personal data in a highly regulated environment. Ruby Central featured Persona as a spotlight on scaling high-stakes identity systems with Rails. Their SF engineering team actively hosts and participates in Ruby meetups.",
+    rubySource: {
+      url: "https://rubycentral.org/news/company-spotlight-how-persona-scales-high-stakes-identity-systems-with-rails/",
+      label: "Ruby Central: how Persona scales identity systems with Rails",
+    },
     openSource: [
       { name: "arctic", url: "https://github.com/persona-id/arctic", desc: "Frozen, deduplicated environment variable access (18 stars)" },
     ],
@@ -342,6 +394,10 @@ export const hosts = {
       "Daniel Yanisse and Jonathan Perichon met building driver onboarding at delivery startup Deliv, where the slow, API-less background check process inspired Checkr. They launched through Y Combinator in 2014; an early $9M Series A brought Uber on as a flagship customer and revenue scaled fast. Checkr raised a $250M Series E in 2021 at a $4.6B valuation, reaching roughly $5B the following year. It remains private.",
     rubyEcosystem:
       "Checkr's core is a long-running Ruby monolith built on Sinatra, surrounded by dozens of supporting microservices written in Ruby and Go. Go handles the most performance-sensitive services, while the Sinatra monolith and its Ruby services carry much of the product surface. It's a genuinely polyglot shop and a strong example of Ruby running high-stakes infrastructure at scale for the gig economy.",
+    rubySource: {
+      url: "https://medium.com/checkr/international-expansion-and-multi-region-deployments-2dc49b7305b0",
+      label: "Checkr Engineering on their Ruby/Sinatra monolith",
+    },
     openSource: [
       { name: "checkr-ruby", url: "https://github.com/checkr/checkr-ruby", desc: "Official Ruby API bindings (the checkr-official gem)" },
       { name: "goodcheckr", url: "https://github.com/checkr/goodcheckr", desc: "Regexp-based customizable linter for enforcing conventions" },
@@ -367,6 +423,10 @@ export const hosts = {
       "Josh Reeves, Tomer London, and Edward Kim founded the company as ZenPayroll, launching out of Y Combinator's W2012 batch with a then-record $6.1M seed round. The three set out to fix the payroll and tax-compliance pain they had felt firsthand as founders and as children of small-business owners. Gusto hit a $1B valuation in 2015, $3.8B in 2019, and roughly $9.3B by 2025 on about $718M raised. It remains private and is widely expected to head toward the public markets.",
     rubyEcosystem:
       "Gusto has run on Ruby on Rails since 2012 and is one of the most influential Rails-at-scale companies in the world. The platform is built as two large Rails monoliths plus many smaller apps talking over Kafka via the Karafka gem, with a GraphQL-fronted single-page frontend. Gusto is a leader in gradual monolith modularization, adopting Packwerk and building the surrounding rubyatscale toolchain, and it joined the Rails Foundation as a contributing member in December 2024. It hosts the SF Ruby meetup at its San Francisco office.",
+    rubySource: {
+      url: "https://rubyonrails.org/2024/12/11/gusto-joins-rails-foundation",
+      label: "Gusto joins the Rails Foundation",
+    },
     openSource: [
       { name: "packs", url: "https://github.com/rubyatscale/packs", desc: "A spec for an extensible Ruby packaging system (rubyatscale org)" },
       { name: "use_packs", url: "https://github.com/rubyatscale/use_packs", desc: "Create and maintain Packwerk packages" },
@@ -377,7 +437,7 @@ export const hosts = {
   evilmartians: {
     id: "evilmartians",
     name: "Evil Martians",
-    logo: "/evilmartians.png",
+    logo: "/host_evilmartians.png",
     url: "https://evilmartians.com",
     summary:
       "Product development consultancy and open-source powerhouse behind 100+ developer tools used by millions.",
@@ -393,6 +453,10 @@ export const hosts = {
       "Alexander Tishchenko and Yaroslav Markin co-founded Evil Martians in 2006. The company grew into one of the most respected Ruby consultancies in the world, known equally for shipping client products and building open-source tools. Irina Nazarova, a former C++ engineer and JP Morgan analyst, rose from account manager to CFO to CEO — and founded the SF Ruby community along the way. The Martian Chronicles blog reaches 500K+ developers/year. Notable clients include bolt.new/StackBlitz (scaled to $40M+ ARR in 5 months), Tines (reached unicorn at $1.1B), Whop, Doximity, and BetterUp.",
     rubyEcosystem:
       "Evil Martians is arguably the single most prolific contributor to the Ruby/Rails open-source ecosystem. They maintain 100+ projects with combined hundreds of millions of gem downloads. Their team includes Vladimir Dementyev (palkan) — creator of AnyCable, TestProf, Action Policy, and author of \"Layered Design for Ruby on Rails Applications\" — and Andrey Sitnik, whose JavaScript tools (PostCSS, Autoprefixer, Nano ID) account for 0.7% of all npm downloads.",
+    rubySource: {
+      url: "https://evilmartians.com/services/ruby-on-rails-consulting",
+      label: "Evil Martians: Ruby on Rails consulting",
+    },
     openSource: [
       { name: "test-prof", url: "https://github.com/test-prof/test-prof", desc: "Ruby test profiling toolkit (2K stars, 72M+ downloads)" },
       { name: "AnyCable", url: "https://github.com/anycable/anycable", desc: "Real-time WebSocket server for Rails (2.3K stars)" },
