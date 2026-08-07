@@ -96,6 +96,7 @@ export const COMPANY_META = {
   angellist: { industry: "Fintech", stage: "Growth" },
 
   // Off-roster companies (inline companyId)
+  duler: { industry: "Hospitality / Workforce", stage: "Early-stage" },
   monami: { industry: "GovTech", stage: "Early-stage" },
   levelpath: { industry: "Enterprise SaaS", stage: "Growth" },
   mudflap: { industry: "Fintech", stage: "Growth" },
