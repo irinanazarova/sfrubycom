@@ -1120,6 +1120,34 @@ const meetupRecordings = [
       },
     ],
   },
+  {
+    id: "meetup-2026-07",
+    title: "SF Bay Area Ruby Meetup - July 2026",
+    date: "2026-07-22",
+    youtubeId: "13a6XcrzQcc",
+    venue: "Sentry",
+    rubyEventsUrl:
+      "https://www.rubyevents.org/events/sf-bay-area-ruby-meetup",
+    talks: [
+      {
+        title: "garnet-js: Implementing the YARV Virtual Machine",
+        speaker: "Cameron Dutro",
+        company: "Cisco Meraki",
+        timestamp: 469,
+      },
+      {
+        title: "Fair by Design: Orchestrating Background Jobs in Ruby",
+        speaker: "Alexander Baygeldin",
+        company: "Evil Martians",
+        timestamp: 2800,
+      },
+      {
+        title: "The Anatomy of an ERB Rendering Engine",
+        speaker: "Marco Roth",
+        timestamp: 5700,
+      },
+    ],
+  },
 ];
 
 // Sort by date descending (newest first)
