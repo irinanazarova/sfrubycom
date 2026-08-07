@@ -3,6 +3,22 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "founding-senior-fullstack-duler": {
+    id: "founding-senior-fullstack-duler",
+    title: "Founding Senior Full Stack Engineer",
+    companyId: "duler",
+    companyName: "Duler",
+    companyLogo: "/company_duler.svg",
+    featured: true,
+    location: "Raleigh, NC or Remote (US / Canada / Americas)",
+    type: "Full-time",
+    salary: "$150K - $180K + 1-2% equity",
+    description:
+      "Duler builds a workforce-management platform for hospitality, giving hotel teams intelligent scheduling and staffing software. Founded by the founder of Lodgistics (acquired 2024), currently in pilot with 14 hotel clients. This is the founding senior engineering hire: own the technical stack end to end, ship features with design partners, stabilize the platform, set engineering standards, and hire and mentor the early team. Backend is Ruby 3 and Rails 8 (PostgreSQL, Redis, Solid Queue, Devise, Action Policy, RSpec, Kamal, Docker). Frontend is React 19 with strict TypeScript, Vite, Tailwind, shadcn/Radix, Zod, and Nanostores, using OpenAPI-first client generation. Eastern timezone: onsite in Raleigh NC, hybrid, or remote across the US, Canada, and the Americas.",
+    chips: ["Fullstack", "React", "TypeScript", "Founding role"],
+    url: "https://rubyonremote.com/jobs/74860-founding-senior-full-stack-engineer-at-duler",
+    postedDate: "2026-08-07",
+  },
   "software-engineer-backend-koah": {
     id: "software-engineer-backend-koah",
     title: "Software Engineer - Backend",

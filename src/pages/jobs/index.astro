@@ -77,7 +77,7 @@ const jobs = getSortedJobs().map((job) => {
         companyLogo,
         companyId,
         isYC,
-        isFeatured: !!job.sponsorId,
+        isFeatured: !!job.sponsorId || !!job.featured,
         workType: parseWorkType(job.location),
         geo: parseGeo(job.location),
         level: parseLevel(job.title),
