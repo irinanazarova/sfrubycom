@@ -19,11 +19,13 @@ const fighters = conferenceSpeakers
     .filter((s) => s.pixel && !offTheGrid.includes(s.name))
     .map((s) => ({ name: s.name, org: s.orgs[0].name, pixel: s.pixel }));
 
+// Cameos carry their real affiliation, same as the speakers: everyone on the
+// roster reads as a peer, stage slot or not.
 const cameos = [
-    { name: "Amanda Kinney", org: "Organizer", pixel: "/community_amanda_kinney_pixel_256.png" },
-    { name: "Andrew Ford", org: "Attendee", pixel: "/community_andrew_ford_pixel_256.png" },
-    { name: "Chris Fung", org: "Attendee", pixel: "/community_chris_fung_pixel_256.png" },
-    { name: "James Kerr", org: "Attendee", pixel: "/community_james_kerr_pixel_256.png" },
+    { name: "Amanda Kinney", org: "Evil Martians", pixel: "/community_amanda_kinney_pixel_256.png" },
+    { name: "Andrew Ford", org: "Buttercut", pixel: "/community_andrew_ford_pixel_256.png" },
+    { name: "Chris Fung", org: "Gusto", pixel: "/community_chris_fung_pixel_256.png" },
+    { name: "James Kerr", org: "Tend", pixel: "/community_james_kerr_pixel_256.png" },
 ];
 // Fixed scatter positions so the cameos read as mixed in, not appended.
 [4, 8, 13, 17].forEach((pos, i) =>
