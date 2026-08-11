@@ -20,10 +20,14 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# research and content prep (not for website)
+# research and content prep (not for website): drafts, plans, research notes
 research/
 tech-stacks/
 drafts/
+plans/
+notes/
+*.draft.md
+*.plan.md
 
 # browser automation outputs (Playwright MCP)
 .playwright-mcp/
@@ -31,9 +35,21 @@ drafts/
 # scratch screenshots and exports at repo root (real assets live under public/ or src/)
 /*.png
 /*.pdf
+/images/
 
 # Playwright QA screenshots
 .qa-shots/
 
 # Raw YouTube transcripts pulled by scripts/fetch-subtitles.rb (summaries are the committed artifact)
 transcripts/
+
+# editor / LSP caches
+.ruby-lsp/
+
+# Claude Code local state (shared skills in .claude/skills/ stay tracked)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/scheduled_tasks.json
+
+# Local Netlify folder
+.netlify

@@ -117,58 +117,11 @@ function generateId(name) {
 }
 
 /**
- * Parse Yes/No to boolean
- */
-function parseBoolean(value) {
-  if (!value) return false;
-  return value.toLowerCase().trim() === 'yes';
-}
-
-/**
  * Parse roles string to array
  */
 function parseRoles(rolesStr) {
   if (!rolesStr) return [];
   return rolesStr.split(',').map(r => r.trim()).filter(Boolean);
-}
-
-/**
- * Parse percentage string to number
- */
-function parsePercentage(value) {
-  if (!value) return 0;
-  const num = parseInt(value.replace(/[^0-9]/g, ''), 10);
-  return isNaN(num) ? 0 : Math.min(100, Math.max(0, num));
-}
-
-/**
- * Transform startup row to JSON
- */
-function transformStartup(row) {
-  const name = row['Startup Name'] || row['Name'] || '';
-  if (!name) return null;
-
-  return {
-    id: generateId(name),
-    name: name,
-    logoUrl: row['Logo URL'] || row['Logo'] || '',
-    founderNames: row['Founder Name(s)'] || row['Founders'] || '',
-    founderLinkedIn: row['Founder LinkedIn Profile'] || row['LinkedIn'] || '',
-    website: row['Website'] || '',
-    oneLiner: (row['One-liner Description'] || row['Description'] || '').slice(0, 100),
-    foundedDate: row['Founded Date'] || '',
-    stage: row['Stage'] || 'Seed',
-    metric: row['ARR or Funding'] || row['Funding'] || '',
-    teamSize: parseInt(row['Team Size'] || '0', 10) || 0,
-    hiring: parseBoolean(row['Hiring?'] || row['Hiring']),
-    hiringRoles: parseRoles(row['Hiring Roles'] || ''),
-    location: row['Location'] || 'SF-based',
-    rubyPercentage: parsePercentage(row['Ruby/Rails Percentage'] || row['Ruby %']),
-    rubyUseCase: (row['Brief Ruby/Rails use case'] || row['Ruby Use Case'] || '').slice(0, 200),
-    researchOptIn: parseBoolean(row['Interested in "Startups on Rails" research?'] || row['Research Opt-in']),
-    researchEmail: row['Research contact email'] || '',
-    researchConsent: parseBoolean(row['Consent to include data in talks/keynotes?'] || row['Research Consent'])
-  };
 }
 
 /**
@@ -216,38 +169,11 @@ async function main() {
   console.log('Fetching data from Google Sheets...');
 
   const {
-    SHEET_STARTUPS_CSV_URL,
     SHEET_NEWS_CSV_URL,
     SHEET_TALKS_CSV_URL
   } = process.env;
 
-  // Fetch startups
-  if (SHEET_STARTUPS_CSV_URL) {
-    try {
-      console.log('Fetching startups...');
-      const csv = await fetchCSV(SHEET_STARTUPS_CSV_URL);
-      const rows = parseCSV(csv);
-      const startups = rows
-        .filter(row => {
-          const status = row['Approval Status'] || row['Status'] || '';
-          return status.toLowerCase() === 'approved' || status === '';
-        })
-        .map(transformStartup)
-        .filter(Boolean);
-
-      fs.writeFileSync(
-        path.join(CONTENT_DIR, 'startups.json'),
-        JSON.stringify(startups, null, 2)
-      );
-      console.log(`Wrote ${startups.length} startups`);
-    } catch (err) {
-      console.error('Error fetching startups:', err.message);
-    }
-  } else {
-    console.log('SHEET_STARTUPS_CSV_URL not set, skipping startups');
-  }
-
-  // Jobs are hand-maintained in src/data/jobs.js
+  // Jobs and startups are hand-maintained in src/data/jobs.js and src/data/startups.js
 
   // Fetch news
   if (SHEET_NEWS_CSV_URL) {

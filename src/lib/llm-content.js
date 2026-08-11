@@ -69,8 +69,8 @@ ${next.length ? next.join("\n") : "See [Luma](https://lu.ma/sfruby) for the next
 - [About](${SITE}/about.md): What SF Ruby is and how to get involved.
 
 ## Get involved
-- Meetups & RSVP: https://lu.ma/sfruby
-- Conference: ${SITE}/conference-2026
+- Meetups: ${SITE}/meetup (RSVP on https://lu.ma/sfruby)
+- Conference (Nov 10-12, 2026 at SFJAZZ): ${SITE}/
 - Sponsor: ${SITE}/sponsor-2026
 `;
 }
@@ -204,8 +204,8 @@ export function aboutMarkdown() {
 SF Ruby exists to promote Ruby as the language of choice for new startups, showcase real Ruby companies (especially conference demos), and support founders and engineers with content, meetups, jobs, and resources. We believe Ruby is the best language for building web applications, and San Francisco is where the most ambitious Ruby startups are born.
 
 ## What we do
-- **Monthly meetups** with talks, demos, and networking. RSVP on [Luma](https://lu.ma/sfruby).
-- **Annual conference.** SF Ruby Conf brings together 450+ Rubyists for two days of talks, workshops, and startup demos. See ${SITE}/conference-2026.
+- **Monthly meetups** with talks, demos, and networking: ${SITE}/meetup. RSVP on [Luma](https://lu.ma/sfruby).
+- **Annual conference.** SF Ruby Conf brings together 450+ Rubyists for two days of talks, workshops, and startup demos. See ${SITE}/.
 - **Jobs board.** A curated, monthly-audited board of Ruby/Rails roles at SF-area startups: ${SITE}/jobs.
 - **Startups & news.** We track Ruby companies and their milestones: ${SITE}/startups and ${SITE}/news.
 
@@ -220,7 +220,8 @@ export const PAGES = [
   {
     slug: "index",
     title: "Home",
-    description: "What SF Ruby is, upcoming meetups, and links to every section.",
+    description:
+      "The San Francisco Ruby Startup Conference 2026, plus what SF Ruby is and links to every section.",
     render: homeMarkdown,
   },
   {
@@ -270,8 +271,8 @@ SF Ruby (sfruby.com) promotes Ruby as the language of choice for new startups an
 ${links}
 
 ## Also
-- Meetup RSVPs: https://lu.ma/sfruby
+- Meetup page: ${SITE}/meetup (RSVPs: https://lu.ma/sfruby)
 - News feed (RSS): ${SITE}/news/rss.xml
-- Conference: ${SITE}/conference-2026
+- Conference (Nov 10-12, 2026 at SFJAZZ): ${SITE}/
 `;
 }

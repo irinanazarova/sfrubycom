@@ -1,17 +1,67 @@
+# sfruby.com
 
-## 🧞 Commands
+Source for [sfruby.com](https://sfruby.com), the home of the SF Ruby community: the San Francisco Ruby Startup Conference, monthly meetups, a curated Ruby/Rails jobs board, a directory of startups building on Ruby, and a running feed of Ruby company news.
 
-All commands are run from the root of the project, from a terminal:
+Built with [Astro](https://astro.build) 5 and Tailwind CSS, deployed as a static site on Netlify. The visual language is a custom 8-bit design system generated from design tokens; browse it live at [sfruby.com/design-system](https://sfruby.com/design-system).
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## What's on the site
 
-## 👀 Want to learn more?
+- **The conference**: the homepage sells the [San Francisco Ruby Startup Conference](https://sfruby.com/), November 10-12, 2026 at SFJAZZ.
+- **[Meetups](https://sfruby.com/meetup)**: the monthly SF Ruby meetup, with recordings of past sessions in [Videos](https://sfruby.com/videos).
+- **[Jobs](https://sfruby.com/jobs)**: Ruby and Rails roles at SF-area startups, hand-curated and audited monthly.
+- **[Startups](https://sfruby.com/startups)** and **[News](https://sfruby.com/news)**: companies building on Ruby and their milestones, with an [RSS feed](https://sfruby.com/news/rss.xml).
+- **LLM-friendly**: every main page has a Markdown twin (append `.md` to its URL) and the site publishes [llms.txt](https://sfruby.com/llms.txt).
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Getting started
+
+```bash
+npm install
+npm run dev        # dev server at localhost:4321
+```
+
+## Commands
+
+| Command             | Action                                              |
+| :------------------ | :-------------------------------------------------- |
+| `npm run dev`       | Start the dev server at `localhost:4321`            |
+| `npm run build`     | Fetch external data, then build to `./dist/`        |
+| `npm run build:dev` | Build without fetching external data (no env vars needed) |
+| `npm run preview`   | Preview the production build locally                |
+| `npm run fetch-data`| Fetch Google Sheets and Luma events data            |
+| `npm run qa`        | Mobile/desktop QA sweep of all routes (Playwright)  |
+
+Use `npm run build:dev` for local work: it skips the external fetches and builds from the JSON already committed in `src/content/`.
+
+## How content flows
+
+Content comes from three sources:
+
+1. **Google Sheets**: talks and news, fetched at build time by `scripts/fetch-sheets.js` into `src/content/*.json`.
+2. **Luma API**: meetup events, fetched by `scripts/fetch-luma-events.js`.
+3. **Hand-maintained files** in `src/data/`: jobs, startups, meetup recordings, hosts, sponsors, speakers, schedule.
+
+A scheduled GitHub Action rebuilds and redeploys the site weekly so sheet and Luma updates ship without a commit.
+
+## Environment variables
+
+Only needed for the full `npm run build` (data fetching); see `.env.example`:
+
+- `SHEET_NEWS_CSV_URL`, `SHEET_TALKS_CSV_URL`: Google Sheets CSV export URLs
+- `LUMA_API_KEY`, `LUMA_CALENDAR_ID`: Luma API access
+
+## Project structure
+
+- `src/pages/`: routes (index, talks, startups, jobs, news, photos, about)
+- `src/components/`: reusable Astro components
+- `src/data/`: JavaScript data exports with helpers
+- `src/content/`: JSON fetched from external sources
+- `src/design/tokens.mjs`: design tokens for the 8-bit design system (see `/design-system` on the site)
+- `scripts/`: build-time data fetching and asset generation
+
+## License
+
+The code is released under the [MIT License](LICENSE). Site content (talk summaries, news, job descriptions, photos) and third-party brand assets (company logos in `public/`) belong to their respective owners and are excluded from the license.
+
+## Contributing
+
+Spotted a stale job listing, a wrong speaker name, or a missing meetup recording? Issues and pull requests are welcome. For content conventions (name verification, editorial voice), see [CLAUDE.md](CLAUDE.md).
