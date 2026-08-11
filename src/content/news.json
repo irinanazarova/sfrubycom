@@ -978,5 +978,275 @@
     "category": "Product",
     "startupName": "Checkr",
     "source": "SiliconANGLE"
+  },
+  {
+    "id": "salesforce-acquires-fin",
+    "date": "2026-06-15",
+    "headline": "Salesforce to acquire Fin (formerly Intercom) for ~$3.6B, a landmark Rails exit",
+    "summary": "Salesforce signed a definitive agreement to buy Fin — the AI customer-service company known as Intercom until its May rebrand — for roughly $3.6 billion, its largest AI-agent acquisition to date. Fin's agent resolves about 76% of support requests autonomously, all running on a roughly 2-million-line Ruby on Rails monolith.",
+    "link": "https://www.salesforce.com/news/press-releases/2026/06/15/salesforce-signs-definitive-agreement-to-acquire-fin/",
+    "category": "Acquisition",
+    "startupName": "Fin (Intercom)",
+    "source": "Salesforce"
+  },
+  {
+    "id": "procore-acquires-dronedeploy",
+    "date": "2026-07-30",
+    "headline": "Rails-built Procore buys DroneDeploy for $845M to add AI reality capture",
+    "summary": "Procore, the publicly traded construction-management platform built on Ruby on Rails, agreed to acquire reality-capture and robotics company DroneDeploy for about $845 million in cash, pairing aerial and ground jobsite capture with Procore AI. The deal is targeted to close by the end of 2026.",
+    "link": "https://www.constructiondive.com/news/procore-acquires-dronedeploy-data-ai-cash/826667/",
+    "category": "Acquisition",
+    "startupName": "Procore",
+    "source": "Construction Dive"
+  },
+  {
+    "id": "rootly-acquires-thinkhive",
+    "date": "2026-07-28",
+    "headline": "Rootly acquires ThinkHive to make incident-response AI agents reliable",
+    "summary": "Rootly, the Rails-built AI incident-management platform, acquired ThinkHive, which traces AI-agent behavior and correlates metrics, traces, and evals to catch hallucination and drift in production. The buy lets Rootly deploy incident-response agents with verified reliability.",
+    "link": "https://rootly.com/blog/why-rootly-acquired-thinkhive",
+    "category": "Acquisition",
+    "startupName": "Rootly",
+    "source": "Rootly"
+  },
+  {
+    "id": "doximity-acquires-pathway",
+    "date": "2026-07-29",
+    "headline": "Doximity buys Pathway Medical for $63M to ground its clinical AI",
+    "summary": "Rails-based physician network Doximity acquired clinical-reference company Pathway Medical for $63 million ($26M cash plus $37M equity), feeding vetted guidelines, drug data, and trial results into its Clinical AI Suite. Doximity reports more than 300,000 AI users and 165 signed health-system AI clients.",
+    "link": "https://www.fiercehealthcare.com/health-tech/doximity-ceo-calls-2026-ai-investment-year-race-get-ai-front-doctors",
+    "category": "Acquisition",
+    "startupName": "Doximity",
+    "source": "Fierce Healthcare"
+  },
+  {
+    "id": "block-q2-2026",
+    "date": "2026-08-05",
+    "headline": "Block's Q2 profit jumps as AI lifts code changes per engineer 150%",
+    "summary": "Block (Square, Cash App), a longtime Ruby shop, grew Q2 2026 gross profit 25% to $3.17B and adjusted EPS 65% to $1.02, and raised full-year guidance to $12.51B. CEO Jack Dorsey credited AI-driven development for a 150% increase in code changes per engineer and a threefold jump in shipped Square features; Block also launched Buzz, its agentic collaboration platform, in July.",
+    "link": "https://finance.yahoo.com/markets/stocks/articles/block-q2-earnings-call-highlights-141600086.html",
+    "category": "Traction",
+    "startupName": "Block",
+    "source": "Yahoo Finance"
+  },
+  {
+    "id": "shopify-q2-2026",
+    "date": "2026-08-05",
+    "headline": "Shopify posts 34% revenue growth and tops $115B GMV in Q2",
+    "summary": "Shopify's Rails-powered commerce platform grew Q2 2026 revenue 34% to $3.58B, with GMV up 32% to $115.6B and free cash flow of $654M — 30%-plus growth across GMV, revenue, gross profit, and free cash flow at once.",
+    "link": "https://www.shopify.com/news/shopify-q2-2026-financial-results",
+    "category": "Traction",
+    "startupName": "Shopify",
+    "source": "Shopify"
+  },
+  {
+    "id": "procore-q2-2026-first-profit",
+    "date": "2026-07-29",
+    "headline": "Procore turns its first GAAP profit and ships embedded AI agents",
+    "summary": "Procore's Rails-built construction platform hit its first-ever GAAP operating profit on Q2 revenue of $375M (up 16%), with free cash flow up sharply, while launching a suite of embedded AI agents for the jobsite.",
+    "link": "https://www.stocktitan.net/sec-filings/PCOR/8-k-procore-technologies-inc-reports-material-event-97fdeaf98363.html",
+    "category": "Traction",
+    "startupName": "Procore",
+    "source": "StockTitan"
+  },
+  {
+    "id": "github-copilot-50m",
+    "date": "2026-07-29",
+    "headline": "GitHub Copilot passes 50M users; one in three PRs now involves an agent",
+    "summary": "GitHub — a Ruby on Rails application — is Microsoft's clearest AI-era win: on the FY26 Q4 earnings call, CEO Satya Nadella said Copilot crossed 50 million users (about 30 million paid seats), and one in three pull requests on GitHub now involves an agent, atop Microsoft's record $90B quarter.",
+    "link": "https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html",
+    "category": "Traction",
+    "startupName": "GitHub",
+    "source": "CNBC"
+  },
+  {
+    "id": "hinge-health-q2-2026",
+    "date": "2026-08-04",
+    "headline": "Hinge Health turns profitable as revenue jumps 53% to $213M",
+    "summary": "Rails/Ruby-backed Hinge Health posted Q2 2026 revenue of $212.8M (up 53%) and swung to a GAAP profit, raising full-year guidance to about $858M and announcing a $105M acquisition of Cylinder Health. Growth is driven by its AI-powered, motion-tracked physical-therapy platform.",
+    "link": "https://www.marketbeat.com/instant-alerts/hinge-health-q2-earnings-call-highlights-2026-08-05/",
+    "category": "Traction",
+    "startupName": "Hinge Health",
+    "source": "MarketBeat"
+  },
+  {
+    "id": "chime-q2-2026-prime",
+    "date": "2026-08-05",
+    "headline": "Chime posts a second straight GAAP profit and launches Chime Prime",
+    "summary": "Chime's Ruby/Rails neobank grew Q2 2026 revenue 27% to $670M with $28M in GAAP net income — its second consecutive profitable quarter — and 10.4M active members, and launched Chime Prime, a premium tier for members with $3,000-plus in monthly direct deposits.",
+    "link": "https://www.stocktitan.net/news/CHYM/chime-reports-second-quarter-2026-financial-tvxajxhye1bb.html",
+    "category": "Traction",
+    "startupName": "Chime",
+    "source": "StockTitan"
+  },
+  {
+    "id": "airbnb-q2-2026-ai",
+    "date": "2026-08-06",
+    "headline": "Airbnb's AI assistant now resolves 45% of issues as net income hits $816M",
+    "summary": "Airbnb, famously built on Rails, grew Q2 2026 revenue 17% to $3.6B and net income to $816M (from $642M), while its AI assistant now resolves nearly 45% of support issues without a human, cutting support cost per booking about 16% year over year.",
+    "link": "https://www.stocktitan.net/sec-filings/ABNB/8-k-airbnb-inc-reports-material-event-522d8547b0cc.html",
+    "category": "Traction",
+    "startupName": "Airbnb",
+    "source": "StockTitan"
+  },
+  {
+    "id": "fleetio-ai-maintenance-h1-2026",
+    "date": "2026-07-21",
+    "headline": "Fleetio's AI helped fleets reject $41.6M in unnecessary repairs in H1",
+    "summary": "Fleetio, the Rails-built fleet-maintenance platform, reported customers rejected $41.6M in unnecessary repair-order line items in the first half of 2026 (up 112% year over year), with AI applied across $1.05B in asset assessments and 57% of enterprise fleets adopting its AI Service Advisor.",
+    "link": "https://www.globenewswire.com/news-release/2026/07/21/3330517/0/en/fleetio-customers-reject-41-6m-in-unnecessary-repair-costs-as-ai-powered-maintenance-scales-in-first-half-of-2026.html",
+    "category": "Traction",
+    "startupName": "Fleetio",
+    "source": "GlobeNewswire"
+  },
+  {
+    "id": "instacart-tractor-supply",
+    "date": "2026-07-14",
+    "headline": "Instacart brings same-day delivery to 2,400+ Tractor Supply stores",
+    "summary": "Instacart, whose backend runs on Rails, partnered with Tractor Supply to deliver pet food, livestock feed, and farm and garden goods same-day from more than 2,400 stores — as fast as an hour, with no markups — extending its reach into rural markets.",
+    "link": "https://investors.instacart.com/news-releases/news-release-details/instacart-and-tractor-supply-partner-deliver-pet-supplies-farm",
+    "category": "Traction",
+    "startupName": "Instacart",
+    "source": "Instacart"
+  },
+  {
+    "id": "coinbase-x402-agent-payments",
+    "date": "2026-07-23",
+    "headline": "Coinbase lets businesses accept payments from AI agents via x402",
+    "summary": "Coinbase Business rolled out a payments stack built on the open x402 protocol that lets software agents pay merchants in USDC with no human checkout; developers can add x402 acceptance to any API, MCP server, or web service in three lines of code. Coinbase runs a Ruby/Rails core.",
+    "link": "https://www.coindesk.com/business/2026/07/23/coinbase-closes-the-gaps-in-ai-agent-economy-for-businesses-users-and-developers",
+    "category": "Product",
+    "startupName": "Coinbase",
+    "source": "CoinDesk"
+  },
+  {
+    "id": "angellist-link-mcp",
+    "date": "2026-07-23",
+    "headline": "AngelList Link lets GPs query their fund from Claude, ChatGPT, and Codex",
+    "summary": "AngelList introduced Link, an MCP-based agentic layer giving general partners conversational, read-only access to financials, documents, capital calls, and distributions from Claude, ChatGPT, and Codex. It upgraded 25,000-plus funds and SPVs to daily financials to support it. AngelList is a Rails shop.",
+    "link": "https://www.crowdfundinsider.com/2026/07/293367-angellist-introduces-agentic-ai-fund-management/",
+    "category": "Product",
+    "startupName": "AngelList",
+    "source": "Crowdfund Insider"
+  },
+  {
+    "id": "whop-cli-ai-agents",
+    "date": "2026-07-21",
+    "headline": "Whop's new CLI hands full API access to owners and their AI agents",
+    "summary": "Whop released a command-line interface that exposes its full platform API as plain-language commands, so a business owner — or their AI agent — can spin up a live product with a shareable checkout link just by chatting. Whop runs on Rails.",
+    "link": "https://siliconangle.com/2026/07/21/whop-releases-command-line-interface-let-business-owners-ai-agents-access-digital-commerce/",
+    "category": "Product",
+    "startupName": "Whop",
+    "source": "SiliconANGLE"
+  },
+  {
+    "id": "clio-work-canada",
+    "date": "2026-07-23",
+    "headline": "Clio Work launches in Canada with agentic legal AI grounded in 470K cases",
+    "summary": "Clio launched Clio Work in Canada, an agentic legal AI that plans and executes multi-step tasks — fact extraction, source-linked research, strategy evaluation, drafting — grounded in more than 470,000 Canadian cases across 40-plus courts. It is the fastest-adopted product in Clio's history. Clio is a Rails company.",
+    "link": "https://www.clio.com/about/press/clio-work-canada-legal-ai/",
+    "category": "Product",
+    "startupName": "Clio",
+    "source": "Clio"
+  },
+  {
+    "id": "chatwoot-captain-ai-2026-07",
+    "date": "2026-07-30",
+    "headline": "Chatwoot's Captain AI agent gains FAQ generation and an impact dashboard",
+    "summary": "Chatwoot, the open-source Rails alternative to Intercom and Zendesk, upgraded its Captain AI agent to auto-generate FAQs from resolved conversations, added an assistant-overview dashboard (volume handled, resolution rate, time saved), and now shows which articles informed each reply.",
+    "link": "https://www.chatwoot.com/changelog",
+    "category": "Product",
+    "startupName": "Chatwoot",
+    "source": "Chatwoot"
+  },
+  {
+    "id": "aurora-solar-marketplace",
+    "date": "2026-08-04",
+    "headline": "Aurora Solar launches a marketplace to compare installers privately",
+    "summary": "Aurora Solar, the Rails-built solar-design platform, launched the Aurora Solar Marketplace, where homeowners get personalized solar-and-storage estimates and compare local installers side by side without handing over a phone number upfront.",
+    "link": "https://finance.yahoo.com/news/aurora-solar-launches-aurora-solar-130000223.html",
+    "category": "Product",
+    "startupName": "Aurora Solar",
+    "source": "Business Wire"
+  },
+  {
+    "id": "appsignal-mcp-server",
+    "date": "2026-07-29",
+    "headline": "AppSignal ships a hosted MCP server, piping Rails errors into your AI editor",
+    "summary": "AppSignal launched a public, hosted Model Context Protocol endpoint — no Docker, OAuth built in — that exposes errors, performance traces, logs, anomalies, metrics, and dashboards to Claude Code, Cursor, VS Code Copilot, Zed, and Windsurf, so an agent can investigate a production Rails issue without leaving the editor.",
+    "link": "https://blog.appsignal.com/2026/07/29/appsignal-mcp-server-get-started-in-your-ide.html",
+    "category": "Product",
+    "startupName": "AppSignal",
+    "source": "AppSignal"
+  },
+  {
+    "id": "solid-queue-1-6-fiber-workers",
+    "date": "2026-07-31",
+    "headline": "Solid Queue 1.6 adds fiber workers, ideal for LLM-heavy background jobs",
+    "summary": "Rails' database-backed job backend gained fiber-based execution — hundreds of concurrent fibers on one reactor thread instead of thread pools — explicitly aimed at I/O-bound work like LLM API calls. The contribution came from Carmine Paolino, author of RubyLLM, and the release hit the Hacker News front page.",
+    "link": "https://github.com/rails/solid_queue/releases/tag/v1.6.0",
+    "category": "Product",
+    "startupName": "Solid Queue",
+    "source": "GitHub"
+  },
+  {
+    "id": "rubocop-1-89-rubydex",
+    "date": "2026-08-05",
+    "headline": "RuboCop 1.89 sees your whole codebase with Rubydex",
+    "summary": "RuboCop historically linted one file at a time; the new opt-in Rubydex index lets 1.89 reason across an entire project, catching duplicate methods and typo'd constants and method names across files, plus lazy-loaded cops for faster startup. Announced by RuboCop creator Bozhidar Batsov.",
+    "link": "https://metaredux.com/posts/2026/08/05/rubocop-1-89.html",
+    "category": "Product",
+    "startupName": "RuboCop",
+    "source": "metaredux"
+  },
+  {
+    "id": "insta-snapshot-testing",
+    "date": "2026-07-15",
+    "headline": "Insta brings self-updating snapshot testing to Ruby",
+    "summary": "Marco Roth, creator of Herb, launched Insta, a snapshot-testing gem with inline snapshots rewritten via Prism, structural diffs, an interactive review CLI, and Minitest and RSpec support. Extracted from Herb and inspired by Armin Ronacher's Rust insta, it debuted at RubyConf 2026.",
+    "link": "https://marcoroth.dev/posts/introducing-insta-snapshot-testing-for-ruby",
+    "category": "Product",
+    "startupName": "Insta",
+    "source": "marcoroth.dev"
+  },
+  {
+    "id": "humid-1-0-ssr",
+    "date": "2026-08-04",
+    "headline": "Humid 1.0 does React server-side rendering in Rails, no Node needed",
+    "summary": "thoughtbot released Humid 1.0, under 200 lines of helpers that render React on the server via mini_racer's embedded V8, skipping a separate Node process — letting Rails own the JavaScript server-rendering story on its own terms.",
+    "link": "https://thoughtbot.com/blog/humid-1-0-react-server-side-rendering-in-rails-can-be-easy",
+    "category": "Product",
+    "startupName": "Humid",
+    "source": "thoughtbot"
+  },
+  {
+    "id": "rubyconf-2026-las-vegas",
+    "date": "2026-07-14",
+    "headline": "RubyConf 2026 lands in Las Vegas with a wave of agent-native talks",
+    "summary": "Ruby Central's flagship conference (64 talks at Red Rock Casino, moved up from its usual November slot) ran keynotes from Matz, Dave Thomas, Obie Fernandez, Jessica Kerr, Richard Schneeman, and Jeremy Evans, with a heavy agent-native thread: \"Convention over Hallucination: Harness Engineering for AI-Powered Rails,\" \"Defying Gravity: Teaching AI to Write Better Ruby,\" and \"Ractors in Ruby 4.0: Message Passing Without the Pain.\"",
+    "link": "https://rubyevents.org/events/rubyconf-2026",
+    "category": "Community",
+    "startupName": "RubyConf 2026",
+    "source": "rubyevents.org"
+  },
+  {
+    "id": "matz-extreme-vibe-coding-rubyconf",
+    "date": "2026-07-14",
+    "headline": "Matz opens RubyConf 2026 with \"Extreme Vibe Coding\"",
+    "summary": "Yukihiro \"Matz\" Matsumoto keynoted RubyConf 2026 with \"Extreme Vibe Coding,\" walking through his AI-assisted workflow — including using Claude to mass-review and auto-merge pull requests on Ruby itself. Ruby's creator, publicly leaning into agent-assisted development.",
+    "link": "https://rubyweekly.com/issues/809",
+    "category": "Community",
+    "startupName": "Ruby",
+    "source": "Ruby Weekly"
+  },
+  {
+    "id": "sf-ruby-meetup-july-2026-sentry",
+    "date": "2026-07-22",
+    "headline": "SF Ruby met at Sentry for a night of VMs, background jobs, and ERB internals",
+    "summary": "The July SF Ruby meetup at Sentry ran a new format — fewer talks, more connecting, with a full round of stage intros — featuring Cameron Dutro (Cisco Meraki) on garnet-js and the YARV virtual machine, Alexander Baygeldin (Evil Martians) on fair background-job orchestration, and Marco Roth on the anatomy of an ERB rendering engine. The recording is up.",
+    "link": "https://youtu.be/13a6XcrzQcc",
+    "category": "Community",
+    "startupName": "SF Ruby",
+    "source": "SF Ruby"
   }
 ]

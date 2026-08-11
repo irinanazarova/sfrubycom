@@ -201,19 +201,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
     postedDate: "2026-05-15",
   },
-  "senior-software-engineer-online-data-stores-persona": {
-    id: "senior-software-engineer-online-data-stores-persona",
-    title: "Senior Software Engineer, Online Data Stores",
-    sponsorId: "persona",
-    location: "San Francisco or US/Canada remote",
-    type: "Full-time",
-    salary: "$190K - $240K + equity",
-    description:
-      "Persona is hiring a Senior Software Engineer on the Online Data Stores team within Infrastructure, owning the data-storage systems (MySQL, MongoDB, Elasticsearch, Redis on GCP and Kubernetes) that power its identity-verification platform. You'll drive data modeling, performance, reliability, and cost-efficiency of the core stores, set best practices and observability, and mentor other engineers. The posting prefers Ruby on Rails among a polyglot backend (Ruby, Go, Python, Java), running identity verification across 200+ countries in a highly regulated domain.",
-    chips: ["Data", "Infra", "Polyglot", "High compliance"],
-    url: "https://jobs.ashbyhq.com/persona/4dcc5ffd-2f9c-4f15-8865-a0629fff6b70",
-    postedDate: "2026-08-02",
-  },
   "senior-product-security-engineer-persona": {
     id: "senior-product-security-engineer-persona",
     title: "Senior Product Security Engineer",
@@ -369,45 +356,6 @@ export const jobs = {
     url: "https://thatch.com/jobs/software-engineer-infrastructure-5161129008",
     postedDate: "2026-06-19",
   },
-  "staff-software-engineer-1-stepful": {
-    id: "staff-software-engineer-1-stepful",
-    title: "Staff Software Engineer 1",
-    startupId: "stepful",
-    location: "New York City (Hybrid; remote-eligible US)",
-    type: "Full-time",
-    salary: "$188K - $248K + equity",
-    description:
-      "Stepful (YC-backed) is building the platform that trains and places healthcare workers — a learning-management system, AI-powered career services, and internal tooling. This staff-level full-stack role works across the backend and a React/TypeScript frontend on PostgreSQL. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
-    chips: ["Fullstack", "React", "Polyglot", "Mentorship"],
-    url: "https://jobs.ashbyhq.com/stepful/1bcc5add-aebd-46c8-8bcc-3bcf60dda70e",
-    postedDate: "2026-06-19",
-  },
-  "senior-software-engineer-1-stepful": {
-    id: "senior-software-engineer-1-stepful",
-    title: "Senior Software Engineer 1",
-    startupId: "stepful",
-    location: "New York City (Hybrid; remote-eligible US)",
-    type: "Full-time",
-    salary: "$157K - $208K + equity",
-    description:
-      "Stepful (YC-backed) is building the platform that trains and places healthcare workers. This senior full-stack role works across the backend and a React/TypeScript frontend on PostgreSQL. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
-    chips: ["Fullstack", "React", "Polyglot"],
-    url: "https://jobs.ashbyhq.com/stepful/0441f421-a1b2-4561-9284-50e0621db3ba",
-    postedDate: "2026-06-19",
-  },
-  "senior-software-engineer-2-stepful": {
-    id: "senior-software-engineer-2-stepful",
-    title: "Senior Software Engineer 2",
-    startupId: "stepful",
-    location: "New York City (Hybrid; remote-eligible US)",
-    type: "Full-time",
-    salary: "$157K - $248K + equity",
-    description:
-      "Stepful (YC-backed) is building the platform that trains and places healthcare workers — building adaptive learning, career-services, and data-infrastructure features. This senior full-stack role spans the backend and a React/TypeScript frontend on PostgreSQL. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
-    chips: ["Fullstack", "React", "Polyglot"],
-    url: "https://jobs.ashbyhq.com/stepful/227ebf1e-4d95-46cb-9b52-f7e6677db180",
-    postedDate: "2026-06-19",
-  },
   "staff-product-engineer-1-stepful": {
     id: "staff-product-engineer-1-stepful",
     title: "Staff Product Engineer 1",
@@ -432,19 +380,6 @@ export const jobs = {
       "Stepful (YC-backed) is building the platform that trains and places healthcare workers. This senior product engineering role ships student- and instructor-facing features across the Rails backend and a React/TypeScript frontend. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
     chips: ["Product Eng", "React", "Polyglot"],
     url: "https://jobs.ashbyhq.com/stepful/06376db3-9192-4ff4-bcbc-6635a878ed81",
-    postedDate: "2026-06-19",
-  },
-  "senior-product-engineer-2-stepful": {
-    id: "senior-product-engineer-2-stepful",
-    title: "Senior Product Engineer 2",
-    startupId: "stepful",
-    location: "New York City (Hybrid; remote-eligible US)",
-    type: "Full-time",
-    salary: "$157K - $248K + equity",
-    description:
-      "Stepful (YC-backed) is building the platform that trains and places healthcare workers. This senior product engineering role (higher band than SPE 1) builds across the product. The posting lists Ruby on Rails among the accepted backend languages alongside Python and Node.js.",
-    chips: ["Product Eng", "Fullstack", "Polyglot"],
-    url: "https://jobs.ashbyhq.com/stepful/128da2c1-041e-41ab-a82a-5bb95e766f76",
     postedDate: "2026-06-19",
   },
   "software-engineer-simple-ai": {
@@ -771,21 +706,6 @@ export const jobs = {
     url: "https://relevant.healthcare/jobs/lead-engineer/",
     postedDate: "2026-06-20",
   },
-  "staff-software-developer-backerkit": {
-    id: "staff-software-developer-backerkit",
-    title: "Staff Software Developer",
-    companyId: "backerkit",
-    companyName: "BackerKit",
-    companyLogo: "/company_backerkit.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$184K - $235K",
-    description:
-      "BackerKit builds crowdfunding and creator-commerce tooling on a Ruby on Rails monolith with the Hotwire stack (Turbo, Stimulus) and Tailwind. This staff role works across that monolith; salary is banded by location. San Francisco company, remote, US-based.",
-    chips: ["Fullstack", "Hotwire"],
-    url: "https://jobs.rubyonrails.org/jobs/32638-staff-software-developer-backerkit",
-    postedDate: "2026-06-20",
-  },
   "lead-software-engineer-gov-platforms-windborne": {
     id: "lead-software-engineer-gov-platforms-windborne",
     title: "Lead Software Engineer, Gov Platforms",
@@ -859,21 +779,6 @@ export const jobs = {
     chips: ["Fullstack", "React", "Sidekiq", "AI-native"],
     url: "https://jobs.rubyonrails.org/jobs/34523-senior-full-stack-engineer-ruby-on-rails-reactjs-checkmate",
     postedDate: "2026-07-01",
-  },
-  "ruby-on-rails-engineer-hudu": {
-    id: "ruby-on-rails-engineer-hudu",
-    title: "Ruby on Rails Engineer",
-    companyId: "hudu",
-    companyName: "Hudu",
-    companyLogo: "/company_hudu.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$90K - $110K",
-    description:
-      "Hudu is a fast-growing SaaS building IT documentation for Managed Service Providers and IT teams — one secure place for passwords, network docs, processes, assets, and client knowledge, replacing scattered spreadsheets and wikis. This full-stack role builds on the latest Ruby on Rails with Hotwire, RSpec, and test-driven development, on REST APIs documented with Swagger. YC-backed, ~30 people. Remote, US.",
-    chips: ["Fullstack", "Hotwire"],
-    url: "https://jobs.ashbyhq.com/hudu/da7eb34e-cd78-4db1-9bf1-7c7fba710825",
-    postedDate: "2026-07-07",
   },
   "junior-fullstack-engineer-serpapi": {
     id: "junior-fullstack-engineer-serpapi",
@@ -972,6 +877,28 @@ export const jobs = {
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
    * ─────────────────────────────────────────────────────────────────
+   *
+   * ── August 2026 audit ──
+   * Stepful — 4 of 6 listings closed (absent from the Ashby open-jobs API).
+   * Remaining Stepful equivalents are NYC-hybrid only (geo-ineligible); the two
+   * open ones (Staff PE 1, Senior PE 1) are already on the board.
+   * "staff-software-engineer-1-stepful":  { url: "https://jobs.ashbyhq.com/stepful/1bcc5add-aebd-46c8-8bcc-3bcf60dda70e", postedDate: "2026-06-19" },
+   * "senior-software-engineer-1-stepful": { url: "https://jobs.ashbyhq.com/stepful/0441f421-a1b2-4561-9284-50e0621db3ba", postedDate: "2026-06-19" },
+   * "senior-software-engineer-2-stepful": { url: "https://jobs.ashbyhq.com/stepful/227ebf1e-4d95-46cb-9b52-f7e6677db180", postedDate: "2026-06-19" },
+   * "senior-product-engineer-2-stepful": { url: "https://jobs.ashbyhq.com/stepful/128da2c1-041e-41ab-a82a-5bb95e766f76", postedDate: "2026-06-19" },
+   *
+   * BackerKit — jobs.rubyonrails.org posting returns HTTP 410 Gone; Lever board
+   * empty. No replacement.
+   * "staff-software-developer-backerkit": { url: "https://jobs.rubyonrails.org/jobs/32638-staff-software-developer-backerkit", postedDate: "2026-06-20" },
+   *
+   * Hudu — Ashby board has only a non-eng role (Account Executive). No Rails
+   * replacement.
+   * "ruby-on-rails-engineer-hudu": { url: "https://jobs.ashbyhq.com/hudu/da7eb34e-cd78-4db1-9bf1-7c7fba710825", postedDate: "2026-07-07" },
+   *
+   * Persona — Online Data Stores role closed (Ashby API). The closest same-company
+   * role (Senior SWE, Resilience) names no languages, failing the Rails-confirmation
+   * bar, so it was not swapped in. Persona still has 1 open role on the board.
+   * "senior-software-engineer-online-data-stores-persona": { url: "https://jobs.ashbyhq.com/persona/4dcc5ffd-2f9c-4f15-8865-a0629fff6b70", postedDate: "2026-08-02" },
    *
    * Beyond Finance — no Ruby/Rails openings on their careers page (April 2026)
    * "engineering-manager-beyondfinance": {
