@@ -1043,11 +1043,11 @@
     "id": "procore-q2-2026-first-profit",
     "date": "2026-07-29",
     "headline": "Procore turns its first GAAP profit and ships embedded AI agents",
-    "summary": "Procore's Rails-built construction platform hit its first-ever GAAP operating profit on Q2 revenue of $375M (up 16%), with free cash flow up sharply, while launching a suite of embedded AI agents for the jobsite.",
-    "link": "https://www.stocktitan.net/sec-filings/PCOR/8-k-procore-technologies-inc-reports-material-event-97fdeaf98363.html",
+    "summary": "Procore's Rails-built construction platform hit its first-ever GAAP operating profit on Q2 revenue of $375M (up 16%), with free cash flow up 507% year over year, while launching a new suite of embedded AI agents powered by Datagrid intelligence.",
+    "link": "https://investors.procore.com/news/news-details/2026/Procore-Announces-Second-Quarter-2026-Financial-Results/default.aspx",
     "category": "Traction",
     "startupName": "Procore",
-    "source": "StockTitan"
+    "source": "Procore"
   },
   {
     "id": "github-copilot-50m",
@@ -1064,30 +1064,30 @@
     "date": "2026-08-04",
     "headline": "Hinge Health turns profitable as revenue jumps 53% to $213M",
     "summary": "Rails/Ruby-backed Hinge Health posted Q2 2026 revenue of $212.8M (up 53%) and swung to a GAAP profit, raising full-year guidance to about $858M and announcing a $105M acquisition of Cylinder Health. Growth is driven by its AI-powered, motion-tracked physical-therapy platform.",
-    "link": "https://www.marketbeat.com/instant-alerts/hinge-health-q2-earnings-call-highlights-2026-08-05/",
+    "link": "https://ir.hingehealth.com/news/news-details/2026/Hinge-Health-reports-record-second-quarter-2026-financial-results-signs-definitive-agreement-to-acquire-Cylinder-Health/default.aspx",
     "category": "Traction",
     "startupName": "Hinge Health",
-    "source": "MarketBeat"
+    "source": "Hinge Health"
   },
   {
     "id": "chime-q2-2026-prime",
     "date": "2026-08-05",
-    "headline": "Chime posts a second straight GAAP profit and launches Chime Prime",
-    "summary": "Chime's Ruby/Rails neobank grew Q2 2026 revenue 27% to $670M with $28M in GAAP net income — its second consecutive profitable quarter — and 10.4M active members, and launched Chime Prime, a premium tier for members with $3,000-plus in monthly direct deposits.",
-    "link": "https://www.stocktitan.net/news/CHYM/chime-reports-second-quarter-2026-financial-tvxajxhye1bb.html",
+    "headline": "Chime posts a second straight GAAP profit and launches commission-free investing",
+    "summary": "Chime's Ruby/Rails neobank grew Q2 2026 revenue 27% to $670M with $28M in GAAP net income — its second consecutive profitable quarter — and 10.4M active members (up 20%). It launched Chime Invest, commission-free investing with no account minimums, while its April Chime Prime tier drove accelerating growth.",
+    "link": "https://investors.chime.com/news-releases/news-release-details/chime-reports-second-quarter-2026-financial-results",
     "category": "Traction",
     "startupName": "Chime",
-    "source": "StockTitan"
+    "source": "Chime"
   },
   {
     "id": "airbnb-q2-2026-ai",
     "date": "2026-08-06",
     "headline": "Airbnb's AI assistant now resolves 45% of issues as net income hits $816M",
     "summary": "Airbnb, famously built on Rails, grew Q2 2026 revenue 17% to $3.6B and net income to $816M (from $642M), while its AI assistant now resolves nearly 45% of support issues without a human, cutting support cost per booking about 16% year over year.",
-    "link": "https://www.stocktitan.net/sec-filings/ABNB/8-k-airbnb-inc-reports-material-event-522d8547b0cc.html",
+    "link": "https://news.airbnb.com/airbnb-q2-2026-financial-results/",
     "category": "Traction",
     "startupName": "Airbnb",
-    "source": "StockTitan"
+    "source": "Airbnb"
   },
   {
     "id": "fleetio-ai-maintenance-h1-2026",
