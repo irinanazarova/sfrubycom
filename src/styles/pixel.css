@@ -302,6 +302,145 @@
     display: none;
 }
 
+/* Running ticker: a dark full-bleed strip whose content scrolls left forever.
+   Markup contract: .px-ticker > two identical .px-ticker__group children (the
+   second aria-hidden), each holding enough repeats to cover the viewport. */
+@keyframes px-ticker-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+.px-ticker {
+    display: flex;
+    overflow: hidden;
+    background: var(--px-ink);
+    user-select: none;
+}
+.px-ticker__group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 100%;
+    animation: px-ticker-scroll 28s linear infinite;
+}
+/* Freeze on hover so the logos inside stay clickable. */
+.px-ticker:hover .px-ticker__group {
+    animation-play-state: paused;
+}
+
+/* Coin slot: a coin drops into the slit on loop (arcade "insert coin").
+   Markup: .px-coinslot > .px-coinslot__well > img.px-coinslot__coin, then
+   .px-coinslot__slot. The well clips the coin above and below, so the coin
+   appears from above and vanishes "into" the slot. */
+@keyframes px-coin-drop {
+    0%,
+    12% {
+        transform: translateY(-130%);
+    }
+    62%,
+    100% {
+        transform: translateY(140%);
+    }
+}
+.px-coinslot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 3rem;
+}
+.px-coinslot__well {
+    height: 2rem;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+.px-coinslot__coin {
+    width: 1.75rem;
+    height: 1.75rem;
+    animation: px-coin-drop 2s cubic-bezier(0.4, 0, 1, 1) infinite;
+}
+.px-coinslot__slot {
+    width: 2.75rem;
+    height: 0.875rem;
+    background: var(--px-ink);
+    position: relative;
+}
+.px-coinslot__slot::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.5rem;
+    height: 4px;
+    background: var(--px-gold);
+}
+
+/* ---------- fighter select ---------- */
+
+/* Character-select grid cell (hero roster). The active cell lights gold
+   like a Street Fighter cursor. */
+.px-fighter-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 2px;
+    border: 3px solid var(--px-ink);
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.1s ease-out;
+}
+.px-fighter-cell:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+.px-fighter-cell:focus-visible {
+    outline: 3px solid var(--px-gold);
+    outline-offset: 2px;
+}
+.px-fighter-cell.is-active {
+    background: var(--px-gold);
+    border-color: var(--px-cloud);
+    outline: 3px solid var(--px-ink);
+    animation: px-cursor-flash 0.8s steps(1) infinite;
+}
+
+/* the select cursor flashes like an arcade highlight */
+@keyframes px-cursor-flash {
+    0%,
+    100% {
+        border-color: var(--px-cloud);
+    }
+    50% {
+        border-color: var(--px-gold);
+    }
+}
+
+/* the featured fighter idles in place */
+.px-fighter-bob {
+    animation: px-bob 1.6s ease-in-out infinite;
+}
+
+/* two-frame blip when the selection lands on a new fighter */
+@keyframes px-fighter-in {
+    0% {
+        transform: translateY(8px);
+        filter: brightness(3);
+    }
+    100% {
+        transform: translateY(0);
+        filter: none;
+    }
+}
+.px-fighter-enter {
+    animation: px-fighter-in 0.18s steps(2);
+}
+
 /* PRESS START blink */
 @keyframes px-blink {
     0%,
@@ -321,7 +460,27 @@
     .px-blink {
         animation: none;
     }
+    .px-ticker__group {
+        animation: none;
+    }
+    .px-coinslot__coin {
+        animation: none;
+        transform: translateY(10%);
+    }
     .px-island-btn__item {
+        animation: none;
+    }
+    .px-fighter-bob {
+        animation: none;
+    }
+    .px-fighter-cell.is-active {
+        animation: none;
+    }
+    .px-fighter-enter {
+        animation: none;
+    }
+    /* Tailwind's float utility, used by the hero clouds/islands */
+    .animate-float {
         animation: none;
     }
     .px-island-btn:active {

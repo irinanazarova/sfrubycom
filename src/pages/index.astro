@@ -8,8 +8,13 @@ import ConferenceNetworking from "../components/ConferenceNetworking.astro";
 import ConferenceQuest from "../components/ConferenceQuest.astro";
 import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
-import { LUMA_URL } from "../data/conference-2026.js";
+import { LUMA_URL, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
 import "../styles/global.css";
+
+// Fighter-select roster: every confirmed speaker whose pixel sprite has landed.
+const fighters = conferenceSpeakers
+    .filter((s) => s.pixel)
+    .map((s) => ({ name: s.name, org: s.orgs[0].name, pixel: s.pixel }));
 
 // First confirmed 2026 conference sponsors, grouped by tier.
 // Tier heading colors: ruby red for Ruby, island-grass green for Emerald.
@@ -31,6 +36,16 @@ const conference2026SponsorTiers = [
         ],
     },
 ];
+
+// Flat sponsor list for the hero ticker, tier order preserved.
+const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);
+
+// Deadline text for the hero CTA, from the same source TicketScarcity reads.
+const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "America/Los_Angeles",
+});
 ---
 
 <!doctype html>
@@ -103,58 +118,255 @@ const conference2026SponsorTiers = [
         <Header />
 
         <main class="flex-grow">
-            <!-- Conference hero: the whole site now opens on the ticket ask -->
-            <section id="conf" class="relative min-h-[92vh] flex items-center text-white overflow-hidden px-sky-grad-day">
-                <!-- blocky retro clouds -->
+            <!-- Conference hero, staged like a game title screen: title art,
+                 date subtitle, one-line statement, blinking press-start CTA,
+                 and the organizer/sponsor ticker scrolling along the bottom. -->
+            <section id="conf" class="relative min-h-svh flex items-center text-white overflow-hidden px-sky-grad-day">
+                <!-- blocky retro clouds up high, floating islands down low:
+                     the overworld this screen takes place in -->
                 <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-28 left-[12%] w-36 md:w-44 animate-float pointer-events-none" aria-hidden="true" />
                 <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-48 right-[10%] w-24 md:w-32 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
-                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[32%] right-[6%] w-40 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16 sm:py-28 text-center">
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-24 left-[4%] w-48 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[34%] right-[3%] w-32 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-16 right-[16%] w-24 h-auto animate-float [animation-delay:-5.5s] pointer-events-none hidden md:block" aria-hidden="true" />
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-24 pb-24">
                     <h1 class="sr-only">
                         San Francisco Ruby Startup Conference 2026
                     </h1>
-                    <div class="mb-8">
-                        <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
-                            <span class="text-gold-500">Year Two</span>
-                            <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SF Jazz</span>
-                        </span>
-                    </div>
-                    <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Startup Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[15rem] md:max-w-[17rem] h-auto mb-8 mx-auto" />
-                    <!-- The statement: what the conference is, in one line -->
-                    <p class="font-display font-semibold text-xl md:text-2xl lg:text-3xl leading-snug text-white px-shadow-ink max-w-2xl mx-auto mb-10">
-                        450 Ruby engineers and founders meet in San Francisco to
-                        build the future
-                    </p>
-                    <!-- Primary CTA: Buy tickets, front and central, above the fold -->
-                    <div class="mb-10 flex flex-col items-center gap-3">
-                        <div class="flex flex-col sm:flex-row items-stretch justify-center gap-3">
-                            <a href={LUMA_URL} target="_blank" rel="noopener noreferrer" class="px-btn px-btn--gold tap-press px-font text-xs md:text-sm px-8 py-5 sm:w-72">
-                                <img src="/px-ticket.png" alt="" width="26" height="12" class="px-pixelated h-5 w-auto" />
-                                Buy tickets
+                    <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+                        <!-- Fighter select: the speakers as a character-select
+                             screen. A script cycles the gold highlight through
+                             the roster; clicking a cell locks the choice. -->
+                        <div class="order-2 lg:order-1 flex justify-center lg:justify-end">
+                            <div id="fighter-select" class="px-dialog p-4 md:p-6 w-full max-w-md">
+                                <p class="px-font text-px10 md:text-xs text-gold-500 text-center mb-3 md:mb-4">
+                                    Choose your fighter
+                                </p>
+                                <div class="relative flex items-end justify-center h-36 md:h-56 mb-1" aria-hidden="true">
+                                    <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-0 left-1/2 -translate-x-1/2 w-44 md:w-60 h-auto" />
+                                    <img id="fighter-portrait" src={fighters[0].pixel} alt="" width="256" height="256" class="px-pixelated h-[calc(100%-1.25rem)] md:h-[calc(100%-1.75rem)] w-auto px-fighter-bob relative mb-3 md:mb-4" />
+                                    <span id="fighter-mystery" class="px-font text-5xl md:text-6xl text-white hidden self-center relative mb-6 md:mb-8">?</span>
+                                </div>
+                                <div class="text-center mb-3 md:mb-4 min-h-[3.5rem]">
+                                    <p id="fighter-name" class="px-font text-px10 md:text-sm text-white">{fighters[0].name}</p>
+                                    <p id="fighter-org" class="px-font text-px8 text-gold-500 mt-1.5 opacity-90">{fighters[0].org}</p>
+                                </div>
+                                <div id="fighter-grid" class="grid grid-cols-6 gap-1.5" role="list" aria-label="Conference speakers">
+                                    {fighters.map((f, i) => (
+                                        <button
+                                            type="button"
+                                            role="listitem"
+                                            class={`px-fighter-cell${i === 0 ? " is-active" : ""}`}
+                                            data-name={f.name}
+                                            data-org={f.org}
+                                            data-pixel={f.pixel}
+                                            aria-label={`${f.name}, ${f.org}`}
+                                        >
+                                            <img src={f.pixel} alt="" width="256" height="256" class="px-pixelated w-full h-auto" loading="eager" />
+                                        </button>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        role="listitem"
+                                        class="px-fighter-cell"
+                                        data-name="???"
+                                        data-org="To be announced"
+                                        data-pixel=""
+                                        aria-label="More speakers to be announced"
+                                    >
+                                        <span class="px-font text-sm text-white" aria-hidden="true">?</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Title stack: art, date, statement, insert-coin CTA -->
+                        <div class="order-1 lg:order-2 text-center">
+                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Startup Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] h-auto mb-4 md:mb-6 mx-auto" />
+                            <div class="mb-4 md:mb-5">
+                                <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
+                                    <span class="text-gold-500">Year Two</span>
+                                    <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SF Jazz</span>
+                                </span>
+                            </div>
+                            <p class="font-display font-semibold text-base md:text-xl leading-snug text-white px-shadow-ink max-w-md mx-auto mb-5 md:mb-7">
+                                450 Ruby and Rails engineers and founders meet
+                                in San Francisco to build the future
+                            </p>
+                            <!-- Insert coin: one gold block carrying the ask, the price
+                                 and the deadline, the whole thing the link -->
+                            <a
+                                href={LUMA_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="px-btn px-btn--gold tap-press inline-flex items-center gap-4 px-7 py-4 text-left"
+                            >
+                                <span class="px-coinslot shrink-0" aria-hidden="true">
+                                    <span class="px-coinslot__well">
+                                        <img src="/px-coin.png" alt="" width="12" height="12" class="px-pixelated px-coinslot__coin" />
+                                    </span>
+                                    <span class="px-coinslot__slot"></span>
+                                </span>
+                                <span class="flex flex-col gap-1.5">
+                                    <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Join the game</span>
+                                    <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
+                                        <span class="whitespace-nowrap">Buy the ticket</span>
+                                        <span class="whitespace-nowrap">$450 &#183; until {regularCloses}<span id="days-left"></span></span>
+                                    </span>
+                                </span>
                             </a>
                         </div>
-                        <TicketScarcity />
                     </div>
-                    <!-- Organized by -->
-                    <div class="mt-8 flex flex-col items-center gap-3">
-                        <span class="text-xs uppercase tracking-widest text-white"
-                            >Organized by</span
-                        >
-                        <a
-                            href="https://evilmartians.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-block hover:opacity-90 transition-opacity"
-                        >
-                            <img
-                                src="/evilmartians.png"
-                                alt="Evil Martians"
-                                width="2500"
-                                height="2500"
-                                class="h-14 md:h-16 w-auto"
-                            />
-                        </a>
-                    </div>
+                    <script define:vars={{ closesOn: regularTier.closesOn }}>
+                        // Countdown next to the deadline, computed on the client so
+                        // the static build never goes stale. Absent if JS fails.
+                        const el = document.getElementById("days-left");
+                        const days = Math.ceil(
+                            (new Date(closesOn).getTime() - Date.now()) / 86400000,
+                        );
+                        if (el && days > 0 && days < 120)
+                            el.textContent = ` (${days}d)`;
+                    </script>
+                    <script>
+                        // Character select: cycle the highlight through the
+                        // roster; hover pauses, a click locks the choice.
+                        {
+                            const cells = [
+                                ...document.querySelectorAll(".px-fighter-cell"),
+                            ];
+                            const portrait = document.getElementById("fighter-portrait");
+                            const mystery = document.getElementById("fighter-mystery");
+                            const nameEl = document.getElementById("fighter-name");
+                            const orgEl = document.getElementById("fighter-org");
+                            const panel = document.getElementById("fighter-select");
+                            let index = 0;
+                            let timer = null;
+                            let locked = false;
+
+                            const show = (i) => {
+                                index = i;
+                                cells.forEach((c, j) =>
+                                    c.classList.toggle("is-active", j === i),
+                                );
+                                const d = cells[i].dataset;
+                                nameEl.textContent = d.name;
+                                orgEl.textContent = d.org;
+                                if (d.pixel) {
+                                    portrait.src = d.pixel;
+                                    portrait.classList.remove("hidden");
+                                    mystery.classList.add("hidden");
+                                    // retrigger the two-frame blip-in
+                                    portrait.classList.remove("px-fighter-enter");
+                                    void portrait.offsetWidth;
+                                    portrait.classList.add("px-fighter-enter");
+                                } else {
+                                    portrait.classList.add("hidden");
+                                    mystery.classList.remove("hidden");
+                                }
+                            };
+
+                            const reduced = window.matchMedia(
+                                "(prefers-reduced-motion: reduce)",
+                            ).matches;
+                            const start = () => {
+                                if (reduced || locked || timer) return;
+                                timer = setInterval(
+                                    () => show((index + 1) % cells.length),
+                                    1600,
+                                );
+                            };
+                            const stop = () => {
+                                clearInterval(timer);
+                                timer = null;
+                            };
+
+                            cells.forEach((c, i) =>
+                                c.addEventListener("click", () => {
+                                    locked = true;
+                                    stop();
+                                    show(i);
+                                }),
+                            );
+                            panel.addEventListener("pointerenter", stop);
+                            panel.addEventListener("pointerleave", start);
+                            start();
+                        }
+                    </script>
+                </div>
+
+                <!-- Organized by + sponsors: running ticker along the hero's bottom
+                     edge. Sponsor logos are dark art, so they ride the dark strip
+                     as white silhouettes (brightness-0 invert). The clone group is
+                     aria-hidden and link-free so tab order sees each brand once. -->
+                <div class="px-ticker absolute bottom-0 left-0 w-full border-t-4 border-ink py-3">
+                    {
+                        [false, true].map((clone) => (
+                            <div
+                                class="px-ticker__group gap-10 pr-10"
+                                aria-hidden={clone ? "true" : undefined}
+                            >
+                                {Array.from({ length: 2 }).map(() => (
+                                    <>
+                                        <span class="px-font text-px8 uppercase whitespace-nowrap text-white">
+                                            Organized by
+                                        </span>
+                                        {clone ? (
+                                            <img
+                                                src="/images/logo_evilmartians_horizontal.png"
+                                                alt=""
+                                                width="1856"
+                                                height="432"
+                                                class="h-8 md:h-9 w-auto shrink-0"
+                                            />
+                                        ) : (
+                                            <a
+                                                href="https://evilmartians.com"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="shrink-0 hover:opacity-80 transition-opacity"
+                                            >
+                                                <img
+                                                    src="/images/logo_evilmartians_horizontal.png"
+                                                    alt="Evil Martians"
+                                                    width="1856"
+                                                    height="432"
+                                                    class="h-8 md:h-9 w-auto"
+                                                    loading="eager"
+                                                />
+                                            </a>
+                                        )}
+                                        <span class="px-font text-px8 uppercase whitespace-nowrap text-white">
+                                            Sponsored by
+                                        </span>
+                                        {tickerSponsors.map((sponsor) =>
+                                            clone ? (
+                                                <img
+                                                    src={sponsor.logo}
+                                                    alt=""
+                                                    class="h-6 md:h-7 w-auto shrink-0 brightness-0 invert"
+                                                    loading="lazy"
+                                                />
+                                            ) : (
+                                                <a
+                                                    href={sponsor.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="shrink-0 hover:opacity-80 transition-opacity"
+                                                >
+                                                    <img
+                                                        src={sponsor.logo}
+                                                        alt={sponsor.name}
+                                                        class="h-6 md:h-7 w-auto brightness-0 invert"
+                                                        loading="eager"
+                                                    />
+                                                </a>
+                                            ),
+                                        )}
+                                    </>
+                                ))}
+                            </div>
+                        ))
+                    }
                 </div>
             </section>
 
