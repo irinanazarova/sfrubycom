@@ -426,7 +426,10 @@
     animation: px-bob 1.6s ease-in-out infinite;
 }
 
-/* two-frame blip when the selection lands on a new fighter */
+/* two-frame blip when the selection lands on a new fighter. The blip class
+   stays on the portrait between swaps, so it must carry the idle bob too:
+   an `animation` shorthand here alone would cancel .px-fighter-bob and leave
+   the fighter frozen. Blip listed last so it owns the transform while it runs. */
 @keyframes px-fighter-in {
     0% {
         transform: translateY(8px);
@@ -438,7 +441,24 @@
     }
 }
 .px-fighter-enter {
-    animation: px-fighter-in 0.18s steps(2);
+    animation:
+        px-bob 1.6s ease-in-out infinite,
+        px-fighter-in 0.18s steps(2);
+}
+
+/* roster thumbnails idle too: a slight bob, staggered per cell */
+@keyframes px-bob-slight {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+.px-fighter-cell img {
+    animation: px-bob-slight 2.6s ease-in-out infinite;
+    animation-delay: var(--px-bob-delay, 0s);
 }
 
 /* PRESS START blink */
@@ -471,6 +491,9 @@
         animation: none;
     }
     .px-fighter-bob {
+        animation: none;
+    }
+    .px-fighter-cell img {
         animation: none;
     }
     .px-fighter-cell.is-active {
