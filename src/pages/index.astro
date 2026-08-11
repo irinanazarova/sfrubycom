@@ -3,136 +3,34 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import IslandNav from "../components/IslandNav.astro";
-import NewsRunner from "../components/NewsRunner.astro";
 import SpeakerRoster from "../components/SpeakerRoster.astro";
+import ConferenceNetworking from "../components/ConferenceNetworking.astro";
+import ConferenceQuest from "../components/ConferenceQuest.astro";
+import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
-import UpcomingMeetups from "../components/UpcomingMeetups.astro";
+import { LUMA_URL } from "../data/conference-2026.js";
 import "../styles/global.css";
 
-// Same build-time CFP deadline as /conference-2026, so the two pages cannot
-// disagree about whether proposals are still open.
-const CFP_CLOSES = new Date("2026-07-28T06:59:00Z");
-const cfpOpen = new Date() < CFP_CLOSES;
-import StartupCard from "../components/StartupCard.astro";
-import StartupModal from "../components/StartupModal.astro";
-import ResourceCard from "../components/ResourceCard.astro";
-import Button from "../components/Button.astro";
-import SocialLink from "../components/SocialLink.astro";
-
-import { getAllStartups, getStartup, startups as startupsData } from "../data/startups.js";
-import { getTalk, talks } from "../data/talks.js";
-import { getLatestMeetupRecordings, formatTimestamp } from "../data/meetup-recordings.js";
-import { getJobsBySponsor, getSortedJobs } from "../data/jobs.js";
-import { getAllPhotoAlbums, GCS_PHOTO_BASE } from "../data/events.js";
-import { getSponsor } from "../data/sponsors.js";
-import { newsItems } from "../data/homepage-news.js";
-import { getSpeaker } from "../data/speakers.js";
-import { getAllHosts, hosts as hostsData } from "../data/hosts.js";
-import HostCard from "../components/HostCard.astro";
-import HostModal from "../components/HostModal.astro";
-
-const allStartups = getAllStartups();
-
-// Filter out hidden startups (CorePilot cancelled)
-const visibleStartups = allStartups.filter((s) => s.id !== "corepilot");
-
-// Sort startups: those with demo videos first (same as /startups page)
-const startups = visibleStartups.sort((a, b) => {
-    const aDemoTalk = getTalk(`${a.id}-demo`);
-    const bDemoTalk = getTalk(`${b.id}-demo`);
-    const aHasVideo = a.youtubeId || aDemoTalk?.youtubeId;
-    const bHasVideo = b.youtubeId || bDemoTalk?.youtubeId;
-
-    if (aHasVideo && !bHasVideo) return -1;
-    if (!aHasVideo && bHasVideo) return 1;
-    return 0;
-});
-
-// Get featured startups (first 8)
-const featuredStartups = startups.slice(0, 8);
-
-const startupCount = startups.length;
-
-// Map startup IDs to sponsor IDs for job lookup
-const startupToSponsorMap: Record<string, string> = {
-    bolt_new: "bolt-new",
-    finta: "finta",
-    thatch: "thatch",
-};
-
-// Build enhanced startups data with jobs info, speaker info, and source URLs for modal
-const enhancedStartupsData: Record<string, any> = {};
-for (const [id, startup] of Object.entries(startupsData)) {
-    const sponsorId = startupToSponsorMap[id];
-    const startupJobs = sponsorId ? getJobsBySponsor(sponsorId) : [];
-    const demoTalk = getTalk(`${id}-demo`);
-    const speaker = startup.speakerId ? getSpeaker(startup.speakerId) : null;
-    enhancedStartupsData[id] = {
-        ...startup,
-        jobs: startupJobs,
-        youtubeId: startup.youtubeId || demoTalk?.youtubeId || null,
-        fundingUrl: startup.fundingUrl || null,
-        valuationUrl: startup.valuationUrl || null,
-        newsUrl: startup.newsUrl || null,
-        speaker: speaker,
-    };
-}
-
-// Get featured jobs (1 per company, newest first)
-const allJobs = getSortedJobs();
-const seenCompanies = new Set();
-const featuredJobs = allJobs.filter((job) => {
-    const companyKey = job.sponsorId || job.startupId || job.companyId;
-    if (seenCompanies.has(companyKey)) return false;
-    seenCompanies.add(companyKey);
-    return true;
-}).slice(0, 6).map((job) => {
-    const sponsor = getSponsor(job.sponsorId);
-    const startup = job.startupId ? getStartup(job.startupId) : null;
-    const inline = job.companyName ? { name: job.companyName, logo: job.companyLogo } : null;
-    return {
-        ...job,
-        sponsor: sponsor || (startup ? { name: startup.name, logo: startup.logo } : inline),
-    };
-});
-const jobCount = allJobs.length;
-
-// Get latest 2 meetup recordings + 2 conference keynotes for homepage
-const latestMeetupRecordings = getLatestMeetupRecordings(2);
-const featuredKeynotes = [getTalk("rails-x-keynote"), getTalk("rails-ai-ruby-llm")]
-    .filter(Boolean)
-    .map((talk: any) => ({
-        ...talk,
-        speaker: talk.speakerId ? getSpeaker(talk.speakerId) : null,
-    }));
-
-// Get photo albums
-const photoAlbums = getAllPhotoAlbums();
-const featuredPhotos = photoAlbums.slice(0, 4);
-const totalPhotoCount = photoAlbums.reduce(
-    (sum, album) => sum + album.photoCount,
-    0,
-);
-
-// First confirmed 2026 conference sponsors (Ruby tier)
-const conference2026Sponsors = [
-    { name: "Typesense", logo: "/sponsor_typesense.png", url: "https://typesense.org/" },
-    { name: "WorkOS", logo: "/sponsor_workos.svg", url: "https://workos.com/" },
+// First confirmed 2026 conference sponsors, grouped by tier.
+// Tier heading colors: ruby red for Ruby, island-grass green for Emerald.
+const conference2026SponsorTiers = [
+    {
+        tier: "Ruby Tier",
+        headingClass: "text-ruby-600",
+        sponsors: [
+            { name: "Typesense", logo: "/sponsor_typesense.png", url: "https://typesense.org/" },
+            { name: "WorkOS", logo: "/sponsor_workos.svg", url: "https://workos.com/" },
+        ],
+    },
+    {
+        tier: "Emerald",
+        headingClass: "text-[#46b957]",
+        sponsors: [
+            { name: "Beyond Finance", logo: "/sponsor_beyondfinance.png", url: "https://www.beyondfinance.com/" },
+            { name: "SumIt", logo: "/sponsor_sumit.png", url: "https://getsumit.com/" },
+        ],
+    },
 ];
-
-// Monthly news cards live in src/data/homepage-news.js
-
-// Open roles per host (by sponsorId), passed to the host modal so it can link
-// each role to our job board. Only the fields the modal needs.
-const hostJobs: Record<string, { id: string; title: string; location?: string }[]> = {};
-for (const h of getAllHosts()) {
-    if (!h.sponsorId) continue;
-    const roles = getJobsBySponsor(h.sponsorId);
-    if (roles.length) {
-        hostJobs[h.id] = roles.map((j) => ({ id: j.id, title: j.title, location: j.location }));
-    }
-}
-
 ---
 
 <!doctype html>
@@ -153,11 +51,18 @@ for (const h of getAllHosts()) {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta
             name="description"
-            content="Join the SF Ruby community: monthly meetups, talks, jobs, and the annual conference. Connect with founders and engineers building with Ruby."
+            content="The San Francisco Ruby Startup Conference, November 10-12, 2026 at SFJAZZ. Keynote by Garry Tan, President & CEO of Y Combinator. Tickets on sale now."
         />
-        <meta name="theme-color" content="#dc2626" />
-        <title>SF Ruby - Where Ruby Startups Grow</title>
+        <meta name="theme-color" content="#62bbee" />
+        <title>San Francisco Ruby Startup Conference 2026 - SF Ruby</title>
 
+        <link
+            rel="preload"
+            href="/fonts/PressStart2P.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
         <link
             rel="preload"
             href="/fonts/MartianGrotesk.woff2"
@@ -176,15 +81,15 @@ for (const h of getAllHosts()) {
         <meta property="og:type" content="website" />
         <meta
             property="og:title"
-            content="SF Ruby - Where Ruby Startups Grow"
+            content="San Francisco Ruby Startup Conference 2026 - SF Ruby"
         />
         <meta
             property="og:description"
-            content="Let's build the new generation of Ruby success stories. Join the SF Ruby community: monthly meetups, and the annual conference. Connect with founders and engineers building with Ruby."
+            content="November 10-12, 2026 at SFJAZZ. Keynote by Garry Tan, President & CEO of Y Combinator. Tickets on sale now."
         />
-        <meta property="og:image" content="https://sfruby.com/og/home.png" />
+        <meta property="og:image" content="https://sfruby.com/og/conference.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:image" content="https://sfruby.com/og/home.png" />
+        <meta property="twitter:image" content="https://sfruby.com/og/conference.png" />
 
         <script
             defer
@@ -198,15 +103,16 @@ for (const h of getAllHosts()) {
         <Header />
 
         <main class="flex-grow">
-            <!-- Conference Announcement -->
-            <!-- TODO before publish: replace href="#" with the real conference-page URL -->
-            <!-- Gradient runs the full height sky -> navy, ending on the news color so the join is seamless -->
-            <section id="conf-announcement" class="relative min-h-[92vh] flex items-center text-white overflow-hidden px-sky-grad-day">
+            <!-- Conference hero: the whole site now opens on the ticket ask -->
+            <section id="conf" class="relative min-h-[92vh] flex items-center text-white overflow-hidden px-sky-grad-day">
                 <!-- blocky retro clouds -->
                 <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-28 left-[12%] w-36 md:w-44 animate-float pointer-events-none" aria-hidden="true" />
                 <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-48 right-[10%] w-24 md:w-32 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[32%] right-[6%] w-40 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16 sm:py-32 text-center">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16 sm:py-28 text-center">
+                    <h1 class="sr-only">
+                        San Francisco Ruby Startup Conference 2026
+                    </h1>
                     <div class="mb-8">
                         <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
                             <span class="text-gold-500">Year Two</span>
@@ -214,229 +120,81 @@ for (const h of getAllHosts()) {
                         </span>
                     </div>
                     <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Startup Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[15rem] md:max-w-[17rem] h-auto mb-8 mx-auto" />
+                    <!-- The statement: what the conference is, in one line -->
+                    <p class="font-display font-semibold text-xl md:text-2xl lg:text-3xl leading-snug text-white px-shadow-ink max-w-2xl mx-auto mb-10">
+                        450 Ruby engineers and founders meet in San Francisco to
+                        build the future
+                    </p>
                     <!-- Primary CTA: Buy tickets, front and central, above the fold -->
                     <div class="mb-10 flex flex-col items-center gap-3">
-                        <!-- No spent-tier button beside the live one: a disabled
-                             control at equal weight spends the primary CTA slot
-                             saying "you already missed it". -->
                         <div class="flex flex-col sm:flex-row items-stretch justify-center gap-3">
-                            <a href="https://luma.com/sfrubyconf2026" target="_blank" rel="noopener noreferrer" class="px-btn px-btn--gold tap-press px-font text-xs md:text-sm px-8 py-5 sm:w-72">
+                            <a href={LUMA_URL} target="_blank" rel="noopener noreferrer" class="px-btn px-btn--gold tap-press px-font text-xs md:text-sm px-8 py-5 sm:w-72">
                                 <img src="/px-ticket.png" alt="" width="26" height="12" class="px-pixelated h-5 w-auto" />
                                 Buy tickets
                             </a>
                         </div>
                         <TicketScarcity />
                     </div>
-                    <!-- Photo: Seb Daly / Web Summit / Sportsfile, CC BY 2.0 (Wikimedia Commons) -->
-                    <div class="px-card bg-white max-w-2xl mx-auto p-5 md:p-6 flex items-center justify-center gap-5 text-left">
-                        <div class="shrink-0 animate-float"><img src="/garry_pixel_256.png" alt="Garry Tan, pixel character by Anton Lovchikov" width="256" height="256" loading="lazy" class="px-pixelated w-32 md:w-36 h-auto relative z-10 mx-auto" /><img src="/px-island.png" alt="" width="598" height="104" loading="lazy" class="px-pixelated w-36 md:w-40 h-auto -mt-3 mx-auto" /></div>
-                        <div class="text-left">
-                            <p class="text-lg md:text-xl lg:text-2xl text-gray-800 leading-snug">
-                                Keynote: <strong class="text-ink font-bold">Garry Tan</strong>, President &amp; CEO of <strong class="text-ink font-bold">Y Combinator</strong>
-                            </p>
-                            <p class="text-sm md:text-base text-gray-500 mt-2">
-                                Rubyist, Creator of <a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener noreferrer" class="text-ruby-600 underline hover:text-ruby-500 transition-colors">GStack</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-10 max-w-3xl mx-auto text-center">
-                        <a href="https://luma.com/sfrubyconf2026" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
-                            <img src="/px-ticket.png" alt="" width="26" height="12" class="px-island-btn__item h-8 w-auto" />
-                            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
-                            <span class="px-plate px-font text-px8 px-3 py-1.5">Buy tickets</span>
-                            <span class="text-xs text-indigo-950/85 mt-2">General admission on sale</span>
-                        </a>
-                        {cfpOpen && (
-                        <a href="https://cfp.sfruby.com" target="_blank" rel="noopener noreferrer" class="px-island-btn tap-press">
-                            <img src="/px-quest.png" alt="" width="64" height="296" class="px-island-btn__item h-9 w-auto [animation-delay:-0.7s]" />
-                            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
-                            <span class="px-plate px-font text-px8 px-3 py-1.5">Propose a talk</span>
-                            <span class="text-xs text-indigo-950/85 mt-2">CFP is open</span>
-                        </a>
-                        )}
-                        <a href="/sponsor-2026" class="px-island-btn tap-press">
-                            <img src="/px-coin.png" alt="" width="135" height="139" class="px-island-btn__item h-9 w-auto [animation-delay:-1.4s]" />
-                            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-28 md:w-32 h-auto" />
-                            <span class="px-plate px-font text-px8 px-3 py-1.5">Sponsor</span>
-                            <span class="text-xs text-indigo-950/85 mt-2">Booths and more</span>
-                        </a>
-                    </div>
-                    <div class="mt-10">
-                        <a href="/conference-2026" class="inline-flex items-center gap-2 px-font text-px9 text-indigo-950/90 hover:text-ink underline decoration-indigo-950/40 hover:decoration-ink transition-colors">
-                            Conference details<span class="sr-only"> about the San Francisco Ruby Startup Conference</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="square" d="M9 5l7 7-7 7" /></svg>
-                        </a>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- The lineup, straight under the hero: names are what sell the ticket -->
-            <SpeakerRoster
-                heading="Who you'll hear"
-                compact={true}
-                ctaHref="/conference-2026"
-                ctaLabel="Everything about the conference"
-            />
-
-            <!-- SF Ruby News Hero -->
-            <section id="news" class="relative text-white overflow-hidden px-night">
-                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8 pb-16">
-
-                    <!-- Masthead: game HUD -->
-                    <div class="mb-12">
-                        <div class="border-2 border-white/30 bg-white/5 px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
-                            <h1 class="px-font text-sm md:text-base text-white">SF Ruby News</h1>
-                            <p class="px-font text-px10 md:text-xs text-gold-400">World 07-26 &#8226; July</p>
-                        </div>
-                        <!-- Full feed -->
-                        <div class="mt-3 flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-2">
-                            <a href="/news" class="px-font text-px8 text-white/60 hover:text-gold-400 transition-colors inline-flex items-center gap-1.5">
-                                Browse the full news feed
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="square" d="M9 5l7 7-7 7" /></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <NewsRunner />
-
-                    <!-- News: uniform cards on a horizontal snap scroller -->
-                    <div class="relative">
-                        <div
-                            id="news-scroller"
-                            class="px-scroll-row flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4"
-                            tabindex="0"
-                            aria-label="News stories"
+                    <!-- Organized by -->
+                    <div class="mt-8 flex flex-col items-center gap-3">
+                        <span class="text-xs uppercase tracking-widest text-white"
+                            >Organized by</span
                         >
-                            {newsItems.map((item) => (
-                                <article class="px-dialog relative snap-start shrink-0 w-[86%] sm:w-[24rem] p-5 md:p-6 flex flex-col text-left">
-                                    <div class="flex items-center justify-between gap-3 mb-4">
-                                        <span class:list={["px-font inline-block px-2 py-1.5 text-px8 border-2 border-ink", item.gold ? "bg-gold-500 text-ink" : "bg-ruby-500 text-white"]}>{item.cat}</span>
-                                        <span class="text-[0.6875rem] text-white/50 shrink-0">{item.meta}</span>
-                                    </div>
-                                    <h3 class="font-display text-lg md:text-xl font-bold text-white leading-snug mb-3">{item.title}</h3>
-                                    <p class="text-sm text-white/70 leading-relaxed flex-1">{item.blurb}</p>
-                                    <a
-                                        href={item.href}
-                                        target={item.external ? "_blank" : undefined}
-                                        rel={item.external ? "noopener noreferrer" : undefined}
-                                        class:list={["mt-4 inline-flex items-center gap-1.5 text-xs transition-colors", item.gold ? "text-gold-400 hover:text-gold-300" : "text-ruby-400 hover:text-ruby-300"]}
-                                    >
-                                        {item.link}
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                                    </a>
-                                </article>
-                            ))}
-                        </div>
-
-                        <!-- Pager -->
-                        <div class="flex items-center justify-center gap-6 mt-6 mb-6">
-                            <button id="news-prev" aria-label="Previous story" class="w-11 h-11 border-2 border-white/40 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-colors disabled:opacity-20 disabled:cursor-default" disabled>
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                            </button>
-                            <p id="news-count" class="px-font text-px10 text-gold-400" aria-live="polite">News 1 of {newsItems.length}</p>
-                            <button id="news-next" aria-label="Next story" class="w-11 h-11 border-2 border-white/40 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-colors disabled:opacity-20 disabled:cursor-default">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                            </button>
-                        </div>
+                        <a
+                            href="https://evilmartians.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-block hover:opacity-90 transition-opacity"
+                        >
+                            <img
+                                src="/evilmartians.png"
+                                alt="Evil Martians"
+                                width="2500"
+                                height="2500"
+                                class="h-14 md:h-16 w-auto"
+                            />
+                        </a>
                     </div>
-
-                    <!-- Divider + CTA -->
-                    <div class="h-[2px] bg-white/15 mb-10"></div>
-
-                    <script>
-                        (function() {
-                            const scroller = document.getElementById('news-scroller');
-                            const prevBtn = document.getElementById('news-prev') as HTMLButtonElement;
-                            const nextBtn = document.getElementById('news-next') as HTMLButtonElement;
-                            const counter = document.getElementById('news-count');
-                            if (!scroller || !prevBtn || !nextBtn || !counter) return;
-                            const cards = Array.from(scroller.children) as HTMLElement[];
-                            const total = cards.length;
-                            const step = () => (cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : scroller.clientWidth);
-
-                            let current = 0;
-                            function update() {
-                                current = Math.min(total - 1, Math.max(0, Math.round(scroller.scrollLeft / step())));
-                                counter.textContent = `News ${current + 1} of ${total}`;
-                                prevBtn.disabled = current === 0;
-                                nextBtn.disabled = current === total - 1;
-                            }
-                            let raf = 0;
-                            scroller.addEventListener('scroll', () => {
-                                cancelAnimationFrame(raf);
-                                raf = requestAnimationFrame(update);
-                            }, { passive: true });
-                            prevBtn.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
-                            nextBtn.addEventListener('click', () => scroller.scrollBy({ left: step(), behavior: 'smooth' }));
-                            scroller.addEventListener('keydown', (e) => {
-                                if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn.click(); }
-                                if (e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
-                            });
-                            update();
-                        })();
-                    </script>
-
                 </div>
-
-                <!-- crenellated step into slate-50 -->
-                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#f8fafc]" aria-hidden="true"></div>
             </section>
 
-            <!-- Upcoming Events Section -->
-            <section id="meetups" class="py-20 bg-slate-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="max-w-4xl mx-auto">
-                        <!-- Section header -->
-                        <div class="text-center mb-8">
-                            <span class="px-plate px-font text-px10 px-3 py-2 mb-5">
-                                Monthly Meetup
-                            </span>
-                            <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
-                                Join the Next SF Ruby Meetup
-                            </h2>
-                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                                Connect with founders and engineers building with Ruby.
-                                Learn, share, and make friends for life!
+            <!-- The lineup: names are what sell the ticket -->
+            <SpeakerRoster />
+
+            <!-- Organized networking: the differentiator -->
+            <ConferenceNetworking />
+
+            <!-- Pre-conference season: the reason to buy today, not in October -->
+            <ConferenceQuest />
+
+            <!-- Price ladder + team offer -->
+            <TicketLadder />
+
+            <!-- Venue photo, framed like a cutscene still -->
+            <section class="relative w-full border-y-4 border-ink">
+                <img
+                    src="/sfjazz.webp"
+                    alt="SFJAZZ Center, San Francisco"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    class="w-full h-[40vh] md:h-[60vh] object-cover"
+                />
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-10">
+                    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="px-card inline-block bg-white p-4 md:p-5">
+                            <p class="px-font text-xs md:text-sm text-gray-900">
+                                <a
+                                    href="https://www.sfjazz.org/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hover:underline"
+                                    >The Venue: SFJAZZ Center</a
+                                >
                             </p>
-                        </div>
-
-                        <!-- Next meetup, synced from Luma at build time -->
-                        <UpcomingMeetups />
-
-                        <!-- CTAs -->
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <a
-                                href="https://lu.ma/sfruby"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50"
-                            >
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                See all events
-                            </a>
-                            <a
-                                href="https://forms.gle/EZLqENWd5VjiLduq8"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
-                            >
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                </svg>
-                                Submit a talk
-                            </a>
-                            <a
-                                href="/host"
-                                class="px-btn px-font text-px10 gap-2.5 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50"
-                            >
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
-                                Host the meetup
-                            </a>
+                            <p class="text-xs md:text-sm text-gray-600 mt-2">
+                                San Francisco
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -445,38 +203,41 @@ for (const h of getAllHosts()) {
             <!-- 2026 Conference Sponsors -->
             <section id="sponsors-2026" class="py-16 bg-sky-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <!-- Conference Sponsors 2026 -->
                     <div class="text-center mb-8">
                         <h2 class="px-font text-base md:text-lg text-gray-900 mb-2">
                             SF Ruby Conference 2026 Sponsors
                         </h2>
-                        <p class="text-sm text-gray-500 mb-8">Typesense and WorkOS are first in. Thank you!</p>
+                        <p class="text-sm text-gray-500 mb-8">The first companies backing year two. Thank you!</p>
 
-                        <div>
-                            <h3 class="px-font text-px10 text-ruby-600 text-center mb-5">
-                                Ruby Tier
-                            </h3>
-                            <div class="flex flex-wrap justify-center items-center gap-5 md:gap-8">
-                                {
-                                    conference2026Sponsors.map((sponsor) => (
-                                        <a
-                                            href={sponsor.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="px-card bg-white px-8 py-6 inline-flex items-center hover:-translate-y-0.5 transition-transform"
-                                        >
-                                            <img
-                                                src={sponsor.logo}
-                                                alt={sponsor.name}
-                                                class="h-8 md:h-9 w-auto"
-                                                width="126"
-                                                height="24"
-                                                loading="lazy"
-                                            />
-                                        </a>
-                                    ))
-                                }
-                            </div>
+                        <div class="space-y-10">
+                            {
+                                conference2026SponsorTiers.map((tier) => (
+                                    <div>
+                                        <h3 class={`px-font text-px10 ${tier.headingClass} text-center mb-5`}>
+                                            {tier.tier}
+                                        </h3>
+                                        <div class="flex flex-wrap justify-center items-center gap-5 md:gap-8">
+                                            {tier.sponsors.map((sponsor) => (
+                                                <a
+                                                    href={sponsor.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="px-card bg-white px-8 py-6 inline-flex items-center hover:-translate-y-0.5 transition-transform"
+                                                >
+                                                    <img
+                                                        src={sponsor.logo}
+                                                        alt={sponsor.name}
+                                                        class="h-8 md:h-9 w-auto"
+                                                        width="126"
+                                                        height="24"
+                                                        loading="lazy"
+                                                    />
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))
+                            }
                         </div>
 
                         <div class="mt-10">
@@ -494,725 +255,102 @@ for (const h of getAllHosts()) {
                 </div>
             </section>
 
-            <!-- New Ruby Jobs Section -->
-            <section id="jobs" class="py-20 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
-                            New Ruby Jobs
-                        </h2>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            {jobCount} open positions at Ruby startups and companies.
-                        </p>
-                    </div>
+            <!-- Tickets: the closing ask -->
+            <section
+                id="tickets-cta"
+                class="relative overflow-hidden pt-20 pb-24 px-royal-grad text-white"
+            >
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                    <h2 class="px-font px-shadow-ink text-lg md:text-2xl text-white mb-8">
+                        Tickets are on sale
+                    </h2>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {
-                            featuredJobs.map((job) => (
-                                <a
-                                    href={job.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="group flex items-center gap-4 p-4 bg-gray-50 border-2 border-ink shadow-md hover:bg-gray-100 transition-all duration-300"
-                                >
-                                    {job.sponsor?.logo && (
-                                        <div class="w-24 h-10 bg-white rounded-lg flex items-center justify-center px-2 flex-shrink-0 border border-gray-200">
-                                            <img
-                                                src={job.sponsor.logo}
-                                                alt={job.sponsor.name}
-                                                class="w-full h-full object-contain"
-                                            />
-                                        </div>
-                                    )}
-                                    <div class="flex-grow min-w-0">
-                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors truncate">
-                                            {job.title}
-                                        </h3>
-                                        <p class="text-sm text-gray-500">
-                                            {job.sponsor?.name} &middot; {job.location}
-                                        </p>
-                                    </div>
-                                    <svg
-                                        class="w-5 h-5 text-gray-400 group-hover:text-ruby-500 flex-shrink-0 transition-colors"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                        />
-                                    </svg>
-                                </a>
-                            ))
-                        }
-                    </div>
-
-                    <div class="mt-10 text-center">
-                        <Button href="/jobs" variant="secondary">
-                            View all jobs
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- New Videos Section -->
-            <section id="videos" class="py-20 bg-gray-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
-                            New Videos
-                        </h2>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            Latest meetup recordings and conference keynotes.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {
-                            latestMeetupRecordings.map((recording: any) => (
-                                <div class="group bg-white border-2 border-ink shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
-                                    <a
-                                        href={`https://www.youtube.com/watch?v=${recording.youtubeId}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="block"
-                                    >
-                                        <div class="aspect-video bg-gray-900 relative overflow-hidden">
-                                            <img
-                                                src={`https://img.youtube.com/vi/${recording.youtubeId}/mqdefault.jpg`}
-                                                alt={recording.title}
-                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                                loading="lazy"
-                                            />
-                                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                                <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                                                    <svg class="w-5 h-5 text-sky-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M8 5v14l11-7z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="p-4 pb-2">
-                                            <h3 class="font-semibold text-gray-900 group-hover:text-sky-500 transition-colors">
-                                                {recording.title.replace("SF Bay Area Ruby Meetup - ", "").replace("SF Ruby & Elixir Special - ", "Elixir Special - ")}
-                                            </h3>
-                                            <p class="text-sm text-gray-500 mt-1">
-                                                {recording.talks.length} talks · {recording.venue}
-                                            </p>
-                                        </div>
-                                    </a>
-                                    <div class="px-4 pb-4">
-                                        <details class="meetup-details">
-                                            <summary class="text-xs text-sky-500 hover:text-sky-600 cursor-pointer font-medium select-none">
-                                                Show talks
-                                            </summary>
-                                            <ul class="mt-2 space-y-1.5">
-                                                {recording.talks.map((talk: any) => (
-                                                    <li class="text-xs">
-                                                        <a
-                                                            href={`https://www.youtube.com/watch?v=${recording.youtubeId}${talk.timestamp ? `&t=${talk.timestamp}` : ""}`}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            class="flex items-start gap-2 text-gray-600 hover:text-sky-600 transition-colors"
-                                                        >
-                                                            <span class="text-gray-400 font-mono whitespace-nowrap mt-px">{formatTimestamp(talk.timestamp)}</span>
-                                                            <span>
-                                                                <span class="font-medium">{talk.speaker}</span>
-                                                                {talk.company && <span class="text-gray-400"> ({talk.company})</span>}
-                                                                <span class="text-gray-400"> — </span>
-                                                                {talk.title}
-                                                            </span>
-                                                        </a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </details>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                        {
-                            featuredKeynotes.map((talk: any) => (
-                                <a
-                                    href={`/videos?talk=${talk.id}#${talk.id}`}
-                                    class="group block bg-white border-2 border-ink shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
-                                >
-                                    <div class="aspect-video bg-gray-900 relative overflow-hidden">
-                                        <img
-                                            src={`https://img.youtube.com/vi/${talk.youtubeId}/mqdefault.jpg`}
-                                            alt={talk.title}
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                            loading="lazy"
-                                        />
-                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                            <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center">
-                                                <svg class="w-5 h-5 text-ruby-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M8 5v14l11-7z" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="p-4">
-                                        <h3 class="font-semibold text-gray-900 group-hover:text-ruby-500 transition-colors">
-                                            {talk.title}
-                                        </h3>
-                                        <p class="text-sm text-gray-500 mt-1">
-                                            {talk.speaker?.name} · SF Ruby Conf 2025
-                                        </p>
-                                    </div>
-                                </a>
-                            ))
-                        }
-                    </div>
-
-                    <div class="mt-10 text-center">
-                        <Button href="/videos" variant="secondary">
-                            View all videos
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Our Hosts Section -->
-            <section id="hosts" class="py-20 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
-                            Our Hosts
-                        </h2>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            These companies open their doors to the Ruby community every month.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
-                        {getAllHosts().map((host) => (
-                            <HostCard host={host} />
-                        ))}
-                    </div>
-
-                    <div class="text-center">
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="mb-2">
+                            <TicketScarcity />
+                        </div>
                         <a
-                            href="/host"
+                            href={LUMA_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 sm:w-56"
+                        >
+                            <img src="/px-ticket.png" alt="" width="26" height="12" class="px-pixelated h-5 w-auto" />
+                            Buy tickets
+                        </a>
+                        <a
+                            href="https://sfruby.substack.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4"
+                        >
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                            </svg>
+                            Subscribe on Substack
+                        </a>
+                    </div>
+                </div>
+
+                <!-- crenellated step into the community strip -->
+                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#ffffff]" aria-hidden="true"></div>
+            </section>
+
+            <!-- The community behind the conference -->
+            <section id="community" class="py-16 bg-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="px-font text-base md:text-lg text-gray-900 mb-4">
+                        SF Ruby, All Year Round
+                    </h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                        The conference is year two of a community that meets every
+                        month: free meetups, a curated jobs board, and a running
+                        feed of Ruby startup news.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a
+                            href="/meetup"
                             class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
                         >
-                            Host the meetup
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
+                            The monthly meetup
+                        </a>
+                        <a
+                            href="/jobs"
+                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50 border-2 border-ink"
+                        >
+                            Ruby jobs
+                        </a>
+                        <a
+                            href="/news"
+                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50 border-2 border-ink"
+                        >
+                            News
                         </a>
                     </div>
                 </div>
             </section>
 
-            <!-- Our Startups Section -->
-            <section id="startups" class="py-20 bg-gray-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12">
-                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mb-4">
-                            Our Startups
-                        </h2>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                            {startupCount} startups are part of the SF Ruby community.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {
-                            featuredStartups.map((startup) => {
-                                const sponsorId = startupToSponsorMap[startup.id];
-                                const hasJobs = sponsorId
-                                    ? getJobsBySponsor(sponsorId).length > 0
-                                    : false;
-                                return (
-                                    <StartupCard
-                                        startup={startup}
-                                        compact
-                                        hasJobs={hasJobs}
-                                    />
-                                );
-                            })
-                        }
-                    </div>
-
-                    <div class="mt-10 text-center">
-                        <Button href="https://docs.google.com/forms/d/e/1FAIpQLSdTg1VZIMOyWqffBZgsQxxWbSWYOKmp_kFVnQhtJvlgvdabyw/viewform?usp=send_form" variant="secondary">
-                            Demo at the meetup
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Compact Wrap-up Section -->
-            <section id="community" class="py-12 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                    <!-- Community Links -->
-                    <div class="text-center mb-8">
-                        <h2 class="px-font text-base md:text-lg text-gray-900 mb-6">
-                            Join the Community
-                        </h2>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <SocialLink
-                                platform="slack"
-                                href="https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg"
-                            >
-                                Join SF Ruby Slack
-                            </SocialLink>
-                            <SocialLink
-                                platform="substack"
-                                href="https://sfruby.substack.com/"
-                            >
-                                Newsletter
-                            </SocialLink>
-                            <SocialLink
-                                platform="twitter"
-                                href="https://x.com/sfrubyconf"
-                            >
-                                Twitter
-                            </SocialLink>
-                            <SocialLink
-                                platform="bluesky"
-                                href="https://bsky.app/profile/sfruby.com"
-                            >
-                                Bluesky
-                            </SocialLink>
-                            <SocialLink
-                                platform="linkedin"
-                                href="https://www.linkedin.com/company/sfrubyconf/"
-                            >
-                                LinkedIn
-                            </SocialLink>
-                            <SocialLink
-                                platform="ruby"
-                                href="https://www.rubyevents.org/events"
-                            >
-                                <svg slot="icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                Ruby Events
-                            </SocialLink>
-                        </div>
-                    </div>
-
-
-
-
-
-                </div>
-            </section>
-
             <!-- Final CTA: overworld exits -->
             <IslandNav
-                title="Ready to join the Ruby community?"
+                id="get-involved"
+                kicker="World 2026"
+                title="Choose your quest"
+                lede="Tickets, sponsorship, the meetup, or just say hi."
                 items={[
                     {
-                        href: "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg",
-                        label: "Join Slack",
-                        icon: "heart",
+                        href: LUMA_URL,
+                        label: "Tickets",
+                        icon: "ticket",
                         external: true,
                     },
-                    {
-                        href: "/conference-2026",
-                        label: "The conference",
-                        icon: "ticket",
-                    },
                     { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
+                    { href: "/meetup", label: "The meetup", icon: "heart" },
                     { href: "/contact", label: "Contact us", icon: "envelope" },
                 ]}
             />
         </main>
 
-        <!-- Startup Modal -->
-        <StartupModal />
-
-        <!-- Host Modal -->
-        <HostModal />
-
         <Footer />
         <BottomNav />
     </body>
 </html>
-
-<script define:vars={{ enhancedStartupsData }}>
-    // Modal functionality for startup cards
-    function buildModalContent(startup) {
-        let videoHtml = "";
-        if (startup.youtubeId) {
-            videoHtml = `
-                <div class="mb-6">
-                    <div class="aspect-video rounded-xl overflow-hidden bg-black">
-                        <iframe
-                            src="https://www.youtube.com/embed/${startup.youtubeId}"
-                            title="${startup.name} Demo"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                            class="w-full h-full"
-                        ></iframe>
-                    </div>
-                </div>
-            `;
-        }
-
-        let factsHtml = "";
-        if (startup.funding || startup.valuation || startup.news) {
-            const fundingHtml = startup.funding
-                ? startup.fundingUrl
-                    ? `<a href="${startup.fundingUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-ruby-500 underline">${startup.funding}</a>`
-                    : startup.funding
-                : null;
-            const valuationHtml = startup.valuation
-                ? startup.valuationUrl
-                    ? `<a href="${startup.valuationUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-ruby-500 underline">${startup.valuation}</a>`
-                    : startup.valuation
-                : null;
-            const newsHtml = startup.news
-                ? startup.newsUrl
-                    ? `<a href="${startup.newsUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-ruby-500 underline">${startup.news}</a>`
-                    : startup.news
-                : null;
-
-            factsHtml = `
-                <div class="mb-6 p-4 bg-gray-50 rounded-xl">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        ${fundingHtml ? `<div><span class="text-gray-500">Funding:</span> <span class="font-medium text-gray-900">${fundingHtml}</span></div>` : ""}
-                        ${valuationHtml ? `<div><span class="text-gray-500">Valuation:</span> <span class="font-medium text-gray-900">${valuationHtml}</span></div>` : ""}
-                        ${newsHtml ? `<div class="md:col-span-2"><span class="text-gray-500">Latest:</span> <span class="text-gray-700">${newsHtml}</span></div>` : ""}
-                    </div>
-                </div>
-            `;
-        }
-
-        let jobsHtml = "";
-        if (startup.jobs && startup.jobs.length > 0) {
-            const jobsList = startup.jobs
-                .map(
-                    (job) => `
-                <a href="${job.applyUrl || "#"}" target="_blank" rel="noopener noreferrer"
-                   class="block p-3 bg-white border border-gray-200 rounded-lg hover:border-ruby-300 hover:shadow-sm transition-all">
-                    <div class="font-medium text-gray-900">${job.title}</div>
-                    <div class="text-sm text-gray-500">${job.location || "Remote"}</div>
-                </a>
-            `,
-                )
-                .join("");
-
-            jobsHtml = `
-                <div class="mb-6">
-                    <h4 class="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                        Open Positions
-                        <span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">Hiring</span>
-                    </h4>
-                    <div class="space-y-2">${jobsList}</div>
-                </div>
-            `;
-        }
-
-        let speakerHtml = "";
-        if (startup.speaker) {
-            const speaker = startup.speaker;
-            // Build social links
-            let socialLinks = "";
-            if (speaker.socials && speaker.socials.length > 0) {
-                const socialIcons = speaker.socials
-                    .map((url) => {
-                        let icon = "";
-                        let label = "Link";
-                        if (url.includes("github.com")) {
-                            icon = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>`;
-                            label = "GitHub";
-                        } else if (
-                            url.includes("x.com") ||
-                            url.includes("twitter.com")
-                        ) {
-                            icon = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
-                            label = "Twitter";
-                        } else if (url.includes("linkedin.com")) {
-                            icon = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`;
-                            label = "LinkedIn";
-                        } else if (url.includes("bsky.app")) {
-                            icon = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/></svg>`;
-                            label = "Bluesky";
-                        }
-                        return icon
-                            ? `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors" title="${label}">${icon}</a>`
-                            : "";
-                    })
-                    .filter(Boolean)
-                    .join("");
-
-                if (socialIcons) {
-                    socialLinks = `<div class="flex items-center gap-2 mt-2">${socialIcons}</div>`;
-                }
-            }
-
-            speakerHtml = `
-                <div class="mb-6 p-5 bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl border border-gray-100">
-                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Demo Presenter</h4>
-                    <div class="flex items-start gap-4">
-                        ${
-                            speaker.image
-                                ? `
-                            <img src="${speaker.image}" alt="${speaker.name}"
-                                class="w-20 h-20 rounded-xl object-cover shadow-md flex-shrink-0" />
-                        `
-                                : ""
-                        }
-                        <div class="flex-1 min-w-0">
-                            <p class="font-bold text-lg text-gray-900">${speaker.name}</p>
-                            <p class="text-sm text-gray-600">${speaker.role || speaker.title || ""}</p>
-                            ${speaker.company ? `<p class="text-sm text-gray-500">${speaker.company}</p>` : ""}
-                            ${socialLinks}
-                        </div>
-                    </div>
-                    ${speaker.bio ? `<p class="mt-4 text-sm text-gray-600 leading-relaxed">${speaker.bio}</p>` : ""}
-                </div>
-            `;
-        }
-
-        return `
-            <div class="p-6">
-                <button id="startupModalCloseBtn" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10">
-                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-                <div class="flex items-start gap-4 mb-6">
-                    <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center p-2 flex-shrink-0">
-                        <img src="${startup.logo}" alt="${startup.name}" class="max-w-full max-h-full object-contain" />
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900">${startup.name}</h3>
-                        <p class="text-gray-600">${startup.description}</p>
-                        ${startup.isYC ? '<span class="inline-block mt-2 px-2 py-0.5 bg-orange-100 text-orange-700 text-xs font-medium rounded">YC Backed</span>' : ""}
-                    </div>
-                </div>
-                ${videoHtml}
-                ${speakerHtml}
-                ${factsHtml}
-                ${jobsHtml}
-                <a href="${startup.url}" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center gap-2 text-ruby-500 hover:text-ruby-600 font-medium">
-                    Visit website
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
-            </div>
-        `;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        // Handle startup card clicks - use StartupModal component functions
-        document.querySelectorAll("[data-startup-id]").forEach((card) => {
-            card.addEventListener("click", (e) => {
-                e.preventDefault();
-                const startupId = card.getAttribute("data-startup-id");
-                const startup = enhancedStartupsData[startupId];
-                if (
-                    startup &&
-                    window.setStartupModalContent &&
-                    window.showStartupModal
-                ) {
-                    window.setStartupModalContent(buildModalContent(startup));
-                    window.showStartupModal();
-                }
-            });
-        });
-    });
-</script>
-
-<script define:vars={{ hostsData, hostJobs }}>
-    function buildHostModalContent(host) {
-        // Open roles on our job board for this host, linked high in the modal.
-        const jobs = hostJobs[host.id] || [];
-        let jobsHtml = "";
-        if (jobs.length > 0) {
-            const roleLinks = jobs.map(job =>
-                `<a href="/jobs#${job.id}" class="flex items-center justify-between gap-3 py-1.5 text-sm text-emerald-800 hover:text-emerald-900 hover:underline">
-                    <span class="font-medium">${job.title}</span>
-                    <svg class="w-4 h-4 flex-shrink-0 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                </a>`
-            ).join("");
-            jobsHtml = `
-                <div class="mb-5 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
-                    <h4 class="text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                        Now hiring · ${jobs.length} open ${jobs.length === 1 ? "role" : "roles"} on our board
-                    </h4>
-                    <div class="divide-y divide-emerald-100">${roleLinks}</div>
-                </div>
-            `;
-        }
-
-        // Tag color
-        let tagClass = "bg-red-50 text-red-700";
-        if (host.tag === "Ruby SDK") tagClass = "bg-purple-50 text-purple-700";
-
-        let leadershipHtml = "";
-        if (host.leadership) {
-            leadershipHtml = `
-                <div class="flex items-center gap-2 mt-2">
-                    <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span class="text-sm text-gray-600">${host.leadership}</span>
-                </div>
-            `;
-        }
-
-        let foundersHtml = "";
-        if (host.founders) {
-            foundersHtml = `
-                <div class="flex items-start gap-2 mt-2">
-                    <svg class="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <span class="text-sm text-gray-600">Founded ${host.founded || ""} by ${host.founders}</span>
-                </div>
-            `;
-        }
-
-        let productHtml = "";
-        if (host.product) {
-            productHtml = `
-                <div class="mb-5">
-                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">The Product</h4>
-                    <p class="text-sm text-gray-700 leading-relaxed">${host.product}</p>
-                </div>
-            `;
-        }
-
-        let historyHtml = "";
-        if (host.history) {
-            historyHtml = `
-                <div class="mb-5">
-                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">The Story</h4>
-                    <p class="text-sm text-gray-700 leading-relaxed">${host.history}</p>
-                </div>
-            `;
-        }
-
-        let ecosystemHtml = "";
-        if (host.rubyEcosystem) {
-            let openSourceHtml = "";
-            if (host.openSource && host.openSource.length > 0) {
-                const repoLinks = host.openSource.map(repo =>
-                    `<a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="flex items-start gap-2 p-2 -mx-2 rounded-lg hover:bg-red-100/50 transition-colors group">
-                        <svg class="w-4 h-4 text-gray-400 group-hover:text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        <div class="min-w-0">
-                            <span class="text-sm font-medium text-gray-900 group-hover:text-red-700">${repo.name}</span>
-                            <span class="text-xs text-gray-500 ml-1">${repo.desc}</span>
-                        </div>
-                    </a>`
-                ).join("");
-                openSourceHtml = `
-                    <div class="mt-3 pt-3 border-t border-red-100">
-                        <p class="text-xs font-semibold text-red-700 uppercase tracking-wider mb-1">Open Source</p>
-                        ${repoLinks}
-                    </div>
-                `;
-            }
-            let sourceHtml = "";
-            if (host.rubySource) {
-                sourceHtml = `
-                    <a href="${host.rubySource.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-xs font-medium text-red-700 hover:text-red-900 hover:underline">
-                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.247m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.247" />
-                        </svg>
-                        Read more: ${host.rubySource.label}
-                    </a>
-                `;
-            }
-            ecosystemHtml = `
-                <div class="mb-5 p-4 bg-gradient-to-br from-red-50 to-rose-50 rounded-xl border border-red-100">
-                    <h4 class="text-xs font-semibold text-red-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
-                        </svg>
-                        Ruby & Rails Ecosystem
-                    </h4>
-                    <p class="text-sm text-gray-700 leading-relaxed">${host.rubyEcosystem}</p>
-                    ${sourceHtml}
-                    ${openSourceHtml}
-                </div>
-            `;
-        }
-
-        return `
-            <div class="p-6">
-                <button id="hostModalCloseBtn" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10">
-                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-                <!-- Header -->
-                <div class="flex items-start gap-4 mb-5">
-                    <div class="w-16 h-16 bg-gray-50 rounded-xl flex items-center justify-center p-2 flex-shrink-0 border border-gray-100">
-                        <img src="${host.logo}" alt="${host.name}" class="max-w-full max-h-full object-contain" />
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <h3 class="text-xl font-bold text-gray-900">${host.name}</h3>
-                            <span class="px-2 py-0.5 text-xs font-bold rounded-md ${tagClass}">${host.tag}</span>
-                        </div>
-                        <p class="text-gray-600 mt-1">${host.summary}</p>
-                        ${foundersHtml}
-                        ${leadershipHtml}
-                    </div>
-                </div>
-
-                ${host.rubyConnection ? `
-                <div class="flex items-start gap-2 mb-5">
-                    <svg class="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/></svg>
-                    <p class="text-sm font-semibold text-gray-900 leading-snug">${host.rubyConnection}</p>
-                </div>` : ""}
-
-                ${jobsHtml}
-                ${productHtml}
-                ${historyHtml}
-                ${ecosystemHtml}
-
-                <a href="${host.url}" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium text-sm">
-                    Visit ${host.name}
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                </a>
-            </div>
-        `;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll("[data-host-id]").forEach((card) => {
-            card.addEventListener("click", (e) => {
-                e.preventDefault();
-                const hostId = card.getAttribute("data-host-id");
-                const host = hostsData[hostId];
-                if (
-                    host &&
-                    window.setHostModalContent &&
-                    window.showHostModal
-                ) {
-                    window.setHostModalContent(buildHostModalContent(host));
-                    window.showHostModal();
-                }
-            });
-        });
-    });
-</script>

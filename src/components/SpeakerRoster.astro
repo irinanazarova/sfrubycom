@@ -40,7 +40,6 @@ const speakers = limit
           ...ordered.filter((s) => s.pin === "last"),
       ]
     : ordered;
-const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
 ---
 
 <section
@@ -60,10 +59,6 @@ const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
             >
                 {heading}
             </h2>
-            <p class="text-base md:text-lg text-white/90 mt-4">
-                Founders and engineers shipping Ruby in production. More
-                announced every week.
-            </p>
         </div>
 
         <ul
@@ -106,8 +101,12 @@ const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
                         <p class="font-display font-semibold text-sm md:text-base text-gray-900 mt-3 leading-snug flex items-center justify-center min-h-[2.75rem]">
                             {s.name}
                         </p>
+                        {/* markup kept tight on purpose: line breaks inside the
+                            anchor render as spaces and detach the commas */}
                         <p class="text-xs md:text-sm text-ruby-600 mt-2">
-                            {s.company}
+                            {s.orgs.map((org, i) => (
+                                <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
+                            ))}
                         </p>
                         {s.bio && (
                             <p class="text-xs text-gray-600 leading-relaxed mt-3">
@@ -124,14 +123,6 @@ const revealed = conferenceSpeakers.filter((s) => s.pixel).length;
             }
         </ul>
 
-        {
-            revealed < conferenceSpeakers.length && (
-                <p class="text-center text-sm text-white/80 mt-8">
-                    {revealed} characters unlocked. The rest are revealed as
-                    their art lands.
-                </p>
-            )
-        }
 
         {
             ctaHref && (

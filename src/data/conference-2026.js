@@ -3,11 +3,14 @@
 // `pixel` points at a 256x256 transparent sprite in /public (see speaker_*_pixel_256.png).
 // Speakers without artwork yet render as a "?" character-select slot; drop the sprite in
 // and add the `pixel` key to reveal them.
+//
+// `orgs` is the affiliation line: each entry renders as a link when it has a `url`.
+// All URLs are content-verified (page title checked), not just resolved.
 export const conferenceSpeakers = [
   {
     name: "Garry Tan",
     bio: "Built Bookface, YC's internal platform, on Rails. Now runs the place.",
-    company: "Y Combinator",
+    orgs: [{ name: "Y Combinator", url: "https://www.ycombinator.com/" }],
     role: "President & CEO",
     track: "startups",
     keynote: true,
@@ -17,80 +20,134 @@ export const conferenceSpeakers = [
     pixel: "/garry_pixel_256.png",
   },
   {
-    name: "Rosa Gutiérrez",
-    bio: "Built Solid Queue, the job backend that ships with Rails 8.",
-    company: "37signals",
-    track: "scaleups",
-    pixel: "/speaker_rosa_gutierrez_pixel_256.png",
-  },
-  {
-    name: "Chris Oliver",
-    bio: "Has taught Rails to a generation of developers. Maintains Pay, Noticed and Jumpstart.",
-    company: "GoRails",
-    track: "startups",
-    pixel: "/speaker_chris_oliver_pixel_256.png",
-  },
-  {
-    name: "Jason Bosco",
-    bio: "Bootstrapped an open-source search engine on Rails. It answers 10B+ searches a month.",
-    company: "Typesense",
-    track: "startups",
-    pixel: "/speaker_jason_bosco_pixel_256.png",
+    name: "Ryan Sherlock",
+    bio: "Scales the Rails infrastructure and MySQL fleet behind Fin, the AI customer service agent.",
+    orgs: [{ name: "Fin (ex Intercom)", url: "https://fin.ai/" }],
+    // pixel: "/speaker_ryan_sherlock_pixel_256.png",
   },
   {
     name: "Cole Robertson",
     bio: "YC S25. Measures bulk inventory nobody can barcode, with LiDAR and computer vision.",
-    company: "Rebulk",
+    orgs: [{ name: "Rebulk", url: "https://www.rebulk.com/" }],
     track: "startups",
     pixel: "/speaker_cole_robertson_pixel_256.png",
   },
-  // Marco Roth was announced on X but is not on the confirmed list; his sprite is
-  // ready at /speaker_marco_roth_pixel_256.png — uncomment once he is confirmed.
-  // {
-  //   name: "Marco Roth",
-  //   company: "Herb, Hotwire",
-  //   track: "startups",
-  //   pixel: "/speaker_marco_roth_pixel_256.png",
-  // },
   {
     name: "Carmine Paolino",
     bio: "Creator of RubyLLM, the Ruby framework for every major AI provider.",
-    company: "Chat with Work",
+    orgs: [
+      { name: "Chat with Work", url: "https://chatwithwork.com/" },
+      { name: "RubyLLM", url: "https://rubyllm.com/" },
+    ],
     track: "startups",
     pixel: "/speaker_carmine_paolino_pixel_256.png",
   },
   {
+    name: "Rosa Gutiérrez",
+    bio: "Built Solid Queue, the job backend that ships with Rails 8.",
+    orgs: [{ name: "37signals", url: "https://37signals.com/" }],
+    track: "scaleups",
+    pixel: "/speaker_rosa_gutierrez_pixel_256.png",
+  },
+  {
+    name: "Jason Bosco",
+    bio: "Bootstrapped an open-source search engine on Rails. It answers 10B+ searches a month.",
+    orgs: [{ name: "Typesense", url: "https://typesense.org/" }],
+    track: "startups",
+    pixel: "/speaker_jason_bosco_pixel_256.png",
+  },
+  {
+    name: "Chris Oliver",
+    bio: "Has taught Rails to a generation of developers. Maintains Pay, Noticed and Jumpstart.",
+    orgs: [
+      { name: "GoRails", url: "https://gorails.com/" },
+      { name: "Hatchbox", url: "https://hatchbox.io/" },
+    ],
+    track: "startups",
+    pixel: "/speaker_chris_oliver_pixel_256.png",
+  },
+  {
     name: "Vladimir Dementyev",
     bio: "Author of AnyCable, TestProf and Layered Design for Ruby on Rails Applications.",
-    company: "Evil Martians",
+    orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
     track: "startups",
     pixel: "/speaker_vladimir_dementyev_pixel_256.png",
   },
   {
     name: "Andrey Novikov",
     bio: "Author of Yabeda, the Ruby instrumentation framework with over 10 million downloads.",
-    company: "Evil Martians",
+    orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
     track: "scaleups",
     pixel: "/speaker_andrey_novikov_pixel_256.png",
   },
   {
     name: "Jason Thomas",
     bio: "Co-created COSMOS, the Ruby stack used to build, test and fly satellites and robots.",
-    company: "OpenC3",
+    orgs: [{ name: "OpenC3", url: "https://openc3.com/" }],
     track: "startups",
     pixel: "/speaker_jason_thomas_pixel_256.png",
   },
   {
     name: "Neha Abraham",
     bio: "Builds the data tools a nationwide remodeling business runs on, in Rails.",
-    company: "Power Home Remodeling",
+    orgs: [{ name: "Power Home Remodeling", url: "https://www.powerhrg.com/" }],
     track: "scaleups",
     pixel: "/speaker_neha_abraham_pixel_256.png",
   },
   {
+    name: "Marisa Lopez",
+    bio: "Builds public health infrastructure on Rails: the platform connecting labs, clinics and patients.",
+    orgs: [{ name: "Primary Health", url: "https://www.primary.health/" }],
+    // pixel: "/speaker_marisa_lopez_pixel_256.png",
+  },
+  {
+    name: "Phillip Campbell",
+    bio: "Scales Sidekiq and the Rails apps that run payroll for hundreds of thousands of small businesses.",
+    orgs: [{ name: "Gusto", url: "https://gusto.com/" }],
+    // pixel: "/speaker_phillip_campbell_pixel_256.png",
+  },
+  {
+    name: "Peter Zhu",
+    bio: "Ruby core committer. Works on Ruby's garbage collector at Shopify.",
+    orgs: [{ name: "Shopify", url: "https://www.shopify.com/" }],
+    // pixel: "/speaker_peter_zhu_pixel_256.png",
+  },
+  {
+    name: "Ben Sheldon",
+    bio: "Author of GoodJob, the Postgres-backed Active Job backend.",
+    orgs: [{ name: "Frontdoor Benefits", url: "https://www.openfrontdoor.com/" }],
+    // pixel: "/speaker_ben_sheldon_pixel_256.png",
+  },
+  {
+    name: "Alex Coomans",
+    bio: "Simplifies the Rails architecture behind Persona's identity platform. Spent nine years scaling Square before that.",
+    orgs: [{ name: "Persona", url: "https://withpersona.com/" }],
+    // pixel: "/speaker_alex_coomans_pixel_256.png",
+  },
+  {
+    name: "Madison Sites",
+    bio: "Wrangles legacy Rails in production. Speaks on what AI agents can and can't fix in old codebases.",
+    orgs: [{ name: "Order.co", url: "https://www.order.co/" }],
+    // pixel: "/speaker_madison_sites_pixel_256.png",
+  },
+  {
+    name: "CJ Avilla",
+    bio: "Teaches Rails on YouTube. Previously an engineer at Craftwork and developer educator at Stripe.",
+    orgs: [{ name: "Anthropic", url: "https://www.anthropic.com/" }],
+    // pixel: "/speaker_cj_avilla_pixel_256.png",
+  },
+  // Marco Roth was announced on X but is not on the confirmed list; his sprite is
+  // ready at /speaker_marco_roth_pixel_256.png — uncomment once he is confirmed.
+  // {
+  //   name: "Marco Roth",
+  //   orgs: [{ name: "Herb, Hotwire", url: "https://herb-tools.dev/" }],
+  //   track: "startups",
+  //   pixel: "/speaker_marco_roth_pixel_256.png",
+  // },
+  {
     name: "Irina Nazarova",
     bio: "CEO, and co-founder of AnyCable, the WebSocket server for Ruby.",
-    company: "Evil Martians",
+    orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
     track: "startups",
     keynote: true,
     pin: "last",

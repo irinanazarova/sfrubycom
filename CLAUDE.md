@@ -28,11 +28,11 @@ npm run fetch-data   # Fetch Google Sheets + Luma events data
 ### Data Flow
 
 Content comes from three sources:
-1. **Google Sheets** - Talks, startups, news (fetched via `scripts/fetch-sheets.js`)
+1. **Google Sheets** - Talks, news (fetched via `scripts/fetch-sheets.js`)
 2. **Luma API** - Meetup events (fetched via `scripts/fetch-luma-events.js`)
-3. **Hand-maintained JS files** - Jobs (`src/data/jobs.js`), meetup recordings (`src/data/meetup-recordings.js`), hosts, sponsors, speakers, schedule
+3. **Hand-maintained JS files** - Jobs (`src/data/jobs.js`), startups (`src/data/startups.js`), meetup recordings (`src/data/meetup-recordings.js`), hosts, sponsors, speakers, schedule
 
-Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions. Jobs do **not** flow through Google Sheets — edit `src/data/jobs.js` directly. (`src/content/jobs.json` is unused; the plumbing was removed in commit `833216b`.)
+Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions. Jobs and startups do **not** flow through Google Sheets — edit `src/data/jobs.js` and `src/data/startups.js` directly (their sheet plumbing was removed; jobs in commit `833216b`).
 
 ### Directory Structure
 
@@ -57,7 +57,7 @@ Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The 
 ### Environment Variables
 
 Required for `npm run build` (data fetching):
-- `SHEET_STARTUPS_CSV_URL`, `SHEET_NEWS_CSV_URL`, `SHEET_TALKS_CSV_URL` - Google Sheets CSV export URLs
+- `SHEET_NEWS_CSV_URL`, `SHEET_TALKS_CSV_URL` - Google Sheets CSV export URLs
 - `LUMA_API_KEY`, `LUMA_CALENDAR_ID` - Luma API access
 
 ## Key Patterns
@@ -154,7 +154,7 @@ Take a screenshot and actually look at it. Numbers confirm density; eyes confirm
 
 The mobile experience has native-style chrome modeled on the iOS 26 "Liquid Glass" tab bar. When adding pages or fixed/sticky UI, respect its z-index contract:
 
-- **Bottom nav** (`src/components/BottomNav.astro`): a floating frosted-glass **pill** plus a detached accent **CTA circle**, mobile-only (`lg:hidden`), `ogplus:hidden`. It is the **sole mobile nav** (the hamburger was removed). The pill (`#bottom-nav`) holds four primary tabs (Home / Conf / Slack / Jobs) **+ a "More" tab** that opens a bottom-sheet menu (`#more-sheet`) for the overflow destinations (Videos / Startups / Sponsor / News / About). The detached ruby circle (`#join-fab`) is the Join CTA. **No horizontal scrolling** (overflow lives in the More sheet, so every destination is discoverable). The `.bottom-dock` wrapper is `pointer-events-none` with the pill/circle `pointer-events-auto`, so the transparent margins stay tappable to the page; content scrolls under the glass. Tabs are data-driven (`tabs` + `moreItems` arrays); **display/visibility come from utility classes** (`flex lg:hidden ogplus:hidden` on the dock) so the hide variants win the cascade over the scoped glass styles. Icons are **Phosphor** via `astro-icon` + `@iconify-json/ph` (`ph:<name>-light` idle, `-fill` active), inlined at build (no client JS). Pages give content bottom clearance with the `pb-tabbar` body class (`5.25rem`, tuned to the floating pill height + lift). **The site has three page-shell patterns and the nav must be in all of them:** `BaseLayout.astro`, `Layout.astro`, and the standalone pages that build their own `<body>` (`index.astro`, `sponsor-2026.astro`, `conference-2026.astro`). A new top-level page that defines its own `<body>` must import `BottomNav`, add `pb-tabbar` to the body, and use the `viewport-fit=cover` meta (so safe-area insets resolve).
+- **Bottom nav** (`src/components/BottomNav.astro`): a floating frosted-glass **pill** plus a detached accent **CTA circle**, mobile-only (`lg:hidden`), `ogplus:hidden`. It is the **sole mobile nav** (the hamburger was removed). The pill (`#bottom-nav`) holds four primary tabs (Home / Meetup / Slack / Jobs) **+ a "More" tab** that opens a bottom-sheet menu (`#more-sheet`) for the overflow destinations (Videos / Startups / Sponsor / News / About). The detached ruby circle (`#join-fab`) is the Join CTA. **No horizontal scrolling** (overflow lives in the More sheet, so every destination is discoverable). The `.bottom-dock` wrapper is `pointer-events-none` with the pill/circle `pointer-events-auto`, so the transparent margins stay tappable to the page; content scrolls under the glass. Tabs are data-driven (`tabs` + `moreItems` arrays); **display/visibility come from utility classes** (`flex lg:hidden ogplus:hidden` on the dock) so the hide variants win the cascade over the scoped glass styles. Icons are **Phosphor** via `astro-icon` + `@iconify-json/ph` (`ph:<name>-light` idle, `-fill` active), inlined at build (no client JS). Pages give content bottom clearance with the `pb-tabbar` body class (`5.25rem`, tuned to the floating pill height + lift). **The site has three page-shell patterns and the nav must be in all of them:** `BaseLayout.astro`, `Layout.astro`, and the standalone pages that build their own `<body>` (`index.astro`, `sponsor-2026.astro`). A new top-level page that defines its own `<body>` must import `BottomNav`, add `pb-tabbar` to the body, and use the `viewport-fit=cover` meta (so safe-area insets resolve).
 - **More sheet** (`#more-sheet` + `#more-backdrop`): an iOS bottom sheet (rounded top, grab handle, drag-to-dismiss, dim backdrop, Escape/backdrop close, body scroll-lock). Backdrop `z-50`, sheet `z-51`.
 - **Jobs filter sheet** (`/jobs`, `#filter-panel` + `#filter-backdrop`): same bottom-sheet pattern. Backdrop `z-45`, sheet `z-46`, above the nav so the sheet covers it. Reuse this pattern for any future mobile sheet.
 
@@ -168,7 +168,7 @@ Quick check (390x844): `document.getElementById('bottom-nav')` exists and is vis
 
 `Header.astro` (the `BaseLayout` shell) starts as a **transparent** header with the **white** logo, then swaps to a solid white header with the **dark** logo once scrolled past 50px. That transparent/white-logo state only reads on a **dark hero**. A `BaseLayout` page whose top section is light (`bg-white`, `bg-gray-50`, `from-gray-50`, etc.) must pass **`darkHero={false}`**, which starts the header solid with the dark logo so the logo isn't invisible on a light background at the top.
 
-Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/jobs`, `/videos`, `/photos`, `/host`, `conference-2026`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
+Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/meetup`, `/jobs`, `/videos`, `/photos`, `/host`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
 
 When adding a `BaseLayout` page, check the first section's background and set `darkHero` accordingly. QA: at 390x844, the header logo must be legible at scroll-top (`.header-logo-white` visible only over a dark hero; otherwise `.header-logo-dark` on a solid header).
 

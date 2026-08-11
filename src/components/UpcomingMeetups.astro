@@ -6,11 +6,12 @@
  * next SF Ruby meetup, synced from Luma at build time (see src/data/meetups.js).
  * Falls back to a "follow on Luma" state when nothing is scheduled.
  */
-import { getUpcomingMeetups } from "../data/meetups.js";
+import { getUpcomingMeetups, getAllUpcoming } from "../data/meetups.js";
 
-const meetups = getUpcomingMeetups();
-const next = meetups[0] || null;
-const rest = meetups.slice(1);
+// Hero = the next monthly meetup. The list below carries every other upcoming
+// event (the following meetup + the conference).
+const next = getUpcomingMeetups()[0] || null;
+const rest = getAllUpcoming().filter((e) => !next || e.id !== next.id);
 
 // Format from the raw timestamp + event timezone so the day never shifts,
 // regardless of the build machine's local timezone.
@@ -30,6 +31,22 @@ function dayLabel(m) {
         month: "short",
         day: "numeric",
     });
+}
+// Compact date (no weekday); shows a range for multi-day events, e.g. the
+// conference reads "Nov 10-12".
+function shortDate(m) {
+    const startDay = fmt(m.startAt, m.timezone, { day: "numeric" });
+    const startMonth = fmt(m.startAt, m.timezone, { month: "short" });
+    if (m.endAt) {
+        const endDay = fmt(m.endAt, m.timezone, { day: "numeric" });
+        const endMonth = fmt(m.endAt, m.timezone, { month: "short" });
+        if (endDay !== startDay || endMonth !== startMonth) {
+            return endMonth === startMonth
+                ? `${startMonth} ${startDay}-${endDay}`
+                : `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
+        }
+    }
+    return `${startMonth} ${startDay}`;
 }
 function timeRange(m) {
     const start = fmt(m.startAt, m.timezone, { hour: "numeric", minute: "2-digit" });
@@ -131,19 +148,33 @@ function statusLabel(m) {
         <div class="mb-8">
             <p class="px-font text-px8 text-gray-500 mb-3">More upcoming</p>
             <ul class="flex flex-col gap-2">
-                {rest.map((m) => (
-                    <li>
-                        <a
-                            href={m.lumaUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex items-center justify-between gap-3 bg-white border-2 border-gray-900 px-4 py-3 hover:bg-slate-50 transition-colors tap-press"
-                        >
-                            <span class="font-medium text-gray-900 truncate">{m.title}</span>
-                            <span class="text-sm text-gray-500 flex-shrink-0">{dayLabel(m)}</span>
-                        </a>
-                    </li>
-                ))}
+                {rest.map((m) => {
+                    const isConf = m.type === "conference";
+                    const href = isConf ? "/" : m.lumaUrl;
+                    return (
+                        <li>
+                            <a
+                                href={href}
+                                target={isConf ? undefined : "_blank"}
+                                rel={isConf ? undefined : "noopener noreferrer"}
+                                class="flex items-start justify-between gap-3 bg-white border-2 border-gray-900 px-3 py-3 hover:bg-slate-50 transition-colors tap-press"
+                            >
+                                <span class="flex items-start gap-2.5 min-w-0">
+                                    <span
+                                        class:list={[
+                                            "px-plate px-font text-px8 px-2 py-1 flex-shrink-0 mt-0.5",
+                                            isConf && "px-plate--gold",
+                                        ]}
+                                    >
+                                        {isConf ? "Conf" : "Meetup"}
+                                    </span>
+                                    <span class="font-medium text-gray-900 leading-snug">{m.title}</span>
+                                </span>
+                                <span class="text-sm text-gray-500 flex-shrink-0 mt-0.5">{shortDate(m)}</span>
+                            </a>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     )

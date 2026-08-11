@@ -10,6 +10,12 @@
   to = "/"
   status = 301
 
+# The conference is the homepage now; the old page 301s home
+[[redirects]]
+  from = "/conference-2026"
+  to = "/"
+  status = 301
+
 [[redirects]]
   from = "/register"
   to = "https://lu.ma/sfruby"
