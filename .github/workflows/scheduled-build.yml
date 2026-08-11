@@ -21,8 +21,6 @@ jobs:
 
       - name: Build
         env:
-          SHEET_NEWS_CSV_URL: ${{ secrets.SHEET_NEWS_CSV_URL }}
-          SHEET_TALKS_CSV_URL: ${{ secrets.SHEET_TALKS_CSV_URL }}
           LUMA_API_KEY: ${{ secrets.LUMA_API_KEY }}
           LUMA_CALENDAR_ID: ${{ secrets.LUMA_CALENDAR_ID }}
         run: npm run build

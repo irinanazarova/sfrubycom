@@ -20,19 +20,18 @@ npm run dev          # Start dev server at localhost:4321
 npm run build        # Fetch external data + build (production)
 npm run build:dev    # Build without fetching data (faster for local dev)
 npm run preview      # Preview production build
-npm run fetch-data   # Fetch Google Sheets + Luma events data
+npm run fetch-data   # Fetch Luma events data
 ```
 
 ## Architecture
 
 ### Data Flow
 
-Content comes from three sources:
-1. **Google Sheets** - Talks, news (fetched via `scripts/fetch-sheets.js`)
-2. **Luma API** - Meetup events (fetched via `scripts/fetch-luma-events.js`)
-3. **Hand-maintained JS files** - Jobs (`src/data/jobs.js`), startups (`src/data/startups.js`), meetup recordings (`src/data/meetup-recordings.js`), hosts, sponsors, speakers, schedule
+Content comes from two sources:
+1. **Luma API** - Meetup events (fetched via `scripts/fetch-luma-events.js`)
+2. **Hand-maintained files** - Jobs (`src/data/jobs.js`), startups (`src/data/startups.js`), meetup recordings (`src/data/meetup-recordings.js`), hosts, sponsors, speakers, schedule; news (`src/content/news.json`) and talks (`src/content/talks.json`)
 
-Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions. Jobs and startups do **not** flow through Google Sheets — edit `src/data/jobs.js` and `src/data/startups.js` directly (their sheet plumbing was removed; jobs in commit `833216b`).
+Luma data is fetched at build time and saved to `src/content/*.json`. The `src/data/*.js` files export this data with helper functions. Everything else is edited directly in the repo — the old Google Sheets plumbing for news/talks and jobs/startups has been removed (jobs in commit `833216b`).
 
 ### Directory Structure
 
@@ -40,7 +39,7 @@ Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The 
 - `src/components/` - Reusable Astro components (cards, modals, layout elements)
 - `src/layouts/` - BaseLayout.astro and Layout.astro page wrappers
 - `src/data/` - JavaScript data exports with helpers (talks, speakers, jobs, startups, sponsors, schedule)
-- `src/content/` - JSON data fetched from external sources
+- `src/content/` - JSON data (fetched Luma events; hand-edited news and talks)
 - `src/utils/` - TypeScript utilities and type definitions
 - `scripts/` - Build-time data fetching scripts
 - `drafts/` - Gitignored. Monthly Substack drafts live here as a pair: `substack-YYYY-MM-[month].md` (working draft) and `.html` (paste-ready, since Substack's editor doesn't parse Markdown).
@@ -57,7 +56,6 @@ Sheet/Luma data is fetched at build time and saved to `src/content/*.json`. The 
 ### Environment Variables
 
 Required for `npm run build` (data fetching):
-- `SHEET_NEWS_CSV_URL`, `SHEET_TALKS_CSV_URL` - Google Sheets CSV export URLs
 - `LUMA_API_KEY`, `LUMA_CALENDAR_ID` - Luma API access
 
 ## Key Patterns

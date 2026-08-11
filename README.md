@@ -27,26 +27,24 @@ npm run dev        # dev server at localhost:4321
 | `npm run build`     | Fetch external data, then build to `./dist/`        |
 | `npm run build:dev` | Build without fetching external data (no env vars needed) |
 | `npm run preview`   | Preview the production build locally                |
-| `npm run fetch-data`| Fetch Google Sheets and Luma events data            |
+| `npm run fetch-data`| Fetch Luma events data                              |
 | `npm run qa`        | Mobile/desktop QA sweep of all routes (Playwright)  |
 
 Use `npm run build:dev` for local work: it skips the external fetches and builds from the JSON already committed in `src/content/`.
 
 ## How content flows
 
-Content comes from three sources:
+Content comes from two sources:
 
-1. **Google Sheets**: talks and news, fetched at build time by `scripts/fetch-sheets.js` into `src/content/*.json`.
-2. **Luma API**: meetup events, fetched by `scripts/fetch-luma-events.js`.
-3. **Hand-maintained files** in `src/data/`: jobs, startups, meetup recordings, hosts, sponsors, speakers, schedule.
+1. **Luma API**: meetup events, fetched at build time by `scripts/fetch-luma-events.js` into `src/content/`.
+2. **Hand-maintained files**: jobs, startups, meetup recordings, hosts, sponsors, speakers, and schedule in `src/data/`; news and talks in `src/content/news.json` and `src/content/talks.json`.
 
-A scheduled GitHub Action rebuilds and redeploys the site weekly so sheet and Luma updates ship without a commit.
+A scheduled GitHub Action rebuilds and redeploys the site weekly so Luma updates ship without a commit.
 
 ## Environment variables
 
 Only needed for the full `npm run build` (data fetching); see `.env.example`:
 
-- `SHEET_NEWS_CSV_URL`, `SHEET_TALKS_CSV_URL`: Google Sheets CSV export URLs
 - `LUMA_API_KEY`, `LUMA_CALENDAR_ID`: Luma API access
 
 ## Project structure
@@ -54,7 +52,7 @@ Only needed for the full `npm run build` (data fetching); see `.env.example`:
 - `src/pages/`: routes (index, talks, startups, jobs, news, photos, about)
 - `src/components/`: reusable Astro components
 - `src/data/`: JavaScript data exports with helpers
-- `src/content/`: JSON fetched from external sources
+- `src/content/`: JSON data (fetched Luma events, hand-edited news and talks)
 - `src/design/tokens.mjs`: design tokens for the 8-bit design system (see `/design-system` on the site)
 - `scripts/`: build-time data fetching and asset generation
 
