@@ -95,10 +95,10 @@ export const conferenceSpeakers = [
     pixel: "/speaker_neha_abraham_pixel_256.png",
   },
   {
-    name: "Marisa Lopez",
+    name: "Celina Lopez",
     bio: "Builds public health infrastructure on Rails: the platform connecting labs, clinics and patients.",
     orgs: [{ name: "Primary Health", url: "https://www.primary.health/" }],
-    pixel: "/speaker_marisa_lopez_pixel_256.png",
+    pixel: "/speaker_celina_lopez_pixel_256.png",
   },
   {
     name: "Phillip Campbell",
@@ -154,6 +154,13 @@ export const conferenceSpeakers = [
     pixel: "/speaker_irina_nazarova_pixel_256.png",
   },
 ];
+
+// CFP speakers type their own names, so the feed sometimes disagrees with the
+// roster above ("phillc", nicknames). Map the CFP spelling to the roster name
+// here; the build warns about any CFP name that still matches nobody, and each
+// warning is fixed by adding one line here (or adding the speaker to the roster).
+// Empty right now: the 2026 feed's names were fixed in the CFP app itself.
+export const cfpNameAliases = {};
 
 // The ladder is the argument for buying today. Keep it in sync with Luma.
 //

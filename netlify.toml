@@ -51,6 +51,15 @@
   to = "/startups"
   status = 301
 
+# Same-origin proxy for the CFP talks feed: no CORS involvement, the CFP app's
+# location stays swappable, and the edge caches responses (the API sends
+# Cache-Control: public, max-age=600, stale-while-revalidate=3600).
+[[redirects]]
+  from = "/api/talks"
+  to = "https://cfp.sfruby.com/api/talks"
+  status = 200
+  force = true
+
 # Retired monthly issue archive pages now point at the running feed
 [[redirects]]
   from = "/news/2026-*"

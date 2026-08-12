@@ -1,7 +1,14 @@
 ---
 // Character-select grid for the 2026 lineup. Speakers without pixel art yet render
 // as an unrevealed "?" slot, which keeps the name (the thing that sells) on the page.
-import { conferenceSpeakers } from "../data/conference-2026.js";
+//
+// Talk titles come from the CFP feed: baked in at build time from the committed
+// snapshot (src/content/cfp-talks.json, refreshed by scripts/fetch-cfp-talks.js),
+// then silently refreshed in place from the live API by the script below. Only
+// titles that pass isRealTitle render; TBD-style placeholders stay hidden.
+import { conferenceSpeakers, cfpNameAliases } from "../data/conference-2026.js";
+import { buildTitleMap, speakerKey } from "../utils/cfpTalks.js";
+import cfpTalks from "../content/cfp-talks.json";
 
 interface Props {
     heading?: string;
@@ -40,6 +47,16 @@ const speakers = limit
           ...ordered.filter((s) => s.pin === "last"),
       ]
     : ordered;
+
+const { titles, unmatched } = buildTitleMap(
+    cfpTalks,
+    conferenceSpeakers,
+    cfpNameAliases,
+);
+// An unmatched CFP name means a missing cfpNameAliases entry or a speaker we
+// haven't added to the roster — surface it in the build log, don't fail.
+if (unmatched.length > 0)
+    console.warn(`cfp-talks: no roster match for: ${unmatched.join(", ")}`);
 ---
 
 <section
@@ -66,7 +83,10 @@ const speakers = limit
         >
             {
                 speakers.map((s) => (
-                    <li class="px-card bg-white p-4 flex flex-col items-center text-center">
+                    <li
+                        class="px-card bg-white p-4 flex flex-col items-center text-center"
+                        data-cfp-key={speakerKey(s.name)}
+                    >
                         {s.pixel ? (
                             <img
                                 src={s.pixel}
@@ -108,6 +128,16 @@ const speakers = limit
                                 <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
                             ))}
                         </p>
+                        {/* always in the DOM (hidden when empty) so the client
+                            refresh has a node to fill when a title lands */}
+                        <p
+                            data-talk-title
+                            hidden={!titles.has(speakerKey(s.name))}
+                            class="font-display font-semibold text-xs md:text-sm text-gray-900 leading-snug mt-3"
+                        >
+                            {titles.has(speakerKey(s.name)) &&
+                                `“${titles.get(speakerKey(s.name))}”`}
+                        </p>
                         {s.bio && (
                             <p class="text-xs text-gray-600 leading-relaxed mt-3">
                                 {s.bio}
@@ -148,3 +178,42 @@ const speakers = limit
         }
     </div>
 </section>
+
+<script>
+    // Refresh talk titles in place from the live CFP feed. The baked titles are
+    // already on screen, so every failure path (dev server without the Netlify
+    // proxy, CFP app down, 8s timeout) just means no silent upgrade this visit —
+    // nothing to clean up, no spinner to hide.
+    import {
+        conferenceSpeakers,
+        cfpNameAliases,
+    } from "../data/conference-2026.js";
+    import { buildTitleMap, CFP_API_PATH } from "../utils/cfpTalks.js";
+
+    async function refreshTalkTitles() {
+        try {
+            const res = await fetch(CFP_API_PATH, {
+                signal: AbortSignal.timeout(8_000),
+            });
+            if (!res.ok) return;
+            const talks = await res.json();
+            const { titles } = buildTitleMap(
+                talks,
+                conferenceSpeakers,
+                cfpNameAliases,
+            );
+            for (const card of document.querySelectorAll("[data-cfp-key]")) {
+                const node = card.querySelector("[data-talk-title]");
+                if (!(node instanceof HTMLElement) || !(card instanceof HTMLElement)) continue;
+                const title = titles.get(card.dataset.cfpKey ?? "");
+                const text = title ? `“${title}”` : "";
+                if (node.textContent !== text) node.textContent = text;
+                node.hidden = !title;
+            }
+        } catch {
+            // keep the baked titles
+        }
+    }
+
+    refreshTalkTitles();
+</script>

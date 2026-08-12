@@ -1,0 +1,197 @@
+[
+  {
+    "id": "FtseR90T",
+    "title": "Assign to Claude: Making an Agent a First‑Class Teammate in Your SaaS",
+    "abstract": "Most AI features are a chat box bolted onto the product. The good ones are woven through it: an agent you assign a card to, that triages the ticket before you read it, that spots a bad deploy and opens the incident itself. We'll build all three live in one Rails app on Claude Managed Agents (MCP, custom tools, memory, human approvals) and leave you a map of the agent-shaped holes in your product.",
+    "track": "general",
+    "speaker": {
+      "name": "CJ Avilla",
+      "company": "Anthropic",
+      "role": "Member of Technical Staff",
+      "bio": "CJ Avilla is a Member of Technical Staff at Anthropic and former Stripe Developer Advocate.",
+      "socials": "https://x.com/cjav_dev https://www.youtube.com/@cjav_dev "
+    }
+  },
+  {
+    "id": "QRYjVXDt",
+    "title": "Background processing at Gusto: The Parts Where People Look Puzzled",
+    "abstract": "An update/extension/reformulation of my talk from Rocky Mountain Ruby https://www.youtube.com/watch?v=aY_yKeZYzko",
+    "track": "scale",
+    "speaker": {
+      "name": "Phillip Campbell",
+      "company": "Gusto",
+      "role": "Senior Engineering Manager",
+      "bio": "Phillip Campbell is an engineering leader at Gusto, where he leads the teams responsible for Rails architecture and background processing. He’s passionate about developer productivity at scale and focuses on building systems that help engineers stay fast, effective and happy in complex environments.",
+      "socials": "https://www.linkedin.com/in/phillc1/"
+    }
+  },
+  {
+    "id": "5w3EdzkG",
+    "title": "Building the same app twice: same problems, different decade",
+    "abstract": "Ten years ago I helped build and scale a welfare benefits app to aid more than 1 million people a year. Now, I'm doing it all again from the beginning. I'll compare the original 2016 product roadmap to what's possible in 2026, including feature appetites, team composition and enablement, and very, very different build-vs-buy decisions for an even more monolithic product.",
+    "track": "startup",
+    "speaker": {
+      "name": "Ben Sheldon",
+      "company": "Frontdoor Benefits",
+      "role": "Co-Founder and CTO",
+      "bio": "Ben Sheldon is the author of GoodJob, an Active Job backend. A Rails developer for over 10 years, he has worked at GitHub, OkCupid Labs, and Code for America. Ben is currently co-founder and CTO of Frontdoor Benefits.",
+      "socials": "https://www.linkedin.com/in/bensheldon/"
+    }
+  },
+  {
+    "id": "qWBFY9Fg",
+    "title": "Data, Dinos, Dashboards: Powerful Analytics on Rails",
+    "abstract": "Slow queries are the asteroid your dashboard won't survive. Startups move fast, but your data questions don't wait for a Tableau budget. This is a how-to for building fast, powerful dashboards directly in Rails with no extra vendor or contract. Take your queries from 15s to just milliseconds and leave with practical patterns you can immediately apply.",
+    "track": "scale",
+    "speaker": {
+      "name": "Neha Abraham",
+      "company": "Power Home Remodeling",
+      "role": "Software Developer",
+      "bio": "A developer at Power Home Remodeling, Neha builds data-intensive dashboards and loves the craft of software development. Outside of work, she's baking with her toddler, traveling with her husband, or being supervised by her dog and cat.",
+      "socials": "https://www.linkedin.com/in/nehaabraham/"
+    }
+  },
+  {
+    "id": "r8bh4cUV",
+    "title": "How We Bootstrapped an Open Source Search Engine to $10M+ ARR with 15 People and Ruby on Rails",
+    "abstract": "TBD",
+    "track": "startup",
+    "speaker": {
+      "name": "Jason Bosco",
+      "company": "Typesense",
+      "role": "CEO & Co-Founder",
+      "bio": "TBD",
+      "socials": "https://x.com/jasonbosco"
+    }
+  },
+  {
+    "id": "L95RQzUU",
+    "title": "Keeping Your Head on Straight in Concurrent & Complex Ruby Applications",
+    "abstract": "Ruby applications depend on execution-scoped state, but Threads, Fibers, requests, and jobs can lose it, leak it, or restore it incorrectly. This talk introduces Persona’s Context abstraction for safely inheriting and overriding that state, shows how we built dynamic configuration systems on top of it, and offers patterns you can apply in your own Ruby applications.",
+    "track": "scale",
+    "speaker": {
+      "name": "Alex Coomans",
+      "company": "Persona",
+      "role": "Software Engineer at Persona - Infrastructure Team",
+      "bio": "Alex is a long time Rubyist with a love for intricate and mind-boggling puzzles. At Persona, he's focused on enabling product teams by developing & maintaining robust, scalable infrastructure - ranging across Rails, Kubernetes, Cloud IaC - and everything in between.",
+      "socials": "https://github.com/drcapulet https://www.linkedin.com/in/alexcoomans/"
+    }
+  },
+  {
+    "id": "ZnCvY9ix",
+    "title": "Open Source is the Most Fragile and Most Resilient Ecosystem",
+    "abstract": "The open source software that powers our businesses is maintained primarily by volunteers but funded by too few companies. This talk reframes open source support as not charity, but rather a critical part of the business’ infrastructure. We will be discussing why your company needs a team to manage your open source stack, how to manage this team, and the benefits they could provide.",
+    "track": "scale",
+    "speaker": {
+      "name": "Peter Zhu",
+      "company": "Shopify",
+      "role": "Ruby Core Committer & Staff Software Engineer",
+      "bio": "Peter is a Ruby core committer and a Staff Software Engineer at Shopify. He works on improving the performance of Ruby and has worked on various projects including Modular GC, Ractors, and Variable Width Allocation. He is currently based in Tokyo, Japan.",
+      "socials": "https://x.com/peterzhu2118, https://bsky.app/profile/peterzhu.ca, https://ruby.social/@peterzhu2118, https://www.linkedin.com/in/peterzhu2118"
+    }
+  },
+  {
+    "id": "YyejSBrx",
+    "title": "Satellite command and control with Ruby and COSMOS",
+    "abstract": "COSMOS began at Ball Aerospace to scratch an itch: can I make an easy to use and configure command and control system? This talk traces that journey — from an internal tool at a big aerospace company, to open source in an industry where almost nothing is open, to OpenC3, the company we founded to steward COSMOS. Ends with how we built line-by-line Ruby script execution.",
+    "track": "general",
+    "speaker": {
+      "name": "Jason Thomas",
+      "company": "OpenC3",
+      "role": "CTO",
+      "bio": "Jason graduated from Iowa State University and spent 20 years at Ball Aerospace, where he was instrumental in building COSMOS. In 2022 he co-founded OpenC3 with Ryan Melton to commercialize COSMOS, where he now serves as CTO, building the next generation of COSMOS features.",
+      "socials": "https://www.linkedin.com/in/jmthomas/"
+    }
+  },
+  {
+    "id": "OdkW4UdX",
+    "title": "Solid Queue: two years on Rails",
+    "abstract": "Solid Queue 1.0 was released in September 2024 as the default Active Job backend in Rails. 2.0 is ready, but the world is completely different now! Let's explore the path to that new version and the new features, as well as how maintaining an open-source project has changed since Solid Queue was started. ",
+    "track": "general",
+    "speaker": {
+      "name": "Rosa Gutierrez",
+      "company": "37signals",
+      "role": "Principal programmer",
+      "bio": "Rosa has worked with Ruby for over 13 years. She loves maths, theoretical computer science, learning languages for both humans and computers, and her dog Mochi.",
+      "socials": "https://bsky.app/profile/rosa.codes"
+    }
+  },
+  {
+    "id": "JTCW1PPd",
+    "title": "Startups on Rails: 2026",
+    "abstract": "TBD",
+    "track": "startup",
+    "speaker": {
+      "name": " Irina Nazarova",
+      "company": "",
+      "role": "",
+      "bio": "",
+      "socials": ""
+    }
+  },
+  {
+    "id": "TBvEWlLi",
+    "title": "TBA",
+    "abstract": "TBD",
+    "track": "general",
+    "speaker": {
+      "name": "Vladimir Dementyev",
+      "company": "Evil Martians",
+      "role": "Principal Backend Engineer",
+      "bio": "Martian",
+      "socials": "https://x.com/palkan_tula"
+    }
+  },
+  {
+    "id": "_q7FnjUo",
+    "title": "TBD",
+    "abstract": "TBD",
+    "track": "startup",
+    "speaker": {
+      "name": "Chris Oliver",
+      "company": "Hatchbox",
+      "role": "Founder",
+      "bio": "Chris is a Rails Luminary, entrepreneur and content creator. He makes weekly Ruby on Rails screencasts at GoRails.com, a Ruby on Rails SaaS template called Jumpstart Pro and a hosting service called Hatchbox.io.\r\n\r\n",
+      "socials": "https://x.com/excid3, https://linkedin.com/in/excid3"
+    }
+  },
+  {
+    "id": "aFMxVPZw",
+    "title": "TBD",
+    "abstract": "TBD",
+    "track": "general",
+    "speaker": {
+      "name": "Celina Lopez",
+      "company": "Primary.Health & Canine.sh",
+      "role": "Technical Lead",
+      "bio": "Self taught software engineer with more than 5+ years of experience. Built software which helped vaccinate/test more than 7 million people in the US. Currently contributing to an open-source platform that simplifies application deployment using Kubernetes.",
+      "socials": "https://github.com/celina-lopez"
+    }
+  },
+  {
+    "id": "WIQ3Szn-",
+    "title": "The System Nobody Understood (Including AI)",
+    "abstract": "Every scaled Rails app has a stretch of backcountry nobody dares hike into: the part no one fully understands, so you patch it for years, until you can't. Ours had a critical bridge out there. The map showed it, the report said passable; I hiked in and it was all but gone. Our dashboards, our tenured engineers, and our AI were all confidently wrong. This is how we learned to trust only the ground.",
+    "track": "scale",
+    "speaker": {
+      "name": "Madison Sites",
+      "company": "Order.co",
+      "role": "Staff Software Engineer",
+      "bio": "Madison Sites is based in Lake Tahoe and has been a professional Ruby developer for over 10 years. She believes that removing dead code is the sixth love language. When she's not building things with cool people on the internet, you can find her very much offline, hiking on or maintaining a trail.",
+      "socials": "https://www.linkedin.com/in/madisonsites"
+    }
+  },
+  {
+    "id": "DLejvhHl",
+    "title": "Who Watches the Agents? Closing the Rails Loop from Code to Customers",
+    "abstract": "At Fin, over 95% of pull requests are Agent-driven and most are approved without human review. \r\n\r\nThis talk follows changes through our fifteen-year-old, three-million-line Rails monolith, from automated review and selective testing to production monitoring and rollback. Safe speed comes from layers of evidence, bounded authority, and fast recovery, not one perfect reviewer.",
+    "track": "general",
+    "speaker": {
+      "name": "Ryan Sherlock",
+      "company": "Fin (formally Intercom)",
+      "role": "Senior Director of Engineering",
+      "bio": "Ryan Sherlock is Senior Director of Engineering at Fin, leading infrastructure and core technologies. He works on reliability, developer productivity, and the three-million-line Rails monolith that powers Fin at scale.",
+      "socials": "https://x.com/ryan_sherlock, https://www.linkedin.com/in/ryansherlock/"
+    }
+  }
+]
