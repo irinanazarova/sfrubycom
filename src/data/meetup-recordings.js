@@ -567,7 +567,7 @@ const meetupRecordings = [
       },
       {
         title: "A Ruby Gem to Prettify Rails Notes",
-        speaker: "Marisa Lopez",
+        speaker: "Celina Lopez",
         company: "Primary Health",
         timestamp: 4794,
       },
