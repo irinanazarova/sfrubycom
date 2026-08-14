@@ -463,7 +463,7 @@ const facetGroups = [
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            color: #9ca3af;
+            color: var(--dark-400);
             margin-bottom: 0.5rem;
         }
         .chip {
@@ -475,20 +475,20 @@ const facetGroups = [
             font-size: 0.8125rem;
             font-weight: 500;
             line-height: 1.25rem;
-            color: #374151;
-            background: #fff;
-            border: 1px solid #d1d5db;
+            color: var(--dark-700);
+            background: var(--white);
+            border: 1px solid var(--dark-300);
             cursor: pointer;
             transition: all 0.15s;
             white-space: nowrap;
         }
         .chip:hover {
-            border-color: #f87171;
+            border-color: var(--ruby-400);
         }
         .chip-active {
-            color: #fff;
-            background: #dc2626;
-            border-color: #dc2626;
+            color: var(--white);
+            background: var(--ruby-600);
+            border-color: var(--ruby-600);
         }
         .chip-count {
             font-size: 0.6875rem;
@@ -506,14 +506,14 @@ const facetGroups = [
 
         /* Per-card anchor: highlight when linked, copy-link affordance. */
         .job-row:target {
-            border-color: #f87171;
-            box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+            border-color: var(--ruby-400);
+            box-shadow: 0 0 0 2px color-mix(in oklch, var(--ruby-600) 25%, transparent);
         }
         .copy-link {
             position: relative;
             display: inline-flex;
             align-items: center;
-            color: #9ca3af;
+            color: var(--dark-400);
             opacity: 0;
             transition: opacity 0.15s, color 0.15s;
         }
@@ -522,10 +522,10 @@ const facetGroups = [
             opacity: 1;
         }
         .copy-link:hover {
-            color: #dc2626;
+            color: var(--ruby-600);
         }
         .copy-link.copied {
-            color: #059669;
+            color: var(--grass-700);
             opacity: 1;
         }
         .copy-link.copied::after {
@@ -535,8 +535,8 @@ const facetGroups = [
             bottom: calc(100% + 0.35rem);
             transform: translateX(-50%);
             white-space: nowrap;
-            background: #111827;
-            color: #fff;
+            background: var(--dark-900);
+            color: var(--white);
             font-size: 0.6875rem;
             font-weight: 600;
             padding: 0.2rem 0.45rem;
@@ -582,7 +582,7 @@ const facetGroups = [
                 max-height: 85dvh;
                 overflow-y: auto;
                 overscroll-behavior: contain;
-                background: #fff;
+                background: var(--white);
                 border-radius: 1.25rem 1.25rem 0 0;
                 box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
                 padding: 0 1rem env(safe-area-inset-bottom);
@@ -598,7 +598,7 @@ const facetGroups = [
                 align-items: center;
                 padding: 0.625rem 0 0.5rem;
                 margin: 0 -1rem;
-                background: #fff;
+                background: var(--white);
                 border-radius: 1.25rem 1.25rem 0 0;
                 cursor: grab;
                 touch-action: none;
@@ -609,7 +609,7 @@ const facetGroups = [
                 width: 2.25rem;
                 height: 0.3125rem;
                 border-radius: 9999px;
-                background: #d1d5db;
+                background: var(--dark-300);
             }
         }
         @keyframes filter-sheet-up {

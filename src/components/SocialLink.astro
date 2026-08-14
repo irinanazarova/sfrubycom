@@ -8,8 +8,8 @@
  * @example Basic usage:
  * <SocialLink platform="slack" href="https://slack.com/invite">Join Slack</SocialLink>
  *
- * @example With custom icon:
- * <SocialLink platform="custom" href="/link" color="#123456">
+ * @example With custom icon (colors come from the token palette classes):
+ * <SocialLink platform="custom" href="/link" class="bg-indigo-500">
  *   <svg slot="icon">...</svg>
  *   Custom Link
  * </SocialLink>
@@ -33,12 +33,12 @@ interface Props {
 const { platform, href, class: className = "" } = Astro.props;
 
 const platformStyles: Record<string, string> = {
-    slack: "bg-[#4A154B] hover:bg-[#3e1240]",
-    substack: "bg-[#c24e00] hover:bg-[#a84400]",
+    slack: "bg-slack-500 hover:bg-slack-600",
+    substack: "bg-substack-700 hover:bg-substack-800",
     twitter: "bg-black hover:bg-gray-800",
-    bluesky: "bg-[#0060bf] hover:bg-[#004d99]",
-    linkedin: "bg-[#0A66C2] hover:bg-[#084d94]",
-    youtube: "bg-[#FF0000] hover:bg-[#cc0000]",
+    bluesky: "bg-bluesky-700 hover:bg-bluesky-800",
+    linkedin: "bg-linkedin-500 hover:bg-linkedin-600",
+    youtube: "bg-youtube-500 hover:bg-youtube-600",
     ruby: "bg-ruby-500 hover:bg-ruby-600",
     dark: "bg-gray-700 hover:bg-gray-600",
     gradient:

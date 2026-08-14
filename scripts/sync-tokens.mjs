@@ -1,9 +1,20 @@
 // Regenerates src/styles/tokens.css from src/design/tokens.mjs.
 // Run after editing tokens: node scripts/sync-tokens.mjs
 import { writeFileSync } from "node:fs";
-import { cssVars, oklch } from "../src/design/tokens.mjs";
+import { palette, cssVars, oklch } from "../src/design/tokens.mjs";
 
-const lines = Object.entries(cssVars)
+// Full palette as vars (--ruby-500, --dark-400, --white, --slack-500, ...)
+// so scoped <style> blocks can reference any registered color without raw hex.
+const paletteVars = Object.entries(palette).flatMap(([family, value]) =>
+  typeof value === "string"
+    ? [[family, value]]
+    : Object.entries(value).map(([step, hex]) => [`${family}-${step}`, hex]),
+);
+
+// Semantic px-* aliases keep their names (and win any duplicates).
+const allVars = [...paletteVars, ...Object.entries(cssVars)];
+
+const lines = allVars
   .map(([name, value]) => `    --${name}: ${oklch(value)};`)
   .join("\n");
 
@@ -15,4 +26,4 @@ ${lines}
 `;
 
 writeFileSync("src/styles/tokens.css", css);
-console.log(`src/styles/tokens.css written (${Object.keys(cssVars).length} vars)`);
+console.log(`src/styles/tokens.css written (${allVars.length} vars)`);

@@ -7,8 +7,9 @@
     "dev": "astro dev",
     "fetch-data": "node scripts/fetch-luma-events.js && node scripts/fetch-cfp-talks.js",
     "fetch-youtube-dates": "node scripts/fetch-youtube-dates.js",
-    "build": "npm run fetch-data && astro build",
-    "build:dev": "astro build",
+    "lint:colors": "node scripts/check-colors.mjs",
+    "build": "npm run lint:colors && npm run fetch-data && astro build",
+    "build:dev": "npm run lint:colors && astro build",
     "preview": "astro preview",
     "qa": "npm run build:dev && node scripts/qa-mobile.mjs",
     "astro": "astro"

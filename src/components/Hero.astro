@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { palette } from "../design/tokens.mjs";
 ---
 
 <section
@@ -113,7 +114,7 @@ import { Image } from "astro:assets";
         >
             <path
                 d="M0,120 L0,80 C120,60 240,50 360,55 C480,45 600,48 720,55 C840,45 960,48 1080,55 C1140,52 1170,53 1200,55 L1200,120 Z"
-                fill="#f8fafc"></path>
+                fill={palette.dark[50]}></path>
         </svg>
     </div>
 </section>

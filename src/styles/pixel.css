@@ -184,7 +184,7 @@
 }
 /* spent/unavailable button — greyed, and it does not lift or press on hover */
 .px-btn--disabled {
-    background: #9aa3b2;
+    background: var(--dark-400);
     color: rgba(0, 0, 0, 0.6);
     cursor: not-allowed;
 }

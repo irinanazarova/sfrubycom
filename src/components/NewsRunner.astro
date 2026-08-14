@@ -33,6 +33,7 @@
 </div>
 
 <script>
+    import { palette } from "../design/tokens.mjs";
     (function () {
         const wrap = document.getElementById("news-game-wrap");
         const canvas = document.getElementById(
@@ -60,8 +61,8 @@
             cloud: load("/px-cloud.png"),
         };
 
-        // Python-logo tints for the snake obstacle: blue (#4B8BBE) or yellow
-        // (#FFD43B), chosen at random per spawn. Built lazily once the sprite
+        // Python-logo tints for the snake obstacle (palette.python.blue or
+        // .yellow), chosen at random per spawn. Built lazily once the sprite
         // loads; source-atop keeps the pixel shading while shifting the hue.
         const snakeTints: Record<string, HTMLCanvasElement> = {};
         function tintSprite(img: HTMLImageElement, hex: string) {
@@ -82,8 +83,8 @@
         function snakeSprite(color?: "blue" | "yellow") {
             if (!color || !S.snake.width) return S.snake;
             if (!snakeTints.blue) {
-                snakeTints.blue = tintSprite(S.snake, "#4B8BBE");
-                snakeTints.yellow = tintSprite(S.snake, "#FFD43B");
+                snakeTints.blue = tintSprite(S.snake, palette.python.blue);
+                snakeTints.yellow = tintSprite(S.snake, palette.python.yellow);
             }
             return snakeTints[color] || S.snake;
         }
@@ -281,7 +282,7 @@
             );
 
             ctx.font = "10px 'Press Start 2P', monospace";
-            ctx.fillStyle = "#f4c700";
+            ctx.fillStyle = palette.gold[500];
             pops.forEach((p) => {
                 ctx.globalAlpha = 1 - p.t / 0.7;
                 ctx.fillText(p.text, p.x + 6, p.y - p.t * 40);
@@ -289,7 +290,7 @@
             });
 
             // HUD: coin count, ruby count, score (right)
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = palette.white;
             if (S.coin.width) ctx.drawImage(S.coin, 12, 10, 16, 16);
             ctx.fillText(`x${coinsScore}`, 34, 23);
             if (S.ruby.width) ctx.drawImage(S.ruby, 78, 11, 18, 15);
@@ -301,7 +302,7 @@
             if (over) {
                 ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
                 ctx.fillRect(0, 0, W, H);
-                ctx.fillStyle = "#ff5545";
+                ctx.fillStyle = palette.ruby[500];
                 ctx.font = "16px 'Press Start 2P', monospace";
                 const msg = "GAME OVER";
                 ctx.fillText(
@@ -309,7 +310,7 @@
                     (W - ctx.measureText(msg).width) / 2,
                     H / 2 - 14,
                 );
-                ctx.fillStyle = "#ffffff";
+                ctx.fillStyle = palette.white;
                 ctx.font = "8px 'Press Start 2P', monospace";
                 const sub = `SCORE ${score} - THE PYTHON GOT YOU - TAP TO RETRY`;
                 ctx.fillText(

@@ -10,6 +10,7 @@ import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import { LUMA_URL, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
+import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
 // Fighter-select roster: confirmed speakers with sprites, minus a few kept off
@@ -64,7 +65,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             name="description"
             content="The San Francisco Ruby Startup Conference, November 10-12, 2026 at SFJAZZ. Keynote by Garry Tan, President & CEO of Y Combinator. Tickets on sale now."
         />
-        <meta name="theme-color" content="#62bbee" />
+        <meta name="theme-color" content={palette.sky[400]} />
         <title>San Francisco Ruby Startup Conference 2026 - SF Ruby</title>
 
         <link
@@ -539,7 +540,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 </div>
 
                 <!-- crenellated step into the community strip -->
-                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#ffffff]" aria-hidden="true"></div>
+                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--white)]" aria-hidden="true"></div>
             </section>
 
             <!-- The community behind the conference -->

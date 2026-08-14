@@ -132,7 +132,7 @@ const moreActive = moreItems.some((it) => isActive(it.href));
         border-radius: 0;
         overflow: hidden;
         pointer-events: auto;
-        background: #ffffff;
+        background: var(--white);
         border: 4px solid var(--px-ink);
         box-shadow: 4px 4px 0 0 var(--px-ink);
     }
@@ -142,7 +142,7 @@ const moreActive = moreItems.some((it) => isActive(it.href));
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #6b7280;
+        color: var(--dark-500);
         background: transparent;
         border: 0;
         cursor: pointer;
@@ -164,8 +164,8 @@ const moreActive = moreItems.some((it) => isActive(it.href));
     }
     /* Active tab: logo coral + a flat tinted block behind it. */
     .tab-inner.active {
-        color: oklch(59.41% 0.2097 29.29);
-        background: oklch(68% 0.2086 29.03 / 0.14);
+        color: var(--ruby-600);
+        background: color-mix(in oklch, var(--ruby-500) 14%, transparent);
     }
 
     /* Detached accent CTA: a gold "item block" square, same sprite family
@@ -190,7 +190,7 @@ const moreActive = moreItems.some((it) => isActive(it.href));
         position: fixed;
         inset: 0;
         z-index: 50;
-        background: rgba(17, 24, 39, 0.45);
+        background: color-mix(in oklch, var(--dark-900) 45%, transparent);
         opacity: 0;
         transition: opacity 0.28s ease;
         pointer-events: none;
@@ -207,7 +207,7 @@ const moreActive = moreItems.some((it) => isActive(it.href));
         max-height: 80vh;
         overflow-y: auto;
         overscroll-behavior: contain;
-        background: #fff;
+        background: var(--white);
         border-radius: 0;
         border-top: 4px solid var(--px-ink);
         padding: 0 0.75rem calc(0.75rem + env(safe-area-inset-bottom));
@@ -224,7 +224,7 @@ const moreActive = moreItems.some((it) => isActive(it.href));
         justify-content: center;
         align-items: center;
         padding: 0.625rem 0 0.25rem;
-        background: #fff;
+        background: var(--white);
         cursor: grab;
         touch-action: none;
     }
@@ -239,7 +239,7 @@ const moreActive = moreItems.some((it) => isActive(it.href));
         font-family: "Press Start 2P", "Martian Mono", monospace;
         font-size: 0.625rem;
         text-transform: uppercase;
-        color: #6b7280;
+        color: var(--dark-500);
         padding: 0.25rem 0.75rem 0.5rem;
     }
     .more-row {
@@ -248,25 +248,25 @@ const moreActive = moreItems.some((it) => isActive(it.href));
         gap: 0.875rem;
         padding: 0.875rem 0.75rem;
         border-radius: 0;
-        color: #1f2937;
+        color: var(--dark-800);
         font-size: 1rem;
         font-weight: 500;
     }
     .more-row-icon {
-        color: #6b7280;
+        color: var(--dark-500);
         flex: 0 0 auto;
     }
     .more-row-caret {
         margin-inline-start: auto;
-        color: #d1d5db;
+        color: var(--dark-300);
         flex: 0 0 auto;
     }
     .more-row.active {
-        background: oklch(68% 0.2086 29.03 / 0.12);
-        color: oklch(59.41% 0.2097 29.29);
+        background: color-mix(in oklch, var(--ruby-500) 12%, transparent);
+        color: var(--ruby-600);
     }
     .more-row.active .more-row-icon {
-        color: oklch(59.41% 0.2097 29.29);
+        color: var(--ruby-600);
     }
 
     @media (prefers-reduced-motion: reduce) {

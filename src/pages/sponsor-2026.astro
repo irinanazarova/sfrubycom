@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import EmailModal from "../components/EmailModal.astro";
+import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
 // 2026 sponsorship tiers (hardcoded here on purpose — data/sponsors.js holds the
@@ -86,7 +87,7 @@ const tiers2026 = [
             name="description"
             content="Sponsor the SF Ruby Conference 2026 and connect with 450+ Ruby developers, founders, and engineers in San Francisco."
         />
-        <meta name="theme-color" content="#dc2626" />
+        <meta name="theme-color" content={palette.ruby[600]} />
         <title>Sponsor SF Ruby 2026 - SF Ruby</title>
 
         <link
@@ -152,7 +153,7 @@ const tiers2026 = [
 
                 <!-- crenellated step into the white content below -->
                 <div
-                    class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:#ffffff]"
+                    class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--white)]"
                     aria-hidden="true"
                 >
                 </div>

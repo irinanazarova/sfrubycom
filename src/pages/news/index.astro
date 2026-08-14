@@ -184,9 +184,9 @@ function leadSentence(text: string): string {
         line-height: 1;
         font-weight: 500;
         padding: 0.45rem 0.85rem;
-        border: 1px solid #e5e7eb;
-        background: #fff;
-        color: #6b7280;
+        border: 1px solid var(--dark-200);
+        background: var(--white);
+        color: var(--dark-500);
         cursor: pointer;
         transition:
             background-color 0.15s ease,
@@ -194,17 +194,17 @@ function leadSentence(text: string): string {
             border-color 0.15s ease;
     }
     .news-tag:hover {
-        background: #f9fafb;
-        color: #374151;
+        background: var(--dark-50);
+        color: var(--dark-700);
     }
     .news-tag.is-active {
-        background: #ff5545;
-        border-color: #ff5545;
-        color: #fff;
+        background: var(--ruby-500);
+        border-color: var(--ruby-500);
+        color: var(--white);
     }
     .news-tag.is-active:hover {
-        background: #e6472f;
-        border-color: #e6472f;
+        background: var(--ruby-600);
+        border-color: var(--ruby-600);
     }
 </style>
 

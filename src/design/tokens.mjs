@@ -80,6 +80,12 @@ export const palette = {
     500: "#da5513",
     600: "#b14416",
   },
+  // Island grass / python greens (sampled from the logo island)
+  grass: {
+    300: "#91c568",
+    500: "#46b957",
+    700: "#2f7d3a",
+  },
   // Neutral grays (UI text and surfaces)
   dark: {
     50: "#f9fafb",
@@ -94,9 +100,42 @@ export const palette = {
     900: "#111827",
     950: "#030712",
   },
-  // Outline ink (pure black, per the logo) + fog shade
+  // Outline ink (pure black, per the logo) + fog shade + paper white
   ink: "#000000",
+  white: "#ffffff",
   cloudshade: "#c4d6ef",
+
+  // Third-party brand colors (social buttons, sprite tints). Registered here
+  // so no raw hex leaks into components; 500 is the brand color, higher
+  // steps are hover/darker variants.
+  slack: {
+    500: "#4a154b",
+    600: "#3e1240",
+  },
+  substack: {
+    500: "#ff6719",
+    600: "#e55a14",
+    700: "#c24e00",
+    800: "#a84400",
+  },
+  bluesky: {
+    500: "#0085ff",
+    600: "#0070d6",
+    700: "#0060bf",
+    800: "#004d99",
+  },
+  linkedin: {
+    500: "#0a66c2",
+    600: "#084d94",
+  },
+  youtube: {
+    500: "#ff0000",
+    600: "#cc0000",
+  },
+  python: {
+    blue: "#4b8bbe",
+    yellow: "#ffd43b",
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -168,7 +207,7 @@ export const cssVars = {
   "px-gold": palette.gold[500],
   "px-orange": palette.pumpkin[500],
   "px-ink": palette.ink,
-  "px-cloud": "#ffffff",
+  "px-cloud": palette.white,
   "px-cloud-shade": palette.cloudshade,
   "px-paper": palette.sky[50],
   "px-paper-gold": "#fff7e6",
@@ -199,14 +238,14 @@ export const skyRamps = {
 export const spriteColors = {
   ".": null, // transparent
   K: palette.ink, // outline
-  W: "#ffffff", // paper / glint
+  W: palette.white, // paper / glint
   S: palette.cloudshade, // fog shade
   R: palette.ruby[500], // coral ruby
   r: palette.ruby[700], // ruby shadow
   L: palette.ruby[300], // coral highlight
   G: palette.gold[500], // coin gold
   g: palette.gold[600], // gold shadow
-  N: "#46b957", // python green (sampled from the island grass)
-  n: "#91c568", // python light
-  m: "#2f7d3a", // python shade
+  N: palette.grass[500], // python green (sampled from the island grass)
+  n: palette.grass[300], // python light
+  m: palette.grass[700], // python shade
 };

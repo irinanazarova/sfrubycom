@@ -47,7 +47,7 @@ html {
 }
 
 :focus-visible {
-    outline: 3px solid #ff5545;
+    outline: 3px solid var(--px-ruby);
     outline-offset: 2px;
 }
 

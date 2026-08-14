@@ -45,7 +45,7 @@ export const conference2026SponsorTiers = [
   },
   {
     tier: "Emerald",
-    headingClass: "text-[#46b957]",
+    headingClass: "text-grass-500",
     sponsors: [
       {
         name: "Beyond Finance",
