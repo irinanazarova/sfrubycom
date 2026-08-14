@@ -9,6 +9,7 @@ import ConferenceQuest from "../components/ConferenceQuest.astro";
 import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import { LUMA_URL, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
+import { conference2026SponsorTiers } from "../data/sponsors.js";
 import "../styles/global.css";
 
 // Fighter-select roster: confirmed speakers with sprites, minus a few kept off
@@ -31,42 +32,6 @@ const cameos = [
 [4, 8, 13, 17].forEach((pos, i) =>
     fighters.splice(Math.min(pos, fighters.length), 0, cameos[i]),
 );
-
-// First confirmed 2026 conference sponsors, grouped by tier.
-// Tier heading colors: ruby red for Ruby, island-grass green for Emerald.
-const conference2026SponsorTiers = [
-    {
-        tier: "Ruby Tier",
-        headingClass: "text-ruby-600",
-        sponsors: [
-            { name: "Typesense", logo: "/sponsor_typesense.png", url: "https://typesense.org/" },
-            { name: "WorkOS", logo: "/sponsor_workos.svg", url: "https://workos.com/" },
-            { name: "Fin", logo: "/sponsor_fin.png", url: "https://fin.ai/" },
-        ],
-    },
-    {
-        tier: "Coffee Sponsor",
-        headingClass: "text-ruby-600",
-        sponsors: [
-            { name: "AppSignal", logo: "/sponsor_appsignal.png", url: "https://www.appsignal.com/" },
-        ],
-    },
-    {
-        tier: "Ruby Passport Booth",
-        headingClass: "text-ruby-600",
-        sponsors: [
-            { name: "Persona", logo: "/sponsor_persona.png", url: "https://withpersona.com/" },
-        ],
-    },
-    {
-        tier: "Emerald",
-        headingClass: "text-[#46b957]",
-        sponsors: [
-            { name: "Beyond Finance", logo: "/sponsor_beyondfinance.png", url: "https://www.beyondfinance.com/" },
-            { name: "SumIt", logo: "/sponsor_sumit.png", url: "https://getsumit.com/" },
-        ],
-    },
-];
 
 // Flat sponsor list for the hero ticker, tier order preserved.
 const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);

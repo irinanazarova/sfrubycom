@@ -1,3 +1,68 @@
+// ============================================================
+// SF Ruby Conference 2026 — current sponsors
+// Rendered on the homepage (#sponsors-2026 section + hero ticker).
+// Tier order here is display order; headingClass colors the tier heading.
+// ============================================================
+export const conference2026SponsorTiers = [
+  {
+    tier: "Ruby Tier",
+    headingClass: "text-ruby-600",
+    sponsors: [
+      {
+        name: "Typesense",
+        logo: "/sponsor_typesense.png",
+        url: "https://typesense.org/",
+      },
+      {
+        name: "WorkOS",
+        logo: "/sponsor_workos.svg",
+        url: "https://workos.com/",
+      },
+      { name: "Fin", logo: "/sponsor_fin.png", url: "https://fin.ai/" },
+    ],
+  },
+  {
+    tier: "Coffee Sponsor",
+    headingClass: "text-ruby-600",
+    sponsors: [
+      {
+        name: "AppSignal",
+        logo: "/sponsor_appsignal.png",
+        url: "https://www.appsignal.com/",
+      },
+    ],
+  },
+  {
+    tier: "Ruby Passport Booth",
+    headingClass: "text-ruby-600",
+    sponsors: [
+      {
+        name: "Persona",
+        logo: "/sponsor_persona.png",
+        url: "https://withpersona.com/",
+      },
+    ],
+  },
+  {
+    tier: "Emerald",
+    headingClass: "text-[#46b957]",
+    sponsors: [
+      {
+        name: "Beyond Finance",
+        logo: "/sponsor_beyondfinance.png",
+        url: "https://www.beyondfinance.com/",
+      },
+      { name: "SumIt", logo: "/sponsor_sumit.png", url: "https://getsumit.com/" },
+    ],
+  },
+];
+
+// ============================================================
+// SF Ruby Conference 2025 — archive
+// Everything below renders the /sponsors-2025 page (and getSponsor
+// lookups for the jobs board). Do not add 2026 sponsors here.
+// ============================================================
+
 // Sponsor tier definitions
 export const sponsorTiers = [
   // ACTIVE TIERS - Accepting new sponsors (9 days before conference)
