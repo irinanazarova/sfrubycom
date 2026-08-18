@@ -91,6 +91,32 @@
     }
   },
   {
+    "id": "8MO4KLYb",
+    "title": "Reactive Rails Views, No Rewrite Required",
+    "abstract": "What if your existing Rails views could become reactive without rewriting them?\r\n\r\nIn this talk, we'll explore how ReActionView brings fine-grained reactivity to HTML+ERB while staying compatible with Action View. We'll look at how existing templates can become reactive, how updates are tracked and rendered, and what this could mean for the future of the Rails view layer.",
+    "track": "general",
+    "speaker": {
+      "name": "Marco Roth",
+      "company": "",
+      "role": "",
+      "bio": "Marco is a passionate full-stack developer and a dedicated open-source contributor. He has open-sourced, maintained, and contributed to numerous libraries in the Ruby ecosystem and was awarded the Rails Luminary Award in 2025.",
+      "socials": "https://x.com/marcoroth_"
+    }
+  },
+  {
+    "id": "DdxMTtiT",
+    "title": "RubyLLM 2.0: The AI Framework Ruby Deserves",
+    "abstract": "RubyLLM made Ruby an AI language: one beautiful API for every provider, 11+ million downloads. 2.0 makes it a full framework: the agentic loop as public API, durable approval-gated agents, the most precise cost ledger in AI, caching, batches, fallbacks, citations, cancellation, server tools, speech, video, OCR, reranking, and a generator that writes provider gems. Ruby is where you ship AI.",
+    "track": "general",
+    "speaker": {
+      "name": "Carmine Paolino",
+      "company": "Chat with Work",
+      "role": "Founder and CEO",
+      "bio": "Carmine Paolino builds the tools he wants to use: RubyLLM, how Rubyists do AI, plus archspec, kamal-backup, a cluster headache tracker, and TonePush, a reverse-engineered editor for his guitar gear. He founded Chat with Work and organizes Berlin.rb. In a previous life, a decade of ML in Python.",
+      "socials": "https://paolino.me, https://x.com/paolino"
+    }
+  },
+  {
     "id": "YyejSBrx",
     "title": "Satellite command and control with Ruby and COSMOS",
     "abstract": "COSMOS began at Ball Aerospace to scratch an itch: can I make an easy to use and configure command and control system? This talk traces that journey — from an internal tool at a big aerospace company, to open source in an industry where almost nothing is open, to OpenC3, the company we founded to steward COSMOS. Ends with how we built line-by-line Ruby script execution.",
