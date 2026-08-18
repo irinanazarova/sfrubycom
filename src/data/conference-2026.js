@@ -136,14 +136,13 @@ export const conferenceSpeakers = [
     orgs: [{ name: "Anthropic", url: "https://www.anthropic.com/" }],
     pixel: "/speaker_cj_avilla_pixel_256.png",
   },
-  // Marco Roth was announced on X but is not on the confirmed list; his sprite is
-  // ready at /speaker_marco_roth_pixel_256.png — uncomment once he is confirmed.
-  // {
-  //   name: "Marco Roth",
-  //   orgs: [{ name: "Herb, Hotwire", url: "https://herb-tools.dev/" }],
-  //   track: "startups",
-  //   pixel: "/speaker_marco_roth_pixel_256.png",
-  // },
+  {
+    name: "Marco Roth",
+    bio: "Creator of Herb, the HTML-aware toolchain that gives ERB a parser, formatter and language server.",
+    orgs: [{ name: "Herb", url: "https://herb-tools.dev/" }],
+    track: "startups",
+    pixel: "/speaker_marco_roth_pixel_256.png",
+  },
   {
     name: "Irina Nazarova",
     bio: "CEO, and co-founder of AnyCable, the WebSocket server for Ruby.",
