@@ -88,13 +88,6 @@ export const conferenceSpeakers = [
     pixel: "/speaker_jason_thomas_pixel_256.png",
   },
   {
-    name: "Neha Abraham",
-    bio: "Builds the data tools a nationwide remodeling business runs on, in Rails.",
-    orgs: [{ name: "Power Home Remodeling", url: "https://www.powerhrg.com/" }],
-    track: "scaleups",
-    pixel: "/speaker_neha_abraham_pixel_256.png",
-  },
-  {
     name: "Celina Lopez",
     bio: "Builds public health infrastructure on Rails: the platform connecting labs, clinics and patients.",
     orgs: [{ name: "Primary Health", url: "https://www.primary.health/" }],
