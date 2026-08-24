@@ -373,13 +373,19 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                         <span class="px-font text-px8 uppercase whitespace-nowrap text-white">
                                             Sponsored by
                                         </span>
+                                        {/* Every ticker img needs intrinsic width/height and eager
+                                            loading: a late-loading or 0-width image changes the
+                                            group's width mid-animation, and Safari glitches when
+                                            the translateX(-100%) distance is re-resolved. */}
                                         {tickerSponsors.map((sponsor) =>
                                             clone ? (
                                                 <img
                                                     src={sponsor.logo}
                                                     alt=""
+                                                    width={sponsor.logoWidth}
+                                                    height={sponsor.logoHeight}
                                                     class="h-6 md:h-7 w-auto shrink-0 brightness-0 invert"
-                                                    loading="lazy"
+                                                    loading="eager"
                                                 />
                                             ) : (
                                                 <a
@@ -391,6 +397,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                     <img
                                                         src={sponsor.logo}
                                                         alt={sponsor.name}
+                                                        width={sponsor.logoWidth}
+                                                        height={sponsor.logoHeight}
                                                         class="h-6 md:h-7 w-auto brightness-0 invert"
                                                         loading="eager"
                                                     />
@@ -475,8 +483,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                         src={sponsor.logo}
                                                         alt={sponsor.name}
                                                         class="h-8 md:h-9 w-auto"
-                                                        width="126"
-                                                        height="24"
+                                                        width={sponsor.logoWidth}
+                                                        height={sponsor.logoHeight}
                                                         loading="lazy"
                                                     />
                                                 </a>
