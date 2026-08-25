@@ -31,10 +31,13 @@
   to = "/videos/:splat"
   status = 301
 
+# The 2025 schedule moved to /schedule-2025. Temporary on purpose: /schedule is
+# the natural home for the 2026 schedule once it exists, and a 301 would sit in
+# browser caches pointing at the archive long after that page ships.
 [[redirects]]
   from = "/schedule"
-  to = "/videos"
-  status = 301
+  to = "/schedule-2025"
+  status = 302
 
 [[redirects]]
   from = "/sponsors"

@@ -1,0 +1,56 @@
+---
+// Land on the right element when a page is opened at #some-id.
+//
+// The site opts into native cross-document view transitions (@view-transition in
+// global.css). Chrome runs one on same-origin navigation and drops the fragment
+// scroll while it does, so a link from another page on the site leaves the
+// reader at the top with the fragment still in the URL. A cold load of the same
+// URL has no transition and lands correctly, which is why the QA sweep's
+// cold-load deep-link check never caught this.
+//
+// Include this in every page shell. Pages that steer the hash themselves — the
+// jobs board's converge loop, the 2025 schedule's #day tabs, a slide deck's
+// slide index — opt out with hashScroll="manual" on their layout, rather than
+// having two handlers race for the scroll position.
+---
+
+<script>
+    // Fires on pagereveal (the new document appearing at the end of a view
+    // transition) and again after load, for browsers that fire neither.
+    let readerScrolled = false;
+    for (const event of ["wheel", "touchstart", "keydown"])
+        addEventListener(event, () => (readerScrolled = true), {
+            once: true,
+            passive: true,
+        });
+
+    function jumpToHash() {
+        // Their scroll position always wins over ours.
+        if (!location.hash || readerScrolled) return;
+        let target: HTMLElement | null = null;
+        try {
+            target = document.getElementById(
+                decodeURIComponent(location.hash.slice(1)),
+            );
+        } catch {
+            return; // a hash that isn't valid percent-encoding is not an anchor
+        }
+        if (!target) return;
+        // The target's own scroll-margin sets the exact resting place; this only
+        // asks whether something (the browser, or the page's own handler) has
+        // already put it near the top of the viewport.
+        const { top } = target.getBoundingClientRect();
+        if (top >= 0 && top < 240) return;
+        target.scrollIntoView({ behavior: "instant", block: "start" });
+    }
+
+    function jumpToHashSettled() {
+        jumpToHash();
+        // once more for the reset that arrives late, as images and fonts settle
+        setTimeout(jumpToHash, 250);
+    }
+
+    addEventListener("pagereveal", jumpToHashSettled);
+    if (document.readyState === "complete") jumpToHashSettled();
+    else addEventListener("load", jumpToHashSettled, { once: true });
+</script>

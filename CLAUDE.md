@@ -43,7 +43,7 @@ Luma data is fetched at build time and saved to `src/content/*.json`. The `src/d
 - `src/utils/` - TypeScript utilities and type definitions
 - `scripts/` - Build-time data fetching scripts
 - `drafts/` - Gitignored. Monthly Substack drafts live here as a pair: `substack-YYYY-MM-[month].md` (working draft) and `.html` (paste-ready, since Substack's editor doesn't parse Markdown).
-- `src/pages/speakers.astro` - The 2026 lineup in full: a character-select jump index, then one profile card per speaker. Merges two sources on `speakerKey` (`src/utils/cfpTalks.js`): `src/data/conference-2026.js` owns who is confirmed plus the sprite and bio, the CFP feed owns the talk title and abstract. Titles/abstracts are baked in from the `src/content/cfp-talks.json` snapshot and refreshed client-side from the live API, the same contract `SpeakerRoster.astro` uses on the homepage. The 2025 lineup lives on unchanged at `/speakers-2025` (`speakers-2025.astro`), which `/schedule` and `getSpeakerOGMetadata` deep-link into.
+- `src/pages/speakers.astro` - The 2026 lineup in full: a character-select jump index, then one profile card per speaker. Merges two sources on `speakerKey` (`src/utils/cfpTalks.js`): `src/data/conference-2026.js` owns who is confirmed plus the sprite and bio, the CFP feed owns the talk title and abstract. Titles/abstracts are baked in from the `src/content/cfp-talks.json` snapshot and refreshed client-side from the live API, the same contract `SpeakerRoster.astro` uses on the homepage. The 2025 lineup lives on unchanged at `/speakers-2025` (`speakers-2025.astro`), which `/schedule-2025` and `getSpeakerOGMetadata` deep-link into. The 2025 schedule moved alongside it: `schedule-2025.astro`, with `/schedule` 302ing there until a 2026 schedule takes that URL.
 - `src/pages/news/index.astro` - The news page: a single running feed of items from `src/content/news.json`, with search + category filters, rendered as a dense multi-column list. `src/pages/news/rss.xml.ts` generates the `/news/rss.xml` feed from the same data. There are no per-issue archive pages: the old `news/YYYY-MM.astro` monthly pages were retired in favor of the feed (with a `netlify.toml` 301 from `/news/2026-*` to `/news`). The monthly issue still ships on Substack; the site just links to it.
 
 ### Key Types (src/utils/types.ts)
@@ -171,6 +171,14 @@ Quick check (390x844): `document.getElementById('bottom-nav')` exists and is vis
 Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/meetup`, `/jobs`, `/videos`, `/photos`, `/host`, `speakers`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
 
 When adding a `BaseLayout` page, check the first section's background and set `darkHero` accordingly. QA: at 390x844, the header logo must be legible at scroll-top (`.header-logo-white` visible only over a dark hero; otherwise `.header-logo-dark` on a solid header).
+
+### Anchor scrolling across pages (`HashScroll`)
+
+`global.css` opts into native cross-document view transitions (`@view-transition { navigation: auto }`). Chrome runs one on same-origin navigation and **drops the fragment scroll while it does**, so a link from another page on the site (`/speakers#peter-zhu`) lands at the top of the destination with the hash still in the URL. A cold load of the same URL has no transition and lands correctly, which is why `npm run qa`'s deep-link check never caught it: that check only cold-loads.
+
+`src/components/HashScroll.astro` does the jump itself, on `pagereveal` and again after load, and backs off once the reader has scrolled. It is rendered by `BaseLayout`, `Layout`, and the standalone shells (`index.astro`, `sponsor-2026.astro`) — a new page shell must include it, the same way it must include `BottomNav`.
+
+A page that steers the hash itself passes **`hashScroll="manual"`** to its layout, so two handlers never race for the scroll position. Currently manual: `jobs/index` (its own converge loop, which lands with a header-aware offset) and `schedule-2025` (`#day1`-`#day3` select a tab, `#talk-id` opens a modal). Slide decks on `PresentationLayout` never had it.
 
 ### Mobile regression check (run after any header/overlay/sticky change)
 

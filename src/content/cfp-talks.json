@@ -144,15 +144,15 @@
   },
   {
     "id": "JTCW1PPd",
-    "title": "Startups on Rails: 2026",
-    "abstract": "TBD",
+    "title": "Startups on Rails in 2026",
+    "abstract": "Let's celebrate the new and ambitious companies choosing Ruby and Rails today. We'll hear their stories, learn from their wins, and find out what's missing: what we as the Ruby community need to build to help them grow into the big Ruby success stories of the future. Based on interviews with founders.\r\n\r\nFounded a Ruby startup in the last 2-3 years? Let's talk: https://cal.com/inazarova/feedback",
     "track": "startup",
     "speaker": {
       "name": " Irina Nazarova",
-      "company": "",
-      "role": "",
-      "bio": "",
-      "socials": ""
+      "company": "Evil Martians",
+      "role": "CEO",
+      "bio": "CEO at Evil Martians, co-founder at AnyCable, and organizer of the SF Ruby community. Based in Japantown, and supervised by an opinionated calico cat Murka.",
+      "socials": "https://x.com/inazarova, https://github.com/irinanazarova, https://www.linkedin.com/in/nonconstant/, https://irinanazarova.substack.com/"
     }
   },
   {

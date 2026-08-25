@@ -4,12 +4,18 @@
 // where the same people get their whole entry: the talk they're giving, the
 // abstract, who they are.
 //
-// Two sources, merged on speakerKey: the hand-maintained roster
-// (src/data/conference-2026.js) owns who is confirmed, the sprite and the bio;
-// the CFP feed owns the talk. Titles and abstracts are baked in from the
-// committed snapshot (src/content/cfp-talks.json) and then refreshed in place
-// from the live API by the script at the bottom, so an edit in the CFP app
-// shows up without a redeploy.
+// Card shape follows the 2025 page (speakers-2025.astro), which reads better
+// than a compact roster row: one grid, portrait across the full card width at
+// the top, everything else stacked underneath, keynotes called out with a
+// corner badge instead of a section of their own. The 2025 portrait is a photo;
+// here it is the pixel sprite on a dithered sky, which is what a transparent
+// sprite needs behind it to read at size.
+//
+// Content comes from buildProfiles (src/utils/speakerProfiles.js), the one merge
+// of roster and CFP feed that the homepage roster uses too. Talk, role and bio
+// are baked in from the committed snapshot (src/content/cfp-talks.json) and then
+// refreshed in place from the live API by the script at the bottom, so an edit
+// in the CFP app shows up without a redeploy.
 //
 // The 2025 lineup lives on at /speakers-2025.
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -19,16 +25,11 @@ import {
     cfpNameAliases,
     LUMA_URL,
 } from "../data/conference-2026.js";
-import {
-    buildTalkMap,
-    speakerKey,
-    isRealTitle,
-    isRealAbstract,
-} from "../utils/cfpTalks.js";
-import { socialMetaList } from "../utils/socialLinks.js";
+import { buildProfiles } from "../utils/speakerProfiles.js";
+import { toParagraphs } from "../utils/abstractText.js";
 import cfpTalks from "../content/cfp-talks.json";
 
-const { byKey, unmatched } = buildTalkMap(
+const { profiles, unmatched } = buildProfiles(
     cfpTalks,
     conferenceSpeakers,
     cfpNameAliases,
@@ -39,30 +40,21 @@ const { byKey, unmatched } = buildTalkMap(
 if (unmatched.length > 0)
     console.warn(`cfp-talks: no roster match for: ${unmatched.join(", ")}`);
 
-// Merge once, here, so the markup below only ever reads flat fields.
-const profiles = conferenceSpeakers.map((s) => {
-    const key = speakerKey(s.name);
-    const talk = byKey.get(key);
-    return {
+// Keynotes open the grid, then whoever has a confirmed talk: a card carrying a
+// title and an abstract is the reason to scroll, and speakers whose CFP entry
+// hasn't landed yet would otherwise hold the top of the page with the thinnest
+// cards on it. Prose is split here; the card markup only reads flat fields.
+const speakers = [...profiles]
+    .sort(
+        (a, b) =>
+            Number(Boolean(b.keynote)) - Number(Boolean(a.keynote)) ||
+            Number(Boolean(b.title)) - Number(Boolean(a.title)),
+    )
+    .map((s) => ({
         ...s,
-        key,
-        title: talk && isRealTitle(talk.title) ? talk.title.trim() : "",
-        abstract:
-            talk && isRealAbstract(talk.abstract) ? talk.abstract.trim() : "",
-        // The CFP role is the speaker's own wording and beats anything we'd
-        // guess; the roster `role` is the fallback for speakers with no CFP entry.
-        role: talk?.speaker?.role ?? s.role ?? "",
-        socials: socialMetaList(talk?.speaker?.socials),
-    };
-});
-
-const keynotes = profiles.filter((s) => s.keynote);
-// Confirmed-with-a-talk first: a card carrying a title and an abstract is the
-// reason to scroll, and speakers whose CFP entry hasn't landed yet would
-// otherwise open the list with the thinnest cards on the page.
-const lineup = profiles
-    .filter((s) => !s.keynote)
-    .sort((a, b) => Number(Boolean(b.title)) - Number(Boolean(a.title)));
+        abstract: toParagraphs(s.abstract),
+        bio: toParagraphs(s.bio),
+    }));
 
 const withTalks = profiles.filter((s) => s.title).length;
 ---
@@ -74,7 +66,7 @@ const withTalks = profiles.filter((s) => s.title).length;
 >
     <!-- Hero -->
     <section class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden">
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             <span class="px-plate px-font text-px8 px-3 py-1.5">
                 Nov 10-12, 2026 &#183; SFJAZZ
             </span>
@@ -117,162 +109,9 @@ const withTalks = profiles.filter((s) => s.title).length;
         </div>
     </section>
 
-    <!-- Character select: the whole lineup at a glance, each sprite jumping to
-         its profile. Nineteen full profiles is a long scroll on a phone, so the
-         page opens with every face in two screens. -->
-    <section class="py-10 md:py-12 bg-white border-t-4 border-ink">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="px-font text-sm md:text-base text-gray-900">
-                Character select
-            </h2>
-            <ul
-                class="mt-6 grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 md:gap-4 list-none p-0"
-            >
-                {
-                    profiles.map((s) => (
-                        <li>
-                            <a
-                                href={`#${s.key}`}
-                                class="flex flex-col items-center text-center p-2 hover:bg-sky-50 tap-press"
-                            >
-                                {s.pixel ? (
-                                    <img
-                                        src={s.pixel}
-                                        alt=""
-                                        width="256"
-                                        height="256"
-                                        class="px-pixelated w-14 md:w-16 h-auto"
-                                    />
-                                ) : (
-                                    <div
-                                        class="w-14 md:w-16 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
-                                        aria-hidden="true"
-                                    >
-                                        <span class="px-font text-base text-sky-500">
-                                            ?
-                                        </span>
-                                    </div>
-                                )}
-                                <span class="font-display font-semibold text-xs text-gray-900 leading-tight mt-1">
-                                    {s.name}
-                                </span>
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
-    </section>
-
-    <!-- Keynotes -->
-    {
-        keynotes.length > 0 && (
-            <section class="py-12 md:py-16 bg-sky-50 border-t-4 border-ink">
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="px-font text-base md:text-xl text-gray-900">
-                        Keynotes
-                    </h2>
-                    <ul class="mt-8 grid gap-6 lg:grid-cols-2 list-none p-0">
-                        {keynotes.map((s) => (
-                            <li
-                                id={s.key}
-                                data-cfp-key={s.key}
-                                class="px-card bg-white p-5 sm:p-6 scroll-mt-28"
-                            >
-                                <div class="flex items-start gap-4">
-                                    <div class="flex-shrink-0 flex flex-col items-center">
-                                        {s.pixel ? (
-                                            <img
-                                                src={s.pixel}
-                                                alt={`${s.name}, pixel character`}
-                                                width="256"
-                                                height="256"
-                                                class="px-pixelated w-20 sm:w-24 h-auto"
-                                            />
-                                        ) : (
-                                            <div
-                                                class="w-20 sm:w-24 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
-                                                aria-hidden="true"
-                                            >
-                                                <span class="px-font text-2xl text-sky-500">
-                                                    ?
-                                                </span>
-                                            </div>
-                                        )}
-                                        <img
-                                            src="/px-island.png"
-                                            alt=""
-                                            width="598"
-                                            height="104"
-                                            class="px-pixelated w-24 sm:w-28 h-auto -mt-2"
-                                        />
-                                    </div>
-                                    <div class="min-w-0 flex-1">
-                                        <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1">
-                                            Keynote
-                                        </span>
-                                        {/* Grotesk, not the pixel font: Press Start 2P
-                                            has no accented capitals and mangles names
-                                            like Gutiérrez. */}
-                                        <h3 class="font-display font-semibold text-lg md:text-xl text-gray-900 mt-3 leading-snug">
-                                            {s.name}
-                                        </h3>
-                                        {s.role && (
-                                            <p class="text-sm text-gray-600 mt-1">
-                                                {s.role}
-                                            </p>
-                                        )}
-                                        <p class="text-sm text-ruby-600 mt-1">
-                                            {s.orgs.map((org, i) => (
-                                                <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
-                                            ))}
-                                        </p>
-                                    </div>
-                                </div>
-                                <p
-                                    data-talk-title
-                                    hidden={!s.title}
-                                    class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug mt-5"
-                                >
-                                    {s.title && `“${s.title}”`}
-                                </p>
-                                <p
-                                    data-talk-abstract
-                                    hidden={!s.abstract}
-                                    class="text-sm text-gray-700 leading-relaxed mt-3"
-                                >
-                                    {s.abstract}
-                                </p>
-                                {s.bio && (
-                                    <p class="text-sm text-gray-600 leading-relaxed mt-4 pt-4 border-t-2 border-sky-100">
-                                        {s.bio}
-                                    </p>
-                                )}
-                                {s.socials.length > 0 && (
-                                    <div class="flex flex-wrap gap-3 mt-4">
-                                        {s.socials.map((link) => (
-                                            <SocialLink
-                                                platform={link.platform}
-                                                href={link.href}
-                                            >
-                                                <span class:list={[link.icon && "sr-only"]}>
-                                                    {link.label}
-                                                </span>
-                                            </SocialLink>
-                                        ))}
-                                    </div>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </section>
-        )
-    }
-
-    <!-- The rest of the lineup -->
+    <!-- The lineup -->
     <section class="py-12 md:py-16 bg-white border-t-4 border-ink">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="px-font text-base md:text-xl text-gray-900">
                 The lineup
             </h2>
@@ -281,93 +120,145 @@ const withTalks = profiles.filter((s) => s.title).length;
                 as speakers submit them.
             </p>
 
-            <ul class="mt-8 grid gap-6 lg:grid-cols-2 list-none p-0">
+            {/* items-start, not the default stretch: abstract lengths vary by 5x,
+                and a stretched short card is a card with 500px of empty white in
+                it. Ragged bottoms read better than that. */}
+            <ul
+                class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start list-none p-0"
+            >
                 {
-                    lineup.map((s) => (
+                    speakers.map((s) => (
                         <li
                             id={s.key}
                             data-cfp-key={s.key}
-                            class="px-card bg-white p-5 sm:p-6 scroll-mt-28"
+                            class="px-card bg-white overflow-hidden flex flex-col scroll-mt-28 relative"
                         >
-                            <div class="flex items-start gap-4">
-                                <div class="flex-shrink-0 flex flex-col items-center">
-                                    {s.pixel ? (
+                            {s.keynote && (
+                                <span class="absolute top-3 right-3 z-10 px-plate px-plate--gold px-font text-px8 px-2 py-1">
+                                    Keynote
+                                </span>
+                            )}
+                            {/* Portrait stage. The sprite is a transparent PNG, so
+                                it needs the dithered sky behind it to read at this
+                                size, and a fixed height so every card in a row
+                                starts its text on the same line. */}
+                            <div class="px-dither-sky h-56 md:h-64 flex items-end justify-center border-b-4 border-ink">
+                                {s.pixel ? (
+                                    <div class="flex flex-col items-center pb-3">
                                         <img
                                             src={s.pixel}
                                             alt={`${s.name}, pixel character`}
                                             width="256"
                                             height="256"
                                             loading="lazy"
-                                            class="px-pixelated w-20 sm:w-24 h-auto"
+                                            class="px-pixelated w-36 md:w-40 h-auto"
                                         />
-                                    ) : (
-                                        <div
-                                            class="w-20 sm:w-24 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
-                                            aria-hidden="true"
-                                        >
-                                            <span class="px-font text-2xl text-sky-500">
-                                                ?
-                                            </span>
-                                        </div>
-                                    )}
-                                    <img
-                                        src="/px-island.png"
-                                        alt=""
-                                        width="598"
-                                        height="104"
-                                        loading="lazy"
-                                        class="px-pixelated w-24 sm:w-28 h-auto -mt-2"
-                                    />
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <h3 class="font-display font-semibold text-lg text-gray-900 leading-snug">
-                                        {s.name}
-                                    </h3>
-                                    {s.role && (
-                                        <p class="text-sm text-gray-600 mt-1">
-                                            {s.role}
-                                        </p>
-                                    )}
-                                    <p class="text-sm text-ruby-600 mt-1">
-                                        {s.orgs.map((org, i) => (
-                                            <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
-                                        ))}
-                                    </p>
-                                </div>
+                                        <img
+                                            src="/px-island.png"
+                                            alt=""
+                                            width="598"
+                                            height="104"
+                                            loading="lazy"
+                                            class="px-pixelated w-44 md:w-48 h-auto -mt-3"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div
+                                        class="flex-1 flex items-center justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <span class="px-font px-shadow-ink text-4xl text-white">
+                                            ?
+                                        </span>
+                                    </div>
+                                )}
                             </div>
-                            <p
-                                data-talk-title
-                                hidden={!s.title}
-                                class="font-display font-semibold text-base text-gray-900 leading-snug mt-5"
-                            >
-                                {s.title && `“${s.title}”`}
-                            </p>
-                            <p
-                                data-talk-abstract
-                                hidden={!s.abstract}
-                                class="text-sm text-gray-700 leading-relaxed mt-3"
-                            >
-                                {s.abstract}
-                            </p>
-                            {s.bio && (
-                                <p class="text-sm text-gray-600 leading-relaxed mt-4 pt-4 border-t-2 border-sky-100">
-                                    {s.bio}
+
+                            <div class="p-6 flex flex-col flex-1">
+                                {/* Grotesk, not the pixel font: Press Start 2P has
+                                    no accented capitals and mangles names like
+                                    Gutiérrez. */}
+                                <h3 class="font-display font-bold text-xl text-gray-900 leading-snug">
+                                    {s.name}
+                                </h3>
+                                {/* markup kept tight on purpose: line breaks inside
+                                    the anchor render as spaces and detach the commas */}
+                                <p class="font-display font-medium text-ruby-600 mt-2">
+                                    {s.orgs.map((org, i) => (
+                                        <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
+                                    ))}
                                 </p>
-                            )}
-                            {s.socials.length > 0 && (
-                                <div class="flex flex-wrap gap-3 mt-4">
-                                    {s.socials.map((link) => (
-                                        <SocialLink
-                                            platform={link.platform}
-                                            href={link.href}
-                                        >
-                                            <span class:list={[link.icon && "sr-only"]}>
-                                                {link.label}
-                                            </span>
-                                        </SocialLink>
+                                {s.role && (
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        {s.role}
+                                    </p>
+                                )}
+
+                                {/* always in the DOM (hidden when empty) so the
+                                    client refresh has a node to fill when a title
+                                    or abstract lands */}
+                                <p
+                                    data-talk-title
+                                    hidden={!s.title}
+                                    class="font-display font-semibold text-base text-gray-900 leading-snug mt-5"
+                                >
+                                    {s.title && `“${s.title}”`}
+                                </p>
+                                <div
+                                    data-talk-abstract
+                                    hidden={s.abstract.length === 0}
+                                    class="text-sm text-gray-700 leading-relaxed"
+                                >
+                                    {s.abstract.map((parts) => (
+                                        <p class="mt-3">
+                                            {parts.map((part) =>
+                                                part.type === "link" ? (
+                                                    <a href={part.href} target="_blank" rel="noopener noreferrer" class="font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words">{part.label}</a>
+                                                ) : (
+                                                    part.value
+                                                ),
+                                            )}
+                                        </p>
                                     ))}
                                 </div>
-                            )}
+
+                                <div
+                                    data-speaker-bio
+                                    hidden={s.bio.length === 0}
+                                    class="text-sm text-gray-600 leading-relaxed mt-5 pt-5 border-t-2 border-sky-100"
+                                >
+                                    {s.bio.map((parts) => (
+                                        <p class="[&+&]:mt-3">
+                                            {parts.map((part) =>
+                                                part.type === "link" ? (
+                                                    <a href={part.href} target="_blank" rel="noopener noreferrer" class="font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words">{part.label}</a>
+                                                ) : (
+                                                    part.value
+                                                ),
+                                            )}
+                                        </p>
+                                    ))}
+                                </div>
+
+                                {s.socials.length > 0 && (
+                                    <div class="flex flex-wrap gap-3 pt-6 mt-auto">
+                                        {s.socials.map((link) => (
+                                            <SocialLink
+                                                platform={link.platform}
+                                                href={link.href}
+                                            >
+                                                <span
+                                                    class:list={[
+                                                        link.icon && "sr-only",
+                                                    ]}
+                                                >
+                                                    {link.label}
+                                                </span>
+                                            </SocialLink>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         </li>
                     ))
                 }
@@ -407,20 +298,18 @@ const withTalks = profiles.filter((s) => s.title).length;
 </BaseLayout>
 
 <script>
-    // Refresh talk titles and abstracts in place from the live CFP feed, the
-    // same deal as the homepage roster: the baked copy is already on screen, so
-    // every failure path (dev server without the Netlify proxy, CFP app down,
-    // 8s timeout) just means no silent upgrade this visit.
+    // Refresh the talk, role and bio in place from the live CFP feed. The baked
+    // copy is already on screen, so every failure path (dev server without the
+    // Netlify proxy, CFP app down, 8s timeout) just means no silent upgrade this
+    // visit. buildProfiles applies the same roster fallbacks here as at build
+    // time, so a stub in the feed can never blank a card.
     import {
         conferenceSpeakers,
         cfpNameAliases,
     } from "../data/conference-2026.js";
-    import {
-        buildTalkMap,
-        isRealTitle,
-        isRealAbstract,
-        CFP_API_PATH,
-    } from "../utils/cfpTalks.js";
+    import { buildProfiles } from "../utils/speakerProfiles.js";
+    import { CFP_API_PATH } from "../utils/cfpTalks.js";
+    import { toParagraphs } from "../utils/abstractText.js";
 
     function setText(card: Element, selector: string, text: string) {
         const node = card.querySelector(selector);
@@ -429,32 +318,64 @@ const withTalks = profiles.filter((s) => s.title).length;
         node.hidden = !text;
     }
 
-    async function refreshTalks() {
+    // Built with createElement rather than innerHTML: this is text a speaker
+    // typed into a third-party app, and it must never reach the page as markup.
+    function setProse(card: Element, selector: string, text: string) {
+        const node = card.querySelector(selector);
+        if (!(node instanceof HTMLElement)) return;
+        const paragraphs = toParagraphs(text);
+        node.hidden = paragraphs.length === 0;
+        node.replaceChildren(
+            ...paragraphs.map((parts) => {
+                const p = document.createElement("p");
+                p.className = "mt-3";
+                for (const part of parts) {
+                    if (part.type === "link") {
+                        const a = document.createElement("a");
+                        a.href = part.href;
+                        a.target = "_blank";
+                        a.rel = "noopener noreferrer";
+                        a.className =
+                            "font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words";
+                        a.textContent = part.label;
+                        p.append(a);
+                    } else {
+                        p.append(part.value);
+                    }
+                }
+                return p;
+            }),
+        );
+    }
+
+    async function refreshProfiles() {
         try {
             const res = await fetch(CFP_API_PATH, {
                 signal: AbortSignal.timeout(8_000),
             });
             if (!res.ok) return;
-            const { byKey } = buildTalkMap(
+            const { profiles } = buildProfiles(
                 await res.json(),
                 conferenceSpeakers,
                 cfpNameAliases,
             );
+            const byKey = new Map(profiles.map((p) => [p.key, p]));
             for (const card of document.querySelectorAll("[data-cfp-key]")) {
                 if (!(card instanceof HTMLElement)) continue;
-                const talk = byKey.get(card.dataset.cfpKey ?? "");
-                const title = isRealTitle(talk?.title) ? talk.title.trim() : "";
-                setText(card, "[data-talk-title]", title ? `“${title}”` : "");
+                const p = byKey.get(card.dataset.cfpKey ?? "");
+                if (!p) continue;
                 setText(
                     card,
-                    "[data-talk-abstract]",
-                    isRealAbstract(talk?.abstract) ? talk.abstract.trim() : "",
+                    "[data-talk-title]",
+                    p.title ? `\u201C${p.title}\u201D` : "",
                 );
+                setProse(card, "[data-talk-abstract]", p.abstract);
+                setProse(card, "[data-speaker-bio]", p.bio);
             }
         } catch {
             // keep the baked copy
         }
     }
 
-    refreshTalks();
+    refreshProfiles();
 </script>

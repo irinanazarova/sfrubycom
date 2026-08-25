@@ -2,12 +2,17 @@
 // Character-select grid for the 2026 lineup. Speakers without pixel art yet render
 // as an unrevealed "?" slot, which keeps the name (the thing that sells) on the page.
 //
-// Talk titles come from the CFP feed: baked in at build time from the committed
-// snapshot (src/content/cfp-talks.json, refreshed by scripts/fetch-cfp-talks.js),
-// then silently refreshed in place from the live API by the script below. Only
-// titles that pass isRealTitle render; TBD-style placeholders stay hidden.
+// Talk titles and bios come from the CFP feed: baked in at build time from the
+// committed snapshot (src/content/cfp-talks.json, refreshed by
+// scripts/fetch-cfp-talks.js), then silently refreshed in place from the live
+// API by the script below. Stubs ("TBD", a one-word bio) stay hidden or fall
+// back to the roster line, which buildProfiles decides for every surface at
+// once so this grid and /speakers can never disagree about a speaker.
+//
+// A tile is a link into that speaker's full card on /speakers, where the bio
+// runs at full length. This one is shortened to fit.
 import { conferenceSpeakers, cfpNameAliases } from "../data/conference-2026.js";
-import { buildTitleMap, speakerKey } from "../utils/cfpTalks.js";
+import { buildProfiles, shortBio } from "../utils/speakerProfiles.js";
 import cfpTalks from "../content/cfp-talks.json";
 
 interface Props {
@@ -28,10 +33,20 @@ const {
     ctaLabel = "Everything about the conference",
 } = Astro.props;
 
+const { profiles, unmatched } = buildProfiles(
+    cfpTalks,
+    conferenceSpeakers,
+    cfpNameAliases,
+);
+// An unmatched CFP name means a missing cfpNameAliases entry or a speaker we
+// haven't added to the roster — surface it in the build log, don't fail.
+if (unmatched.length > 0)
+    console.warn(`cfp-talks: no roster match for: ${unmatched.join(", ")}`);
+
 // Pinned speakers hold the ends of the grid; the rest sort artwork-first so the
 // roster opens on real faces rather than a wall of unrevealed slots.
 const rank = (s) => (s.pin === "first" ? -1 : s.pin === "last" ? 1 : 0);
-const ordered = [...conferenceSpeakers].sort(
+const ordered = [...profiles].sort(
     (a, b) =>
         rank(a) - rank(b) ||
         Number(Boolean(b.pixel)) - Number(Boolean(a.pixel)),
@@ -47,16 +62,6 @@ const speakers = limit
           ...ordered.filter((s) => s.pin === "last"),
       ]
     : ordered;
-
-const { titles, unmatched } = buildTitleMap(
-    cfpTalks,
-    conferenceSpeakers,
-    cfpNameAliases,
-);
-// An unmatched CFP name means a missing cfpNameAliases entry or a speaker we
-// haven't added to the roster — surface it in the build log, don't fail.
-if (unmatched.length > 0)
-    console.warn(`cfp-talks: no roster match for: ${unmatched.join(", ")}`);
 ---
 
 <section
@@ -83,71 +88,80 @@ if (unmatched.length > 0)
         >
             {
                 speakers.map((s) => (
-                    <li
-                        class="px-card bg-white p-4 flex flex-col items-center text-center"
-                        data-cfp-key={speakerKey(s.name)}
-                    >
-                        {s.pixel ? (
-                            <img
-                                src={s.pixel}
-                                alt={`${s.name}, pixel character`}
-                                width="256"
-                                height="256"
-                                loading="lazy"
-                                class="px-pixelated w-24 md:w-28 h-auto"
-                            />
-                        ) : (
-                            <div
-                                class="w-24 md:w-28 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
-                                aria-hidden="true"
-                            >
-                                <span class="px-font text-2xl text-sky-500">
-                                    ?
-                                </span>
-                            </div>
-                        )}
-                        <img
-                            src="/px-island.png"
-                            alt=""
-                            width="598"
-                            height="104"
-                            loading="lazy"
-                            class="px-pixelated w-28 md:w-32 h-auto -mt-2"
-                        />
-                        {/* Grotesk, not the pixel font: Press Start 2P has no accented
-                            capitals and would mangle names like Gutiérrez. */}
-                        {/* fixed two-line box so cards whose names wrap keep the
-                            company line on the same baseline across the row */}
-                        <p class="font-display font-semibold text-sm md:text-base text-gray-900 mt-3 leading-snug flex items-center justify-center min-h-[2.75rem]">
-                            {s.name}
-                        </p>
-                        {/* markup kept tight on purpose: line breaks inside the
-                            anchor render as spaces and detach the commas */}
-                        <p class="text-xs md:text-sm text-ruby-600 mt-2">
-                            {s.orgs.map((org, i) => (
-                                <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
-                            ))}
-                        </p>
-                        {/* always in the DOM (hidden when empty) so the client
-                            refresh has a node to fill when a title lands */}
-                        <p
-                            data-talk-title
-                            hidden={!titles.has(speakerKey(s.name))}
-                            class="font-display font-semibold text-xs md:text-sm text-gray-900 leading-snug mt-3"
+                    <li class="px-card bg-white" data-cfp-key={s.key}>
+                        <a
+                            href={`/speakers#${s.key}`}
+                            class="p-4 flex flex-col items-center text-center h-full tap-press"
                         >
-                            {titles.has(speakerKey(s.name)) &&
-                                `“${titles.get(speakerKey(s.name))}”`}
-                        </p>
-                        {s.bio && (
-                            <p class="text-xs text-gray-600 leading-relaxed mt-3">
-                                {s.bio}
+                            {s.pixel ? (
+                                <img
+                                    src={s.pixel}
+                                    alt={`${s.name}, pixel character`}
+                                    width="256"
+                                    height="256"
+                                    loading="lazy"
+                                    class="px-pixelated w-24 md:w-28 h-auto"
+                                />
+                            ) : (
+                                <div
+                                    class="w-24 md:w-28 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
+                                    aria-hidden="true"
+                                >
+                                    <span class="px-font text-2xl text-sky-500">
+                                        ?
+                                    </span>
+                                </div>
+                            )}
+                            <img
+                                src="/px-island.png"
+                                alt=""
+                                width="598"
+                                height="104"
+                                loading="lazy"
+                                class="px-pixelated w-28 md:w-32 h-auto -mt-2"
+                            />
+                            {/* Grotesk, not the pixel font: Press Start 2P has no accented
+                                capitals and would mangle names like Gutiérrez. */}
+                            {/* fixed two-line box so cards whose names wrap keep the
+                                company line on the same baseline across the row */}
+                            <p class="font-display font-semibold text-sm md:text-base text-gray-900 mt-3 leading-snug flex items-center justify-center min-h-[2.75rem]">
+                                {s.name}
                             </p>
-                        )}
-                        {s.keynote && (
-                            <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 mt-3">
-                                Keynote
-                            </span>
-                        )}
+                            {/* plain text, not links: the whole tile is already an
+                                anchor, and anchors can't nest. The org links live on
+                                the /speakers card this tile opens. */}
+                            <p class="text-xs md:text-sm text-ruby-600 mt-2">
+                                {s.orgs.map((org) => org.name).join(", ")}
+                            </p>
+                            {/* always in the DOM (hidden when empty) so the client
+                                refresh has a node to fill when a title lands */}
+                            <p
+                                data-talk-title
+                                hidden={!s.title}
+                                class="font-display font-semibold text-xs md:text-sm text-gray-900 leading-snug mt-3"
+                            >
+                                {s.title && `“${s.title}”`}
+                            </p>
+                            {/* shortBio trims the text; the clamp keeps a long
+                                one from stretching the tile. Six lines on a
+                                phone, where the two-column tile fits about a
+                                dozen characters per line and four would clip a
+                                short bio mid-sentence; four from sm up, where
+                                the tile is wide enough. The full bio is one tap
+                                away on the card this tile opens. */}
+                            <p
+                                data-speaker-bio
+                                hidden={!s.bio}
+                                class="text-xs text-gray-600 leading-relaxed mt-3 line-clamp-6 sm:line-clamp-4"
+                            >
+                                {shortBio(s.bio)}
+                            </p>
+                            {s.keynote && (
+                                <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 mt-3">
+                                    Keynote
+                                </span>
+                            )}
+                        </a>
                     </li>
                 ))
             }
@@ -180,40 +194,51 @@ if (unmatched.length > 0)
 </section>
 
 <script>
-    // Refresh talk titles in place from the live CFP feed. The baked titles are
-    // already on screen, so every failure path (dev server without the Netlify
-    // proxy, CFP app down, 8s timeout) just means no silent upgrade this visit —
-    // nothing to clean up, no spinner to hide.
+    // Refresh talk titles and bios in place from the live CFP feed. The baked
+    // copy is already on screen, so every failure path (dev server without the
+    // Netlify proxy, CFP app down, 8s timeout) just means no silent upgrade this
+    // visit — nothing to clean up, no spinner to hide.
     import {
         conferenceSpeakers,
         cfpNameAliases,
     } from "../data/conference-2026.js";
-    import { buildTitleMap, CFP_API_PATH } from "../utils/cfpTalks.js";
+    import { buildProfiles, shortBio } from "../utils/speakerProfiles.js";
+    import { CFP_API_PATH } from "../utils/cfpTalks.js";
 
-    async function refreshTalkTitles() {
+    function setText(card: Element, selector: string, text: string) {
+        const node = card.querySelector(selector);
+        if (!(node instanceof HTMLElement)) return;
+        if (node.textContent !== text) node.textContent = text;
+        node.hidden = !text;
+    }
+
+    async function refreshRoster() {
         try {
             const res = await fetch(CFP_API_PATH, {
                 signal: AbortSignal.timeout(8_000),
             });
             if (!res.ok) return;
-            const talks = await res.json();
-            const { titles } = buildTitleMap(
-                talks,
+            const { profiles } = buildProfiles(
+                await res.json(),
                 conferenceSpeakers,
                 cfpNameAliases,
             );
+            const byKey = new Map(profiles.map((p) => [p.key, p]));
             for (const card of document.querySelectorAll("[data-cfp-key]")) {
-                const node = card.querySelector("[data-talk-title]");
-                if (!(node instanceof HTMLElement) || !(card instanceof HTMLElement)) continue;
-                const title = titles.get(card.dataset.cfpKey ?? "");
-                const text = title ? `“${title}”` : "";
-                if (node.textContent !== text) node.textContent = text;
-                node.hidden = !title;
+                if (!(card instanceof HTMLElement)) continue;
+                const p = byKey.get(card.dataset.cfpKey ?? "");
+                if (!p) continue;
+                setText(
+                    card,
+                    "[data-talk-title]",
+                    p.title ? `\u201C${p.title}\u201D` : "",
+                );
+                setText(card, "[data-speaker-bio]", shortBio(p.bio));
             }
         } catch {
-            // keep the baked titles
+            // keep the baked copy
         }
     }
 
-    refreshTalkTitles();
+    refreshRoster();
 </script>

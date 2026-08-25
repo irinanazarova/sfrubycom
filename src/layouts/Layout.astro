@@ -2,6 +2,7 @@
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
+import HashScroll from "../components/HashScroll.astro";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -11,12 +12,15 @@ export interface Props {
     preloadHeroImage?: boolean;
     ogUrl?: string;
     ogType?: string;
+    /** "manual" for a page that steers the hash itself (see HashScroll.astro) */
+    hashScroll?: "auto" | "manual";
 }
 
 const {
     title = "San Francisco Ruby Conference 2025",
     description = "Join us for the San Francisco Ruby Conference 2025: Building the Future with Ruby. November 19-20 at Fort Mason, San Francisco.",
     preloadHeroImage = false,
+    hashScroll = "auto",
     ogUrl = Astro.url.href,
     ogType = "website",
 } = Astro.props;
@@ -144,5 +148,6 @@ const ogPlusImage = `https://iqtfijxk.ogplus.net${ogPlusPath}`;
                 });
             });
         </script>
+        {hashScroll === "auto" && <HashScroll />}
     </body>
 </html>

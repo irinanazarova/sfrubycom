@@ -71,7 +71,7 @@ const getPrimaryTalk = (speakerId) => {
             {
                 featuredSpeakers.map((speaker, index) => {
                     const talk = getPrimaryTalk(speaker.id);
-                    const talkLink = talk ? `/schedule#${talk.id}` : null;
+                    const talkLink = talk ? `/schedule-2025#${talk.id}` : null;
 
                     return (
                         <div
@@ -154,7 +154,7 @@ const getPrimaryTalk = (speakerId) => {
             {
                 randomSpeakers.map((speaker, index) => {
                     const talk = getPrimaryTalk(speaker.id);
-                    const talkLink = talk ? `/schedule#${talk.id}` : null;
+                    const talkLink = talk ? `/schedule-2025#${talk.id}` : null;
 
                     return (
                         <div

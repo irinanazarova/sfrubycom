@@ -22,7 +22,7 @@ import { getTalkOGMetadata, truncateDescription } from '../utils/og';
 const ogMetadata = {
     title: "Schedule - San Francisco Ruby Conference 2025",
     description: "Full conference schedule for San Francisco Ruby Conference 2025. November 19-20 at Fort Mason, featuring talks, workshops, and keynotes from industry leaders.",
-    ogUrl: "https://sfruby.com/schedule",
+    ogUrl: "https://sfruby.com/schedule-2025",
 };
 
 // Note: Hash-based deep linking (#talk-id) doesn't work reliably for social previews
@@ -119,6 +119,7 @@ const days = [
 ---
 
 <Layout
+    hashScroll="manual"
     title={ogMetadata.title}
     description={ogMetadata.description}
     ogUrl={ogMetadata.ogUrl}

@@ -51,7 +51,7 @@ export function getTalkOGMetadata(talk: any, speaker: any, baseUrl: string = 'ht
     description: talk.description || `${talk.title} by ${speakerName}. San Francisco Ruby Conference 2025.`,
     image: getTalkOGImage(talk.id, talk.title, speakerName),
     type: 'article',
-    url: `${baseUrl}/schedule#${talk.id}`,
+    url: `${baseUrl}/schedule-2025#${talk.id}`,
   };
 }
 
