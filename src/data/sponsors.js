@@ -2,6 +2,11 @@
 // SF Ruby Conference 2026 — current sponsors
 // Rendered on the homepage (#sponsors-2026 section + hero ticker).
 // Tier order here is display order; headingClass colors the tier heading.
+// logoWidth/logoHeight are the file's intrinsic pixel dimensions (sips -g
+// pixelWidth -g pixelHeight public/<logo>). They must be present and correct:
+// the hero ticker animates translateX(-100%), which resolves against content
+// width, so a logo without a reserved aspect ratio renders 0px wide until it
+// loads and the strip's width jumps mid-animation (Safari glitches on that).
 // ============================================================
 export const conference2026SponsorTiers = [
   {
@@ -11,14 +16,24 @@ export const conference2026SponsorTiers = [
       {
         name: "Typesense",
         logo: "/sponsor_typesense.png",
+        logoWidth: 824,
+        logoHeight: 185,
         url: "https://typesense.org/",
       },
       {
         name: "WorkOS",
         logo: "/sponsor_workos.svg",
+        logoWidth: 126,
+        logoHeight: 24,
         url: "https://workos.com/",
       },
-      { name: "Fin", logo: "/sponsor_fin.png", url: "https://fin.ai/" },
+      {
+        name: "Fin",
+        logo: "/sponsor_fin.png",
+        logoWidth: 799,
+        logoHeight: 310,
+        url: "https://fin.ai/",
+      },
     ],
   },
   {
@@ -28,6 +43,8 @@ export const conference2026SponsorTiers = [
       {
         name: "AppSignal",
         logo: "/sponsor_appsignal.png",
+        logoWidth: 852,
+        logoHeight: 182,
         url: "https://www.appsignal.com/",
       },
     ],
@@ -39,6 +56,8 @@ export const conference2026SponsorTiers = [
       {
         name: "Persona",
         logo: "/sponsor_persona.png",
+        logoWidth: 1000,
+        logoHeight: 263,
         url: "https://withpersona.com/",
       },
     ],
@@ -50,9 +69,17 @@ export const conference2026SponsorTiers = [
       {
         name: "Beyond Finance",
         logo: "/sponsor_beyondfinance.png",
+        logoWidth: 1060,
+        logoHeight: 275,
         url: "https://www.beyondfinance.com/",
       },
-      { name: "SumIt", logo: "/sponsor_sumit.png", url: "https://getsumit.com/" },
+      {
+        name: "SumIt",
+        logo: "/sponsor_sumit.png",
+        logoWidth: 582,
+        logoHeight: 127,
+        url: "https://getsumit.com/",
+      },
     ],
   },
 ];
