@@ -1,254 +1,460 @@
 ---
-import Layout from "../layouts/Layout.astro";
+// The 2026 lineup in full. The homepage roster (SpeakerRoster.astro) is the
+// character-select grid — sprite, name, company, one line of bio. This page is
+// where the same people get their whole entry: the talk they're giving, the
+// abstract, who they are.
+//
+// Two sources, merged on speakerKey: the hand-maintained roster
+// (src/data/conference-2026.js) owns who is confirmed, the sprite and the bio;
+// the CFP feed owns the talk. Titles and abstracts are baked in from the
+// committed snapshot (src/content/cfp-talks.json) and then refreshed in place
+// from the live API by the script at the bottom, so an edit in the CFP app
+// shows up without a redeploy.
+//
+// The 2025 lineup lives on at /speakers-2025.
+import BaseLayout from "../layouts/BaseLayout.astro";
 import SocialLink from "../components/SocialLink.astro";
-import { speakers } from "../data/speakers.js";
-import { talks } from "../data/talks.js";
-import { startups } from "../data/startups.js";
-import { getSpeakerOGMetadata, truncateDescription } from "../utils/og";
+import {
+    conferenceSpeakers,
+    cfpNameAliases,
+    LUMA_URL,
+} from "../data/conference-2026.js";
+import {
+    buildTalkMap,
+    speakerKey,
+    isRealTitle,
+    isRealAbstract,
+} from "../utils/cfpTalks.js";
+import { socialMetaList } from "../utils/socialLinks.js";
+import cfpTalks from "../content/cfp-talks.json";
 
-// Get all speakers as an array with their status
-const allSpeakers = Object.entries(speakers).map(([id, speaker]) => ({
-    ...speaker,
-    id,
-}));
+const { byKey, unmatched } = buildTalkMap(
+    cfpTalks,
+    conferenceSpeakers,
+    cfpNameAliases,
+);
+// An unmatched CFP name means a missing cfpNameAliases entry or a speaker who
+// isn't on the roster (a withdrawn talk still in the feed, say) — surface it in
+// the build log, don't fail.
+if (unmatched.length > 0)
+    console.warn(`cfp-talks: no roster match for: ${unmatched.join(", ")}`);
 
-// Check if we have a hash parameter for a specific speaker
-const hash = Astro.url.hash.replace('#', '');
-const targetSpeaker = hash ? (speakers as any)[hash] : null;
-
-// Generate page-specific OG metadata
-// For speakers page, we use a dedicated OG image showing speaker collage
-const ogMetadata = {
-    title: "Speakers - San Francisco Ruby Conference 2025",
-    description: "Meet our amazing speakers at San Francisco Ruby Conference 2025. Industry leaders from Shopify, Cisco, Gusto, and more sharing their expertise.",
-    ogUrl: "https://sfruby.com/speakers",
-};
-
-// Note: Hash-based deep linking (#speaker-id) doesn't work reliably for social previews
-// because hash fragments are client-side only. Social crawlers don't send them to the server.
-// To implement speaker-specific OG images, create dedicated pages: /speakers/[id].astro
-
-// Build a speaker-to-talks index for O(1) lookups
-const speakerToTalksIndex = new Map();
-
-// Single pass through all talks to build the index
-Object.values(talks).forEach((talk) => {
-    // Handle single speaker
-    if (talk.speakerId) {
-        if (!speakerToTalksIndex.has(talk.speakerId)) {
-            speakerToTalksIndex.set(talk.speakerId, []);
-        }
-        speakerToTalksIndex.get(talk.speakerId).push(talk);
-    }
-
-    // Handle multiple speakers
-    if (talk.speakers && Array.isArray(talk.speakers)) {
-        talk.speakers.forEach((speakerId) => {
-            if (!speakerToTalksIndex.has(speakerId)) {
-                speakerToTalksIndex.set(speakerId, []);
-            }
-            speakerToTalksIndex.get(speakerId).push(talk);
-        });
-    }
+// Merge once, here, so the markup below only ever reads flat fields.
+const profiles = conferenceSpeakers.map((s) => {
+    const key = speakerKey(s.name);
+    const talk = byKey.get(key);
+    return {
+        ...s,
+        key,
+        title: talk && isRealTitle(talk.title) ? talk.title.trim() : "",
+        abstract:
+            talk && isRealAbstract(talk.abstract) ? talk.abstract.trim() : "",
+        // The CFP role is the speaker's own wording and beats anything we'd
+        // guess; the roster `role` is the fallback for speakers with no CFP entry.
+        role: talk?.speaker?.role ?? s.role ?? "",
+        socials: socialMetaList(talk?.speaker?.socials),
+    };
 });
 
-// Helper function to get talks by speaker ID - now O(1)
-function getTalksBySpeakerId(speakerId) {
-    return speakerToTalksIndex.get(speakerId) || [];
-}
+const keynotes = profiles.filter((s) => s.keynote);
+// Confirmed-with-a-talk first: a card carrying a title and an abstract is the
+// reason to scroll, and speakers whose CFP entry hasn't landed yet would
+// otherwise open the list with the thinnest cards on the page.
+const lineup = profiles
+    .filter((s) => !s.keynote)
+    .sort((a, b) => Number(Boolean(b.title)) - Number(Boolean(a.title)));
 
-// Helper function to get speaker status badge
-function getSpeakerBadge(speaker) {
-    if (speaker.group === "featured") {
-        return { text: "Keynote", color: "bg-gradient-to-r from-ruby-500 to-pink-500" };
-    }
-    if (speaker.group === "cto") {
-        return { text: "CTO Panel", color: "bg-gradient-to-r from-purple-500 to-indigo-500" };
-    }
-    // Check if speaker is associated with a startup demo
-    const speakerStartup = Object.values(startups).find(startup =>
-        startup.founders?.some(founder => founder.toLowerCase().includes(speaker.name.toLowerCase()))
-    );
-    if (speakerStartup) {
-        return { text: "Startup Demo", color: "bg-gradient-to-r from-emerald-500 to-green-500" };
-    }
-    return null;
-}
-
-// Sort speakers: featured first, then CTO, then regular, then alphabetically by name
-allSpeakers.sort((a, b) => {
-    const orderMap = { featured: 0, cto: 1, speaker: 2 };
-    const orderA = orderMap[a.group] ?? 3;
-    const orderB = orderMap[b.group] ?? 3;
-    if (orderA !== orderB) return orderA - orderB;
-    return a.name.localeCompare(b.name);
-});
+const withTalks = profiles.filter((s) => s.title).length;
 ---
 
-<Layout
-    title={ogMetadata.title}
-    description={ogMetadata.description}
-    ogUrl={ogMetadata.ogUrl}
+<BaseLayout
+    title="Speakers - San Francisco Ruby Startup Conference 2026"
+    description={`The ${conferenceSpeakers.length} speakers of the San Francisco Ruby Startup Conference, November 10-12 2026 at SFJAZZ. Keynote by Garry Tan of Y Combinator, plus the people behind Solid Queue, RubyLLM, GoodJob, Typesense, Herb and AnyCable.`}
+    ogUrl="https://sfruby.com/speakers"
 >
-    <div class="px-sky-grad-dusk text-white pt-32 pb-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="px-font text-lg md:text-2xl text-center">
+    <!-- Hero -->
+    <section class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden">
+        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            <span class="px-plate px-font text-px8 px-3 py-1.5">
+                Nov 10-12, 2026 &#183; SFJAZZ
+            </span>
+            <h1
+                class="px-font px-shadow-ink text-xl md:text-3xl text-white mt-6"
+            >
                 Speakers
             </h1>
-            <p class="mt-4 text-xl text-center max-w-3xl mx-auto">
-                Meet the speakers who will be sharing their stories
+            <p class="text-lg md:text-xl text-gray-200 mt-6 max-w-3xl">
+                {conferenceSpeakers.length} confirmed for the San Francisco Ruby
+                Startup Conference: the people who build the gems you run in production,
+                and the founders running Ruby businesses.
             </p>
-        </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- All speakers in one grid -->
-        <div class="mb-16">
-            <h2 class="text-2xl font-display font-bold text-dark-900 mb-8">
-                All Speakers
-            </h2>
-
-            <div
-                id="speakers-grid"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8"
-            >
-                {
-                    allSpeakers.map((speaker) => {
-                        const speakerTalks = getTalksBySpeakerId(speaker.id);
-                        const badge = getSpeakerBadge(speaker);
-                        const ctoPanelTalk = speaker.group === "cto" ?
-                            Object.values(talks).find(talk =>
-                                talk.id === "cto-roundtable"
-                            ) : null;
-
-                        return (
-                            <div id={`speaker-${speaker.id}`} class="group speaker-card bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl relative">
-                                {/* Status Badge */}
-                                {badge && (
-                                    <div class={`absolute top-3 right-3 z-10 px-3 py-1 ${badge.color} text-white text-xs font-semibold rounded-full shadow-lg`}>
-                                        {badge.text}
-                                    </div>
-                                )}
-
-                                <!-- Full width on desktop, centered circle on mobile -->
-                                <div class="hidden sm:block w-full aspect-[0.8] overflow-hidden">
-                                    <img
-                                        src={speaker.image}
-                                        alt={`Photo of ${speaker.name}`}
-                                        class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div class="sm:hidden flex justify-center pt-6">
-                                    <div class="w-48 h-48 rounded-full overflow-hidden shadow-lg">
-                                        <img
-                                            src={speaker.image}
-                                            alt={`Photo of ${speaker.name}`}
-                                            class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div class="p-6">
-                                    <h3 class="font-bold text-xl text-dark-900">
-                                        {speaker.name}
-                                    </h3>
-                                    <p class="text-ruby-500 font-display font-medium mt-2">
-                                        {speaker.company}
-                                    </p>
-                                    <p class="text-dark-500 text-sm mb-2">
-                                        {speaker.role}
-                                    </p>
-
-                                    <p class="text-dark-600 text-sm mb-4">
-                                        {speaker.bio}
-                                    </p>
-
-                                    {/* Show talks for non-CTO speakers or CTO panel link for CTO speakers */}
-                                    {speaker.group === "cto" && ctoPanelTalk ? (
-                                        <div class="mb-4 pt-3 border-t border-gray-200">
-                                            <p class="text-xs text-gray-600 uppercase tracking-wide mb-2 font-semibold">
-                                                Panel
-                                            </p>
-                                            <a
-                                                href={`/schedule#${ctoPanelTalk.id}`}
-                                                class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
-                                            >
-                                                <svg
-                                                    class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                                                    />
-                                                </svg>
-                                                <span class="break-words">
-                                                    {ctoPanelTalk.title}
-                                                </span>
-                                            </a>
-                                        </div>
-                                    ) : speakerTalks.length > 0 ? (
-                                        <div class="mb-4 pt-3 border-t border-gray-200">
-
-                                            {speakerTalks.map((talk) => (
-                                                <a
-                                                    href={`/schedule#${talk.id}`}
-                                                    class="group inline-flex items-start gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-2 transition-colors"
-                                                >
-                                                    <svg
-                                                        class="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                                        />
-                                                    </svg>
-                                                    <span class="break-words">
-                                                        {talk.title}
-                                                    </span>
-                                                </a>
-                                            ))}
-                                        </div>
-                                    ) : null}
-
-                                    <div class="flex space-x-4">
-                                        {speaker.socials.map((url) => (
-                                            <SocialLink url={url} />
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a
+                    href={LUMA_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-btn px-btn--white px-font text-px10 px-6 py-4 tap-press"
+                >
+                    Get a ticket
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path stroke-linecap="square" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+                <a
+                    href="/speakers-2025"
+                    class="px-4 py-3 text-white/80 hover:text-white font-medium transition-colors"
+                >
+                    2025 speakers &#8594;
+                </a>
             </div>
         </div>
+    </section>
 
-        <!-- Call for speakers banner -->
-        <div class="mt-16 bg-dark-50 rounded-lg p-8 text-center">
-            <h3 class="text-xl font-bold text-dark-900 mb-2">
-                Join as a Speaker
-            </h3>
-            <p class="text-dark-600 mb-4">
-                The full program is now available! We are grateful to each and
-                every application that was submitted. All applicants were
-                contacted over email. Thank you for being an amazing community!
-                We are excited to make this event inspiring and meaningful
-                together with everyone participating.
-            </p>
+    <!-- Character select: the whole lineup at a glance, each sprite jumping to
+         its profile. Nineteen full profiles is a long scroll on a phone, so the
+         page opens with every face in two screens. -->
+    <section class="py-10 md:py-12 bg-white border-t-4 border-ink">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="px-font text-sm md:text-base text-gray-900">
+                Character select
+            </h2>
+            <ul
+                class="mt-6 grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 md:gap-4 list-none p-0"
+            >
+                {
+                    profiles.map((s) => (
+                        <li>
+                            <a
+                                href={`#${s.key}`}
+                                class="flex flex-col items-center text-center p-2 hover:bg-sky-50 tap-press"
+                            >
+                                {s.pixel ? (
+                                    <img
+                                        src={s.pixel}
+                                        alt=""
+                                        width="256"
+                                        height="256"
+                                        class="px-pixelated w-14 md:w-16 h-auto"
+                                    />
+                                ) : (
+                                    <div
+                                        class="w-14 md:w-16 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
+                                        aria-hidden="true"
+                                    >
+                                        <span class="px-font text-base text-sky-500">
+                                            ?
+                                        </span>
+                                    </div>
+                                )}
+                                <span class="font-display font-semibold text-xs text-gray-900 leading-tight mt-1">
+                                    {s.name}
+                                </span>
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
-    </div>
+    </section>
 
+    <!-- Keynotes -->
+    {
+        keynotes.length > 0 && (
+            <section class="py-12 md:py-16 bg-sky-50 border-t-4 border-ink">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="px-font text-base md:text-xl text-gray-900">
+                        Keynotes
+                    </h2>
+                    <ul class="mt-8 grid gap-6 lg:grid-cols-2 list-none p-0">
+                        {keynotes.map((s) => (
+                            <li
+                                id={s.key}
+                                data-cfp-key={s.key}
+                                class="px-card bg-white p-5 sm:p-6 scroll-mt-28"
+                            >
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 flex flex-col items-center">
+                                        {s.pixel ? (
+                                            <img
+                                                src={s.pixel}
+                                                alt={`${s.name}, pixel character`}
+                                                width="256"
+                                                height="256"
+                                                class="px-pixelated w-20 sm:w-24 h-auto"
+                                            />
+                                        ) : (
+                                            <div
+                                                class="w-20 sm:w-24 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
+                                                aria-hidden="true"
+                                            >
+                                                <span class="px-font text-2xl text-sky-500">
+                                                    ?
+                                                </span>
+                                            </div>
+                                        )}
+                                        <img
+                                            src="/px-island.png"
+                                            alt=""
+                                            width="598"
+                                            height="104"
+                                            class="px-pixelated w-24 sm:w-28 h-auto -mt-2"
+                                        />
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1">
+                                            Keynote
+                                        </span>
+                                        {/* Grotesk, not the pixel font: Press Start 2P
+                                            has no accented capitals and mangles names
+                                            like Gutiérrez. */}
+                                        <h3 class="font-display font-semibold text-lg md:text-xl text-gray-900 mt-3 leading-snug">
+                                            {s.name}
+                                        </h3>
+                                        {s.role && (
+                                            <p class="text-sm text-gray-600 mt-1">
+                                                {s.role}
+                                            </p>
+                                        )}
+                                        <p class="text-sm text-ruby-600 mt-1">
+                                            {s.orgs.map((org, i) => (
+                                                <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
+                                            ))}
+                                        </p>
+                                    </div>
+                                </div>
+                                <p
+                                    data-talk-title
+                                    hidden={!s.title}
+                                    class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug mt-5"
+                                >
+                                    {s.title && `“${s.title}”`}
+                                </p>
+                                <p
+                                    data-talk-abstract
+                                    hidden={!s.abstract}
+                                    class="text-sm text-gray-700 leading-relaxed mt-3"
+                                >
+                                    {s.abstract}
+                                </p>
+                                {s.bio && (
+                                    <p class="text-sm text-gray-600 leading-relaxed mt-4 pt-4 border-t-2 border-sky-100">
+                                        {s.bio}
+                                    </p>
+                                )}
+                                {s.socials.length > 0 && (
+                                    <div class="flex flex-wrap gap-3 mt-4">
+                                        {s.socials.map((link) => (
+                                            <SocialLink
+                                                platform={link.platform}
+                                                href={link.href}
+                                            >
+                                                <span class:list={[link.icon && "sr-only"]}>
+                                                    {link.label}
+                                                </span>
+                                            </SocialLink>
+                                        ))}
+                                    </div>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </section>
+        )
+    }
 
-</Layout>
+    <!-- The rest of the lineup -->
+    <section class="py-12 md:py-16 bg-white border-t-4 border-ink">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="px-font text-base md:text-xl text-gray-900">
+                The lineup
+            </h2>
+            <p class="text-gray-600 mt-4 max-w-3xl">
+                {withTalks} talks confirmed so far. Titles and abstracts land here
+                as speakers submit them.
+            </p>
+
+            <ul class="mt-8 grid gap-6 lg:grid-cols-2 list-none p-0">
+                {
+                    lineup.map((s) => (
+                        <li
+                            id={s.key}
+                            data-cfp-key={s.key}
+                            class="px-card bg-white p-5 sm:p-6 scroll-mt-28"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 flex flex-col items-center">
+                                    {s.pixel ? (
+                                        <img
+                                            src={s.pixel}
+                                            alt={`${s.name}, pixel character`}
+                                            width="256"
+                                            height="256"
+                                            loading="lazy"
+                                            class="px-pixelated w-20 sm:w-24 h-auto"
+                                        />
+                                    ) : (
+                                        <div
+                                            class="w-20 sm:w-24 aspect-square flex items-center justify-center bg-sky-100 border-4 border-ink"
+                                            aria-hidden="true"
+                                        >
+                                            <span class="px-font text-2xl text-sky-500">
+                                                ?
+                                            </span>
+                                        </div>
+                                    )}
+                                    <img
+                                        src="/px-island.png"
+                                        alt=""
+                                        width="598"
+                                        height="104"
+                                        loading="lazy"
+                                        class="px-pixelated w-24 sm:w-28 h-auto -mt-2"
+                                    />
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <h3 class="font-display font-semibold text-lg text-gray-900 leading-snug">
+                                        {s.name}
+                                    </h3>
+                                    {s.role && (
+                                        <p class="text-sm text-gray-600 mt-1">
+                                            {s.role}
+                                        </p>
+                                    )}
+                                    <p class="text-sm text-ruby-600 mt-1">
+                                        {s.orgs.map((org, i) => (
+                                            <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
+                                        ))}
+                                    </p>
+                                </div>
+                            </div>
+                            <p
+                                data-talk-title
+                                hidden={!s.title}
+                                class="font-display font-semibold text-base text-gray-900 leading-snug mt-5"
+                            >
+                                {s.title && `“${s.title}”`}
+                            </p>
+                            <p
+                                data-talk-abstract
+                                hidden={!s.abstract}
+                                class="text-sm text-gray-700 leading-relaxed mt-3"
+                            >
+                                {s.abstract}
+                            </p>
+                            {s.bio && (
+                                <p class="text-sm text-gray-600 leading-relaxed mt-4 pt-4 border-t-2 border-sky-100">
+                                    {s.bio}
+                                </p>
+                            )}
+                            {s.socials.length > 0 && (
+                                <div class="flex flex-wrap gap-3 mt-4">
+                                    {s.socials.map((link) => (
+                                        <SocialLink
+                                            platform={link.platform}
+                                            href={link.href}
+                                        >
+                                            <span class:list={[link.icon && "sr-only"]}>
+                                                {link.label}
+                                            </span>
+                                        </SocialLink>
+                                    ))}
+                                </div>
+                            )}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="py-16 px-dither-sky border-t-4 border-ink">
+        <div
+            class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+        >
+            <h2 class="px-font px-shadow-ink text-base md:text-xl text-white">
+                More still landing
+            </h2>
+            <p class="text-gray-200 mt-6">
+                The lineup grows through the summer. Tickets rise as it does.
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <a
+                    href={LUMA_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-btn px-btn--white px-font text-px10 px-6 py-4 tap-press"
+                >
+                    Get a ticket
+                </a>
+                <a
+                    href="/videos"
+                    class="px-btn px-btn--sky px-font text-px10 px-6 py-4 tap-press"
+                >
+                    Watch past talks
+                </a>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<script>
+    // Refresh talk titles and abstracts in place from the live CFP feed, the
+    // same deal as the homepage roster: the baked copy is already on screen, so
+    // every failure path (dev server without the Netlify proxy, CFP app down,
+    // 8s timeout) just means no silent upgrade this visit.
+    import {
+        conferenceSpeakers,
+        cfpNameAliases,
+    } from "../data/conference-2026.js";
+    import {
+        buildTalkMap,
+        isRealTitle,
+        isRealAbstract,
+        CFP_API_PATH,
+    } from "../utils/cfpTalks.js";
+
+    function setText(card: Element, selector: string, text: string) {
+        const node = card.querySelector(selector);
+        if (!(node instanceof HTMLElement)) return;
+        if (node.textContent !== text) node.textContent = text;
+        node.hidden = !text;
+    }
+
+    async function refreshTalks() {
+        try {
+            const res = await fetch(CFP_API_PATH, {
+                signal: AbortSignal.timeout(8_000),
+            });
+            if (!res.ok) return;
+            const { byKey } = buildTalkMap(
+                await res.json(),
+                conferenceSpeakers,
+                cfpNameAliases,
+            );
+            for (const card of document.querySelectorAll("[data-cfp-key]")) {
+                if (!(card instanceof HTMLElement)) continue;
+                const talk = byKey.get(card.dataset.cfpKey ?? "");
+                const title = isRealTitle(talk?.title) ? talk.title.trim() : "";
+                setText(card, "[data-talk-title]", title ? `“${title}”` : "");
+                setText(
+                    card,
+                    "[data-talk-abstract]",
+                    isRealAbstract(talk?.abstract) ? talk.abstract.trim() : "",
+                );
+            }
+        } catch {
+            // keep the baked copy
+        }
+    }
+
+    refreshTalks();
+</script>

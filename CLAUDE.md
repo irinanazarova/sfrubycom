@@ -43,6 +43,7 @@ Luma data is fetched at build time and saved to `src/content/*.json`. The `src/d
 - `src/utils/` - TypeScript utilities and type definitions
 - `scripts/` - Build-time data fetching scripts
 - `drafts/` - Gitignored. Monthly Substack drafts live here as a pair: `substack-YYYY-MM-[month].md` (working draft) and `.html` (paste-ready, since Substack's editor doesn't parse Markdown).
+- `src/pages/speakers.astro` - The 2026 lineup in full: a character-select jump index, then one profile card per speaker. Merges two sources on `speakerKey` (`src/utils/cfpTalks.js`): `src/data/conference-2026.js` owns who is confirmed plus the sprite and bio, the CFP feed owns the talk title and abstract. Titles/abstracts are baked in from the `src/content/cfp-talks.json` snapshot and refreshed client-side from the live API, the same contract `SpeakerRoster.astro` uses on the homepage. The 2025 lineup lives on unchanged at `/speakers-2025` (`speakers-2025.astro`), which `/schedule` and `getSpeakerOGMetadata` deep-link into.
 - `src/pages/news/index.astro` - The news page: a single running feed of items from `src/content/news.json`, with search + category filters, rendered as a dense multi-column list. `src/pages/news/rss.xml.ts` generates the `/news/rss.xml` feed from the same data. There are no per-issue archive pages: the old `news/YYYY-MM.astro` monthly pages were retired in favor of the feed (with a `netlify.toml` 301 from `/news/2026-*` to `/news`). The monthly issue still ships on Substack; the site just links to it.
 
 ### Key Types (src/utils/types.ts)
@@ -167,7 +168,7 @@ Quick check (390x844): `document.getElementById('bottom-nav')` exists and is vis
 
 `Header.astro` (the `BaseLayout` shell) starts as a **transparent** header with the **white** logo, then swaps to a solid white header with the **dark** logo once scrolled past 50px. That transparent/white-logo state only reads on a **dark hero**. A `BaseLayout` page whose top section is light (`bg-white`, `bg-gray-50`, `from-gray-50`, etc.) must pass **`darkHero={false}`**, which starts the header solid with the dark logo so the logo isn't invisible on a light background at the top.
 
-Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/meetup`, `/jobs`, `/videos`, `/photos`, `/host`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
+Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/index`, `jobs/post`, `404`, `design-system`. Dark-hero pages (`/`, `/meetup`, `/jobs`, `/videos`, `/photos`, `/host`, `speakers`, `sponsor-2026`) keep the default `darkHero={true}`. `Navigation.astro` (the `Layout` shell) always uses the dark logo on a solid header, so it is unaffected.
 
 When adding a `BaseLayout` page, check the first section's background and set `darkHero` accordingly. QA: at 390x844, the header logo must be legible at scroll-top (`.header-logo-white` visible only over a dark hero; otherwise `.header-logo-dark` on a solid header).
 

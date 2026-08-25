@@ -32,11 +32,6 @@
   status = 301
 
 [[redirects]]
-  from = "/speakers"
-  to = "/videos"
-  status = 301
-
-[[redirects]]
   from = "/schedule"
   to = "/videos"
   status = 301

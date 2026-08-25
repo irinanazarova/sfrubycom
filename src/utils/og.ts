@@ -37,7 +37,7 @@ export function getSpeakerOGMetadata(speaker: any, baseUrl: string = 'https://sf
     description: speaker.bio || `${speaker.title}${speaker.company ? ` at ${speaker.company}` : ''}. Speaking at San Francisco Ruby Conference 2025.`,
     image: speaker.image || getSpeakerOGImage(speaker.id, speaker.name),
     type: 'profile',
-    url: `${baseUrl}/speakers#${speaker.id}`,
+    url: `${baseUrl}/speakers-2025#${speaker.id}`,
   };
 }
 

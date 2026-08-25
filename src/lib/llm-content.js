@@ -71,6 +71,7 @@ ${next.length ? next.join("\n") : "See [Luma](https://lu.ma/sfruby) for the next
 ## Get involved
 - Meetups: ${SITE}/meetup (RSVP on https://lu.ma/sfruby)
 - Conference (Nov 10-12, 2026 at SFJAZZ): ${SITE}/
+- 2026 speakers, with talk titles and abstracts: ${SITE}/speakers
 - Sponsor: ${SITE}/sponsor-2026
 `;
 }
@@ -274,5 +275,6 @@ ${links}
 - Meetup page: ${SITE}/meetup (RSVPs: https://lu.ma/sfruby)
 - News feed (RSS): ${SITE}/news/rss.xml
 - Conference (Nov 10-12, 2026 at SFJAZZ): ${SITE}/
+- 2026 speakers, with talk titles and abstracts: ${SITE}/speakers
 `;
 }

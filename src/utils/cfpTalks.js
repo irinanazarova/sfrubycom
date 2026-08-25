@@ -46,14 +46,25 @@ export function speakerKey(name) {
   return `${tokens[0]}-${tokens[tokens.length - 1]}`;
 }
 
-// Reduce the raw feed to { titles: Map<speakerKey, title>, unmatched: string[] }.
+// An abstract renders only once it says something. Same job as isRealTitle:
+// "TBD" placeholders and one-line stubs stay hidden until the speaker writes
+// the real thing, rather than publishing an empty promise on the lineup page.
+export function isRealAbstract(abstract) {
+  if (typeof abstract !== "string") return false;
+  const trimmed = abstract.trim();
+  if (trimmed.length < 60) return false;
+  if (/^\s*(tbd|tba|tbc)\b/i.test(trimmed)) return false;
+  return true;
+}
+
+// Reduce the raw feed to { byKey: Map<speakerKey, talk>, unmatched: string[] }.
 // `unmatched` lists CFP speaker names that matched nobody on the roster — each
 // one is either a missing cfpNameAliases entry or a speaker we haven't added.
-export function buildTitleMap(talks, speakers, aliases = {}) {
+export function buildTalkMap(talks, speakers, aliases = {}) {
   const rosterKeys = new Set(speakers.map((s) => speakerKey(s.name)));
-  const titles = new Map();
+  const byKey = new Map();
   const unmatched = [];
-  if (!Array.isArray(talks)) return { titles, unmatched };
+  if (!Array.isArray(talks)) return { byKey, unmatched };
   for (const talk of talks) {
     const cfpName = talk?.speaker?.name?.trim();
     if (!cfpName) continue;
@@ -62,6 +73,16 @@ export function buildTitleMap(talks, speakers, aliases = {}) {
       unmatched.push(cfpName);
       continue;
     }
+    byKey.set(key, talk);
+  }
+  return { byKey, unmatched };
+}
+
+// Titles only, for the callers that render nothing else (the homepage roster).
+export function buildTitleMap(talks, speakers, aliases = {}) {
+  const { byKey, unmatched } = buildTalkMap(talks, speakers, aliases);
+  const titles = new Map();
+  for (const [key, talk] of byKey) {
     if (isRealTitle(talk.title)) titles.set(key, talk.title.trim());
   }
   return { titles, unmatched };
