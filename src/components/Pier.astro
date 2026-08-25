@@ -73,9 +73,15 @@ const cards = [
 const PIER_URL = "https://clouds.sfruby.com";
 const SLACK_URL =
     "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg";
-// Price quoted from the ladder rather than typed in, so it can never drift
-// from the tier table further down the page.
-const livePrice = ticketTiers.find((t) => t.state === "live").price;
+// Price quoted from the ladder rather than typed in, so it can never drift from
+// the tier table further down the page. Pinned to the individual price: the
+// company-sponsored tier is invoiced and has no deadline, so taking whichever
+// tier happens to be live first would quote $650 on a CTA aimed at one person
+// the moment Regular closes. If no individual tier is live, the button drops
+// the price rather than the build.
+const livePrice = ticketTiers.find(
+    (t) => t.state === "live" && t.name !== "Company-sponsored",
+)?.price;
 ---
 
 <section
@@ -160,8 +166,11 @@ const livePrice = ticketTiers.find((t) => t.state === "live").price;
                     <h3 class="px-font text-px10 md:text-xs text-gray-900">
                         Quests
                     </h3>
+                    {/* "0 complete" is what the game's own panel shows. A
+                        denominator would have to include the returning-2025
+                        bonus quest, which most readers cannot do. */}
                     <span class="px-plate px-font text-px8 px-2.5 py-1"
-                        >0 / {quests.length}</span
+                        >0 complete</span
                     >
                 </div>
                 <ul class="mt-6 list-none p-0 flex flex-col gap-4">
@@ -179,7 +188,8 @@ const livePrice = ticketTiers.find((t) => t.state === "live").price;
                     }
                 </ul>
                 <p class="text-xs text-gray-500 leading-relaxed mt-6">
-                    More quests land between now and November. Badges stack up
+                    Came last year? A returning-attendee quest is already
+                    waiting. More land between now and November. Badges stack up
                     on your card, the chatter runs in the{" "}
                     <a
                         href={SLACK_URL}
@@ -267,7 +277,7 @@ const livePrice = ticketTiers.find((t) => t.state === "live").price;
                     height="12"
                     class="px-pixelated h-5 w-auto"
                 />
-                Get your slot &#183; ${livePrice}
+                Get your slot{livePrice && ` \u00B7 $${livePrice}`}
             </a>
         </div>
     </div>

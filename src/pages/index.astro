@@ -65,7 +65,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta
             name="description"
-            content="A conference for engineers who read and write Ruby, November 10-12, 2026 at SFJAZZ. Talks on agentic Rails in production, the authors of Solid Queue, GoodJob, AnyCable and RubyLLM in one room, and organized networking where everyone gets the mic."
+            content="A conference for engineers who read and write Ruby. November 10-12, 2026 at SFJAZZ: agentic Rails in production, and networking where everyone gets the mic."
         />
         <meta name="theme-color" content={palette.sky[400]} />
         <title>San Francisco Ruby Startup Conference 2026 - SF Ruby</title>
@@ -420,11 +420,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             <Pier />
 
             <!-- The lineup: four faces as a taste, the CTA carries the rest to /speakers -->
-            <SpeakerRoster
-                limit={4}
-                ctaHref="/speakers"
-                ctaLabel="See the full lineup"
-            />
+            <SpeakerRoster limit={4} ctaHref="/speakers" />
 
             <!-- The two content arguments: agentic Rails in production, and the
                  authors of the gems already in your Gemfile -->

@@ -6,6 +6,9 @@
 // Talk titles deliberately live on /speakers, where they are refreshed from
 // the CFP feed. This section describes what each person works on, which does
 // not go stale, and links every name into their card.
+import { conferenceSpeakers } from "../data/conference-2026.js";
+import { speakerKey } from "../utils/cfpTalks.js";
+
 const agentic = [
     {
         key: "ryan-sherlock",
@@ -69,6 +72,20 @@ const gemfile = [
         ],
     },
 ];
+
+// Every key here is hand-written and points at an anchor on /speakers. Dropping
+// a speaker from the roster (the way #59 dropped Neha Abraham) would otherwise
+// leave a link that silently scrolls to the top of the page, so surface it in
+// the build log the same way SpeakerRoster surfaces unmatched CFP names.
+const rosterKeys = new Set(conferenceSpeakers.map((s) => speakerKey(s.name)));
+const dangling = [
+    ...agentic.map((a) => a.key),
+    ...gemfile.flatMap((g) => g.people.map((p) => p.key)),
+].filter((k) => !rosterKeys.has(k));
+if (dangling.length > 0)
+    console.warn(
+        `WhatYouHear: no roster match for: ${dangling.join(", ")} — the /speakers anchor is dead`,
+    );
 ---
 
 <section

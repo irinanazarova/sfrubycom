@@ -1197,6 +1197,16 @@ export function getJob(jobId) {
   return jobs[jobId];
 }
 
+// A listing's company identity. Most listings carry only a sponsorId or a
+// startupId and take their name from that record, so `companyName` alone
+// misses more than half the board. /jobs and the homepage networking count
+// both resolve it here so the two can never disagree about how many companies
+// are hiring. Returns null when a listing carries no reference at all, which
+// callers filter out rather than counting as a phantom company.
+export function jobCompanyId(job) {
+  return job.sponsorId || job.startupId || job.companyId || null;
+}
+
 export function getAllJobs() {
   return Object.values(jobs);
 }
