@@ -31,6 +31,7 @@ import {
     speakerKey,
     isRealTitle,
     isRealAbstract,
+    isRealBio,
 } from "../utils/cfpTalks.js";
 import { socialMetaList } from "../utils/socialLinks.js";
 import { toParagraphs } from "../utils/abstractText.js";
@@ -63,9 +64,14 @@ const profiles = conferenceSpeakers.map((s) => {
                 : (s.pitch ?? ""),
         ),
         fromPitch: !(talk && isRealAbstract(talk.abstract)) && Boolean(s.pitch),
-        // The CFP role is the speaker's own wording and beats anything we'd
-        // guess; the roster `role` is the fallback for speakers with no CFP entry.
+        // The CFP role and bio are the speaker's own wording and beat anything
+        // we'd guess; the roster fields are the fallback for speakers with no
+        // CFP entry, and for the stub bios in it ("TBD", "Martian").
         role: talk?.speaker?.role ?? s.role ?? "",
+        bio: toParagraphs(
+            isRealBio(talk?.speaker?.bio) ? talk.speaker.bio.trim() : s.bio,
+        ),
+        fromRosterBio: !isRealBio(talk?.speaker?.bio),
         socials: socialMetaList(talk?.speaker?.socials),
     };
 });
@@ -156,6 +162,7 @@ const withTalks = profiles.filter((s) => s.title).length;
                             id={s.key}
                             data-cfp-key={s.key}
                             data-local-abstract={s.fromPitch ? "" : undefined}
+                            data-local-bio={s.fromRosterBio ? "" : undefined}
                             class="px-card bg-white overflow-hidden flex flex-col scroll-mt-28 relative"
                         >
                             {s.keynote && (
@@ -247,11 +254,23 @@ const withTalks = profiles.filter((s) => s.title).length;
                                     ))}
                                 </div>
 
-                                {s.bio && (
-                                    <p class="text-sm text-gray-600 leading-relaxed mt-5 pt-5 border-t-2 border-sky-100">
-                                        {s.bio}
-                                    </p>
-                                )}
+                                <div
+                                    data-speaker-bio
+                                    hidden={s.bio.length === 0}
+                                    class="text-sm text-gray-600 leading-relaxed mt-5 pt-5 border-t-2 border-sky-100"
+                                >
+                                    {s.bio.map((parts) => (
+                                        <p class="[&+&]:mt-3">
+                                            {parts.map((part) =>
+                                                part.type === "link" ? (
+                                                    <a href={part.href} target="_blank" rel="noopener noreferrer" class="font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words">{part.label}</a>
+                                                ) : (
+                                                    part.value
+                                                ),
+                                            )}
+                                        </p>
+                                    ))}
+                                </div>
 
                                 {s.socials.length > 0 && (
                                     <div class="flex flex-wrap gap-3 pt-6 mt-auto">
@@ -323,6 +342,7 @@ const withTalks = profiles.filter((s) => s.title).length;
         buildTalkMap,
         isRealTitle,
         isRealAbstract,
+        isRealBio,
         CFP_API_PATH,
     } from "../utils/cfpTalks.js";
     import { toParagraphs } from "../utils/abstractText.js";
@@ -337,8 +357,8 @@ const withTalks = profiles.filter((s) => s.title).length;
     // Built with createElement rather than innerHTML: the abstract is text a
     // speaker typed into a third-party app, and it must never reach the page as
     // markup.
-    function setAbstract(card: Element, text: string) {
-        const node = card.querySelector("[data-talk-abstract]");
+    function setProse(card: Element, selector: string, text: string) {
+        const node = card.querySelector(selector);
         if (!(node instanceof HTMLElement)) return;
         const paragraphs = toParagraphs(text);
         node.hidden = paragraphs.length === 0;
@@ -387,7 +407,15 @@ const withTalks = profiles.filter((s) => s.title).length;
                     ? talk.abstract.trim()
                     : "";
                 if (abstract || card.dataset.localAbstract === undefined)
-                    setAbstract(card, abstract);
+                    setProse(card, "[data-talk-abstract]", abstract);
+
+                // Same guard for the bio: a stub in the feed must not wipe the
+                // roster line the card was built with.
+                const bio = isRealBio(talk?.speaker?.bio)
+                    ? talk.speaker.bio.trim()
+                    : "";
+                if (bio || card.dataset.localBio === undefined)
+                    setProse(card, "[data-speaker-bio]", bio);
             }
         } catch {
             // keep the baked copy

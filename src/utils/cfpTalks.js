@@ -57,6 +57,17 @@ export function isRealAbstract(abstract) {
   return true;
 }
 
+// A CFP bio renders only once it says something. The live feed's stubs are
+// "TBD" and a one-word "Martian"; every real bio in it runs past 90 characters,
+// so 40 separates them with room to spare.
+export function isRealBio(bio) {
+  if (typeof bio !== "string") return false;
+  const trimmed = bio.trim();
+  if (trimmed.length < 40) return false;
+  if (/^\s*(tbd|tba|tbc)\b/i.test(trimmed)) return false;
+  return true;
+}
+
 // Reduce the raw feed to { byKey: Map<speakerKey, talk>, unmatched: string[] }.
 // `unmatched` lists CFP speaker names that matched nobody on the roster — each
 // one is either a missing cfpNameAliases entry or a speaker we haven't added.
