@@ -12,6 +12,7 @@ const PLATFORMS = [
   { test: /(^|\.)bsky\.app$/, platform: "bluesky", label: "Bluesky" },
   { test: /(^|\.)youtube\.com$|(^|\.)youtu\.be$/, platform: "youtube", label: "YouTube" },
   { test: /(^|\.)substack\.com$/, platform: "substack", label: "Substack" },
+  { test: /(^|\.)github\.com$/, platform: "github", label: "GitHub" },
 ];
 
 export function socialMeta(url) {
@@ -28,16 +29,34 @@ export function socialMeta(url) {
     return { platform: known.platform, label: known.label, href: url, icon: true };
   // github.com -> GitHub, ruby.social -> Ruby.social, kaspth.com -> Kaspth.com
   const label = host.charAt(0).toUpperCase() + host.slice(1);
-  return {
-    platform: "dark",
-    label: host === "github.com" ? "GitHub" : label,
-    href: url,
-    icon: false,
-  };
+  return { platform: "dark", label, href: url, icon: false };
 }
 
-// A CFP `socials` field is a single URL string; the 2025 roster stores an array.
+// The CFP `socials` field is one free-form string a speaker types by hand, and
+// they put as many links in it as they like, separated by commas, spaces, or
+// newlines ("https://x.com/a, https://github.com/a"). The 2025 roster stores an
+// array instead. Both come through here.
+//
+// Splitting matters: `new URL()` happily swallows a whole comma-separated list
+// as one URL (hostname x.com, the rest of the list as the path), so treating the
+// field as a single link silently produced one chip with a broken href.
 export function socialMetaList(socials) {
-  const list = Array.isArray(socials) ? socials : socials ? [socials] : [];
-  return list.map(socialMeta).filter(Boolean);
+  const raw = Array.isArray(socials) ? socials : socials ? [socials] : [];
+  const urls = raw
+    .flatMap((entry) => String(entry).split(/[\s,;]+/))
+    .map((u) => u.trim().replace(/[.,;]+$/, ""))
+    .filter(Boolean)
+    // a bare "paolino.me" is a link too, and needs the scheme to parse
+    .map((u) => (/^https?:\/\//i.test(u) ? u : `https://${u}`));
+
+  const seen = new Set();
+  return urls
+    .map(socialMeta)
+    .filter(Boolean)
+    .filter((link) => {
+      const key = link.href.replace(/\/+$/, "").toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 }
