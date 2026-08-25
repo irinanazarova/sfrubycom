@@ -172,6 +172,14 @@ Pages currently marked `darkHero={false}`: `about`, `news/index`, `startups/inde
 
 When adding a `BaseLayout` page, check the first section's background and set `darkHero` accordingly. QA: at 390x844, the header logo must be legible at scroll-top (`.header-logo-white` visible only over a dark hero; otherwise `.header-logo-dark` on a solid header).
 
+### Anchor scrolling across pages (`HashScroll`)
+
+`global.css` opts into native cross-document view transitions (`@view-transition { navigation: auto }`). Chrome runs one on same-origin navigation and **drops the fragment scroll while it does**, so a link from another page on the site (`/speakers#peter-zhu`) lands at the top of the destination with the hash still in the URL. A cold load of the same URL has no transition and lands correctly, which is why `npm run qa`'s deep-link check never caught it: that check only cold-loads.
+
+`src/components/HashScroll.astro` does the jump itself, on `pagereveal` and again after load, and backs off once the reader has scrolled. It is rendered by `BaseLayout`, `Layout`, and the standalone shells (`index.astro`, `sponsor-2026.astro`) — a new page shell must include it, the same way it must include `BottomNav`.
+
+A page that steers the hash itself passes **`hashScroll="manual"`** to its layout, so two handlers never race for the scroll position. Currently manual: `jobs/index` (its own converge loop, which lands with a header-aware offset) and `schedule-2025` (`#day1`-`#day3` select a tab, `#talk-id` opens a modal). Slide decks on `PresentationLayout` never had it.
+
 ### Mobile regression check (run after any header/overlay/sticky change)
 
 There is no hamburger menu on mobile; the floating glass nav is the only mobile nav (the `#mobile-menu-button` is hidden on all viewports). Page-level `sticky`/`fixed` bars must stay `≤ z-30` so they sit below the bottom nav (`z-40`), jobs filter sheet (`z-45/46`), and More sheet (`z-50/51`).

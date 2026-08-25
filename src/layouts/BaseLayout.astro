@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
+import HashScroll from "../components/HashScroll.astro";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -11,6 +12,8 @@ export interface Props {
     ogUrl?: string;
     ogType?: string;
     darkHero?: boolean;
+    /** "manual" for a page that steers the hash itself (see HashScroll.astro) */
+    hashScroll?: "auto" | "manual";
     /** Curated social card path (e.g. "/og/jobs.png"); defaults to the ogplus live render */
     ogImage?: string;
 }
@@ -21,6 +24,7 @@ const {
     ogUrl = Astro.url.href,
     ogType = "website",
     darkHero = true,
+    hashScroll = "auto",
     ogImage,
 } = Astro.props;
 
@@ -106,5 +110,6 @@ const ogPlusImage = ogImage
 
         <Footer />
         <BottomNav />
+        {hashScroll === "auto" && <HashScroll />}
     </body>
 </html>

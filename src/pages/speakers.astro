@@ -378,42 +378,4 @@ const withTalks = profiles.filter((s) => s.title).length;
     }
 
     refreshProfiles();
-
-    // Arriving from a homepage tile leaves the page at the top with the
-    // fragment still in the URL. The cause is global.css opting into native
-    // cross-document view transitions (@view-transition): Chrome runs one on
-    // same-origin navigations and drops the fragment scroll while it does. A
-    // cold load of the same URL has no transition and lands correctly.
-    //
-    // So do the jump here: on pagereveal, which is the new document appearing
-    // at the end of that transition, and again after load for the browsers that
-    // fire neither. Never once the reader has scrolled: their position wins.
-    let readerScrolled = false;
-    for (const event of ["wheel", "touchstart", "keydown"])
-        addEventListener(event, () => (readerScrolled = true), {
-            once: true,
-            passive: true,
-        });
-
-    function jumpToHash() {
-        if (!location.hash || readerScrolled) return;
-        const target = document.getElementById(
-            decodeURIComponent(location.hash.slice(1)),
-        );
-        if (!target) return;
-        // the card's own scroll-margin sets the exact resting place; this only
-        // asks whether it is already roughly at the top of the viewport
-        const { top } = target.getBoundingClientRect();
-        if (top >= 0 && top < 200) return;
-        target.scrollIntoView({ behavior: "instant", block: "start" });
-    }
-
-    function jumpToHashSettled() {
-        jumpToHash();
-        setTimeout(jumpToHash, 250);
-    }
-
-    addEventListener("pagereveal", jumpToHashSettled);
-    if (document.readyState === "complete") jumpToHashSettled();
-    else addEventListener("load", jumpToHashSettled, { once: true });
 </script>
