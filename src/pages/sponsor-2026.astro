@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import HashScroll from "../components/HashScroll.astro";
 import EmailModal from "../components/EmailModal.astro";
+import { conferenceSpeakers } from "../data/conference-2026.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -86,7 +87,7 @@ const tiers2026 = [
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta
             name="description"
-            content="Sponsor the SF Ruby Conference 2026 and connect with 450+ Ruby developers, founders, and engineers in San Francisco."
+            content="Sponsor the SF Ruby Conference 2026: three days with 450 engineers who read and write Ruby, and the founders hiring them, in San Francisco."
         />
         <meta name="theme-color" content={palette.ruby[600]} />
         <title>Sponsor SF Ruby 2026 - SF Ruby</title>
@@ -110,7 +111,7 @@ const tiers2026 = [
         <meta property="og:title" content="Sponsor SF Ruby 2026 - SF Ruby" />
         <meta
             property="og:description"
-            content="Sponsor the SF Ruby Conference 2026 and connect with 450+ Ruby developers, founders, and engineers in San Francisco."
+            content="Sponsor the SF Ruby Conference 2026: three days with 450 engineers who read and write Ruby, and the founders hiring them, in San Francisco."
         />
         <meta property="og:image" content="https://sfruby.com/og/sponsor.png" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -146,8 +147,9 @@ const tiers2026 = [
                             Sponsor SF Ruby 2026
                         </h1>
                         <p class="text-xl text-white">
-                            Connect with the Ruby community at our annual
-                            conference and monthly meetups.
+                            Three days in a room of engineers who read and write
+                            Ruby, plus the founders hiring them, and a monthly
+                            meetup the rest of the year.
                         </p>
                     </div>
                 </div>
@@ -189,7 +191,7 @@ const tiers2026 = [
                                 <div
                                     class="px-font text-xl md:text-2xl text-ruby-600"
                                 >
-                                    18+
+                                    {conferenceSpeakers.length}
                                 </div>
                                 <div class="text-gray-600 text-sm mt-1">
                                     Speakers

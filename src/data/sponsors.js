@@ -80,6 +80,13 @@ export const conference2026SponsorTiers = [
         logoHeight: 127,
         url: "https://getsumit.com/",
       },
+      {
+        name: "TRMNL",
+        logo: "/sponsor_trmnl.png",
+        logoWidth: 1488,
+        logoHeight: 310,
+        url: "https://trmnl.com/",
+      },
     ],
   },
 ];

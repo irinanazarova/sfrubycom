@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import EmailModal from "../../components/EmailModal.astro";
 import PostingRulesModal from "../../components/PostingRulesModal.astro";
-import { getSortedJobs } from "../../data/jobs.js";
+import { getSortedJobs, jobCompanyId } from "../../data/jobs.js";
 import { getSponsor } from "../../data/sponsors.js";
 import { getStartup } from "../../data/startups.js";
 import {
@@ -52,19 +52,17 @@ function searchText(job) {
 const jobs = getSortedJobs().map((job) => {
     let companyName = job.companyName;
     let companyLogo = job.companyLogo || null;
-    let companyId = job.companyId || null;
+    const companyId = jobCompanyId(job);
     let isYC = false;
 
     if (job.sponsorId) {
         const sponsor = getSponsor(job.sponsorId);
         companyName = sponsor?.name || job.sponsorId;
         companyLogo = sponsor?.logo || null;
-        companyId = job.sponsorId;
     } else if (job.startupId) {
         const startup = getStartup(job.startupId);
         companyName = startup?.name || job.startupId;
         companyLogo = startup?.logo || null;
-        companyId = job.startupId;
         isYC = startup?.isYC || false;
     }
 

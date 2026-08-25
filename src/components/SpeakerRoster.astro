@@ -62,6 +62,14 @@ const speakers = limit
           ...ordered.filter((s) => s.pin === "last"),
       ]
     : ordered;
+// Whoever the limit trimmed. Their sprites become the crowd on the CTA, so the
+// page shows how much lineup is left rather than just asserting it.
+const shown = new Set(speakers.map((s) => s.key));
+const rest = ordered.filter((s) => !shown.has(s.key));
+// The CTA names the whole lineup rather than the remainder: "see all 19" is the
+// number a reader wants, and one number beats two competing on the same panel.
+const ctaText =
+    rest.length > 0 ? `See all ${ordered.length} speakers` : ctaLabel;
 ---
 
 <section
@@ -170,26 +178,50 @@ const speakers = limit
 
         {
             ctaHref && (
-                <div class="mt-12 flex justify-center">
+                <div class="mt-10 md:mt-12">
+                    {/* The whole panel is the target, not a lone button: on a
+                        trimmed roster this is the only way through to the other
+                        speakers, so it gets the width. */}
                     <a
                         href={ctaHref}
-                        class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                        class="px-btn px-btn--white flex-col w-full gap-5 px-6 py-8 md:py-10 tap-press"
                     >
-                        {ctaLabel}
-                        <svg
-                            class="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="3"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <path stroke-linecap="square" d="M9 5l7 7-7 7" />
-                        </svg>
+                        {rest.length > 0 && (
+                            <div class="flex flex-wrap items-end justify-center gap-x-1 gap-y-2">
+                                {rest.map(
+                                    (s) =>
+                                        s.pixel && (
+                                            <img
+                                                src={s.pixel}
+                                                alt=""
+                                                width="256"
+                                                height="256"
+                                                loading="lazy"
+                                                aria-hidden="true"
+                                                class="px-pixelated w-10 md:w-14 h-auto"
+                                            />
+                                        ),
+                                )}
+                            </div>
+                        )}
+                        <span class="px-plate px-plate--gold px-font text-px8 md:text-px10 px-5 py-4 inline-flex items-center gap-2">
+                            {ctaText}
+                            <svg
+                                class="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="3"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="square" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
                     </a>
                 </div>
             )
         }
+
     </div>
 </section>
 

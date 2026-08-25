@@ -6,7 +6,8 @@ import HashScroll from "../components/HashScroll.astro";
 import IslandNav from "../components/IslandNav.astro";
 import SpeakerRoster from "../components/SpeakerRoster.astro";
 import ConferenceNetworking from "../components/ConferenceNetworking.astro";
-import ConferenceQuest from "../components/ConferenceQuest.astro";
+import Pier from "../components/Pier.astro";
+import WhatYouHear from "../components/WhatYouHear.astro";
 import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import { LUMA_URL, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
@@ -64,7 +65,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta
             name="description"
-            content="The San Francisco Ruby Startup Conference, November 10-12, 2026 at SFJAZZ. Keynote by Garry Tan, President & CEO of Y Combinator. Tickets on sale now."
+            content="A conference for engineers who read and write Ruby. November 10-12, 2026 at SFJAZZ: agentic Rails in production, and networking where everyone gets the mic."
         />
         <meta name="theme-color" content={palette.sky[400]} />
         <title>San Francisco Ruby Startup Conference 2026 - SF Ruby</title>
@@ -98,7 +99,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
         />
         <meta
             property="og:description"
-            content="November 10-12, 2026 at SFJAZZ. Keynote by Garry Tan, President & CEO of Y Combinator. Tickets on sale now."
+            content="November 10-12, 2026 at SFJAZZ. A conference for engineers who read and write Ruby, and the founders who come to meet them. Keynote by Garry Tan of Y Combinator."
         />
         <meta property="og:image" content="https://sfruby.com/og/conference.png" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -192,8 +193,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                 </span>
                             </div>
                             <p class="font-display font-semibold text-base md:text-xl leading-snug text-white px-shadow-ink max-w-md mx-auto mb-5 md:mb-7">
-                                450 Ruby and Rails engineers and founders meet
-                                in San Francisco to build the future
+                                A conference for engineers who read and write
+                                Ruby. Founders come here to meet them.
                             </p>
                             <!-- Insert coin: one gold block carrying the ask, the price
                                  and the deadline, the whole thing the link -->
@@ -414,17 +415,19 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 </div>
             </section>
 
-            <!-- The lineup: names are what sell the ticket, /speakers has the talks -->
-            <SpeakerRoster
-                ctaHref="/speakers"
-                ctaLabel="Speaker profiles and talks"
-            />
+            <!-- The Pier: the pre-conference game, high up because a ticket is
+                 what unlocks it and nobody else has one -->
+            <Pier />
+
+            <!-- The lineup: four faces as a taste, the CTA carries the rest to /speakers -->
+            <SpeakerRoster limit={4} ctaHref="/speakers" />
+
+            <!-- The two content arguments: agentic Rails in production, and the
+                 authors of the gems already in your Gemfile -->
+            <WhatYouHear />
 
             <!-- Organized networking: the differentiator -->
             <ConferenceNetworking />
-
-            <!-- Pre-conference season: the reason to buy today, not in October -->
-            <ConferenceQuest />
 
             <!-- Price ladder + team offer -->
             <TicketLadder />

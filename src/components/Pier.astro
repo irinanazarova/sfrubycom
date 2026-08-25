@@ -1,0 +1,284 @@
+---
+// The Pier (clouds.sfruby.com): the pre-conference game, and the reason to buy
+// a ticket in August rather than in October. It sits directly under the hero
+// because it is the one thing here no other Ruby conference has, and because a
+// ticket is what unlocks it.
+//
+// Everything shown is the real game: the map art is the same asset the game
+// serves as its own OG image, the quests are the live quest list with its
+// point values, and the three Cloud Cards are published cards of people who
+// are actually coming. Refresh them by re-exporting from the game rather than
+// inventing copy here — a quest list that disagrees with the game is worse
+// than no quest list.
+import { LUMA_URL, ticketTiers } from "../data/conference-2026.js";
+
+// Sprites scattered over the map frame so it reads as populated. Positioned
+// against the frame, not the image, so the mobile crop can move underneath
+// them without stranding anyone in the bay.
+const citizens = [
+    {
+        pixel: "/speaker_rosa_gutierrez_pixel_256.png",
+        at: "bottom-[14%] left-[8%] w-14 md:w-16",
+        delay: "0s",
+    },
+    {
+        pixel: "/community_chris_fung_pixel_256.png",
+        at: "bottom-[38%] left-[26%] w-12 md:w-14",
+        delay: "-1.5s",
+    },
+    {
+        pixel: "/speaker_peter_zhu_pixel_256.png",
+        at: "bottom-[10%] right-[22%] w-14 md:w-16",
+        delay: "-3s",
+    },
+    {
+        pixel: "/community_amanda_kinney_pixel_256.png",
+        at: "bottom-[44%] right-[9%] w-12 md:w-14",
+        delay: "-4.5s",
+    },
+];
+
+// The live quest list, with the game's own point values.
+const quests = [
+    { label: "Generate and publish your pixel card", points: 10 },
+    { label: "Fill out your profile", points: 10 },
+    { label: "Find yourself on the Pier", points: 1 },
+    { label: "Talk to 5 people", points: 20 },
+    { label: "Share your card on your socials", points: 30 },
+];
+
+// Published cards, one community member among the speakers: the Pier is the
+// whole room, not the stage.
+const cards = [
+    {
+        name: "Rosa Gutiérrez",
+        role: "Speaker · 37signals",
+        image: "/cloudcard_2026_rosa_gutierrez.webp",
+        href: "https://clouds.sfruby.com/e/2026-bits/rosa-gutierrez",
+    },
+    {
+        name: "Chris Fung",
+        role: "Attendee · Gusto",
+        image: "/cloudcard_2026_chris_fung.webp",
+        href: "https://clouds.sfruby.com/e/2026-bits/chris-fung",
+    },
+    {
+        name: "Peter Zhu",
+        role: "Speaker · Shopify",
+        image: "/cloudcard_2026_peter_zhu.webp",
+        href: "https://clouds.sfruby.com/e/2026-bits/peter-zhu",
+    },
+];
+
+const PIER_URL = "https://clouds.sfruby.com";
+const SLACK_URL =
+    "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg";
+// Price quoted from the ladder rather than typed in, so it can never drift from
+// the tier table further down the page. Pinned to the individual price: the
+// company-sponsored tier is invoiced and has no deadline, so taking whichever
+// tier happens to be live first would quote $650 on a CTA aimed at one person
+// the moment Regular closes. If no individual tier is live, the button drops
+// the price rather than the build.
+const livePrice = ticketTiers.find(
+    (t) => t.state === "live" && t.name !== "Company-sponsored",
+)?.price;
+---
+
+<section
+    id="pier"
+    class="relative overflow-hidden py-20 md:py-24 px-night border-t-4 border-ink"
+>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="px-plate px-plate--gold px-font text-px8 px-3 py-1.5"
+                >Playable now</span
+            >
+            <h2
+                class="px-font px-shadow-ink text-lg md:text-2xl text-white mt-6"
+            >
+                Everyone who comes gets a character
+            </h2>
+            <p class="text-base md:text-lg text-white/90 leading-relaxed mt-5">
+                The Pier is an 8-bit San Francisco where every attendee, speaker
+                and volunteer walks around as a pixel version of themselves.
+                Your ticket is the character slot, so the game starts the moment
+                you buy it and runs until we meet at SFJAZZ in November.
+            </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-[1.5fr_1fr] items-start">
+            <!-- A window into the running game: the map, populated, with the
+                 whole frame as the way in. -->
+            <a
+                href={PIER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-card block relative overflow-hidden bg-sky-400 tap-press"
+                aria-label="Enter the Pier, the SF Ruby conference game"
+            >
+                {/* Phones get a crop around SFJAZZ rather than the whole
+                    city: the full map at 342px wide is a smudge, and the
+                    building with our sign on it is the point. <picture> so
+                    only one of the two is ever fetched. */}
+                <picture>
+                    <source
+                        media="(min-width: 640px)"
+                        srcset="/pier-map-1600.webp"
+                        width="1600"
+                        height="892"
+                    />
+                    <img
+                        src="/pier-map-detail.webp"
+                        alt="The Pier: an 8-bit San Francisco, with the SFJAZZ Center under the conference sign"
+                        width="900"
+                        height="711"
+                        loading="lazy"
+                        class="px-pixelated w-full aspect-[5/4] sm:aspect-[16/9] object-cover"
+                    />
+                </picture>
+                {
+                    citizens.map((c) => (
+                        <img
+                            src={c.pixel}
+                            alt=""
+                            width="256"
+                            height="256"
+                            loading="lazy"
+                            aria-hidden="true"
+                            class:list={[
+                                "px-pixelated absolute h-auto animate-float pointer-events-none",
+                                c.at,
+                            ]}
+                            style={`animation-delay: ${c.delay}`}
+                        />
+                    ))
+                }
+                <span
+                    class="px-plate px-plate--gold px-font text-px8 md:text-px10 px-4 py-3 absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap"
+                >
+                    Enter the Pier &#9654;&#xFE0E;
+                </span>
+            </a>
+
+            <!-- The live quest list. Point values are the game's own. -->
+            <div class="px-card bg-white p-6">
+                <div class="flex items-center justify-between gap-3">
+                    <h3 class="px-font text-px10 md:text-xs text-gray-900">
+                        Quests
+                    </h3>
+                    {/* "0 complete" is what the game's own panel shows. A
+                        denominator would have to include the returning-2025
+                        bonus quest, which most readers cannot do. */}
+                    <span class="px-plate px-font text-px8 px-2.5 py-1"
+                        >0 complete</span
+                    >
+                </div>
+                <ul class="mt-6 list-none p-0 flex flex-col gap-4">
+                    {
+                        quests.map((q) => (
+                            <li class="flex items-start justify-between gap-3 border-b-2 border-gray-100 pb-4 last:border-0 last:pb-0">
+                                <span class="text-sm text-gray-700 leading-relaxed">
+                                    {q.label}
+                                </span>
+                                <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 shrink-0">
+                                    +{q.points}
+                                </span>
+                            </li>
+                        ))
+                    }
+                </ul>
+                <p class="text-xs text-gray-500 leading-relaxed mt-6">
+                    Came last year? A returning-attendee quest is already
+                    waiting. More land between now and November. Badges stack up
+                    on your card, the chatter runs in the{" "}
+                    <a
+                        href={SLACK_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-ruby-600 underline underline-offset-2"
+                        >SF Ruby Slack</a
+                    >, and the last badges are earned face to face at SFJAZZ.
+                </p>
+            </div>
+        </div>
+
+        <!-- The artifact people actually post. Three published cards, linked
+             to the real profiles they came from. -->
+        <div class="mt-14">
+            <p
+                class="px-font text-px8 md:text-px10 text-white/80 text-center leading-relaxed"
+            >
+                Every player gets a Cloud Card
+            </p>
+            <ul class="mt-6 grid gap-5 sm:grid-cols-3 list-none p-0">
+                {
+                    cards.map((c) => (
+                        <li class="px-card bg-white">
+                            <a
+                                href={c.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="block tap-press"
+                            >
+                                <img
+                                    src={c.image}
+                                    alt={`${c.name}'s Cloud Card`}
+                                    width="900"
+                                    height="470"
+                                    loading="lazy"
+                                    class="px-pixelated w-full h-auto border-b-4 border-ink"
+                                />
+                                <div class="p-4 text-center">
+                                    <p class="font-display font-semibold text-sm text-gray-900 leading-snug">
+                                        {c.name}
+                                    </p>
+                                    <p class="text-xs text-ruby-600 mt-1.5">
+                                        {c.role}
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <div
+            class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+            <a
+                href={PIER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+            >
+                Enter the Pier
+                <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path stroke-linecap="square" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+            <a
+                href={LUMA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+            >
+                <img
+                    src="/px-ticket.png"
+                    alt=""
+                    width="26"
+                    height="12"
+                    class="px-pixelated h-5 w-auto"
+                />
+                Get your slot{livePrice && ` \u00B7 $${livePrice}`}
+            </a>
+        </div>
+    </div>
+</section>

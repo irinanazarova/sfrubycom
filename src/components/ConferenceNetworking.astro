@@ -4,12 +4,35 @@
 // reason a company sends five people instead of one, it gets its own section
 // above the ticket ladder.
 import { LUMA_URL } from "../data/conference-2026.js";
+import { getAllJobs, jobCompanyId } from "../data/jobs.js";
+
+const openRoles = getAllJobs();
+const hiringCompanies = new Set(
+    openRoles.map(jobCompanyId).filter(Boolean),
+).size;
+
+// Counted from the board rather than typed in, so the claim cannot go stale the
+// next time a listing is added or archived. Company identity comes from
+// jobCompanyId, the same resolution /jobs uses: counting `companyName` alone
+// drops half the board (Gusto, Chime, Persona, AngelList and Omada among them).
 
 // Numbered plates rather than sprite icons: the px-* set has no third icon that
 // reads as "founders' session", and the numbers frame this as a sequence anyway.
 // The mechanics are the pitch here, so they are stated exactly: two groups, 70
 // to 100 people, 60 seconds each. Earlier copy said "small groups", which is
 // both vaguer and wrong at this size.
+// The four people running the networking rooms. Affiliations verified: Amanda
+// is Evil Martians, Cameron moved to Cisco Meraki (our own July 2026 meetup
+// writeup, more recent than the GitHub tenure the web still shows), Mike is
+// Staff Engineer at Triumph. Ken hosts unaffiliated, so he carries no org line
+// rather than a guessed one.
+const hosts = [
+    { name: "Amanda Kinney", org: "Evil Martians" },
+    { name: "Ken Decanio", org: "" },
+    { name: "Cameron Dutro", org: "Cisco Meraki" },
+    { name: "Mike Dalton", org: "Triumph" },
+];
+
 const formats = [
     {
         title: "Everyone gets a mic",
@@ -39,8 +62,10 @@ const formats = [
                 More than a room of talks
             </h2>
             <p class="text-base md:text-lg text-white/90 leading-relaxed mt-5">
-                Half the value of a conference is who you meet, so it is on the
-                schedule rather than left to the coffee queue.
+                Startups and scaleups get two tracks, and the tracks weave: when
+                one is on stage, the other room is in an organized networking
+                session, then they swap. Who you meet is on the schedule, so it
+                never comes down to the coffee queue.
             </p>
         </div>
 
@@ -61,6 +86,70 @@ const formats = [
                 ))
             }
         </ul>
+
+        <!-- Who runs the rooms. A session with 100 people in it and a mic
+             going around needs someone driving, and naming them makes the
+             format concrete rather than a promise. -->
+        <div
+            class="mt-6 px-card bg-white p-6 md:p-7 max-w-3xl mx-auto text-center"
+        >
+            <p class="px-font text-px8 text-ruby-600">Your hosts</p>
+            <ul
+                class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-5 list-none p-0"
+            >
+                {
+                    hosts.map((h) => (
+                        <li>
+                            {/* fixed two-line box, same trick as the speaker
+                                tiles: names that wrap would otherwise push
+                                their org line off the row's baseline */}
+                            <p class="font-display font-semibold text-sm md:text-base text-gray-900 leading-snug flex items-center justify-center min-h-[2.75rem]">
+                                {h.name}
+                            </p>
+                            {h.org && (
+                                <p class="text-xs text-ruby-600 mt-1.5">
+                                    {h.org}
+                                </p>
+                            )}
+                        </li>
+                    ))
+                }
+            </ul>
+            <p class="text-xs text-gray-500 leading-relaxed mt-6">
+                Each room has a host keeping the mic moving through 70 to 100
+                introductions, so every 60 seconds lands.
+            </p>
+        </div>
+
+        <!-- The hiring is already visible, and it is our own board saying so. -->
+        <div class="mt-8 px-card bg-white p-6 md:p-7 max-w-3xl mx-auto text-center">
+            <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+                <span class="font-display font-semibold text-gray-900">
+                    {openRoles.length} open Ruby and Rails roles from {
+                        hiringCompanies
+                    } companies
+                </span>{" "}
+                are on our jobs board today, GitHub, Chime, Gusto, Persona and
+                AngelList among them. In November those hiring managers are
+                sitting in your networking group, and you get the mic.
+            </p>
+            <a
+                href="/jobs"
+                class="px-btn px-btn--sky px-font text-px8 md:text-px10 px-5 py-3 tap-press mt-5"
+            >
+                See who is hiring
+                <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path stroke-linecap="square" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
 
         <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
