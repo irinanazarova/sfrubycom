@@ -144,16 +144,6 @@ export const conferenceSpeakers = [
     keynote: true,
     pin: "last",
     pixel: "/speaker_irina_nazarova_pixel_256.png",
-    // `pitch` is the abstract for a talk whose CFP entry has none yet. /speakers
-    // prefers the CFP abstract whenever one lands, so this is a fallback and not
-    // a second source of truth: fill the CFP entry in and this stops rendering.
-    // `pitchCta` is the one link the pitch needs to be useful.
-    pitch:
-      "Let's celebrate the new and ambitious companies choosing Ruby and Rails today. We'll hear their stories, learn from their wins, and find out what's missing: what we as the Ruby community need to build to help them grow into the big Ruby success stories of the future. Based on interviews with founders.",
-    pitchCta: {
-      label: "Founded a Ruby startup in the last 2-3 years? Let's talk",
-      url: "https://cal.com/inazarova/feedback",
-    },
   },
 ];
 
