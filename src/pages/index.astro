@@ -413,8 +413,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 </div>
             </section>
 
-            <!-- The lineup: names are what sell the ticket -->
-            <SpeakerRoster />
+            <!-- The lineup: names are what sell the ticket, /speakers has the talks -->
+            <SpeakerRoster
+                ctaHref="/speakers"
+                ctaLabel="Speaker profiles and talks"
+            />
 
             <!-- Organized networking: the differentiator -->
             <ConferenceNetworking />
