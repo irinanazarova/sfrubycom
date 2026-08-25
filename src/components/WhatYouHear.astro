@@ -1,0 +1,189 @@
+---
+// The two content arguments for a ticket, in the order the conference blog
+// makes them: what agentic Rails looks like in production, and the fact that
+// the authors of the gems in your Gemfile are all in one room.
+//
+// Talk titles deliberately live on /speakers, where they are refreshed from
+// the CFP feed. This section describes what each person works on, which does
+// not go stale, and links every name into their card.
+const agentic = [
+    {
+        key: "ryan-sherlock",
+        name: "Ryan Sherlock",
+        org: "Fin (ex Intercom)",
+        body: "Scales the AI customer service agent that grew out of Intercom: 150,000 HTTPS requests per second at peak, out of a Rails monolith.",
+    },
+    {
+        key: "cj-avilla",
+        name: "CJ Avilla",
+        org: "Anthropic",
+        body: "On making an agent a first-class teammate inside your SaaS, rather than a chat box bolted to the side of it.",
+    },
+    {
+        key: "madison-sites",
+        name: "Madison Sites",
+        org: "Order.co",
+        body: "Wrangles legacy Rails for a living, and has the honest answer on what agents can and cannot fix in an old codebase.",
+    },
+    {
+        key: "carmine-paolino",
+        name: "Carmine Paolino",
+        org: "RubyLLM",
+        body: "Created RubyLLM, one interface to every major AI provider: 11 million downloads and 4,000 GitHub stars since January 2025. He brings 2.0.",
+    },
+];
+
+// Framed by the part of your app each one owns, because that is how you
+// recognise them: you have their gem in your Gemfile right now.
+const gemfile = [
+    {
+        layer: "Your job queue",
+        people: [
+            { key: "rosa-gutierrez", name: "Rosa Gutiérrez", what: "wrote Solid Queue, at 37signals" },
+            { key: "ben-sheldon", name: "Ben Sheldon", what: "wrote GoodJob" },
+            { key: "phillip-campbell", name: "Phillip Campbell", what: "scales the Sidekiq workloads that run payroll at Gusto" },
+        ],
+    },
+    {
+        layer: "Your real-time layer",
+        people: [
+            { key: "vladimir-dementyev", name: "Vladimir Dementyev", what: "wrote AnyCable, TestProf, and Layered Design for Rails" },
+        ],
+    },
+    {
+        layer: "Your metrics",
+        people: [
+            { key: "andrey-novikov", name: "Andrey Novikov", what: "wrote Yabeda, 10 million downloads of Ruby instrumentation" },
+        ],
+    },
+    {
+        layer: "Your view layer",
+        people: [
+            { key: "marco-roth", name: "Marco Roth", what: "builds Herb, the parser and language server ERB never had" },
+        ],
+    },
+    {
+        layer: "Your runtime",
+        people: [
+            { key: "peter-zhu", name: "Peter Zhu", what: "commits to Ruby core, on the garbage collector, at Shopify" },
+        ],
+    },
+];
+---
+
+<section
+    id="what-you-hear"
+    class="py-20 md:py-24 bg-white border-t-4 border-ink"
+>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+            <span class="px-plate px-font text-px8 px-3 py-1.5">The program</span>
+            <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
+                What you will actually hear
+            </h2>
+            <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
+                Every speaker here was hand-picked. We screened GitHub for
+                people actively building in Ruby open source and went after
+                them, which is how a talk about the Ruby stack that flies
+                satellites ended up on the schedule.
+            </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-2 items-start">
+            <div class="px-card bg-sky-50 p-6 md:p-8">
+                <h3
+                    class="px-font text-px10 md:text-xs text-gray-900 leading-relaxed"
+                >
+                    Agentic Rails, already in production
+                </h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-4">
+                    Four talks from people who have shipped it, on the question
+                    that decides what your job looks like for the next few
+                    years.
+                </p>
+                <ul class="mt-7 flex flex-col gap-5 list-none p-0">
+                    {
+                        agentic.map((a) => (
+                            <li class="border-b-2 border-sky-100 pb-5 last:border-0 last:pb-0">
+                                <a
+                                    href={`/speakers#${a.key}`}
+                                    class="block group tap-press"
+                                >
+                                    <p class="font-display font-semibold text-sm md:text-base text-gray-900 leading-snug group-hover:text-ruby-600 transition-colors">
+                                        {a.name}
+                                        <span class="text-ruby-600 font-normal">
+                                            {" "}
+                                            · {a.org}
+                                        </span>
+                                    </p>
+                                    <p class="text-sm text-gray-600 leading-relaxed mt-2">
+                                        {a.body}
+                                    </p>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <div class="px-card bg-gold-100 p-6 md:p-8">
+                <h3
+                    class="px-font text-px10 md:text-xs text-gray-900 leading-relaxed"
+                >
+                    The people who wrote your Gemfile
+                </h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-4">
+                    A conference pays for itself when the author of the thing
+                    that is currently breaking is standing ten feet away. Three
+                    independent answers to the job-queue question will be in the
+                    same room, all willing to argue about it.
+                </p>
+                <ul class="mt-7 flex flex-col gap-5 list-none p-0">
+                    {
+                        gemfile.map((g) => (
+                            <li class="border-b-2 border-gold-300 pb-5 last:border-0 last:pb-0">
+                                <p class="px-font text-px8 text-ruby-600">
+                                    {g.layer}
+                                </p>
+                                <ul class="mt-3 flex flex-col gap-2 list-none p-0">
+                                    {g.people.map((p) => (
+                                        <li>
+                                            <a
+                                                href={`/speakers#${p.key}`}
+                                                class="text-sm text-gray-700 leading-relaxed hover:text-ruby-600 transition-colors tap-press"
+                                            >
+                                                <span class="font-display font-semibold text-gray-900 mr-1">
+                                                    {p.name}
+                                                </span>{" "}
+                                                {p.what}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-12 flex justify-center">
+            <a
+                href="/speakers"
+                class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+            >
+                Every speaker and talk
+                <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path stroke-linecap="square" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
