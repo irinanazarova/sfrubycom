@@ -11,12 +11,11 @@
 // here it is the pixel sprite on a dithered sky, which is what a transparent
 // sprite needs behind it to read at size.
 //
-// Two sources, merged on speakerKey: the hand-maintained roster
-// (src/data/conference-2026.js) owns who is confirmed, the sprite and the bio;
-// the CFP feed owns the talk. Titles and abstracts are baked in from the
-// committed snapshot (src/content/cfp-talks.json) and then refreshed in place
-// from the live API by the script at the bottom, so an edit in the CFP app
-// shows up without a redeploy.
+// Content comes from buildProfiles (src/utils/speakerProfiles.js), the one merge
+// of roster and CFP feed that the homepage roster uses too. Talk, role and bio
+// are baked in from the committed snapshot (src/content/cfp-talks.json) and then
+// refreshed in place from the live API by the script at the bottom, so an edit
+// in the CFP app shows up without a redeploy.
 //
 // The 2025 lineup lives on at /speakers-2025.
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -26,18 +25,11 @@ import {
     cfpNameAliases,
     LUMA_URL,
 } from "../data/conference-2026.js";
-import {
-    buildTalkMap,
-    speakerKey,
-    isRealTitle,
-    isRealAbstract,
-    isRealBio,
-} from "../utils/cfpTalks.js";
-import { socialMetaList } from "../utils/socialLinks.js";
+import { buildProfiles } from "../utils/speakerProfiles.js";
 import { toParagraphs } from "../utils/abstractText.js";
 import cfpTalks from "../content/cfp-talks.json";
 
-const { byKey, unmatched } = buildTalkMap(
+const { profiles, unmatched } = buildProfiles(
     cfpTalks,
     conferenceSpeakers,
     cfpNameAliases,
@@ -48,43 +40,21 @@ const { byKey, unmatched } = buildTalkMap(
 if (unmatched.length > 0)
     console.warn(`cfp-talks: no roster match for: ${unmatched.join(", ")}`);
 
-// Merge once, here, so the markup below only ever reads flat fields.
-const profiles = conferenceSpeakers.map((s) => {
-    const key = speakerKey(s.name);
-    const talk = byKey.get(key);
-    return {
-        ...s,
-        key,
-        title: talk && isRealTitle(talk.title) ? talk.title.trim() : "",
-        // CFP abstract wins whenever there is one; `pitch` on the roster covers
-        // a confirmed talk whose CFP entry is still a stub.
-        abstract: toParagraphs(
-            talk && isRealAbstract(talk.abstract)
-                ? talk.abstract.trim()
-                : (s.pitch ?? ""),
-        ),
-        fromPitch: !(talk && isRealAbstract(talk.abstract)) && Boolean(s.pitch),
-        // The CFP role and bio are the speaker's own wording and beat anything
-        // we'd guess; the roster fields are the fallback for speakers with no
-        // CFP entry, and for the stub bios in it ("TBD", "Martian").
-        role: talk?.speaker?.role ?? s.role ?? "",
-        bio: toParagraphs(
-            isRealBio(talk?.speaker?.bio) ? talk.speaker.bio.trim() : s.bio,
-        ),
-        fromRosterBio: !isRealBio(talk?.speaker?.bio),
-        socials: socialMetaList(talk?.speaker?.socials),
-    };
-});
-
 // Keynotes open the grid, then whoever has a confirmed talk: a card carrying a
 // title and an abstract is the reason to scroll, and speakers whose CFP entry
 // hasn't landed yet would otherwise hold the top of the page with the thinnest
-// cards on it.
-const speakers = [...profiles].sort(
-    (a, b) =>
-        Number(Boolean(b.keynote)) - Number(Boolean(a.keynote)) ||
-        Number(Boolean(b.title)) - Number(Boolean(a.title)),
-);
+// cards on it. Prose is split here; the card markup only reads flat fields.
+const speakers = [...profiles]
+    .sort(
+        (a, b) =>
+            Number(Boolean(b.keynote)) - Number(Boolean(a.keynote)) ||
+            Number(Boolean(b.title)) - Number(Boolean(a.title)),
+    )
+    .map((s) => ({
+        ...s,
+        abstract: toParagraphs(s.abstract),
+        bio: toParagraphs(s.bio),
+    }));
 
 const withTalks = profiles.filter((s) => s.title).length;
 ---
@@ -161,8 +131,6 @@ const withTalks = profiles.filter((s) => s.title).length;
                         <li
                             id={s.key}
                             data-cfp-key={s.key}
-                            data-local-abstract={s.fromPitch ? "" : undefined}
-                            data-local-bio={s.fromRosterBio ? "" : undefined}
                             class="px-card bg-white overflow-hidden flex flex-col scroll-mt-28 relative"
                         >
                             {s.keynote && (
@@ -330,21 +298,17 @@ const withTalks = profiles.filter((s) => s.title).length;
 </BaseLayout>
 
 <script>
-    // Refresh talk titles and abstracts in place from the live CFP feed, the
-    // same deal as the homepage roster: the baked copy is already on screen, so
-    // every failure path (dev server without the Netlify proxy, CFP app down,
-    // 8s timeout) just means no silent upgrade this visit.
+    // Refresh the talk, role and bio in place from the live CFP feed. The baked
+    // copy is already on screen, so every failure path (dev server without the
+    // Netlify proxy, CFP app down, 8s timeout) just means no silent upgrade this
+    // visit. buildProfiles applies the same roster fallbacks here as at build
+    // time, so a stub in the feed can never blank a card.
     import {
         conferenceSpeakers,
         cfpNameAliases,
     } from "../data/conference-2026.js";
-    import {
-        buildTalkMap,
-        isRealTitle,
-        isRealAbstract,
-        isRealBio,
-        CFP_API_PATH,
-    } from "../utils/cfpTalks.js";
+    import { buildProfiles } from "../utils/speakerProfiles.js";
+    import { CFP_API_PATH } from "../utils/cfpTalks.js";
     import { toParagraphs } from "../utils/abstractText.js";
 
     function setText(card: Element, selector: string, text: string) {
@@ -354,9 +318,8 @@ const withTalks = profiles.filter((s) => s.title).length;
         node.hidden = !text;
     }
 
-    // Built with createElement rather than innerHTML: the abstract is text a
-    // speaker typed into a third-party app, and it must never reach the page as
-    // markup.
+    // Built with createElement rather than innerHTML: this is text a speaker
+    // typed into a third-party app, and it must never reach the page as markup.
     function setProse(card: Element, selector: string, text: string) {
         const node = card.querySelector(selector);
         if (!(node instanceof HTMLElement)) return;
@@ -385,42 +348,72 @@ const withTalks = profiles.filter((s) => s.title).length;
         );
     }
 
-    async function refreshTalks() {
+    async function refreshProfiles() {
         try {
             const res = await fetch(CFP_API_PATH, {
                 signal: AbortSignal.timeout(8_000),
             });
             if (!res.ok) return;
-            const { byKey } = buildTalkMap(
+            const { profiles } = buildProfiles(
                 await res.json(),
                 conferenceSpeakers,
                 cfpNameAliases,
             );
+            const byKey = new Map(profiles.map((p) => [p.key, p]));
             for (const card of document.querySelectorAll("[data-cfp-key]")) {
                 if (!(card instanceof HTMLElement)) continue;
-                const talk = byKey.get(card.dataset.cfpKey ?? "");
-                const title = isRealTitle(talk?.title) ? talk.title.trim() : "";
-                setText(card, "[data-talk-title]", title ? `“${title}”` : "");
-                // An empty CFP abstract must not wipe a roster `pitch`; a real
-                // one still replaces it, so the CFP stays the source of truth.
-                const abstract = isRealAbstract(talk?.abstract)
-                    ? talk.abstract.trim()
-                    : "";
-                if (abstract || card.dataset.localAbstract === undefined)
-                    setProse(card, "[data-talk-abstract]", abstract);
-
-                // Same guard for the bio: a stub in the feed must not wipe the
-                // roster line the card was built with.
-                const bio = isRealBio(talk?.speaker?.bio)
-                    ? talk.speaker.bio.trim()
-                    : "";
-                if (bio || card.dataset.localBio === undefined)
-                    setProse(card, "[data-speaker-bio]", bio);
+                const p = byKey.get(card.dataset.cfpKey ?? "");
+                if (!p) continue;
+                setText(
+                    card,
+                    "[data-talk-title]",
+                    p.title ? `\u201C${p.title}\u201D` : "",
+                );
+                setProse(card, "[data-talk-abstract]", p.abstract);
+                setProse(card, "[data-speaker-bio]", p.bio);
             }
         } catch {
             // keep the baked copy
         }
     }
 
-    refreshTalks();
+    refreshProfiles();
+
+    // Arriving from a homepage tile leaves the page at the top with the
+    // fragment still in the URL. The cause is global.css opting into native
+    // cross-document view transitions (@view-transition): Chrome runs one on
+    // same-origin navigations and drops the fragment scroll while it does. A
+    // cold load of the same URL has no transition and lands correctly.
+    //
+    // So do the jump here: on pagereveal, which is the new document appearing
+    // at the end of that transition, and again after load for the browsers that
+    // fire neither. Never once the reader has scrolled: their position wins.
+    let readerScrolled = false;
+    for (const event of ["wheel", "touchstart", "keydown"])
+        addEventListener(event, () => (readerScrolled = true), {
+            once: true,
+            passive: true,
+        });
+
+    function jumpToHash() {
+        if (!location.hash || readerScrolled) return;
+        const target = document.getElementById(
+            decodeURIComponent(location.hash.slice(1)),
+        );
+        if (!target) return;
+        // the card's own scroll-margin sets the exact resting place; this only
+        // asks whether it is already roughly at the top of the viewport
+        const { top } = target.getBoundingClientRect();
+        if (top >= 0 && top < 200) return;
+        target.scrollIntoView({ behavior: "instant", block: "start" });
+    }
+
+    function jumpToHashSettled() {
+        jumpToHash();
+        setTimeout(jumpToHash, 250);
+    }
+
+    addEventListener("pagereveal", jumpToHashSettled);
+    if (document.readyState === "complete") jumpToHashSettled();
+    else addEventListener("load", jumpToHashSettled, { once: true });
 </script>
