@@ -434,6 +434,36 @@ export const hosts = {
       { name: "packwerk-extensions", url: "https://github.com/rubyatscale/packwerk-extensions", desc: "Extensions for enforcing Packwerk package boundaries" },
     ],
   },
+  datadog: {
+    id: "datadog",
+    name: "Datadog",
+    logo: "/host_datadog.png",
+    url: "https://www.datadoghq.com",
+    summary:
+      "Observability and security for cloud applications: metrics, traces, logs, and profiles in one platform.",
+    rubyConnection:
+      "136M+ downloads of the Ruby tracer. Donates the observability that keeps RubyGems.org running",
+    tag: "Ruby SDK",
+    founded: "2010",
+    founders: "Olivier Pomel, Alexis Lê-Quôc",
+    leadership: "Olivier Pomel, co-founder & CEO",
+    product:
+      "A monitoring platform that pulls metrics, distributed traces, logs, profiles, and security signals from every layer of a stack into one place. Roughly 32,700 customers as of the end of 2025, on $3.43B of revenue that year. Datadog is public on Nasdaq as DDOG and keeps an engineering office in San Francisco.",
+    history:
+      "Olivier Pomel and Alexis Lê-Quôc met at Wireless Generation, where Pomel worked on the product and Lê-Quôc kept the servers alive. They founded Datadog in New York in 2010 to give both sides one shared view of a running system. The name is a joke at their own expense: their old employer named production servers after dogs, and \"datadog 17\" was the Oracle database that doubled in size every year. Datadog IPO'd on Nasdaq in September 2019.",
+    rubyEcosystem:
+      "Datadog's Ruby SDKs are widely deployed across the Rails world: dogstatsd-ruby has 135M+ downloads, and the APM tracer has 136M+ across its ddtrace and datadog gem names. Datadog is also a Ruby Central infrastructure donor, providing the observability behind RubyGems.org, which runs the Datadog agent for real-time monitoring and vulnerability alerting. Its Ruby team works in the open on VM internals: Ivo Anjo keynoted RubyKaigi 2025 on low-level Ruby observability APIs and has landed profiler fixes in CRuby, and Benoit Daloze, the TruffleRuby lead and a Ruby core committer, works on the profiler there.",
+    rubySource: {
+      url: "https://rubycentral.org/news/ruby-centrals-infrastructure-improvements-for-rubygems-org/",
+      label: "Ruby Central on Datadog monitoring for RubyGems.org",
+    },
+    openSource: [
+      { name: "dd-trace-rb", url: "https://github.com/DataDog/dd-trace-rb", desc: "Ruby APM tracer and continuous profiler (the datadog gem, 136M+ downloads)" },
+      { name: "dogstatsd-ruby", url: "https://github.com/DataDog/dogstatsd-ruby", desc: "Ruby client for DogStatsD metrics (135M+ downloads)" },
+      { name: "datadog-ci-rb", url: "https://github.com/DataDog/datadog-ci-rb", desc: "Test visibility for Ruby test suites (34M+ downloads)" },
+      { name: "gvl-tracing", url: "https://github.com/ivoanjo/gvl-tracing", desc: "Trace Global VM Lock contention in a Ruby app (by Datadog's Ivo Anjo)" },
+    ],
+  },
   evilmartians: {
     id: "evilmartians",
     name: "Evil Martians",
