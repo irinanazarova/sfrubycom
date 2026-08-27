@@ -442,15 +442,15 @@ export const hosts = {
     summary:
       "Observability and security for cloud applications: metrics, traces, logs, and profiles in one platform.",
     rubyConnection:
-      "136M+ downloads of the Ruby tracer. Donates the observability that keeps RubyGems.org running",
+      "136M+ downloads of the Ruby tracer. Donates the observability behind RubyGems.org",
     tag: "Ruby SDK",
     founded: "2010",
     founders: "Olivier Pomel, Alexis Lê-Quôc",
-    leadership: "Olivier Pomel, co-founder & CEO",
+    leadership: "Olivier Pomel, co-founder & CEO. Alexis Lê-Quôc, co-founder & CTO",
     product:
-      "A monitoring platform that pulls metrics, distributed traces, logs, profiles, and security signals from every layer of a stack into one place. Roughly 32,700 customers as of the end of 2025, on $3.43B of revenue that year. Datadog is public on Nasdaq as DDOG and keeps an engineering office in San Francisco.",
+      "A monitoring platform that pulls metrics, distributed traces, logs, profiles, and security signals from every layer of a stack into one place. Roughly 32,700 customers as of the end of 2025, on $3.43B of revenue that year. Datadog is public on Nasdaq as DDOG and keeps an office in San Francisco.",
     history:
-      "Olivier Pomel and Alexis Lê-Quôc met at Wireless Generation, where Pomel worked on the product and Lê-Quôc kept the servers alive. They founded Datadog in New York in 2010 to give both sides one shared view of a running system. The name is a joke at their own expense: their old employer named production servers after dogs, and \"datadog 17\" was the Oracle database that doubled in size every year. Datadog IPO'd on Nasdaq in September 2019.",
+      "Olivier Pomel and Alexis Lê-Quôc met at Wireless Generation, where Pomel ran engineering as VP of Technology and Lê-Quôc ran the infrastructure as Director of Operations. They founded Datadog in New York in 2010 to give both sides one shared view of a running system. The name is a joke at their own expense: their old employer named production servers after dogs, and \"datadog 17\" was the Oracle database that doubled in size every year. Datadog IPO'd on Nasdaq in September 2019.",
     rubyEcosystem:
       "Datadog's Ruby SDKs are widely deployed across the Rails world: dogstatsd-ruby has 135M+ downloads, and the APM tracer has 136M+ across its ddtrace and datadog gem names. Datadog is also a Ruby Central infrastructure donor, providing the observability behind RubyGems.org, which runs the Datadog agent for real-time monitoring and vulnerability alerting. Its Ruby team works in the open on VM internals: Ivo Anjo keynoted RubyKaigi 2025 on low-level Ruby observability APIs and has landed profiler fixes in CRuby, and Benoit Daloze, the TruffleRuby lead and a Ruby core committer, works on the profiler there.",
     rubySource: {

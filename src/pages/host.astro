@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import EmailModal from "../components/EmailModal.astro";
 import { getAllHosts } from "../data/hosts.js";
 
-const pastHosts = getAllHosts();
+const hostCompanies = getAllHosts();
 ---
 
 <BaseLayout
@@ -72,7 +72,7 @@ const pastHosts = getAllHosts();
                 </div>
                 <div>
                     <div class="px-font text-lg md:text-xl text-gold-400">15+</div>
-                    <div class="text-gray-600 text-sm mt-1">Past hosts</div>
+                    <div class="text-gray-600 text-sm mt-1">Host companies</div>
                 </div>
             </div>
         </div>
@@ -430,13 +430,13 @@ const pastHosts = getAllHosts();
         </div>
     </section>
 
-    <!-- Past hosts -->
+    <!-- Host companies -->
     <section class="py-16 bg-white">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="px-font text-base md:text-xl text-gray-900 mb-10">Companies that open their doors to us</h2>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                {pastHosts.map((host) => (
+                {hostCompanies.map((host) => (
                     <a
                         href={host.url}
                         target="_blank"
