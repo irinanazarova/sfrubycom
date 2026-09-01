@@ -12,6 +12,7 @@ import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import { LUMA_URL, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
+import SponsorTiers from "../components/SponsorTiers.astro";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -471,36 +472,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                         </h2>
                         <p class="text-sm text-gray-500 mb-8">The first companies backing year two. Thank you!</p>
 
-                        <div class="space-y-10">
-                            {
-                                conference2026SponsorTiers.map((tier) => (
-                                    <div>
-                                        <h3 class={`px-font text-px10 ${tier.headingClass} text-center mb-5`}>
-                                            {tier.tier}
-                                        </h3>
-                                        <div class="flex flex-wrap justify-center items-center gap-5 md:gap-8">
-                                            {tier.sponsors.map((sponsor) => (
-                                                <a
-                                                    href={sponsor.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    class="px-card bg-white px-8 py-6 inline-flex items-center hover:-translate-y-0.5 transition-transform"
-                                                >
-                                                    <img
-                                                        src={sponsor.logo}
-                                                        alt={sponsor.name}
-                                                        class="h-8 md:h-9 w-auto"
-                                                        width={sponsor.logoWidth}
-                                                        height={sponsor.logoHeight}
-                                                        loading="lazy"
-                                                    />
-                                                </a>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
+                        <SponsorTiers />
 
                         <div class="mt-10">
                             <a

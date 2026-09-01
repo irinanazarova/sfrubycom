@@ -2,6 +2,10 @@
 // SF Ruby Conference 2026 — current sponsors
 // Rendered on the homepage (#sponsors-2026 section + hero ticker).
 // Tier order here is display order; headingClass colors the tier heading.
+// size drives how big the logo cards render (SponsorTiers.astro): "xl" for
+// Pickaxe when we sell one, "lg" for the Ruby-priced tiers (Ruby, Coffee,
+// Passport Booth), "md" for Emerald. The size hierarchy is the visual part of
+// what a sponsor pays for, so keep it in step with the prices on /sponsor-2026.
 // logoWidth/logoHeight are the file's intrinsic pixel dimensions (sips -g
 // pixelWidth -g pixelHeight public/<logo>). They must be present and correct:
 // the hero ticker animates translateX(-100%), which resolves against content
@@ -11,6 +15,7 @@
 export const conference2026SponsorTiers = [
   {
     tier: "Ruby Tier",
+    size: "lg",
     headingClass: "text-ruby-600",
     sponsors: [
       {
@@ -38,6 +43,7 @@ export const conference2026SponsorTiers = [
   },
   {
     tier: "Coffee Sponsor",
+    size: "lg",
     headingClass: "text-ruby-600",
     sponsors: [
       {
@@ -51,6 +57,7 @@ export const conference2026SponsorTiers = [
   },
   {
     tier: "Ruby Passport Booth",
+    size: "lg",
     headingClass: "text-ruby-600",
     sponsors: [
       {
@@ -64,6 +71,7 @@ export const conference2026SponsorTiers = [
   },
   {
     tier: "Emerald",
+    size: "md",
     headingClass: "text-grass-500",
     sponsors: [
       {
