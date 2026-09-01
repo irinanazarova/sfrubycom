@@ -74,6 +74,13 @@ export const conference2026SponsorTiers = [
         url: "https://www.beyondfinance.com/",
       },
       {
+        name: "Order.co",
+        logo: "/sponsor_orderco.png",
+        logoWidth: 816,
+        logoHeight: 172,
+        url: "https://www.order.co/",
+      },
+      {
         name: "SumIt",
         logo: "/sponsor_sumit.png",
         logoWidth: 582,
