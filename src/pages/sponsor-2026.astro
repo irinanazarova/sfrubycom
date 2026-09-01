@@ -10,8 +10,10 @@ import { conferenceSpeakers } from "../data/conference-2026.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
-// 2026 sponsorship tiers (hardcoded here on purpose — data/sponsors.js holds the
-// historical 2025 tiers that the /sponsors-2025 archive page still renders).
+// What a 2026 sponsorship costs. Hardcoded here because data/sponsors.js carries
+// the tiers as they were priced in 2025, for the /sponsors-2025 archive. Who has
+// actually signed does live in that file: SponsorTiers reads the 2026 roster from
+// it, and sponsors2025Count below counts the 2025 one.
 const sponsors2025Count = Object.keys(sponsors2025).length;
 
 const tiers2026 = [
