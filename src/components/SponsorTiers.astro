@@ -1,0 +1,78 @@
+---
+import { conference2026SponsorTiers } from "../data/sponsors.js";
+
+// Logo cards scale with the tier, so the row a sponsor lands in reads as the
+// thing they paid for. Sizes come from `size` on each tier in data/sponsors.js.
+// Class strings are spelled out in full so Tailwind's scanner sees them.
+// Padding is what decides where a tier stops wrapping, so it stays lean and the
+// logo height carries the hierarchy. At these sizes each tier holds one row from
+// 820px on the homepage and 900px on /sponsor-2026, and stacks below that.
+const SIZES = {
+    xl: {
+        card: "px-8 py-6 md:px-8 md:py-8",
+        logo: "h-9 md:h-14",
+        heading: "text-px10 md:text-xs",
+    },
+    lg: {
+        card: "px-6 py-4 md:py-5",
+        logo: "h-8 md:h-11",
+        heading: "text-px10",
+    },
+    md: {
+        // Two-up on phones. Letting these size to their logos leaves cards of
+        // 141-163px against a ~318px row, so they wrap one per screen; a
+        // half-width basis (minus half the 1rem gap) fits two whatever the
+        // next logo's aspect ratio turns out to be.
+        card: "basis-[calc(50%-0.5rem)] grow-0 justify-center sm:basis-auto px-4 py-3 sm:px-5 sm:py-4",
+        logo: "h-6 md:h-8",
+        heading: "text-px9 md:text-px10",
+    },
+};
+
+const unsized = conference2026SponsorTiers.filter((t) => !SIZES[t.size]);
+if (unsized.length) {
+    // Falling back to a default would render a new Pickaxe tier at Emerald size:
+    // the top of the paid hierarchy drawn as the bottom, with nothing to notice it.
+    throw new Error(
+        `SponsorTiers: set size (${Object.keys(SIZES).join("/")}) on ${unsized
+            .map((t) => t.tier)
+            .join(", ")} in data/sponsors.js`,
+    );
+}
+---
+
+<div class="space-y-10">
+    {
+        conference2026SponsorTiers.map((tier) => {
+            const size = SIZES[tier.size];
+            return (
+                <div>
+                    <h3
+                        class={`px-font ${size.heading} ${tier.headingClass} text-center mb-5`}
+                    >
+                        {tier.tier}
+                    </h3>
+                    <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+                        {tier.sponsors.map((sponsor) => (
+                            <a
+                                href={sponsor.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class={`px-card bg-white ${size.card} inline-flex items-center hover:-translate-y-0.5 transition-transform`}
+                            >
+                                <img
+                                    src={sponsor.logo}
+                                    alt={sponsor.name}
+                                    class={`${size.logo} w-auto max-w-full object-contain`}
+                                    width={sponsor.logoWidth}
+                                    height={sponsor.logoHeight}
+                                    loading="lazy"
+                                />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            );
+        })
+    }
+</div>

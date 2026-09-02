@@ -4,12 +4,18 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import HashScroll from "../components/HashScroll.astro";
 import EmailModal from "../components/EmailModal.astro";
+import SponsorTiers from "../components/SponsorTiers.astro";
+import { sponsors as sponsors2025 } from "../data/sponsors.js";
 import { conferenceSpeakers } from "../data/conference-2026.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
-// 2026 sponsorship tiers (hardcoded here on purpose — data/sponsors.js holds the
-// historical 2025 tiers that the /sponsors-2025 archive page still renders).
+// What a 2026 sponsorship costs. Hardcoded here because data/sponsors.js carries
+// the tiers as they were priced in 2025, for the /sponsors-2025 archive. Who has
+// actually signed does live in that file: SponsorTiers reads the 2026 roster from
+// it, and sponsors2025Count below counts the 2025 one.
+const sponsors2025Count = Object.keys(sponsors2025).length;
+
 const tiers2026 = [
     {
         name: "Pickaxe ⛏️",
@@ -388,106 +394,37 @@ const tiers2026 = [
                         </div>
                     </div>
 
-                    <!-- 2025 Sponsors -->
-                    <div
-                        class="px-card bg-white p-8 mb-12"
-                    >
+                </div>
+
+                <!-- The sponsor wall gets a wider column than the reading
+                     copy above it, so a tier's logos stay on one row. -->
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- 2026 Sponsors -->
+                    <!-- p-4 on phones: p-8 costs enough width that the Emerald
+                         row drops to one card per screen. -->
+                    <div class="px-card bg-white p-4 sm:p-8 mb-12">
                         <h2
-                            class="px-font text-sm md:text-base text-gray-900 mb-6 text-center"
+                            class="px-font text-sm md:text-base text-gray-900 mb-2 text-center"
                         >
-                            2025 Sponsors
+                            2026 Sponsors
                         </h2>
-                        <div
-                            class="flex flex-wrap justify-center items-center gap-8 opacity-75"
-                        >
-                            <!-- Pickaxe tier -->
-                            <img
-                                src="/sponsor_chime.png"
-                                alt="Chime"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_boltnew.png"
-                                alt="Bolt.new"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_cisco.png"
-                                alt="Cisco"
-                                class="h-8 object-contain"
-                            />
-                            <!-- Ruby tier -->
-                            <img
-                                src="/sponsor_gusto.png"
-                                alt="Gusto"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_temporal.png"
-                                alt="Temporal"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_intercom.png"
-                                alt="Intercom"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_omada.png"
-                                alt="Omada"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_avo.png"
-                                alt="Avo"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_thatch.png"
-                                alt="Thatch"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_finta.png"
-                                alt="Finta"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_angellist.png"
-                                alt="AngelList"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_planetscale.png"
-                                alt="PlanetScale"
-                                class="h-8 object-contain"
-                            />
-                            <!-- Reception -->
-                            <img
-                                src="/sponsor_gitbutler.png"
-                                alt="GitButler"
-                                class="h-8 object-contain"
-                            />
-                            <!-- Travel -->
-                            <img
-                                src="/sponsor_tidewave.png"
-                                alt="Tidewave AI"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_hackclub.png"
-                                alt="Hack Club"
-                                class="h-8 object-contain"
-                            />
-                            <img
-                                src="/sponsor_ezcater.png"
-                                alt="ezCater"
-                                class="h-8 object-contain"
-                            />
-                        </div>
-                        <p class="text-center text-gray-500 mt-6">and more</p>
+                        <p class="text-sm text-gray-500 mb-8 text-center">
+                            The companies backing year two so far.
+                        </p>
+                        <SponsorTiers />
+                        <p class="text-center text-sm text-gray-500 mt-8">
+                            Year one had {sponsors2025Count} sponsors, Chime,
+                            Bolt.new, Cisco, Gusto and Temporal among them: <a
+                                href="/sponsors-2025"
+                                class="text-ruby-600 underline underline-offset-2 hover:text-ruby-500"
+                                >see the 2025 sponsors</a
+                            >.
+                        </p>
                     </div>
 
+                </div>
+
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Contact -->
                     <div
                         class="px-card bg-ruby-50 p-8 text-center"
