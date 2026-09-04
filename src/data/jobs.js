@@ -71,19 +71,6 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/patch.io/8d3edb1a-3846-436c-a286-700a1e923e0f",
     postedDate: "2026-04-28",
   },
-  "fullstack-engineer-reset": {
-    id: "fullstack-engineer-reset",
-    title: "Full Stack Engineer",
-    startupId: "reset",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$150K - $180K + equity",
-    description:
-      "Reset is a public benefit corp building earned-wage access (EWA) for everyday Americans — fee-free access to pay you've already earned, before payday. Unlike consumer EWA apps that go direct-to-consumer, Reset embeds directly into the credit unions and community banks people already trust, pairing daily income access with automated cashflow budgeting inside the partner's banking app. Mission: better timing of income to fundamentally change how paycheck-to-paycheck households manage money. $7M+ raised; founders ex-Visa, Salesforce, Upstart; HQ Palo Alto. Work closely with the CTO on real-time card-transaction decisioning (sub-second authorization, dynamic spend limits based on income and cash flow) and integrations with banking + payments partners. Stack: Ruby on Rails + PostgreSQL backend, React frontend, Heroku. Strong full-stack and API design experience required; fintech background a bonus. AI as a force multiplier expected.",
-    chips: ["Fullstack", "Payments", "React", "Public benefit"],
-    url: "https://jobs.ashbyhq.com/Reset/b40547a5-3b95-4646-8786-147cf83b4181?utm_source=rb8JwX8KGV",
-    postedDate: "2026-04-28",
-  },
   "founding-engineer-finta": {
     id: "founding-engineer-finta",
     title: "Founding Engineer (Ruby)",
@@ -96,19 +83,6 @@ export const jobs = {
     chips: ["Fullstack", "Hotwire", "Founding role", "AI-native"],
     url: "https://www.ycombinator.com/companies/finta/jobs/vg5fXEw-founding-engineer-ruby",
     postedDate: "2026-04-27",
-  },
-  "senior-software-engineer-assurance-omada": {
-    id: "senior-software-engineer-assurance-omada",
-    title: "Senior Software Engineer, Assurance",
-    sponsorId: "omada",
-    location: "Remote (US Only)",
-    type: "Full-time",
-    salary: "$179K - $224K",
-    description:
-      "Omada Health is hiring a Senior Software Engineer for its Assurance / agentic systems team, powering AI Transformation across Engineering, Product, and Design. Sitting inside Architecture & Infrastructure, the team defines the patterns, tools, and infrastructure that let every engineer, PM, and designer use AI to build, test, and operate software safely, orchestrating agentic software development with quality built in by design. Work at the intersection of infrastructure and application development on Omada's Ruby/Rails stack (PostgreSQL, Kafka). $179.4-224.3K base in CA/NY/WA ($171.6-214.5K in CO) + bonus + equity. US-based.",
-    chips: ["AI/ML", "Platform", "Kafka", "AI-native"],
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7997294",
-    postedDate: "2026-06-18",
   },
   "senior-software-engineer-core-systems-omada": {
     id: "senior-software-engineer-core-systems-omada",
@@ -123,19 +97,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/omadahealth/jobs/8051562",
     postedDate: "2026-07-26",
   },
-  "senior-software-engineer-member-omada": {
-    id: "senior-software-engineer-member-omada",
-    title: "Senior Software Engineer (Member Engineering)",
-    sponsorId: "omada",
-    location: "Remote (US Only)",
-    type: "Full-time",
-    salary: "$179K - $224K",
-    description:
-      "Omada Health is hiring a Senior Software Engineer for the Member Engineering team to build the backends powering mobile applications for members and web applications for providers delivering digital healthcare. Spend 80-90% of time hands-on coding, mentor junior engineers, and propose AI solutions to complex problems. 7+ years experience with Ruby or Python, relational databases (PostgreSQL/MySQL), scalable APIs, and CI/CD pipelines. $172-224K base depending on state + bonus + equity. US-based.",
-    chips: ["Backend", "PostgreSQL", "Polyglot", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/7822840",
-    postedDate: "2026-05-10",
-  },
   "software-engineer-fullstack-thatch": {
     id: "software-engineer-fullstack-thatch",
     title: "Software Engineer: Full Stack",
@@ -147,19 +108,6 @@ export const jobs = {
       "Thatch is hiring a Full Stack Software Engineer to own product areas spanning frontend and backend systems for its health benefits platform. Build across React, TailwindCSS, and Ruby on Rails to ship features that directly impact employer benefits management, employee onboarding, and payment systems. Strong product judgment, systems thinking, and a track record of shipping production applications required. $161k-$230k.",
     chips: ["Fullstack", "Payments", "React"],
     url: "https://thatch.com/jobs/software-engineer-full-stack-5113761008",
-    postedDate: "2026-04-27",
-  },
-  "software-engineer-product-engagement-thatch": {
-    id: "software-engineer-product-engagement-thatch",
-    title: "Software Engineer: Full Stack, Product Engagement",
-    sponsorId: "thatch",
-    location: "Remote (US) / San Francisco",
-    type: "Full-time",
-    salary: "$170K - $200K",
-    description:
-      "Thatch is hiring a Full Stack Engineer on the Product Engagement team to enhance how members and employers experience the platform — onboarding, activation, and enrollment flows. Build user-facing features and backend systems while using data and instrumentation to drive engagement. Work across Ruby on Rails, React, and TailwindCSS, collaborating with product and design to ship impactful changes. $170k-$200k.",
-    chips: ["Product Eng", "Fullstack", "React"],
-    url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
     postedDate: "2026-04-27",
   },
   "senior-staff-software-engineer-money-group-gusto": {
@@ -265,31 +213,31 @@ export const jobs = {
     url: "https://www.angellist.com/careers/9adf9ccb-61c1-4a75-bf00-03f39fea8f09",
     postedDate: "2026-06-19",
   },
-  "senior-fullstack-app-journey-chime": {
-    id: "senior-fullstack-app-journey-chime",
-    title: "Senior Full-Stack Engineer, App Journey (GraphQL)",
-    sponsorId: "chime",
-    location: "New York, NY / San Francisco, CA",
-    type: "Full-time",
-    salary: "$187K - $259K + bonus, equity",
-    description:
-      "Chime is hiring a Senior Full-Stack Engineer on the App Journey team, owning the core app surfaces and navigation that members use every day. You'll build the React Native frontend plus backend services and GraphQL APIs in Ruby on Rails. Chime is the largest US consumer fintech built to help everyday Americans get ahead, with banking, credit-building, and payments products serving millions.",
-    chips: ["Fullstack", "React Native", "GraphQL"],
-    url: "https://careers.chime.com/jobs/8485955002/senior-full-stack-engineer-app-journey-graphql/",
-    postedDate: "2026-04-07",
-  },
-  "senior-fullstack-unsecured-cards-chime": {
-    id: "senior-fullstack-unsecured-cards-chime",
-    title: "Senior Full-Stack Software Engineer, Unsecured Cards",
+  "software-engineer-growth-chime": {
+    id: "software-engineer-growth-chime",
+    title: "Software Engineer, Growth",
     sponsorId: "chime",
     location: "San Francisco, CA",
     type: "Full-time",
-    salary: "$164K - $227K + bonus, equity",
+    salary: "$133K - $184K",
     description:
-      "Chime is hiring a Senior Full-Stack Engineer on the Cards team to build and scale new card products across the stack, shipping member-facing web and mobile experiences plus the Ruby on Rails backend services that power them at millions-of-member scale. You'll lead multi-engineer efforts, own features end to end, and partner closely with product, design, risk, credit, and compliance. Chime is the largest US consumer fintech, built to help everyday Americans get ahead.",
-    chips: ["Fullstack", "Payments", "High compliance"],
-    url: "https://careers.chime.com/jobs/8587249002/senior-full-stack-software-engineer-unsecured-cards/",
-    postedDate: "2026-08-02",
+      "Chime is hiring a full-stack Growth Engineer to build product experiences that move business metrics: React and TypeScript on the front end, Rails and Go services behind it. You work closely with product, design, and data science on features that drive member growth. Chime is a Pickaxe sponsor of the SF Ruby Conference.",
+    chips: ["Fullstack", "React", "TypeScript", "Go"],
+    url: "https://job-boards.greenhouse.io/chime/jobs/8782503002",
+    postedDate: "2026-09-04",
+  },
+  "software-engineer-membership-chime": {
+    id: "software-engineer-membership-chime",
+    title: "Software Engineer, Membership",
+    sponsorId: "chime",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$133K - $184K",
+    description:
+      "Chime is hiring a full-stack engineer for its Membership team, building and evolving the features that deepen member engagement and retention across Chime's membership products. The posting asks for proven experience with Ruby on Rails or a comparable framework, alongside TypeScript and React.",
+    chips: ["Fullstack", "React", "TypeScript"],
+    url: "https://job-boards.greenhouse.io/chime/jobs/8614188002",
+    postedDate: "2026-09-04",
   },
   "software-engineer-lending-chime": {
     id: "software-engineer-lending-chime",
@@ -304,44 +252,44 @@ export const jobs = {
     url: "https://careers.chime.com/jobs/8657011002/software-engineer-lending/",
     postedDate: "2026-08-02",
   },
-  "software-engineer-deposits-insights-chime": {
-    id: "software-engineer-deposits-insights-chime",
-    title: "Software Engineer, Deposits & Insights",
+  "software-engineer-support-foundations-chime": {
+    id: "software-engineer-support-foundations-chime",
+    title: "Software Engineer, Support Foundations",
     sponsorId: "chime",
     location: "San Francisco, CA",
     type: "Full-time",
-    salary: "$133K - $184K + bonus, equity",
+    salary: "$133K - $184K",
     description:
-      "Chime is hiring a Software Engineer on the Deposits & Insights team for backend engineering on the products that help members manage and grow their money. Requires Ruby on Rails or comparable frameworks plus transactional databases and caching. Chime is the largest US consumer fintech, built to help everyday Americans get ahead.",
-    chips: ["Backend", "Payments"],
-    url: "https://careers.chime.com/jobs/8523547002/software-engineer-deposits-insights/",
-    postedDate: "2026-05-04",
+      "Chime's Support Foundations team builds the infrastructure behind every support interaction a member has: the automated phone system, the in-app chatbot, live chat with human agents, and the data and routing systems underneath. The posting asks for experience with Ruby on Rails or comparable frameworks and with transactional databases and caching.",
+    chips: ["Backend", "Platform"],
+    url: "https://job-boards.greenhouse.io/chime/jobs/8607195002",
+    postedDate: "2026-09-04",
   },
-  "staff-software-engineer-developer-productivity-gusto": {
-    id: "staff-software-engineer-developer-productivity-gusto",
-    title: "Staff Software Engineer, Developer Productivity Async",
+  "senior-staff-engineer-tax-platform-gusto": {
+    id: "senior-staff-engineer-tax-platform-gusto",
+    title: "Senior Staff Engineer, Tax Platform Engineering",
     sponsorId: "gusto",
-    location: "San Francisco, CA",
+    location: "San Francisco, CA (also Denver, New York, Chicago)",
     type: "Full-time",
-    salary: "$189K - $220K",
+    salary: "$223K - $278K",
     description:
-      "Gusto is hiring a Staff Software Engineer on Developer Productivity to build the tooling that keeps large engineering teams fast and effective. The role requires deep experience with Ruby and Rails. Gusto runs one of the largest Ruby on Rails and TypeScript/React applications in the world, powering payroll, benefits, and HR for over 400,000 businesses.",
-    chips: ["Platform", "DevOps", "Backend"],
-    url: "https://job-boards.greenhouse.io/gusto/jobs/7947658",
-    postedDate: "2026-06-19",
+      "Gusto is hiring a Senior Staff Engineer on Tax Platform Engineering to build the core platform behind tax compliance for millions of people, guiding projects end to end from feature spec to rollout. The posting describes the work as helping scale one of the largest Ruby/Rails and TypeScript/React applications in the world. Gusto powers payroll, benefits, and HR for more than 500,000 small businesses.",
+    chips: ["Platform", "Backend", "TypeScript"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8013480",
+    postedDate: "2026-09-04",
   },
-  "staff-software-engineer-growth-gusto": {
-    id: "staff-software-engineer-growth-gusto",
-    title: "Staff Software Engineer, Growth (Revenue Enablement)",
+  "staff-software-engineer-ai-voice-gusto": {
+    id: "staff-software-engineer-ai-voice-gusto",
+    title: "Staff Software Engineer, AI Voice and Content",
     sponsorId: "gusto",
     location: "San Francisco, CA",
     type: "Full-time",
     salary: "$163K - $247K",
     description:
-      "Gusto is hiring a Staff Software Engineer on the Growth team to build revenue-enablement systems in a collaborative, test-driven environment on Ruby on Rails. Gusto runs one of the largest Ruby on Rails and JavaScript/React applications in the world, powering payroll, benefits, and HR for over 400,000 businesses.",
-    chips: ["Backend", "Fullstack"],
+      "Gusto is hiring a Staff Software Engineer on AI Voice and Content, working in a collaborative, test-driven environment where experience with Ruby on Rails is listed among the things they look for. Gusto runs one of the largest Ruby on Rails and TypeScript/React applications in the world, powering payroll, benefits, and HR for more than 500,000 small businesses.",
+    chips: ["AI/ML", "Backend"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7673999",
-    postedDate: "2026-06-19",
+    postedDate: "2026-09-04",
   },
   "software-engineer-infrastructure-thatch": {
     id: "software-engineer-infrastructure-thatch",
@@ -526,7 +474,7 @@ export const jobs = {
     description:
       "GitHub.com runs on a Ruby on Rails monolith. The Client Apps Platform team connects the gh CLI, Desktop, and Mobile apps to backend teams; you'll maintain and operate production Ruby and Go services and integrate with GitHub's Ruby on Rails monolith. SF-headquartered, remote across the US.",
     chips: ["Backend", "Platform", "Go", "Polyglot"],
-    url: "https://www.github.careers/careers-home/jobs/5306?lang=en-us",
+    url: "https://www.github.careers/careers-home/jobs/5756?lang=en-us",
     postedDate: "2026-06-19",
   },
   "full-stack-engineer-generalmedicine": {
@@ -571,21 +519,6 @@ export const jobs = {
       "Pie Systems (PieVAT) is a fintech digitizing VAT and tax-free-shopping refunds for travelers and merchants. You'll contribute to the Ruby on Rails application and support deployments and releases, alongside a modern JavaScript frontend. US HQ in San Francisco (also Copenhagen and Tokyo). (Series A, $15.5M, Nov 2025.)",
     chips: ["Fullstack", "Payments"],
     url: "https://wellfound.com/jobs/3076798-sr-fullstack-engineer-ror",
-    postedDate: "2026-06-19",
-  },
-  "full-stack-engineer-upmetrics": {
-    id: "full-stack-engineer-upmetrics",
-    title: "Full Stack Software Engineer",
-    companyId: "upmetrics",
-    companyName: "UpMetrics",
-    companyLogo: "/company_upmetrics.png",
-    location: "Remote (US) / San Francisco, CA",
-    type: "Full-time",
-    salary: "$145K - $170K",
-    description:
-      "UpMetrics is an impact-reporting and analytics platform for nonprofits, foundations, and impact investors. You'll build and evolve the Ruby on Rails API (background jobs, data models) plus rich Vue.js + TypeScript front-end experiences on MySQL; 6+ years wanted. HQ at 300 Brannan St, San Francisco (SOMA).",
-    chips: ["Fullstack", "Vue", "MySQL"],
-    url: "https://jobs.lever.co/UpMetrics/62b78791-e881-44c7-bf21-c82bce483081",
     postedDate: "2026-06-19",
   },
   "rails-engineer-decile": {
@@ -676,21 +609,6 @@ export const jobs = {
     url: "https://betterstack.com/careers",
     postedDate: "2026-06-20",
   },
-  "software-engineer-relevant-healthcare": {
-    id: "software-engineer-relevant-healthcare",
-    title: "Software Engineer",
-    companyId: "relevanthealthcare",
-    companyName: "Relevant Healthcare",
-    companyLogo: "/company_relevanthealthcare.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$115K - $165K",
-    description:
-      "Relevant Healthcare is a bootstrapped, profitable ~25-person team building an analytics and population-health platform for community health centers. This role works across a Ruby on Rails backend with a TypeScript/React frontend (Apollo/GraphQL, d3, Go, GCP). Fully remote, US/Canada.",
-    chips: ["Fullstack", "GraphQL", "Profitable"],
-    url: "https://relevant.healthcare/jobs/software-engineer/",
-    postedDate: "2026-06-20",
-  },
   "lead-engineer-relevant-healthcare": {
     id: "lead-engineer-relevant-healthcare",
     title: "Lead Engineer",
@@ -736,50 +654,6 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/salma-health/91df7bfc-b8a0-4ac6-a5f4-e1fc3e896c9d",
     postedDate: "2026-07-01",
   },
-  "senior-fullstack-engineer-opendate": {
-    id: "senior-fullstack-engineer-opendate",
-    title: "Senior Full-Stack Software Engineer",
-    companyId: "opendate",
-    companyName: "Opendate",
-    companyLogo: "/company_opendate.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    description:
-      "Opendate is the operating system for live events: booking, ticketing, and settlement for 200+ independent venues, doubled in the past year. $14M Series A led by High Alpha (January 2026). You'll work in a monolithic Ruby on Rails codebase with PostgreSQL, Redis, BigQuery, and React; the team says every engineer has AI teammates in their daily workflow. Remote US, with Indianapolis and Chicago offices to drop into.",
-    chips: ["Fullstack", "React", "PostgreSQL", "AI-native"],
-    url: "https://www.opendate.io/careers/senior-full-stack-software-engineer",
-    postedDate: "2026-07-01",
-  },
-  "senior-fullstack-engineer-jukebox": {
-    id: "senior-fullstack-engineer-jukebox",
-    title: "Senior Fullstack Engineer",
-    companyId: "jukeboxhealth",
-    companyName: "Jukebox Health",
-    companyLogo: "/company_jukeboxhealth.svg",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$180K - $210K + equity",
-    description:
-      "Jukebox Health makes homes safer for older adults, delivering home-safety modifications through Medicare/Medicaid plans; $30.5M raised (Series A: Valtruis, Home Depot Ventures, Equitage). This senior role builds the platform end to end on a Ruby on Rails backend with a React + TypeScript frontend. NYC HQ, remote across the US.",
-    chips: ["Fullstack", "React", "TypeScript"],
-    url: "https://job-boards.greenhouse.io/jukeboxhealth/jobs/4284648009",
-    postedDate: "2026-07-01",
-  },
-  "senior-fullstack-engineer-checkmate": {
-    id: "senior-fullstack-engineer-checkmate",
-    title: "Senior Full Stack Engineer",
-    companyId: "checkmate",
-    companyName: "Checkmate",
-    companyLogo: "/company_checkmate.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$180K",
-    description:
-      "Checkmate powers restaurant ordering: POS integrations, voice AI, and kiosks for enterprise restaurant brands. $21.5M raised, Series B led by Tiger Global. The stack is Ruby on Rails and React with Sidekiq, REST/GraphQL APIs, and PostgreSQL/MySQL, in what the team calls an AI-led SDLC where engineers are expected to leverage AI coding agents daily. 100% remote, US.",
-    chips: ["Fullstack", "React", "Sidekiq", "AI-native"],
-    url: "https://jobs.rubyonrails.org/jobs/34523-senior-full-stack-engineer-ruby-on-rails-reactjs-checkmate",
-    postedDate: "2026-07-01",
-  },
   "junior-fullstack-engineer-serpapi": {
     id: "junior-fullstack-engineer-serpapi",
     title: "Junior Fullstack Engineer",
@@ -810,20 +684,20 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/fathom.video/50323c12-96b2-4e6a-b8ea-98f21ea6e960",
     postedDate: "2026-07-14",
   },
-  "senior-security-engineer-pairteam": {
-    id: "senior-security-engineer-pairteam",
-    title: "Senior Security Engineer",
+  "senior-platform-engineer-pairteam": {
+    id: "senior-platform-engineer-pairteam",
+    title: "Sr. Platform Engineer (Infra Pod)",
     companyId: "pairteam",
     companyName: "Pair Team",
     companyLogo: "/company_pairteam.png",
     location: "Remote (US)",
     type: "Full-time",
-    salary: "$170K - $190K",
+    salary: "$180K - $220K",
     description:
-      "Pair Team is building whole-person care for the 115 million Americans on Medicaid, Medicare, and public assistance — a public benefit corporation and AI-enabled medical group, and the largest complex-care provider in California. This Senior Security Engineer secures a regulated HIPAA / SOC 2 / HITRUST / PCI environment and is hands-on in the codebase, shipping production Ruby (and/or TypeScript). Remote, US. Series B.",
-    chips: ["Security", "High compliance", "Public benefit"],
-    url: "https://job-boards.greenhouse.io/pairteam/jobs/8580695002",
-    postedDate: "2026-07-14",
+      "Pair Team is hiring a senior platform engineer for its infrastructure pod: deep AWS and Terraform expertise, while being comfortable working in the company's Ruby on Rails codebase. Pair Team is a public benefit corporation and AI-enabled medical group connecting Medicaid and Medicare patients to care alongside housing, food, and transportation support.",
+    chips: ["Platform", "Infra", "Terraform", "Public benefit"],
+    url: "https://job-boards.greenhouse.io/pairteam/jobs/8642973002",
+    postedDate: "2026-09-04",
   },
 
   /* ─────────────────────────────────────────────────────────────────
@@ -1190,6 +1064,152 @@ export const jobs = {
    *   postedDate: "2026-07-07",
    * },
    */
+
+  /* ---- September 4, 2026 audit ---- */
+  // fullstack-engineer-reset: Reset - Ashby board is empty (company is posting no roles at all)
+  //   "fullstack-engineer-reset": {
+  //     id: "fullstack-engineer-reset",
+  //     title: "Full Stack Engineer",
+  //     startupId: "reset",
+  //     location: "Remote (US)",
+  //     type: "Full-time",
+  //     salary: "$150K - $180K + equity",
+  //     description:
+  //       "Reset is a public benefit corp building earned-wage access (EWA) for everyday Americans — fee-free access to pay you've already earned, before payday. Unlike consumer EWA apps that go direct-to-consumer, Reset embeds directly into the credit unions and community banks people already trust, pairing daily income access with automated cashflow budgeting inside the partner's banking app. Mission: better timing of income to fundamentally change how paycheck-to-paycheck households manage money. $7M+ raised; founders ex-Visa, Salesforce, Upstart; HQ Palo Alto. Work closely with the CTO on real-time card-transaction decisioning (sub-second authorization, dynamic spend limits based on income and cash flow) and integrations with banking + payments partners. Stack: Ruby on Rails + PostgreSQL backend, React frontend, Heroku. Strong full-stack and API design experience required; fintech background a bonus. AI as a force multiplier expected.",
+  //     chips: ["Fullstack", "Payments", "React", "Public benefit"],
+  //     url: "https://jobs.ashbyhq.com/Reset/b40547a5-3b95-4646-8786-147cf83b4181?utm_source=rb8JwX8KGV",
+  //     postedDate: "2026-04-28",
+  //   },
+
+  // senior-software-engineer-assurance-omada: Omada - req closed; the only remaining platform role is Python-only Data & AI
+  //   "senior-software-engineer-assurance-omada": {
+  //     id: "senior-software-engineer-assurance-omada",
+  //     title: "Senior Software Engineer, Assurance",
+  //     sponsorId: "omada",
+  //     location: "Remote (US Only)",
+  //     type: "Full-time",
+  //     salary: "$179K - $224K",
+  //     description:
+  //       "Omada Health is hiring a Senior Software Engineer for its Assurance / agentic systems team, powering AI Transformation across Engineering, Product, and Design. Sitting inside Architecture & Infrastructure, the team defines the patterns, tools, and infrastructure that let every engineer, PM, and designer use AI to build, test, and operate software safely, orchestrating agentic software development with quality built in by design. Work at the intersection of infrastructure and application development on Omada's Ruby/Rails stack (PostgreSQL, Kafka). $179.4-224.3K base in CA/NY/WA ($171.6-214.5K in CO) + bonus + equity. US-based.",
+  //     chips: ["AI/ML", "Platform", "Kafka", "AI-native"],
+  //     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7997294",
+  //     postedDate: "2026-06-18",
+  //   },
+
+  // senior-software-engineer-member-omada: Omada - req closed; see above
+  //   "senior-software-engineer-member-omada": {
+  //     id: "senior-software-engineer-member-omada",
+  //     title: "Senior Software Engineer (Member Engineering)",
+  //     sponsorId: "omada",
+  //     location: "Remote (US Only)",
+  //     type: "Full-time",
+  //     salary: "$179K - $224K",
+  //     description:
+  //       "Omada Health is hiring a Senior Software Engineer for the Member Engineering team to build the backends powering mobile applications for members and web applications for providers delivering digital healthcare. Spend 80-90% of time hands-on coding, mentor junior engineers, and propose AI solutions to complex problems. 7+ years experience with Ruby or Python, relational databases (PostgreSQL/MySQL), scalable APIs, and CI/CD pipelines. $172-224K base depending on state + bonus + equity. US-based.",
+  //     chips: ["Backend", "PostgreSQL", "Polyglot", "Mentorship"],
+  //     url: "https://job-boards.greenhouse.io/omadahealth/jobs/7822840",
+  //     postedDate: "2026-05-10",
+  //   },
+
+  // full-stack-engineer-upmetrics: UpMetrics - Lever board is down to a single Senior Client Manager role
+  //   "full-stack-engineer-upmetrics": {
+  //     id: "full-stack-engineer-upmetrics",
+  //     title: "Full Stack Software Engineer",
+  //     companyId: "upmetrics",
+  //     companyName: "UpMetrics",
+  //     companyLogo: "/company_upmetrics.png",
+  //     location: "Remote (US) / San Francisco, CA",
+  //     type: "Full-time",
+  //     salary: "$145K - $170K",
+  //     description:
+  //       "UpMetrics is an impact-reporting and analytics platform for nonprofits, foundations, and impact investors. You'll build and evolve the Ruby on Rails API (background jobs, data models) plus rich Vue.js + TypeScript front-end experiences on MySQL; 6+ years wanted. HQ at 300 Brannan St, San Francisco (SOMA).",
+  //     chips: ["Fullstack", "Vue", "MySQL"],
+  //     url: "https://jobs.lever.co/UpMetrics/62b78791-e881-44c7-bf21-c82bce483081",
+  //     postedDate: "2026-06-19",
+  //   },
+
+  // senior-fullstack-engineer-jukebox: Jukebox Health - req closed; all 43 open roles are clinical or construction
+  //   "senior-fullstack-engineer-jukebox": {
+  //     id: "senior-fullstack-engineer-jukebox",
+  //     title: "Senior Fullstack Engineer",
+  //     companyId: "jukeboxhealth",
+  //     companyName: "Jukebox Health",
+  //     companyLogo: "/company_jukeboxhealth.svg",
+  //     location: "Remote (US)",
+  //     type: "Full-time",
+  //     salary: "$180K - $210K + equity",
+  //     description:
+  //       "Jukebox Health makes homes safer for older adults, delivering home-safety modifications through Medicare/Medicaid plans; $30.5M raised (Series A: Valtruis, Home Depot Ventures, Equitage). This senior role builds the platform end to end on a Ruby on Rails backend with a React + TypeScript frontend. NYC HQ, remote across the US.",
+  //     chips: ["Fullstack", "React", "TypeScript"],
+  //     url: "https://job-boards.greenhouse.io/jukeboxhealth/jobs/4284648009",
+  //     postedDate: "2026-07-01",
+  //   },
+
+  // software-engineer-product-engagement-thatch: Thatch - posting returns a genuine Job Not Found page
+  //   "software-engineer-product-engagement-thatch": {
+  //     id: "software-engineer-product-engagement-thatch",
+  //     title: "Software Engineer: Full Stack, Product Engagement",
+  //     sponsorId: "thatch",
+  //     location: "Remote (US) / San Francisco",
+  //     type: "Full-time",
+  //     salary: "$170K - $200K",
+  //     description:
+  //       "Thatch is hiring a Full Stack Engineer on the Product Engagement team to enhance how members and employers experience the platform — onboarding, activation, and enrollment flows. Build user-facing features and backend systems while using data and instrumentation to drive engagement. Work across Ruby on Rails, React, and TailwindCSS, collaborating with product and design to ship impactful changes. $170k-$200k.",
+  //     chips: ["Product Eng", "Fullstack", "React"],
+  //     url: "https://thatch.com/jobs/software-engineer-full-stack-product-engagement-5171664008",
+  //     postedDate: "2026-04-27",
+  //   },
+
+  // software-engineer-relevant-healthcare: Relevant Healthcare - 404; their Lead Engineer role stays on the board
+  //   "software-engineer-relevant-healthcare": {
+  //     id: "software-engineer-relevant-healthcare",
+  //     title: "Software Engineer",
+  //     companyId: "relevanthealthcare",
+  //     companyName: "Relevant Healthcare",
+  //     companyLogo: "/company_relevanthealthcare.png",
+  //     location: "Remote (US)",
+  //     type: "Full-time",
+  //     salary: "$115K - $165K",
+  //     description:
+  //       "Relevant Healthcare is a bootstrapped, profitable ~25-person team building an analytics and population-health platform for community health centers. This role works across a Ruby on Rails backend with a TypeScript/React frontend (Apollo/GraphQL, d3, Go, GCP). Fully remote, US/Canada.",
+  //     chips: ["Fullstack", "GraphQL", "Profitable"],
+  //     url: "https://relevant.healthcare/jobs/software-engineer/",
+  //     postedDate: "2026-06-20",
+  //   },
+
+  // senior-fullstack-engineer-opendate: Opendate - role gone; only open eng role is a Chicago data-migration specialist
+  //   "senior-fullstack-engineer-opendate": {
+  //     id: "senior-fullstack-engineer-opendate",
+  //     title: "Senior Full-Stack Software Engineer",
+  //     companyId: "opendate",
+  //     companyName: "Opendate",
+  //     companyLogo: "/company_opendate.png",
+  //     location: "Remote (US)",
+  //     type: "Full-time",
+  //     description:
+  //       "Opendate is the operating system for live events: booking, ticketing, and settlement for 200+ independent venues, doubled in the past year. $14M Series A led by High Alpha (January 2026). You'll work in a monolithic Ruby on Rails codebase with PostgreSQL, Redis, BigQuery, and React; the team says every engineer has AI teammates in their daily workflow. Remote US, with Indianapolis and Chicago offices to drop into.",
+  //     chips: ["Fullstack", "React", "PostgreSQL", "AI-native"],
+  //     url: "https://www.opendate.io/careers/senior-full-stack-software-engineer",
+  //     postedDate: "2026-07-01",
+  //   },
+
+  // senior-fullstack-engineer-checkmate: Checkmate - rubyonrails.org post expired (410), itsacheckmate.com lists no openings
+  //   "senior-fullstack-engineer-checkmate": {
+  //     id: "senior-fullstack-engineer-checkmate",
+  //     title: "Senior Full Stack Engineer",
+  //     companyId: "checkmate",
+  //     companyName: "Checkmate",
+  //     companyLogo: "/company_checkmate.png",
+  //     location: "Remote (US)",
+  //     type: "Full-time",
+  //     salary: "$180K",
+  //     description:
+  //       "Checkmate powers restaurant ordering: POS integrations, voice AI, and kiosks for enterprise restaurant brands. $21.5M raised, Series B led by Tiger Global. The stack is Ruby on Rails and React with Sidekiq, REST/GraphQL APIs, and PostgreSQL/MySQL, in what the team calls an AI-led SDLC where engineers are expected to leverage AI coding agents daily. 100% remote, US.",
+  //     chips: ["Fullstack", "React", "Sidekiq", "AI-native"],
+  //     url: "https://jobs.rubyonrails.org/jobs/34523-senior-full-stack-engineer-ruby-on-rails-reactjs-checkmate",
+  //     postedDate: "2026-07-01",
+  //   },
+
 };
 
 // Helper functions
