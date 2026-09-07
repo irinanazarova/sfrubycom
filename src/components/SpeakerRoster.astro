@@ -62,6 +62,31 @@ const speakers = limit
           ...ordered.filter((s) => s.pin === "last"),
       ]
     : ordered;
+// The companies line under the heading, derived from the roster's org lists so
+// it can never name a company whose speaker has dropped out. Projects and
+// tools are left out (the line is about where people build with Ruby, and
+// "building with Ruby at RubyLLM" reads wrong), as are orgs that do not
+// publicly run Ruby, where the speaker's presence says nothing about the
+// stack. Order: the names a reader recognises first, then roster order.
+const NOT_COMPANIES = new Set(["RubyLLM", "Herb", "Hatchbox"]);
+const NOT_RUBY_SHOPS = new Set(["Anthropic", "Y Combinator"]);
+const PRIORITY = ["Fin (ex Intercom)", "37signals", "Shopify", "Gusto", "Persona", "Typesense", "Order.co"];
+const companyNames = [];
+for (const s of conferenceSpeakers) {
+    for (const o of s.orgs || []) {
+        if (NOT_COMPANIES.has(o.name) || NOT_RUBY_SHOPS.has(o.name)) continue;
+        if (!companyNames.includes(o.name)) companyNames.push(o.name);
+    }
+}
+companyNames.sort((a, b) => {
+    const ia = PRIORITY.indexOf(a), ib = PRIORITY.indexOf(b);
+    return (ia < 0 ? PRIORITY.length : ia) - (ib < 0 ? PRIORITY.length : ib);
+});
+const companiesLine = companyNames
+    .map((n) => n.replace(" (ex Intercom)", ""))
+    .reduce((acc, n, i, arr) =>
+        i === 0 ? n : i === arr.length - 1 ? `${acc}, and ${n}` : `${acc}, ${n}`, "");
+
 // Whoever the limit trimmed. Their sprites become the crowd on the CTA, so the
 // page shows how much lineup is left rather than just asserting it.
 const shown = new Set(speakers.map((s) => s.key));
@@ -89,6 +114,9 @@ const ctaText =
             >
                 {heading}
             </h2>
+            <p class="text-base md:text-lg text-white/90 leading-relaxed mt-5 max-w-2xl mx-auto px-shadow-ink">
+                Speakers share experience building with Ruby at {companiesLine}.
+            </p>
         </div>
 
         <ul
