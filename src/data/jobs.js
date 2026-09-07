@@ -3,6 +3,75 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "senior-software-engineer-rails-companycam": {
+    id: "senior-software-engineer-rails-companycam",
+    title: "Senior Software Engineer (Ruby on Rails)",
+    sponsorId: "companycam",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "CompanyCam is hiring a senior backend engineer for its Rails and React codebase, working with engineers, designers, and PMs on everything from company-wide initiatives to small fixes, and helping shape the backend discipline of a growing team. They want T-shaped engineers: deep in one area, comfortable dropping into frontend, mobile, or discovery. Stack is Ruby on Rails with Sidekiq, PostgreSQL, GraphQL, and React. The engineering team is remote-first across every US time zone. CompanyCam makes the photo documentation app contractors use in the field.",
+    chips: ["Backend", "React", "Sidekiq", "GraphQL"],
+    url: "https://jobs.ashbyhq.com/companycam/76838979-40c4-4d4c-81e6-976ed7b6ee78",
+    postedDate: "2026-09-06",
+  },
+  "senior-software-engineer-trust-checkr": {
+    id: "senior-software-engineer-trust-checkr",
+    title: "Senior Software Engineer, Trust",
+    companyId: "checkr",
+    companyName: "Checkr",
+    companyLogo: "/host_checkr.png",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$185K - $218K",
+    description:
+      "Checkr is hiring a senior full-stack engineer on its Trust team, the group that keeps the background-check platform honest at scale. The posting asks for advanced knowledge of Ruby (Rails) and JavaScript (React), 5+ years of full-stack experience, and comfort using AI tools day to day. Checkr has hosted the SF Ruby meetup.",
+    chips: ["Fullstack", "React", "Security"],
+    url: "https://job-boards.greenhouse.io/checkr/jobs/8163203",
+    postedDate: "2026-09-06",
+  },
+  "senior-software-engineer-online-data-stores-persona": {
+    id: "senior-software-engineer-online-data-stores-persona",
+    title: "Senior Software Engineer, Online Data Stores",
+    sponsorId: "persona",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$190K - $240K + equity",
+    description:
+      "Persona is hiring a senior engineer for Online Data Stores, the infrastructure team that builds and evolves the data storage behind the whole application stack, owning scalability, reliability, and performance of those core systems and setting storage best practices for other engineering teams. Rails alongside Go and Python. Persona builds the identity layer for the internet and sponsors the Ruby Passport Booth at SF Ruby 2026.",
+    chips: ["Infra", "Platform", "PostgreSQL", "Go"],
+    url: "https://jobs.ashbyhq.com/persona/4dcc5ffd-2f9c-4f15-8865-a0629fff6b70",
+    postedDate: "2026-09-06",
+  },
+  "software-engineer-early-career-koah": {
+    id: "software-engineer-early-career-koah",
+    title: "Software Engineer, Early Career",
+    startupId: "koah-labs",
+    location: "San Francisco, CA (In-person)",
+    type: "Full-time",
+    salary: "$120K - $160K + equity",
+    description:
+      "Koah Labs is hiring at the ground floor for an early-career engineer, one of the few genuinely junior Rails roles in the Bay Area right now. You help shape core systems in the ad network powering AI-native products, on a small team out of San Francisco with backgrounds at X, Apple, and Meta. Core application is Ruby on Rails, React, and TypeScript; data is PostgreSQL, ClickHouse, Redis, and Kafka; infra is Terraform and AWS.",
+    chips: ["Fullstack", "React", "TypeScript", "Mentorship"],
+    url: "https://jobs.ashbyhq.com/koahlabs/197c931d-3cda-44b3-b26b-470976730808",
+    postedDate: "2026-09-06",
+  },
+  "senior-software-engineer-edfinity": {
+    id: "senior-software-engineer-edfinity",
+    title: "Senior Software Engineer",
+    companyId: "edfinity",
+    companyName: "Edfinity",
+    companyLogo: "/company_edfinity.svg",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$135K - $195K",
+    description:
+      "Edfinity is hiring a senior full-stack engineer across assessment authoring, LLM-powered features, performance work, and technical debt. Stack is Ruby on Rails with MongoDB, Elasticsearch, ClickHouse, Redis and Sidekiq, plus React. Bootstrapped and NSF-supported, a small remote team of senior engineers building courseware and assessment technology for higher-ed STEM. US work authorization required; they do not sponsor visas.",
+    chips: ["Fullstack", "AI/ML", "React", "Sidekiq"],
+    url: "https://jobs.rubyonrails.org/jobs/39438-senior-software-engineer-remote-edfinity",
+    postedDate: "2026-09-06",
+  },
   "founding-senior-fullstack-duler": {
     id: "founding-senior-fullstack-duler",
     title: "Founding Senior Full Stack Engineer",
@@ -747,6 +816,17 @@ export const jobs = {
    *   Tines — Senior SWE, Government Cloud (remote-US, US citizenship) [Series C]
    *     https://job-boards.greenhouse.io/tines/jobs/6017339004
    * ───────────────────────────────────────────────────────────────── */
+
+  /* ---- September 6, 2026 ----
+   * Huntress (huntress, Greenhouse) is running five Ruby/Rails roles, all
+   * US-remote and all naming Rails in the title: Principal SWE SIEM,
+   * Principal SWE SOC Experience, Senior SWE Business Platform, Staff SWE
+   * ESPM Platform, Staff SWE ISPM Platform, Staff SWE Showcase Platform.
+   * Held: $150M Series D in June 2024 at a $1.55B valuation clears both the
+   * Series C and the $1B thresholds, and Huntress is neither a sponsor nor a
+   * meetup host. Publish if that changes; the roles are senior, so path 2
+   * does not apply.
+   */
 
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
