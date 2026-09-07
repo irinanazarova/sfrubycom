@@ -4,7 +4,7 @@
 // longer stage slot, group registration on Luma and invoicing all exist; this
 // page puts them in one place instead of a paragraph under the price ladder.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { LUMA_URL, ticketTiers, regularTier } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, ticketTiers, regularTier } from "../data/conference-2026.js";
 import { getAllJobs, jobCompanyId } from "../data/jobs.js";
 
 const CONTACT_EMAIL = "conference@sfruby.com";
@@ -60,10 +60,10 @@ const included = [
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
-                    href={LUMA_URL}
+                    href={ticketLink("team")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                    class={`px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("team")}`}
                 >
                     <img
                         src="/px-ticket.png"

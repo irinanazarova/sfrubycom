@@ -1,7 +1,7 @@
 ---
 // The full price ladder with dates. Publishing every step is what removes
 // "I'll decide later" — the visitor can see exactly what waiting costs.
-import { ticketTiers, LUMA_URL } from "../data/conference-2026.js";
+import { ticketTiers, ticketLink, ticketEventClass } from "../data/conference-2026.js";
 ---
 
 <section id="tickets" class="py-20 md:py-24 bg-sky-50 border-t-4 border-ink">
@@ -55,10 +55,10 @@ import { ticketTiers, LUMA_URL } from "../data/conference-2026.js";
 
         <div class="mt-10 flex justify-center">
             <a
-                href={LUMA_URL}
+                href={ticketLink("ladder")}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                class={`px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("ladder")}`}
             >
                 <img
                     src="/px-ticket.png"

@@ -197,3 +197,23 @@ export const regularRemaining = () =>
   Math.max(0, regularTier.total - regularTier.sold);
 
 export const LUMA_URL = "https://luma.com/sfrubyconf2026";
+
+// Every link to the ticket page goes through these two helpers, so that a
+// click is measurable end to end: Plausible records a "Ticket click" event
+// with the placement as a property (the tagged-events extension reads the
+// class names, no script needed), and Luma stores the utm_source on the
+// registration, so a paid ticket can be traced back to the button that sold
+// it. Luma keeps only utm_source per guest, which is why the placement is
+// encoded there rather than in utm_campaign.
+//
+// Usage in a component:
+//   <a href={ticketLink("hero")} class={`px-btn ${ticketEventClass("hero")}`}>
+//
+// Placements are short kebab-case names for where the link sits (hero, header,
+// ladder, pier, speakers-top, team, manager-email...). Add new ones freely;
+// the Plausible goal is one event name with the placement as a breakdown.
+export const ticketLink = (placement) =>
+  `${LUMA_URL}?utm_source=sfruby-${placement}&utm_medium=site&utm_campaign=conf2026`;
+
+export const ticketEventClass = (placement) =>
+  `plausible-event-name=Ticket+click plausible-event-placement=${placement}`;

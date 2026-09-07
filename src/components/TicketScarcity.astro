@@ -6,7 +6,8 @@
 import {
     regularTier,
     regularRemaining,
-    LUMA_URL,
+    ticketLink,
+    ticketEventClass,
 } from "../data/conference-2026.js";
 
 interface Props {
@@ -56,10 +57,10 @@ const showCount = remaining <= regularTier.showCountBelow;
     {
         withCta && (
             <a
-                href={LUMA_URL}
+                href={ticketLink("scarcity")}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="px-btn px-btn--gold px-font text-px8 px-4 py-3 tap-press"
+                class={`px-btn px-btn--gold px-font text-px8 px-4 py-3 tap-press ${ticketEventClass("scarcity")}`}
             >
                 Get tickets
             </a>
