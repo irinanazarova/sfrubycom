@@ -1,5 +1,75 @@
 [
   {
+    "id": "agents-on-rails-fable-51-glm-53-flash",
+    "date": "2026-09-02",
+    "headline": "Claude Fable 5.1 ties for the top score on the Rails agent benchmark, at 40% less cost",
+    "summary": "The second Agents on Rails leaderboard puts Fable 5.1 at 58 of 63 runs (92%), matching Claude Opus 5's accuracy for a bill about 40% lower and a 5.4-minute median run. It also posted the highest Rails API recall recorded so far, 41%. GLM 5.3 Flash, previously running unnamed as ox-alpha, hit 83% at $3.31 total, roughly five cents a run.",
+    "link": "https://rubyonrails.org/2026/9/2/agents-on-rails-claude-fable-5-1-and-glm-5-3-flash",
+    "category": "Product",
+    "startupName": "Ruby on Rails",
+    "source": "Ruby on Rails"
+  },
+  {
+    "id": "on-rails-ascend-rate-limiting",
+    "date": "2026-09-01",
+    "headline": "Ascend on why its insurance payments platform is still a Rails monolith five years in",
+    "summary": "Eddie Galindo and Kagen Hearn take the On Rails podcast through rate limiting for enterprise customers: finding the real limits of their data ingestion pipeline, choosing feature flags over database configuration, and adding AI tooling to financial software. Ascend moves and reconciles money for insurance agencies, and is hiring Rails engineers on the SF Ruby job board.",
+    "link": "https://rubyonrails.org/2026/9/1/on-rails-kagen-hearn-and-eddie-galindo-ascend",
+    "category": "Community",
+    "startupName": "Ascend",
+    "source": "On Rails"
+  },
+  {
+    "id": "ruby-resolv-cves-2026",
+    "date": "2026-08-27",
+    "headline": "Two resolv CVEs land in every current Ruby: patch to 0.7.2",
+    "summary": "CVE-2026-80212 lets malicious DNS responses drive unbounded memory growth until the process dies. CVE-2026-80213 is a hostname validation bypass: an app checking hostnames against an allowlist can be steered into resolving a different domain, opening the door to SSRF. Affects resolv 0.3.1 and below plus 0.4.0 through 0.7.1, which covers the gem bundled with Ruby 3.3, 3.4 and 4.0. Fix is resolv 0.7.2, or 0.3.2 on the 3.3 series.",
+    "link": "https://www.ruby-lang.org/en/news/2026/08/27/multiple-vulnerabilities-in-resolv/",
+    "category": "Product",
+    "startupName": "Ruby",
+    "source": "ruby-lang.org"
+  },
+  {
+    "id": "rails-lemans-open-source",
+    "date": "2026-08-24",
+    "headline": "Rails open-sources lemans, the Ruby harness it uses to benchmark AI agents",
+    "summary": "Vladimir Dementyev, Svyatoslav Kryukov and Artur Petrov built lemans with support from the Rails Foundation, replacing the Python tooling the team had been using with a Rails-native one. It runs agents against standard Rails tasks, sandboxes them in Daytona or Docker, and verifies results with hidden test files and filesystem snapshots so an agent cannot grade its own work. Now at github.com/rails/lemans, with the tasks and results at rails/ai-evals.",
+    "link": "https://rubyonrails.org/2026/8/24/agents-on-rails-lemans",
+    "category": "Product",
+    "startupName": "Ruby on Rails",
+    "source": "Ruby on Rails"
+  },
+  {
+    "id": "on-rails-joanna-wang-sixfold",
+    "date": "2026-08-18",
+    "headline": "Sixfold's Joanna Wang: code got cheap, developers did not",
+    "summary": "Wang, a senior engineer at Sixfold, builds AI underwriting tools that collect data and assess risk for insurance companies on Rails. Her On Rails episode traces the migration off a brittle homegrown orchestration system, and argues that cheap code generation raises rather than lowers the value of the architectural judgment behind it.",
+    "link": "https://rubyonrails.org/2026/8/18/on-rails-joanna-wang-sixfold",
+    "category": "Community",
+    "startupName": "Sixfold",
+    "source": "On Rails"
+  },
+  {
+    "id": "agents-on-rails-first-benchmark",
+    "date": "2026-08-13",
+    "headline": "Rails benchmarks eight AI models and finds that knowing Rails, not raw reasoning, separates them",
+    "summary": "Svyatoslav Kryukov and Artur Petrov ran eight models against 21 atomic Rails tasks, three runs each, 504 runs total, drawn from real Writebook scenarios covering fixes, security, performance and features. No task named the Rails API it needed, so the test was whether a model reaches for the framework's own solution. Claude Opus 5 led on accuracy at 92%; GPT-5.6 Sol gave the best value at 84% for $0.52 and five minutes a task. Rails API recall ranged from 8% to 35%, and tracked the results more closely than general problem-solving did.",
+    "link": "https://rubyonrails.org/2026/8/13/agents-on-rails-the-first-benchmark-report",
+    "category": "Product",
+    "startupName": "Ruby on Rails",
+    "source": "Ruby on Rails"
+  },
+  {
+    "id": "rails-world-2026-matz-dhh",
+    "date": "2026-08-07",
+    "headline": "Matz joins DHH on stage at Rails World 2026 in Austin",
+    "summary": "Rails World returns September 23-24 at the Palmer Event Center, and Ruby's creator sits down with DHH on day two for a fireside chat on Ruby, Rails, AI, and where programming goes next. The agenda adds pair programming with Test Double, a lightning track, board game night and a closing party; sessions are recorded and published within two weeks, with the opening keynote livestreamed. AppSignal returns as a Platinum sponsor for a fourth year, joined by first-timer Procore, which hosts the Rails at Scale Summit.",
+    "link": "https://rubyonrails.org/2026/8/7/rails-world-2026-matz-agenda",
+    "category": "Community",
+    "startupName": "",
+    "source": "Ruby on Rails"
+  },
+  {
     "id": "lime-ipo-nasdaq",
     "date": "2026-07-01",
     "headline": "Lime goes public on Nasdaq, ending a decade as a private company",
