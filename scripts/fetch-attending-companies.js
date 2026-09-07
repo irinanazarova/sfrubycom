@@ -21,11 +21,10 @@ const OUT = fileURLToPath(
 const EVENT_ID = "evt-mKb0oC6cWGtqSIQ"; // San Francisco Ruby Startup Conference 2026
 const LUMA_API = "https://public-api.luma.com/public/v1";
 const CHARACTERS_API = "https://clouds.sfruby.com/api/characters?limit=500";
-// The list API returns the 50 newest characters and nothing older, so a card
-// made in July is invisible to it. Each character also lives at a URL slugged
-// from the name the person typed, and that is probed for every attendee the
-// list did not cover. Renamed cards and collision suffixes miss the probe, but
-// those are the recent ones the list still has.
+// The list API pages with next_cursor; older deploys capped it at the 50
+// newest with no cursor. Each character also lives at a URL slugged from the
+// name the person typed, and that is probed for every attendee the list did
+// not cover, which catches the older-deploy case and nothing else needs to.
 const CHARACTER_URL = (slug) => `https://clouds.sfruby.com/e/2026-bits/${slug}`;
 const MIN_ATTENDEES = 2;
 
@@ -105,6 +104,17 @@ async function probeCharacter(name) {
   }
 }
 
+async function fetchCharacters() {
+  const characters = [];
+  let cursor = null;
+  do {
+    const page = await getJson(CHARACTERS_API + (cursor ? `&cursor=${cursor}` : ""));
+    characters.push(...(page.characters ?? []));
+    cursor = page.next_cursor ?? null;
+  } while (cursor);
+  return characters;
+}
+
 async function fetchGuests(apiKey) {
   const guests = [];
   let cursor = null;
@@ -132,10 +142,7 @@ try {
   const apiKey = process.env.LUMA_API_KEY;
   if (!apiKey) throw new Error("LUMA_API_KEY not set");
 
-  const [guests, { characters = [] }] = await Promise.all([
-    fetchGuests(apiKey),
-    getJson(CHARACTERS_API),
-  ]);
+  const [guests, characters] = await Promise.all([fetchGuests(apiKey), fetchCharacters()]);
 
   const attendees = guests.filter(
     (g) =>
