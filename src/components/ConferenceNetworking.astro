@@ -20,13 +20,17 @@ const hiringCompanies = new Set(
 // The mechanics are the pitch here, so they are stated exactly: two groups, 70
 // to 100 people, 60 seconds each. Earlier copy said "small groups", which is
 // both vaguer and wrong at this size.
-// The four people running the networking rooms. Affiliations verified: Amanda
-// is Evil Martians, Cameron moved to Cisco Meraki (our own July 2026 meetup
-// writeup, more recent than the GitHub tenure the web still shows), Mike is
-// Staff Engineer at Triumph. Ken hosts unaffiliated, so he carries no org line
-// rather than a guessed one.
+// Who runs the networking rooms. Affiliations verified: Amanda and Svyatoslav
+// are Evil Martians (Svyatoslav maintains Inertia Rails), Cameron moved to
+// Cisco Meraki (our own July 2026 meetup writeup, more recent than the GitHub
+// tenure the web still shows), Mike is Staff Engineer at Triumph. Ken hosts
+// unaffiliated, so he carries no org line rather than a guessed one. Y
+// Combinator hosts the founders' round as an organization; the partner in the
+// room is confirmed closer to the date, so the card names the firm.
 const hosts = [
     { name: "Amanda Kinney", org: "Evil Martians" },
+    { name: "Svyatoslav Kryukov", org: "Inertia Rails, Evil Martians" },
+    { name: "Y Combinator", org: "" },
     { name: "Ken Decanio", org: "" },
     { name: "Cameron Dutro", org: "Cisco Meraki" },
     { name: "Mike Dalton", org: "Triumph" },
@@ -99,7 +103,7 @@ const formats = [
         >
             <p class="px-font text-px8 text-ruby-600">Your hosts</p>
             <ul
-                class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-5 list-none p-0"
+                class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-5 list-none p-0"
             >
                 {
                     hosts.map((h) => (
