@@ -3,7 +3,6 @@
 // does not, and none of it appeared anywhere on the site. Given it is also the
 // reason a company sends five people instead of one, it gets its own section
 // above the ticket ladder.
-import { LUMA_URL } from "../data/conference-2026.js";
 import { getAllJobs, jobCompanyId } from "../data/jobs.js";
 
 const openRoles = getAllJobs();
@@ -33,18 +32,21 @@ const hosts = [
     { name: "Mike Dalton", org: "Triumph" },
 ];
 
+// The founders' round is hosted with Y Combinator as an organization: a YC
+// partner will be in the room, and the person is confirmed closer to the date,
+// so the card names the firm rather than promising a name.
 const formats = [
     {
         title: "Everyone gets a mic",
-        body: "You are matched into at least two networking groups of 70 to 100 people. In each one you get 60 seconds on the mic to say who you are and what you are building.",
+        body: "You are matched into at least two groups of 70 to 100 people who work on the same kind of thing you do. In each one you get 60 seconds on the mic to say who you are and what you are building, so the people who need to find you can.",
     },
     {
         title: "Teams of 5+ get a longer slot",
-        body: "Bring five or more from your company and you get extended time, and slides, to introduce the team to the room.",
+        body: "Bring five or more from your company and you get extended time, and slides, to introduce the team to the room. Hiring managers find that useful.",
     },
     {
-        title: "Founders' round with Garry Tan",
-        body: "A dedicated group for founders and founding teams with the President and CEO of Y Combinator.",
+        title: "Founders' round with Y Combinator",
+        body: "A dedicated group for founders and founding teams, hosted together with Y Combinator.",
     },
 ];
 ---
@@ -62,8 +64,10 @@ const formats = [
                 More than a room of talks
             </h2>
             <p class="text-base md:text-lg text-white/90 leading-relaxed mt-5">
+                The other room is full of people shipping the same problem you
+                are: the same queue, the same monolith, the same hiring plan.
                 Startups and scaleups get two tracks, and the tracks weave: when
-                one is on stage, the other room is in an organized networking
+                one is on stage, the other is in an organized networking
                 session, then they swap. Who you meet is on the schedule, so it
                 never comes down to the coffee queue.
             </p>
@@ -153,9 +157,7 @@ const formats = [
 
         <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-                href={LUMA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/team"
                 class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
             >
                 <img
@@ -168,10 +170,10 @@ const formats = [
                 Bring your team
             </a>
             <a
-                href="/contact"
+                href="/manager"
                 class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
             >
-                Ask for an invoice
+                Convince your manager
             </a>
         </div>
     </div>

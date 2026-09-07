@@ -171,7 +171,7 @@ export const ticketTiers = [
   {
     name: "Company-sponsored",
     price: 650,
-    note: "Invoiced, expensable, no deadline",
+    note: "Invoiced, expensable, no deadline. Buying this tier is what keeps Regular at $450.",
     state: "live",
   },
 ];
@@ -180,7 +180,7 @@ export const ticketTiers = [
 // or wire `sold` to the Luma API in scripts/fetch-luma-events.js and read it from
 // src/content/. Deliberately a plain number so a non-engineer can bump it.
 export const regularTier = {
-  sold: 3,
+  sold: 20, // Luma, 2026-09-06
   total: 174,
   closesOn: "2026-09-30T23:59:00-07:00",
   // Set once the post-Regular tier is decided; until then the strip says prices
