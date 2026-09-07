@@ -23,6 +23,7 @@ export const conferenceSpeakers = [
     name: "Ryan Sherlock",
     bio: "Scales the Rails infrastructure and MySQL fleet behind Fin, the AI customer service agent.",
     orgs: [{ name: "Fin (ex Intercom)", url: "https://fin.ai/" }],
+    keynote: true,
     pixel: "/speaker_ryan_sherlock_pixel_256.png",
   },
   {
