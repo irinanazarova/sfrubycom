@@ -26,15 +26,24 @@ const API = "https://clouds.sfruby.com/api/characters?limit=50";
 const NAME_ALIASES = { "Vova Dementyev": "Vladimir Dementyev" };
 
 // People who prefer the sprite already in the repo. Their character stays on
-// clouds.sfruby.com; the site keeps the hand-cut art.
-const KEEP_EXISTING = ["Irina Nazarova"];
+// clouds.sfruby.com; the site keeps the hand-cut art. Empty since Sep 2026.
+const KEEP_EXISTING = [];
 
 const dryRun = process.argv.includes("--dry-run");
 const publicDir = fileURLToPath(new URL("../public/", import.meta.url));
 
-const res = await fetch(API, { signal: AbortSignal.timeout(20_000) });
-if (!res.ok) throw new Error(`characters API: HTTP ${res.status}`);
-const { characters } = await res.json();
+// The API pages with next_cursor; walk every page so an early card is found.
+const characters = [];
+let cursor = null;
+do {
+  const res = await fetch(API + (cursor ? `&cursor=${cursor}` : ""), {
+    signal: AbortSignal.timeout(20_000),
+  });
+  if (!res.ok) throw new Error(`characters API: HTTP ${res.status}`);
+  const page = await res.json();
+  characters.push(...(page.characters ?? []));
+  cursor = page.next_cursor ?? null;
+} while (cursor);
 
 const keepExisting = new Set(KEEP_EXISTING.map(speakerKey));
 // Only speakers already carrying a `pixel` path are rewritten: the path in
