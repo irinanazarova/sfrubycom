@@ -102,6 +102,13 @@ export const conference2026SponsorTiers = [
         logoHeight: 310,
         url: "https://trmnl.com/",
       },
+      {
+        name: "Chatwoot",
+        logo: "/sponsor_chatwoot.png",
+        logoWidth: 859,
+        logoHeight: 172,
+        url: "https://www.chatwoot.com/",
+      },
     ],
   },
 ];
