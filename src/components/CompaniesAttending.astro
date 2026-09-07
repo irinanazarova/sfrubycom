@@ -1,0 +1,107 @@
+---
+// Who is in the room: the companies with two or more ticket holders, with the
+// Cloud Card characters those people have already published on the Pier.
+// Data is the build-time snapshot from scripts/fetch-attending-companies.js
+// (src/content/attending-companies.json), refreshed on every `npm run build`.
+//
+// Characters are hotlinked from clouds.sfruby.com, the same images the game
+// serves on each person's card. A character someone has since deleted 404s,
+// and the img removes itself so the row never shows a broken image.
+import snapshot from "../content/attending-companies.json";
+
+const companies = snapshot.companies ?? [];
+const min = snapshot.minAttendees ?? 2;
+const totalPeople = companies.reduce((n, c) => n + c.count, 0);
+---
+
+{
+    companies.length > 0 && (
+        <section
+            id="companies"
+            class="py-20 md:py-24 bg-white border-t-4 border-ink"
+        >
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center">
+                    <span class="px-plate px-font text-px8 px-3 py-1.5">
+                        Who is in the room
+                    </span>
+                    <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
+                        Ruby companies attending
+                    </h2>
+                    <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
+                        {companies.length} companies have sent {min} or more
+                        people so far, {totalPeople} engineers and founders
+                        between them. The characters are theirs, made on the
+                        Pier.
+                    </p>
+                </div>
+
+                <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 list-none p-0">
+                    {companies.map((c) => (
+                        <li class="px-card bg-sky-50 p-5 flex flex-col gap-4">
+                            <div class="flex items-baseline justify-between gap-3">
+                                <h3 class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug min-w-0">
+                                    {c.name}
+                                </h3>
+                                <span class="px-plate px-plate--gold px-font text-px8 px-2.5 py-1 shrink-0 whitespace-nowrap">
+                                    {c.count} attending
+                                </span>
+                            </div>
+                            <div class="flex flex-wrap items-end gap-2 min-h-[4rem]">
+                                {c.characters.map((p) => (
+                                    <a
+                                        href={p.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="block tap-press"
+                                        title={p.name}
+                                        aria-label={`${p.name}'s Cloud Card`}
+                                    >
+                                        <img
+                                            src={p.image}
+                                            alt={p.name}
+                                            width="64"
+                                            height="64"
+                                            loading="lazy"
+                                            decoding="async"
+                                            class="px-pixelated h-16 w-auto"
+                                            onerror="this.parentElement.remove()"
+                                        />
+                                    </a>
+                                ))}
+                                {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
+                                    <span
+                                        class="px-font text-2xl text-gray-300 h-16 flex items-end pb-1"
+                                        aria-label="Attendee without a Cloud Card yet"
+                                    >
+                                        ?
+                                    </span>
+                                ))}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a
+                        href="/team"
+                        class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                    >
+                        <img
+                            src="/px-ticket.png"
+                            alt=""
+                            width="64"
+                            height="64"
+                            class="px-pixelated h-5 w-auto"
+                        />
+                        Put your company here
+                    </a>
+                    <p class="text-sm text-gray-500 text-center sm:text-left max-w-xs">
+                        Two tickets from one company and you are on this list.
+                        A ticket also unlocks your character on the Pier.
+                    </p>
+                </div>
+            </div>
+        </section>
+    )
+}

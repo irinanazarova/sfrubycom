@@ -1,0 +1,223 @@
+{
+  "fetchedAt": "2026-09-07T19:24:17.404Z",
+  "minAttendees": 2,
+  "companies": [
+    {
+      "name": "Evil Martians",
+      "count": 10,
+      "characters": [
+        {
+          "name": "Victoria Melnikova",
+          "url": "https://clouds.sfruby.com/e/2026-bits/victoria-melnikova",
+          "image": "https://clouds.sfruby.com/e/2026-bits/victoria-melnikova/character"
+        },
+        {
+          "name": "Amanda Kinney",
+          "url": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney",
+          "image": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney/character"
+        },
+        {
+          "name": "Anton Senkovskiy",
+          "url": "https://clouds.sfruby.com/e/2026-bits/anton-senkovskiy",
+          "image": "https://clouds.sfruby.com/e/2026-bits/anton-senkovskiy/character"
+        },
+        {
+          "name": "Alexander Tishchenko",
+          "url": "https://clouds.sfruby.com/e/2026-bits/alexander-tishchenko",
+          "image": "https://clouds.sfruby.com/e/2026-bits/alexander-tishchenko/character"
+        },
+        {
+          "name": "Svyatoslav Kryukov",
+          "url": "https://clouds.sfruby.com/e/2026-bits/svyatoslav-kryukov-b5b05195-a91a-448a-a006-0b96e13d4903",
+          "image": "https://clouds.sfruby.com/e/2026-bits/svyatoslav-kryukov-b5b05195-a91a-448a-a006-0b96e13d4903/character"
+        },
+        {
+          "name": "Andrey Novikov",
+          "url": "https://clouds.sfruby.com/e/2026-bits/andrey-novikov",
+          "image": "https://clouds.sfruby.com/e/2026-bits/andrey-novikov/character"
+        },
+        {
+          "name": "travis turner",
+          "url": "https://clouds.sfruby.com/e/2026-bits/travis-turner",
+          "image": "https://clouds.sfruby.com/e/2026-bits/travis-turner/character"
+        },
+        {
+          "name": "Irina Nazarova",
+          "url": "https://clouds.sfruby.com/e/2026-bits/irina-nazarova",
+          "image": "https://clouds.sfruby.com/e/2026-bits/irina-nazarova/character"
+        },
+        {
+          "name": "Camila Mirabal",
+          "url": "https://clouds.sfruby.com/e/2026-bits/camila-cami",
+          "image": "https://clouds.sfruby.com/e/2026-bits/camila-cami/character"
+        },
+        {
+          "name": "Vova Dementyev",
+          "url": "https://clouds.sfruby.com/e/2026-bits/vova-dem",
+          "image": "https://clouds.sfruby.com/e/2026-bits/vova-dem/character"
+        }
+      ]
+    },
+    {
+      "name": "Handshake",
+      "count": 3,
+      "characters": [
+        {
+          "name": "Igor Arkhipov",
+          "url": "https://clouds.sfruby.com/e/2026-bits/igor-arkhipov",
+          "image": "https://clouds.sfruby.com/e/2026-bits/igor-arkhipov/character"
+        },
+        {
+          "name": "Enrique Mogollan",
+          "url": "https://clouds.sfruby.com/e/2026-bits/enrique-mogollan",
+          "image": "https://clouds.sfruby.com/e/2026-bits/enrique-mogollan/character"
+        },
+        {
+          "name": "Trista Mueller",
+          "url": "https://clouds.sfruby.com/e/2026-bits/trista-mueller",
+          "image": "https://clouds.sfruby.com/e/2026-bits/trista-mueller/character"
+        }
+      ]
+    },
+    {
+      "name": "IFTTT",
+      "count": 3,
+      "characters": [
+        {
+          "name": "Chris Janik",
+          "url": "https://clouds.sfruby.com/e/2026-bits/chris-janik",
+          "image": "https://clouds.sfruby.com/e/2026-bits/chris-janik/character"
+        }
+      ]
+    },
+    {
+      "name": "Cactus",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Avinash Joshi",
+          "url": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi",
+          "image": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi/character"
+        }
+      ]
+    },
+    {
+      "name": "ClickFunnels",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Benjamin Wood",
+          "url": "https://clouds.sfruby.com/e/2026-bits/benjamin-wood",
+          "image": "https://clouds.sfruby.com/e/2026-bits/benjamin-wood/character"
+        },
+        {
+          "name": "Nate Vick",
+          "url": "https://clouds.sfruby.com/e/2026-bits/nate-vick",
+          "image": "https://clouds.sfruby.com/e/2026-bits/nate-vick/character"
+        }
+      ]
+    },
+    {
+      "name": "Fixate Industries",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Liz Pantalone",
+          "url": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone",
+          "image": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone/character"
+        }
+      ]
+    },
+    {
+      "name": "Gusto",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Chris Fung",
+          "url": "https://clouds.sfruby.com/e/2026-bits/chris-fung",
+          "image": "https://clouds.sfruby.com/e/2026-bits/chris-fung/character"
+        },
+        {
+          "name": "Todd Sedano",
+          "url": "https://clouds.sfruby.com/e/2026-bits/todd-sedano",
+          "image": "https://clouds.sfruby.com/e/2026-bits/todd-sedano/character"
+        }
+      ]
+    },
+    {
+      "name": "Hack Club",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Luke Oldenburg",
+          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
+          "image": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33/character"
+        }
+      ]
+    },
+    {
+      "name": "HopSkipDrive",
+      "count": 2,
+      "characters": []
+    },
+    {
+      "name": "Instrumentl",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Nina R",
+          "url": "https://clouds.sfruby.com/e/2026-bits/nina-revko",
+          "image": "https://clouds.sfruby.com/e/2026-bits/nina-revko/character"
+        }
+      ]
+    },
+    {
+      "name": "New Leaders",
+      "count": 2,
+      "characters": []
+    },
+    {
+      "name": "Shopify",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Peter Zhu",
+          "url": "https://clouds.sfruby.com/e/2026-bits/peter-zhu",
+          "image": "https://clouds.sfruby.com/e/2026-bits/peter-zhu/character"
+        }
+      ]
+    },
+    {
+      "name": "thoughtbot",
+      "count": 2,
+      "characters": []
+    },
+    {
+      "name": "Typesense",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Jason Bosco",
+          "url": "https://clouds.sfruby.com/e/2026-bits/jason-bosco",
+          "image": "https://clouds.sfruby.com/e/2026-bits/jason-bosco/character"
+        },
+        {
+          "name": "Steph Farid",
+          "url": "https://clouds.sfruby.com/e/2026-bits/steph-farid",
+          "image": "https://clouds.sfruby.com/e/2026-bits/steph-farid/character"
+        }
+      ]
+    },
+    {
+      "name": "Workshop Software Inc",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Zachary Roland",
+          "url": "https://clouds.sfruby.com/e/2026-bits/zachary-roland",
+          "image": "https://clouds.sfruby.com/e/2026-bits/zachary-roland/character"
+        }
+      ]
+    }
+  ]
+}
