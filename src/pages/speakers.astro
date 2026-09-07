@@ -23,7 +23,8 @@ import SocialLink from "../components/SocialLink.astro";
 import {
     conferenceSpeakers,
     cfpNameAliases,
-    LUMA_URL,
+    ticketLink,
+    ticketEventClass,
 } from "../data/conference-2026.js";
 import { buildProfiles } from "../utils/speakerProfiles.js";
 import { toParagraphs } from "../utils/abstractText.js";
@@ -84,10 +85,10 @@ const withTalks = profiles.filter((s) => s.title).length;
             </p>
             <div class="mt-8 flex flex-wrap items-center gap-3">
                 <a
-                    href={LUMA_URL}
+                    href={ticketLink("speakers-top")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="px-btn px-btn--white px-font text-px10 px-6 py-4 tap-press"
+                    class={`px-btn px-btn--white px-font text-px10 px-6 py-4 tap-press ${ticketEventClass("speakers-top")}`}
                 >
                     Get a ticket
                     <svg
@@ -281,10 +282,10 @@ const withTalks = profiles.filter((s) => s.title).length;
             </p>
             <div class="mt-8 flex flex-wrap justify-center gap-3">
                 <a
-                    href={LUMA_URL}
+                    href={ticketLink("speakers-bottom")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="px-btn px-btn--white px-font text-px10 px-6 py-4 tap-press"
+                    class={`px-btn px-btn--white px-font text-px10 px-6 py-4 tap-press ${ticketEventClass("speakers-bottom")}`}
                 >
                     Get a ticket
                 </a>

@@ -10,7 +10,7 @@ import Pier from "../components/Pier.astro";
 import WhatYouHear from "../components/WhatYouHear.astro";
 import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
-import { LUMA_URL, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { palette } from "../design/tokens.mjs";
@@ -168,11 +168,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                     <!-- The last slot is the visitor: choosing
                                          yourself means claiming a ticket. -->
                                     <a
-                                        href={LUMA_URL}
+                                        href={ticketLink("hero-you")}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         role="listitem"
-                                        class="px-fighter-cell"
+                                        class={`px-fighter-cell ${ticketEventClass("hero-you")}`}
                                         data-name="You"
                                         data-org="Claim your slot"
                                         data-pixel=""
@@ -200,10 +200,10 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                             <!-- Insert coin: one gold block carrying the ask, the price
                                  and the deadline, the whole thing the link -->
                             <a
-                                href={LUMA_URL}
+                                href={ticketLink("hero")}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="px-btn px-btn--gold tap-press inline-flex items-center gap-4 px-7 py-4 text-left"
+                                class={`px-btn px-btn--gold tap-press inline-flex items-center gap-4 px-7 py-4 text-left ${ticketEventClass("hero")}`}
                             >
                                 <span class="px-coinslot shrink-0" aria-hidden="true">
                                     <span class="px-coinslot__well">
@@ -504,10 +504,10 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                             <TicketScarcity />
                         </div>
                         <a
-                            href={LUMA_URL}
+                            href={ticketLink("tickets-section")}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 sm:w-56"
+                            class={`px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 sm:w-56 ${ticketEventClass("tickets-section")}`}
                         >
                             <img src="/px-ticket.png" alt="" width="26" height="12" class="px-pixelated h-5 w-auto" />
                             Buy tickets
@@ -572,10 +572,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 lede="Tickets, sponsorship, the meetup, or just say hi."
                 items={[
                     {
-                        href: LUMA_URL,
+                        href: ticketLink("island-nav"),
                         label: "Tickets",
                         icon: "ticket",
                         external: true,
+                        class: ticketEventClass("island-nav"),
                     },
                     { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
                     { href: "/meetup", label: "The meetup", icon: "heart" },

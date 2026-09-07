@@ -134,6 +134,10 @@ Every job carries a hand-curated `chips: [...]` array, rendered as pills on the 
 
 After editing, `npm run build:dev` (a validation snippet can assert every chip is in `CHIP_KIND`), then eyeball the `/jobs` cards at 390x844 — the chip row must not push the card past 3-per-screen density or cause horizontal overflow.
 
+### Ticket links: UTMs and the Plausible "Ticket click" goal
+
+Every link to the Luma ticket page goes through `ticketLink(placement)` and `ticketEventClass(placement)` from `src/data/conference-2026.js`, never a raw `LUMA_URL` href. `ticketLink` appends `utm_source=sfruby-<placement>&utm_medium=site&utm_campaign=conf2026` (Luma keeps only `utm_source` per registration, so the placement lives there); `ticketEventClass` adds the `plausible-event-name=Ticket+click plausible-event-placement=<placement>` classes that the already-loaded `tagged-events` Plausible extension turns into a custom event with a `placement` property. No click script is needed. Placements are short kebab-case names for where the link sits (`hero`, `header`, `ladder`, `pier`, `team`, `manager-email`); add new ones freely. In Plausible the goal is the custom event `Ticket click`, and `placement` must be listed under Site settings → Custom properties to be a breakdown. Quick check after a build: `grep -o 'utm_source=sfruby-[a-z-]*' dist/index.html | sort | uniq -c` lists every tagged placement on the homepage.
+
 ### Verifying changes locally
 
 - `npm run build:dev` — fast syntax check without env vars or external fetch. Use this after editing data files.

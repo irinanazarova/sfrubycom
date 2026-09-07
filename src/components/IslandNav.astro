@@ -20,6 +20,8 @@ interface Item {
     label: string;
     icon: keyof typeof ICONS;
     external?: boolean;
+    /** Extra classes, e.g. the Plausible tagged-event classes on the ticket island */
+    class?: string;
 }
 
 interface Props {
@@ -80,7 +82,7 @@ const { id, kicker, title, lede, items } = Astro.props;
                                     ? "noopener noreferrer"
                                     : undefined
                             }
-                            class="px-island-btn tap-press"
+                            class:list={["px-island-btn tap-press", item.class]}
                         >
                             <img
                                 src={icon.src}

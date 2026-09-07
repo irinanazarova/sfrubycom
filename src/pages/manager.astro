@@ -4,7 +4,7 @@
 // itemized says yes faster. The email at the bottom is written for the
 // engineer to paste, with the blanks they need to fill marked in brackets.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { LUMA_URL, ticketTiers, regularTier } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, ticketTiers, regularTier } from "../data/conference-2026.js";
 import { conferenceSpeakers } from "../data/conference-2026.js";
 
 const regular = ticketTiers.find((t) => t.name === "Regular");
@@ -56,7 +56,7 @@ Why it's worth it for us:
 - Networking is organized: I'll be placed in two groups of engineers working on the same kind of system as ours, which is where the useful conversations about [our system] happen.
 - I'll write up the talks relevant to [our system] for the team afterwards.
 
-Ticket: ${LUMA_URL}
+Ticket: ${ticketLink("manager-email")}
 
 Thanks,
 [name]`;
@@ -148,10 +148,10 @@ Thanks,
                         Copy the email
                     </button>
                     <a
-                        href={LUMA_URL}
+                        href={ticketLink("manager")}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="px-btn px-btn--white px-font text-px8 md:text-px10 px-5 py-3 tap-press"
+                        class={`px-btn px-btn--white px-font text-px8 md:text-px10 px-5 py-3 tap-press ${ticketEventClass("manager")}`}
                     >
                         Already approved? Get a ticket
                     </a>

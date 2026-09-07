@@ -10,7 +10,7 @@
 // are actually coming. Refresh them by re-exporting from the game rather than
 // inventing copy here — a quest list that disagrees with the game is worse
 // than no quest list.
-import { LUMA_URL, ticketTiers } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, ticketTiers } from "../data/conference-2026.js";
 
 // Sprites scattered over the map frame so it reads as populated. Positioned
 // against the frame, not the image, so the mobile crop can move underneath
@@ -265,10 +265,10 @@ const livePrice = ticketTiers.find(
                 </svg>
             </a>
             <a
-                href={LUMA_URL}
+                href={ticketLink("pier")}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                class={`px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("pier")}`}
             >
                 <img
                     src="/px-ticket.png"
