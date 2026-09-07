@@ -4,7 +4,7 @@
 // Tier order here is display order; headingClass colors the tier heading.
 // size drives how big the logo cards render (SponsorTiers.astro): "xl" for
 // Pickaxe when we sell one, "lg" for the Ruby-priced tiers (Ruby, Coffee,
-// Passport Booth), "md" for Emerald, "sm" for Travel, "xs" for Info. The size hierarchy is the visual part of
+// Passport Booth), "md" for Emerald, "sm" for Travel, "xs" for Media. The size hierarchy is the visual part of
 // what a sponsor pays for, so keep it in step with the prices on /sponsor-2026.
 // logoWidth/logoHeight are the file's intrinsic pixel dimensions (sips -g
 // pixelWidth -g pixelHeight public/<logo>). They must be present and correct:
@@ -126,7 +126,7 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Info Sponsor",
+    tier: "Media Sponsor",
     size: "xs",
     headingClass: "text-gray-500",
     sponsors: [
