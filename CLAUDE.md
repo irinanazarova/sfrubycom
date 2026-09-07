@@ -138,6 +138,10 @@ After editing, `npm run build:dev` (a validation snippet can assert every chip i
 
 Every link to the Luma ticket page goes through `ticketLink(placement)` and `ticketEventClass(placement)` from `src/data/conference-2026.js`, never a raw `LUMA_URL` href. `ticketLink` appends `utm_source=sfruby-<placement>&utm_medium=site&utm_campaign=conf2026` (Luma keeps only `utm_source` per registration, so the placement lives there); `ticketEventClass` adds the `plausible-event-name=Ticket+click plausible-event-placement=<placement>` classes that the already-loaded `tagged-events` Plausible extension turns into a custom event with a `placement` property. No click script is needed. Placements are short kebab-case names for where the link sits (`hero`, `header`, `ladder`, `pier`, `team`, `manager-email`); add new ones freely. In Plausible the goal is the custom event `Ticket click`, and `placement` must be listed under Site settings → Custom properties to be a breakdown. Quick check after a build: `grep -o 'utm_source=sfruby-[a-z-]*' dist/index.html | sort | uniq -c` lists every tagged placement on the homepage.
 
+### Deploy previews are opt-in
+
+Netlify builds a deploy preview only for PRs that ask for one (`scripts/netlify-ignore.sh`, wired through `ignore` in `netlify.toml`); a preview for every content PR was more compute than review. Ask for one by adding the **`preview`** label on GitHub and then pushing (Netlify only builds on a push, so a label added afterwards needs a push or a "Retry" in Netlify), or without touching GitHub: name the branch `*-preview`, or put `[preview]` in the head commit message. Production and branch deploys are never skipped.
+
 ### Verifying changes locally
 
 - `npm run build:dev` — fast syntax check without env vars or external fetch. Use this after editing data files.

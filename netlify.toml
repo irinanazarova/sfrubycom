@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  # Deploy previews are opt-in: see scripts/netlify-ignore.sh. Production and
+  # branch deploys always build.
+  ignore = "bash scripts/netlify-ignore.sh"
 
 [build.environment]
   NODE_VERSION = "18"
