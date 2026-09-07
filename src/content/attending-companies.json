@@ -1,7 +1,63 @@
 {
-  "fetchedAt": "2026-09-07T18:01:45.495Z",
+  "fetchedAt": "2026-09-07T18:49:26.999Z",
   "minAttendees": 2,
   "companies": [
+    {
+      "name": "Evil Martians",
+      "count": 10,
+      "characters": [
+        {
+          "name": "Victoria Melnikova",
+          "url": "https://clouds.sfruby.com/e/2026-bits/victoria-melnikova",
+          "image": "https://clouds.sfruby.com/e/2026-bits/victoria-melnikova/character"
+        },
+        {
+          "name": "Amanda Kinney",
+          "url": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney",
+          "image": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney/character"
+        },
+        {
+          "name": "Anton Senkovskiy",
+          "url": "https://clouds.sfruby.com/e/2026-bits/anton-senkovskiy",
+          "image": "https://clouds.sfruby.com/e/2026-bits/anton-senkovskiy/character"
+        },
+        {
+          "name": "Alexander Tishchenko",
+          "url": "https://clouds.sfruby.com/e/2026-bits/alexander-tishchenko",
+          "image": "https://clouds.sfruby.com/e/2026-bits/alexander-tishchenko/character"
+        },
+        {
+          "name": "Svyatoslav Kryukov",
+          "url": "https://clouds.sfruby.com/e/2026-bits/svyatoslav-kryukov-b5b05195-a91a-448a-a006-0b96e13d4903",
+          "image": "https://clouds.sfruby.com/e/2026-bits/svyatoslav-kryukov-b5b05195-a91a-448a-a006-0b96e13d4903/character"
+        },
+        {
+          "name": "Andrey Novikov",
+          "url": "https://clouds.sfruby.com/e/2026-bits/andrey-novikov",
+          "image": "https://clouds.sfruby.com/e/2026-bits/andrey-novikov/character"
+        },
+        {
+          "name": "travis turner",
+          "url": "https://clouds.sfruby.com/e/2026-bits/travis-turner",
+          "image": "https://clouds.sfruby.com/e/2026-bits/travis-turner/character"
+        },
+        {
+          "name": "Irina Nazarova",
+          "url": "https://clouds.sfruby.com/e/2026-bits/irina-nazarova",
+          "image": "https://clouds.sfruby.com/e/2026-bits/irina-nazarova/character"
+        },
+        {
+          "name": "Camila Mirabal",
+          "url": "https://clouds.sfruby.com/e/2026-bits/camila-cami",
+          "image": "https://clouds.sfruby.com/e/2026-bits/camila-cami/character"
+        },
+        {
+          "name": "Vova Dementyev",
+          "url": "https://clouds.sfruby.com/e/2026-bits/vova-dem",
+          "image": "https://clouds.sfruby.com/e/2026-bits/vova-dem/character"
+        }
+      ]
+    },
     {
       "name": "Handshake",
       "count": 3,
@@ -37,7 +93,13 @@
     {
       "name": "Cactus",
       "count": 2,
-      "characters": []
+      "characters": [
+        {
+          "name": "Avinash Joshi",
+          "url": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi",
+          "image": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi/character"
+        }
+      ]
     },
     {
       "name": "ClickFunnels",

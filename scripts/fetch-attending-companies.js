@@ -21,6 +21,12 @@ const OUT = fileURLToPath(
 const EVENT_ID = "evt-mKb0oC6cWGtqSIQ"; // San Francisco Ruby Startup Conference 2026
 const LUMA_API = "https://public-api.luma.com/public/v1";
 const CHARACTERS_API = "https://clouds.sfruby.com/api/characters?limit=500";
+// The list API returns the 50 newest characters and nothing older, so a card
+// made in July is invisible to it. Each character also lives at a URL slugged
+// from the name the person typed, and that is probed for every attendee the
+// list did not cover. Renamed cards and collision suffixes miss the probe, but
+// those are the recent ones the list still has.
+const CHARACTER_URL = (slug) => `https://clouds.sfruby.com/e/2026-bits/${slug}`;
 const MIN_ATTENDEES = 2;
 
 // Minimal .env loader, same as fetch-luma-events.js: never overrides vars
@@ -34,11 +40,11 @@ if (existsSync(envPath)) {
   }
 }
 
-// Ticket types that are not attendees in the sense the section means.
-const NOT_ATTENDEE_TICKETS = new Set(["Organizer/volunteer"]);
-// The organizer's own people would top the list; the section is about
-// everyone else in the room.
-const HIDDEN_COMPANIES = new Set(["evil martians"]);
+// Every approved ticket counts, organizers and volunteers included: they are
+// in the room, and a volunteer from another company is that company attending.
+const NOT_ATTENDEE_TICKETS = new Set();
+// Companies never listed, by normalized key. Empty on purpose.
+const HIDDEN_COMPANIES = new Set();
 // Answers that are not a company.
 const NOT_A_COMPANY = new Set([
   "", "n/a", "na", "none", "self", "self-employed", "freelance", "freelancer",
@@ -66,6 +72,14 @@ const nameKey = (raw) =>
     .replace(/\s+/g, " ")
     .trim();
 
+const slugOf = (raw) =>
+  (raw || "")
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 // People who typed a different name on the Pier than on Luma.
 const NAME_ALIASES = { "vova dementyev": "vladimir dementyev" };
 
@@ -73,6 +87,22 @@ async function getJson(url, headers = {}) {
   const res = await fetch(url, { headers, signal: AbortSignal.timeout(20_000) });
   if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
   return res.json();
+}
+
+// A character exists when its image URL answers 200 with a PNG.
+async function probeCharacter(name) {
+  const slug = slugOf(name);
+  if (!slug) return null;
+  try {
+    const res = await fetch(`${CHARACTER_URL(slug)}/character`, {
+      method: "HEAD",
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!res.ok || !(res.headers.get("content-type") ?? "").startsWith("image/")) return null;
+    return { name, url: CHARACTER_URL(slug), image_url: `${CHARACTER_URL(slug)}/character` };
+  } catch {
+    return null;
+  }
 }
 
 async function fetchGuests(apiKey) {
@@ -122,6 +152,7 @@ try {
     const c = companies.get(key) ?? { key, spellings: new Map(), people: new Set() };
     c.spellings.set(raw, (c.spellings.get(raw) ?? 0) + 1);
     c.people.add(nameKey(g.name ?? g.user_name));
+    (c.names ??= new Map()).set(nameKey(g.name ?? g.user_name), (g.name ?? g.user_name ?? "").trim());
     companies.set(key, c);
   }
 
@@ -136,25 +167,30 @@ try {
     if (ck) (byCompany.get(ck) ?? byCompany.set(ck, []).get(ck)).push(ch);
   }
 
-  const out = [...companies.values()]
-    .filter((c) => c.people.size >= MIN_ATTENDEES)
-    .map((c) => {
-      const seen = new Set();
-      const chars = [];
-      const add = (ch) => {
-        if (!ch || seen.has(ch.url)) return;
-        seen.add(ch.url);
-        chars.push({ name: ch.name, url: ch.url, image: ch.image_url });
-      };
-      // A ticket holder from this company who made a character, matched by
-      // name; then anyone who typed this company on their card, which only a
-      // ticket holder can make.
-      for (const p of c.people) add(byName.get(p));
-      for (const ch of byCompany.get(c.key) ?? []) add(ch);
-      const name = [...c.spellings.entries()].sort((a, b) => b[1] - a[1])[0][0];
-      return { name, count: c.people.size, characters: chars };
-    })
-    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+  const out = [];
+  for (const c of [...companies.values()].filter((c) => c.people.size >= MIN_ATTENDEES)) {
+    const seen = new Set();
+    const chars = [];
+    const add = (ch) => {
+      if (!ch || seen.has(ch.url)) return;
+      seen.add(ch.url);
+      chars.push({ name: ch.name, url: ch.url, image: ch.image_url });
+    };
+    // A ticket holder from this company who made a character: from the list
+    // API by name, else by probing the slug of the name they used on Luma.
+    // Then anyone who typed this company on their card, which only a ticket
+    // holder can make.
+    for (const p of c.people) {
+      add(byName.get(p) ?? (await probeCharacter(c.names.get(p))));
+    }
+    for (const ch of byCompany.get(c.key) ?? []) add(ch);
+    const name = [...c.spellings.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    // Someone who typed this company on their card but a different one on
+    // Luma still counts as in the room, so the count never reads below the
+    // row of characters under it.
+    out.push({ name, count: Math.max(c.people.size, chars.length), characters: chars });
+  }
+  out.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 
   writeFileSync(
     OUT,
