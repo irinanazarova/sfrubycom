@@ -6,6 +6,7 @@ import HashScroll from "../components/HashScroll.astro";
 import IslandNav from "../components/IslandNav.astro";
 import SpeakerRoster from "../components/SpeakerRoster.astro";
 import ConferenceNetworking from "../components/ConferenceNetworking.astro";
+import CompaniesAttending from "../components/CompaniesAttending.astro";
 import Pier from "../components/Pier.astro";
 import WhatYouHear from "../components/WhatYouHear.astro";
 import TicketLadder from "../components/TicketLadder.astro";
@@ -429,6 +430,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
 
             <!-- Organized networking: the differentiator -->
             <ConferenceNetworking />
+
+            <CompaniesAttending />
 
             <!-- Price ladder + team offer -->
             <TicketLadder />
