@@ -185,6 +185,8 @@ When adding a `BaseLayout` page, check the first section's background and set `d
 
 `src/components/HashScroll.astro` does the jump itself, on `pagereveal` and again after load, and backs off once the reader has scrolled. It is rendered by `BaseLayout`, `Layout`, and the standalone shells (`index.astro`, `sponsor-2026.astro`) — a new page shell must include it, the same way it must include `BottomNav`.
 
+`src/components/SectionLinks.astro` (homepage only, mounted next to `HashScroll`) adds a copy-link button beside every `main section[id]` h2 at runtime, so any block can be shared as `/#<id>`; a new section with an id and an h2 gets one without being edited.
+
 A page that steers the hash itself passes **`hashScroll="manual"`** to its layout, so two handlers never race for the scroll position. Currently manual: `jobs/index` (its own converge loop, which lands with a header-aware offset) and `schedule-2025` (`#day1`-`#day3` select a tab, `#talk-id` opens a modal). Slide decks on `PresentationLayout` never had it.
 
 ### Mobile regression check (run after any header/overlay/sticky change)
