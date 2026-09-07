@@ -135,7 +135,7 @@ export const conference2026SponsorTiers = [
         logo: "/sponsor_info_devitjobs.png",
         logoWidth: 362,
         logoHeight: 172,
-        url: "https://devitjobs.com/",
+        url: "https://devitjobs.com/jobs/Ruby/all/all",
       },
     ],
   },
