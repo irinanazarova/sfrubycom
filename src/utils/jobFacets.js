@@ -51,7 +51,11 @@ export function parseLevel(title = "") {
   if (t.includes("principal") || t.includes("staff")) return "staff+";
   if (t.includes("senior") || t.includes("sr.") || t.includes("founding") || t.includes("lead"))
     return "senior";
-  if (t.includes("junior")) return "junior";
+  // Entry-level roles rarely use the word "junior" in the title; "Early Career"
+  // and "New Grad" are the common phrasings. Missing them filed the one junior
+  // role on the board under Mid-level, which is the filter those seekers use.
+  if (/\bjunior\b|\bearly[ -]career\b|\bentry[ -]level\b|\bnew[ -]grad(uate)?\b|\bapprentice\b|\bintern\b/.test(t))
+    return "junior";
   if (t.includes("mid-level") || t.includes("mid level") || /\bii\b/.test(t)) return "mid";
   return "mid";
 }

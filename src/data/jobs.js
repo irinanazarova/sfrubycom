@@ -48,6 +48,9 @@ export const jobs = {
     id: "software-engineer-early-career-koah",
     title: "Software Engineer, Early Career",
     startupId: "koah-labs",
+    // Featured on purpose: junior Rails roles in the Bay Area are the hardest
+    // listing for the board to find, and the one applicants ask for most.
+    featured: true,
     location: "San Francisco, CA (In-person)",
     type: "Full-time",
     salary: "$120K - $160K + equity",
