@@ -1,8 +1,9 @@
-name: Weekly Build & Deploy
+name: Daily Build & Deploy
 
 on:
   schedule:
-    - cron: '0 1 * * 0' # Sundays 1 AM UTC
+    - cron: '0 13 * * *' # Daily, 13:00 UTC (6am PT). Keeps the homepage
+      # "Ruby companies attending" snapshot at most a day behind ticket sales.
   workflow_dispatch: {}
 
 jobs:
