@@ -385,11 +385,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                         {tickerSponsors.map((sponsor) =>
                                             clone ? (
                                                 <img
-                                                    src={sponsor.logo}
+                                                    src={sponsor.logoOnDark ?? sponsor.logo}
                                                     alt=""
-                                                    width={sponsor.logoWidth}
+                                                    width={sponsor.logoOnDarkWidth ?? sponsor.logoWidth}
                                                     height={sponsor.logoHeight}
-                                                    class="h-6 md:h-7 w-auto shrink-0 brightness-0 invert"
+                                                    class:list={["h-6 md:h-7 w-auto shrink-0", !sponsor.logoOnDark && "brightness-0 invert"]}
                                                     loading="eager"
                                                 />
                                             ) : (
@@ -400,11 +400,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                     class="shrink-0 hover:opacity-80 transition-opacity"
                                                 >
                                                     <img
-                                                        src={sponsor.logo}
+                                                        src={sponsor.logoOnDark ?? sponsor.logo}
                                                         alt={sponsor.name}
-                                                        width={sponsor.logoWidth}
+                                                        width={sponsor.logoOnDarkWidth ?? sponsor.logoWidth}
                                                         height={sponsor.logoHeight}
-                                                        class="h-6 md:h-7 w-auto brightness-0 invert"
+                                                        class:list={["h-6 md:h-7 w-auto", !sponsor.logoOnDark && "brightness-0 invert"]}
                                                         loading="eager"
                                                     />
                                                 </a>
