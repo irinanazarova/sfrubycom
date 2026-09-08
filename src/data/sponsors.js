@@ -138,13 +138,6 @@ export const conference2026SponsorTiers = [
         url: "https://hatchbox.io/",
       },
       {
-        name: "Order.co",
-        logo: "/sponsor_orderco.png",
-        logoWidth: 816,
-        logoHeight: 172,
-        url: "https://www.order.co/",
-      },
-      {
         name: "Rebulk",
         logo: "/sponsor_travel_rebulk.png",
         logoWidth: 687,
