@@ -3,7 +3,7 @@
 // Two audiences share one stage. Every session block is tagged with the
 // audience in the hall, and while that audience is in the hall the other one
 // is in a conversation group built for it (`group`), then they swap. Keynotes
-// are for everyone. Day 1 is AI on Rails; Day 2 is the rest of the stack:
+// are for everyone. Day 1 is AI-heavy; Day 2 is AI-light, the rest of the stack:
 // queues, concurrency, real-time, open source.
 //
 // Talk titles live here rather than in the CFP feed on purpose: several
@@ -28,7 +28,7 @@ export const days = [
     n: 1,
     date: "2026-11-10",
     weekday: "Tuesday",
-    theme: "AI on Rails",
+    theme: "AI-heavy",
     tagline:
       "Agents in production, AI in legacy codebases, and the Ruby tooling for both.",
     blocks: [
@@ -68,9 +68,9 @@ export const days = [
           },
           {
             start: "11:05",
-            speaker: "Celina Lopez",
-            org: "Primary Health",
-            title: "Building a Developer-friendly PaaS for Kubernetes on Ruby",
+            speaker: "JP Camara",
+            org: "Wealthbox",
+            title: "Realtime collaboration on Rails with yrby and Lexxy",
           },
         ],
         group: {
@@ -156,7 +156,7 @@ export const days = [
     n: 2,
     date: "2026-11-11",
     weekday: "Wednesday",
-    theme: "The rest of the stack",
+    theme: "AI-light",
     tagline:
       "Queues, concurrency, real-time, open source, and the businesses built on them.",
     blocks: [
@@ -183,9 +183,9 @@ export const days = [
         sessions: [
           {
             start: "9:50",
-            speaker: "JP Camara",
-            org: "Wealthbox",
-            title: "Realtime collaboration on Rails with yrby and Lexxy",
+            speaker: "Celina Lopez",
+            org: "Primary Health",
+            title: "Building a Developer-friendly PaaS for Kubernetes on Ruby",
           },
           {
             start: "10:20",
@@ -197,9 +197,10 @@ export const days = [
           },
           {
             start: "10:50",
-            speaker: "Chris Oliver",
-            org: "GoRails",
-            title: "Teaching, open sourcing and building a dev tooling company on Rails",
+            speaker: "Marco Roth",
+            org: "Herb",
+            title: "Reactive Rails Views, No Rewrite Required",
+            cfpTitle: "Reactive Rails Views, No Rewrite Required",
           },
         ],
         group: {
@@ -279,10 +280,10 @@ export const days = [
         audience: "all",
         sessions: [
           {
-            speaker: "Marco Roth",
-            org: "Herb",
-            title: "Reactive Rails Views, No Rewrite Required",
-            cfpTitle: "Reactive Rails Views, No Rewrite Required",
+            // Closing keynote, title to come; the first real CFP title wins.
+            speaker: "Chris Oliver",
+            org: "GoRails",
+            title: "Keynote",
           },
         ],
       },

@@ -60,6 +60,7 @@ export const conferenceSpeakers = [
       { name: "Hatchbox", url: "https://hatchbox.io/" },
     ],
     track: "startups",
+    keynote: true,
     pixel: "/speaker_chris_oliver_pixel_256.png",
   },
   {
@@ -123,7 +124,6 @@ export const conferenceSpeakers = [
     bio: "Creator of Herb, the HTML-aware toolchain that gives ERB a parser, formatter and language server.",
     orgs: [{ name: "Herb", url: "https://herb-tools.dev/" }],
     track: "startups",
-    keynote: true,
     pixel: "/speaker_marco_roth_pixel_256.png",
   },
   {
@@ -177,7 +177,7 @@ export const ticketTiers = [
   {
     name: "Single day",
     price: 350,
-    note: "Day 1 only (Nov 10, AI on Rails) or Day 2 only (Nov 11, the rest of the stack).",
+    note: "Day 1 only (Nov 10, AI-heavy) or Day 2 only (Nov 11, AI-light).",
     state: "live",
   },
   {
