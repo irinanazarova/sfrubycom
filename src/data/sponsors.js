@@ -107,6 +107,10 @@ export const conference2026SponsorTiers = [
         logo: "/sponsor_chatwoot.png",
         logoWidth: 859,
         logoHeight: 172,
+        // Ring mark with a cut-out: the ticker's invert fills the hole, so
+        // ship the brand's white art and let the ticker skip the filter.
+        logoOnDark: "/sponsor_chatwoot_white.png",
+        logoOnDarkWidth: 865,
         url: "https://www.chatwoot.com/",
       },
     ],
@@ -122,6 +126,27 @@ export const conference2026SponsorTiers = [
         logoWidth: 612,
         logoHeight: 172,
         url: "https://37signals.com/",
+      },
+      {
+        name: "Shopify",
+        logo: "/sponsor_travel_shopify.png",
+        logoWidth: 602,
+        logoHeight: 172,
+        url: "https://www.shopify.com/",
+      },
+      {
+        name: "Hatchbox",
+        logo: "/sponsor_travel_hatchbox.png",
+        logoWidth: 829,
+        logoHeight: 172,
+        url: "https://hatchbox.io/",
+      },
+      {
+        name: "Rebulk",
+        logo: "/sponsor_travel_rebulk.png",
+        logoWidth: 687,
+        logoHeight: 172,
+        url: "https://rebulk.com/",
       },
     ],
   },
