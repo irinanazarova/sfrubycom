@@ -2,14 +2,14 @@
 // Organizers and volunteers: everyone on the Organizer/volunteer ticket on
 // Luma, together on one floating island at dusk, the same way the companies
 // stand on theirs. The snapshot is src/content/crew-2026.json (see the fetch
-// script). Only people who have drawn their Cloud Card appear; the rest are
-// in the snapshot and show up the day they do, no stand-ins here, since the
-// nudge to draw one comes from the organizers themselves.
+// script). Everyone is named; only those who have drawn their Cloud Card
+// stand on the island, and the rest join it the day they do. No stand-ins,
+// since the nudge to draw one comes from the organizers themselves.
 import crew from "../content/crew-2026.json";
 
-const people = [...(crew.organizers ?? []), ...(crew.volunteers ?? [])]
-    .filter((p) => p.image)
-    .sort((a, b) => a.name.localeCompare(b.name));
+const people = [...(crew.organizers ?? []), ...(crew.volunteers ?? [])].sort((a, b) =>
+    a.name.localeCompare(b.name),
+);
 const groups = people.length ? [{ label: "Organizers and volunteers", people }] : [];
 ---
 
@@ -34,7 +34,7 @@ const groups = people.length ? [{ label: "Organizers and volunteers", people }] 
                     {groups.map((g) => (
                         <li class="flex flex-col items-center animate-float min-w-[10rem]">
                             <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[44rem] px-4 -mb-1.5">
-                                {g.people.map((p) => (
+                                {g.people.filter((p) => p.image).map((p) => (
                                     <a href={p.url} target="_blank" rel="noopener noreferrer" class="block tap-press" title={p.name} aria-label={`${p.name}'s Cloud Card`}>
                                         <img src={p.image} alt={p.name} width="73" height="128" loading="lazy" decoding="async" class="px-pixelated h-14 md:h-16 w-auto" />
                                     </a>
