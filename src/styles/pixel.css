@@ -182,30 +182,6 @@
     animation-delay: var(--px-twinkle-delay, 0s);
 }
 
-/* two-frame flap: two sprites stacked, the second blinking in on the half
-   beat, so a bird drawn once with the wing up and once down flies. */
-.px-flap {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-}
-.px-flap img + img {
-    position: absolute;
-    inset: 0;
-    animation: px-flap 0.6s steps(1, end) infinite;
-}
-@keyframes px-flap {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
 /* ground: a grass lip over stone (public/px-ground.png), repeated along the
    bottom of a scene so what stands on it has a floor. Set the height on the
    element; the tile is 32x24 and stretches to it. */
@@ -578,10 +554,6 @@
     .px-sparkle {
         animation: none;
         opacity: 0.7;
-    }
-    .px-flap img + img {
-        animation: none;
-        opacity: 0;
     }
     .px-blink {
         animation: none;

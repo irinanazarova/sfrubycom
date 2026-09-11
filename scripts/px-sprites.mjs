@@ -90,67 +90,7 @@ function balloon(fill, shade, light) {
   );
 }
 
-// Phoenix: the messenger bird on the hero, flying right with a plume of
-// tail feathers. Two frames, wing up and wing down, that `.px-flap` flips
-// between; the body, head and tail are shared so only the wing moves.
-function phoenix(wingUp) {
-  const body = [
-    "........................",
-    "........................",
-    "........................",
-    "........................",
-    "........................",
-    "..................KGK...",
-    "..................KKKK..",
-    ".................KRLRRK.",
-    "KK.......KKKKKK..KRRKRRK",
-    "KGK.....KRRRRRRKKRRRRRK.",
-    ".KGK...KRRRRRRRRRRRRRKGG",
-    "..KGKKKRLLRRRRRRRRRRRRK.",
-    "KGGKRRRRRRRRRRRRRRRRRK..",
-    "..KGKKrrRRRRRRRRRRRRK...",
-    ".KGK...KrrrRRRRRRRRK....",
-    "KGK.....KKrrrrrrrKK.....",
-    "KK........KKKKKKK.......",
-    "........................",
-    "........................",
-    "........................",
-  ];
-  const wingUp_ = [
-    "......KKK...............",
-    ".....KGGGK..............",
-    ".....KGRRGK.............",
-    "......KRRRRK............",
-    "......KRRRRRK...........",
-    ".......KRRRRRK..........",
-    ".......KRRRRRRK.........",
-    "........KRRRRRRK........",
-    ".........KRRRRRRK.......",
-  ];
-  const wingDown = [
-    "........KrRRRRRRK.......",
-    ".......KrRRRRRRK........",
-    "......KrRRRRRK..........",
-    ".....KrRRRRK............",
-    "....KrRRK...............",
-    "...KGGK.................",
-    "....KK..................",
-  ];
-  const rows = body.map((r) => [...r]);
-  const paint = (layer, y0) =>
-    layer.forEach((r, y) =>
-      [...r].forEach((ch, x) => {
-        if (ch !== ".") rows[y0 + y][x] = ch;
-      }),
-    );
-  if (wingUp) paint(wingUp_, 0);
-  else paint(wingDown, 13);
-  return rows.map((r) => r.join(""));
-}
-
 const SPRITES = {
-  "px-phoenix-a": phoenix(true),
-  "px-phoenix-b": phoenix(false),
   "px-balloon-ruby": balloon("R", "r", "L"),
   "px-balloon-gold": balloon("G", "g", "W"),
   "px-balloon-blue": balloon("B", "b", "A"),

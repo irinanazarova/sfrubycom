@@ -229,22 +229,23 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                     </span>
                                 </span>
                             </a>
-                            <!-- The messenger: a phoenix with the news that the
-                                 program is up. In the title stack on phones;
-                                 on desktop it flies top-right of the title art,
+                            <!-- The herald: the early-bird dragon, its sign
+                                 repainted to announce the program, linking to
+                                 the schedule. In the title stack on phones; on
+                                 desktop it hovers top-right of the title art,
                                  positioned against the content column. -->
                             <a
                                 href="#schedule"
-                                class="inline-flex flex-col items-start mt-7 lg:mt-0 lg:absolute lg:top-24 lg:right-4 tap-press"
+                                class="inline-block mt-7 lg:mt-0 lg:absolute lg:top-20 lg:right-0 xl:-right-6 tap-press"
                                 aria-label="The schedule is live. Jump to the schedule"
                             >
-                                <span class="px-bubble px-font text-px8 text-ruby-600 px-3 py-2.5 whitespace-nowrap">
-                                    Schedule is live<span class="px-blink" aria-hidden="true"> &#9654;&#xFE0E;</span>
-                                </span>
-                                <span class="px-flap animate-float mt-4" aria-hidden="true">
-                                    <img src="/px-phoenix-a.png" alt="" width="24" height="20" class="px-pixelated w-20 h-auto" />
-                                    <img src="/px-phoenix-b.png" alt="" width="24" height="20" class="px-pixelated w-20 h-auto" />
-                                </span>
+                                <img
+                                    src="/schedule_live_dragon.png"
+                                    alt="A pixel dragon holding a sign that reads Schedule is live"
+                                    width="1064"
+                                    height="696"
+                                    class="px-pixelated animate-float w-full max-w-[15rem] lg:max-w-[14rem] xl:max-w-[16rem] h-auto"
+                                />
                             </a>
                         </div>
                     </div>
