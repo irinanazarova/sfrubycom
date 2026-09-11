@@ -332,15 +332,6 @@ export const formatDay = (day) =>
     timeZone: "America/Los_Angeles",
   });
 
-// The talks a given audience sits in on, keynotes excluded: those are for
-// everyone and the homepage says so in one line rather than listing them twice.
-export const talksFor = (audience) =>
-  days.flatMap((d) =>
-    d.blocks
-      .filter((b) => b.kind === "talks" && b.audience === audience)
-      .flatMap((b) => b.sessions.filter((s) => !s.tba).map((s) => ({ ...s, day: d.n }))),
-  );
-
 // Every conversation group, in schedule order, with its day and times.
 export const allGroups = () =>
   days.flatMap((d) =>
@@ -349,18 +340,7 @@ export const allGroups = () =>
       .map((b) => ({ ...b.group, day: d.n, start: b.start, end: b.end })),
   );
 
-// The conversation groups a given audience is in.
-export const groupsFor = (audience) =>
-  allGroups().filter((g) => g.audience === audience);
-
 // Everyone hosting a group, first appearance first, for the hosts line.
 export const groupHosts = () => [
   ...new Set(allGroups().flatMap((g) => g.hosts ?? [])),
 ];
-
-export const keynotes = () =>
-  days.flatMap((d) =>
-    d.blocks
-      .filter((b) => b.kind === "keynote")
-      .flatMap((b) => b.sessions.map((s) => ({ ...s, day: d.n }))),
-  );
