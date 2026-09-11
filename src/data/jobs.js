@@ -882,7 +882,7 @@ export const jobs = {
     salary: "Not disclosed",
     description:
       "CrewAI, the multi-agent framework and enterprise platform behind 300M+ agent executions a month, is hiring a frontend-leaning full-stack engineer for its Agent Management Platform: the Rails web product where teams deploy, monitor, and govern agents in production. Rails, Hotwire, ViewComponent, and Tailwind alongside React, TypeScript, and Vite; tests in Minitest/RSpec and Vitest. Seven-plus years of product engineering.",
-    chips: ["Fullstack", "Product Eng", "Hotwire", "ViewComponent", "React", "AI-native"],
+    chips: ["Fullstack", "Hotwire", "ViewComponent", "React", "AI-native"],
     url: "https://apply.workable.com/crewai/j/0AB5665160/",
     postedDate: "2026-09-07",
   },
