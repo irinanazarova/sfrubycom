@@ -35,11 +35,18 @@ export function parseWorkType(location = "") {
   return [...types];
 }
 
-// Geography (post-ICP-filter the board is SF Bay or Remote US only).
+// Geography. The board is California in-office or Remote US; Bay Area gets
+// its own bucket, everything else in the state (Los Angeles, Fresno, Irvine,
+// Santa Barbara) is "california". A location that names none of these and is
+// not remote falls back to sf-bay, which is where the unqualified "San
+// Francisco, CA (In-person)" style strings land.
 export function parseGeo(location = "") {
   const loc = location.toLowerCase();
   const geos = new Set();
-  if (/(san francisco|bay area|oakland|east bay)/.test(loc)) geos.add("sf-bay");
+  if (/(san francisco|bay area|oakland|east bay|south san francisco|emeryville|san mateo|palo alto|mountain view|redwood city|berkeley)/.test(loc))
+    geos.add("sf-bay");
+  else if (/(los angeles|santa monica|irvine|san diego|fresno|sacramento|santa barbara|newport beach|rocklin|, ca\b|california)/.test(loc))
+    geos.add("california");
   if (loc.includes("remote")) geos.add("remote-us");
   if (geos.size === 0) geos.add("sf-bay");
   return [...geos];
@@ -54,7 +61,7 @@ export function parseLevel(title = "") {
   // Entry-level roles rarely use the word "junior" in the title; "Early Career"
   // and "New Grad" are the common phrasings. Missing them filed the one junior
   // role on the board under Mid-level, which is the filter those seekers use.
-  if (/\bjunior\b|\bearly[ -]career\b|\bentry[ -]level\b|\bnew[ -]grad(uate)?\b|\bapprentice\b|\bintern\b/.test(t))
+  if (/\bjunior\b|\bjr\.?\b|\bearly[ -]career\b|\bentry[ -]level\b|\bnew[ -]grad(uate)?\b|\brecent[ -]grad(uate)?\b|\bapprentice\b|\bintern\b|\bengineer i\b|\bswe i\b/.test(t))
     return "junior";
   if (t.includes("mid-level") || t.includes("mid level") || /\bii\b/.test(t)) return "mid";
   return "mid";
@@ -160,7 +167,6 @@ export const COMPANY_META = {
   koalahealth: { industry: "Healthtech", stage: "Growth" },
   fabric: { industry: "Healthtech", stage: "Early-stage" },
   revealtech: { industry: "Security / Identity", stage: "Growth" },
-  apartmentiq: { industry: "Enterprise SaaS", stage: "Growth" },
   tremendous: { industry: "Fintech", stage: "Growth" },
   orderco: { industry: "Enterprise SaaS", stage: "Growth" },
   quantic: { industry: "Edtech", stage: "Early-stage" },
@@ -212,8 +218,8 @@ export function orderChips(chips = []) {
 export const WORK_TYPE_LABELS = { onsite: "On-site", hybrid: "Hybrid", remote: "Remote" };
 export const WORK_TYPE_ORDER = ["remote", "hybrid", "onsite"];
 
-export const GEO_LABELS = { "sf-bay": "SF Bay Area", "remote-us": "Remote (US)" };
-export const GEO_ORDER = ["sf-bay", "remote-us"];
+export const GEO_LABELS = { "sf-bay": "SF Bay Area", california: "Elsewhere in California", "remote-us": "Remote (US)" };
+export const GEO_ORDER = ["sf-bay", "california", "remote-us"];
 
 export const LEVEL_LABELS = {
   junior: "Junior",

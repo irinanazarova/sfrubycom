@@ -1138,20 +1138,6 @@ export const jobs = {
     url: "https://jobs.lever.co/revealtech/73687bbb-1267-4e77-b2e6-51aefe0198a3",
     postedDate: "2026-09-07",
   },
-  "senior-software-engineer-applications-apartmentiq": {
-    id: "senior-software-engineer-applications-apartmentiq",
-    title: "Senior Software Engineer, Applications",
-    companyId: "apartmentiq",
-    companyName: "ApartmentIQ",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "Not disclosed",
-    description:
-      "ApartmentIQ is a profitable, fully remote proptech data platform covering 40M apartment units and trusted by 65 percent of the NMHC Top 50; it has raised $30M-plus and closed a $25M growth round in August 2026. Own features end to end, from data model to Rails API to React and Tailwind front end. Six-plus years full-stack with strong Rails API experience. A Staff role spanning Ruby, Python, and Terraform is also open.",
-    chips: ["Fullstack", "Data", "React", "Profitable"],
-    url: "https://job-boards.greenhouse.io/apartmentiq/jobs/8069494",
-    postedDate: "2026-09-07",
-  },
   "senior-software-engineer-tremendous": {
     id: "senior-software-engineer-tremendous",
     title: "Senior Software Engineer",
@@ -1448,6 +1434,9 @@ export const jobs = {
    *     Senior SWE — remote US, sole engineer on a Rails survey app — https://hstpathways.applytojob.com/apply/A9D3f5ZRnA/Senior-Software-Engineer
    *   Chronograph (Sixth Street growth equity, Jun 2026)
    *     Sr. SWE, Platform Engineering — remote, $175K–$215K, Rails + Node — https://www.chronograph.pe/jobs/?gh_jid=5187048007
+   *   ApartmentIQ (Susquehanna Growth Equity round, $25M, Aug 2026; profitable, $30M+ raised)
+   *     Senior SWE, Applications — remote US, Rails API + React — https://job-boards.greenhouse.io/apartmentiq/jobs/8069494
+   *     Staff SWE — remote US, Ruby + Python + Terraform — https://job-boards.greenhouse.io/apartmentiq/jobs/8116176
    *   GiveCampus (Silversmith growth equity 2022)
    *     Senior SWE, Online Giving — remote US — https://job-boards.greenhouse.io/givecampus/jobs/4374577009
    *     Staff SWE — https://job-boards.greenhouse.io/givecampus/jobs/4278428009
