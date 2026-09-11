@@ -70,7 +70,7 @@ ${next.length ? next.join("\n") : "See [Luma](https://lu.ma/sfruby) for the next
 
 ## Get involved
 - Meetups: ${SITE}/meetup (RSVP on https://lu.ma/sfruby)
-- Conference (Nov 10-12, 2026 at SFJAZZ), for engineers at startups and at household names: ${SITE}/
+- Conference (Nov 10-12, 2026 at SFJAZZ), two days of talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day: ${SITE}/
 - 2026 schedule (Day 1 AI-heavy, Day 2 AI-light): ${SITE}/#schedule
 - 2026 speakers, with talk titles and abstracts: ${SITE}/speakers
 - Sponsor: ${SITE}/sponsor-2026
@@ -207,7 +207,7 @@ SF Ruby exists to promote Ruby as the language of choice for new startups, showc
 
 ## What we do
 - **Monthly meetups** with talks, demos, and networking: ${SITE}/meetup. RSVP on [Luma](https://lu.ma/sfruby).
-- **Annual conference.** SF Ruby Conf brings together 450+ Rubyists for two days of talks, workshops, and startup demos. See ${SITE}/.
+- **Annual conference.** The San Francisco Ruby Conference brings 450+ Rubyists together for two days of talks, Day 1 AI-heavy and Day 2 AI-light, and a community day. See ${SITE}/.
 - **Jobs board.** A curated, monthly-audited board of Ruby/Rails roles at SF-area startups: ${SITE}/jobs.
 - **Startups & news.** We track Ruby companies and their milestones: ${SITE}/startups and ${SITE}/news.
 

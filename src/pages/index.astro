@@ -10,7 +10,7 @@ import GettingThere from "../components/GettingThere.astro";
 import Schedule from "../components/Schedule.astro";
 import TicketsBlock from "../components/TicketsBlock.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
-import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers, ticketTiers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { palette } from "../design/tokens.mjs";
@@ -42,6 +42,11 @@ const cameos = [
 // Flat sponsor list for the hero ticker, tier order preserved.
 const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);
 
+// One description for the meta tag, Open Graph and Twitter, from the same
+// data the page renders, so a price change never leaves a stale preview.
+const fromPrice = Math.min(...ticketTiers.filter((t) => t.state === "live").map((t) => t.price));
+const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live, tickets from $${fromPrice}.`;
+
 // Deadline text for the hero CTA, from the same source TicketScarcity reads.
 const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
     month: "short",
@@ -66,10 +71,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             sizes="96x96"
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta
-            name="description"
-            content="A conference for engineers who read and write Ruby, at startups and at household names. November 10-12, 2026 at SFJAZZ: Day 1 AI-heavy, Day 2 AI-light, and networking where everyone gets the mic."
-        />
+        <meta name="description" content={DESCRIPTION} />
         <meta name="theme-color" content={palette.sky[400]} />
         <title>San Francisco Ruby Conference 2026 - SF Ruby</title>
 
@@ -100,12 +102,14 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             property="og:title"
             content="San Francisco Ruby Conference 2026 - SF Ruby"
         />
-        <meta
-            property="og:description"
-            content="November 10-12, 2026 at SFJAZZ. A conference for engineers who read and write Ruby: the startups building on it and the household names running it at scale. Day 1 is AI-heavy, Day 2 is AI-light."
-        />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:url" content="https://sfruby.com/" />
         <meta property="og:image" content="https://sfruby.com/og/conference.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="San Francisco Ruby Conference 2026 - SF Ruby" />
+        <meta name="twitter:description" content={DESCRIPTION} />
         <meta property="twitter:image" content="https://sfruby.com/og/conference.png" />
 
         <script
