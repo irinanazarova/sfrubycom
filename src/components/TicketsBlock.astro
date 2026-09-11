@@ -12,6 +12,9 @@ const tiers = [
     { ...tier("Regular"), label: "Both days", placement: "tickets", main: true },
     { ...tier("Single day"), label: "One day", placement: "tickets-day", main: false },
 ].filter((t) => t.price);
+// The tier after Regular: shown small and muted at the end of the row, so the
+// deadline on the Regular card has a visible consequence.
+const late = ticketTiers.find((t) => t.name === "Late bird" && t.state === "soon");
 ---
 
 <section id="tickets" class="relative overflow-hidden py-16 md:py-20 px-royal-grad text-white border-t-4 border-ink">
@@ -23,7 +26,7 @@ const tiers = [
             </h2>
         </div>
 
-        <ul class="mt-10 grid gap-5 md:grid-cols-3 list-none p-0 m-0 items-stretch">
+        <ul class:list={["mt-10 grid gap-5 list-none p-0 m-0 items-stretch", late ? "md:grid-cols-[1fr_1fr_1fr_0.7fr]" : "md:grid-cols-3"]}>
             {
                 tiers.map((t) => (
                     <li class:list={["px-card bg-white text-gray-900 p-5 md:p-6 flex flex-col", t.main && "px-card--gold"]}>
@@ -45,6 +48,15 @@ const tiers = [
                         </a>
                     </li>
                 ))
+            }
+            {
+                late && (
+                    <li class="px-card bg-gray-100 text-gray-500 p-4 md:p-5 flex flex-col md:self-center" aria-label={`${late.name}, ${late.note}`}>
+                        <p class="px-font text-px8 text-gray-500">{late.name}</p>
+                        <p class="font-display font-semibold text-2xl md:text-3xl text-gray-400 mt-2">${late.price}</p>
+                        <p class="text-xs text-gray-500 leading-relaxed mt-2">{late.note}</p>
+                    </li>
+                )
             }
         </ul>
 

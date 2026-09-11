@@ -177,7 +177,7 @@ export const ticketTiers = [
   {
     name: "Single day",
     price: 350,
-    note: "Day 1 only (Nov 10, AI-heavy) or Day 2 only (Nov 11, AI-light).",
+    note: "Day 1 AI-heavy OR Day 2 AI-light. Until Sep 30",
     state: "live",
   },
   {
@@ -186,6 +186,8 @@ export const ticketTiers = [
     note: "Invoiced, expensable, no deadline. Buying this tier is what keeps Regular at $450.",
     state: "live",
   },
+  // Opens when Regular closes. `soon` renders muted and without a button.
+  { name: "Late bird", price: 500, note: "From Oct 1", state: "soon" },
 ];
 
 // Regular-tier sales counter. Update from Luma (Registration tab shows sold/total),
@@ -197,7 +199,7 @@ export const regularTier = {
   closesOn: "2026-09-30T23:59:00-07:00",
   // Set once the post-Regular tier is decided; until then the strip says prices
   // rise without quoting a figure we might not honour.
-  nextPrice: null,
+  nextPrice: 500,
   // A remaining-count only reads as scarcity once it is small. Above this it reads
   // as "nobody is buying", so the strip shows the deadline instead. Raise it as the
   // tier fills; below it the live count and the sold meter appear on their own.

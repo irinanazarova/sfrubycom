@@ -20,7 +20,7 @@ const costs = [
     { item: "Ticket, single day (Nov 10 or Nov 11)", value: `$${singleDay.price}` },
     { item: "Flights", value: "$0 from the Bay Area" },
     { item: "Hotel", value: "$0 if you sleep at home" },
-    { item: "Days out of the office", value: "2 (Nov 10 and 11)" },
+    { item: "Days out of the office", value: "1 (Nov 11 is Veterans Day)" },
     { item: "Community day, Nov 12", value: "Optional" },
 ];
 
@@ -51,7 +51,7 @@ const emailBody = `Subject: SF Ruby Conference, Nov 10-11 ($${regular.price})
 
 Hi [manager],
 
-I'd like to attend the San Francisco Ruby Conference at SFJAZZ on November 10 and 11 (sfruby.com). It's local, so the cost is the ticket: $${regular.price} until ${regularCloses}, or $${company.price} on the invoiced company tier with no deadline. A single day is $${singleDay.price}. Two days out of the office. The community day on the 12th is optional.
+I'd like to attend the San Francisco Ruby Conference at SFJAZZ on November 10 and 11 (sfruby.com). It's local, so the cost is the ticket: $${regular.price} until ${regularCloses}, or $${company.price} on the invoiced company tier with no deadline. A single day is $${singleDay.price}. Nov 11 is Veterans Day, so it is one day out of the office. The community day on the 12th is optional.
 
 Why it's worth it for us:
 
@@ -69,7 +69,7 @@ Thanks,
 <BaseLayout
     darkHero={false}
     title="Convince your manager - SF Ruby Conference 2026"
-    description="An email to send your manager, what the San Francisco Ruby Conference costs a Bay Area engineer (the ticket and two days), and what they bring back."
+    description="An email to send your manager, what the San Francisco Ruby Conference costs a Bay Area engineer (the ticket and one day off), and what they bring back."
 >
     <section class="pt-28 pb-14 bg-sky-50 border-b-4 border-ink">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -78,8 +78,8 @@ Thanks,
                 Convince your manager
             </h1>
             <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
-                It is local, so the cost is the ticket and two days. Fill in
-                the brackets, copy, send.
+                It is local, and Nov 11 is Veterans Day, so the cost is the
+                ticket and one day off. Fill in the brackets, copy, send.
             </p>
         </div>
     </section>
