@@ -1,16 +1,16 @@
 ---
-// Organizers and volunteers: everyone on an organizer or volunteer ticket on
-// Luma, on two floating islands at dusk, the same way the companies stand on
-// theirs. The snapshot is src/content/crew-2026.json (see the fetch script);
-// a person without a Cloud Card yet stands in as the CFP-poster chibi, so
-// the roll is complete on the day the ticket is issued, not the day the
-// character is drawn.
+// Organizers and volunteers: everyone on the Organizer/volunteer ticket on
+// Luma, together on one floating island at dusk, the same way the companies
+// stand on theirs. The snapshot is src/content/crew-2026.json (see the fetch
+// script). Only people who have drawn their Cloud Card appear; the rest are
+// in the snapshot and show up the day they do, no stand-ins here, since the
+// nudge to draw one comes from the organizers themselves.
 import crew from "../content/crew-2026.json";
 
-const groups = [
-    { label: "Organizers", people: crew.organizers ?? [] },
-    { label: "Volunteers", people: crew.volunteers ?? [] },
-].filter((g) => g.people.length);
+const people = [...(crew.organizers ?? []), ...(crew.volunteers ?? [])]
+    .filter((p) => p.image)
+    .sort((a, b) => a.name.localeCompare(b.name));
+const groups = people.length ? [{ label: "Organizers and volunteers", people }] : [];
 ---
 
 {
@@ -30,25 +30,20 @@ const groups = [
                     </p>
                 </div>
 
-                <ul class="mt-12 flex flex-wrap justify-center items-end gap-x-10 gap-y-12 list-none p-0 m-0">
-                    {groups.map((g, i) => (
-                        <li class="flex flex-col items-center animate-float min-w-[10rem]" style={`animation-delay: ${i ? "-2.5s" : "0s"}`}>
-                            <span class="px-plate px-plate--gold px-font text-px8 px-2.5 py-1 mb-3">{g.label}</span>
-                            <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[30rem] px-4 -mb-1.5">
-                                {g.people.map((p) =>
-                                    p.image ? (
-                                        <a href={p.url} target="_blank" rel="noopener noreferrer" class="block tap-press" title={p.name} aria-label={`${p.name}'s Cloud Card`}>
-                                            <img src={p.image} alt={p.name} width="73" height="128" loading="lazy" decoding="async" class="px-pixelated h-14 md:h-16 w-auto" />
-                                        </a>
-                                    ) : (
-                                        <img src="/px-human.png" alt={p.name} width="21" height="41" title={p.name} class="px-pixelated h-14 md:h-16 w-auto" />
-                                    ),
-                                )}
+                <ul class="mt-12 flex flex-wrap justify-center items-end list-none p-0 m-0">
+                    {groups.map((g) => (
+                        <li class="flex flex-col items-center animate-float min-w-[10rem]">
+                            <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[44rem] px-4 -mb-1.5">
+                                {g.people.map((p) => (
+                                    <a href={p.url} target="_blank" rel="noopener noreferrer" class="block tap-press" title={p.name} aria-label={`${p.name}'s Cloud Card`}>
+                                        <img src={p.image} alt={p.name} width="73" height="128" loading="lazy" decoding="async" class="px-pixelated h-14 md:h-16 w-auto" />
+                                    </a>
+                                ))}
                             </div>
                             <div class="w-0 min-w-full">
                                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-full h-auto" />
                             </div>
-                            <p class="font-mono text-xs text-white/90 px-shadow-ink-sm text-center leading-relaxed mt-3 max-w-[30rem]">
+                            <p class="font-mono text-xs text-white/90 px-shadow-ink-sm text-center leading-relaxed mt-3 max-w-[44rem]">
                                 {g.people.map((p) => p.name).join(" · ")}
                             </p>
                         </li>
