@@ -17,8 +17,10 @@
 // are 24h strings; `formatTime` renders them.
 export const AUDIENCES = {
   all: { id: "all", label: "Everyone" },
-  startups: { id: "startups", label: "Startups" },
-  household: { id: "household", label: "Household names" },
+  // Labels renamed in September 2026 (were "Startups" and "Household names");
+  // the ids stay, they are the audience keys on every block below.
+  startups: { id: "startups", label: "Small teams" },
+  household: { id: "household", label: "Big teams" },
 };
 
 export const days = [
@@ -107,7 +109,7 @@ export const days = [
         ],
         group: {
           audience: "household",
-          title: "Household names: share your strategies for agentic coding",
+          title: "Big teams: share your strategies for agentic coding",
           hosts: ["Mike Dalton"],
         },
       },
@@ -202,7 +204,7 @@ export const days = [
         ],
         group: {
           audience: "household",
-          title: "Household names and engineers: getting to know each other",
+          title: "Big teams and engineers: getting to know each other",
           hosts: ["Amanda Kinney"],
         },
       },
@@ -265,7 +267,7 @@ export const days = [
         ],
         group: {
           audience: "household",
-          title: "Household names teams: when to choose Sidekiq, Solid Queue, GoodJob and more",
+          title: "Big teams: when to choose Sidekiq, Solid Queue, GoodJob and more",
           hosts: ["Ken Decanio", "Cameron Dutro"],
         },
       },
