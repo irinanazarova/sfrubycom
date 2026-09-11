@@ -23,6 +23,10 @@ const sizeOf = (n) =>
             ? { name: "text-px10 md:text-sm", chibi: "h-12 md:h-14" }
             : { name: "text-px8 md:text-px10", chibi: "h-10 md:h-12" };
 
+// Legal suffixes are noise on an island: "Workshop Software Inc" is
+// Workshop Software to the people standing on it.
+const displayName = (name) => name.replace(/[,\s]+(inc|llc|ltd|corp|co|gmbh|plc)\.?$/i, "");
+
 // The organizers stand aside; the cloud is the companies buying tickets.
 const ORGANIZER = "Evil Martians";
 const organizers = companies.filter((c) => c.name === ORGANIZER);
@@ -63,9 +67,8 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
                     island is as wide as the group, so its height follows
                     (the sprite keeps its aspect), and name and characters
                     grow with the head count too. A ticket holder without a
-                    Cloud Card yet stands in as the hooded generic attendee
-                    (pier-standin.webp), drawn by the game's own sprite
-                    pipeline from a no-photo prompt. The organizers' island
+                    Cloud Card yet stands in as the human from the CFP poster
+                    (px-human.png, cut from 8bit_cfp.png at its native 21x41). The organizers' island
                     sits beside the cloud rather than in it: as organizers we
                     always have the most people, and the cloud is for the
                     companies buying tickets. Sorted by size, then dealt to alternating
@@ -102,10 +105,10 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
                                     ))}
                                     {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
                                         <img
-                                            src="/pier-standin.webp"
+                                            src="/px-human.png"
                                             alt=""
-                                            width="73"
-                                            height="128"
+                                            width="21"
+                                            height="41"
                                             title="Has a ticket, no Cloud Card yet"
                                             class={`px-pixelated ${size.chibi} w-auto`}
                                         />
@@ -118,7 +121,7 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
                                     <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-full h-auto" />
                                 </div>
                                 <h3 class={`px-font text-white px-shadow-ink text-center leading-relaxed mt-2 ${size.name}`}>
-                                    {c.name}
+                                    {displayName(c.name)}
                                 </h3>
                             </li>
                         );
@@ -134,7 +137,7 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
                                 </a>
                             ))}
                             {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
-                                <img src="/pier-standin.webp" alt="" width="73" height="128" title="Has a ticket, no Cloud Card yet" class="px-pixelated h-12 md:h-14 w-auto" />
+                                <img src="/px-human.png" alt="" width="21" height="41" title="Has a ticket, no Cloud Card yet" class="px-pixelated h-12 md:h-14 w-auto" />
                             ))}
                         </div>
                         <div class="w-0 min-w-full">
