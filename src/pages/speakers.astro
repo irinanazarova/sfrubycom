@@ -123,20 +123,23 @@ const withTalks = profiles.filter((s) => s.title).length;
                 as speakers submit them.
             </p>
 
-            {/* items-start, not the default stretch: abstract lengths vary by 5x,
-                and a stretched short card is a card with 500px of empty white in
-                it. Ragged bottoms read better than that. */}
+            {/* Two cards per row from lg, each with the sprite as a tile the
+                text wraps around: three tall stacked cards read as stripes,
+                and so does a full-height sky column. items-start, not the
+                default stretch: abstract lengths vary by 5x, and a stretched
+                short card is a card with 500px of empty white in it. Ragged
+                bottoms read better than that. */}
             <ul
-                class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-start list-none p-0"
+                class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start list-none p-0"
             >
                 {
                     speakers.map((s) => (
                         <li
                             id={s.key}
                             data-cfp-key={s.key}
-                            class="px-card bg-white overflow-hidden flex flex-col scroll-mt-28 relative"
+                            class="px-card bg-white overflow-hidden block scroll-mt-28 relative"
                         >
-                            <SpeakerProfile profile={s} />
+                            <SpeakerProfile profile={s} layout="wrap" />
                         </li>
                     ))
                 }

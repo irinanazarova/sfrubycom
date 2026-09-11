@@ -263,7 +263,7 @@ const company = ticketTiers.find((t) => t.name === "Company-sponsored");
                 {/* tabindex + autofocus: showModal() would otherwise focus the
                     close button and paint its focus ring the moment the card
                     opens. Focus lands on the panel, and Tab reaches the X. */}
-                <div class="px-card bg-white relative overflow-hidden flex flex-col outline-none" tabindex="-1" autofocus>
+                <div class="px-card bg-white relative overflow-hidden flex flex-col md:grid md:grid-cols-[18rem_1fr] outline-none" tabindex="-1" autofocus>
                     <form method="dialog" class="absolute top-3 left-3 z-20 m-0">
                         <button
                             type="submit"
@@ -273,7 +273,7 @@ const company = ticketTiers.find((t) => t.name === "Company-sponsored");
                             X
                         </button>
                     </form>
-                    <SpeakerProfile profile={profile} />
+                    <SpeakerProfile profile={profile} layout="side" />
                     <div class="dialog-foot px-6 pb-6 -mt-2">
                         <a
                             href={`/speakers#${profile.key}`}
@@ -321,27 +321,13 @@ const company = ticketTiers.find((t) => t.name === "Company-sponsored");
             max-height: min(90svh, 100% - 3rem);
             margin: auto;
         }
-        /* the card's hard shadow needs room inside the scroll box */
+        /* the card's hard shadow needs room inside the scroll box; the
+           two-column layout itself is SpeakerProfile's `side` layout */
         .speaker-dialog > .px-card {
             box-shadow: 8px 8px 0 0 var(--px-ink);
             border: 4px solid var(--px-ink);
             margin: 0 8px 8px 0;
             min-height: 0;
-            display: grid;
-            grid-template-columns: 18rem 1fr;
-        }
-        /* SpeakerProfile's stage becomes the left column: full card height,
-           sprite centered, the border moves from the bottom to the right */
-        .speaker-dialog :global(.px-dither-sky) {
-            grid-row: 1 / span 2;
-            height: auto;
-            min-height: 22rem;
-            align-items: center;
-            border-bottom: 0;
-            border-right: 4px solid var(--px-ink);
-        }
-        .speaker-dialog :global(.px-dither-sky > div) {
-            padding-bottom: 0;
         }
         .speaker-dialog .dialog-foot {
             grid-column: 2;

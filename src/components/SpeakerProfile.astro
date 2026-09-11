@@ -8,17 +8,30 @@
 // fields are split into paragraphs here. The data-* hooks stay on the same
 // nodes /speakers' client refresh has always targeted.
 //
-// `title` overrides the CFP title: the schedule carries working titles from
-// the organizers' sheet for speakers whose CFP entry still says TBD.
+// `title` overrides the profile's title where a caller has a better one.
+//
+// Layouts, all of which stack below `md`:
+// - "stack": stage above the text (the default).
+// - "side": the stage is a full-height left column; the parent supplies the
+//   grid (`md:grid md:grid-cols-[18rem_1fr]`) and the stage spans both rows so
+//   a footer under the text leaves no white under the sky. The dialog.
+// - "wrap": the stage is a fixed tile floated top-left and the text flows
+//   beside it, then under it, so a long abstract widens the card rather than
+//   lengthening a sky stripe. The parent must be a plain block (no flex or
+//   grid: those establish a formatting context the float cannot reach into).
+//   The lineup page.
 import SocialLink from "./SocialLink.astro";
 import { toParagraphs } from "../utils/abstractText.js";
 
 interface Props {
     profile: any;
     title?: string;
+    layout?: "stack" | "side" | "wrap";
 }
 
-const { profile: s, title: titleOverride } = Astro.props;
+const { profile: s, title: titleOverride, layout = "stack" } = Astro.props;
+const side = layout === "side";
+const wrap = layout === "wrap";
 const title = titleOverride || s.title;
 const abstract = toParagraphs(s.abstract);
 const bio = toParagraphs(s.bio);
@@ -34,17 +47,24 @@ const bio = toParagraphs(s.bio);
 {/* Portrait stage. The sprite is a transparent PNG, so it needs the dithered
     sky behind it to read at this size, and a fixed height so every card in a
     row starts its text on the same line. */}
-<div class="px-dither-sky h-56 md:h-64 flex items-end justify-center border-b-4 border-ink">
+<div
+    class:list={[
+        "px-dither-sky h-56 flex items-end justify-center border-b-4 border-ink",
+        side && "md:h-auto md:min-h-[20rem] md:row-span-2 md:items-center md:border-b-0 md:border-r-4",
+        wrap && "md:float-left md:w-52 md:h-52 md:mr-6 md:mb-2 md:border-r-4",
+        !side && !wrap && "md:h-64",
+    ]}
+>
     {
         s.pixel ? (
-            <div class="flex flex-col items-center pb-3">
+            <div class:list={["flex flex-col items-center pb-3", side && "md:pb-0"]}>
                 <img
                     src={s.pixel}
                     alt={`${s.name}, pixel character`}
                     width="256"
                     height="256"
                     loading="lazy"
-                    class="px-pixelated w-36 md:w-40 h-auto"
+                    class:list={["px-pixelated h-auto", wrap ? "w-36 md:w-32" : "w-36 md:w-40"]}
                 />
                 <img
                     src="/px-island.png"
@@ -52,7 +72,7 @@ const bio = toParagraphs(s.bio);
                     width="598"
                     height="104"
                     loading="lazy"
-                    class="px-pixelated w-44 md:w-48 h-auto -mt-3"
+                    class:list={["px-pixelated h-auto -mt-3", wrap ? "w-44 md:w-40" : "w-44 md:w-48"]}
                 />
             </div>
         ) : (
@@ -63,7 +83,7 @@ const bio = toParagraphs(s.bio);
     }
 </div>
 
-<div class="p-6 flex flex-col flex-1">
+<div class:list={["p-6", wrap ? "md:pt-7" : "flex flex-col flex-1"]}>
     {/* Grotesk, not the pixel font: Press Start 2P has no accented capitals
         and mangles names like Gutiérrez. */}
     <h3 class="font-display font-bold text-xl text-gray-900 leading-snug">
