@@ -51,11 +51,23 @@ if (unsized.length) {
             .join(", ")} in data/sponsors.js`,
     );
 }
+
+// Consecutive tiers marked `shareRow` (the single-sponsor Coffee and Passport
+// tiers) render side by side in one row, each under its own heading, instead
+// of one lonely card per band. They stack again on phones.
+const groups = conference2026SponsorTiers.reduce((acc, tier) => {
+    const last = acc.at(-1);
+    if (tier.shareRow && last?.shared) last.tiers.push(tier);
+    else acc.push({ shared: !!tier.shareRow, tiers: [tier] });
+    return acc;
+}, []);
 ---
 
 <div class="space-y-10">
     {
-        conference2026SponsorTiers.map((tier) => {
+        groups.map((group) => (
+            <div class:list={[group.shared && "flex flex-wrap justify-center gap-x-12 gap-y-10"]}>
+        {group.tiers.map((tier) => {
             const size = SIZES[tier.size];
             return (
                 <div>
@@ -85,6 +97,8 @@ if (unsized.length) {
                     </div>
                 </div>
             );
-        })
+        })}
+            </div>
+        ))
     }
 </div>

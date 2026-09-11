@@ -44,6 +44,7 @@ export const conference2026SponsorTiers = [
   {
     tier: "Coffee Sponsor",
     size: "lg",
+    shareRow: true, // sits beside the other single-sponsor tier
     headingClass: "text-ruby-600",
     sponsors: [
       {
@@ -58,6 +59,7 @@ export const conference2026SponsorTiers = [
   {
     tier: "Ruby Passport Booth",
     size: "lg",
+    shareRow: true, // sits beside the other single-sponsor tier
     headingClass: "text-ruby-600",
     sponsors: [
       {

@@ -11,7 +11,6 @@ import snapshot from "../content/attending-companies.json";
 
 const companies = snapshot.companies ?? [];
 const min = snapshot.minAttendees ?? 2;
-const totalPeople = companies.reduce((n, c) => n + c.count, 0);
 ---
 
 {
@@ -36,9 +35,8 @@ const totalPeople = companies.reduce((n, c) => n + c.count, 0);
                         Ruby companies you'll meet
                     </h2>
                     <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
-                        {companies.length} companies with {min} or more
-                        tickets each, {totalPeople} people in total. The
-                        characters are theirs, from the Pier.
+                        This list is automated: get more tickets and see
+                        your company on top.
                     </p>
                 </div>
 
