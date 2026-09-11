@@ -107,10 +107,6 @@ export const conference2026SponsorTiers = [
         logo: "/sponsor_chatwoot.png",
         logoWidth: 859,
         logoHeight: 172,
-        // Ring mark with a cut-out: the ticker's invert fills the hole, so
-        // ship the brand's white art and let the ticker skip the filter.
-        logoOnDark: "/sponsor_chatwoot_white.png",
-        logoOnDarkWidth: 865,
         url: "https://www.chatwoot.com/",
       },
     ],

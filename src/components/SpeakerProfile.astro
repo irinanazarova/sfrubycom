@@ -1,0 +1,137 @@
+---
+// One speaker's full card: sprite on the dithered sky, name, affiliations,
+// role, the talk, the abstract, the bio, socials. Rendered by /speakers (one
+// per lineup card) and by the homepage schedule (inside the dialog a talk slot opens), so
+// the two can never disagree about a speaker.
+//
+// `profile` is a buildProfiles() entry (src/utils/speakerProfiles.js). Prose
+// fields are split into paragraphs here. The data-* hooks stay on the same
+// nodes /speakers' client refresh has always targeted.
+//
+// `title` overrides the CFP title: the schedule carries working titles from
+// the organizers' sheet for speakers whose CFP entry still says TBD.
+import SocialLink from "./SocialLink.astro";
+import { toParagraphs } from "../utils/abstractText.js";
+
+interface Props {
+    profile: any;
+    title?: string;
+}
+
+const { profile: s, title: titleOverride } = Astro.props;
+const title = titleOverride || s.title;
+const abstract = toParagraphs(s.abstract);
+const bio = toParagraphs(s.bio);
+---
+
+{
+    s.keynote && (
+        <span class="absolute top-3 right-3 z-10 px-plate px-plate--gold px-font text-px8 px-2 py-1">
+            Keynote
+        </span>
+    )
+}
+{/* Portrait stage. The sprite is a transparent PNG, so it needs the dithered
+    sky behind it to read at this size, and a fixed height so every card in a
+    row starts its text on the same line. */}
+<div class="px-dither-sky h-56 md:h-64 flex items-end justify-center border-b-4 border-ink">
+    {
+        s.pixel ? (
+            <div class="flex flex-col items-center pb-3">
+                <img
+                    src={s.pixel}
+                    alt={`${s.name}, pixel character`}
+                    width="256"
+                    height="256"
+                    loading="lazy"
+                    class="px-pixelated w-36 md:w-40 h-auto"
+                />
+                <img
+                    src="/px-island.png"
+                    alt=""
+                    width="598"
+                    height="104"
+                    loading="lazy"
+                    class="px-pixelated w-44 md:w-48 h-auto -mt-3"
+                />
+            </div>
+        ) : (
+            <div class="flex-1 flex items-center justify-center" aria-hidden="true">
+                <span class="px-font px-shadow-ink text-4xl text-white">?</span>
+            </div>
+        )
+    }
+</div>
+
+<div class="p-6 flex flex-col flex-1">
+    {/* Grotesk, not the pixel font: Press Start 2P has no accented capitals
+        and mangles names like Gutiérrez. */}
+    <h3 class="font-display font-bold text-xl text-gray-900 leading-snug">
+        {s.name}
+    </h3>
+    {/* markup kept tight on purpose: line breaks inside the anchor render as
+        spaces and detach the commas */}
+    <p class="font-display font-medium text-ruby-600 mt-2">
+        {s.orgs.map((org, i) => (
+            <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
+        ))}
+    </p>
+    {s.role && <p class="text-sm text-gray-500 mt-1">{s.role}</p>}
+
+    {/* always in the DOM (hidden when empty) so the client refresh has a node
+        to fill when a title or abstract lands */}
+    <p
+        data-talk-title
+        hidden={!title}
+        class="font-display font-semibold text-base text-gray-900 leading-snug mt-5"
+    >
+        {title && `“${title}”`}
+    </p>
+    <div
+        data-talk-abstract
+        hidden={abstract.length === 0}
+        class="text-sm text-gray-700 leading-relaxed"
+    >
+        {abstract.map((parts) => (
+            <p class="mt-3">
+                {parts.map((part) =>
+                    part.type === "link" ? (
+                        <a href={part.href} target="_blank" rel="noopener noreferrer" class="font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words">{part.label}</a>
+                    ) : (
+                        part.value
+                    ),
+                )}
+            </p>
+        ))}
+    </div>
+
+    <div
+        data-speaker-bio
+        hidden={bio.length === 0}
+        class="text-sm text-gray-600 leading-relaxed mt-5 pt-5 border-t-2 border-sky-100"
+    >
+        {bio.map((parts) => (
+            <p class="[&+&]:mt-3">
+                {parts.map((part) =>
+                    part.type === "link" ? (
+                        <a href={part.href} target="_blank" rel="noopener noreferrer" class="font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words">{part.label}</a>
+                    ) : (
+                        part.value
+                    ),
+                )}
+            </p>
+        ))}
+    </div>
+
+    {
+        s.socials.length > 0 && (
+            <div class="flex flex-wrap gap-3 pt-6 mt-auto">
+                {s.socials.map((link) => (
+                    <SocialLink platform={link.platform} href={link.href}>
+                        <span class:list={[link.icon && "sr-only"]}>{link.label}</span>
+                    </SocialLink>
+                ))}
+            </div>
+        )
+    }
+</div>

@@ -7,6 +7,7 @@ import EmailModal from "../components/EmailModal.astro";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { sponsors as sponsors2025 } from "../data/sponsors.js";
 import { conferenceSpeakers } from "../data/conference-2026.js";
+import attending from "../content/attending-companies.json";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -15,6 +16,11 @@ import "../styles/global.css";
 // actually signed does live in that file: SponsorTiers reads the 2026 roster from
 // it, and sponsors2025Count below counts the 2025 one.
 const sponsors2025Count = Object.keys(sponsors2025).length;
+
+// Who has already bought tickets, from the same snapshot the homepage renders
+// (companies with two or more ticket holders). For a sponsor deciding whether
+// their hiring managers will meet anyone, this is the list that answers it.
+const attendingCompanies = (attending.companies ?? []).map((c) => c.name);
 
 const tiers2026 = [
     {
@@ -93,7 +99,7 @@ const tiers2026 = [
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta
             name="description"
-            content="Sponsor the SF Ruby Conference 2026: three days with 450 engineers who read and write Ruby, and the founders hiring them, in San Francisco."
+            content="Sponsor the SF Ruby Conference 2026: three days with 450 engineers who read and write Ruby, at startups and at household names, in San Francisco."
         />
         <meta name="theme-color" content={palette.ruby[600]} />
         <title>Sponsor SF Ruby 2026 - SF Ruby</title>
@@ -117,7 +123,7 @@ const tiers2026 = [
         <meta property="og:title" content="Sponsor SF Ruby 2026 - SF Ruby" />
         <meta
             property="og:description"
-            content="Sponsor the SF Ruby Conference 2026: three days with 450 engineers who read and write Ruby, and the founders hiring them, in San Francisco."
+            content="Sponsor the SF Ruby Conference 2026: three days with 450 engineers who read and write Ruby, at startups and at household names, in San Francisco."
         />
         <meta property="og:image" content="https://sfruby.com/og/sponsor.png" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -154,7 +160,8 @@ const tiers2026 = [
                         </h1>
                         <p class="text-xl text-white">
                             Three days in a room of engineers who read and write
-                            Ruby, plus the founders hiring them, and a monthly
+                            Ruby, from the startups building on it and the
+                            household names running it at scale, plus a monthly
                             meetup the rest of the year.
                         </p>
                     </div>
@@ -226,6 +233,23 @@ const tiers2026 = [
                         </div>
                     </div>
 
+                    {attendingCompanies.length > 0 && (
+                        <div class="px-card bg-white p-8 mb-12">
+                            <h2 class="px-font text-sm md:text-base text-gray-900 mb-3 text-center">
+                                Who is in the room
+                            </h2>
+                            <p class="text-sm text-gray-600 text-center mb-6">
+                                Companies with two or more ticket holders so far,
+                                organizers and volunteers included.
+                            </p>
+                            <ul class="flex flex-wrap justify-center gap-2 list-none p-0">
+                                {attendingCompanies.map((name) => (
+                                    <li class="px-plate px-font text-px8 px-2.5 py-1.5">{name}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
                     <!-- Why Sponsor -->
                     <div
                         class="px-card bg-white p-8 mb-12"
@@ -254,11 +278,14 @@ const tiers2026 = [
                                 </div>
                                 <div>
                                     <h3 class="font-semibold text-gray-900">
-                                        Targeted Audience
+                                        Two audiences, on purpose
                                     </h3>
                                     <p class="text-gray-600 text-sm">
-                                        Reach senior engineers and founders
-                                        actively building with Ruby.
+                                        Senior engineers from startups and from
+                                        household names. Gusto, Shopify, Persona
+                                        and 37signals are on stage; the schedule
+                                        has talks and conversation groups for
+                                        each audience.
                                     </p>
                                 </div>
                             </div>
@@ -285,8 +312,10 @@ const tiers2026 = [
                                         Hiring Pipeline
                                     </h3>
                                     <p class="text-gray-600 text-sm">
-                                        Connect with Ruby talent at the
-                                        conference and job board.
+                                        Your hiring managers get the mic in
+                                        organized networking groups of 70 to
+                                        100 engineers, and a listing on the
+                                        jobs board the rest of the year.
                                     </p>
                                 </div>
                             </div>

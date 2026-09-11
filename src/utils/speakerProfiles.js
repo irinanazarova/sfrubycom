@@ -15,6 +15,33 @@ import {
   speakerKey,
 } from "./cfpTalks.js";
 import { socialMetaList } from "./socialLinks.js";
+import { days } from "../data/schedule-2026.js";
+
+// The organizers' schedule is the latest word on what a talk is called: the
+// sheet gets edited as titles settle, and several CFP entries still say TBD.
+// So the schedule title shows, on every surface and in the client-side
+// refresh too, and a CFP title replaces it only when it is a new version: a
+// real title that differs from the one the CFP carried when the schedule was
+// set (`cfpTitle` in src/data/schedule-2026.js). Speakers the schedule has
+// not placed fall back to the CFP title.
+const scheduled = new Map(
+  days.flatMap((d) =>
+    d.blocks.flatMap((b) =>
+      (b.sessions ?? [])
+        .filter((sess) => !sess.tba && sess.title)
+        .map((sess) => [
+          speakerKey(sess.speaker),
+          { title: sess.title, cfpTitle: sess.cfpTitle ?? "" },
+        ]),
+    ),
+  ),
+);
+
+function resolveTitle(key, cfpTitle) {
+  const slot = scheduled.get(key);
+  if (!slot) return cfpTitle;
+  return cfpTitle && cfpTitle !== slot.cfpTitle ? cfpTitle : slot.title;
+}
 
 export function buildProfiles(talks, speakers, aliases = {}) {
   const { byKey, unmatched } = buildTalkMap(talks, speakers, aliases);
@@ -27,7 +54,10 @@ export function buildProfiles(talks, speakers, aliases = {}) {
     return {
       ...s,
       key,
-      title: talk && isRealTitle(talk.title) ? talk.title.trim() : "",
+      title: resolveTitle(
+        key,
+        talk && isRealTitle(talk.title) ? talk.title.trim() : "",
+      ),
       // `pitch` on the roster covers a confirmed talk whose CFP entry is still
       // a stub; the CFP abstract takes over the moment one lands.
       abstract: cfpAbstract || s.pitch || "",
