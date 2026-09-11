@@ -11,7 +11,20 @@
 import snapshot from "../content/attending-companies.json";
 
 const companies = snapshot.companies ?? [];
-const min = snapshot.minAttendees ?? 2;
+
+// Name and character size by head count. Four steps is enough: the point is
+// that a group of ten reads as ten and a pair as a pair.
+const sizeOf = (n) =>
+    n >= 8
+        ? { name: "text-base md:text-2xl", chibi: "h-16 md:h-20" }
+        : n >= 4
+          ? { name: "text-sm md:text-lg", chibi: "h-14 md:h-16" }
+          : n >= 3
+            ? { name: "text-px10 md:text-sm", chibi: "h-12 md:h-14" }
+            : { name: "text-px8 md:text-px10", chibi: "h-10 md:h-12" };
+
+// Biggest in the middle: the sorted list is dealt to alternating ends.
+const arranged = companies.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]), []);
 ---
 
 {
@@ -41,60 +54,60 @@ const min = snapshot.minAttendees ?? 2;
                     </p>
                 </div>
 
-                {/* A scoreboard, not a grid of equal tiles: one row per
-                    company, sorted by head count, and the row grows with the
-                    characters in it. Ten people fill a row, two take a corner,
-                    and the biggest group sits on top, which is the point of
-                    the lede above. */}
-                <ol class="mt-12 px-card px-card--gold bg-sky-50 list-none p-0 m-0 divide-y-2 divide-gray-200">
-                    {companies.map((c, i) => (
-                        <li class:list={[
-                            "flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-4 py-3.5 sm:px-5 sm:py-4",
-                            i === 0 && "bg-gold-100",
-                        ]}>
-                            <div class="flex items-center justify-between gap-3 sm:w-[22rem] sm:shrink-0">
-                                <h3 class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug min-w-0">
+                {/* A cloud of companies: every group is its characters
+                    standing together under the company name, and the name
+                    and the characters grow with the head count. A ticket
+                    holder without a Cloud Card yet stands in as the Evil
+                    Martians human (px-human.png). Sorted by size, then
+                    arranged from the centre out so the biggest group floats
+                    in the middle of the cloud. */}
+                <ul class="mt-12 flex flex-wrap justify-center items-end gap-x-6 gap-y-8 md:gap-x-10 md:gap-y-10 list-none p-0 m-0">
+                    {arranged.map((c, i) => {
+                        const size = sizeOf(c.count);
+                        return (
+                            <li
+                                class="flex flex-col items-center gap-2 animate-float"
+                                style={`animation-delay: ${-((i * 1.3) % 6).toFixed(1)}s`}
+                            >
+                                <div class="flex flex-wrap items-end justify-center gap-1 max-w-[24rem]">
+                                    {c.characters.map((p) => (
+                                        <a
+                                            href={p.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="block tap-press"
+                                            title={p.name}
+                                            aria-label={`${p.name}'s Cloud Card`}
+                                        >
+                                            <img
+                                                src={p.image}
+                                                alt={p.name}
+                                                width="73"
+                                                height="128"
+                                                loading="lazy"
+                                                decoding="async"
+                                                class={`px-pixelated ${size.chibi} w-auto`}
+                                            />
+                                        </a>
+                                    ))}
+                                    {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
+                                        <img
+                                            src="/px-human.png"
+                                            alt=""
+                                            width="18"
+                                            height="24"
+                                            title="Has a ticket, no Cloud Card yet"
+                                            class={`px-pixelated ${size.chibi} w-auto opacity-90`}
+                                        />
+                                    ))}
+                                </div>
+                                <h3 class={`px-font text-white px-shadow-ink text-center leading-relaxed ${size.name}`}>
                                     {c.name}
                                 </h3>
-                                <span class="px-plate px-plate--gold px-font text-px8 px-2.5 py-1 shrink-0 whitespace-nowrap">
-                                    {c.count} attending
-                                </span>
-                            </div>
-                            <div class="flex flex-wrap items-end gap-1.5 min-h-[3rem]">
-                                {c.characters.map((p) => (
-                                    <a
-                                        href={p.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="block tap-press"
-                                        title={p.name}
-                                        aria-label={`${p.name}'s Cloud Card`}
-                                    >
-                                        <img
-                                            src={p.image}
-                                            alt={p.name}
-                                            width="64"
-                                            height="64"
-                                            loading="lazy"
-                                            decoding="async"
-                                            class="px-pixelated h-12 w-auto"
-                                            onerror="this.hidden = true; this.nextElementSibling.hidden = false"
-                                        />
-                                        <span hidden class="px-font text-xl text-gray-300 h-12 w-8 flex items-end justify-center pb-1" aria-hidden="true">?</span>
-                                    </a>
-                                ))}
-                                {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
-                                    <span
-                                        class="px-font text-xl text-gray-300 h-12 w-8 flex items-end justify-center pb-1"
-                                        aria-label="Attendee without a Cloud Card yet"
-                                    >
-                                        ?
-                                    </span>
-                                ))}
-                            </div>
-                        </li>
-                    ))}
-                </ol>
+                            </li>
+                        );
+                    })}
+                </ul>
 
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a
