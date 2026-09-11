@@ -6,6 +6,7 @@ import HashScroll from "../components/HashScroll.astro";
 import SectionLinks from "../components/SectionLinks.astro";
 import CompaniesAttending from "../components/CompaniesAttending.astro";
 import Pier from "../components/Pier.astro";
+import GettingThere from "../components/GettingThere.astro";
 import Schedule from "../components/Schedule.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
@@ -521,6 +522,9 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                     </div>
                 </div>
             </section>
+
+            <!-- How to reach the venue: transit lines and garage rates -->
+            <GettingThere />
 
             <!-- Tickets: the closing ask -->
             <section
