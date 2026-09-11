@@ -18,17 +18,24 @@ const totalPeople = companies.reduce((n, c) => n + c.count, 0);
     companies.length > 0 && (
         <section
             id="companies"
-            class="py-20 md:py-24 bg-white border-t-4 border-ink"
+            class="relative overflow-hidden py-20 md:py-24 px-sky-grad-day border-t-4 border-ink"
         >
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* the same sky as the hero, so the room reads as the same world */}
+            <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-20 left-[4%] w-40 md:w-60 animate-float pointer-events-none" aria-hidden="true" />
+            <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-28 right-[6%] w-28 md:w-44 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+            <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-[42%] left-[2%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+            <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute bottom-40 right-[3%] w-36 md:w-56 animate-float [animation-delay:-5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-24 left-[2%] w-48 h-auto animate-float [animation-delay:-4s] pointer-events-none hidden lg:block" aria-hidden="true" />
+            <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[26%] right-[2%] w-32 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="max-w-2xl mx-auto text-center">
                     <span class="px-plate px-font text-px8 px-3 py-1.5">
                         Who is in the room
                     </span>
-                    <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
-                        Ruby companies attending
+                    <h2 class="px-font px-shadow-ink text-lg md:text-2xl text-gold-400 mt-6">
+                        Ruby companies you'll meet
                     </h2>
-                    <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
+                    <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
                         {companies.length} companies have sent {min} or more
                         people so far, {totalPeople} engineers and founders
                         between them. The characters are theirs, made on the
@@ -38,7 +45,7 @@ const totalPeople = companies.reduce((n, c) => n + c.count, 0);
 
                 <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 list-none p-0">
                     {companies.map((c) => (
-                        <li class="px-card bg-sky-50 p-5 flex flex-col gap-4">
+                        <li class="px-card px-card--gold bg-sky-50 p-5 flex flex-col gap-4">
                             <div class="flex items-baseline justify-between gap-3">
                                 <h3 class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug min-w-0">
                                     {c.name}
@@ -96,7 +103,7 @@ const totalPeople = companies.reduce((n, c) => n + c.count, 0);
                         />
                         Put your company here
                     </a>
-                    <p class="text-sm text-gray-500 text-center sm:text-left max-w-xs">
+                    <p class="text-sm text-white px-shadow-ink-sm text-center sm:text-left max-w-xs">
                         Two tickets from one company and you are on this list.
                         A ticket also unlocks your character on the Pier.
                     </p>

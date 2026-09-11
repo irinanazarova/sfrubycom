@@ -50,6 +50,8 @@ const audienceLabel = (audience) => AUDIENCES[audience]?.label ?? "";
 const breakLabel = { break: "Break", lunch: "Lunch" };
 
 const singleDay = ticketTiers.find((t) => t.name === "Single day");
+const regular = ticketTiers.find((t) => t.name === "Regular");
+const company = ticketTiers.find((t) => t.name === "Company-sponsored");
 ---
 
 <section id="schedule" class="py-20 md:py-24 bg-sky-50 border-t-4 border-ink">
@@ -206,7 +208,22 @@ const singleDay = ticketTiers.find((t) => t.name === "Single day");
         ))
     }
 
-        <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Company-sponsored first: the invoiced ticket is the one a manager
+            approves, and it is what keeps Regular at its price. Regular is
+            the main CTA; the single day is the fallback. */}
+        <div class="mt-14 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+            {
+                company && (
+                    <a
+                        href={ticketLink("schedule-company")}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("schedule-company")}`}
+                    >
+                        Company-sponsored, ${company.price}
+                    </a>
+                )
+            }
             <a
                 href={ticketLink("schedule")}
                 target="_blank"
@@ -214,7 +231,7 @@ const singleDay = ticketTiers.find((t) => t.name === "Single day");
                 class={`px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("schedule")}`}
             >
                 <img src="/px-ticket.png" alt="" width="64" height="64" class="px-pixelated h-5 w-auto" />
-                Both days, $450
+                Both days, ${regular.price}
             </a>
             {
                 singleDay && (
@@ -229,6 +246,11 @@ const singleDay = ticketTiers.find((t) => t.name === "Single day");
                 )
             }
         </div>
+        <p class="text-sm text-gray-600 text-center mt-6">
+            Need sign-off first?
+            <a href="/manager" class="text-ruby-600 underline underline-offset-2 hover:text-ruby-500">Convince your manager</a>
+            has the costs, the case and an email to send.
+        </p>
     </div>
 
     {

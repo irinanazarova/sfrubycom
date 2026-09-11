@@ -4,14 +4,9 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import HashScroll from "../components/HashScroll.astro";
 import SectionLinks from "../components/SectionLinks.astro";
-import IslandNav from "../components/IslandNav.astro";
-import SpeakerRoster from "../components/SpeakerRoster.astro";
-import ConferenceNetworking from "../components/ConferenceNetworking.astro";
 import CompaniesAttending from "../components/CompaniesAttending.astro";
 import Pier from "../components/Pier.astro";
-import WhatYouHear from "../components/WhatYouHear.astro";
 import Schedule from "../components/Schedule.astro";
-import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
@@ -127,12 +122,16 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             <section id="conf" class="relative min-h-svh flex items-center text-white overflow-hidden px-sky-grad-day">
                 <!-- blocky retro clouds up high, floating islands down low:
                      the overworld this screen takes place in -->
-                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-28 left-[12%] w-36 md:w-44 animate-float pointer-events-none" aria-hidden="true" />
-                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-48 right-[10%] w-24 md:w-32 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
-                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-24 left-[4%] w-48 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[34%] right-[3%] w-32 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-16 right-[16%] w-24 h-auto animate-float [animation-delay:-5.5s] pointer-events-none hidden md:block" aria-hidden="true" />
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-24 pb-24">
+                <!-- three cloud sizes at three depths: big and slow low down,
+                     small and far up high -->
+                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-24 left-[6%] w-48 md:w-72 animate-float pointer-events-none" aria-hidden="true" />
+                <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-40 right-[8%] w-32 md:w-48 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-16 left-[44%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden md:block" aria-hidden="true" />
+                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute bottom-52 right-[2%] w-40 md:w-64 animate-float [animation-delay:-6s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-60 left-[1%] w-28 md:w-40 animate-float [animation-delay:-4s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-44 left-[3%] w-56 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[30%] right-[3%] w-36 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-24 pb-36 md:pb-40">
                     <h1 class="sr-only">
                         San Francisco Ruby Conference 2026
                     </h1>
@@ -141,11 +140,15 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                              screen. A script cycles the gold highlight through
                              the roster; clicking a cell locks the choice. -->
                         <div class="order-2 lg:order-1 flex justify-center lg:justify-end">
-                            <div id="fighter-select" class="px-dialog p-4 md:p-6 w-full max-w-md">
+                            <div id="fighter-select" class="px-dialog px-dialog--gold p-4 md:p-6 w-full max-w-md">
                                 <p class="px-font text-px10 md:text-xs text-gold-500 text-center mb-3 md:mb-4">
                                     Choose your fighter
                                 </p>
                                 <div class="relative flex items-end justify-center h-36 md:h-56 mb-1" aria-hidden="true">
+                                    <span class="px-spot"></span>
+                                    <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-3 md:w-4 top-[12%] left-[18%]" style="--px-twinkle-delay: 0s" />
+                                    <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2.5 md:w-3 top-[30%] right-[16%]" style="--px-twinkle-delay: -0.7s" />
+                                    <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2 md:w-3 top-[58%] left-[24%]" style="--px-twinkle-delay: -1.2s" />
                                     <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-0 left-1/2 -translate-x-1/2 w-44 md:w-60 h-auto" />
                                     <img id="fighter-portrait" src={fighters[0].pixel} alt="" width="256" height="256" class="px-pixelated h-[calc(100%-1.25rem)] md:h-[calc(100%-1.75rem)] w-auto px-fighter-bob relative mb-3 md:mb-4" />
                                     <span id="fighter-mystery" class="px-font text-5xl md:text-6xl text-white hidden self-center relative mb-6 md:mb-8">?</span>
@@ -196,7 +199,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                     <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SF Jazz</span>
                                 </span>
                             </div>
-                            <p class="font-display font-semibold text-base md:text-xl leading-snug text-white px-shadow-ink max-w-md mx-auto mb-5 md:mb-7">
+                            <p class="font-display font-semibold text-base md:text-xl leading-snug text-gold-400 px-shadow-ink max-w-md mx-auto mb-5 md:mb-7">
                                 Let's bring the programmer delight and Ruby into the future.
                             </p>
                             <!-- Insert coin: one gold block carrying the ask, the price
@@ -338,7 +341,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                      edge. Sponsor logos are dark art, so they ride the dark strip
                      as white silhouettes (brightness-0 invert). The clone group is
                      aria-hidden and link-free so tab order sees each brand once. -->
-                <div class="px-ticker absolute bottom-0 left-0 w-full border-t-4 border-ink py-3">
+                <!-- the ground the scene stands on, with the sponsor ticker as
+                     the strip beneath it -->
+                <div class="absolute bottom-0 left-0 w-full">
+                <div class="px-ground h-12 md:h-16" aria-hidden="true"></div>
+                <div class="px-ticker w-full border-t-4 border-ink py-3">
                     {
                         [false, true].map((clone) => (
                             <div
@@ -416,6 +423,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                         ))
                     }
                 </div>
+                </div>
             </section>
 
             <!-- The schedule, first thing after the hero: the two-audience
@@ -453,20 +461,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                  what unlocks it and nobody else has one -->
             <Pier />
 
-            <!-- The lineup: four faces as a taste, the CTA carries the rest to /speakers -->
-            <SpeakerRoster limit={4} ctaHref="/speakers" />
-
-            <!-- The two content arguments: agentic Rails in production, and the
-                 authors of the gems already in your Gemfile -->
-            <WhatYouHear />
-
-            <!-- Organized networking: the differentiator -->
-            <ConferenceNetworking />
-
             <CompaniesAttending />
-
-            <!-- Price ladder + team offer -->
-            <TicketLadder />
 
             <!-- Venue photo, framed like a cutscene still -->
             <section class="relative w-full border-y-4 border-ink">
@@ -573,25 +568,6 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 </div>
             </section>
 
-            <!-- Final CTA: overworld exits -->
-            <IslandNav
-                id="get-involved"
-                kicker="World 2026"
-                title="Choose your quest"
-                lede="Tickets, sponsorship, the meetup, or just say hi."
-                items={[
-                    {
-                        href: ticketLink("island-nav"),
-                        label: "Tickets",
-                        icon: "ticket",
-                        external: true,
-                        class: ticketEventClass("island-nav"),
-                    },
-                    { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
-                    { href: "/meetup", label: "The meetup", icon: "heart" },
-                    { href: "/contact", label: "Contact us", icon: "envelope" },
-                ]}
-            />
         </main>
 
         <Footer />

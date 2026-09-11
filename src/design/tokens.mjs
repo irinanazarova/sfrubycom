@@ -86,6 +86,13 @@ export const palette = {
     500: "#46b957",
     700: "#2f7d3a",
   },
+  // Island stone (sampled from Anton's island sprite, public/px-island.png):
+  // the ground tile and anything that needs to sit on the same rock.
+  stone: {
+    300: "#9aa8b8",
+    500: "#7c8da1",
+    700: "#678098",
+  },
   // Neutral grays (UI text and surfaces)
   dark: {
     50: "#f9fafb",
@@ -205,6 +212,7 @@ export const cssVars = {
   "px-blue": palette.indigo[500],
   "px-blue-dark": palette.indigo[700],
   "px-gold": palette.gold[500],
+  "px-gold-dark": palette.gold[600],
   "px-orange": palette.pumpkin[500],
   "px-ink": palette.ink,
   "px-cloud": palette.white,
@@ -215,12 +223,12 @@ export const cssVars = {
 
 // Dithered sky ramps (scripts/px-gradients.mjs).
 export const skyRamps = {
-  // Anton's logo sky: nearly flat, slightly darker up top and lighter
-  // toward the ground (his PRESS START sits navy-on-light). The full-height
-  // dither between the two logo blues reproduces that drift.
+  // Day sky: deep up top, the two logo blues below, so a hero reads as a
+  // sky with depth rather than a flat field. The bottom stop is unchanged
+  // on purpose: white text near the horizon keeps the contrast it had.
   "px-sky-day": {
     height: 384,
-    stops: [palette.sky[500], palette.sky[400]],
+    stops: [palette.sky[600], palette.sky[500], palette.sky[400]],
   },
   // Dusk: calm dark sky, lighter toward the ground like the logo,
   // dark enough throughout for white hero text.
@@ -248,4 +256,10 @@ export const spriteColors = {
   N: palette.grass[500], // python green (sampled from the island grass)
   n: palette.grass[300], // python light
   m: palette.grass[700], // python shade
+  T: palette.stone[300], // stone highlight
+  t: palette.stone[500], // stone
+  d: palette.stone[700], // stone shade
+  B: palette.indigo[500], // royal blue
+  b: palette.indigo[700], // royal blue shade
+  A: palette.sky[300], // sky-blue highlight
 };
