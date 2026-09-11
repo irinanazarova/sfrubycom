@@ -85,8 +85,10 @@ const jobs = getSortedJobs().map((job) => {
     };
 });
 
-// Sponsors pinned: stable sort puts featured first, recency preserved within.
-jobs.sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
+// Sponsors pinned first, then editorially featured listings, then the rest;
+// the stable sort keeps recency within each group.
+const pinRank = (j) => (j.sponsorId ? 2 : j.featured ? 1 : 0);
+jobs.sort((a, b) => pinRank(b) - pinRank(a));
 
 const uniqueCompanies = new Set(jobs.map((j) => j.companyId).filter(Boolean));
 
@@ -162,7 +164,7 @@ const facetGroups = [
                     Ruby Jobs
                 </h1>
                 <p class="text-lg md:text-xl text-gray-300 mb-6">
-                    Ruby and Rails roles, from new grad to staff, in the SF Bay Area and remote across the US. Filter to what fits you.
+                    Ruby and Rails roles, from new grad to staff, in the Bay Area, elsewhere in California, and remote across the US. Filter to what fits you.
                 </p>
 
                 <div class="flex flex-wrap items-center gap-8">

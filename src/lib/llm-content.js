@@ -7,6 +7,7 @@
 
 import { getSortedJobs } from "../data/jobs.js";
 import { getStartup, getAllStartups } from "../data/startups.js";
+import { getSponsor } from "../data/sponsors.js";
 import { getSpeaker } from "../data/speakers.js";
 import { talks } from "../data/talks.js";
 import { getAllMeetupRecordings } from "../data/meetup-recordings.js";
@@ -82,11 +83,14 @@ export function jobsMarkdown() {
   const body = jobs
     .map((j) => {
       const startup = j.startupId ? getStartup(j.startupId) : null;
-      const company = startup?.name || "";
+      const sponsor = j.sponsorId ? getSponsor(j.sponsorId) : null;
+      // Inline-company listings carry their own companyName; sponsors and
+      // startups resolve through their rosters.
+      const company = startup?.name || sponsor?.name || j.companyName || "";
       const heading = company ? `${j.title} at ${company}` : j.title;
       const meta = [j.location, j.type, j.salary].filter(Boolean).join(" · ");
       const chips = j.chips?.length ? `\nTags: ${j.chips.join(", ")}` : "";
-      const site = startup?.url ? `\nCompany: ${startup.url}` : "";
+      const site = startup?.url || sponsor?.url ? `\nCompany: ${startup?.url || sponsor?.url}` : "";
       return `### ${heading}
 ${meta}${chips}
 ${plain(j.description)}
