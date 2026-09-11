@@ -432,13 +432,16 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             <Schedule />
 
             <!-- 2026 Conference Sponsors -->
-            <section id="sponsors-2026" class="py-16 bg-sky-50">
+            <!-- White, with the ink rule on top, so the sponsor wall reads as
+                 its own block after the schedule's pale sky -->
+            <section id="sponsors-2026" class="py-20 md:py-24 bg-white border-t-4 border-ink">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-8">
-                        <h2 class="px-font text-base md:text-lg text-gray-900 mb-2">
-                            SF Ruby Conference 2026 Sponsors
+                        <span class="px-plate px-plate--gold px-font text-px8 px-3 py-1.5">Sponsors</span>
+                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6 mb-2">
+                            Backing year two
                         </h2>
-                        <p class="text-sm text-gray-500 mb-8">The first companies backing year two. Thank you!</p>
+                        <p class="text-base md:text-lg text-gray-600 mt-4 mb-10">The companies behind the SF Ruby Conference 2026. Thank you!</p>
 
                         <SponsorTiers />
 
@@ -457,11 +460,10 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 </div>
             </section>
 
-            <!-- The Pier: the pre-conference game, high up because a ticket is
-                 what unlocks it and nobody else has one -->
-            <Pier />
-
+            <!-- Who is in the room, then the game everyone in it plays -->
             <CompaniesAttending />
+
+            <Pier />
 
             <!-- Venue photo, framed like a cutscene still -->
             <section class="relative w-full border-y-4 border-ink">
