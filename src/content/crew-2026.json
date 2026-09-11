@@ -1,5 +1,80 @@
 {
-  "fetchedAt": null,
-  "organizers": [],
-  "volunteers": []
+  "fetchedAt": "2026-09-11T21:15:02.693Z",
+  "organizers": [
+    {
+      "name": "Alex Berdugin",
+      "url": "https://clouds.sfruby.com/e/2026-bits/aleksandr-berdiugin",
+      "image": "/attending/aleksandr-berdiugin.webp"
+    },
+    {
+      "name": "Alexander Tishchenko",
+      "url": "https://clouds.sfruby.com/e/2026-bits/alexander-tishchenko",
+      "image": "/attending/alexander-tishchenko.webp"
+    },
+    {
+      "name": "Amanda Kinney",
+      "url": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney",
+      "image": "/attending/amanda-kinney.webp"
+    },
+    {
+      "name": "Anton Lovchikov"
+    },
+    {
+      "name": "Anton Senkovskiy",
+      "url": "https://clouds.sfruby.com/e/2026-bits/anton-senkovskiy",
+      "image": "/attending/anton-senkovskiy.webp"
+    },
+    {
+      "name": "Camila Mirabal",
+      "url": "https://clouds.sfruby.com/e/2026-bits/camila-cami",
+      "image": "/attending/camila-cami.webp"
+    },
+    {
+      "name": "Victoria Melnikova",
+      "url": "https://clouds.sfruby.com/e/2026-bits/victoria-melnikova",
+      "image": "/attending/victoria-melnikova.webp"
+    },
+    {
+      "name": "Vladimir Dementyev",
+      "url": "https://clouds.sfruby.com/e/2026-bits/vova-dem",
+      "image": "/attending/vova-dem.webp"
+    }
+  ],
+  "volunteers": [
+    {
+      "name": "Aurelie Verrot",
+      "url": "https://clouds.sfruby.com/e/2026-bits/aurelie-verrot",
+      "image": "/attending/aurelie-verrot.webp"
+    },
+    {
+      "name": "Gary Tou"
+    },
+    {
+      "name": "Hector Miramontes"
+    },
+    {
+      "name": "Joshue Osuna"
+    },
+    {
+      "name": "Juli Tera",
+      "url": "https://clouds.sfruby.com/e/2026-bits/juli-tera",
+      "image": "/attending/juli-tera.webp"
+    },
+    {
+      "name": "Ken Decanio",
+      "url": "https://clouds.sfruby.com/e/2026-bits/ken-decanio",
+      "image": "/attending/ken-decanio.webp"
+    },
+    {
+      "name": "Madeline Hou"
+    },
+    {
+      "name": "Steven Ancheta"
+    },
+    {
+      "name": "Yang Chung",
+      "url": "https://clouds.sfruby.com/e/2026-bits/yang-chung",
+      "image": "/attending/yang-chung.webp"
+    }
+  ]
 }

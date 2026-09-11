@@ -22,12 +22,18 @@ import { fileURLToPath } from "node:url";
 // block renders. Committed alongside the JSON so build:dev has them.
 const IMG_DIR = fileURLToPath(new URL("../public/attending/", import.meta.url));
 const IMG_HEIGHT = 128;
-// Organizers and volunteers, by Luma ticket type, for the homepage crew
-// section: everyone approved on such a ticket, with a character when they
-// made one. Same image snapshot as the companies.
+// Organizers and volunteers for the homepage crew section: everyone approved
+// on the "Organizer/volunteer" ticket. Luma has one ticket type for both, so
+// the split is by company: Evil Martians organizes, everyone else on the
+// ticket volunteers. Same image snapshot as the companies.
 const CREW_OUT = fileURLToPath(new URL("../src/content/crew-2026.json", import.meta.url));
-const crewBucket = (ticket) =>
-  /organi[sz]er/i.test(ticket) ? "organizers" : /volunteer/i.test(ticket) ? "volunteers" : null;
+const ORGANIZER_COMPANY = "evil martians";
+const isCrewTicket = (ticket) => /organi[sz]er|volunteer/i.test(ticket);
+const crewBucket = (guest) =>
+  companyKey(companyAnswer(guest)) === ORGANIZER_COMPANY ||
+  /@evilmartians\.com$/i.test(guest.email ?? guest.user_email ?? "")
+    ? "organizers"
+    : "volunteers";
 const OUT = fileURLToPath(
   new URL("../src/content/attending-companies.json", import.meta.url),
 );
@@ -93,7 +99,7 @@ const slugOf = (raw) =>
     .replace(/^-+|-+$/g, "");
 
 // People who typed a different name on the Pier than on Luma.
-const NAME_ALIASES = { "vova dementyev": "vladimir dementyev" };
+const NAME_ALIASES = { "vova dementyev": "vladimir dementyev", "aleksandr berdiugin": "alex berdugin" };
 
 async function getJson(url, headers = {}) {
   const res = await fetch(url, { headers, signal: AbortSignal.timeout(20_000) });
@@ -238,12 +244,19 @@ try {
 
   const crew = { organizers: [], volunteers: [] };
   for (const g of attendees) {
-    const bucket = crewBucket(g.event_ticket?.name ?? "");
-    if (!bucket) continue;
-    const name = (g.name ?? g.user_name ?? "").trim();
-    const n = nameKey(name);
-    const ch = byName.get(NAME_ALIASES[n] ?? n) ?? (await probeCharacter(name));
+    if (!isCrewTicket(g.event_ticket?.name ?? "")) continue;
+    const bucket = crewBucket(g);
+    // Luma carries a registration name and a profile name ("Camila" and
+    // "Camila Mirabal"); the character may be under either.
+    const names = [...new Set([g.name, g.user_name].map((x) => (x ?? "").trim()).filter(Boolean))];
+    let ch = null;
+    for (const cand of names) {
+      const n = nameKey(cand);
+      ch = byName.get(NAME_ALIASES[n] ?? n) ?? byName.get(n) ?? (await probeCharacter(cand));
+      if (ch) break;
+    }
     const snap = ch ? await snapshot({ name: ch.name, url: ch.url, image: ch.image_url }) : null;
+    const name = snap ? ch.name : names.sort((a, b) => b.length - a.length)[0];
     crew[bucket].push(snap ? { name, url: snap.url, image: snap.image } : { name });
   }
   for (const list of Object.values(crew)) list.sort((a, b) => a.name.localeCompare(b.name));
