@@ -50,26 +50,28 @@ const arranged = companies.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc,
                     </h2>
                     <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
                         This list is automated: get more tickets and see
-                        your company on top.
+                        your company here.
                     </p>
                 </div>
 
-                {/* A cloud of companies: every group is its characters
-                    standing together under the company name, and the name
-                    and the characters grow with the head count. A ticket
-                    holder without a Cloud Card yet stands in as the Evil
-                    Martians human (px-human.png). Sorted by size, then
-                    arranged from the centre out so the biggest group floats
-                    in the middle of the cloud. */}
+                {/* An archipelago: every company is its characters standing
+                    on a floating island, the company name under it. The
+                    island is as wide as the group, so its height follows
+                    (the sprite keeps its aspect), and name and characters
+                    grow with the head count too. A ticket holder without a
+                    Cloud Card yet stands in as a grey chibi silhouette
+                    (px-human.png: the CFP-poster chibi flattened to one
+                    tone, so it carries no one's features). Sorted by size, then dealt to alternating
+                    ends so the biggest island floats mid-sky. */}
                 <ul class="mt-12 flex flex-wrap justify-center items-end gap-x-6 gap-y-8 md:gap-x-10 md:gap-y-10 list-none p-0 m-0">
                     {arranged.map((c, i) => {
                         const size = sizeOf(c.count);
                         return (
                             <li
-                                class="flex flex-col items-center gap-2 animate-float"
+                                class="flex flex-col items-center animate-float min-w-[8rem]"
                                 style={`animation-delay: ${-((i * 1.3) % 6).toFixed(1)}s`}
                             >
-                                <div class="flex flex-wrap items-end justify-center gap-1 max-w-[24rem]">
+                                <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[24rem] px-4 -mb-1.5">
                                     {c.characters.map((p) => (
                                         <a
                                             href={p.url}
@@ -94,14 +96,20 @@ const arranged = companies.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc,
                                         <img
                                             src="/px-human.png"
                                             alt=""
-                                            width="18"
-                                            height="24"
+                                            width="21"
+                                            height="41"
                                             title="Has a ticket, no Cloud Card yet"
-                                            class={`px-pixelated ${size.chibi} w-auto opacity-90`}
+                                            class={`px-pixelated ${size.chibi} w-auto`}
                                         />
                                     ))}
                                 </div>
-                                <h3 class={`px-font text-white px-shadow-ink text-center leading-relaxed ${size.name}`}>
+                                {/* w-0 + min-w-full: the island fills the
+                                    cluster's width without its own 598px
+                                    counting toward that width. */}
+                                <div class="w-0 min-w-full">
+                                    <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-full h-auto" />
+                                </div>
+                                <h3 class={`px-font text-white px-shadow-ink text-center leading-relaxed mt-2 ${size.name}`}>
                                     {c.name}
                                 </h3>
                             </li>
