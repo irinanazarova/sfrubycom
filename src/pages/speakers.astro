@@ -19,7 +19,7 @@
 //
 // The 2025 lineup lives on at /speakers-2025.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SocialLink from "../components/SocialLink.astro";
+import SpeakerProfile from "../components/SpeakerProfile.astro";
 import {
     conferenceSpeakers,
     cfpNameAliases,
@@ -27,7 +27,6 @@ import {
     ticketEventClass,
 } from "../data/conference-2026.js";
 import { buildProfiles } from "../utils/speakerProfiles.js";
-import { toParagraphs } from "../utils/abstractText.js";
 import cfpTalks from "../content/cfp-talks.json";
 
 const { profiles, unmatched } = buildProfiles(
@@ -44,25 +43,19 @@ if (unmatched.length > 0)
 // Keynotes open the grid, then whoever has a confirmed talk: a card carrying a
 // title and an abstract is the reason to scroll, and speakers whose CFP entry
 // hasn't landed yet would otherwise hold the top of the page with the thinnest
-// cards on it. Prose is split here; the card markup only reads flat fields.
-const speakers = [...profiles]
-    .sort(
-        (a, b) =>
-            Number(Boolean(b.keynote)) - Number(Boolean(a.keynote)) ||
-            Number(Boolean(b.title)) - Number(Boolean(a.title)),
-    )
-    .map((s) => ({
-        ...s,
-        abstract: toParagraphs(s.abstract),
-        bio: toParagraphs(s.bio),
-    }));
+// cards on it. The card itself is SpeakerProfile, shared with the homepage schedule.
+const speakers = [...profiles].sort(
+    (a, b) =>
+        Number(Boolean(b.keynote)) - Number(Boolean(a.keynote)) ||
+        Number(Boolean(b.title)) - Number(Boolean(a.title)),
+);
 
 const withTalks = profiles.filter((s) => s.title).length;
 ---
 
 <BaseLayout
-    title="Speakers - San Francisco Ruby Startup Conference 2026"
-    description={`The ${conferenceSpeakers.length} speakers of the San Francisco Ruby Startup Conference, November 10-12 2026 at SFJAZZ. Keynote by Garry Tan of Y Combinator, plus the people behind Solid Queue, RubyLLM, GoodJob, Typesense, Herb and AnyCable.`}
+    title="Speakers - San Francisco Ruby Conference 2026"
+    description={`The ${conferenceSpeakers.length} speakers of the San Francisco Ruby Conference, November 10-12 2026 at SFJAZZ: the people behind Solid Queue, RubyLLM, GoodJob, Typesense, Herb and AnyCable, and the engineers running Ruby at Gusto, Shopify, Persona and Fin.`}
     ogUrl="https://sfruby.com/speakers"
 >
     <!-- Hero -->
@@ -78,12 +71,19 @@ const withTalks = profiles.filter((s) => s.title).length;
             </h1>
             <p class="text-lg md:text-xl text-gray-200 mt-6 max-w-3xl">
                 {conferenceSpeakers.length} confirmed for the San Francisco Ruby
-                Startup Conference: the people who build the gems you run in production,
-                and the founders running Ruby businesses. Every one of them was
-                hand-picked, most of them found by screening GitHub for people
-                actively building in Ruby open source.
+                Conference: the people who build the gems you run in production,
+                the founders running Ruby businesses, and the engineers running
+                Ruby at household names. Every one of them was hand-picked, most
+                of them found by screening GitHub for people actively building in
+                Ruby open source.
             </p>
             <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a
+                    href="/#schedule"
+                    class="px-btn px-btn--gold px-font text-px10 px-6 py-4 tap-press"
+                >
+                    The schedule
+                </a>
                 <a
                     href={ticketLink("speakers-top")}
                     target="_blank"
@@ -136,132 +136,7 @@ const withTalks = profiles.filter((s) => s.title).length;
                             data-cfp-key={s.key}
                             class="px-card bg-white overflow-hidden flex flex-col scroll-mt-28 relative"
                         >
-                            {s.keynote && (
-                                <span class="absolute top-3 right-3 z-10 px-plate px-plate--gold px-font text-px8 px-2 py-1">
-                                    Keynote
-                                </span>
-                            )}
-                            {/* Portrait stage. The sprite is a transparent PNG, so
-                                it needs the dithered sky behind it to read at this
-                                size, and a fixed height so every card in a row
-                                starts its text on the same line. */}
-                            <div class="px-dither-sky h-56 md:h-64 flex items-end justify-center border-b-4 border-ink">
-                                {s.pixel ? (
-                                    <div class="flex flex-col items-center pb-3">
-                                        <img
-                                            src={s.pixel}
-                                            alt={`${s.name}, pixel character`}
-                                            width="256"
-                                            height="256"
-                                            loading="lazy"
-                                            class="px-pixelated w-36 md:w-40 h-auto"
-                                        />
-                                        <img
-                                            src="/px-island.png"
-                                            alt=""
-                                            width="598"
-                                            height="104"
-                                            loading="lazy"
-                                            class="px-pixelated w-44 md:w-48 h-auto -mt-3"
-                                        />
-                                    </div>
-                                ) : (
-                                    <div
-                                        class="flex-1 flex items-center justify-center"
-                                        aria-hidden="true"
-                                    >
-                                        <span class="px-font px-shadow-ink text-4xl text-white">
-                                            ?
-                                        </span>
-                                    </div>
-                                )}
-                            </div>
-
-                            <div class="p-6 flex flex-col flex-1">
-                                {/* Grotesk, not the pixel font: Press Start 2P has
-                                    no accented capitals and mangles names like
-                                    Gutiérrez. */}
-                                <h3 class="font-display font-bold text-xl text-gray-900 leading-snug">
-                                    {s.name}
-                                </h3>
-                                {/* markup kept tight on purpose: line breaks inside
-                                    the anchor render as spaces and detach the commas */}
-                                <p class="font-display font-medium text-ruby-600 mt-2">
-                                    {s.orgs.map((org, i) => (
-                                        <>{i > 0 && ", "}{org.url ? <a href={org.url} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-2">{org.name}</a> : org.name}</>
-                                    ))}
-                                </p>
-                                {s.role && (
-                                    <p class="text-sm text-gray-500 mt-1">
-                                        {s.role}
-                                    </p>
-                                )}
-
-                                {/* always in the DOM (hidden when empty) so the
-                                    client refresh has a node to fill when a title
-                                    or abstract lands */}
-                                <p
-                                    data-talk-title
-                                    hidden={!s.title}
-                                    class="font-display font-semibold text-base text-gray-900 leading-snug mt-5"
-                                >
-                                    {s.title && `“${s.title}”`}
-                                </p>
-                                <div
-                                    data-talk-abstract
-                                    hidden={s.abstract.length === 0}
-                                    class="text-sm text-gray-700 leading-relaxed"
-                                >
-                                    {s.abstract.map((parts) => (
-                                        <p class="mt-3">
-                                            {parts.map((part) =>
-                                                part.type === "link" ? (
-                                                    <a href={part.href} target="_blank" rel="noopener noreferrer" class="font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words">{part.label}</a>
-                                                ) : (
-                                                    part.value
-                                                ),
-                                            )}
-                                        </p>
-                                    ))}
-                                </div>
-
-                                <div
-                                    data-speaker-bio
-                                    hidden={s.bio.length === 0}
-                                    class="text-sm text-gray-600 leading-relaxed mt-5 pt-5 border-t-2 border-sky-100"
-                                >
-                                    {s.bio.map((parts) => (
-                                        <p class="[&+&]:mt-3">
-                                            {parts.map((part) =>
-                                                part.type === "link" ? (
-                                                    <a href={part.href} target="_blank" rel="noopener noreferrer" class="font-medium text-ruby-600 hover:text-ruby-500 underline underline-offset-2 break-words">{part.label}</a>
-                                                ) : (
-                                                    part.value
-                                                ),
-                                            )}
-                                        </p>
-                                    ))}
-                                </div>
-
-                                {s.socials.length > 0 && (
-                                    <div class="flex flex-wrap gap-3 pt-6 mt-auto">
-                                        {s.socials.map((link) => (
-                                            <SocialLink
-                                                platform={link.platform}
-                                                href={link.href}
-                                            >
-                                                <span
-                                                    class:list={[
-                                                        link.icon && "sr-only",
-                                                    ]}
-                                                >
-                                                    {link.label}
-                                                </span>
-                                            </SocialLink>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
+                            <SpeakerProfile profile={s} />
                         </li>
                     ))
                 }

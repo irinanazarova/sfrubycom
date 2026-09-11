@@ -70,7 +70,8 @@ ${next.length ? next.join("\n") : "See [Luma](https://lu.ma/sfruby) for the next
 
 ## Get involved
 - Meetups: ${SITE}/meetup (RSVP on https://lu.ma/sfruby)
-- Conference (Nov 10-12, 2026 at SFJAZZ): ${SITE}/
+- Conference (Nov 10-12, 2026 at SFJAZZ), for engineers at startups and at household names: ${SITE}/
+- 2026 schedule (Day 1 AI on Rails, Day 2 the rest of the stack): ${SITE}/#schedule
 - 2026 speakers, with talk titles and abstracts: ${SITE}/speakers
 - Sponsor: ${SITE}/sponsor-2026
 `;
@@ -222,7 +223,7 @@ export const PAGES = [
     slug: "index",
     title: "Home",
     description:
-      "The San Francisco Ruby Startup Conference 2026, plus what SF Ruby is and links to every section.",
+      "The San Francisco Ruby Conference 2026, plus what SF Ruby is and links to every section.",
     render: homeMarkdown,
   },
   {

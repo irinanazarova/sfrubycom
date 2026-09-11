@@ -9,6 +9,7 @@ import { conferenceSpeakers } from "../data/conference-2026.js";
 
 const regular = ticketTiers.find((t) => t.name === "Regular");
 const company = ticketTiers.find((t) => t.name === "Company-sponsored");
+const singleDay = ticketTiers.find((t) => t.name === "Single day");
 const regularCloses = new Date(regularTier.closesOn).toLocaleDateString(
     "en-US",
     { month: "long", day: "numeric", timeZone: "America/Los_Angeles" },
@@ -18,6 +19,7 @@ const speakerCount = conferenceSpeakers.length;
 const costs = [
     { item: `Ticket, Regular (until ${regularCloses})`, value: `$${regular.price}` },
     { item: "Ticket, company-sponsored (invoiced, no deadline)", value: `$${company.price}` },
+    { item: "Ticket, single day (Nov 10 or Nov 11)", value: `$${singleDay.price}` },
     { item: "Flights", value: "$0 from the Bay Area" },
     { item: "Hotel", value: "$0 if you sleep at home" },
     { item: "Days out of the office", value: "2 (Nov 10 and 11)" },
@@ -27,11 +29,15 @@ const costs = [
 const reasons = [
     {
         title: "The people who wrote your Gemfile are on stage",
-        body: "Solid Queue, GoodJob, AnyCable, Yabeda, Herb and Ruby core itself, each represented by its author or maintainer. A question asked in the hallway comes back with the answer the docs do not have.",
+        body: "Solid Queue, GoodJob, AnyCable, Herb and Ruby core itself, each represented by its author or maintainer. A question asked in the hallway comes back with the answer the docs do not have.",
     },
     {
         title: "Agentic Rails, from people running it in production",
-        body: "Fin serves 150,000 requests per second from a Rails monolith. Order.co is putting agents to work on a legacy codebase. RubyLLM 2.0 ships here. These are the talks that decide what the next two years of the job look like.",
+        body: "Day 1 is AI on Rails: Fin serves 150,000 requests per second from a Rails monolith, Order.co is putting agents to work on a legacy codebase, Anthropic shows an agent as a teammate inside a SaaS, and RubyLLM 2.0 ships here. Day 2 is the rest of the stack: queues, concurrency, real-time, open source.",
+    },
+    {
+        title: "A track for companies like yours",
+        body: "Talks and conversation groups are scheduled separately for startups and for household names, so the people in the room with you run the same kind of system, at the same kind of company. Gusto, Persona, Shopify and 37signals are on stage for the household-names audience.",
     },
     {
         title: "Networking is on the schedule",
@@ -43,17 +49,17 @@ const reasons = [
     },
 ];
 
-const emailBody = `Subject: SF Ruby Startup Conference, Nov 10-11 ($${regular.price})
+const emailBody = `Subject: SF Ruby Conference, Nov 10-11 ($${regular.price})
 
 Hi [manager],
 
-I'd like to attend the San Francisco Ruby Startup Conference at SFJAZZ on November 10 and 11 (sfruby.com). It's local, so the full cost is the ticket: $${regular.price} until ${regularCloses}, or $${company.price} on the invoiced company tier with no deadline. Two days out of the office; the community day on the 12th is optional.
+I'd like to attend the San Francisco Ruby Conference at SFJAZZ on November 10 and 11 (sfruby.com). It's local, so the full cost is the ticket: $${regular.price} until ${regularCloses}, or $${company.price} on the invoiced company tier with no deadline. Two days out of the office; the community day on the 12th is optional. A single-day ticket is $${singleDay.price} if one day is all I can take.
 
 Why it's worth it for us:
 
-- The authors and maintainers of tools we run are speaking: Solid Queue (37signals), GoodJob, AnyCable, Yabeda, Herb, and Ruby core (Shopify).
-- Four talks on agentic Rails in production, including Fin at 150,000 requests per second and RubyLLM 2.0.
-- Networking is organized: I'll be placed in two groups of engineers working on the same kind of system as ours, which is where the useful conversations about [our system] happen.
+- The authors and maintainers of tools we run are speaking: Solid Queue (37signals), GoodJob, AnyCable, Herb, and Ruby core (Shopify).
+- Day 1 is AI on Rails in production, including Fin at 150,000 requests per second, Anthropic on agents inside a SaaS, and RubyLLM 2.0. Day 2 is queues, concurrency, real-time and open source, with engineers from Gusto, Persona and Shopify.
+- Talks and networking groups are scheduled separately for startups and for large companies, so I'll be in the room with engineers running the same kind of system as ours, which is where the useful conversations about [our system] happen.
 - I'll write up the talks relevant to [our system] for the team afterwards.
 
 Ticket: ${ticketLink("manager-email")}
@@ -64,8 +70,8 @@ Thanks,
 
 <BaseLayout
     darkHero={false}
-    title="Convince your manager - SF Ruby Startup Conference 2026"
-    description="What the San Francisco Ruby Startup Conference costs a Bay Area engineer (the ticket and two days), what they bring back, and an email to send your manager."
+    title="Convince your manager - SF Ruby Conference 2026"
+    description="What the San Francisco Ruby Conference costs a Bay Area engineer (the ticket and two days), what they bring back, and an email to send your manager."
 >
     <section class="pt-28 pb-14 bg-sky-50 border-b-4 border-ink">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

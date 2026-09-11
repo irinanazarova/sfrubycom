@@ -23,6 +23,12 @@ const agentic = [
         body: "Taught a generation of Rails developers on YouTube, now builds at Anthropic. On making an agent a first-class teammate inside your Rails app, rather than a chat box bolted to the side of it.",
     },
     {
+        key: "vladimir-dementyev",
+        name: "Vladimir Dementyev",
+        org: "Evil Martians",
+        body: "Author of AnyCable and TestProf, on Ruby for AI and AI for Ruby: what the language brings to agents, and what agents bring to the language.",
+    },
+    {
         key: "madison-sites",
         name: "Madison Sites",
         org: "Order.co",
@@ -51,12 +57,6 @@ const gemfile = [
         layer: "Your real-time layer",
         people: [
             { key: "vladimir-dementyev", name: "Vladimir Dementyev", what: "wrote AnyCable, TestProf, and Layered Design for Rails" },
-        ],
-    },
-    {
-        layer: "Your metrics",
-        people: [
-            { key: "andrey-novikov", name: "Andrey Novikov", what: "wrote Yabeda, 10 million downloads of Ruby instrumentation" },
         ],
     },
     {
@@ -108,15 +108,16 @@ if (dangling.length > 0)
 
         <div class="mt-14 grid gap-6 lg:grid-cols-2 items-start">
             <div class="px-card bg-sky-50 p-6 md:p-8">
+                <span class="px-plate px-font text-px8 px-2.5 py-1">Day 1 · Nov 10</span>
                 <h3
-                    class="px-font text-px10 md:text-xs text-gray-900 leading-relaxed"
+                    class="px-font text-px10 md:text-xs text-gray-900 leading-relaxed mt-4"
                 >
                     Agentic Rails, already in production
                 </h3>
                 <p class="text-sm text-gray-600 leading-relaxed mt-4">
-                    Four talks from people who have shipped it, on the question
-                    that decides what your job looks like for the next few
-                    years.
+                    A whole day on AI and Rails, from people who have shipped
+                    it, on the question that decides what your job looks like
+                    for the next few years.
                 </p>
                 <ul class="mt-7 flex flex-col gap-5 list-none p-0">
                     {
@@ -144,16 +145,19 @@ if (dangling.length > 0)
             </div>
 
             <div class="px-card bg-gold-100 p-6 md:p-8">
+                <span class="px-plate px-plate--gold px-font text-px8 px-2.5 py-1">Day 2 · Nov 11</span>
                 <h3
-                    class="px-font text-px10 md:text-xs text-gray-900 leading-relaxed"
+                    class="px-font text-px10 md:text-xs text-gray-900 leading-relaxed mt-4"
                 >
                     The people who wrote your Gemfile
                 </h3>
                 <p class="text-sm text-gray-600 leading-relaxed mt-4">
-                    A conference pays for itself when the author of the thing
-                    that is currently breaking is standing ten feet away. Three
-                    independent answers to the job-queue question will be in the
-                    same room, all willing to argue about it.
+                    A day on the rest of the stack: queues, concurrency,
+                    real-time, open source. A conference pays for itself when
+                    the author of the thing that is currently breaking is
+                    standing ten feet away, and three independent answers to
+                    the job-queue question will be in the same room, all
+                    willing to argue about it.
                 </p>
                 <ul class="mt-7 flex flex-col gap-5 list-none p-0">
                     {

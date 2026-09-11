@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 const OUT = fileURLToPath(
   new URL("../src/content/attending-companies.json", import.meta.url),
 );
-const EVENT_ID = "evt-mKb0oC6cWGtqSIQ"; // San Francisco Ruby Startup Conference 2026
+const EVENT_ID = "evt-mKb0oC6cWGtqSIQ"; // San Francisco Ruby Conference 2026
 const LUMA_API = "https://public-api.luma.com/public/v1";
 const CHARACTERS_API = "https://clouds.sfruby.com/api/characters?limit=500";
 // The list API pages with next_cursor; older deploys capped it at the 50

@@ -10,6 +10,7 @@ import ConferenceNetworking from "../components/ConferenceNetworking.astro";
 import CompaniesAttending from "../components/CompaniesAttending.astro";
 import Pier from "../components/Pier.astro";
 import WhatYouHear from "../components/WhatYouHear.astro";
+import Schedule from "../components/Schedule.astro";
 import TicketLadder from "../components/TicketLadder.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
 import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
@@ -68,10 +69,10 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta
             name="description"
-            content="A conference for engineers who read and write Ruby. November 10-12, 2026 at SFJAZZ: agentic Rails in production, and networking where everyone gets the mic."
+            content="A conference for engineers who read and write Ruby, at startups and at household names. November 10-12, 2026 at SFJAZZ: Day 1 on AI and Rails, Day 2 on the rest of the stack, and networking where everyone gets the mic."
         />
         <meta name="theme-color" content={palette.sky[400]} />
-        <title>San Francisco Ruby Startup Conference 2026 - SF Ruby</title>
+        <title>San Francisco Ruby Conference 2026 - SF Ruby</title>
 
         <link
             rel="preload"
@@ -98,11 +99,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
         <meta property="og:type" content="website" />
         <meta
             property="og:title"
-            content="San Francisco Ruby Startup Conference 2026 - SF Ruby"
+            content="San Francisco Ruby Conference 2026 - SF Ruby"
         />
         <meta
             property="og:description"
-            content="November 10-12, 2026 at SFJAZZ. A conference for engineers who read and write Ruby, and the founders who come to meet them. Keynote by Garry Tan of Y Combinator."
+            content="November 10-12, 2026 at SFJAZZ. A conference for engineers who read and write Ruby: the startups building on it and the household names running it at scale. Day 1 is AI on Rails, Day 2 is the rest of the stack."
         />
         <meta property="og:image" content="https://sfruby.com/og/conference.png" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -133,7 +134,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-16 right-[16%] w-24 h-auto animate-float [animation-delay:-5.5s] pointer-events-none hidden md:block" aria-hidden="true" />
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-24 pb-24">
                     <h1 class="sr-only">
-                        San Francisco Ruby Startup Conference 2026
+                        San Francisco Ruby Conference 2026
                     </h1>
                     <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
                         <!-- Fighter select: the speakers as a character-select
@@ -188,7 +189,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
 
                         <!-- Title stack: art, date, statement, insert-coin CTA -->
                         <div class="order-1 lg:order-2 text-center">
-                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Startup Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] h-auto mb-4 md:mb-6 mx-auto" />
+                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] h-auto mb-4 md:mb-6 mx-auto" />
                             <div class="mb-4 md:mb-5">
                                 <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
                                     <span class="text-gold-500">Year Two</span>
@@ -196,8 +197,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                 </span>
                             </div>
                             <p class="font-display font-semibold text-base md:text-xl leading-snug text-white px-shadow-ink max-w-md mx-auto mb-5 md:mb-7">
-                                A conference for engineers who read and write
-                                Ruby. Founders come here to meet them.
+                                Let's bring the programmer delight and Ruby into the future.
                             </p>
                             <!-- Insert coin: one gold block carrying the ask, the price
                                  and the deadline, the whole thing the link -->
@@ -217,7 +217,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                     <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Get your ticket</span>
                                     <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
                                         <span class="whitespace-nowrap">$450 &#183; until {regularCloses}<span id="days-left"></span></span>
-                                        <span class="whitespace-nowrap">Unlocks the Pier</span>
+                                        <span class="whitespace-nowrap">One day: $350</span>
                                     </span>
                                 </span>
                             </a>
@@ -385,11 +385,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                         {tickerSponsors.map((sponsor) =>
                                             clone ? (
                                                 <img
-                                                    src={sponsor.logoOnDark ?? sponsor.logo}
+                                                    src={sponsor.logo}
                                                     alt=""
-                                                    width={sponsor.logoOnDarkWidth ?? sponsor.logoWidth}
+                                                    width={sponsor.logoWidth}
                                                     height={sponsor.logoHeight}
-                                                    class:list={["h-6 md:h-7 w-auto shrink-0", !sponsor.logoOnDark && "brightness-0 invert"]}
+                                                    class="h-6 md:h-7 w-auto shrink-0 brightness-0 invert"
                                                     loading="eager"
                                                 />
                                             ) : (
@@ -400,11 +400,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                     class="shrink-0 hover:opacity-80 transition-opacity"
                                                 >
                                                     <img
-                                                        src={sponsor.logoOnDark ?? sponsor.logo}
+                                                        src={sponsor.logo}
                                                         alt={sponsor.name}
-                                                        width={sponsor.logoOnDarkWidth ?? sponsor.logoWidth}
+                                                        width={sponsor.logoWidth}
                                                         height={sponsor.logoHeight}
-                                                        class:list={["h-6 md:h-7 w-auto", !sponsor.logoOnDark && "brightness-0 invert"]}
+                                                        class="h-6 md:h-7 w-auto brightness-0 invert"
                                                         loading="eager"
                                                     />
                                                 </a>
@@ -415,6 +415,37 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                             </div>
                         ))
                     }
+                </div>
+            </section>
+
+            <!-- The schedule, first thing after the hero: the two-audience
+                 program is the claim the rest of the page has to earn, and
+                 the schedule is the proof. -->
+            <Schedule />
+
+            <!-- 2026 Conference Sponsors -->
+            <section id="sponsors-2026" class="py-16 bg-sky-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8">
+                        <h2 class="px-font text-base md:text-lg text-gray-900 mb-2">
+                            SF Ruby Conference 2026 Sponsors
+                        </h2>
+                        <p class="text-sm text-gray-500 mb-8">The first companies backing year two. Thank you!</p>
+
+                        <SponsorTiers />
+
+                        <div class="mt-10">
+                            <a
+                                href="/sponsor-2026"
+                                class="px-btn px-font text-px9 gap-2 px-5 py-3 bg-gold-500 text-ink hover:bg-gold-400"
+                            >
+                                Join them: Sponsor 2026
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -462,32 +493,6 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                             <p class="text-xs md:text-sm text-gray-600 mt-2">
                                 San Francisco
                             </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 2026 Conference Sponsors -->
-            <section id="sponsors-2026" class="py-16 bg-sky-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-8">
-                        <h2 class="px-font text-base md:text-lg text-gray-900 mb-2">
-                            SF Ruby Conference 2026 Sponsors
-                        </h2>
-                        <p class="text-sm text-gray-500 mb-8">The first companies backing year two. Thank you!</p>
-
-                        <SponsorTiers />
-
-                        <div class="mt-10">
-                            <a
-                                href="/sponsor-2026"
-                                class="px-btn px-font text-px9 gap-2 px-5 py-3 bg-gold-500 text-ink hover:bg-gold-400"
-                            >
-                                Join them: Sponsor 2026
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </a>
                         </div>
                     </div>
                 </div>

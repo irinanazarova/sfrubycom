@@ -1,0 +1,398 @@
+---
+// The 2026 schedule as a homepage section, rendered from
+// src/data/schedule-2026.js. One stage, two audiences: each talks block shows
+// who is in the hall and, beside it, the conversation group the other audience
+// is in at the same time. It used to be its own page; /schedule now redirects
+// to /#schedule, and the 2025 schedule lives on at /schedule-2025.
+//
+// Every talk slot is a button that opens the speaker's full card (the same
+// SpeakerProfile /speakers renders) in a native <dialog>. The open card is in
+// the URL as ?speaker=<key>, so a slot can be shared and reopens on load.
+import SpeakerProfile from "./SpeakerProfile.astro";
+import {
+    AUDIENCES,
+    days,
+    formatTime,
+    formatRange,
+    formatDay,
+} from "../data/schedule-2026.js";
+import {
+    conferenceSpeakers,
+    cfpNameAliases,
+    ticketLink,
+    ticketEventClass,
+    ticketTiers,
+} from "../data/conference-2026.js";
+import { speakerKey } from "../utils/cfpTalks.js";
+import { buildProfiles } from "../utils/speakerProfiles.js";
+import cfpTalks from "../content/cfp-talks.json";
+
+const { profiles } = buildProfiles(cfpTalks, conferenceSpeakers, cfpNameAliases);
+const profileByKey = new Map(profiles.map((p) => [p.key, p]));
+// A slot opens a dialog only for a speaker on the roster; a name the roster
+// lacks (a withdrawn talk still on the sheet, say) renders as plain text.
+const profileFor = (name) => profileByKey.get(speakerKey(name)) ?? null;
+
+// One dialog per scheduled speaker. The card's title comes from the profile,
+// where the schedule-versus-CFP rule has already been applied.
+const dialogs = new Map();
+for (const d of days)
+    for (const b of d.blocks)
+        for (const sess of b.sessions ?? []) {
+            if (sess.tba) continue;
+            const profile = profileFor(sess.speaker);
+            if (profile && !dialogs.has(profile.key))
+                dialogs.set(profile.key, profile);
+        }
+const plateClass = (audience) =>
+    audience === "household" ? "px-plate--gold" : audience === "all" ? "px-plate--orange" : "";
+const audienceLabel = (audience) => AUDIENCES[audience]?.label ?? "";
+const breakLabel = { break: "Break", lunch: "Lunch" };
+
+const singleDay = ticketTiers.find((t) => t.name === "Single day");
+---
+
+<section id="schedule" class="py-20 md:py-24 bg-sky-50 border-t-4 border-ink">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+            <span class="px-plate px-font text-px8 px-3 py-1.5">Nov 10-12 · SFJAZZ</span>
+            <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
+                The schedule
+            </h2>
+            <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
+                One stage, two audiences. Talks marked
+                <span class="px-plate px-font text-px8 px-2 py-1 mx-1">Startups</span>
+                and
+                <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 mx-1">Household names</span>
+                run while the other audience is in a conversation group, then
+                they swap. Keynotes are for everyone. Tap a talk for the
+                speaker's card.
+            </p>
+            <nav class="mt-8 flex flex-wrap justify-center gap-3" aria-label="Days">
+                {
+                    days.map((d) => (
+                        <a
+                            href={`#day${d.n}`}
+                            class="px-btn px-btn--white px-font text-px8 md:text-px9 px-4 py-3 tap-press"
+                        >
+                            Day {d.n} · {formatDay(d)}
+                        </a>
+                    ))
+                }
+            </nav>
+        </div>
+
+    {
+        days.map((d) => (
+            <div id={`day${d.n}`} class="mt-14 scroll-mt-28">
+                <div>
+                    <p class="px-font text-px8 md:text-px9 text-ruby-600">
+                        Day {d.n} · {d.weekday}, {formatDay(d)}
+                    </p>
+                    <h3 class="px-font text-base md:text-xl text-gray-900 mt-4">
+                        {d.theme}
+                    </h3>
+                    <p class="text-gray-600 mt-3 max-w-2xl">{d.tagline}</p>
+                    {d.links && (
+                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                            {d.links.map((l) => (
+                                <a
+                                    href={l.href}
+                                    target={l.external ? "_blank" : undefined}
+                                    rel={l.external ? "noopener noreferrer" : undefined}
+                                    class="px-btn px-btn--sky px-font text-px8 md:text-px9 px-5 py-3 tap-press"
+                                >
+                                    {l.label}
+                                </a>
+                            ))}
+                        </div>
+                    )}
+
+                    {d.blocks.length > 0 && (
+                        <ol class="mt-10 flex flex-col gap-4 list-none p-0">
+                            {d.blocks.map((b) =>
+                                b.kind === "break" || b.kind === "lunch" ? (
+                                    <li class="flex items-baseline gap-4 px-1 text-sm text-gray-500">
+                                        <span class="font-mono shrink-0 w-32">
+                                            {formatTime(b.start)}
+                                        </span>
+                                        <span class="px-font text-px8">
+                                            {breakLabel[b.kind]}
+                                        </span>
+                                    </li>
+                                ) : (
+                                    <li
+                                        class:list={[
+                                            "px-card bg-white",
+                                            b.group && "grid md:grid-cols-[1fr_16rem]",
+                                        ]}
+                                    >
+                                        <div class="p-5 md:p-6">
+                                            <div class="flex flex-wrap items-center gap-3">
+                                                <span class="font-mono text-sm text-gray-500">
+                                                    {formatRange(b.start, b.end)}
+                                                </span>
+                                                <span class={`px-plate ${plateClass(b.audience)} px-font text-px8 px-2 py-1`}>
+                                                    {b.kind === "keynote" ? "Keynote · Everyone" : audienceLabel(b.audience)}
+                                                </span>
+                                            </div>
+                                            <ul class="mt-5 flex flex-col gap-5 list-none p-0">
+                                                {b.sessions.map((s) => {
+                                                    const profile = s.tba ? null : profileFor(s.speaker);
+                                                    return (
+                                                        <li class="flex gap-4">
+                                                            {s.start && (
+                                                                <span class="font-mono text-xs text-gray-400 shrink-0 w-16 pt-1">
+                                                                    {formatTime(s.start)}
+                                                                </span>
+                                                            )}
+                                                            {s.tba ? (
+                                                                <p class="font-display font-semibold text-gray-500">
+                                                                    To be announced
+                                                                </p>
+                                                            ) : profile ? (
+                                                                <button
+                                                                    type="button"
+                                                                    class="slot-btn group min-w-0 text-left tap-press"
+                                                                    data-speaker-dialog={profile.key}
+                                                                    aria-haspopup="dialog"
+                                                                    aria-controls={`speaker-${profile.key}`}
+                                                                >
+                                                                    <span class="block font-display font-semibold text-base md:text-lg text-gray-900 leading-snug group-hover:text-ruby-600 transition-colors">
+                                                                        {s.title}
+                                                                    </span>
+                                                                    {/* one line on purpose: a line break before the comma renders as a space */}
+                                                                    <span class="block text-sm text-gray-600 mt-1.5"><span class="font-medium text-ruby-600 underline-offset-2 group-hover:underline">{s.speaker}</span>, {s.org}</span>
+                                                                </button>
+                                                            ) : (
+                                                                <div class="min-w-0">
+                                                                    <p class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug">
+                                                                        {s.title}
+                                                                    </p>
+                                                                    <p class="text-sm text-gray-600 mt-1.5"><span class="font-medium text-gray-900">{s.speaker}</span>, {s.org}</p>
+                                                                </div>
+                                                            )}
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        </div>
+                                        {b.group && (
+                                            <aside class="p-5 md:p-6 bg-sky-50 border-t-4 md:border-t-0 md:border-l-4 border-ink">
+                                                <p class="px-font text-px8 text-gray-500">Meanwhile</p>
+                                                <span class={`px-plate ${plateClass(b.group.audience)} px-font text-px8 px-2 py-1 mt-3 inline-block`}>
+                                                    {audienceLabel(b.group.audience)}
+                                                </span>
+                                                <p class="font-display font-semibold text-gray-900 leading-snug mt-3">
+                                                    {b.group.tba ? "Conversation group, to be announced" : b.group.title}
+                                                </p>
+                                                {(b.group.hosts || b.group.hostTbc) && (
+                                                    <p class="text-sm text-gray-600 mt-1.5">
+                                                        {b.group.hosts ? `with ${b.group.hosts.join(" and ")}` : "host to be confirmed"}
+                                                    </p>
+                                                )}
+                                                <p class="text-xs text-gray-500 mt-3">
+                                                    Conversation group, {formatRange(b.start, b.end)}
+                                                </p>
+                                            </aside>
+                                        )}
+                                    </li>
+                                ),
+                            )}
+                        </ol>
+                    )}
+                </div>
+            </div>
+        ))
+    }
+
+        <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+                href={ticketLink("schedule")}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("schedule")}`}
+            >
+                <img src="/px-ticket.png" alt="" width="64" height="64" class="px-pixelated h-5 w-auto" />
+                Both days, $450
+            </a>
+            {
+                singleDay && (
+                    <a
+                        href={ticketLink("schedule-day")}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("schedule-day")}`}
+                    >
+                        One day, ${singleDay.price}
+                    </a>
+                )
+            }
+        </div>
+    </div>
+
+    {
+        [...dialogs.values()].map((profile) => (
+            <dialog
+                id={`speaker-${profile.key}`}
+                class="speaker-dialog"
+                aria-label={`${profile.name}, speaker card`}
+            >
+                {/* tabindex + autofocus: showModal() would otherwise focus the
+                    close button and paint its focus ring the moment the card
+                    opens. Focus lands on the panel, and Tab reaches the X. */}
+                <div class="px-card bg-white relative overflow-hidden flex flex-col outline-none" tabindex="-1" autofocus>
+                    <form method="dialog" class="absolute top-3 left-3 z-20 m-0">
+                        <button
+                            type="submit"
+                            class="px-btn px-btn--white px-font text-px8 w-11 h-11 tap-press"
+                            aria-label="Close"
+                        >
+                            X
+                        </button>
+                    </form>
+                    <SpeakerProfile profile={profile} />
+                    <div class="dialog-foot px-6 pb-6 -mt-2">
+                        <a
+                            href={`/speakers#${profile.key}`}
+                            class="text-sm text-gray-500 underline underline-offset-2 hover:text-ruby-600"
+                        >
+                            All speakers
+                        </a>
+                    </div>
+                </div>
+            </dialog>
+        ))
+    }
+</section>
+
+<style>
+    /* Native <dialog>: the top layer sits above the bottom nav and the More
+       sheet without joining the z-index ladder. The panel is a px-card; the
+       dialog itself is just the frame that positions it and scrolls.
+       Phones get a full-width sheet rising from the bottom; from md up it is
+       a wide centered card with the sprite beside the text. */
+    .speaker-dialog {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        width: 100%;
+        max-width: 100%;
+        max-height: 94svh;
+        margin: auto 0 0 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+    .speaker-dialog::backdrop {
+        background: rgb(0 0 0 / 0.55);
+    }
+    .speaker-dialog > .px-card {
+        box-shadow: none;
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
+        min-height: 100%;
+    }
+    @media (min-width: 768px) {
+        .speaker-dialog {
+            width: min(100% - 3rem, 56rem);
+            max-height: min(90svh, 100% - 3rem);
+            margin: auto;
+        }
+        /* the card's hard shadow needs room inside the scroll box */
+        .speaker-dialog > .px-card {
+            box-shadow: 8px 8px 0 0 var(--px-ink);
+            border: 4px solid var(--px-ink);
+            margin: 0 8px 8px 0;
+            min-height: 0;
+            display: grid;
+            grid-template-columns: 18rem 1fr;
+        }
+        /* SpeakerProfile's stage becomes the left column: full card height,
+           sprite centered, the border moves from the bottom to the right */
+        .speaker-dialog :global(.px-dither-sky) {
+            grid-row: 1 / span 2;
+            height: auto;
+            min-height: 22rem;
+            align-items: center;
+            border-bottom: 0;
+            border-right: 4px solid var(--px-ink);
+        }
+        .speaker-dialog :global(.px-dither-sky > div) {
+            padding-bottom: 0;
+        }
+        .speaker-dialog .dialog-foot {
+            grid-column: 2;
+        }
+    }
+    /* the panel takes initial focus so the close button does not; it is not
+       a control, so the global focus ring stays off it */
+    .speaker-dialog > .px-card:focus,
+    .speaker-dialog > .px-card:focus-visible {
+        outline: none;
+        box-shadow: none;
+    }
+    @media (min-width: 768px) {
+        .speaker-dialog > .px-card:focus,
+        .speaker-dialog > .px-card:focus-visible {
+            box-shadow: 8px 8px 0 0 var(--px-ink);
+        }
+    }
+    .slot-btn {
+        background: none;
+        border: 0;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+    }
+    body:has(.speaker-dialog[open]) {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    // Open a slot's speaker card; keep ?speaker=<key> in the URL so the open
+    // card survives a reload and can be shared. Escape and the backdrop close
+    // it (the backdrop is the dialog element itself; the card is its child).
+    const PARAM = "speaker";
+
+    function dialogFor(key: string | null) {
+        if (!key) return null;
+        const el = document.getElementById(`speaker-${key}`);
+        return el instanceof HTMLDialogElement ? el : null;
+    }
+
+    function setParam(key: string | null) {
+        const url = new URL(location.href);
+        if (key) url.searchParams.set(PARAM, key);
+        else url.searchParams.delete(PARAM);
+        history.replaceState(history.state, "", url);
+    }
+
+    function open(key: string) {
+        const dialog = dialogFor(key);
+        if (!dialog || dialog.open) return;
+        dialog.showModal();
+        dialog.scrollTop = 0;
+        setParam(key);
+    }
+
+    document.addEventListener("click", (e) => {
+        const target = e.target;
+        if (!(target instanceof Element)) return;
+        const btn = target.closest("[data-speaker-dialog]");
+        if (btn instanceof HTMLElement && btn.dataset.speakerDialog) {
+            open(btn.dataset.speakerDialog);
+            return;
+        }
+        // a click on the dialog's own box, outside the card, is the backdrop
+        if (target instanceof HTMLDialogElement && target.open) target.close();
+    });
+
+    for (const dialog of document.querySelectorAll("dialog.speaker-dialog")) {
+        dialog.addEventListener("close", () => setParam(null));
+    }
+
+    const initial = new URLSearchParams(location.search).get(PARAM);
+    if (initial) open(initial);
+</script>
