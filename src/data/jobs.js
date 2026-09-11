@@ -772,6 +772,471 @@ export const jobs = {
     postedDate: "2026-09-04",
   },
 
+  "software-engineer-recent-grad-kikoff": {
+    id: "software-engineer-recent-grad-kikoff",
+    title: "Software Engineer, Recent Grad",
+    companyId: "kikoff",
+    companyName: "Kikoff",
+    // Featured: a genuinely junior Rails role, the listing applicants ask for most.
+    featured: true,
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$165K",
+    description:
+      "Kikoff is hiring recent grads onto the engineering team behind its credit-building products, which millions of people use. The backend is Ruby on Rails on AWS with deliberately plain infrastructure; the web and mobile apps are React on Vercel and Flutter. Kikoff is profitable, pre-IPO, and valued as a unicorn; the founders previously built three fintech unicorns. One of the few true new-grad Rails roles in San Francisco.",
+    chips: ["Fullstack", "React", "Mentorship", "Profitable"],
+    url: "https://job-boards.greenhouse.io/kikoff/jobs/4393822009",
+    postedDate: "2026-09-07",
+  },
+  "software-engineer-new-grad-stripe": {
+    id: "software-engineer-new-grad-stripe",
+    title: "Software Engineer, New Grad",
+    companyId: "stripe",
+    companyName: "Stripe",
+    location: "South San Francisco, CA (also Seattle, New York)",
+    type: "Full-time",
+    salary: "$122K - $134K",
+    description:
+      "Stripe's new-grad program for engineers with up to 18 months of experience. Stripe works mostly in Java, Ruby, JavaScript, Scala, and Go; Ruby is the language of much of the core payments platform, so a new grad here reads and writes a lot of it. Stripe processes trillions of dollars a year for more than 10 million businesses and ships product upgrades daily.",
+    chips: ["Backend", "Payments", "Polyglot", "Mentorship"],
+    url: "https://stripe.com/jobs/search?gh_jid=8128744",
+    postedDate: "2026-09-07",
+  },
+  "software-engineer-i-handshake-ai": {
+    id: "software-engineer-i-handshake-ai",
+    title: "Software Engineer I, Handshake AI",
+    companyId: "handshake",
+    companyName: "Handshake",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$158K - $175K + equity",
+    description:
+      "Handshake AI, the data business Handshake launched in 2025 for frontier AI labs, is hiring engineers with one to five years of experience. The stack is TypeScript-first (React, Next.js, GraphQL) with Ruby on Rails on the backend, so expect to work across both. Handshake AI has grown from zero to about a $1B run rate and pays around 30,000 contributors every month.",
+    chips: ["Fullstack", "TypeScript", "Next.js", "GraphQL", "AI-native"],
+    url: "https://jobs.ashbyhq.com/Handshake/9a93ec72-d396-4971-8d4c-222094f9c5a3",
+    postedDate: "2026-09-07",
+  },
+  "junior-software-engineer-corporate-tools": {
+    id: "junior-software-engineer-corporate-tools",
+    title: "Junior Software Engineer",
+    companyId: "corporatetools",
+    companyName: "Corporate Tools",
+    location: "Remote (US) or Post Falls, ID",
+    type: "Full-time",
+    salary: "$75K",
+    description:
+      "Corporate Tools, the bootstrapped company behind Registered Agents Inc, hires junior engineers and teaches them Ruby, Rails, and Vue on the job. The team builds new Rails applications and maintains older Rack apps for the company's business-services platform. One year of professional experience or a CS degree; Rails experience is preferred but not required.",
+    chips: ["Fullstack", "Vue", "Mentorship", "Profitable"],
+    url: "https://www.corporatetools.com/job-postings/engineering-and-development/junior-software-engineer/",
+    postedDate: "2026-09-07",
+  },
+  "jr-ruby-on-rails-developer-amphenol": {
+    id: "jr-ruby-on-rails-developer-amphenol",
+    title: "Jr. Ruby on Rails Developer",
+    companyId: "amphenol",
+    companyName: "Amphenol Borisch Technologies",
+    location: "Remote (US) or Grand Rapids, MI",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Amphenol Borisch Technologies, an electronics manufacturer within Amphenol (NYSE: APH), is hiring a junior Rails developer in its Business Systems group to build and extend the internal applications that sit on top of a legacy ERP. Two years of Ruby on Rails and Vue.js, Git, and a Linux command line; TDD experience is a plus. A rare entry-level Rails role at a large public company.",
+    chips: ["Fullstack", "Vue", "Mentorship"],
+    url: "https://www.linkedin.com/jobs/view/4453291666",
+    postedDate: "2026-09-07",
+  },
+  "staff-backend-engineer-rails-tread": {
+    id: "staff-backend-engineer-rails-tread",
+    title: "Staff Backend Engineer (Rails)",
+    companyId: "tread",
+    companyName: "Tread",
+    location: "San Francisco, CA / Remote (US)",
+    type: "Full-time",
+    salary: "$180K - $220K + 0.1%-0.25% equity",
+    description:
+      "Tread is a Series A, Mucker-backed platform for construction materials logistics, with over $1B in monthly delivered load value and a payments stack that settles about $1B a month in hauler payouts. Engineering is under ten people across backend, frontend, and mobile. The backend is a Rails API on Postgres with React on the web and Flutter on mobile; strong Rails or a comparable framework and a fast ramp.",
+    chips: ["Backend", "Payments", "PostgreSQL", "AI-native"],
+    url: "https://jobs.ashbyhq.com/tread/c35ad3bd-ee36-433a-9183-17c12f59f3cb",
+    postedDate: "2026-09-07",
+  },
+  "head-of-engineering-perfect-venue": {
+    id: "head-of-engineering-perfect-venue",
+    title: "Head of Engineering",
+    companyId: "perfectvenue",
+    companyName: "Perfect Venue",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$220K - $280K + equity + bonus",
+    description:
+      "Perfect Venue builds event-sales software and AI agents for restaurants and venues, backed by Hustle Fund, Defy.vc, and Amity Ventures and used by thousands of venues. The Head of Engineering leads a distributed team from a San Francisco seat (three days a week in office), owns security and compliance for hotel and restaurant group customers, and must have shipped Ruby on Rails in production. Ten-plus years of engineering with three-plus leading teams.",
+    chips: ["Fullstack", "Founding role", "AI-native"],
+    url: "https://jobs.ashbyhq.com/perfect-venue/087a3656-2951-44a1-8f7e-76fa081b0676",
+    postedDate: "2026-09-07",
+  },
+  "fullstack-engineer-agent-platform-crewai": {
+    id: "fullstack-engineer-agent-platform-crewai",
+    title: "Full-Stack Engineer, Agent Management Platform",
+    companyId: "crewai",
+    companyName: "CrewAI",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "CrewAI, the multi-agent framework and enterprise platform behind 300M+ agent executions a month, is hiring a frontend-leaning full-stack engineer for its Agent Management Platform: the Rails web product where teams deploy, monitor, and govern agents in production. Rails, Hotwire, ViewComponent, and Tailwind alongside React, TypeScript, and Vite; tests in Minitest/RSpec and Vitest. Seven-plus years of product engineering.",
+    chips: ["Fullstack", "Hotwire", "ViewComponent", "React", "AI-native"],
+    url: "https://apply.workable.com/crewai/j/0AB5665160/",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-hireart": {
+    id: "senior-software-engineer-hireart",
+    title: "Senior Software Engineer",
+    companyId: "hireart",
+    companyName: "HireArt",
+    location: "San Francisco, CA",
+    type: "Full-time",
+    salary: "$175K - $200K",
+    description:
+      "HireArt is a roughly 75-person staffing platform for sourcing, employing, and managing contract workers. This senior role works on the core staffing application, a large modular Rails 8.1 monolith with React 18 and some Stimulus and Turbo on the front, PostgreSQL and Redis, deployed on Heroku. Engineers work across the stack and are expected to use AI tools while owning what they ship. Eight to ten years of experience.",
+    chips: ["Fullstack", "React", "PostgreSQL"],
+    url: "https://www.linkedin.com/jobs/view/4408443566",
+    postedDate: "2026-09-07",
+  },
+  "full-stack-engineer-boldin": {
+    id: "full-stack-engineer-boldin",
+    title: "Full Stack Engineer",
+    companyId: "boldin",
+    companyName: "Boldin",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Boldin (formerly NewRetirement), the Mill Valley financial-planning platform that raised a $20M Series A in 2024, is hiring a full-stack engineer on its Time to Value team, the group that shortens the path from signup to a first useful plan. React and TypeScript on the front end, Ruby on Rails on the back end.",
+    chips: ["Fullstack", "Product Eng", "React", "TypeScript"],
+    url: "https://job-boards.greenhouse.io/boldin/jobs/4312857009",
+    postedDate: "2026-09-07",
+  },
+  "senior-product-engineer-govly": {
+    id: "senior-product-engineer-govly",
+    title: "Senior Product Engineer",
+    companyId: "govly",
+    companyName: "Govly",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Govly is a Series A, Insight Partners and YC-backed market-intelligence platform that helps government contractors find and win public-sector work; it recently won a Direct to Phase II SBIR award from the US Army. The primary app runs on Ruby on Rails, TypeScript and React, Postgres, Redis, and Elasticsearch, and the team uses Claude Code and MCPs heavily. A second opening focuses on security.",
+    chips: ["Fullstack", "Product Eng", "React", "TypeScript", "AI-native"],
+    url: "https://ats.rippling.com/govly-inc/jobs/ec8496c3-b203-46eb-bc78-13d1d0856756",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-backend-numero": {
+    id: "senior-software-engineer-backend-numero",
+    title: "Senior Software Engineer, Backend",
+    companyId: "numero",
+    companyName: "Numero",
+    location: "Remote (US) / San Francisco, CA",
+    type: "Full-time",
+    salary: "$160K - $200K",
+    description:
+      "Numero builds fundraising software for political campaigns, from city council races to the US Senate, and has helped them raise more than $10B since 2019. The platform is a Ruby on Rails monolith serving TypeScript and React frontends over a GraphQL API, with Sidekiq and RSpec, and the team is now building agents on its own Ruby LLM tooling. Around six years of experience running production systems with real traffic; continental US, with one or two retreats a year in California.",
+    chips: ["Backend", "GraphQL", "Sidekiq", "AI-native"],
+    url: "https://wellfound.com/jobs/4299483-senior-software-engineer-backend",
+    postedDate: "2026-09-07",
+  },
+  "product-engineer-warehouse-ops-revivn": {
+    id: "product-engineer-warehouse-ops-revivn",
+    title: "Product Engineer, Warehouse Operations",
+    companyId: "revivn",
+    companyName: "Revivn",
+    location: "Fresno, CA",
+    type: "Full-time",
+    salary: "$90K - $130K",
+    description:
+      "Revivn, a profitable public benefit corporation that repurposes enterprise hardware for people without computer access (customers include Instacart, Lyft, and Spotify), wants a product engineer embedded with the operations team at its new Fresno facility. You scope and ship your own work on the Ruby on Rails and React stack, spending real time on the warehouse floor to see what it needs.",
+    chips: ["Fullstack", "Product Eng", "React", "Public benefit", "Profitable"],
+    url: "https://job-boards.greenhouse.io/revivn/jobs/5212662007",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-ruby-healthie": {
+    id: "senior-software-engineer-ruby-healthie",
+    title: "Senior Software Engineer (Ruby / Full-Stack)",
+    companyId: "healthie",
+    companyName: "Healthie",
+    location: "Los Angeles, CA (Hybrid)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Healthie, the practice-management and EHR platform for modern healthcare businesses (Series B, $23M in 2024), is hiring a senior full-stack engineer for its Los Angeles office. The work is primarily in the monolith: Rails on the backend with React, TypeScript, and GraphQL on the front.",
+    chips: ["Fullstack", "React", "TypeScript", "GraphQL", "High compliance"],
+    url: "https://www.linkedin.com/jobs/view/4429604551",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-ledger-frame": {
+    id: "senior-software-engineer-ledger-frame",
+    title: "Senior Software Engineer, Ledger Platform",
+    companyId: "frame",
+    companyName: "Frame",
+    location: "Los Angeles, CA",
+    type: "Full-time",
+    salary: "$160K - $220K",
+    description:
+      "Frame is a compliance-and-payments infrastructure company for regulated industries: one platform that moves money and embeds the compliance around it. The Ledger Platform engineer works primarily in Rails, Go, and TypeScript on systems where correctness is mandatory. Four-plus years with strong Rails and TypeScript; developer-facing APIs and Go are a plus. A sibling role owns the Risk Platform.",
+    chips: ["Backend", "Payments", "Go", "TypeScript", "High compliance"],
+    url: "https://www.linkedin.com/jobs/view/4457548244",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-risk-frame": {
+    id: "senior-software-engineer-risk-frame",
+    title: "Senior Software Engineer, Risk Platform",
+    companyId: "frame",
+    companyName: "Frame",
+    location: "Los Angeles, CA",
+    type: "Full-time",
+    salary: "$160K - $220K",
+    description:
+      "The second Frame opening builds the risk and compliance systems behind its merchant model: the infrastructure that decides who gets approved, what gets flagged, and how fast the company acts on a signal. Primarily Rails, Go, and TypeScript; four-plus years, with classification pipelines, document processing, and anomaly detection as pluses.",
+    chips: ["Backend", "Payments", "Go", "TypeScript", "High compliance"],
+    url: "https://www.linkedin.com/jobs/view/4457545293",
+    postedDate: "2026-09-07",
+  },
+  "senior-backend-engineer-endless-commerce": {
+    id: "senior-backend-engineer-endless-commerce",
+    title: "Senior Backend Engineer",
+    companyId: "endlesscommerce",
+    companyName: "Endless Commerce",
+    location: "Los Angeles, CA / Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Endless Commerce, a Pear VC-backed startup, builds multi-channel commerce infrastructure for order management, fulfillment, and integrations. The backend is Ruby on Rails with Sidekiq, PostgreSQL, Redis, and Heroku, and this role develops the services and APIs behind it. Five-plus years of backend work with a strong emphasis on Rails; remote accepted.",
+    chips: ["Backend", "Sidekiq", "PostgreSQL"],
+    url: "https://jobs.ashbyhq.com/Pear-VC/342c6a70-57be-4e51-955a-54cc8246ed9d",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-tern": {
+    id: "senior-software-engineer-tern",
+    title: "Senior Software Engineer",
+    companyId: "tern",
+    companyName: "Tern",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$175K - $200K + equity",
+    description:
+      "Tern is building the operating system for travel advisors, a $127B industry that is 98 percent small businesses, and ships every week. It is a Ruby on Rails application with a Hotwire front end on Postgres, hosted on Heroku and moving to Google Cloud. Engineers move across squads: data models, Hotwire UI, background jobs, integrations, mobile. Series A ($13M, 2025), AI-native and low-ego by its own description.",
+    chips: ["Fullstack", "Hotwire", "PostgreSQL", "AI-native"],
+    url: "https://jobs.ashbyhq.com/tern/e17bad73-201e-41e7-8ba4-77840288f078",
+    postedDate: "2026-09-07",
+  },
+  "senior-fullstack-engineer-ai-core-circle": {
+    id: "senior-fullstack-engineer-ai-core-circle",
+    title: "Senior Full-Stack Engineer, AI Core",
+    companyId: "circle",
+    companyName: "Circle",
+    location: "Remote (US, and worldwide)",
+    type: "Full-time",
+    salary: "$130K - $140K + equity",
+    description:
+      "Circle is the all-in-one community platform for creators and digital businesses, a fully remote company of about 270 people in 30-plus countries. The AI Core team ships LLM-powered features end to end on a Ruby on Rails backend with a React frontend; they have hired both Rails engineers who learned AI and AI engineers who learned Rails. Six-plus years on high-traffic production apps. Circle also has Discover and CMS full-stack openings on the same stack.",
+    chips: ["Fullstack", "AI/ML", "React", "MySQL"],
+    url: "https://jobs.ashbyhq.com/circle/77d16455-292a-4926-a182-58a9e2950c9c",
+    postedDate: "2026-09-07",
+  },
+  "senior-fullstack-engineer-cms-circle": {
+    id: "senior-fullstack-engineer-cms-circle",
+    title: "Senior Full-Stack Engineer, CMS",
+    companyId: "circle",
+    companyName: "Circle",
+    location: "Remote (US, and worldwide)",
+    type: "Full-time",
+    salary: "$140K + equity",
+    description:
+      "Circle's CMS team owns the Page Builder that customers use to design and publish their community sites. Work across React and TypeScript on the front and Ruby on Rails on the back; deep Rails experience and five-plus years building SaaS products. U.S.-benchmarked pay globally, 35 days of paid time off, two company retreats a year.",
+    chips: ["Fullstack", "Product Eng", "React", "TypeScript"],
+    url: "https://jobs.ashbyhq.com/circle/bf99b611-ccbd-4b6c-aec1-4770a5c44152",
+    postedDate: "2026-09-07",
+  },
+  "software-engineer-backend-folio": {
+    id: "software-engineer-backend-folio",
+    title: "Software Engineer, Backend",
+    companyId: "folio",
+    companyName: "Folio",
+    location: "Remote (US, Eastern-adjacent preferred)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Folio is building B2B commerce infrastructure for hospitality, starting with hotels, and raised a $14M Series A from Thrive in 2025. Folio is a Ruby on Rails app with TypeScript Node automations and Elasticsearch on AWS. This backend role is for a specialist in server-side design and APIs with eight-plus years on teams that shipped. Remote-first, with quarterly stays at partner hotels. Full-stack and forward-deployed variants of the role are open on the same board.",
+    chips: ["Backend", "TypeScript", "PostgreSQL"],
+    url: "https://jobs.ashbyhq.com/folio/ec3a9689-27fc-418c-8834-e29708798dfd",
+    postedDate: "2026-09-07",
+  },
+  "software-engineer-product-fullstack-folio": {
+    id: "software-engineer-product-fullstack-folio",
+    title: "Software Engineer, Product (Full Stack)",
+    companyId: "folio",
+    companyName: "Folio",
+    location: "Remote (US, Eastern-adjacent preferred)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Folio's full-stack generalist role: equally at home in Ruby on Rails and Hotwire as in TypeScript, React, and Node, building the hotel-facing product from spark to shipped. Eight-plus years as a senior contributor on early-stage teams; founders welcome.",
+    chips: ["Fullstack", "Product Eng", "Hotwire", "React"],
+    url: "https://jobs.ashbyhq.com/folio/4e0d63c1-1ec8-4e67-9ec3-b07b2ddcfd61",
+    postedDate: "2026-09-07",
+  },
+  "software-engineer-platform-smartleaf": {
+    id: "software-engineer-platform-smartleaf",
+    title: "Software Engineer, Platform Team",
+    companyId: "smartleaf",
+    companyName: "Smartleaf",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$140K - $170K",
+    description:
+      "Smartleaf is a founder-led Boston company whose portfolio rebalancing service handles over $90 billion in assets; the next milestone is doubling capacity to a million accounts, which means evolving the architecture. Stack is Ruby on Rails, Stimulus, React, PostgreSQL, and Debian, with open-source coding agents and local LLMs. They use AI where it removes toil and expect every engineer to understand what they ship. A Feature Team opening ($135K to $150K) is on the same board. Boston-area candidates are asked to be hybrid for the first six months.",
+    chips: ["Platform", "Backend", "Hotwire", "React", "PostgreSQL"],
+    url: "https://jobs.ashbyhq.com/smartleaf/b3cbac93-9e7d-422c-afc2-03850324ea86",
+    postedDate: "2026-09-07",
+  },
+  "principal-software-engineer-koala-health": {
+    id: "principal-software-engineer-koala-health",
+    title: "Principal Software Engineer, AI & Platform",
+    companyId: "koalahealth",
+    companyName: "Koala Health",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$150K - $160K",
+    description:
+      "Koala Health delivers pet medications in presorted pouches and raised a Series B in 2025. The principal engineer is the technical leader across the engineering org: expert-level Ruby on Rails, distributed systems, APIs, data modeling, and cloud, with ten-plus years operating production-scale systems.",
+    chips: ["Backend", "Platform", "AI/ML", "Mentorship"],
+    url: "https://jobs.lever.co/koalahealth/542a9701-b4f9-4440-97f9-f6a7679e6aa0",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-virtual-care-fabric": {
+    id: "senior-software-engineer-virtual-care-fabric",
+    title: "Senior Software Engineer, Virtual Care Platform",
+    companyId: "fabric",
+    companyName: "Fabric",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "From $140K",
+    description:
+      "Fabric (formerly Florence), the healthcare automation company that raised a $60M Series A from General Catalyst in 2024, is hiring a senior engineer for its virtual care platform. The work is in Ruby on Rails: fixing complex production bugs, performing precise live-data corrections, and hardening the platform clinicians depend on.",
+    chips: ["Backend", "Fullstack", "High compliance"],
+    url: "https://jobs.gem.com/fabrichealth/am9icG9zdDqV7PZiNlESJ_NyY6XaHrfH",
+    postedDate: "2026-09-07",
+  },
+  "full-stack-engineer-ruby-react-reveal": {
+    id: "full-stack-engineer-ruby-react-reveal",
+    title: "Full Stack Engineer (Ruby / React)",
+    companyId: "revealtech",
+    companyName: "Reveal Technology",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$150K - $185K + equity",
+    description:
+      "Reveal Technology builds software for public-safety and defense users at the tactical edge, and raised a $30M Series B led by Ballistic Ventures in 2025. This engineer owns the core web application and the APIs behind mobile apps that must work disconnected, low-bandwidth, and fully offline: high-performance Ruby on Rails APIs, modern React, and hard data-synchronization problems. Fully remote and asynchronous. A second, more Python-and-Kubernetes-flavored full-stack role ($130K to $175K) is on the same board.",
+    chips: ["Fullstack", "Backend", "React", "PostgreSQL", "High compliance"],
+    url: "https://jobs.lever.co/revealtech/73687bbb-1267-4e77-b2e6-51aefe0198a3",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-tremendous": {
+    id: "senior-software-engineer-tremendous",
+    title: "Senior Software Engineer",
+    companyId: "tremendous",
+    companyName: "Tremendous",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$150K - $280K + equity",
+    description:
+      "Tremendous lets 20,000 organizations, including Atlassian, MIT, and United Way, send payouts and gift cards to millions of recipients worldwide. It is profitable with no outside investors, fully remote, high-documentation, and low-meeting. Ruby on Rails and React (or a similar JavaScript framework), PostgreSQL, Google Cloud. An Engineering Manager role ($250K to $300K) is open on the same stack.",
+    chips: ["Fullstack", "Payments", "React", "PostgreSQL", "Profitable"],
+    url: "https://jobs.ashbyhq.com/tremendous/bbcd8882-3fff-40c3-a376-63cc99b737ef",
+    postedDate: "2026-09-07",
+  },
+  "engineering-manager-tremendous": {
+    id: "engineering-manager-tremendous",
+    title: "Engineering Manager",
+    companyId: "tremendous",
+    companyName: "Tremendous",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$250K - $300K + equity",
+    description:
+      "Tremendous is hiring an engineering manager for its payouts platform: Ruby on Rails, TypeScript and React, PostgreSQL, Google Cloud. Eight-plus years of engineering with at least two leading a team as a manager or tech lead, in a profitable, bootstrapped, fully remote company.",
+    chips: ["Fullstack", "Payments", "Mentorship", "Profitable"],
+    url: "https://jobs.ashbyhq.com/tremendous/36365a33-9969-44f7-a8da-7ff24f386c34",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-rails-corporate-tools": {
+    id: "senior-software-engineer-rails-corporate-tools",
+    title: "Senior Software Engineer (Ruby on Rails)",
+    companyId: "corporatetools",
+    companyName: "Corporate Tools",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Up to $185K",
+    description:
+      "Corporate Tools, the bootstrapped, investor-free company behind Registered Agents Inc, is hiring senior Rails engineers to peel monolith code into well-organized architecture across its business-services platform. Advanced ActiveRecord and Sequel, new Rails apps alongside older Rack apps, Vue on the front. A mid-level Software Engineer ($90K to $140K) and a Junior role are on the same page.",
+    chips: ["Backend", "Fullstack", "Vue", "Profitable"],
+    url: "https://www.corporatetools.com/job-postings/engineering-and-development/senior-software-engineer-ruby-on-rails/",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-order-co": {
+    id: "senior-software-engineer-order-co",
+    title: "Senior Software Engineer",
+    companyId: "orderco",
+    companyName: "Order.co",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$175K - $195K",
+    description:
+      "Order.co is a guided B2B marketplace that manages about $500M in annual customer spend, founded in 2016 in New York with $50M raised. Production-grade Ruby on Rails and PostgreSQL, integrations with external systems over REST and GraphQL and webhooks, AWS, and AI coding assistants in the workflow. Order.co engineers are speaking at SF Ruby 2026 about agentic Rails in production.",
+    chips: ["Backend", "Fullstack", "PostgreSQL", "GraphQL", "AI-native"],
+    url: "https://ats.rippling.com/orderco/jobs/1dd35919-a7fd-45c7-b9d6-d14fce23a900",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-quantic": {
+    id: "senior-software-engineer-quantic",
+    title: "Senior Software Engineer",
+    companyId: "quantic",
+    companyName: "Quantic School of Business and Technology",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Quantic is an accredited online business school built on its own interactive learning platform, with content authoring tools, an AI tutor and advisor, and student networking. Five-plus years of Ruby on Rails in production, data modeling, SQL profiling, PostgreSQL, and three-plus years of JavaScript and React; Kubernetes and Helm are a plus. Series A ($15M, 2022).",
+    chips: ["Fullstack", "Backend", "React", "PostgreSQL"],
+    url: "https://www.linkedin.com/jobs/view/4463625394",
+    postedDate: "2026-09-07",
+  },
+  "senior-software-engineer-karias-health": {
+    id: "senior-software-engineer-karias-health",
+    title: "Senior Software Engineer (Python & Ruby on Rails)",
+    companyId: "kariashealth",
+    companyName: "Karias Health",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Karias is a seed-stage health-benefits platform combining self-funded plans with an AI-enabled navigation layer. The stack is Ruby on Rails and Python on AWS (RDS, S3, Redshift, Glue, OpenSearch) with RAG pipelines on HIPAA-eligible LLMs, and the team expects AI-assisted development across the lifecycle. Seven-plus years, comfortable making structural decisions inside a mature Rails codebase.",
+    chips: ["Backend", "AI/ML", "Polyglot", "High compliance", "AI-native"],
+    url: "https://www.linkedin.com/jobs/view/4454299285",
+    postedDate: "2026-09-07",
+  },
+  "full-stack-software-engineer-goodbill": {
+    id: "full-stack-software-engineer-goodbill",
+    title: "Full Stack Software Engineer",
+    companyId: "goodbill",
+    companyName: "Goodbill",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Goodbill uses AI and software to cut hospital costs for 5,000-plus employers and 250,000 patients, and was named one of TIME's Best Inventions of 2023; investors include Eniac, Maveron, and Reach Capital. The stack is Ruby, HTML, CSS, and JavaScript with Rails, SCSS, and Hotwire. They want someone who has worked at a pre-seed to Series A startup before.",
+    chips: ["Fullstack", "Hotwire", "AI-native"],
+    url: "https://builtin.com/job/full-stack-software-engineer/8898000",
+    postedDate: "2026-09-07",
+  },
+
   /* ─────────────────────────────────────────────────────────────────
    * OUT OF ICP SCOPE — verified-open Ruby/Rails roles removed because they
    * fall outside the job board's ICP (experienced Ruby dev in the US, in
@@ -798,38 +1263,202 @@ export const jobs = {
 
   /* ─────────────────────────────────────────────────────────────────
    * PENDING SPONSORSHIP — verified-open Ruby/Rails roles held back because
-   * the company has not (yet) hosted an SF Ruby meetup or sponsored the
-   * conference. Publish once they host or sponsor. (Held June 19, 2026.)
-   *   Block (Cash App, Square) — Senior SWE, Product Platform
-   *     https://block.xyz/careers/jobs/5231964008?gh_jid=5231964008
-   *   Handshake — Senior SWE, Pay & Safety
-   *     https://jobs.ashbyhq.com/Handshake/60057740-e884-4025-9d02-e332f8feb867
-   *   Instacart — Senior SWE, Customers Back End
-   *     https://www.ycombinator.com/companies/instacart/jobs/Vc34PRHze-senior-software-engineer-customers-back-end
-   *   Flexport — Senior SWE, Autonomous Freight Systems
-   *     https://boards.greenhouse.io/flexport/jobs/7975365?gh_jid=7975365
-   *   Scribd — Software Engineer II, Signup & Activation [late-stage / mature]
-   *     https://jobs.ashbyhq.com/ScribdInc/f9e8ac27-6323-40e4-bae8-3d7c6e6534c6
-   *   Fleetio — Senior SWE, Integrations (remote-US) [Series C]
-   *     https://job-boards.greenhouse.io/fleetio/jobs/5044498007
-   *   Calendly — Senior Full Stack Engineer (remote-US) [named Series B, ~$3B unicorn / late-stage]
-   *     https://job-boards.greenhouse.io/calendly/jobs/8464846002
-   *   Tines — Staff SWE, Backend (remote-US) [Series C]
-   *     https://job-boards.greenhouse.io/tines/jobs/6014045004
-   *   Tines — Senior SWE, Government Cloud (remote-US, US citizenship) [Series C]
-   *     https://job-boards.greenhouse.io/tines/jobs/6017339004
+   * the company is past the paid threshold (Series C+, PE-owned, acquired,
+   * public, or $1B+) and has not hosted an SF Ruby meetup or sponsored the
+   * conference. Publish once they host or sponsor. Rebuilt September 7,
+   * 2026 from a full sweep: aggregators (LinkedIn guest search, hiring.cafe,
+   * Built In, Wellfound, HN, jobs.rubyonrails.org), search-engine sweeps of
+   * the Greenhouse/Ashby/Lever/Workday/Rippling/Workable domains, and the
+   * boards of ~230 known Ruby companies (about 190 had no qualifying role:
+   * no Ruby, intl-only, non-CA onsite, or no engineering openings). Every
+   * URL below was live on Sep 7. Roles are CA onsite/hybrid or US-remote and
+   * name Ruby/Rails as a primary technology; junior roles are excluded here
+   * because they qualify on their own (path 2).
+   *
+   * Of the June 19 list: Block Product Platform, Fleetio Integrations, both
+   * Tines roles, Scribd SWE II and Instacart Customers Back End have closed
+   * (Tines now has no Rails eng role; Instacart US roles list Ruby only as
+   * one of "Java, Ruby, Python, or similar"). Handshake, Flexport and
+   * Calendly are still open; Flexport is dropped because Rails is only "a
+   * plus" behind Java/Spring.
+   *
+   * California, onsite or hybrid
+   *   Stripe (private, $159B tender Feb 2026; Ruby, not Rails)
+   *     Staff SWE, Link — South SF/NY/Seattle — https://stripe.com/jobs/search?gh_jid=8082847
+   *     Staff SWE, Storage Abstractions — South SF/Seattle — https://stripe.com/jobs/search?gh_jid=8171539
+   *   Block (NYSE: XYZ)
+   *     SWE, Justice Engineering — Bay Area, $180K–$270K, 3+ yrs, "Ruby on Rails, Sidekiq" first in stack
+   *     https://block.xyz/careers/jobs/5406194008?gh_jid=5406194008
+   *   Neuralink (Series E, ~$9B, Jun 2025)
+   *     SWE, Robot Manufacturing — South SF, $135K–$216K, "Our stack is Ruby on Rails and React/TypeScript"
+   *     https://boards.greenhouse.io/neuralink/jobs/7655221003
+   *   Amazon / ART19 (NASDAQ: AMZN)
+   *     SDE, ART19 — SF, $165K–$224K, "Our tech stack includes Ruby on Rails"
+   *     https://www.amazon.jobs/en/jobs/10508447/software-development-engineer-art19
+   *   Atlassian, DX team (NASDAQ: TEAM; DX acquired Jan 2026)
+   *     Fullstack SWE, DX — SF or remote US — https://www.atlassian.com/company/careers/details/26345
+   *     Senior Fullstack SWE, DX — SF or remote US — https://www.atlassian.com/company/careers/details/26664
+   *   Braze (NASDAQ: BRZE)
+   *     Senior Staff Engineer — SF (also NYC/Austin/Chicago), $208K–$350K — https://job-boards.greenhouse.io/braze/jobs/7914092
+   *   Apollo.io (Series D 2023, $1.6B)
+   *     Principal SWE — SF hybrid, $315K–$473K — https://job-boards.greenhouse.io/apolloio/jobs/6134562004
+   *     Senior SWE — SF hybrid, $195K–$358K — https://job-boards.greenhouse.io/apolloio/jobs/6118319004
+   *   Motive (S-1 filed Dec 2025; $2.85B)
+   *     Staff Platform Engineer — SF hybrid, $189K–$236K, "Golang, Ruby on Rails, and Python services"
+   *     https://job-boards.greenhouse.io/gomotive/jobs/8504954002
+   *   Strava ($2.2B, May 2025; Ruby/Scala/Go backend)
+   *     Staff Engineer, Core Services Platform — SF/remote — https://jobs.ashbyhq.com/strava/daf4c971-6a2b-48e0-aafe-afc6af47e3a1
+   *     Staff Engineer, Product Engineering (Backend) — https://jobs.ashbyhq.com/strava/d6f596af-db13-46a3-aebd-b10535b5e4ea
+   *   Handshake (Series F 2022, $3.5B)
+   *     Senior SWE, Pay & Safety — SF, $225K–$250K — https://jobs.ashbyhq.com/Handshake/60057740-e884-4025-9d02-e332f8feb867
+   *   Spring Health (Series E 2024, $3.3B)
+   *     Senior SWE I, Agentic Care — SF hybrid, $183K–$206K — https://job-boards.greenhouse.io/springhealth66/jobs/4723630005
+   *   Modern Treasury (Series C 2021, $2B+)
+   *     Software Engineer — SF, $120K–$240K (2+ yrs; borderline junior) — https://jobs.ashbyhq.com/moderntreasury/f2ff4c9c-0c2f-4bb8-b446-77cab281126a
+   *     SWE, Infrastructure — remote US, $150K–$250K — https://jobs.ashbyhq.com/moderntreasury/bac5287c-66a1-4954-ab55-1c4c545a8ede
+   *   Scribd (Spectrum Equity growth round)
+   *     Senior SWE (Fullstack), Scribd Core — SF, $151K–$226K; role decomposes the Rails monolith toward Next.js
+   *     https://jobs.ashbyhq.com/ScribdInc/c1bc1fed-49b2-4a3a-a79a-08613629c12f
+   *     Staff SWE (Backend), Everand Core — SF, $171K–$267K, "Ruby (preferred), Scala, Go, or Python"
+   *     https://jobs.ashbyhq.com/ScribdInc/c8fbcc07-e25a-4aa1-8208-306659febb36
+   *   Taskrabbit (IKEA/Ingka since 2017)
+   *     Senior SWE — SF hybrid, $130K–$180K, Rails + Sorbet — https://job-boards.greenhouse.io/taskrabbit/jobs/8122383
+   *   Freshworks (NASDAQ: FRSH)
+   *     Lead SWE, Backend — San Mateo hybrid, $168K–$208K — https://jobs.smartrecruiters.com/Freshworks/744000126166169
+   *   Omnissa (KKR since 2024; ex-VMware EUC)
+   *     Senior Full Stack Developer, Java or Ruby on Rails — Mountain View hybrid, $176K–$270K
+   *     https://www.omnissa.com/careers/jobs/usa-senior-full-stack-developer-java-or-ruby-rails/
+   *   Equinix (NASDAQ: EQIX)
+   *     Staff Engineer, Product Software — Redwood City, $142K–$212K, "core APIs using Ruby on Rails and Go"
+   *     https://www.linkedin.com/jobs/view/4427870203 (LinkedIn only; no public ATS page found)
+   *   Beacon Software / 99Pledges (Series C $225M, Jun 2026)
+   *     Senior SWE, 99Pledges — SF, "mature, production Rails codebase" — https://jobs.ashbyhq.com/beaconsoftware/4207cf49-5a43-48f5-a39f-afdae184819d
+   *   Renew Financial (Oakland; Series D 2015 from memory, not re-verified)
+   *     Senior SWE — Oakland hybrid, $170K–$200K, "primarily… Ruby on Rails and Postgres"
+   *     https://www.linkedin.com/jobs/view/4451485828 (LinkedIn only)
+   *   Kajabi ($2B growth round 2021)
+   *     Senior SWE — Irvine onsite, $137K–$182K — https://ats.rippling.com/kajabi/jobs/9931c3e3-5f48-4a01-ab67-fdafe7f81d76
+   *   AppFolio (NASDAQ: APPF)
+   *     Sr. SWE, Property & Programs — San Diego / Santa Barbara, $138K–$173K
+   *     https://www.linkedin.com/jobs/view/4452687658 (LinkedIn only)
+   *   Internet Brands (KKR / Warburg Pincus)
+   *     Senior Ruby on Rails Software Developer — El Segundo — https://jobs.jobvite.com/internetbrands/job/oCGVzfww
+   *   Mitratech (Ontario Teachers' / Hg)
+   *     Sr Full Stack Engineer — Rocklin CA or remote US, $155K–$170K, "mature Rails monolith" + Go
+   *     https://job-boards.greenhouse.io/mitratech/jobs/8132478
+   *   SimplePractice (Vista, via EngageSmart 2024; Santa Monica)
+   *     Senior SWE II, AI Developer Foundations — remote US, $208K–$260K, "large Rails monolith"
+   *     https://www.linkedin.com/jobs/view/4447554308 (LinkedIn only)
+   *   Brightline (Series C 2022, KKR; Palo Alto)
+   *     Full Stack Ruby on Rails SWE (Principal) — remote US, $215K–$240K — https://jobs.ashbyhq.com/hellobrightline/53358b5e-eb0b-4fe2-b7a3-9873315fbbe0
+   *   Babylist (Series C 2021; Emeryville; $750M revenue)
+   *     Senior SWE — remote US, $202K–$252K — https://job-boards.greenhouse.io/babylist/jobs/5987289004
+   *     Staff SWE — $234K–$291K — https://job-boards.greenhouse.io/babylist/jobs/6103791004
+   *     Staff Engineer, SRE — $227K–$272K — https://job-boards.greenhouse.io/babylist/jobs/6015140004
+   *   Upstart (NASDAQ: UPST; San Mateo) — remote US, $167K–$231K
+   *     Senior SWE, Partner Integrations — https://careers.upstart.com/jobs?gh_jid=7957643
+   *     Senior SWE, White Label Platform — https://careers.upstart.com/jobs?gh_jid=8039664
+   *     Senior SWE, Marketplace Optimization — https://careers.upstart.com/jobs?gh_jid=8056243
+   *   Stitch Fix (NASDAQ: SFIX; SF) — remote US
+   *     Lead Engineer, Order Management — $112K–$186K — https://www.stitchfix.com/careers/jobs?gh_jid=8165244
+   *     Principal Platform Engineer — $125K–$209K — https://www.stitchfix.com/careers/jobs?gh_jid=8165186
+   *   The RealReal (NASDAQ: REAL; SF) — Remote, California
+   *     Staff SWE — $172K–$216K — https://careers.therealreal.com/us/en/job/R12623/Staff-Software-Engineer
+   *     Engineering Manager, Inbound — https://careers.therealreal.com/us/en/job/R12839/Engineering-Manager-Inbound
+   *     Engineering Manager, International Expansion — https://careers.therealreal.com/us/en/job/R13155/Engineering-Manager-International-Expansion
+   *   Alto Pharmacy → FuzeRx (Fuze Health roll-up, 2025)
+   *     Senior SWE — remote, CA eligible, $148K–$185K — https://alto.wd1.myworkdayjobs.com/en-US/FuzeHealthCareerSite/job/Remote---Florida/Senior-Software-Engineer_R201094
+   *   Brightside Health (SF-founded; Series C 2022 from memory, not re-verified)
+   *     Staff SWE, Growth — remote US — https://builtin.com/job/staff-software-engineer-growth/9956198 (aggregator link)
+   *
+   * US-remote, headquartered elsewhere
+   *   GitLab (NASDAQ: GTLB) — remote US, $139K–$282K by level
+   *     Senior Backend (Ruby), Plan — https://job-boards.greenhouse.io/gitlab/jobs/8682707002
+   *     Senior SWE (Ruby), Security Platform: Authorization — https://job-boards.greenhouse.io/gitlab/jobs/8738225002
+   *     Senior SWE (RoR/Go), Authentication — https://job-boards.greenhouse.io/gitlab/jobs/8614945002
+   *     Senior Software Security Engineer, Trust & Safety — https://job-boards.greenhouse.io/gitlab/jobs/8637549002
+   *     Staff Backend (Ruby), AI Engineering — https://job-boards.greenhouse.io/gitlab/jobs/8646573002
+   *     Staff Fullstack (Ruby/Vue), Monetization — https://job-boards.greenhouse.io/gitlab/jobs/8739391002
+   *     Staff Backend, Developer Experience — https://job-boards.greenhouse.io/gitlab/jobs/8490477002
+   *     Staff Backend, AMER — https://job-boards.greenhouse.io/gitlab/jobs/8773381002
+   *     Intermediate Backend, AMER — https://job-boards.greenhouse.io/gitlab/jobs/8773006002
+   *     Backend Engineer, Duo Chat — https://job-boards.greenhouse.io/gitlab/jobs/8698314002
+   *   Shopify (NYSE: SHOP) — Remote, Americas
+   *     Software Engineers — https://www.shopify.com/careers/software-engineers_ea5811c0-0353-4468-a1a5-0ef776748b31
+   *     Engineering Manager, Ruby and Rails Infrastructure — https://www.shopify.com/careers/engineering-manager-ruby-and-rails-infrastructure_0536bba4-c326-4416-935e-9401c9ea4482
+   *     Senior Engineer, Privacy Engineering — https://www.shopify.com/careers/senior-engineer-privacy-engineering_6387b485-f57b-42b7-859a-702e56bfb12c
+   *   Huntress (Series D 2024, $1.55B) — remote US
+   *     Principal SWE, SIEM — $215K–$240K — https://job-boards.greenhouse.io/huntress/jobs/7776837003
+   *     Principal SWE, SOC Experience — https://job-boards.greenhouse.io/huntress/jobs/7776835003
+   *     Staff SWE, ESPM Platform — $200K–$220K — https://job-boards.greenhouse.io/huntress/jobs/7774959003
+   *     Staff SWE, ISPM Platform — https://job-boards.greenhouse.io/huntress/jobs/7774957003
+   *     Staff SWE, Showcase Platform — https://job-boards.greenhouse.io/huntress/jobs/7777877003
+   *     Senior SWE, Business Platform — $160K–$190K — https://job-boards.greenhouse.io/huntress/jobs/7767523003
+   *   Calendly (~$3B) — remote US, $187K–$272K
+   *     Senior Full Stack Engineer, Growth — https://job-boards.greenhouse.io/calendly/jobs/8622983002
+   *     Senior Full Stack Engineer, AI Scheduling (Node or Rails) — https://job-boards.greenhouse.io/calendly/jobs/8464846002
+   *   Fleetio (Series D $450M, Mar 2025) — Remote USA/CAN/MEX
+   *     Senior SWE, Fleet Intelligence — https://job-boards.greenhouse.io/fleetio/jobs/5206783007
+   *     Senior SWE, Marketplace Payments — https://job-boards.greenhouse.io/fleetio/jobs/5180391007
+   *     Software Engineer, Marketplace (2+ yrs) — https://job-boards.greenhouse.io/fleetio/jobs/5213856007
+   *     Engineering Manager, Payments — https://job-boards.greenhouse.io/fleetio/jobs/5200077007
+   *   Kin Insurance (unicorn) — remote US
+   *     Staff SWE — $165K–$200K — https://jobs.ashbyhq.com/kin/4b5dfc81-2f36-42d5-8ce1-7efc1d330f9f
+   *     Senior SWE, Back-End — $122K–$153K (posted Oct 2025) — https://jobs.ashbyhq.com/kin/2b57a949-a4bb-440f-a170-eda3ccf49b6c
+   *   KnowBe4 (Vista, 2023)
+   *     Staff Engineer — remote US, $170K–$190K — https://job-boards.greenhouse.io/knowbe4/jobs/8644906002
+   *   CentralReach (Roper Technologies, 2025)
+   *     Sr. SWE, Ruby on Rails — remote US, $120K–$180K — https://job-boards.greenhouse.io/centralreach/jobs/4396809009
+   *   PrizePicks (Allwyn majority, Jan 2026) — remote
+   *     Senior Back End Engineer (Rails & Go) — $175K–$185K — https://prizepicks.com/position?gh_jid=7768364003
+   *     Gamification Senior SWE (Rails) — https://prizepicks.com/position?gh_jid=7984095003
+   *     Board SWE III (Rails) — $145K–$165K — https://prizepicks.com/position?gh_jid=7984087003
+   *   Caribou (Series C 2022, $1.1B)
+   *     Engineering Manager, Loan Origination — remote US, $174K–$217K — https://job-boards.greenhouse.io/caribou/jobs/7820484003
+   *   Triumph Financial / TriumphPay (NASDAQ: TFIN) — remote US
+   *     Lead/Staff SWE, Ruby on Rails — $173K–$281K — https://tbkbank.wd1.myworkdayjobs.com/tfin/job/Remote---United-States/Lead-Staff-Software-Engineer--Remote----Ruby-on-Rails_REQ-4921
+   *     Lead or Staff SWE (Ruby, C# or F#) — https://tbkbank.wd1.myworkdayjobs.com/tfin/job/Remote---United-States/Staff-Software-Engineer_REQ-4581
+   *   PAR Technology (NYSE: PAR)
+   *     Ruby on Rails Engineer — remote US, $140K–$160K — https://jobs.ashbyhq.com/par%20technology/eb5ee156-4058-4fb8-889e-5caa40592801
+   *   HHAeXchange (Hg, 2021)
+   *     Sr. SWE, ROR — remote US, $110K–$125K — https://jobs.lever.co/hhaexchange/e56acb41-8b08-4541-9fa8-025faed5b7a5
+   *   Kalkomey (Macquarie Capital, 2024)
+   *     Principal Backend Engineer (Ruby on Rails) — remote US — https://ats.rippling.com/kalkomey/jobs/6a784bdd-c625-4a4b-aa37-6baf020069ce
+   *   Fluxx (Metamorph / ABS Capital, 2021)
+   *     Principal Engineer — remote, $164K–$210K, Rails + Node — https://job-boards.greenhouse.io/fluxx/jobs/4688509006
+   *   Andela (Series E 2021, $1.5B)
+   *     Staff Fullstack Engineer — North America remote, "proprietary Ruby on Rails ecosystem" — https://jobs.ashbyhq.com/andela/9829c4f1-548f-4ef9-b4a2-c0ba2e11b90c
+   *   SRS Acquiom (Carlyle AlpInvest, Jan 2026)
+   *     Senior SWE, VDR — remote US, $145K–$160K — https://job-boards.greenhouse.io/srsacquiom/jobs/5194743007
+   *   HST Pathways (Bain Capital)
+   *     Senior SWE — remote US, sole engineer on a Rails survey app — https://hstpathways.applytojob.com/apply/A9D3f5ZRnA/Senior-Software-Engineer
+   *   Chronograph (Sixth Street growth equity, Jun 2026)
+   *     Sr. SWE, Platform Engineering — remote, $175K–$215K, Rails + Node — https://www.chronograph.pe/jobs/?gh_jid=5187048007
+   *   ApartmentIQ (Susquehanna Growth Equity round, $25M, Aug 2026; profitable, $30M+ raised)
+   *     Senior SWE, Applications — remote US, Rails API + React — https://job-boards.greenhouse.io/apartmentiq/jobs/8069494
+   *     Staff SWE — remote US, Ruby + Python + Terraform — https://job-boards.greenhouse.io/apartmentiq/jobs/8116176
+   *   GiveCampus (Silversmith growth equity 2022)
+   *     Senior SWE, Online Giving — remote US — https://job-boards.greenhouse.io/givecampus/jobs/4374577009
+   *     Staff SWE — https://job-boards.greenhouse.io/givecampus/jobs/4278428009
+   *   brightwheel (Series C 2021, ~$600M) — remote US, Rails + Sidekiq backend
+   *     Senior AI SWE, Product — $133K–$189K — https://jobs.ashbyhq.com/brightwheel/96f73905-30e4-4921-a71d-09360237ebb4
+   *     Staff AI SWE, Product — https://jobs.ashbyhq.com/brightwheel/1e5afc7d-5a4d-437e-bade-1e4a14ba4c24
+   *     Principal AI SWE, Product — https://jobs.ashbyhq.com/brightwheel/918b98e2-bf78-4cab-be21-8ca7d37fc6e3
+   *   Mode Mobile (Chicago; stage not verified)
+   *     Sr. Backend Engineer — remote, "Expert proficiency in Ruby on Rails" — https://www.modemobile.com/open-role?gh_jid=8777975002
+   *   Beam Benefits (Columbus; Series E 2021 from memory, not re-verified)
+   *     Senior SWE — remote US, "primarily React and Ruby on Rails" — https://builtin.com/job/senior-software-engineer/9228677 (aggregator link)
+   *
+   * Borderline, not held (Ruby is one of several primary languages, or the
+   * role is migrating off Rails): Envoy MTS Fullstack, Poshmark Sr SWE Cloud
+   * Platform, Hinge Health Sr Backend/Full Stack (Node-first), Instacart Sr
+   * EM Enterprise Fulfillment, Rightway Sr SWE (new services in Node),
+   * Snapsheet SRE (Rails "strong preference"), Rhino Sr SWE (Rails "a big
+   * plus"), Flexport Autonomous Freight (Rails "a plus"), Coinbase/Airbnb
+   * (language lists), Twitch SE I Payments (Go/Ruby/Java/C++), Bold Penguin
+   * and Decisiv (aggregator-only, could not be verified), Apex Dental
+   * (email-apply, no ATS).
    * ───────────────────────────────────────────────────────────────── */
-
-  /* ---- September 6, 2026 ----
-   * Huntress (huntress, Greenhouse) is running five Ruby/Rails roles, all
-   * US-remote and all naming Rails in the title: Principal SWE SIEM,
-   * Principal SWE SOC Experience, Senior SWE Business Platform, Staff SWE
-   * ESPM Platform, Staff SWE ISPM Platform, Staff SWE Showcase Platform.
-   * Held: $150M Series D in June 2024 at a $1.55B valuation clears both the
-   * Series C and the $1B thresholds, and Huntress is neither a sponsor nor a
-   * meetup host. Publish if that changes; the roles are senior, so path 2
-   * does not apply.
-   */
 
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
