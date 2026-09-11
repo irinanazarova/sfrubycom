@@ -5,6 +5,10 @@
 // as of September 2026. Two lines older guides recommend, the 21 Hayes and
 // the 47 Van Ness, are suspended in 2026, so they are not listed. Recheck
 // the garage tables before the conference: SFMTA revises them each summer.
+// Nov 11 is Veterans Day: SFMTA lists the Civic Center Garage as closed on
+// federal holidays and the Performing Arts Garage as closed only on
+// Thanksgiving and Christmas; meters stay enforced; Muni and BART run a
+// weekday schedule (BART has run one every Veterans Day since 2020).
 import { days, formatTime } from "../data/schedule-2026.js";
 
 const ADDRESS = "201 Franklin St, San Francisco, CA 94102";
@@ -37,7 +41,7 @@ const transit = [
     },
     {
         name: "Caltrain",
-        detail: "N Judah from 4th & King to Van Ness station.",
+        detail: "Caltrain ends at 4th & King. From there the N Judah, a Muni light rail, runs to Van Ness station.",
         meta: "About 20 min, then the walk",
     },
     {
@@ -58,7 +62,7 @@ const garages = [
             ["Hourly", "$3 to $5"],
             ["12 hours", "$26"],
         ],
-        note: "Weekdays 6 am to 10 pm. 6'9\" clearance. EV charging.",
+        note: "Weekdays 6 am to 10 pm, Nov 11 included. 6'9\" clearance. EV charging.",
     },
     {
         name: "Civic Center Garage",
@@ -70,7 +74,7 @@ const garages = [
             ["Hourly, midday", "$7"],
             ["24 hours", "$38"],
         ],
-        note: "Weekdays 6 am to 10 pm.",
+        note: "Weekdays 6 am to 10 pm. Closed Nov 11, Veterans Day.",
     },
 ];
 ---
@@ -150,13 +154,13 @@ const garages = [
                     }
                 </ul>
                 <p class="text-sm text-gray-700 leading-relaxed mt-5 pt-5 border-t-2 border-gray-200">
-                    Street meters are two-hour limits until 6 pm. Rideshare drop-off: Franklin St at Fell.
+                    Street meters are two-hour limits until 6 pm, Veterans Day included. Rideshare drop-off: Franklin St at Fell.
                 </p>
             </div>
         </div>
 
         <p class="text-xs text-gray-500 text-center mt-8">
-            Rates from SFMTA, September 2026.
+            Rates from SFMTA, September 2026. Nov 11 is Veterans Day: Muni and BART run a weekday schedule.
         </p>
     </div>
 </section>
