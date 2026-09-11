@@ -72,7 +72,7 @@ ${next.length ? next.join("\n") : "See [Luma](https://lu.ma/sfruby) for the next
 - Meetups: ${SITE}/meetup (RSVP on https://lu.ma/sfruby)
 - Conference (Nov 10-12, 2026 at SFJAZZ), two days of talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day: ${SITE}/
 - 2026 schedule (Day 1 AI-heavy, Day 2 AI-light): ${SITE}/#schedule
-- 2026 speakers, with talk titles and abstracts: ${SITE}/speakers
+- 2026 speakers, with talk titles and abstracts, in the schedule: ${SITE}/#schedule
 - Sponsor: ${SITE}/sponsor-2026
 `;
 }
@@ -276,6 +276,6 @@ ${links}
 - Meetup page: ${SITE}/meetup (RSVPs: https://lu.ma/sfruby)
 - News feed (RSS): ${SITE}/news/rss.xml
 - Conference (Nov 10-12, 2026 at SFJAZZ): ${SITE}/
-- 2026 speakers, with talk titles and abstracts: ${SITE}/speakers
+- 2026 speakers, with talk titles and abstracts, in the schedule: ${SITE}/#schedule
 `;
 }

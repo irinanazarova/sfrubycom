@@ -41,6 +41,14 @@
   to = "/#schedule"
   status = 302
 
+# The 2026 speakers live in the schedule's talk cards. The page still builds
+# (it is the roster's full view), so the redirect is forced over the file.
+[[redirects]]
+  from = "/speakers"
+  to = "/#schedule"
+  status = 302
+  force = true
+
 [[redirects]]
   from = "/sponsors"
   to = "/sponsor-2026"

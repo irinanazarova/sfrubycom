@@ -219,14 +219,6 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                         </button>
                     </form>
                     <SpeakerProfile profile={profile} layout="side" />
-                    <div class="dialog-foot px-6 pb-6 -mt-2">
-                        <a
-                            href={`/speakers#${profile.key}`}
-                            class="text-sm text-gray-500 underline underline-offset-2 hover:text-ruby-600"
-                        >
-                            All speakers
-                        </a>
-                    </div>
                 </div>
             </dialog>
         ))
@@ -273,9 +265,6 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
             border: 4px solid var(--px-ink);
             margin: 0 8px 8px 0;
             min-height: 0;
-        }
-        .speaker-dialog .dialog-foot {
-            grid-column: 2;
         }
     }
     /* the panel takes initial focus so the close button does not; it is not
