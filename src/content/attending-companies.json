@@ -1,60 +1,81 @@
 {
-  "fetchedAt": "2026-09-07T19:24:17.404Z",
+  "fetchedAt": "2026-09-11T20:03:14.909Z",
   "minAttendees": 2,
   "companies": [
     {
       "name": "Evil Martians",
-      "count": 10,
+      "count": 12,
       "characters": [
         {
           "name": "Victoria Melnikova",
           "url": "https://clouds.sfruby.com/e/2026-bits/victoria-melnikova",
-          "image": "https://clouds.sfruby.com/e/2026-bits/victoria-melnikova/character"
+          "image": "/attending/victoria-melnikova.webp"
         },
         {
           "name": "Amanda Kinney",
           "url": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney",
-          "image": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney/character"
+          "image": "/attending/amanda-kinney.webp"
         },
         {
           "name": "Anton Senkovskiy",
           "url": "https://clouds.sfruby.com/e/2026-bits/anton-senkovskiy",
-          "image": "https://clouds.sfruby.com/e/2026-bits/anton-senkovskiy/character"
+          "image": "/attending/anton-senkovskiy.webp"
         },
         {
           "name": "Alexander Tishchenko",
           "url": "https://clouds.sfruby.com/e/2026-bits/alexander-tishchenko",
-          "image": "https://clouds.sfruby.com/e/2026-bits/alexander-tishchenko/character"
+          "image": "/attending/alexander-tishchenko.webp"
         },
         {
           "name": "Svyatoslav Kryukov",
           "url": "https://clouds.sfruby.com/e/2026-bits/svyatoslav-kryukov-b5b05195-a91a-448a-a006-0b96e13d4903",
-          "image": "https://clouds.sfruby.com/e/2026-bits/svyatoslav-kryukov-b5b05195-a91a-448a-a006-0b96e13d4903/character"
+          "image": "/attending/svyatoslav-kryukov-b5b05195-a91a-448a-a006-0b96e13d4903.webp"
         },
         {
           "name": "Andrey Novikov",
           "url": "https://clouds.sfruby.com/e/2026-bits/andrey-novikov",
-          "image": "https://clouds.sfruby.com/e/2026-bits/andrey-novikov/character"
+          "image": "/attending/andrey-novikov.webp"
         },
         {
           "name": "travis turner",
           "url": "https://clouds.sfruby.com/e/2026-bits/travis-turner",
-          "image": "https://clouds.sfruby.com/e/2026-bits/travis-turner/character"
+          "image": "/attending/travis-turner.webp"
         },
         {
           "name": "Irina Nazarova",
           "url": "https://clouds.sfruby.com/e/2026-bits/irina-nazarova",
-          "image": "https://clouds.sfruby.com/e/2026-bits/irina-nazarova/character"
+          "image": "/attending/irina-nazarova.webp"
         },
         {
           "name": "Camila Mirabal",
           "url": "https://clouds.sfruby.com/e/2026-bits/camila-cami",
-          "image": "https://clouds.sfruby.com/e/2026-bits/camila-cami/character"
+          "image": "/attending/camila-cami.webp"
         },
         {
           "name": "Vova Dementyev",
           "url": "https://clouds.sfruby.com/e/2026-bits/vova-dem",
-          "image": "https://clouds.sfruby.com/e/2026-bits/vova-dem/character"
+          "image": "/attending/vova-dem.webp"
+        },
+        {
+          "name": "Nicolas Erlichman",
+          "url": "https://clouds.sfruby.com/e/2026-bits/nicolas-e",
+          "image": "/attending/nicolas-e.webp"
+        },
+        {
+          "name": "Aleksandr Berdiugin",
+          "url": "https://clouds.sfruby.com/e/2026-bits/aleksandr-berdiugin",
+          "image": "/attending/aleksandr-berdiugin.webp"
+        }
+      ]
+    },
+    {
+      "name": "Hack Club",
+      "count": 3,
+      "characters": [
+        {
+          "name": "Luke Oldenburg",
+          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
+          "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
         }
       ]
     },
@@ -65,17 +86,17 @@
         {
           "name": "Igor Arkhipov",
           "url": "https://clouds.sfruby.com/e/2026-bits/igor-arkhipov",
-          "image": "https://clouds.sfruby.com/e/2026-bits/igor-arkhipov/character"
+          "image": "/attending/igor-arkhipov.webp"
         },
         {
           "name": "Enrique Mogollan",
           "url": "https://clouds.sfruby.com/e/2026-bits/enrique-mogollan",
-          "image": "https://clouds.sfruby.com/e/2026-bits/enrique-mogollan/character"
+          "image": "/attending/enrique-mogollan.webp"
         },
         {
           "name": "Trista Mueller",
           "url": "https://clouds.sfruby.com/e/2026-bits/trista-mueller",
-          "image": "https://clouds.sfruby.com/e/2026-bits/trista-mueller/character"
+          "image": "/attending/trista-mueller.webp"
         }
       ]
     },
@@ -86,7 +107,7 @@
         {
           "name": "Chris Janik",
           "url": "https://clouds.sfruby.com/e/2026-bits/chris-janik",
-          "image": "https://clouds.sfruby.com/e/2026-bits/chris-janik/character"
+          "image": "/attending/chris-janik.webp"
         }
       ]
     },
@@ -97,7 +118,7 @@
         {
           "name": "Avinash Joshi",
           "url": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi",
-          "image": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi/character"
+          "image": "/attending/avinash-joshi.webp"
         }
       ]
     },
@@ -108,12 +129,12 @@
         {
           "name": "Benjamin Wood",
           "url": "https://clouds.sfruby.com/e/2026-bits/benjamin-wood",
-          "image": "https://clouds.sfruby.com/e/2026-bits/benjamin-wood/character"
+          "image": "/attending/benjamin-wood.webp"
         },
         {
           "name": "Nate Vick",
           "url": "https://clouds.sfruby.com/e/2026-bits/nate-vick",
-          "image": "https://clouds.sfruby.com/e/2026-bits/nate-vick/character"
+          "image": "/attending/nate-vick.webp"
         }
       ]
     },
@@ -124,7 +145,7 @@
         {
           "name": "Liz Pantalone",
           "url": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone",
-          "image": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone/character"
+          "image": "/attending/liz-pantalone.webp"
         }
       ]
     },
@@ -135,23 +156,12 @@
         {
           "name": "Chris Fung",
           "url": "https://clouds.sfruby.com/e/2026-bits/chris-fung",
-          "image": "https://clouds.sfruby.com/e/2026-bits/chris-fung/character"
+          "image": "/attending/chris-fung.webp"
         },
         {
           "name": "Todd Sedano",
           "url": "https://clouds.sfruby.com/e/2026-bits/todd-sedano",
-          "image": "https://clouds.sfruby.com/e/2026-bits/todd-sedano/character"
-        }
-      ]
-    },
-    {
-      "name": "Hack Club",
-      "count": 2,
-      "characters": [
-        {
-          "name": "Luke Oldenburg",
-          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
-          "image": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33/character"
+          "image": "/attending/todd-sedano.webp"
         }
       ]
     },
@@ -167,14 +177,25 @@
         {
           "name": "Nina R",
           "url": "https://clouds.sfruby.com/e/2026-bits/nina-revko",
-          "image": "https://clouds.sfruby.com/e/2026-bits/nina-revko/character"
+          "image": "/attending/nina-revko.webp"
+        },
+        {
+          "name": "Celine",
+          "url": "https://clouds.sfruby.com/e/2026-bits/celine",
+          "image": "/attending/celine.webp"
         }
       ]
     },
     {
       "name": "New Leaders",
       "count": 2,
-      "characters": []
+      "characters": [
+        {
+          "name": "Dave Sick",
+          "url": "https://clouds.sfruby.com/e/2026-bits/dave-sick",
+          "image": "/attending/dave-sick.webp"
+        }
+      ]
     },
     {
       "name": "Shopify",
@@ -183,7 +204,7 @@
         {
           "name": "Peter Zhu",
           "url": "https://clouds.sfruby.com/e/2026-bits/peter-zhu",
-          "image": "https://clouds.sfruby.com/e/2026-bits/peter-zhu/character"
+          "image": "/attending/peter-zhu.webp"
         }
       ]
     },
@@ -199,12 +220,12 @@
         {
           "name": "Jason Bosco",
           "url": "https://clouds.sfruby.com/e/2026-bits/jason-bosco",
-          "image": "https://clouds.sfruby.com/e/2026-bits/jason-bosco/character"
+          "image": "/attending/jason-bosco.webp"
         },
         {
           "name": "Steph Farid",
           "url": "https://clouds.sfruby.com/e/2026-bits/steph-farid",
-          "image": "https://clouds.sfruby.com/e/2026-bits/steph-farid/character"
+          "image": "/attending/steph-farid.webp"
         }
       ]
     },
@@ -215,7 +236,7 @@
         {
           "name": "Zachary Roland",
           "url": "https://clouds.sfruby.com/e/2026-bits/zachary-roland",
-          "image": "https://clouds.sfruby.com/e/2026-bits/zachary-roland/character"
+          "image": "/attending/zachary-roland.webp"
         }
       ]
     }

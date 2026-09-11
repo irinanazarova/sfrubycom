@@ -1,4 +1,4 @@
-// SF Ruby Startup Conference 2026 — speakers, ticket ladder and live sales counter.
+// SF Ruby Conference 2026 — speakers, ticket ladder and live sales counter.
 //
 // `pixel` points at a 256x256 transparent sprite in /public (see speaker_*_pixel_256.png).
 // Speakers without artwork yet render as a "?" character-select slot; drop the sprite in
@@ -6,24 +6,18 @@
 //
 // `orgs` is the affiliation line: each entry renders as a link when it has a `url`.
 // All URLs are content-verified (page title checked), not just resolved.
+//
+// `keynote` marks the four sessions everyone is in the hall for (the opener and
+// closer of each day, per src/data/schedule-2026.js). `pin` fixes a speaker to
+// either end of the grid; everyone else is ordered by whether their sprite has
+// landed, so the roster opens on real faces.
 export const conferenceSpeakers = [
-  {
-    name: "Garry Tan",
-    bio: "Built Bookface, YC's internal platform, on Rails. Now runs the place.",
-    orgs: [{ name: "Y Combinator", url: "https://www.ycombinator.com/" }],
-    role: "President & CEO",
-    track: "startups",
-    keynote: true,
-    // `pin` fixes a speaker to either end of the grid; everyone else is ordered
-    // by whether their sprite has landed, so the roster opens on real faces.
-    pin: "first",
-    pixel: "/garry_pixel_256.png",
-  },
   {
     name: "Ryan Sherlock",
     bio: "Scales the Rails infrastructure and MySQL fleet behind Fin, the AI customer service agent.",
     orgs: [{ name: "Fin (ex Intercom)", url: "https://fin.ai/" }],
     keynote: true,
+    pin: "first",
     pixel: "/speaker_ryan_sherlock_pixel_256.png",
   },
   {
@@ -48,6 +42,7 @@ export const conferenceSpeakers = [
     bio: "Built Solid Queue, the job backend that ships with Rails 8.",
     orgs: [{ name: "37signals", url: "https://37signals.com/" }],
     track: "scaleups",
+    keynote: true,
     pixel: "/speaker_rosa_gutierrez_pixel_256.png",
   },
   {
@@ -65,6 +60,7 @@ export const conferenceSpeakers = [
       { name: "Hatchbox", url: "https://hatchbox.io/" },
     ],
     track: "startups",
+    keynote: true,
     pixel: "/speaker_chris_oliver_pixel_256.png",
   },
   {
@@ -73,13 +69,6 @@ export const conferenceSpeakers = [
     orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
     track: "startups",
     pixel: "/speaker_vladimir_dementyev_pixel_256.png",
-  },
-  {
-    name: "Andrey Novikov",
-    bio: "Author of Yabeda, the Ruby instrumentation framework with over 10 million downloads.",
-    orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
-    track: "scaleups",
-    pixel: "/speaker_andrey_novikov_pixel_256.png",
   },
   {
     name: "Jason Thomas",
@@ -138,6 +127,20 @@ export const conferenceSpeakers = [
     pixel: "/speaker_marco_roth_pixel_256.png",
   },
   {
+    name: "Svyatoslav Kryukov",
+    bio: "Maintains Inertia Rails, the Rails and React stack Evil Martians builds greenfield products on.",
+    orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
+    track: "startups",
+    pixel: "/speaker_svyatoslav_kryukov_pixel_256.png",
+  },
+  {
+    name: "JP Camara",
+    bio: "Author of the Ruby concurrency series, the long-form deep dive into threads and the GVL that is becoming a book.",
+    orgs: [{ name: "Wealthbox", url: "https://www.wealthbox.com/" }],
+    track: "startups",
+    pixel: "/speaker_jp_camara_pixel_256.png",
+  },
+  {
     name: "Irina Nazarova",
     bio: "CEO, and co-founder of AnyCable, the WebSocket server for Ruby.",
     orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
@@ -166,7 +169,15 @@ export const ticketTiers = [
   {
     name: "Regular",
     price: 450,
-    note: "Until Sep 30",
+    note: "Both days and the community day. Until Sep 30",
+    state: "live",
+  },
+  // Two tickets on Luma, "Day 1 ONLY" and "Day 2 ONLY", one row here: the
+  // choice is the day, and the price is the same.
+  {
+    name: "Single day",
+    price: 350,
+    note: "Day 1 AI-heavy OR Day 2 AI-light. Until Sep 30",
     state: "live",
   },
   {
@@ -175,6 +186,8 @@ export const ticketTiers = [
     note: "Invoiced, expensable, no deadline. Buying this tier is what keeps Regular at $450.",
     state: "live",
   },
+  // Opens when Regular closes. `soon` renders muted and without a button.
+  { name: "Late bird", price: 500, note: "From Oct 1", state: "soon" },
 ];
 
 // Regular-tier sales counter. Update from Luma (Registration tab shows sold/total),
@@ -186,7 +199,7 @@ export const regularTier = {
   closesOn: "2026-09-30T23:59:00-07:00",
   // Set once the post-Regular tier is decided; until then the strip says prices
   // rise without quoting a figure we might not honour.
-  nextPrice: null,
+  nextPrice: 500,
   // A remaining-count only reads as scarcity once it is small. Above this it reads
   // as "nobody is buying", so the strip shows the deadline instead. Raise it as the
   // tier fills; below it the live count and the sold meter appear on their own.

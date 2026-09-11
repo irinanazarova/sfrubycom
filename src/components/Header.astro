@@ -2,7 +2,7 @@
 import { ticketLink, ticketEventClass } from "../data/conference-2026.js";
 
 const navItems = [
-    { name: "Speakers", href: "/speakers" },
+    { name: "Schedule", href: "/#schedule" },
     { name: "Meetup", href: "/meetup" },
     { name: "Jobs", href: "/jobs" },
     { name: "Sponsor", href: "/sponsor-2026" },
@@ -12,9 +12,10 @@ const navItems = [
         external: true,
     },
     { name: "Videos", href: "/videos" },
-    { name: "Startups", href: "/startups" },
+    // Speakers, Startups and About are not in this row, by choice: Schedule
+    // links every speaker, and seven links plus the CTA sit comfortably beside
+    // the logo at 1024px. All three stay in the footer and the mobile More sheet.
     { name: "News", href: "/news" },
-    { name: "About", href: "/about" },
 ];
 
 // Pages with a dark hero at the top get the transparent header + white logo.
@@ -54,7 +55,7 @@ const { darkHero = true } = Astro.props;
                 >
             </a>
 
-            <nav class="hidden lg:flex items-center space-x-8">
+            <nav class="hidden lg:flex items-center space-x-5 xl:space-x-8">
                 {
                     navItems.map((item) => (
                         <a

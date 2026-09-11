@@ -5,55 +5,59 @@
 // engineer to paste, with the blanks they need to fill marked in brackets.
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { ticketLink, ticketEventClass, ticketTiers, regularTier } from "../data/conference-2026.js";
-import { conferenceSpeakers } from "../data/conference-2026.js";
 
 const regular = ticketTiers.find((t) => t.name === "Regular");
 const company = ticketTiers.find((t) => t.name === "Company-sponsored");
+const singleDay = ticketTiers.find((t) => t.name === "Single day");
 const regularCloses = new Date(regularTier.closesOn).toLocaleDateString(
     "en-US",
     { month: "long", day: "numeric", timeZone: "America/Los_Angeles" },
 );
-const speakerCount = conferenceSpeakers.length;
 
 const costs = [
     { item: `Ticket, Regular (until ${regularCloses})`, value: `$${regular.price}` },
     { item: "Ticket, company-sponsored (invoiced, no deadline)", value: `$${company.price}` },
+    { item: "Ticket, single day (Nov 10 or Nov 11)", value: `$${singleDay.price}` },
     { item: "Flights", value: "$0 from the Bay Area" },
     { item: "Hotel", value: "$0 if you sleep at home" },
-    { item: "Days out of the office", value: "2 (Nov 10 and 11)" },
+    { item: "Days out of the office", value: "1 (Nov 11 is Veterans Day)" },
     { item: "Community day, Nov 12", value: "Optional" },
 ];
 
 const reasons = [
     {
         title: "The people who wrote your Gemfile are on stage",
-        body: "Solid Queue, GoodJob, AnyCable, Yabeda, Herb and Ruby core itself, each represented by its author or maintainer. A question asked in the hallway comes back with the answer the docs do not have.",
+        body: "Solid Queue, GoodJob, AnyCable, Herb and Ruby core, each by its author or maintainer. Hallway questions get the answers the docs do not have.",
     },
     {
         title: "Agentic Rails, from people running it in production",
-        body: "Fin serves 150,000 requests per second from a Rails monolith. Order.co is putting agents to work on a legacy codebase. RubyLLM 2.0 ships here. These are the talks that decide what the next two years of the job look like.",
+        body: "Day 1 is AI-heavy: Fin serving 150,000 requests per second from a Rails monolith, Order.co putting agents on a legacy codebase, Anthropic on an agent as a teammate inside a SaaS, RubyLLM 2.0. Day 2 is AI-light: queues, concurrency, real-time, open source.",
+    },
+    {
+        title: "A track for companies like yours",
+        body: "Talks and conversation groups run separately for small teams and big teams, so the people around you run the same kind of system at the same kind of company. Gusto, Persona, Shopify and 37signals speak on the big-teams track.",
     },
     {
         title: "Networking is on the schedule",
-        body: "Every attendee is placed in at least two organized groups of people working on the same kind of system, with a minute on the mic. What comes back is names, not business cards.",
+        body: "Everyone is placed in at least two groups of people working on the same kind of system, with a minute on the mic. You come back with names.",
     },
     {
         title: "It is local",
-        body: "SFJAZZ, 201 Franklin Street. Over 400 people came last year. For anyone in the Bay Area the cost is the ticket and two days.",
+        body: "SFJAZZ, 201 Franklin St. Over 400 people came last year.",
     },
 ];
 
-const emailBody = `Subject: SF Ruby Startup Conference, Nov 10-11 ($${regular.price})
+const emailBody = `Subject: SF Ruby Conference, Nov 10-11 ($${regular.price})
 
 Hi [manager],
 
-I'd like to attend the San Francisco Ruby Startup Conference at SFJAZZ on November 10 and 11 (sfruby.com). It's local, so the full cost is the ticket: $${regular.price} until ${regularCloses}, or $${company.price} on the invoiced company tier with no deadline. Two days out of the office; the community day on the 12th is optional.
+I'd like to attend the San Francisco Ruby Conference at SFJAZZ on November 10 and 11 (sfruby.com). It's local, so the cost is the ticket: $${regular.price} until ${regularCloses}, or $${company.price} on the invoiced company tier with no deadline. A single day is $${singleDay.price}. Nov 11 is Veterans Day, so it is one day out of the office. The community day on the 12th is optional.
 
 Why it's worth it for us:
 
-- The authors and maintainers of tools we run are speaking: Solid Queue (37signals), GoodJob, AnyCable, Yabeda, Herb, and Ruby core (Shopify).
-- Four talks on agentic Rails in production, including Fin at 150,000 requests per second and RubyLLM 2.0.
-- Networking is organized: I'll be placed in two groups of engineers working on the same kind of system as ours, which is where the useful conversations about [our system] happen.
+- The authors and maintainers of tools we run are speaking: Solid Queue (37signals), GoodJob, AnyCable, Herb, and Ruby core (Shopify).
+- Day 1 is AI-heavy: agents in production, including Fin at 150,000 requests per second, Anthropic on agents inside a SaaS, and RubyLLM 2.0. Day 2 is AI-light: queues, concurrency, real-time and open source, with engineers from Gusto, Persona and Shopify.
+- Talks and networking groups run separately for small teams and big teams, so I'll be with engineers running the same kind of system as ours.
 - I'll write up the talks relevant to [our system] for the team afterwards.
 
 Ticket: ${ticketLink("manager-email")}
@@ -64,8 +68,8 @@ Thanks,
 
 <BaseLayout
     darkHero={false}
-    title="Convince your manager - SF Ruby Startup Conference 2026"
-    description="What the San Francisco Ruby Startup Conference costs a Bay Area engineer (the ticket and two days), what they bring back, and an email to send your manager."
+    title="Convince your manager - SF Ruby Conference 2026"
+    description="An email to send your manager, what the San Francisco Ruby Conference costs a Bay Area engineer (the ticket and one day off), and what they bring back."
 >
     <section class="pt-28 pb-14 bg-sky-50 border-b-4 border-ink">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -74,9 +78,8 @@ Thanks,
                 Convince your manager
             </h1>
             <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
-                For most of our attendees this is the cheapest conference trip
-                there is: the ticket, and two days. Here is the whole
-                argument on one page, and an email you can send as is.
+                It is local, and Nov 11 is Veterans Day, so the cost is the
+                ticket and one day off. Fill in the brackets, copy, send.
             </p>
         </div>
     </section>
@@ -84,56 +87,8 @@ Thanks,
     <section class="py-16 md:py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="px-font text-px10 md:text-xs text-ruby-600">
-                What it costs
-            </h2>
-            <!-- Rows stack on phones so the label keeps the full width; a
-                 two-column table starved the label column to three words. -->
-            <dl class="px-card bg-white mt-6 m-0 divide-y divide-gray-200">
-                {
-                    costs.map((c) => (
-                        <div class="p-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 text-sm md:text-base">
-                            <dt class="text-gray-700">{c.item}</dt>
-                            <dd class="m-0 font-mono font-semibold text-gray-900 sm:text-right sm:shrink-0">
-                                {c.value}
-                            </dd>
-                        </div>
-                    ))
-                }
-            </dl>
-            <p class="text-sm text-gray-500 leading-relaxed mt-4">
-                The company-sponsored ticket is invoiced and expensable with no
-                deadline. Buying it is what keeps the Regular ticket at ${regular.price}.
-            </p>
-
-            <h2 class="px-font text-px10 md:text-xs text-ruby-600 mt-14">
-                What you bring back
-            </h2>
-            <ul class="mt-6 grid gap-4 list-none p-0">
-                {
-                    reasons.map((r) => (
-                        <li class="px-card bg-sky-50 p-5 md:p-6">
-                            <h3 class="px-font text-px9 md:text-px10 text-gray-900 leading-relaxed">
-                                {r.title}
-                            </h3>
-                            <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-3">
-                                {r.body}
-                            </p>
-                        </li>
-                    ))
-                }
-            </ul>
-            <p class="text-sm text-gray-500 leading-relaxed mt-4">
-                All {speakerCount} speakers, with talk titles and abstracts, are on
-                <a href="/speakers" class="text-ruby-600 underline underline-offset-2">the speakers page</a>.
-            </p>
-
-            <h2 class="px-font text-px10 md:text-xs text-ruby-600 mt-14">
                 The email
             </h2>
-            <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-4">
-                Fill in the brackets and send. The copy button puts it on your
-                clipboard as plain text.
-            </p>
             <div class="px-dialog bg-white p-5 md:p-6 mt-6">
                 <pre
                     id="manager-email"
@@ -157,6 +112,50 @@ Thanks,
                     </a>
                 </div>
             </div>
+
+            <h2 class="px-font text-px10 md:text-xs text-ruby-600 mt-14">
+                What it costs
+            </h2>
+            <!-- Rows stack on phones so the label keeps the full width; a
+                 two-column table starved the label column to three words. -->
+            <dl class="px-card bg-white mt-6 m-0 divide-y divide-gray-200">
+                {
+                    costs.map((c) => (
+                        <div class="p-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 text-sm md:text-base">
+                            <dt class="text-gray-700">{c.item}</dt>
+                            <dd class="m-0 font-mono font-semibold text-gray-900 sm:text-right sm:shrink-0">
+                                {c.value}
+                            </dd>
+                        </div>
+                    ))
+                }
+            </dl>
+            <p class="text-sm text-gray-500 leading-relaxed mt-4">
+                The company-sponsored ticket is invoiced, with no deadline. It
+                is what keeps Regular at ${regular.price}.
+            </p>
+
+            <h2 class="px-font text-px10 md:text-xs text-ruby-600 mt-14">
+                What you bring back
+            </h2>
+            <ul class="mt-6 grid gap-4 list-none p-0">
+                {
+                    reasons.map((r) => (
+                        <li class="px-card bg-sky-50 p-5 md:p-6">
+                            <h3 class="px-font text-px9 md:text-px10 text-gray-900 leading-relaxed">
+                                {r.title}
+                            </h3>
+                            <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-3">
+                                {r.body}
+                            </p>
+                        </li>
+                    ))
+                }
+            </ul>
+            <p class="text-sm text-gray-500 leading-relaxed mt-4">
+                Every speaker and talk is on
+                <a href="/speakers" class="text-ruby-600 underline underline-offset-2">the speakers page</a>.
+            </p>
 
             <p class="text-sm text-gray-500 leading-relaxed mt-10 text-center">
                 Bringing more than one person?

@@ -1,0 +1,81 @@
+---
+// Tickets, right after the schedule: the three live tiers as cards, and the
+// manager page given the same weight as a tier, since for most readers the
+// step between reading the program and buying is getting a yes at work.
+// Company-sponsored comes first: it is the ticket a manager approves, and
+// it is what keeps Regular at its price. Regular is the main CTA.
+import { ticketLink, ticketEventClass, ticketTiers } from "../data/conference-2026.js";
+
+const tier = (name) => ticketTiers.find((t) => t.name === name && t.state === "live");
+const tiers = [
+    { ...tier("Company-sponsored"), label: "Company-sponsored", placement: "tickets-company", main: false },
+    { ...tier("Regular"), label: "Both days", placement: "tickets", main: true },
+    { ...tier("Single day"), label: "One day", placement: "tickets-day", main: false },
+].filter((t) => t.price);
+// The tier after Regular: shown small and muted at the end of the row, so the
+// deadline on the Regular card has a visible consequence.
+const late = ticketTiers.find((t) => t.name === "Late bird" && t.state === "soon");
+---
+
+<section id="tickets" class="relative overflow-hidden py-16 md:py-20 px-royal-grad text-white border-t-4 border-ink">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center">
+            <span class="px-plate px-plate--gold px-font text-px8 px-3 py-1.5">Nov 10-12 · SFJAZZ</span>
+            <h2 class="px-font px-shadow-ink text-lg md:text-2xl text-white mt-6">
+                Tickets
+            </h2>
+        </div>
+
+        <ul class:list={["mt-10 grid gap-5 list-none p-0 m-0 items-stretch", late ? "md:grid-cols-[1fr_1fr_1fr_0.7fr]" : "md:grid-cols-3"]}>
+            {
+                tiers.map((t) => (
+                    <li class:list={["px-card bg-white text-gray-900 p-5 md:p-6 flex flex-col", t.main && "px-card--gold"]}>
+                        <p class="px-font text-px9 text-gray-900">{t.label}</p>
+                        <p class="font-display font-semibold text-3xl md:text-4xl text-gray-900 mt-3">${t.price}</p>
+                        <p class="text-sm text-gray-600 leading-relaxed mt-3 flex-1">{t.note}</p>
+                        <a
+                            href={ticketLink(t.placement)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class:list={[
+                                "px-btn px-font text-px9 md:text-px10 px-5 py-3.5 mt-5 tap-press justify-center",
+                                t.main ? "px-btn--gold" : "px-btn--white",
+                                ticketEventClass(t.placement),
+                            ]}
+                        >
+                            {t.main && <img src="/px-ticket.png" alt="" width="64" height="64" class="px-pixelated h-5 w-auto" />}
+                            Get a ticket
+                        </a>
+                    </li>
+                ))
+            }
+            {
+                late && (
+                    <li class="px-card bg-gray-100 text-gray-500 p-4 md:p-5 flex flex-col md:self-center" aria-label={`${late.name}, ${late.note}`}>
+                        <p class="px-font text-px8 text-gray-500">{late.name}</p>
+                        <p class="font-display font-semibold text-2xl md:text-3xl text-gray-400 mt-2">${late.price}</p>
+                        <p class="text-xs text-gray-500 leading-relaxed mt-2">{late.note}</p>
+                    </li>
+                )
+            }
+        </ul>
+
+        <!-- The approval step, as big as a tier -->
+        <div class="px-dialog bg-white text-gray-900 mt-8 p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+            <div class="flex-1">
+                <h3 class="px-font text-px10 md:text-xs text-gray-900">
+                    Need company sign-off to attend?
+                </h3>
+                <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-3">
+                    One page with the costs, the case, and an email you can send as is.
+                </p>
+            </div>
+            <a
+                href="/manager"
+                class="px-btn px-btn--gold px-font text-px9 md:text-px10 px-6 py-4 tap-press justify-center shrink-0"
+            >
+                Convince your manager
+            </a>
+        </div>
+    </div>
+</section>

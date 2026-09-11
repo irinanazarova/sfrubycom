@@ -10,7 +10,131 @@ import { spriteColors } from "../src/design/tokens.mjs";
 
 const PALETTE = spriteColors;
 
+// Clouds are built rather than hand-typed: a union of circles clipped to a
+// flat underside, shaded on the bottom rows, outlined where the fill meets
+// air. Same style as the hand-drawn px-cloud, at sizes that read as depth
+// when a hero scatters all three.
+function cloud(w, h, base, blobs) {
+  const inside = (x, y) =>
+    x >= 0 && x < w && y >= 0 && y <= base &&
+    blobs.some(([cx, cy, r]) => (x - cx) ** 2 + (y - cy) ** 2 <= r * r);
+  const rows = [];
+  for (let y = 0; y < h; y++) {
+    let row = "";
+    for (let x = 0; x < w; x++) {
+      if (!inside(x, y)) row += ".";
+      else if (
+        !inside(x - 1, y) || !inside(x + 1, y) || !inside(x, y - 1) || !inside(x, y + 1)
+      )
+        row += "K";
+      else if (y >= base - 2) row += "S";
+      else row += "W";
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+
+// Ground tile: a grass lip over stone, in the island's own colours (no ink
+// outline, like the island). Repeats horizontally; .px-ground stretches it.
+function ground() {
+  const w = 32, h = 24;
+  const rows = [];
+  for (let y = 0; y < h; y++) {
+    let row = "";
+    for (let x = 0; x < w; x++) {
+      const scallop = (x % 8 === 3 || x % 8 === 4) ? 1 : 0;
+      if (y === 0) row += x % 5 === 2 ? "N" : "n";
+      else if (y < 5 + scallop) row += (y === 4 + scallop || (x % 8 === 0 && y > 2)) ? "m" : "N";
+      else if (y < 7 + scallop) row += "d";
+      else {
+        // stone with a brick-ish break every 6 rows and a few highlights
+        const brick = (y - 7) % 6;
+        const shift = Math.floor((y - 7) / 6) % 2 === 0 ? 0 : 5;
+        if (brick === 5) row += "d";
+        else if ((x + shift) % 10 === 0) row += "d";
+        else if (brick === 0 && (x + shift) % 10 === 1) row += "T";
+        else row += "t";
+      }
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+
+// Party balloon: a filled oval with a glint, a knot and a wavy string. One
+// map, three colourways, so the celebration reads in the palette's own tones.
+function balloon(fill, shade, light) {
+  const map = [
+    "....KKKK....",
+    "...KFFFFK...",
+    "..KFLLFFFK..",
+    ".KFFLFFFFFK.",
+    ".KFFFFFFFFK.",
+    ".KFFFFFFFFK.",
+    ".KFFFFFFFFK.",
+    ".KSFFFFFFSK.",
+    "..KSFFFFSK..",
+    "...KSSSSK...",
+    "....KKKK....",
+    ".....KK.....",
+    "....KSSK....",
+    ".....KK.....",
+    "......K.....",
+    ".....K......",
+    "......K.....",
+    ".....K......",
+  ];
+  return map.map((row) =>
+    row.replace(/F/g, fill).replace(/S/g, shade).replace(/L/g, light),
+  );
+}
+
 const SPRITES = {
+  "px-balloon-ruby": balloon("R", "r", "L"),
+  "px-balloon-gold": balloon("G", "g", "W"),
+  "px-balloon-blue": balloon("B", "b", "A"),
+  // Hot-air balloon: striped envelope, a basket on two ropes. Floats over
+  // the Pier map.
+  "px-hotair": [
+    ".......KKKKKKKK.......",
+    ".....KKRRGGRRGGKK.....",
+    "....KRRRGGRRGGRRK.....",
+    "...KRRRRGGRRGGRRRK....",
+    "..KRRRRRGGRRGGRRRRK...",
+    "..KRRRRRGGRRGGRRRRK...",
+    ".KRRRRRRGGRRGGRRRRRK..",
+    ".KRRRRRRGGRRGGRRRRRK..",
+    ".KRRRRRRGGRRGGRRRRRK..",
+    ".KrRRRRRGGRRGGRRRRrK..",
+    ".KrRRRRRGGRRGGRRRRrK..",
+    "..KrRRRRGGRRGGRRRrK...",
+    "..KrrRRRGGRRGGRRrrK...",
+    "...KrrRRGGRRGGRRrK....",
+    "....KrrRGGRRGGrrK.....",
+    ".....KKrrGGGGrrKK.....",
+    ".......KKrrrrKK.......",
+    ".........KKKK.........",
+    "........K....K........",
+    ".......K......K.......",
+    ".......KKKKKKKK.......",
+    ".......KggggggK.......",
+    ".......KgGGGGgK.......",
+    ".......KKKKKKKK.......",
+  ],
+  "px-cloud-md": cloud(48, 20, 16, [[11, 12, 7], [22, 9, 9], [34, 11, 8], [41, 13, 5]]),
+  "px-cloud-lg": cloud(72, 28, 22, [[13, 16, 9], [28, 11, 12], [45, 13, 11], [59, 17, 8], [65, 19, 5]]),
+  "px-ground": ground(),
+  // four-point star, gold with a white core: the select-screen sparkle
+  "px-sparkle": [
+    "...W...",
+    "...G...",
+    "..GWG..",
+    "WGWWWGW",
+    "..GWG..",
+    "...G...",
+    "...W...",
+  ],
   "px-envelope": [
     "........................",
     ".KKKKKKKKKKKKKKKKKKKKKK.",
@@ -154,7 +278,9 @@ function toPam(rows) {
 for (const [name, rows] of Object.entries(SPRITES)) {
   const tmp = `/tmp/${name}.pam`;
   writeFileSync(tmp, toPam(rows));
-  execSync(`magick ${tmp} public/${name}.png`);
+  // compression-level 9 + strip: the committed px-*.png are kept small, and
+  // plain `magick` would inflate every sprite this script touches.
+  execSync(`magick ${tmp} -define png:compression-level=9 -strip public/${name}.png`);
   unlinkSync(tmp);
   console.log(`public/${name}.png  ${rows[0].length}x${rows.length}`);
 }

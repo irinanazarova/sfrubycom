@@ -1,0 +1,162 @@
+---
+// Getting to SFJAZZ: transit first, since most attendees are local, then the
+// two city garages with the rates that matter on a weekday conference day.
+// Figures are from sfmta.com (garage rate tables, Muni fares, route pages)
+// as of September 2026. Two lines older guides recommend, the 21 Hayes and
+// the 47 Van Ness, are suspended in 2026, so they are not listed. Recheck
+// the garage tables before the conference: SFMTA revises them each summer.
+import { days, formatTime } from "../data/schedule-2026.js";
+
+const ADDRESS = "201 Franklin St, San Francisco, CA 94102";
+// Program hours from the schedule itself, so they cannot drift from it.
+const hours = days.slice(0, 2).map((d) => ({
+    n: d.n,
+    opens: formatTime(d.blocks[0].start),
+    closes: formatTime(d.blocks.at(-1).end),
+}));
+const MAPS = {
+    google: "https://www.google.com/maps/dir/?api=1&destination=SFJAZZ+Center,+201+Franklin+St,+San+Francisco,+CA+94102",
+    apple: "https://maps.apple.com/?daddr=201+Franklin+St,+San+Francisco,+CA+94102",
+};
+
+const transit = [
+    {
+        name: "Muni Metro",
+        detail: "Any line to Van Ness station, then 8 minutes on foot up Van Ness to Fell.",
+        meta: "$2.85 with Clipper, $3 cash",
+    },
+    {
+        name: "BART",
+        detail: "Civic Center station, then 12 minutes on foot along Grove, past City Hall.",
+        meta: "About 30 min and $11 from SFO",
+    },
+    {
+        name: "Buses",
+        detail: "49 Van Ness/Mission to McAllister. 6 Hayes/Parnassus to Hayes & Gough. 5 Fulton to McAllister & Gough.",
+        meta: "3 to 5 min walk",
+    },
+    {
+        name: "Caltrain",
+        detail: "N Judah from 4th & King to Van Ness station.",
+        meta: "About 20 min, then the walk",
+    },
+    {
+        name: "Bike",
+        detail: "Bay Wheels docks at Grove & Gough and Market & Franklin.",
+        meta: "3 min walk",
+    },
+];
+
+const garages = [
+    {
+        name: "Performing Arts Garage",
+        address: "360 Grove St",
+        href: "https://www.sfmta.com/garages-lots/performing-arts-garage",
+        walk: "Two blocks, 4 min walk",
+        rates: [
+            ["In by 9 am, out by 7 pm", "$21 flat"],
+            ["Hourly", "$3 to $5"],
+            ["12 hours", "$26"],
+        ],
+        note: "Weekdays 6 am to 10 pm. 6'9\" clearance. EV charging.",
+    },
+    {
+        name: "Civic Center Garage",
+        address: "355 McAllister St, under Civic Center Plaza",
+        href: "https://www.sfmta.com/garages-lots/civic-center-garage",
+        walk: "10 min walk",
+        rates: [
+            ["In by 8:30 am, out by 7 pm", "$23 flat"],
+            ["Hourly, midday", "$7"],
+            ["24 hours", "$38"],
+        ],
+        note: "Weekdays 6 am to 10 pm.",
+    },
+];
+---
+
+<section id="getting-there" class="py-16 md:py-20 bg-sky-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+            <span class="px-plate px-font text-px8 px-3 py-1.5">SFJAZZ Center</span>
+            <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
+                Getting there
+            </h2>
+            <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
+                {ADDRESS}, at Fell, in Hayes Valley. Entrance on Franklin.
+                {hours.map((h, i) => `Day ${h.n}${i ? "" : " runs"} ${h.opens} to ${h.closes}`).join(", ")}.
+            </p>
+            <div class="mt-6 flex flex-wrap justify-center gap-3">
+                <a
+                    href={MAPS.google}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-btn px-btn--white px-font text-px8 md:text-px9 px-4 py-3 tap-press"
+                >
+                    Google Maps
+                </a>
+                <a
+                    href={MAPS.apple}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-btn px-btn--white px-font text-px8 md:text-px9 px-4 py-3 tap-press"
+                >
+                    Apple Maps
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-2 items-start">
+            <!-- Transit: the default for a local crowd -->
+            <div class="px-card bg-white p-5 md:p-6">
+                <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1">Public transit</span>
+                <ul class="mt-5 grid gap-4 list-none p-0 m-0">
+                    {
+                        transit.map((t) => (
+                            <li class="border-l-4 border-sky-300 pl-4">
+                                <p class="px-font text-px9 text-gray-900">{t.name}</p>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed mt-2">{t.detail}</p>
+                                <p class="font-mono text-xs text-gray-500 mt-1.5">{t.meta}</p>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Car: two city garages, the flat rates first -->
+            <div class="px-card bg-white p-5 md:p-6">
+                <span class="px-plate px-font text-px8 px-2 py-1">Parking</span>
+                <ul class="mt-5 grid gap-5 list-none p-0 m-0">
+                    {
+                        garages.map((g) => (
+                            <li class="border-l-4 border-gold-400 pl-4">
+                                <p class="px-font text-px9 text-gray-900">
+                                    <a href={g.href} target="_blank" rel="noopener noreferrer" class="hover:underline underline-offset-4">{g.name}</a>
+                                </p>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed mt-2">
+                                    {g.address}. {g.walk}.
+                                </p>
+                                <dl class="mt-3 m-0 grid gap-1.5 text-sm">
+                                    {g.rates.map(([label, price]) => (
+                                        <div class="flex justify-between gap-4 items-baseline">
+                                            <dt class="text-gray-600">{label}</dt>
+                                            <dd class="m-0 font-mono font-semibold text-gray-900 whitespace-nowrap">{price}</dd>
+                                        </div>
+                                    ))}
+                                </dl>
+                                <p class="font-mono text-xs text-gray-500 mt-2">{g.note}</p>
+                            </li>
+                        ))
+                    }
+                </ul>
+                <p class="text-sm text-gray-700 leading-relaxed mt-5 pt-5 border-t-2 border-gray-200">
+                    Street meters are two-hour limits until 6 pm. Rideshare drop-off: Franklin St at Fell.
+                </p>
+            </div>
+        </div>
+
+        <p class="text-xs text-gray-500 text-center mt-8">
+            Rates from SFMTA, September 2026.
+        </p>
+    </div>
+</section>

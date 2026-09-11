@@ -12,13 +12,20 @@
 // company; and for people who have already published a character on the Pier,
 // the character image, the card URL and the name that card already shows. No
 // emails, no ticket types, nobody who has not put themselves on the map.
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, unlinkSync } from "node:fs";
+import sharp from "sharp";
 import { fileURLToPath } from "node:url";
 
+// Character images are saved here, resized, so the homepage never hotlinks
+// the game's 450x800 PNGs (about 600KB each; 26 of them was 15MB of images
+// and the odd one failing to load). 128px tall is 2x the largest size the
+// block renders. Committed alongside the JSON so build:dev has them.
+const IMG_DIR = fileURLToPath(new URL("../public/attending/", import.meta.url));
+const IMG_HEIGHT = 128;
 const OUT = fileURLToPath(
   new URL("../src/content/attending-companies.json", import.meta.url),
 );
-const EVENT_ID = "evt-mKb0oC6cWGtqSIQ"; // San Francisco Ruby Startup Conference 2026
+const EVENT_ID = "evt-mKb0oC6cWGtqSIQ"; // San Francisco Ruby Conference 2026
 const LUMA_API = "https://public-api.luma.com/public/v1";
 const CHARACTERS_API = "https://clouds.sfruby.com/api/characters?limit=500";
 // The list API pages with next_cursor; older deploys capped it at the 50
@@ -198,6 +205,32 @@ try {
     out.push({ name, count: Math.max(c.people.size, chars.length), characters: chars });
   }
   out.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+
+  // Snapshot the character art locally. A download that fails drops the
+  // character (the person still counts; the block shows a stand-in).
+  mkdirSync(IMG_DIR, { recursive: true });
+  const keep = new Set();
+  for (const c of out) {
+    c.characters = (
+      await Promise.all(
+        c.characters.map(async (ch) => {
+          const file = `${ch.url.split("/").filter(Boolean).at(-1)}.webp`;
+          try {
+            const res = await fetch(ch.image, { signal: AbortSignal.timeout(30_000) });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const buf = Buffer.from(await res.arrayBuffer());
+            await sharp(buf).resize({ height: IMG_HEIGHT }).webp({ quality: 82 }).toFile(IMG_DIR + file);
+            keep.add(file);
+            return { ...ch, image: `/attending/${file}` };
+          } catch (e) {
+            console.warn(`attending-companies: no image for ${ch.name} (${e.message})`);
+            return null;
+          }
+        }),
+      )
+    ).filter(Boolean);
+  }
+  for (const f of readdirSync(IMG_DIR)) if (!keep.has(f)) unlinkSync(IMG_DIR + f);
 
   writeFileSync(
     OUT,

@@ -42,7 +42,7 @@ const GRADIENTS = skyRamps;
 for (const [name, { height, stops }] of Object.entries(GRADIENTS)) {
   const tmp = `/tmp/${name}.ppm`;
   writeFileSync(tmp, ppm(height, stops));
-  execSync(`magick ${tmp} public/${name}.png`);
+  execSync(`magick ${tmp} -define png:compression-level=9 -strip public/${name}.png`);
   unlinkSync(tmp);
   console.log(`public/${name}.png  ${W}x${height}  ${stops.length} stops`);
 }

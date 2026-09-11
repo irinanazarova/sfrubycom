@@ -4,24 +4,24 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import HashScroll from "../components/HashScroll.astro";
 import SectionLinks from "../components/SectionLinks.astro";
-import IslandNav from "../components/IslandNav.astro";
-import SpeakerRoster from "../components/SpeakerRoster.astro";
-import ConferenceNetworking from "../components/ConferenceNetworking.astro";
 import CompaniesAttending from "../components/CompaniesAttending.astro";
 import Pier from "../components/Pier.astro";
-import WhatYouHear from "../components/WhatYouHear.astro";
-import TicketLadder from "../components/TicketLadder.astro";
+import GettingThere from "../components/GettingThere.astro";
+import Schedule from "../components/Schedule.astro";
+import TicketsBlock from "../components/TicketsBlock.astro";
 import TicketScarcity from "../components/TicketScarcity.astro";
-import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers, ticketTiers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
 // Fighter-select roster: confirmed speakers with sprites, minus a few kept off
-// the homepage grid (they stay in the lineup section below), plus community
-// cameos mixed in — the game is the whole community, not only the stage.
-const offTheGrid = ["Alex Coomans", "Cole Robertson", "Jason Thomas", "Ben Sheldon"];
+// the homepage grid so the count fills it exactly, plus community cameos
+// mixed in: the game is the whole community, stage slot or not. With the
+// visitor's own "You" cell the grid holds 21 on desktop (7 x 3) and 20 on
+// phones (5 x 4), where the last cameo sits out.
+const offTheGrid = ["Alex Coomans", "Cole Robertson", "Jason Thomas"];
 const fighters = conferenceSpeakers
     .filter((s) => s.pixel && !offTheGrid.includes(s.name))
     .map((s) => ({ name: s.name, org: s.orgs[0].name, pixel: s.pixel }));
@@ -32,7 +32,7 @@ const cameos = [
     { name: "Amanda Kinney", org: "Evil Martians", pixel: "/community_amanda_kinney_pixel_256.png" },
     { name: "Andrew Ford", org: "Buttercut", pixel: "/community_andrew_ford_pixel_256.png" },
     { name: "Chris Fung", org: "Gusto", pixel: "/community_chris_fung_pixel_256.png" },
-    { name: "James Kerr", org: "Tend Cash", pixel: "/community_james_kerr_pixel_256.png" },
+    { name: "James Kerr", org: "Tend Cash", pixel: "/community_james_kerr_pixel_256.png", desktopOnly: true },
 ];
 // Fixed scatter positions so the cameos read as mixed in, not appended.
 [4, 8, 13, 17].forEach((pos, i) =>
@@ -41,6 +41,11 @@ const cameos = [
 
 // Flat sponsor list for the hero ticker, tier order preserved.
 const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);
+
+// One description for the meta tag, Open Graph and Twitter, from the same
+// data the page renders, so a price change never leaves a stale preview.
+const fromPrice = Math.min(...ticketTiers.filter((t) => t.state === "live").map((t) => t.price));
+const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live, tickets from $${fromPrice}.`;
 
 // Deadline text for the hero CTA, from the same source TicketScarcity reads.
 const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
@@ -66,12 +71,9 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             sizes="96x96"
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta
-            name="description"
-            content="A conference for engineers who read and write Ruby. November 10-12, 2026 at SFJAZZ: agentic Rails in production, and networking where everyone gets the mic."
-        />
+        <meta name="description" content={DESCRIPTION} />
         <meta name="theme-color" content={palette.sky[400]} />
-        <title>San Francisco Ruby Startup Conference 2026 - SF Ruby</title>
+        <title>San Francisco Ruby Conference 2026 - SF Ruby</title>
 
         <link
             rel="preload"
@@ -98,14 +100,16 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
         <meta property="og:type" content="website" />
         <meta
             property="og:title"
-            content="San Francisco Ruby Startup Conference 2026 - SF Ruby"
+            content="San Francisco Ruby Conference 2026 - SF Ruby"
         />
-        <meta
-            property="og:description"
-            content="November 10-12, 2026 at SFJAZZ. A conference for engineers who read and write Ruby, and the founders who come to meet them. Keynote by Garry Tan of Y Combinator."
-        />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:url" content="https://sfruby.com/" />
         <meta property="og:image" content="https://sfruby.com/og/conference.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="San Francisco Ruby Conference 2026 - SF Ruby" />
+        <meta name="twitter:description" content={DESCRIPTION} />
         <meta property="twitter:image" content="https://sfruby.com/og/conference.png" />
 
         <script
@@ -123,42 +127,53 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             <!-- Conference hero, staged like a game title screen: title art,
                  date subtitle, one-line statement, blinking press-start CTA,
                  and the organizer/sponsor ticker scrolling along the bottom. -->
-            <section id="conf" class="relative min-h-svh flex items-center text-white overflow-hidden px-sky-grad-day">
+            <!-- On laptops the hero stops short of the fold on purpose: the
+                 schedule's heading shows under it, so the page reads as
+                 something to scroll. -->
+            <section id="conf" class="relative lg:min-h-[calc(100svh-10rem)] flex items-center text-white overflow-hidden px-sky-grad-day">
                 <!-- blocky retro clouds up high, floating islands down low:
                      the overworld this screen takes place in -->
-                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-28 left-[12%] w-36 md:w-44 animate-float pointer-events-none" aria-hidden="true" />
-                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-48 right-[10%] w-24 md:w-32 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
-                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-24 left-[4%] w-48 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[34%] right-[3%] w-32 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-16 right-[16%] w-24 h-auto animate-float [animation-delay:-5.5s] pointer-events-none hidden md:block" aria-hidden="true" />
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-24 pb-24">
+                <!-- three cloud sizes at three depths: big and slow low down,
+                     small and far up high -->
+                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-24 left-[6%] w-48 md:w-72 animate-float pointer-events-none" aria-hidden="true" />
+                <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-40 right-[8%] w-32 md:w-48 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+                <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-16 left-[44%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden md:block" aria-hidden="true" />
+                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute bottom-52 right-[2%] w-40 md:w-64 animate-float [animation-delay:-6s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-60 left-[1%] w-28 md:w-40 animate-float [animation-delay:-4s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-44 left-[3%] w-56 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[30%] right-[3%] w-36 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-[5.5rem] pb-36 md:pb-40 lg:pb-[8.5rem]">
                     <h1 class="sr-only">
-                        San Francisco Ruby Startup Conference 2026
+                        San Francisco Ruby Conference 2026
                     </h1>
                     <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
                         <!-- Fighter select: the speakers as a character-select
                              screen. A script cycles the gold highlight through
                              the roster; clicking a cell locks the choice. -->
                         <div class="order-2 lg:order-1 flex justify-center lg:justify-end">
-                            <div id="fighter-select" class="px-dialog p-4 md:p-6 w-full max-w-md">
-                                <p class="px-font text-px10 md:text-xs text-gold-500 text-center mb-3 md:mb-4">
+                            <div id="fighter-select" class="px-dialog px-dialog--gold p-4 md:p-6 lg:p-5 w-full max-w-md">
+                                <p class="px-font text-px10 md:text-xs text-gold-500 text-center mb-3 md:mb-4 lg:mb-3">
                                     Choose your fighter
                                 </p>
-                                <div class="relative flex items-end justify-center h-36 md:h-56 mb-1" aria-hidden="true">
+                                <div class="relative flex items-end justify-center h-36 md:h-56 lg:h-40 mb-1" aria-hidden="true">
+                                    <span class="px-spot"></span>
+                                    <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-3 md:w-4 top-[12%] left-[18%]" style="--px-twinkle-delay: 0s" />
+                                    <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2.5 md:w-3 top-[30%] right-[16%]" style="--px-twinkle-delay: -0.7s" />
+                                    <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2 md:w-3 top-[58%] left-[24%]" style="--px-twinkle-delay: -1.2s" />
                                     <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-0 left-1/2 -translate-x-1/2 w-44 md:w-60 h-auto" />
                                     <img id="fighter-portrait" src={fighters[0].pixel} alt="" width="256" height="256" class="px-pixelated h-[calc(100%-1.25rem)] md:h-[calc(100%-1.75rem)] w-auto px-fighter-bob relative mb-3 md:mb-4" />
                                     <span id="fighter-mystery" class="px-font text-5xl md:text-6xl text-white hidden self-center relative mb-6 md:mb-8">?</span>
                                 </div>
-                                <div class="text-center mb-3 md:mb-4 min-h-[3.5rem]">
+                                <div class="text-center mb-3 md:mb-4 lg:mb-3 min-h-[3.5rem] lg:min-h-[3rem]">
                                     <p id="fighter-name" class="px-font text-px10 md:text-sm text-white">{fighters[0].name}</p>
                                     <p id="fighter-org" class="px-font text-px8 text-gold-500 mt-1.5 opacity-90">{fighters[0].org}</p>
                                 </div>
-                                <div id="fighter-grid" class="grid grid-cols-5 gap-1.5" role="list" aria-label="Conference speakers">
+                                <div id="fighter-grid" class="grid grid-cols-5 lg:grid-cols-7 gap-1.5" role="list" aria-label="Conference speakers">
                                     {fighters.map((f, i) => (
                                         <button
                                             type="button"
                                             role="listitem"
-                                            class={`px-fighter-cell${i === 0 ? " is-active" : ""}`}
+                                            class:list={["px-fighter-cell", { "is-active": i === 0, "max-lg:hidden": f.desktopOnly }]}
                                             data-name={f.name}
                                             data-org={f.org}
                                             data-pixel={f.pixel}
@@ -188,16 +203,15 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
 
                         <!-- Title stack: art, date, statement, insert-coin CTA -->
                         <div class="order-1 lg:order-2 text-center">
-                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Startup Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] h-auto mb-4 md:mb-6 mx-auto" />
-                            <div class="mb-4 md:mb-5">
+                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] lg:max-w-[10rem] h-auto mb-4 md:mb-6 lg:mb-4 mx-auto" />
+                            <div class="mb-4 md:mb-5 lg:mb-4">
                                 <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
                                     <span class="text-gold-500">Year Two</span>
-                                    <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SF Jazz</span>
+                                    <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SFJAZZ</span>
                                 </span>
                             </div>
-                            <p class="font-display font-semibold text-base md:text-xl leading-snug text-white px-shadow-ink max-w-md mx-auto mb-5 md:mb-7">
-                                A conference for engineers who read and write
-                                Ruby. Founders come here to meet them.
+                            <p class="font-display font-semibold text-base md:text-xl leading-snug text-gold-400 px-shadow-ink max-w-md lg:max-w-lg mx-auto mb-5 md:mb-7 lg:mb-5">
+                                Let's bring programmer delight and Ruby into the future.
                             </p>
                             <!-- Insert coin: one gold block carrying the ask, the price
                                  and the deadline, the whole thing the link -->
@@ -217,9 +231,27 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                     <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Get your ticket</span>
                                     <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
                                         <span class="whitespace-nowrap">$450 &#183; until {regularCloses}<span id="days-left"></span></span>
-                                        <span class="whitespace-nowrap">Unlocks the Pier</span>
+                                        <span class="whitespace-nowrap">One day: $350</span>
                                     </span>
                                 </span>
+                            </a>
+                            <!-- The herald: the early-bird dragon, its sign
+                                 repainted to announce the program, linking to
+                                 the schedule. In the title stack on phones; on
+                                 desktop it hovers top-right of the title art,
+                                 positioned against the content column. -->
+                            <a
+                                href="#schedule"
+                                class="inline-block mt-7 lg:mt-0 lg:absolute lg:top-20 lg:right-0 xl:-right-6 tap-press"
+                                aria-label="The schedule is live. Jump to the schedule"
+                            >
+                                <img
+                                    src="/schedule_live_dragon.png"
+                                    alt="A pixel dragon holding a sign that reads Schedule is live"
+                                    width="1064"
+                                    height="696"
+                                    class="px-pixelated animate-float w-full max-w-[12rem] lg:max-w-[11rem] xl:max-w-[13rem] h-auto"
+                                />
                             </a>
                         </div>
                     </div>
@@ -239,10 +271,14 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                         // over (left/right anywhere, up/down while engaged with
                         // the panel so page scrolling stays intact).
                         {
+                            // Cells hidden at this width (the phone grid is
+                            // one short) stay out of the cycle.
                             const cells = [
                                 ...document.querySelectorAll(".px-fighter-cell"),
-                            ];
-                            const COLS = 5;
+                            ].filter((c) => c.offsetParent !== null);
+                            const grid = document.getElementById("fighter-grid");
+                            const cols = () =>
+                                getComputedStyle(grid).gridTemplateColumns.split(" ").length;
                             const portrait = document.getElementById("fighter-portrait");
                             const mystery = document.getElementById("fighter-mystery");
                             const nameEl = document.getElementById("fighter-name");
@@ -319,9 +355,9 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                 if (e.key === "ArrowRight") delta = 1;
                                 else if (e.key === "ArrowLeft") delta = -1;
                                 else if (e.key === "ArrowDown" && engaged)
-                                    delta = COLS;
+                                    delta = cols();
                                 else if (e.key === "ArrowUp" && engaged)
-                                    delta = -COLS;
+                                    delta = -cols();
                                 if (delta === null) return;
                                 e.preventDefault();
                                 locked = true;
@@ -338,7 +374,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                      edge. Sponsor logos are dark art, so they ride the dark strip
                      as white silhouettes (brightness-0 invert). The clone group is
                      aria-hidden and link-free so tab order sees each brand once. -->
-                <div class="px-ticker absolute bottom-0 left-0 w-full border-t-4 border-ink py-3">
+                <!-- the ground the scene stands on, with the sponsor ticker as
+                     the strip beneath it -->
+                <div class="absolute bottom-0 left-0 w-full">
+                <div class="px-ground h-12 md:h-16" aria-hidden="true"></div>
+                <div class="px-ticker w-full border-t-4 border-ink py-3">
                     {
                         [false, true].map((clone) => (
                             <div
@@ -385,11 +425,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                         {tickerSponsors.map((sponsor) =>
                                             clone ? (
                                                 <img
-                                                    src={sponsor.logoOnDark ?? sponsor.logo}
+                                                    src={sponsor.logo}
                                                     alt=""
-                                                    width={sponsor.logoOnDarkWidth ?? sponsor.logoWidth}
+                                                    width={sponsor.logoWidth}
                                                     height={sponsor.logoHeight}
-                                                    class:list={["h-6 md:h-7 w-auto shrink-0", !sponsor.logoOnDark && "brightness-0 invert"]}
+                                                    class="h-6 md:h-7 w-auto shrink-0 brightness-0 invert"
                                                     loading="eager"
                                                 />
                                             ) : (
@@ -400,11 +440,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                     class="shrink-0 hover:opacity-80 transition-opacity"
                                                 >
                                                     <img
-                                                        src={sponsor.logoOnDark ?? sponsor.logo}
+                                                        src={sponsor.logo}
                                                         alt={sponsor.name}
-                                                        width={sponsor.logoOnDarkWidth ?? sponsor.logoWidth}
+                                                        width={sponsor.logoWidth}
                                                         height={sponsor.logoHeight}
-                                                        class:list={["h-6 md:h-7 w-auto", !sponsor.logoOnDark && "brightness-0 invert"]}
+                                                        class="h-6 md:h-7 w-auto brightness-0 invert"
                                                         loading="eager"
                                                     />
                                                 </a>
@@ -416,26 +456,50 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                         ))
                     }
                 </div>
+                </div>
             </section>
 
-            <!-- The Pier: the pre-conference game, high up because a ticket is
-                 what unlocks it and nobody else has one -->
-            <Pier />
+            <!-- The schedule, first thing after the hero: the two-audience
+                 program is the claim the rest of the page has to earn, and
+                 the schedule is the proof. -->
+            <Schedule />
 
-            <!-- The lineup: four faces as a taste, the CTA carries the rest to /speakers -->
-            <SpeakerRoster limit={4} ctaHref="/speakers" />
+            <!-- Tickets and the manager page, right after the program -->
+            <TicketsBlock />
 
-            <!-- The two content arguments: agentic Rails in production, and the
-                 authors of the gems already in your Gemfile -->
-            <WhatYouHear />
+            <!-- 2026 Conference Sponsors -->
+            <!-- White, with the ink rule on top, so the sponsor wall reads as
+                 its own block after the schedule's pale sky -->
+            <section id="sponsors-2026" class="py-20 md:py-24 bg-white border-t-4 border-ink">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8">
+                        <span class="px-plate px-plate--gold px-font text-px8 px-3 py-1.5">Sponsors</span>
+                        <h2 class="px-font text-lg md:text-2xl text-gray-900 mt-6 mb-2">
+                            Backing year two
+                        </h2>
+                        <p class="text-base md:text-lg text-gray-600 mt-4 mb-10">Thank you to the companies behind the conference.</p>
 
-            <!-- Organized networking: the differentiator -->
-            <ConferenceNetworking />
+                        <SponsorTiers />
 
+                        <div class="mt-10">
+                            <a
+                                href="/sponsor-2026"
+                                class="px-btn px-font text-px9 gap-2 px-5 py-3 bg-gold-500 text-ink hover:bg-gold-400"
+                            >
+                                Join them: Sponsor 2026
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Who is in the room, then the game everyone in it plays -->
             <CompaniesAttending />
 
-            <!-- Price ladder + team offer -->
-            <TicketLadder />
+            <Pier />
 
             <!-- Venue photo, framed like a cutscene still -->
             <section class="relative w-full border-y-4 border-ink">
@@ -467,31 +531,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 </div>
             </section>
 
-            <!-- 2026 Conference Sponsors -->
-            <section id="sponsors-2026" class="py-16 bg-sky-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-8">
-                        <h2 class="px-font text-base md:text-lg text-gray-900 mb-2">
-                            SF Ruby Conference 2026 Sponsors
-                        </h2>
-                        <p class="text-sm text-gray-500 mb-8">The first companies backing year two. Thank you!</p>
-
-                        <SponsorTiers />
-
-                        <div class="mt-10">
-                            <a
-                                href="/sponsor-2026"
-                                class="px-btn px-font text-px9 gap-2 px-5 py-3 bg-gold-500 text-ink hover:bg-gold-400"
-                            >
-                                Join them: Sponsor 2026
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <!-- How to reach the venue: transit lines and garage rates -->
+            <GettingThere />
 
             <!-- Tickets: the closing ask -->
             <section
@@ -541,9 +582,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                         SF Ruby, All Year Round
                     </h2>
                     <p class="text-gray-600 max-w-2xl mx-auto mb-8">
-                        The conference is year two of a community that meets every
-                        month: free meetups, a curated jobs board, and a running
-                        feed of Ruby startup news.
+                        SF Ruby meets every month: free meetups, a jobs board,
+                        and Ruby news.
                     </p>
                     <div class="flex flex-wrap justify-center gap-3">
                         <a
@@ -568,25 +608,6 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 </div>
             </section>
 
-            <!-- Final CTA: overworld exits -->
-            <IslandNav
-                id="get-involved"
-                kicker="World 2026"
-                title="Choose your quest"
-                lede="Tickets, sponsorship, the meetup, or just say hi."
-                items={[
-                    {
-                        href: ticketLink("island-nav"),
-                        label: "Tickets",
-                        icon: "ticket",
-                        external: true,
-                        class: ticketEventClass("island-nav"),
-                    },
-                    { href: "/sponsor-2026", label: "Sponsor", icon: "coin" },
-                    { href: "/meetup", label: "The meetup", icon: "heart" },
-                    { href: "/contact", label: "Contact us", icon: "envelope" },
-                ]}
-            />
         </main>
 
         <Footer />

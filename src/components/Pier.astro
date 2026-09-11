@@ -39,12 +39,14 @@ const citizens = [
 ];
 
 // The live quest list, with the game's own point values.
+// Icons are the site's own item sprites, one per quest, so the list reads
+// like a quest log rather than a checklist.
 const quests = [
-    { label: "Generate and publish your pixel card", points: 10 },
-    { label: "Fill out your profile", points: 10 },
-    { label: "Find yourself on the Pier", points: 1 },
-    { label: "Talk to 5 people", points: 20 },
-    { label: "Collect a gem", points: 1 },
+    { label: "Generate and publish your pixel card", points: 10, icon: "/px-ticket.png", w: 26, h: 12 },
+    { label: "Fill out your profile", points: 10, icon: "/px-envelope.png", w: 24, h: 13 },
+    { label: "Find yourself on the Pier", points: 1, icon: "/px-coin.png", w: 12, h: 12 },
+    { label: "Talk to 5 people", points: 20, icon: "/px-heart.png", w: 14, h: 13 },
+    { label: "Return a gem to its maintainer", points: 10, icon: "/px-ruby.png", w: 14, h: 12 },
 ];
 
 // Published cards, one community member among the speakers: the Pier is the
@@ -86,29 +88,56 @@ const livePrice = ticketTiers.find(
 
 <section
     id="pier"
-    class="relative overflow-hidden py-20 md:py-24 px-night border-t-4 border-ink"
+    class="relative overflow-hidden py-20 md:py-24 px-sky-grad-day border-t-4 border-ink"
 >
+    {/* the same world as the hero: clouds at three depths, islands, and a
+        few sparkles in the sky */}
+    <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-16 left-[3%] w-40 md:w-60 animate-float pointer-events-none" aria-hidden="true" />
+    <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-24 right-[5%] w-28 md:w-44 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+    <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-[38%] left-[1%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+    <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-[52%] right-[1%] w-36 md:w-56 animate-float [animation-delay:-5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+    <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[30%] right-[4%] w-32 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
+    <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-16 left-[2%] w-44 h-auto animate-float [animation-delay:-4s] pointer-events-none hidden lg:block" aria-hidden="true" />
+    {
+        [
+            ["top-12 left-[16%]", "0s"], ["top-40 left-[9%]", "-0.6s"], ["top-20 right-[18%]", "-1.1s"],
+            ["top-[44%] right-[9%]", "-0.3s"], ["bottom-32 left-[12%]", "-1.4s"], ["bottom-24 right-[14%]", "-0.9s"],
+        ].map(([at, delay]) => (
+            <img src="/px-sparkle.png" alt="" width="7" height="7" class={`px-sparkle w-3 md:w-4 hidden md:block ${at}`} style={`--px-twinkle-delay: ${delay}`} aria-hidden="true" />
+        ))
+    }
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="max-w-3xl mx-auto text-center">
+        <div class="max-w-3xl mx-auto text-center relative">
+            {/* balloons and hearts around the heading: the celebration the
+                section is about, kept to the edges so the words stay clear */}
+            <img src="/px-balloon-blue.png" alt="" width="12" height="18" class="px-pixelated absolute -top-4 -left-6 lg:-left-16 w-7 md:w-9 animate-float pointer-events-none hidden md:block" aria-hidden="true" />
+            <img src="/px-balloon-gold.png" alt="" width="12" height="18" class="px-pixelated absolute top-8 -left-2 lg:-left-8 w-6 md:w-8 animate-float [animation-delay:-2s] pointer-events-none hidden md:block" aria-hidden="true" />
+            <img src="/px-heart.png" alt="" width="14" height="13" class="px-pixelated absolute top-24 -left-5 lg:-left-14 w-5 md:w-6 animate-float [animation-delay:-1s] pointer-events-none hidden md:block" aria-hidden="true" />
+            <img src="/px-balloon-ruby.png" alt="" width="12" height="18" class="px-pixelated absolute -top-5 -right-6 lg:-right-16 w-7 md:w-9 animate-float [animation-delay:-3s] pointer-events-none hidden md:block" aria-hidden="true" />
+            <img src="/px-balloon-gold.png" alt="" width="12" height="18" class="px-pixelated absolute top-10 -right-2 lg:-right-8 w-6 md:w-8 animate-float [animation-delay:-4.5s] pointer-events-none hidden md:block" aria-hidden="true" />
+            <img src="/px-heart.png" alt="" width="14" height="13" class="px-pixelated absolute top-24 -right-5 lg:-right-14 w-5 md:w-6 animate-float [animation-delay:-2.5s] pointer-events-none hidden md:block" aria-hidden="true" />
             <span class="px-plate px-plate--gold px-font text-px8 px-3 py-1.5"
                 >Playable now</span
             >
             <h2
-                class="px-font px-shadow-ink text-lg md:text-2xl text-white mt-6"
+                class="px-font px-shadow-ink text-lg md:text-2xl text-gold-400 mt-6"
             >
                 Everyone who comes gets a character
             </h2>
-            <p class="text-base md:text-lg text-white/90 leading-relaxed mt-5">
-                The Pier is an 8-bit San Francisco where every attendee, speaker
-                and volunteer walks around as a pixel version of themselves.
-                Your ticket is the character slot, so the game starts the moment
-                you buy it and runs until we meet at SFJAZZ in November.
+            <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
+                The Pier is an 8-bit San Francisco where attendees, speakers
+                and volunteers walk around as pixel versions of themselves.
+                Buy a ticket, get a character. The game runs until we meet at
+                SFJAZZ in November.
             </p>
         </div>
 
         <div class="mt-14 grid gap-6 lg:grid-cols-[1.5fr_1fr] items-start">
             <!-- A window into the running game: the map, populated, with the
                  whole frame as the way in. -->
+            <div class="relative">
+            <img src="/px-hotair.png" alt="" width="22" height="24" class="px-pixelated absolute -top-10 left-[14%] w-12 md:w-16 z-10 animate-float pointer-events-none" aria-hidden="true" />
+            <img src="/px-hotair.png" alt="" width="22" height="24" class="px-pixelated absolute -top-8 right-[8%] w-10 md:w-14 z-10 animate-float [animation-delay:-3.5s] pointer-events-none" aria-hidden="true" />
             <a
                 href={PIER_URL}
                 target="_blank"
@@ -159,10 +188,12 @@ const livePrice = ticketTiers.find(
                     Enter the Pier &#9654;&#xFE0E;
                 </span>
             </a>
+            </div>
 
             <!-- The live quest list. Point values are the game's own. -->
-            <div class="px-card bg-white p-6">
-                <div class="flex items-center justify-between gap-3">
+            <div class="px-card bg-white overflow-hidden">
+                {/* gold header band, like the game's own quest panel */}
+                <div class="flex items-center justify-between gap-3 bg-gold-500 border-b-4 border-ink px-5 py-4">
                     <h3 class="px-font text-px10 md:text-xs text-gray-900">
                         Quests
                     </h3>
@@ -173,31 +204,37 @@ const livePrice = ticketTiers.find(
                         >0 complete</span
                     >
                 </div>
-                <ul class="mt-6 list-none p-0 flex flex-col gap-4">
+                <ul class="list-none p-0 m-0 flex flex-col">
                     {
-                        quests.map((q) => (
-                            <li class="flex items-start justify-between gap-3 border-b-2 border-gray-100 pb-4 last:border-0 last:pb-0">
-                                <span class="text-sm text-gray-700 leading-relaxed">
+                        quests.map((q, i) => (
+                            <li class:list={[
+                                "flex items-center justify-between gap-3 px-5 py-4 border-b-2 border-gray-100 last:border-0",
+                                i === 0 && "bg-gold-100",
+                            ]}>
+                                <span class="text-sm text-gray-800 leading-relaxed min-w-0">
                                     {q.label}
                                 </span>
-                                <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 shrink-0">
-                                    +{q.points}
+                                <span class="flex items-center gap-3 shrink-0">
+                                    <img src={q.icon} alt="" width={q.w} height={q.h} class="px-pixelated h-5 w-auto" aria-hidden="true" />
+                                    <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1">
+                                        +{q.points}
+                                    </span>
                                 </span>
                             </li>
                         ))
                     }
                 </ul>
-                <p class="text-xs text-gray-500 leading-relaxed mt-6">
-                    Came last year? A returning-attendee quest is already
-                    waiting. More land between now and November. Badges stack up
-                    on your card, the chatter runs in the{" "}
+                <p class="text-xs text-gray-500 leading-relaxed px-5 pb-5 pt-4">
+                    Came last year? There is a quest waiting for you. New
+                    quests come out until November, and the last badges are
+                    earned in person at SFJAZZ. Talk about it in the{" "}
                     <a
                         href={SLACK_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         class="text-ruby-600 underline underline-offset-2"
                         >SF Ruby Slack</a
-                    >, and the last badges are earned face to face at SFJAZZ.
+                    >.
                 </p>
             </div>
         </div>
@@ -206,7 +243,7 @@ const livePrice = ticketTiers.find(
              to the real profiles they came from. -->
         <div class="mt-14">
             <p
-                class="px-font text-px8 md:text-px10 text-white/80 text-center leading-relaxed"
+                class="px-font text-px8 md:text-px10 text-white px-shadow-ink-sm text-center leading-relaxed"
             >
                 Every player gets a Cloud Card
             </p>
