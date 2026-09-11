@@ -6,7 +6,8 @@
 //
 // Characters are hotlinked from clouds.sfruby.com, the same images the game
 // serves on each person's card. A character someone has since deleted 404s,
-// and the img removes itself so the row never shows a broken image.
+// and the img swaps itself for the "?" placeholder so the head count still
+// shows and the row never shows a broken image.
 import snapshot from "../content/attending-companies.json";
 
 const companies = snapshot.companies ?? [];
@@ -40,10 +41,18 @@ const min = snapshot.minAttendees ?? 2;
                     </p>
                 </div>
 
-                <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 list-none p-0">
-                    {companies.map((c) => (
-                        <li class="px-card px-card--gold bg-sky-50 p-5 flex flex-col gap-4">
-                            <div class="flex items-baseline justify-between gap-3">
+                {/* A scoreboard, not a grid of equal tiles: one row per
+                    company, sorted by head count, and the row grows with the
+                    characters in it. Ten people fill a row, two take a corner,
+                    and the biggest group sits on top, which is the point of
+                    the lede above. */}
+                <ol class="mt-12 px-card px-card--gold bg-sky-50 list-none p-0 m-0 divide-y-2 divide-gray-200">
+                    {companies.map((c, i) => (
+                        <li class:list={[
+                            "flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 px-4 py-3.5 sm:px-5 sm:py-4",
+                            i === 0 && "bg-gold-100",
+                        ]}>
+                            <div class="flex items-center justify-between gap-3 sm:w-[22rem] sm:shrink-0">
                                 <h3 class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug min-w-0">
                                     {c.name}
                                 </h3>
@@ -51,7 +60,7 @@ const min = snapshot.minAttendees ?? 2;
                                     {c.count} attending
                                 </span>
                             </div>
-                            <div class="flex flex-wrap items-end gap-2 min-h-[4rem]">
+                            <div class="flex flex-wrap items-end gap-1.5 min-h-[3rem]">
                                 {c.characters.map((p) => (
                                     <a
                                         href={p.url}
@@ -68,14 +77,15 @@ const min = snapshot.minAttendees ?? 2;
                                             height="64"
                                             loading="lazy"
                                             decoding="async"
-                                            class="px-pixelated h-16 w-auto"
-                                            onerror="this.parentElement.remove()"
+                                            class="px-pixelated h-12 w-auto"
+                                            onerror="this.hidden = true; this.nextElementSibling.hidden = false"
                                         />
+                                        <span hidden class="px-font text-xl text-gray-300 h-12 w-8 flex items-end justify-center pb-1" aria-hidden="true">?</span>
                                     </a>
                                 ))}
                                 {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
                                     <span
-                                        class="px-font text-2xl text-gray-300 h-16 flex items-end pb-1"
+                                        class="px-font text-xl text-gray-300 h-12 w-8 flex items-end justify-center pb-1"
                                         aria-label="Attendee without a Cloud Card yet"
                                     >
                                         ?
@@ -84,7 +94,7 @@ const min = snapshot.minAttendees ?? 2;
                             </div>
                         </li>
                     ))}
-                </ul>
+                </ol>
 
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a
