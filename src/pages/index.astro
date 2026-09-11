@@ -9,7 +9,7 @@ import Pier from "../components/Pier.astro";
 import GettingThere from "../components/GettingThere.astro";
 import Schedule from "../components/Schedule.astro";
 import TicketsBlock from "../components/TicketsBlock.astro";
-import TicketScarcity from "../components/TicketScarcity.astro";
+import Crew from "../components/Crew.astro";
 import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers, ticketTiers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
 import SponsorTiers from "../components/SponsorTiers.astro";
@@ -47,7 +47,7 @@ const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);
 const fromPrice = Math.min(...ticketTiers.filter((t) => t.state === "live").map((t) => t.price));
 const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live, tickets from $${fromPrice}.`;
 
-// Deadline text for the hero CTA, from the same source TicketScarcity reads.
+// Deadline text for the hero CTA.
 const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -534,46 +534,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             <!-- How to reach the venue: transit lines and garage rates -->
             <GettingThere />
 
-            <!-- Tickets: the closing ask -->
-            <section
-                id="tickets-cta"
-                class="relative overflow-hidden pt-20 pb-24 px-royal-grad text-white"
-            >
-                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                    <h2 class="px-font px-shadow-ink text-lg md:text-2xl text-white mb-8">
-                        Tickets are on sale
-                    </h2>
-
-                    <div class="flex flex-col items-center gap-4">
-                        <div class="mb-2">
-                            <TicketScarcity />
-                        </div>
-                        <a
-                            href={ticketLink("tickets-section")}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class={`px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 sm:w-56 ${ticketEventClass("tickets-section")}`}
-                        >
-                            <img src="/px-ticket.png" alt="" width="26" height="12" class="px-pixelated h-5 w-auto" />
-                            Buy tickets
-                        </a>
-                        <a
-                            href="https://sfruby.substack.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4"
-                        >
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
-                            </svg>
-                            Subscribe on Substack
-                        </a>
-                    </div>
-                </div>
-
-                <!-- crenellated step into the community strip -->
-                <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--white)]" aria-hidden="true"></div>
-            </section>
+            <!-- The people running it, before the community strip -->
+            <Crew />
 
             <!-- The community behind the conference -->
             <section id="community" class="py-16 bg-white">

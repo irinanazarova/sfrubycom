@@ -22,6 +22,12 @@ import { fileURLToPath } from "node:url";
 // block renders. Committed alongside the JSON so build:dev has them.
 const IMG_DIR = fileURLToPath(new URL("../public/attending/", import.meta.url));
 const IMG_HEIGHT = 128;
+// Organizers and volunteers, by Luma ticket type, for the homepage crew
+// section: everyone approved on such a ticket, with a character when they
+// made one. Same image snapshot as the companies.
+const CREW_OUT = fileURLToPath(new URL("../src/content/crew-2026.json", import.meta.url));
+const crewBucket = (ticket) =>
+  /organi[sz]er/i.test(ticket) ? "organizers" : /volunteer/i.test(ticket) ? "volunteers" : null;
 const OUT = fileURLToPath(
   new URL("../src/content/attending-companies.json", import.meta.url),
 );
@@ -210,31 +216,50 @@ try {
   // character (the person still counts; the block shows a stand-in).
   mkdirSync(IMG_DIR, { recursive: true });
   const keep = new Set();
+  const snapshot = async (ch) => {
+    const file = `${ch.url.split("/").filter(Boolean).at(-1)}.webp`;
+    try {
+      if (!keep.has(file)) {
+        const res = await fetch(ch.image, { signal: AbortSignal.timeout(30_000) });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const buf = Buffer.from(await res.arrayBuffer());
+        await sharp(buf).resize({ height: IMG_HEIGHT }).webp({ quality: 82 }).toFile(IMG_DIR + file);
+        keep.add(file);
+      }
+      return { ...ch, image: `/attending/${file}` };
+    } catch (e) {
+      console.warn(`attending-companies: no image for ${ch.name} (${e.message})`);
+      return null;
+    }
+  };
   for (const c of out) {
-    c.characters = (
-      await Promise.all(
-        c.characters.map(async (ch) => {
-          const file = `${ch.url.split("/").filter(Boolean).at(-1)}.webp`;
-          try {
-            const res = await fetch(ch.image, { signal: AbortSignal.timeout(30_000) });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const buf = Buffer.from(await res.arrayBuffer());
-            await sharp(buf).resize({ height: IMG_HEIGHT }).webp({ quality: 82 }).toFile(IMG_DIR + file);
-            keep.add(file);
-            return { ...ch, image: `/attending/${file}` };
-          } catch (e) {
-            console.warn(`attending-companies: no image for ${ch.name} (${e.message})`);
-            return null;
-          }
-        }),
-      )
-    ).filter(Boolean);
+    c.characters = (await Promise.all(c.characters.map(snapshot))).filter(Boolean);
   }
+
+  const crew = { organizers: [], volunteers: [] };
+  for (const g of attendees) {
+    const bucket = crewBucket(g.event_ticket?.name ?? "");
+    if (!bucket) continue;
+    const name = (g.name ?? g.user_name ?? "").trim();
+    const n = nameKey(name);
+    const ch = byName.get(NAME_ALIASES[n] ?? n) ?? (await probeCharacter(name));
+    const snap = ch ? await snapshot({ name: ch.name, url: ch.url, image: ch.image_url }) : null;
+    crew[bucket].push(snap ? { name, url: snap.url, image: snap.image } : { name });
+  }
+  for (const list of Object.values(crew)) list.sort((a, b) => a.name.localeCompare(b.name));
+
   for (const f of readdirSync(IMG_DIR)) if (!keep.has(f)) unlinkSync(IMG_DIR + f);
 
   writeFileSync(
     OUT,
     JSON.stringify({ fetchedAt: new Date().toISOString(), minAttendees: MIN_ATTENDEES, companies: out }, null, 2) + "\n",
+  );
+  writeFileSync(
+    CREW_OUT,
+    JSON.stringify({ fetchedAt: new Date().toISOString(), ...crew }, null, 2) + "\n",
+  );
+  console.log(
+    `crew: ${crew.organizers.length} organizers, ${crew.volunteers.length} volunteers (${[...crew.organizers, ...crew.volunteers].filter((p) => p.image).length} with characters)`,
   );
   const withArt = out.filter((c) => c.characters.length).length;
   console.log(
