@@ -88,6 +88,23 @@ The visual language derives from the pixel logo (`public/logo8bit.png`).
 - **Type**: Press Start 2P only for short display strings via `.px-font`/`font-pixel` at the pixel sizes `text-px8/px9/px10`; Martian Grotesk (`font-display`) for long headings; Martian Mono body. Never fake-bold the pixel font.
 - **Docs**: `/design-system#pixel` renders the palette live from the token source.
 
+## Writing Rules (site copy)
+
+Distilled from the September 2026 copy pass on the homepage, when every section was rewritten with Travis's notes. They apply to every page, every email template, and every data-file blurb.
+
+1. **Say it once.** If the next section says it, cut it here. The line "a ticket also unlocks your character on the Pier" went from the companies block because the Pier block under it says exactly that.
+2. **No instructions for what the reader can see.** "Tap a talk to see the speaker" went; a talk that opens a card needs no caption. Buttons say what they do, in two or three words.
+3. **State the rule, not the mechanism.** "This list is automated: two tickets from one company put it here" replaced a description of how the snapshot is built.
+4. **Numbers only where they change a decision.** Prices, dates, walking minutes, garage rates: yes. "43 engineers and founders between them": no.
+5. **One idea per sentence, and cut the clause that explains the clause.** "One stage, two audiences." went because the sentence after it already showed the two audiences. Sentences end; the next one starts. No semicolons, no em dashes, no "not X but Y".
+6. **Plain verbs.** Never: land / lands (as in "titles land here"), unlock, leverage, journey, elevate, delve, genuinely, deliberately, actually, just, "the point is". Use: appear, come, get, is.
+7. **Labels are nouns.** "Tickets", "Getting there", "The schedule", "In by 9 am, out by 7 pm". A label never carries a colon-explainer ("Early bird: in 6 to 9 am, out by 7 pm" became the line above).
+8. **Talk to the reader as a colleague.** A question is fine when it is the reader's own question: "Need company sign-off to attend?" Then answer it in one line and give the button.
+9. **Names are the names.** SFJAZZ (never SF Jazz), Small teams and Big teams, AI-heavy and AI-light, San Francisco Ruby Conference, Evil Martians. A company standing on an island is its name without Inc/LLC.
+10. **Sources and caveats are one short line at the end.** "Rates from SFMTA, September 2026." Never inline, never a paragraph.
+11. **Cut what a reader would skip.** Thank-you filler, "so far", "between them", "the whole argument", "here is", restating the heading in the first sentence.
+12. **The email a reader forwards is written for forwarding.** Short subject with the price, the cost in the first paragraph, three or four bullets, brackets for what they fill in, nothing to edit out.
+
 ## Data Quality & Editorial Conventions
 
 These rules apply to all content edits (jobs, talks, news, startups, meetup recordings, drafts).

@@ -295,7 +295,7 @@ export const days = [
     weekday: "Thursday",
     theme: "Community day",
     tagline:
-      "Bring your own event: a walk, a bike ride, an ocean swim. We plan a Rails Girls hackathon too!",
+      "Bring your own event: a walk, a bike ride, an ocean swim, a hackathon or anything else you want to do together with Ruby friends!",
     // A day with no blocks asks for ideas instead: these render as buttons.
     links: [
       {
