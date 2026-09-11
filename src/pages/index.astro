@@ -15,9 +15,11 @@ import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
 // Fighter-select roster: confirmed speakers with sprites, minus a few kept off
-// the homepage grid (they stay in the lineup section below), plus community
-// cameos mixed in — the game is the whole community, not only the stage.
-const offTheGrid = ["Alex Coomans", "Cole Robertson", "Jason Thomas", "Ben Sheldon"];
+// the homepage grid so the count fills it exactly, plus community cameos
+// mixed in: the game is the whole community, stage slot or not. With the
+// visitor's own "You" cell the grid holds 21 on desktop (7 x 3) and 20 on
+// phones (5 x 4), where the last cameo sits out.
+const offTheGrid = ["Alex Coomans", "Cole Robertson", "Jason Thomas"];
 const fighters = conferenceSpeakers
     .filter((s) => s.pixel && !offTheGrid.includes(s.name))
     .map((s) => ({ name: s.name, org: s.orgs[0].name, pixel: s.pixel }));
@@ -28,7 +30,7 @@ const cameos = [
     { name: "Amanda Kinney", org: "Evil Martians", pixel: "/community_amanda_kinney_pixel_256.png" },
     { name: "Andrew Ford", org: "Buttercut", pixel: "/community_andrew_ford_pixel_256.png" },
     { name: "Chris Fung", org: "Gusto", pixel: "/community_chris_fung_pixel_256.png" },
-    { name: "James Kerr", org: "Tend Cash", pixel: "/community_james_kerr_pixel_256.png" },
+    { name: "James Kerr", org: "Tend Cash", pixel: "/community_james_kerr_pixel_256.png", desktopOnly: true },
 ];
 // Fixed scatter positions so the cameos read as mixed in, not appended.
 [4, 8, 13, 17].forEach((pos, i) =>
@@ -119,7 +121,10 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             <!-- Conference hero, staged like a game title screen: title art,
                  date subtitle, one-line statement, blinking press-start CTA,
                  and the organizer/sponsor ticker scrolling along the bottom. -->
-            <section id="conf" class="relative min-h-svh flex items-center text-white overflow-hidden px-sky-grad-day">
+            <!-- On laptops the hero stops short of the fold on purpose: the
+                 schedule's heading shows under it, so the page reads as
+                 something to scroll. -->
+            <section id="conf" class="relative lg:min-h-[calc(100svh-10rem)] flex items-center text-white overflow-hidden px-sky-grad-day">
                 <!-- blocky retro clouds up high, floating islands down low:
                      the overworld this screen takes place in -->
                 <!-- three cloud sizes at three depths: big and slow low down,
@@ -131,7 +136,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-60 left-[1%] w-28 md:w-40 animate-float [animation-delay:-4s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-44 left-[3%] w-56 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[30%] right-[3%] w-36 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-24 pb-36 md:pb-40">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-[5.5rem] pb-36 md:pb-40 lg:pb-[8.5rem]">
                     <h1 class="sr-only">
                         San Francisco Ruby Conference 2026
                     </h1>
@@ -140,11 +145,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                              screen. A script cycles the gold highlight through
                              the roster; clicking a cell locks the choice. -->
                         <div class="order-2 lg:order-1 flex justify-center lg:justify-end">
-                            <div id="fighter-select" class="px-dialog px-dialog--gold p-4 md:p-6 w-full max-w-md">
-                                <p class="px-font text-px10 md:text-xs text-gold-500 text-center mb-3 md:mb-4">
+                            <div id="fighter-select" class="px-dialog px-dialog--gold p-4 md:p-6 lg:p-5 w-full max-w-md">
+                                <p class="px-font text-px10 md:text-xs text-gold-500 text-center mb-3 md:mb-4 lg:mb-3">
                                     Choose your fighter
                                 </p>
-                                <div class="relative flex items-end justify-center h-36 md:h-56 mb-1" aria-hidden="true">
+                                <div class="relative flex items-end justify-center h-36 md:h-56 lg:h-40 mb-1" aria-hidden="true">
                                     <span class="px-spot"></span>
                                     <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-3 md:w-4 top-[12%] left-[18%]" style="--px-twinkle-delay: 0s" />
                                     <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2.5 md:w-3 top-[30%] right-[16%]" style="--px-twinkle-delay: -0.7s" />
@@ -153,16 +158,16 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                     <img id="fighter-portrait" src={fighters[0].pixel} alt="" width="256" height="256" class="px-pixelated h-[calc(100%-1.25rem)] md:h-[calc(100%-1.75rem)] w-auto px-fighter-bob relative mb-3 md:mb-4" />
                                     <span id="fighter-mystery" class="px-font text-5xl md:text-6xl text-white hidden self-center relative mb-6 md:mb-8">?</span>
                                 </div>
-                                <div class="text-center mb-3 md:mb-4 min-h-[3.5rem]">
+                                <div class="text-center mb-3 md:mb-4 lg:mb-3 min-h-[3.5rem] lg:min-h-[3rem]">
                                     <p id="fighter-name" class="px-font text-px10 md:text-sm text-white">{fighters[0].name}</p>
                                     <p id="fighter-org" class="px-font text-px8 text-gold-500 mt-1.5 opacity-90">{fighters[0].org}</p>
                                 </div>
-                                <div id="fighter-grid" class="grid grid-cols-5 gap-1.5" role="list" aria-label="Conference speakers">
+                                <div id="fighter-grid" class="grid grid-cols-5 lg:grid-cols-7 gap-1.5" role="list" aria-label="Conference speakers">
                                     {fighters.map((f, i) => (
                                         <button
                                             type="button"
                                             role="listitem"
-                                            class={`px-fighter-cell${i === 0 ? " is-active" : ""}`}
+                                            class:list={["px-fighter-cell", { "is-active": i === 0, "max-lg:hidden": f.desktopOnly }]}
                                             data-name={f.name}
                                             data-org={f.org}
                                             data-pixel={f.pixel}
@@ -192,14 +197,14 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
 
                         <!-- Title stack: art, date, statement, insert-coin CTA -->
                         <div class="order-1 lg:order-2 text-center">
-                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] h-auto mb-4 md:mb-6 mx-auto" />
-                            <div class="mb-4 md:mb-5">
+                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] lg:max-w-[10rem] h-auto mb-4 md:mb-6 lg:mb-4 mx-auto" />
+                            <div class="mb-4 md:mb-5 lg:mb-4">
                                 <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
                                     <span class="text-gold-500">Year Two</span>
                                     <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SF Jazz</span>
                                 </span>
                             </div>
-                            <p class="font-display font-semibold text-base md:text-xl leading-snug text-gold-400 px-shadow-ink max-w-md mx-auto mb-5 md:mb-7">
+                            <p class="font-display font-semibold text-base md:text-xl leading-snug text-gold-400 px-shadow-ink max-w-md lg:max-w-lg mx-auto mb-5 md:mb-7 lg:mb-5">
                                 Let's bring the programmer delight and Ruby into the future.
                             </p>
                             <!-- Insert coin: one gold block carrying the ask, the price
@@ -224,6 +229,23 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                     </span>
                                 </span>
                             </a>
+                            <!-- The messenger: a phoenix with the news that the
+                                 program is up. In the title stack on phones;
+                                 on desktop it flies top-right of the title art,
+                                 positioned against the content column. -->
+                            <a
+                                href="#schedule"
+                                class="inline-flex flex-col items-start mt-7 lg:mt-0 lg:absolute lg:top-24 lg:right-4 tap-press"
+                                aria-label="The schedule is live. Jump to the schedule"
+                            >
+                                <span class="px-bubble px-font text-px8 text-ruby-600 px-3 py-2.5 whitespace-nowrap">
+                                    Schedule is live<span class="px-blink" aria-hidden="true"> &#9654;&#xFE0E;</span>
+                                </span>
+                                <span class="px-flap animate-float mt-4" aria-hidden="true">
+                                    <img src="/px-phoenix-a.png" alt="" width="24" height="20" class="px-pixelated w-20 h-auto" />
+                                    <img src="/px-phoenix-b.png" alt="" width="24" height="20" class="px-pixelated w-20 h-auto" />
+                                </span>
+                            </a>
                         </div>
                     </div>
                     <script define:vars={{ closesOn: regularTier.closesOn }}>
@@ -242,10 +264,14 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                         // over (left/right anywhere, up/down while engaged with
                         // the panel so page scrolling stays intact).
                         {
+                            // Cells hidden at this width (the phone grid is
+                            // one short) stay out of the cycle.
                             const cells = [
                                 ...document.querySelectorAll(".px-fighter-cell"),
-                            ];
-                            const COLS = 5;
+                            ].filter((c) => c.offsetParent !== null);
+                            const grid = document.getElementById("fighter-grid");
+                            const cols = () =>
+                                getComputedStyle(grid).gridTemplateColumns.split(" ").length;
                             const portrait = document.getElementById("fighter-portrait");
                             const mystery = document.getElementById("fighter-mystery");
                             const nameEl = document.getElementById("fighter-name");
@@ -322,9 +348,9 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                 if (e.key === "ArrowRight") delta = 1;
                                 else if (e.key === "ArrowLeft") delta = -1;
                                 else if (e.key === "ArrowDown" && engaged)
-                                    delta = COLS;
+                                    delta = cols();
                                 else if (e.key === "ArrowUp" && engaged)
-                                    delta = -COLS;
+                                    delta = -cols();
                                 if (delta === null) return;
                                 e.preventDefault();
                                 locked = true;
