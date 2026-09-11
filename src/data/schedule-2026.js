@@ -97,7 +97,8 @@ export const days = [
             start: "13:45",
             speaker: "Svyatoslav Kryukov",
             org: "Evil Martians",
-            title: "Maximizing Rails, React and AI with Inertia Rails",
+            title: "Agents Scale, Humans Don't: Hiring Without Slowing Down",
+            cfpTitle: "Agents Scale, Humans Don't: Hiring Without Slowing Down",
           },
           {
             start: "14:15",

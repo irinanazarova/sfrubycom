@@ -1,5 +1,18 @@
 [
   {
+    "id": "vunqlJjl",
+    "title": "Agents Scale, Humans Don't: Hiring Without Slowing Down",
+    "abstract": "One founder plus thirty agents ships more than a team of ten. Hire a second engineer and everything slows down. Why? You didn't add an engineer, you added a second team. We'll look at the fixes that fail, then at those I believe work well with Rails, and finally at what a founder must give up to get faster.",
+    "track": "general",
+    "speaker": {
+      "name": "Svyatoslav Kryukov",
+      "company": "Evil Martians",
+      "role": "Senior Backend Engineer",
+      "bio": "Dedicated to bridging Rails and the JavaScript ecosystem. A core maintainer of Inertia Rails, and the creator of Typelizer (automatic TypeScript types from Ruby) and TurboMount (component-based widgets for Hotwire). Writes about Rails and frontend on the Evil Martians blog.",
+      "socials": "https://x.com/skryukov_dev"
+    }
+  },
+  {
     "id": "FtseR90T",
     "title": "Assign to Claude: Making an Agent a First‑Class Teammate in Your SaaS",
     "abstract": "Most AI features are a chat box bolted onto the product. The good ones are woven through it: an agent you assign a card to, that triages the ticket before you read it, that spots a bad deploy and opens the incident itself. We'll build all three live in one Rails app on Claude Managed Agents (MCP, custom tools, memory, human approvals) and leave you a map of the agent-shaped holes in your product.",
@@ -36,19 +49,6 @@
       "role": "Co-Founder and CTO",
       "bio": "Ben Sheldon is the author of GoodJob, an Active Job backend. A Rails developer for over 10 years, he has worked at GitHub, OkCupid Labs, and Code for America. Ben is currently co-founder and CTO of Frontdoor Benefits.",
       "socials": "https://www.linkedin.com/in/bensheldon/"
-    }
-  },
-  {
-    "id": "qWBFY9Fg",
-    "title": "Data, Dinos, Dashboards: Powerful Analytics on Rails",
-    "abstract": "Slow queries are the asteroid your dashboard won't survive. Startups move fast, but your data questions don't wait for a Tableau budget. This is a how-to for building fast, powerful dashboards directly in Rails with no extra vendor or contract. Take your queries from 15s to just milliseconds and leave with practical patterns you can immediately apply.",
-    "track": "scale",
-    "speaker": {
-      "name": "Neha Abraham",
-      "company": "Power Home Remodeling",
-      "role": "Software Developer",
-      "bio": "A developer at Power Home Remodeling, Neha builds data-intensive dashboards and loves the craft of software development. Outside of work, she's baking with her toddler, traveling with her husband, or being supervised by her dog and cat.",
-      "socials": "https://www.linkedin.com/in/nehaabraham/"
     }
   },
   {
