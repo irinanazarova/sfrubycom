@@ -218,17 +218,17 @@ export const days = [
         sessions: [
           {
             start: "13:00",
-            speaker: "Phillip Campbell",
-            org: "Gusto",
-            title: "Background processing at Gusto: The Parts Where People Look Puzzled",
-            cfpTitle: "Background processing at Gusto: The Parts Where People Look Puzzled",
-          },
-          {
-            start: "13:30",
             speaker: "Alex Coomans",
             org: "Persona",
             title: "Keeping Your Head on Straight in Concurrent & Complex Ruby Applications",
             cfpTitle: "Keeping Your Head on Straight in Concurrent & Complex Ruby Applications",
+          },
+          {
+            start: "13:30",
+            speaker: "Phillip Campbell",
+            org: "Gusto",
+            title: "Background processing at Gusto: The Parts Where People Look Puzzled",
+            cfpTitle: "Background processing at Gusto: The Parts Where People Look Puzzled",
           },
           {
             start: "14:00",
