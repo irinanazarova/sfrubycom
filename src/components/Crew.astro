@@ -1,0 +1,58 @@
+---
+// Organizers and volunteers: everyone on the Organizer/volunteer ticket on
+// Luma, together on one floating island at dusk, the same way the companies
+// stand on theirs. The snapshot is src/content/crew-2026.json (see the fetch
+// script). Everyone is named; only those who have drawn their Cloud Card
+// stand on the island, and the rest join it the day they do. No stand-ins,
+// since the nudge to draw one comes from the organizers themselves.
+import crew from "../content/crew-2026.json";
+
+const people = [...(crew.organizers ?? []), ...(crew.volunteers ?? [])].sort((a, b) =>
+    a.name.localeCompare(b.name),
+);
+const groups = people.length ? [{ label: "Organizers and volunteers", people }] : [];
+---
+
+{
+    groups.length > 0 && (
+        <section id="crew" class="relative overflow-hidden pt-20 pb-28 md:pt-24 md:pb-32 px-sky-grad-dusk border-t-4 border-ink text-white">
+            <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-16 left-[5%] w-40 md:w-60 animate-float pointer-events-none" aria-hidden="true" />
+            <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-24 right-[7%] w-28 md:w-44 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+            <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute bottom-24 left-[3%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-2xl mx-auto text-center">
+                    <span class="px-plate px-font text-px8 px-3 py-1.5">The people running it</span>
+                    <h2 class="px-font px-shadow-ink text-lg md:text-2xl text-gold-400 mt-6">
+                        Organizers and volunteers
+                    </h2>
+                    <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
+                        Say hi at SFJAZZ. They know where everything is.
+                    </p>
+                </div>
+
+                <ul class="mt-12 flex flex-wrap justify-center items-end list-none p-0 m-0">
+                    {groups.map((g) => (
+                        <li class="flex flex-col items-center animate-float min-w-[10rem]">
+                            <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[44rem] px-4 -mb-1.5">
+                                {g.people.filter((p) => p.image).map((p) => (
+                                    <a href={p.url} target="_blank" rel="noopener noreferrer" class="block tap-press" title={p.name} aria-label={`${p.name}'s Cloud Card`}>
+                                        <img src={p.image} alt={p.name} width="73" height="128" loading="lazy" decoding="async" class="px-pixelated h-14 md:h-16 w-auto" />
+                                    </a>
+                                ))}
+                            </div>
+                            <div class="w-0 min-w-full">
+                                <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-full h-auto" />
+                            </div>
+                            <p class="font-mono text-xs text-white/90 px-shadow-ink-sm text-center leading-relaxed mt-3 max-w-[44rem]">
+                                {g.people.map((p) => p.name).join(" · ")}
+                            </p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <!-- crenellated step into the community strip -->
+            <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--white)]" aria-hidden="true"></div>
+        </section>
+    )
+}

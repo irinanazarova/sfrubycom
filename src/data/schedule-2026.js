@@ -281,10 +281,9 @@ export const days = [
         audience: "all",
         sessions: [
           {
-            // Closing keynote, title to come; the first real CFP title wins.
             speaker: "Chris Oliver",
             org: "GoRails",
-            title: "Keynote",
+            title: "Rails: The Founder's Unfair Advantage",
           },
         ],
       },

@@ -22,6 +22,18 @@ import { fileURLToPath } from "node:url";
 // block renders. Committed alongside the JSON so build:dev has them.
 const IMG_DIR = fileURLToPath(new URL("../public/attending/", import.meta.url));
 const IMG_HEIGHT = 128;
+// Organizers and volunteers for the homepage crew section: everyone approved
+// on the "Organizer/volunteer" ticket. Luma has one ticket type for both, so
+// the split is by company: Evil Martians organizes, everyone else on the
+// ticket volunteers. Same image snapshot as the companies.
+const CREW_OUT = fileURLToPath(new URL("../src/content/crew-2026.json", import.meta.url));
+const ORGANIZER_COMPANY = "evil martians";
+const isCrewTicket = (ticket) => /organi[sz]er|volunteer/i.test(ticket);
+const crewBucket = (guest) =>
+  companyKey(companyAnswer(guest)) === ORGANIZER_COMPANY ||
+  /@evilmartians\.com$/i.test(guest.email ?? guest.user_email ?? "")
+    ? "organizers"
+    : "volunteers";
 const OUT = fileURLToPath(
   new URL("../src/content/attending-companies.json", import.meta.url),
 );
@@ -87,7 +99,7 @@ const slugOf = (raw) =>
     .replace(/^-+|-+$/g, "");
 
 // People who typed a different name on the Pier than on Luma.
-const NAME_ALIASES = { "vova dementyev": "vladimir dementyev" };
+const NAME_ALIASES = { "vova dementyev": "vladimir dementyev", "aleksandr berdiugin": "alex berdugin" };
 
 async function getJson(url, headers = {}) {
   const res = await fetch(url, { headers, signal: AbortSignal.timeout(20_000) });
@@ -210,31 +222,57 @@ try {
   // character (the person still counts; the block shows a stand-in).
   mkdirSync(IMG_DIR, { recursive: true });
   const keep = new Set();
+  const snapshot = async (ch) => {
+    const file = `${ch.url.split("/").filter(Boolean).at(-1)}.webp`;
+    try {
+      if (!keep.has(file)) {
+        const res = await fetch(ch.image, { signal: AbortSignal.timeout(30_000) });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const buf = Buffer.from(await res.arrayBuffer());
+        await sharp(buf).resize({ height: IMG_HEIGHT }).webp({ quality: 82 }).toFile(IMG_DIR + file);
+        keep.add(file);
+      }
+      return { ...ch, image: `/attending/${file}` };
+    } catch (e) {
+      console.warn(`attending-companies: no image for ${ch.name} (${e.message})`);
+      return null;
+    }
+  };
   for (const c of out) {
-    c.characters = (
-      await Promise.all(
-        c.characters.map(async (ch) => {
-          const file = `${ch.url.split("/").filter(Boolean).at(-1)}.webp`;
-          try {
-            const res = await fetch(ch.image, { signal: AbortSignal.timeout(30_000) });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const buf = Buffer.from(await res.arrayBuffer());
-            await sharp(buf).resize({ height: IMG_HEIGHT }).webp({ quality: 82 }).toFile(IMG_DIR + file);
-            keep.add(file);
-            return { ...ch, image: `/attending/${file}` };
-          } catch (e) {
-            console.warn(`attending-companies: no image for ${ch.name} (${e.message})`);
-            return null;
-          }
-        }),
-      )
-    ).filter(Boolean);
+    c.characters = (await Promise.all(c.characters.map(snapshot))).filter(Boolean);
   }
+
+  const crew = { organizers: [], volunteers: [] };
+  for (const g of attendees) {
+    if (!isCrewTicket(g.event_ticket?.name ?? "")) continue;
+    const bucket = crewBucket(g);
+    // Luma carries a registration name and a profile name ("Camila" and
+    // "Camila Mirabal"); the character may be under either.
+    const names = [...new Set([g.name, g.user_name].map((x) => (x ?? "").trim()).filter(Boolean))];
+    let ch = null;
+    for (const cand of names) {
+      const n = nameKey(cand);
+      ch = byName.get(NAME_ALIASES[n] ?? n) ?? byName.get(n) ?? (await probeCharacter(cand));
+      if (ch) break;
+    }
+    const snap = ch ? await snapshot({ name: ch.name, url: ch.url, image: ch.image_url }) : null;
+    const name = snap ? ch.name : names.sort((a, b) => b.length - a.length)[0];
+    crew[bucket].push(snap ? { name, url: snap.url, image: snap.image } : { name });
+  }
+  for (const list of Object.values(crew)) list.sort((a, b) => a.name.localeCompare(b.name));
+
   for (const f of readdirSync(IMG_DIR)) if (!keep.has(f)) unlinkSync(IMG_DIR + f);
 
   writeFileSync(
     OUT,
     JSON.stringify({ fetchedAt: new Date().toISOString(), minAttendees: MIN_ATTENDEES, companies: out }, null, 2) + "\n",
+  );
+  writeFileSync(
+    CREW_OUT,
+    JSON.stringify({ fetchedAt: new Date().toISOString(), ...crew }, null, 2) + "\n",
+  );
+  console.log(
+    `crew: ${crew.organizers.length} organizers, ${crew.volunteers.length} volunteers (${[...crew.organizers, ...crew.volunteers].filter((p) => p.image).length} with characters)`,
   );
   const withArt = out.filter((c) => c.characters.length).length;
   console.log(
