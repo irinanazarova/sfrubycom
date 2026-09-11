@@ -244,16 +244,33 @@ try {
 
   const crew = { organizers: [], volunteers: [] };
   for (const g of attendees) {
-    if (!isCrewTicket(g.event_ticket?.name ?? "")) continue;
+    // A guest can hold several tickets (an organizer who also bought a
+    // Regular one); the crew ticket may be any of them.
+    const tickets = [g.event_ticket, ...(g.event_tickets ?? [])].map((t) => t?.name ?? "");
+    if (!tickets.some(isCrewTicket)) continue;
     const bucket = crewBucket(g);
     // Luma carries a registration name and a profile name ("Camila" and
-    // "Camila Mirabal"); the character may be under either.
-    const names = [...new Set([g.name, g.user_name].map((x) => (x ?? "").trim()).filter(Boolean))];
+    // "Camila Mirabal"); the character may be under either, or under a
+    // nickname ("Vova Dementyev"). Exact name first, then the slug, then a
+    // last name that is unique among the company's own characters.
+    const names = [...new Set([g.name, g.user_name, g.user?.name].map((x) => (x ?? "").trim()).filter(Boolean))];
     let ch = null;
     for (const cand of names) {
       const n = nameKey(cand);
       ch = byName.get(NAME_ALIASES[n] ?? n) ?? byName.get(n) ?? (await probeCharacter(cand));
       if (ch) break;
+    }
+    if (!ch) {
+      const last = names.map((x) => nameKey(x).split(" ").at(-1)).filter((x) => x && x.length > 2);
+      const pool = byCompany.get(companyKey(companyAnswer(g))) ?? byCompany.get(bucket === "organizers" ? ORGANIZER_COMPANY : "") ?? [];
+      const hits = pool.filter((c) => last.includes(nameKey(c.name).split(" ").at(-1)));
+      if (hits.length === 1) ch = hits[0];
+      // A one-word registration ("Camila") against the company's first names.
+      if (!ch) {
+        const first = names.map(nameKey).filter((x) => !x.includes(" "));
+        const byFirst = pool.filter((c) => first.includes(nameKey(c.name).split(" ")[0]));
+        if (byFirst.length === 1) ch = byFirst[0];
+      }
     }
     const snap = ch ? await snapshot({ name: ch.name, url: ch.url, image: ch.image_url }) : null;
     const name = snap ? ch.name : names.sort((a, b) => b.length - a.length)[0];
