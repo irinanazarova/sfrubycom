@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-11T21:15:02.693Z",
+  "fetchedAt": "2026-09-11T21:17:52.775Z",
   "organizers": [
     {
       "name": "Alex Berdugin",
@@ -28,6 +28,11 @@
       "name": "Camila Mirabal",
       "url": "https://clouds.sfruby.com/e/2026-bits/camila-cami",
       "image": "/attending/camila-cami.webp"
+    },
+    {
+      "name": "Irina Nazarova",
+      "url": "https://clouds.sfruby.com/e/2026-bits/irina-nazarova",
+      "image": "/attending/irina-nazarova.webp"
     },
     {
       "name": "Victoria Melnikova",
