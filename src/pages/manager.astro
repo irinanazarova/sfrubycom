@@ -1,64 +1,39 @@
 ---
-// The approval page. Most of our audience is local, so the whole cost of the
-// conference is the ticket plus two days, and a manager who sees that line
-// itemized says yes faster. The email at the bottom is written for the
-// engineer to paste, with the blanks they need to fill marked in brackets.
+// The approval page. The page is the email: the engineer pastes it, fills the
+// brackets, and sends it. The cost itemization and the "what you bring back"
+// cards were taken off in September 2026, since the email carries the costs
+// and the reasons itself.
+import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { ticketLink, ticketEventClass, ticketTiers, regularTier } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, ticketTiers } from "../data/conference-2026.js";
 
 const regular = ticketTiers.find((t) => t.name === "Regular");
 const company = ticketTiers.find((t) => t.name === "Company-sponsored");
-const singleDay = ticketTiers.find((t) => t.name === "Single day");
-const regularCloses = new Date(regularTier.closesOn).toLocaleDateString(
-    "en-US",
-    { month: "long", day: "numeric", timeZone: "America/Los_Angeles" },
-);
 
-const costs = [
-    { item: `Ticket, Regular (until ${regularCloses})`, value: `$${regular.price}` },
-    { item: "Ticket, company-sponsored (invoiced, no deadline)", value: `$${company.price}` },
-    { item: "Ticket, single day (Nov 10 or Nov 11)", value: `$${singleDay.price}` },
-    { item: "Flights", value: "$0 from the Bay Area" },
-    { item: "Hotel", value: "$0 if you sleep at home" },
-    { item: "Days out of the office", value: "1 (Nov 11 is Veterans Day)" },
-    { item: "Community day, Nov 12", value: "Optional" },
-];
+// Subject and body are separate strings, and each box copies only its own
+// text: the subject pastes into the subject field, the body into the body.
+const emailSubject = `Request to attend SF Ruby Conference 2026, Nov 10-11 ($${regular.price})`;
 
-const reasons = [
-    {
-        title: "The people who wrote your Gemfile are on stage",
-        body: "Solid Queue, GoodJob, AnyCable, Herb and Ruby core, each by its author or maintainer. Hallway questions get the answers the docs do not have.",
-    },
-    {
-        title: "Agentic Rails, from people running it in production",
-        body: "Day 1 is AI-heavy: Fin serving 150,000 requests per second from a Rails monolith, Order.co putting agents on a legacy codebase, Anthropic on an agent as a teammate inside a SaaS, RubyLLM 2.0. Day 2 is AI-light: queues, concurrency, real-time, open source.",
-    },
-    {
-        title: "A track for companies like yours",
-        body: "Talks and conversation groups run separately for small teams and big teams, so the people around you run the same kind of system at the same kind of company. Gusto, Persona, Shopify and 37signals speak on the big-teams track.",
-    },
-    {
-        title: "Networking is on the schedule",
-        body: "Everyone is placed in at least two groups of people working on the same kind of system, with a minute on the mic. You come back with names.",
-    },
-    {
-        title: "It is local",
-        body: "SFJAZZ, 201 Franklin St. Over 400 people came last year.",
-    },
-];
+const emailBody = `Hi [MANAGER'S NAME],
 
-const emailBody = `Subject: SF Ruby Conference, Nov 10-11 ($${regular.price})
+I'd like to request your approval to attend SF Ruby Conference 2026 at the SFJAZZ in San Francisco, California, on November 10-12.
 
-Hi [manager],
+SF Ruby is the flagship West Coast Ruby event that brings together technical leaders and builders shaping the future of Ruby. The conference is designed to help teams use AI effectively and move faster without compromising quality by learning directly from the bigger teams that ship Ruby code today.
 
-I'd like to attend the San Francisco Ruby Conference at SFJAZZ on November 10 and 11 (sfruby.com). It's local, so the cost is the ticket: $${regular.price} until ${regularCloses}, or $${company.price} on the invoiced company tier with no deadline. A single day is $${singleDay.price}. Nov 11 is Veterans Day, so it is one day out of the office. The community day on the 12th is optional.
+Here's a breakdown of the conference costs:
 
-Why it's worth it for us:
+Conference pass: $${company.price}
+Airfare: [ADD COST]
+Round trip transportation between airport and hotel: [ADD COST]
+Hotel: [add cost per night] (plus taxes, subject to availability)
+Meals: Breakfast, lunch, dinner [ADD COST]
+Total: [ADD COST]
 
-- The authors and maintainers of tools we run are speaking: Solid Queue (37signals), GoodJob, AnyCable, Herb, and Ruby core (Shopify).
-- Day 1 is AI-heavy: agents in production, including Fin at 150,000 requests per second, Anthropic on agents inside a SaaS, and RubyLLM 2.0. Day 2 is AI-light: queues, concurrency, real-time and open source, with engineers from Gusto, Persona and Shopify.
-- Talks and networking groups run separately for small teams and big teams, so I'll be with engineers running the same kind of system as ours.
-- I'll write up the talks relevant to [our system] for the team afterwards.
+If we purchase 5 or more passes, we'll receive a 10% off with team pricing and get a segment on stage.
+
+By attending SF Ruby, we can learn directly from Ruby success stories and apply those insights to our work.
+
+Thank you for considering my request. If approved, I'm happy to share a brief plan for what I'll focus on and a recap afterward with concrete takeaways and recommendations.
 
 Ticket: ${ticketLink("manager-email")}
 
@@ -78,117 +53,137 @@ Thanks,
                 Convince your manager
             </h1>
             <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
-                It is local, and Nov 11 is Veterans Day, so the cost is the
-                ticket and one day off. Fill in the brackets, copy, send.
+                Advance your company to the cusp of what's possible with Ruby
+                today. Copy, paste, fill in the gaps and send it to your boss.
             </p>
+            <!-- Same pair as the /team hero, so the two pages offer the same
+                 next step. -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                    href={ticketLink("manager")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press ${ticketEventClass("manager")}`}
+                >
+                    <img
+                        src="/px-ticket.png"
+                        alt=""
+                        width="64"
+                        height="64"
+                        class="px-pixelated h-5 w-auto"
+                    />
+                    Register on Luma
+                </a>
+                <a
+                    href="/team"
+                    class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                >
+                    Bring your team
+                </a>
+            </div>
         </div>
     </section>
 
     <section class="py-16 md:py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="px-font text-px10 md:text-xs text-ruby-600">
-                The email
-            </h2>
-            <div class="px-dialog bg-white p-5 md:p-6 mt-6">
-                <pre
-                    id="manager-email"
-                    class="whitespace-pre-wrap font-mono text-xs md:text-sm text-gray-800 leading-relaxed m-0"
-                >{emailBody}</pre>
-                <div class="mt-5 flex flex-col sm:flex-row gap-3">
+            <div class="px-dialog bg-white p-5 md:p-6">
+                <!-- Subject and body copy separately, each from the icon next
+                     to its own label, so each goes straight into its field. -->
+                <div class="flex items-center gap-1">
+                    <p class="px-font text-px8 text-gray-500 m-0">Email subject</p>
                     <button
                         type="button"
-                        id="copy-email"
-                        class="px-btn px-btn--gold px-font text-px8 md:text-px10 px-5 py-3 tap-press"
+                        data-copy="manager-subject"
+                        aria-label="Copy the email subject"
+                        title="Copy the email subject"
+                        class="shrink-0 inline-flex items-center justify-center w-11 h-11 -my-3 -ml-2 text-gray-400 hover:text-ruby-600 transition-colors tap-press"
                     >
-                        Copy the email
+                        <Icon name="ph:copy-light" class="w-6 h-6" data-copy-idle />
+                        <Icon name="ph:check-bold" class="w-6 h-6 hidden text-ruby-600" data-copy-done />
                     </button>
-                    <a
-                        href={ticketLink("manager")}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class={`px-btn px-btn--white px-font text-px8 md:text-px10 px-5 py-3 tap-press ${ticketEventClass("manager")}`}
-                    >
-                        Already approved? Get a ticket
-                    </a>
                 </div>
+                <pre
+                    id="manager-subject"
+                    class="whitespace-pre-wrap font-mono text-xs md:text-sm text-gray-800 leading-relaxed m-0 mt-2"
+                >{emailSubject}</pre>
+
+                <div class="flex items-center gap-1 mt-8">
+                    <p class="px-font text-px8 text-gray-500 m-0">Email body</p>
+                    <button
+                        type="button"
+                        data-copy="manager-email"
+                        aria-label="Copy the email body"
+                        title="Copy the email body"
+                        class="shrink-0 inline-flex items-center justify-center w-11 h-11 -my-3 -ml-2 text-gray-400 hover:text-ruby-600 transition-colors tap-press"
+                    >
+                        <Icon name="ph:copy-light" class="w-6 h-6" data-copy-idle />
+                        <Icon name="ph:check-bold" class="w-6 h-6 hidden text-ruby-600" data-copy-done />
+                    </button>
+                </div>
+                <pre
+                    id="manager-email"
+                    class="whitespace-pre-wrap font-mono text-xs md:text-sm text-gray-800 leading-relaxed m-0 mt-2"
+                >{emailBody}</pre>
             </div>
 
-            <h2 class="px-font text-px10 md:text-xs text-ruby-600 mt-14">
-                What it costs
-            </h2>
-            <!-- Rows stack on phones so the label keeps the full width; a
-                 two-column table starved the label column to three words. -->
-            <dl class="px-card bg-white mt-6 m-0 divide-y divide-gray-200">
-                {
-                    costs.map((c) => (
-                        <div class="p-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 text-sm md:text-base">
-                            <dt class="text-gray-700">{c.item}</dt>
-                            <dd class="m-0 font-mono font-semibold text-gray-900 sm:text-right sm:shrink-0">
-                                {c.value}
-                            </dd>
-                        </div>
-                    ))
-                }
-            </dl>
-            <p class="text-sm text-gray-500 leading-relaxed mt-4">
-                The company-sponsored ticket is invoiced, with no deadline. It
-                is what keeps Regular at ${regular.price}.
-            </p>
-
-            <h2 class="px-font text-px10 md:text-xs text-ruby-600 mt-14">
-                What you bring back
-            </h2>
-            <ul class="mt-6 grid gap-4 list-none p-0">
-                {
-                    reasons.map((r) => (
-                        <li class="px-card bg-sky-50 p-5 md:p-6">
-                            <h3 class="px-font text-px9 md:text-px10 text-gray-900 leading-relaxed">
-                                {r.title}
-                            </h3>
-                            <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-3">
-                                {r.body}
-                            </p>
-                        </li>
-                    ))
-                }
-            </ul>
-            <p class="text-sm text-gray-500 leading-relaxed mt-4">
+            <p class="text-sm text-gray-500 leading-relaxed mt-10 text-center">
                 Every talk, with its abstract, is on
                 <a href="/#schedule" class="text-ruby-600 underline underline-offset-2">the schedule</a>.
             </p>
 
-            <p class="text-sm text-gray-500 leading-relaxed mt-10 text-center">
-                Bringing more than one person?
-                <a href="/team" class="text-ruby-600 underline underline-offset-2">Teams of five get a slot on stage</a>.
+            <p class="text-sm text-gray-500 leading-relaxed mt-4 text-center">
+                <a href="/team" class="text-ruby-600 underline underline-offset-2">Teams of five get a 10% and a segment on stage</a>.
             </p>
         </div>
     </section>
 
     <script>
-        // Copy the email as plain text; the button confirms inline and then
-        // reverts, so the page never needs a toast. Falls back to selecting the
-        // text where the clipboard API is unavailable.
-        const button = document.getElementById("copy-email");
-        const email = document.getElementById("manager-email");
-        if (button && email) {
+        // Each button copies its own block as plain text, named by data-copy,
+        // so the subject and the body go to the clipboard separately. The
+        // button confirms inline and then reverts, so the page never needs a
+        // toast. Falls back to selecting the text where the clipboard API is
+        // unavailable.
+        document.querySelectorAll("[data-copy]").forEach((button) => {
+            const block = document.getElementById(
+                button.getAttribute("data-copy") || "",
+            );
+            if (!block) return;
+            // An icon button confirms by swapping its two icons; a text button
+            // by swapping its label, which would wipe an icon out of the DOM.
+            const idle = button.querySelector("[data-copy-idle]");
+            const done = button.querySelector("[data-copy-done]");
             const label = button.textContent;
+            const confirm = (text) => {
+                if (idle && done) {
+                    idle.classList.add("hidden");
+                    done.classList.remove("hidden");
+                } else {
+                    button.textContent = text;
+                }
+            };
+            const revert = () => {
+                if (idle && done) {
+                    done.classList.add("hidden");
+                    idle.classList.remove("hidden");
+                } else {
+                    button.textContent = label;
+                }
+            };
             button.addEventListener("click", async () => {
-                const text = email.textContent || "";
+                const text = block.textContent || "";
                 try {
                     await navigator.clipboard.writeText(text);
-                    button.textContent = "Copied";
+                    confirm("Copied");
                 } catch {
                     const range = document.createRange();
-                    range.selectNodeContents(email);
+                    range.selectNodeContents(block);
                     const sel = window.getSelection();
                     sel?.removeAllRanges();
                     sel?.addRange(range);
-                    button.textContent = "Select and copy";
+                    confirm("Select and copy");
                 }
-                setTimeout(() => {
-                    button.textContent = label;
-                }, 1800);
+                setTimeout(revert, 1800);
             });
-        }
+        });
     </script>
 </BaseLayout>

@@ -1,51 +1,73 @@
 ---
 // The team page: everything a manager or founder needs to register five
 // people, on one URL they can forward. Nothing here is a new promise. The
-// longer stage slot, group registration on Luma and invoicing all exist; this
+// longer stage segment, group registration on Luma and invoicing all exist; this
 // page puts them in one place instead of a paragraph under the price ladder.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { ticketLink, ticketEventClass, ticketTiers, regularTier } from "../data/conference-2026.js";
-import { getAllJobs, jobCompanyId } from "../data/jobs.js";
+import { ticketLink, ticketEventClass, ticketTiers } from "../data/conference-2026.js";
 
 const CONTACT_EMAIL = "conference@sfruby.com";
-const regular = ticketTiers.find((t) => t.name === "Regular");
+const PIER_URL = "https://clouds.sfruby.com/";
+const PIER_MAP_URL = "https://clouds.sfruby.com/e/2026-bits/pier";
 const company = ticketTiers.find((t) => t.name === "Company-sponsored");
-const regularCloses = new Date(regularTier.closesOn).toLocaleDateString(
-    "en-US",
-    { month: "short", day: "numeric", timeZone: "America/Los_Angeles" },
-);
 
-const openRoles = getAllJobs();
-const hiringCompanies = new Set(openRoles.map(jobCompanyId).filter(Boolean))
-    .size;
-
+// `note` is a second paragraph under a step, for the condition that would
+// otherwise crowd the step itself.
 const steps = [
     {
-        title: "Register everyone in one order",
-        body: `Luma takes several tickets in one checkout. ${company.name} ($${company.price}, no deadline) if the company pays, Regular ($${regular.price} until ${regularCloses}) if people expense it.`,
+        title: "Create a single order on Luma",
+        body: `Register several tickets in one checkout. Each ticket is $${company.price}. Teams of five and more receive 10% off.`,
+        link: {
+            text: "one checkout",
+            href: ticketLink("team"),
+            external: true,
+            // Same Plausible goal as every other ticket link on the site.
+            class: ticketEventClass("team"),
+        },
     },
     {
-        title: "Ask for one invoice",
-        body: `Write to ${CONTACT_EMAIL} with the names and we send one invoice.`,
+        title: "Email us for the invoice",
+        body: `Send us an email at ${CONTACT_EMAIL} listing your teammates.`,
+        // `link` turns that phrase of `body` into a link, so the copy stays one
+        // string. `text` must appear in `body` verbatim.
+        link: {
+            text: CONTACT_EMAIL,
+            href: `mailto:${CONTACT_EMAIL}?subject=Team%20tickets%20for%20SF%20Ruby%202026`,
+        },
+        note: "Teams of five and more get to speak on stage. Mark who from your team is going to present on stage.",
     },
     {
-        title: "Tell us who is on stage",
-        body: "Teams of five or more get a slot with slides in the networking session. Send the presenter's name and we put them on the run sheet.",
+        title: "Activate your chibis",
+        body: "Activate your chibi character and post on socials. Let's spread the word and make the conference even more fun!",
+        link: { text: "your chibi character", href: PIER_URL, external: true },
+    },
+    {
+        title: "Join the Pier",
+        body: "Mine some coins at the Pier to exchange them for fun goodies at the conference!",
+        link: { text: "the Pier", href: PIER_MAP_URL, external: true },
+    },
+    {
+        title: "Post a job",
+        body: "Hiring? Put your open Ruby roles on the jobs board before the conference.",
+        link: { text: "the jobs board", href: "/jobs/post" },
+    },
+    {
+        title: "Have fun and learn at SF Ruby",
+        body: "Small and big teams will have two intertwining tracks that include technical talks and networking. Day 1 is AI-heavy, Day 2 is AI-light, and Day 3 is all about community fun.",
+        link: { text: "two intertwining tracks", href: "/#schedule" },
+    },
+    {
+        title: "Present on stage",
+        body: "Every attendee gets a minute on the mic. Teams of five and more get a whole segment on the stage.",
     },
 ];
 
-const included = [
-    "All talks on Nov 10 (AI-heavy) and Nov 11 (AI-light), and the community day on Nov 12",
-    "Two networking groups for every person, with a minute on the mic",
-    "Teams of five or more: a slot with slides to introduce the company",
-    "A character for everyone on the Pier, so the team shows up on the map together",
-];
 ---
 
 <BaseLayout
     darkHero={false}
     title="Bring your team - SF Ruby Conference 2026"
-    description="Register a team for the San Francisco Ruby Conference, Nov 10-12 at SFJAZZ: one order, one invoice, and a stage slot for teams of five or more."
+    description="Register a team for the San Francisco Ruby Conference, Nov 10-12 at SFJAZZ: one order, one invoice, 10% off, and a stage segment for teams of five or more."
 >
     <section class="pt-28 pb-14 bg-sky-50 border-b-4 border-ink">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -54,8 +76,7 @@ const included = [
                 Bring your team
             </h1>
             <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
-                Two days in San Francisco, one invoice. Teams of five or more
-                get the stage to introduce the company.
+                Teams of five get a 10% and a segment on stage.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
@@ -74,10 +95,10 @@ const included = [
                     Register on Luma
                 </a>
                 <a
-                    href={`mailto:${CONTACT_EMAIL}?subject=Team%20tickets%20for%20SF%20Ruby%202026`}
+                    href="/manager"
                     class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
                 >
-                    Ask for an invoice
+                    Get approval
                 </a>
             </div>
         </div>
@@ -85,23 +106,7 @@ const included = [
 
     <section class="py-16 md:py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="px-font text-px10 md:text-xs text-ruby-600">
-                What a team ticket includes
-            </h2>
-            <ul class="mt-6 grid gap-3 list-none p-0">
-                {
-                    included.map((item) => (
-                        <li class="px-card bg-sky-50 p-4 md:p-5 text-sm md:text-base text-gray-700 leading-relaxed">
-                            {item}
-                        </li>
-                    ))
-                }
-            </ul>
-
-            <h2 class="px-font text-px10 md:text-xs text-ruby-600 mt-14">
-                How to register a team
-            </h2>
-            <ol class="mt-6 grid gap-4 list-none p-0">
+            <ol class="grid gap-4 list-none p-0">
                 {
                     steps.map((s, i) => (
                         <li class="px-card bg-white p-5 md:p-6 flex gap-4">
@@ -113,58 +118,32 @@ const included = [
                                     {s.title}
                                 </h3>
                                 <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-3">
-                                    {s.body}
+                                    {s.link ? (
+                                        <Fragment>{s.body.split(s.link.text)[0]}<a href={s.link.href} class={`text-ruby-600 underline underline-offset-2 ${s.link.class ?? ""}`} {...(s.link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{s.link.text}</a>{s.body.split(s.link.text)[1]}</Fragment>
+                                    ) : (
+                                        s.body
+                                    )}
                                 </p>
+                                {s.note && (
+                                    <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-3">
+                                        {s.note}
+                                    </p>
+                                )}
                             </div>
                         </li>
                     ))
                 }
             </ol>
 
-            <div class="px-dialog bg-white p-6 md:p-8 mt-14">
-                <h2 class="px-font text-px10 md:text-xs text-gray-900">
-                    Founding teams
-                </h2>
-                <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-4">
-                    Founders get their own conversation groups, with the
-                    startup-minded engineers you want to hire in the room.
-                    Bring your co-founder and first engineers: the small-teams
-                    talks are built for a team of three.
-                </p>
-            </div>
+            <p class="text-sm text-gray-500 leading-relaxed mt-14 text-center">
+                Every talk, with its abstract, is on
+                <a href="/#schedule" class="text-ruby-600 underline underline-offset-2">the schedule</a>.
+            </p>
 
-            <div class="px-dialog bg-white p-6 md:p-8 mt-6">
-                <h2 class="px-font text-px10 md:text-xs text-gray-900">
-                    Teams from big companies
-                </h2>
-                <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-4">
-                    Gusto, Persona, Shopify and 37signals are on stage, and the
-                    big-teams conversation groups compare notes on agentic
-                    coding and on Sidekiq, Solid Queue and GoodJob. Your hiring
-                    managers sit in those groups, and the slot puts the team in
-                    front of the whole room. See
-                    <a href="/#schedule" class="text-ruby-600 underline underline-offset-2">the schedule</a>.
-                </p>
-            </div>
-
-            <div class="px-card bg-sky-50 p-6 md:p-7 mt-8 text-center">
-                <p class="text-sm md:text-base text-gray-700 leading-relaxed">
-                    <span class="font-display font-semibold text-gray-900">
-                        {openRoles.length} open Ruby roles from {hiringCompanies} companies
-                    </span>{" "}
-                    are on the jobs board. Hiring? Post yours before the conference.
-                </p>
-                <a
-                    href="/jobs/post"
-                    class="px-btn px-btn--sky px-font text-px8 md:text-px10 px-5 py-3 tap-press mt-5"
-                >
-                    Post a job
-                </a>
-            </div>
-
-            <p class="text-sm text-gray-500 leading-relaxed mt-10 text-center">
-                Someone needs sign-off? Send them
-                <a href="/manager" class="text-ruby-600 underline underline-offset-2">the manager page</a>.
+            <p class="text-sm text-gray-500 leading-relaxed mt-4 text-center">
+                Use
+                <a href="/manager" class="text-ruby-600 underline underline-offset-2">our handy template</a>
+                to get approval from your boss.
             </p>
         </div>
     </section>
