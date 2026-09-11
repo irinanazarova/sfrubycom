@@ -22,28 +22,28 @@ const MAPS = {
 const transit = [
     {
         name: "Muni Metro",
-        detail: "Any line (J, K, L, M, N) to Van Ness station. Walk north on Van Ness to Fell, then one block west.",
-        meta: "8 min walk · $2.85 Clipper or MuniMobile, $3 cash",
+        detail: "Any line to Van Ness station, then 8 minutes on foot up Van Ness to Fell.",
+        meta: "$2.85 with Clipper, $3 cash",
     },
     {
         name: "BART",
-        detail: "Civic Center / UN Plaza station. Walk west on Grove, past City Hall, to Franklin.",
-        meta: "12 min walk · about 30 min and $11 from SFO",
+        detail: "Civic Center station, then 12 minutes on foot along Grove, past City Hall.",
+        meta: "About 30 min and $11 from SFO",
     },
     {
         name: "Buses",
-        detail: "49 Van Ness/Mission to the McAllister station, every 6 minutes. 6 Hayes/Parnassus to Hayes & Gough. 5 and 5R Fulton to McAllister & Gough.",
-        meta: "3 to 5 min walk from each stop",
+        detail: "49 Van Ness/Mission to McAllister. 6 Hayes/Parnassus to Hayes & Gough. 5 Fulton to McAllister & Gough.",
+        meta: "3 to 5 min walk",
     },
     {
         name: "Caltrain",
-        detail: "From 4th & King, the N Judah runs straight into the Market Street subway. Get off at Van Ness.",
-        meta: "about 20 min on the N, then the 8 min walk",
+        detail: "N Judah from 4th & King to Van Ness station.",
+        meta: "About 20 min, then the walk",
     },
     {
         name: "Bike",
-        detail: "Bay Wheels docks at Grove & Gough and at Market & Franklin.",
-        meta: "3 min walk from either dock",
+        detail: "Bay Wheels docks at Grove & Gough and Market & Franklin.",
+        meta: "3 min walk",
     },
 ];
 
@@ -52,13 +52,13 @@ const garages = [
         name: "Performing Arts Garage",
         address: "360 Grove St",
         href: "https://www.sfmta.com/garages-lots/performing-arts-garage",
-        walk: "4 min walk, two blocks",
+        walk: "Two blocks, 4 min walk",
         rates: [
-            ["Early bird: in 6 to 9 am, out by 7 pm", "$21 flat"],
+            ["In by 9 am, out by 7 pm", "$21 flat"],
             ["Hourly", "$3 to $5"],
-            ["12 hour maximum", "$26"],
+            ["12 hours", "$26"],
         ],
-        note: "Open 6 am to 10 pm on weekdays. 6'9\" clearance. EV charging.",
+        note: "Weekdays 6 am to 10 pm. 6'9\" clearance. EV charging.",
     },
     {
         name: "Civic Center Garage",
@@ -66,11 +66,11 @@ const garages = [
         href: "https://www.sfmta.com/garages-lots/civic-center-garage",
         walk: "10 min walk",
         rates: [
-            ["Early bird: in 6 to 8:30 am, out by 7 pm", "$23 flat"],
-            ["Hourly, 9 am to 3 pm", "$7"],
-            ["Daily maximum", "$38"],
+            ["In by 8:30 am, out by 7 pm", "$23 flat"],
+            ["Hourly, midday", "$7"],
+            ["24 hours", "$38"],
         ],
-        note: "Open 6 am to 10 pm on weekdays. The overflow option when Grove Street is full.",
+        note: "Weekdays 6 am to 10 pm.",
     },
 ];
 ---
@@ -83,8 +83,8 @@ const garages = [
                 Getting there
             </h2>
             <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
-                {ADDRESS}, at the corner of Franklin and Fell in Hayes Valley.
-                The entrance is on Franklin. {hours.map((h) => `Day ${h.n} runs ${h.opens} to ${h.closes}`).join(", ")}.
+                {ADDRESS}, at Fell, in Hayes Valley. Entrance on Franklin.
+                {hours.map((h, i) => `Day ${h.n}${i ? "" : " runs"} ${h.opens} to ${h.closes}`).join(", ")}.
             </p>
             <div class="mt-6 flex flex-wrap justify-center gap-3">
                 <a
@@ -150,14 +150,13 @@ const garages = [
                     }
                 </ul>
                 <p class="text-sm text-gray-700 leading-relaxed mt-5 pt-5 border-t-2 border-gray-200">
-                    Street meters around Hayes Valley are two-hour limits, enforced 9 am to 6 pm, so for a full day the garages win.
-                    Rideshare drop-off is on Franklin St at the Fell St corner. Franklin runs one way, northbound.
+                    Street meters are two-hour limits until 6 pm. Rideshare drop-off: Franklin St at Fell.
                 </p>
             </div>
         </div>
 
         <p class="text-xs text-gray-500 text-center mt-8">
-            Rates and routes from SFMTA, checked September 2026. Garage rate tables change; the links above are the current ones.
+            Rates from SFMTA, September 2026.
         </p>
     </div>
 </section>
