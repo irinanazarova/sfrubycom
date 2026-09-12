@@ -7,8 +7,12 @@ import type { Context, Config } from "@netlify/edge-functions";
 // Runs only on the HTML page routes (see `config.path`), never on *.md, so the
 // internal fetch for the twin can't loop back through this function.
 
+// Keep in sync with src/lib/markdown-twins.js (the edge bundle cannot import it).
 const TWIN: Record<string, string> = {
   "/": "/index.md",
+  "/manager": "/manager.md",
+  "/sponsor-2026": "/sponsor-2026.md",
+  "/meetup": "/meetup.md",
   "/jobs": "/jobs.md",
   "/startups": "/startups.md",
   "/videos": "/videos.md",
@@ -45,5 +49,15 @@ export default async (request: Request, context: Context) => {
 };
 
 export const config: Config = {
-  path: ["/", "/jobs", "/startups", "/videos", "/news", "/about"],
+  path: [
+    "/",
+    "/manager",
+    "/sponsor-2026",
+    "/meetup",
+    "/jobs",
+    "/startups",
+    "/videos",
+    "/news",
+    "/about",
+  ],
 };

@@ -71,6 +71,20 @@ Luma data is fetched at build time and saved to `src/content/*.json`. The `src/d
 Required for `npm run build` (data fetching):
 - `LUMA_API_KEY`, `LUMA_CALENDAR_ID` - Luma API access
 
+## LLM discoverability (llms.txt and Markdown twins)
+
+Agents and LLM crawlers get the site as Markdown. Three routes serve it, all generated at build time from the same data files the pages render, so nothing here is written twice:
+
+- `/llms.txt` (`src/pages/llms.txt.ts`) is the index; `/llms-full.txt` is every twin concatenated.
+- `/<page>.md` (`src/pages/[page].md.ts`) is the Markdown twin of an HTML page: `/index.md` is the conference (schedule, speakers with abstracts, tickets, sponsors, companies attending, venue and getting there, crew), plus `manager`, `sponsor-2026`, `meetup`, `jobs`, `startups`, `videos`, `news`, `about`.
+- `Accept: text/markdown` on the HTML URL returns the twin (`netlify/edge-functions/markdown-negotiation.ts`, production only; `astro preview` has no edge).
+
+Every page with a twin carries `<link rel="alternate" type="text/markdown">`, added by the page shells from `markdownTwinFor()`.
+
+**Which routes have a twin is decided in `src/lib/markdown-twins.js`; how each is rendered is in `src/lib/llm-content.js`.** To add one: add the route to `TWINS`, add a renderer to `RENDERERS` (the build fails on a twin without one), and add the same route to the edge function's `TWIN` map and `config.path` (the edge bundle cannot import from `src/`). Content the twins share with a page lives in a data module, never inline in the `.astro` file: `src/data/venue-2026.js` (address, transit, garages), `src/data/sponsor-tiers-2026.js` (tiers, stats, reasons), `src/data/manager-email-2026.js` (the approval email). Ticket links in the twins go through `ticketLink("<slug>-md")`, so a purchase that started in an LLM answer shows up in Plausible and Luma like any other placement.
+
+Quick check after `npm run build:dev`: `ls dist/*.md dist/llms*.txt` and `grep -l 'rel="alternate" type="text/markdown"' dist/*/index.html`.
+
 ## Key Patterns
 
 - **Static Generation**: All pages pre-rendered; no server-side runtime
