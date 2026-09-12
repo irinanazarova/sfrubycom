@@ -1,8 +1,8 @@
 {
-  "fetchedAt": "2026-09-11T21:17:52.775Z",
+  "fetchedAt": "2026-09-12T19:35:06.994Z",
   "organizers": [
     {
-      "name": "Alex Berdugin",
+      "name": "Aleksandr Berdiugin",
       "url": "https://clouds.sfruby.com/e/2026-bits/aleksandr-berdiugin",
       "image": "/attending/aleksandr-berdiugin.webp"
     },
@@ -40,7 +40,7 @@
       "image": "/attending/victoria-melnikova.webp"
     },
     {
-      "name": "Vladimir Dementyev",
+      "name": "Vova Dementyev",
       "url": "https://clouds.sfruby.com/e/2026-bits/vova-dem",
       "image": "/attending/vova-dem.webp"
     }
@@ -71,10 +71,15 @@
       "image": "/attending/ken-decanio.webp"
     },
     {
+      "name": "lindsey anne",
+      "url": "https://clouds.sfruby.com/e/2026-bits/lindsey-anne",
+      "image": "/attending/lindsey-anne.webp"
+    },
+    {
       "name": "Madeline Hou"
     },
     {
-      "name": "Steven Ancheta"
+      "name": "Steven T Ancheta"
     },
     {
       "name": "Yang Chung",
