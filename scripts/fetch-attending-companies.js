@@ -216,7 +216,6 @@ try {
     // row of characters under it.
     out.push({ name, count: Math.max(c.people.size, chars.length), characters: chars });
   }
-  out.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 
   // Snapshot the character art locally. A download that fails drops the
   // character (the person still counts; the block shows a stand-in).
@@ -241,6 +240,12 @@ try {
   for (const c of out) {
     c.characters = (await Promise.all(c.characters.map(snapshot))).filter(Boolean);
   }
+  // Biggest group first; among equal head counts, the company with more
+  // published Cloud Cards. Sorted after the art snapshot so a character whose
+  // image failed to download does not count toward the order.
+  out.sort(
+    (a, b) => b.count - a.count || b.characters.length - a.characters.length || a.name.localeCompare(b.name),
+  );
 
   const crew = { organizers: [], volunteers: [] };
   for (const g of attendees) {
