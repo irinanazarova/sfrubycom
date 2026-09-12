@@ -8,9 +8,7 @@
 // serves on each person's card. A character someone has since deleted 404s,
 // and the img swaps itself for the "?" placeholder so the head count still
 // shows and the row never shows a broken image.
-import snapshot from "../content/attending-companies.json";
-
-const companies = snapshot.companies ?? [];
+import { companies, displayName, organizers, guests } from "../data/attending.js";
 
 // Name and character size by head count. Four steps is enough: the point is
 // that a group of ten reads as ten and a pair as a pair.
@@ -23,14 +21,8 @@ const sizeOf = (n) =>
             ? { name: "text-px10 md:text-sm", chibi: "h-12 md:h-14" }
             : { name: "text-px8 md:text-px10", chibi: "h-10 md:h-12" };
 
-// Legal suffixes are noise on an island: "Workshop Software Inc" is
-// Workshop Software to the people standing on it.
-const displayName = (name) => name.replace(/[,\s]+(inc|llc|ltd|corp|co|gmbh|plc)\.?$/i, "");
-
-// The organizers stand aside; the cloud is the companies buying tickets.
-const ORGANIZER = "Evil Martians";
-const organizers = companies.filter((c) => c.name === ORGANIZER);
-const guests = companies.filter((c) => c.name !== ORGANIZER);
+// The organizers stand aside; the cloud is the companies buying tickets
+// (the split and the display names come from src/data/attending.js).
 // Biggest in the middle: the sorted list is dealt to alternating ends.
 const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]), []);
 ---

@@ -1,14 +1,14 @@
 // The HTML routes that have a Markdown twin, and nothing else: this file is
 // imported by every page shell, so it must stay free of data imports.
 //
-// One list, three consumers that must agree:
+// One list, three consumers:
 // - src/lib/llm-content.js renders each twin (PAGES adds the render function)
 //   and lists them in /llms.txt;
 // - the page shells (BaseLayout, Layout, index.astro, sponsor-2026.astro) add
 //   <link rel="alternate" type="text/markdown"> for the current route;
-// - netlify/edge-functions/markdown-negotiation.ts carries the same routes in
-//   its own TWIN map and `config.path`, because the edge bundle cannot import
-//   from src/. Add a route in all three places.
+// - netlify/edge-functions/markdown-negotiation.ts derives its route map and
+//   `config.path` from it. Keep this file importable by Deno: relative
+//   imports only, no JSON, nothing Node-specific.
 export const TWINS = [
   {
     path: "/",

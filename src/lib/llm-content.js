@@ -54,10 +54,10 @@ import {
   SOURCE_NOTE,
 } from "../data/venue-2026.js";
 import cfpTalks from "../content/cfp-talks.json";
-import attending from "../content/attending-companies.json";
 import crew from "../content/crew-2026.json";
 import news from "../content/news.json";
-import meetups from "../content/meetups.json";
+import { getAllUpcoming } from "../data/meetups.js";
+import { displayName, guests, organizers } from "../data/attending.js";
 
 export const SITE = "https://sfruby.com";
 const LUMA_CALENDAR = "https://lu.ma/sfruby";
@@ -104,15 +104,38 @@ const prose = (text) =>
 // "Tuesday, November 10, 2026" for a schedule day.
 const fmtDay = (day) => `${day.weekday}, ${fmtDate(day.date)}`;
 
-// Upcoming monthly meetups from the Luma snapshot; the conference is in the
-// same feed under its own type and has the whole homepage twin to itself.
+// Upcoming events from the Luma snapshot, the set the /meetup page renders
+// (the fetch script already drops events that have ended). The conference is
+// in the same feed under its own type and has the whole homepage twin to
+// itself. Dates are formatted in the event's timezone, as UpcomingMeetups does.
+function eventWhen(m) {
+  if (!m.startAt) return fmtDate(m.date);
+  const d = new Date(m.startAt);
+  if (Number.isNaN(d.getTime())) return fmtDate(m.date);
+  const tz = m.timezone || "America/Los_Angeles";
+  const day = new Intl.DateTimeFormat("en-US", {
+    timeZone: tz,
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(d);
+  const time = new Intl.DateTimeFormat("en-US", {
+    timeZone: tz,
+    hour: "numeric",
+    minute: "2-digit",
+  })
+    .format(d)
+    .toLowerCase();
+  return `${day}, ${time}`;
+}
+
 function upcomingMeetupLines() {
-  const today = new Date().toISOString().slice(0, 10);
-  return meetups
-    .filter((m) => m.type === "meetup" && (m.date ?? "") >= today)
+  return getAllUpcoming()
+    .filter((m) => m.type !== "conference")
     .map(
       (m) =>
-        `- **${plain(m.title)}**: ${fmtDate(m.date)}${m.time ? `, ${formatTime(m.time)}` : ""} at ${m.location || m.venue}. [RSVP](${m.lumaUrl})`,
+        `- **${plain(m.title)}**: ${eventWhen(m)} at ${m.location || m.venue}. [RSVP](${m.lumaUrl})`,
     );
 }
 
@@ -244,10 +267,12 @@ const sponsorsSection = () =>
     .join("\n");
 
 const attendingSection = () => {
-  const names = (attending.companies ?? []).map((c) => c.name);
-  return names.length
-    ? `Companies with two or more ticket holders, organizers and volunteers included. Updated on every deploy.\n\n${names.join(" · ")}`
+  const names = guests.map((c) => displayName(c.name));
+  if (!names.length) return "";
+  const org = organizers.length
+    ? `\n\nOrganizers: ${organizers.map((c) => c.name).join(", ")}`
     : "";
+  return `Companies with two or more ticket holders, volunteers included. Updated on every deploy.\n\n${names.join(" · ")}${org}`;
 };
 
 function venueSection() {
@@ -289,7 +314,7 @@ const crewSection = () =>
 export function homeMarkdown() {
   return `# San Francisco Ruby Conference 2026
 
-> Nov 10-12, 2026 at SFJAZZ Center, San Francisco. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. ${fromPrice ? `Tickets from ${fromPrice}. ` : ""}Organized by [Evil Martians](https://evilmartians.com).
+> Nov 10-12, 2026 at SFJAZZ Center, San Francisco. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. ${fromPrice ? `Tickets from $${fromPrice}. ` : ""}Organized by [Evil Martians](https://evilmartians.com).
 
 Year two of the conference, run by SF Ruby (${SITE}), the community for Ruby developers and founders in San Francisco. While Small teams are in a talk, Big teams are in a conversation group, then they swap. Keynotes are for everyone.
 
@@ -381,13 +406,15 @@ export function sponsorMarkdown() {
     .join("\n");
   const tiers = sponsorTiers2026
     .map((t) => {
-      const head = `### ${t.name.replace(/[^\p{L}\p{N})]+$/u, "").trim()}${t.price ? `: ${t.price}` : ""}`;
+      const head = `### ${t.name}${t.price ? `: ${t.price}` : ""}`;
       const benefits = t.benefits.map((b) => `- ${b}`).join("\n");
       const pay = t.paymentLink ? `\nPay by card: ${t.paymentLink}` : "";
       return `${head}\n${t.description}\n${benefits}${pay}`;
     })
     .join("\n\n");
-  const attendingNames = (attending.companies ?? []).map((c) => c.name);
+  const attendingNames = [...guests, ...organizers].map((c) =>
+    displayName(c.name),
+  );
   const room = attendingNames.length
     ? `## Who is in the room
 

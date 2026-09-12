@@ -7,7 +7,8 @@ import EmailModal from "../components/EmailModal.astro";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { sponsors as sponsors2025 } from "../data/sponsors.js";
 import { sponsorTiers2026, sponsorStats2026, whySponsor2026, SPONSOR_CONTACT } from "../data/sponsor-tiers-2026.js";
-import attending from "../content/attending-companies.json";
+import { companies as attending, displayName } from "../data/attending.js";
+import { markdownTwinFor } from "../lib/markdown-twins.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -19,7 +20,7 @@ const sponsors2025Count = Object.keys(sponsors2025).length;
 // Who has already bought tickets, from the same snapshot the homepage renders
 // (companies with two or more ticket holders). For a sponsor deciding whether
 // their hiring managers will meet anyone, this is the list that answers it.
-const attendingCompanies = (attending.companies ?? []).map((c) => c.name);
+const attendingCompanies = attending.map((c) => displayName(c.name));
 
 ---
 
@@ -45,7 +46,7 @@ const attendingCompanies = (attending.companies ?? []).map((c) => c.name);
         />
         <meta name="theme-color" content={palette.ruby[600]} />
         <title>Sponsor the San Francisco Ruby Conference 2026 - SF Ruby</title>
-        <link rel="alternate" type="text/markdown" href="/sponsor-2026.md" />
+        <link rel="alternate" type="text/markdown" href={markdownTwinFor(Astro.url.pathname)} />
 
         <link
             rel="preload"
@@ -222,7 +223,7 @@ const attendingCompanies = (attending.companies ?? []).map((c) => c.name);
                                             </span>
                                         )}
                                         <h3 class="text-lg font-bold text-gray-900">
-                                            {tier.name}
+                                            {tier.name}{tier.emoji && ` ${tier.emoji}`}
                                         </h3>
                                         {tier.price && (
                                             <div class="px-font mt-2 text-lg md:text-xl text-ruby-600">

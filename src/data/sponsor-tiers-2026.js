@@ -9,7 +9,8 @@ import { conferenceSpeakers } from "./conference-2026.js";
 
 export const sponsorTiers2026 = [
   {
-    name: "Pickaxe ⛏️",
+    name: "Pickaxe",
+    emoji: "⛏️",
     price: "$20,000",
     paymentLink: "https://buy.stripe.com/5kQ6oH8bi25Tacg4Ude7m07",
     description: "Premier sponsorship with maximum visibility and branding.",

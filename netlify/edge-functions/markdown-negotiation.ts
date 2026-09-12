@@ -1,4 +1,5 @@
 import type { Context, Config } from "@netlify/edge-functions";
+import { TWINS } from "../../src/lib/markdown-twins.js";
 
 // Content negotiation for AI agents: when a client explicitly prefers Markdown
 // (Accept: text/markdown), serve the page's .md twin instead of the HTML.
@@ -7,18 +8,11 @@ import type { Context, Config } from "@netlify/edge-functions";
 // Runs only on the HTML page routes (see `config.path`), never on *.md, so the
 // internal fetch for the twin can't loop back through this function.
 
-// Keep in sync with src/lib/markdown-twins.js (the edge bundle cannot import it).
-const TWIN: Record<string, string> = {
-  "/": "/index.md",
-  "/manager": "/manager.md",
-  "/sponsor-2026": "/sponsor-2026.md",
-  "/meetup": "/meetup.md",
-  "/jobs": "/jobs.md",
-  "/startups": "/startups.md",
-  "/videos": "/videos.md",
-  "/news": "/news.md",
-  "/about": "/about.md",
-};
+// The routes with a twin come from the same list the site builds from, so a
+// new twin needs no change here.
+const TWIN: Record<string, string> = Object.fromEntries(
+  TWINS.map((t) => [t.path, `/${t.slug}.md`]),
+);
 
 function prefersMarkdown(accept: string): boolean {
   // Only honor an explicit markdown preference; a plain browser sends text/html.
@@ -49,15 +43,5 @@ export default async (request: Request, context: Context) => {
 };
 
 export const config: Config = {
-  path: [
-    "/",
-    "/manager",
-    "/sponsor-2026",
-    "/meetup",
-    "/jobs",
-    "/startups",
-    "/videos",
-    "/news",
-    "/about",
-  ],
+  path: TWINS.map((t) => t.path),
 };

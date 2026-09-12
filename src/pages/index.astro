@@ -13,6 +13,7 @@ import Crew from "../components/Crew.astro";
 import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers, ticketTiers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
 import SponsorTiers from "../components/SponsorTiers.astro";
+import { markdownTwinFor } from "../lib/markdown-twins.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -74,7 +75,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
         <meta name="description" content={DESCRIPTION} />
         <meta name="theme-color" content={palette.sky[400]} />
         <title>San Francisco Ruby Conference 2026 - SF Ruby</title>
-        <link rel="alternate" type="text/markdown" href="/index.md" />
+        <link rel="alternate" type="text/markdown" href={markdownTwinFor(Astro.url.pathname)} />
 
         <link
             rel="preload"
