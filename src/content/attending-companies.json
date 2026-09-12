@@ -69,17 +69,6 @@
       ]
     },
     {
-      "name": "Hack Club",
-      "count": 3,
-      "characters": [
-        {
-          "name": "Luke Oldenburg",
-          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
-          "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
-        }
-      ]
-    },
-    {
       "name": "Handshake",
       "count": 3,
       "characters": [
@@ -101,6 +90,17 @@
       ]
     },
     {
+      "name": "Hack Club",
+      "count": 3,
+      "characters": [
+        {
+          "name": "Luke Oldenburg",
+          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
+          "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
+        }
+      ]
+    },
+    {
       "name": "IFTTT",
       "count": 3,
       "characters": [
@@ -108,17 +108,6 @@
           "name": "Chris Janik",
           "url": "https://clouds.sfruby.com/e/2026-bits/chris-janik",
           "image": "/attending/chris-janik.webp"
-        }
-      ]
-    },
-    {
-      "name": "Cactus",
-      "count": 2,
-      "characters": [
-        {
-          "name": "Avinash Joshi",
-          "url": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi",
-          "image": "/attending/avinash-joshi.webp"
         }
       ]
     },
@@ -139,17 +128,6 @@
       ]
     },
     {
-      "name": "Fixate Industries",
-      "count": 2,
-      "characters": [
-        {
-          "name": "Liz Pantalone",
-          "url": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone",
-          "image": "/attending/liz-pantalone.webp"
-        }
-      ]
-    },
-    {
       "name": "Gusto",
       "count": 2,
       "characters": [
@@ -166,11 +144,6 @@
       ]
     },
     {
-      "name": "HopSkipDrive",
-      "count": 2,
-      "characters": []
-    },
-    {
       "name": "Instrumentl",
       "count": 2,
       "characters": [
@@ -183,6 +156,44 @@
           "name": "Celine",
           "url": "https://clouds.sfruby.com/e/2026-bits/celine",
           "image": "/attending/celine.webp"
+        }
+      ]
+    },
+    {
+      "name": "Typesense",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Jason Bosco",
+          "url": "https://clouds.sfruby.com/e/2026-bits/jason-bosco",
+          "image": "/attending/jason-bosco.webp"
+        },
+        {
+          "name": "Steph Farid",
+          "url": "https://clouds.sfruby.com/e/2026-bits/steph-farid",
+          "image": "/attending/steph-farid.webp"
+        }
+      ]
+    },
+    {
+      "name": "Cactus",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Avinash Joshi",
+          "url": "https://clouds.sfruby.com/e/2026-bits/avinash-joshi",
+          "image": "/attending/avinash-joshi.webp"
+        }
+      ]
+    },
+    {
+      "name": "Fixate Industries",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Liz Pantalone",
+          "url": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone",
+          "image": "/attending/liz-pantalone.webp"
         }
       ]
     },
@@ -209,27 +220,6 @@
       ]
     },
     {
-      "name": "thoughtbot",
-      "count": 2,
-      "characters": []
-    },
-    {
-      "name": "Typesense",
-      "count": 2,
-      "characters": [
-        {
-          "name": "Jason Bosco",
-          "url": "https://clouds.sfruby.com/e/2026-bits/jason-bosco",
-          "image": "/attending/jason-bosco.webp"
-        },
-        {
-          "name": "Steph Farid",
-          "url": "https://clouds.sfruby.com/e/2026-bits/steph-farid",
-          "image": "/attending/steph-farid.webp"
-        }
-      ]
-    },
-    {
       "name": "Workshop Software Inc",
       "count": 2,
       "characters": [
@@ -239,6 +229,16 @@
           "image": "/attending/zachary-roland.webp"
         }
       ]
+    },
+    {
+      "name": "HopSkipDrive",
+      "count": 2,
+      "characters": []
+    },
+    {
+      "name": "thoughtbot",
+      "count": 2,
+      "characters": []
     }
   ]
 }
