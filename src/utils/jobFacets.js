@@ -11,14 +11,20 @@ export function slugify(value) {
     .replace(/^-|-$/g, "");
 }
 
+// One set of city patterns shared by parseWorkType and parseGeo, so a
+// location cannot count as a city for one facet and not the other.
+const BAY_AREA_RE =
+  /(san francisco|bay area|oakland|east bay|emeryville|berkeley|san mateo|palo alto|mountain view|redwood city|sunnyvale|san jose|menlo park|fremont)/;
+const CALIFORNIA_RE =
+  /(los angeles|santa monica|irvine|san diego|fresno|sacramento|santa barbara|newport beach|rocklin|el segundo|orange county)/;
+const OTHER_CITY_RE = /(new york|nyc|denver|chicago|seattle|austin|boston|portland|post falls|grand rapids)/;
+const CITY_RE = new RegExp(`${BAY_AREA_RE.source}|${CALIFORNIA_RE.source}|${OTHER_CITY_RE.source}`);
+
 // Work arrangement: onsite | hybrid | remote. A job can offer several
 // (e.g. "Remote (US) / San Francisco" is remote + onsite).
 export function parseWorkType(location = "") {
   const loc = location.toLowerCase();
-  const hasCity =
-    /(san francisco|bay area|oakland|east bay|new york|nyc|denver|chicago|seattle)/.test(
-      loc,
-    );
+  const hasCity = CITY_RE.test(loc);
   const types = new Set();
 
   if (loc.includes("hybrid")) types.add("hybrid");
@@ -35,26 +41,27 @@ export function parseWorkType(location = "") {
   return [...types];
 }
 
-// Geography. The board is California in-office or Remote US; Bay Area gets
-// its own bucket, everything else in the state (Los Angeles, Fresno, Irvine,
-// Santa Barbara) is "california". A location that names none of these and is
-// not remote falls back to sf-bay, which is where the unqualified "San
-// Francisco, CA (In-person)" style strings land.
+// Geography. The board is California in-office or Remote US. Bay Area cities
+// get their own bucket; the other California cities we list get
+// "california". Anything unrecognised that is not remote falls back to
+// sf-bay, as it always has, so an unlisted Bay Area town is never filed
+// elsewhere in the state by accident.
 export function parseGeo(location = "") {
   const loc = location.toLowerCase();
   const geos = new Set();
-  if (/(san francisco|bay area|oakland|east bay|south san francisco|emeryville|san mateo|palo alto|mountain view|redwood city|berkeley)/.test(loc))
-    geos.add("sf-bay");
-  else if (/(los angeles|santa monica|irvine|san diego|fresno|sacramento|santa barbara|newport beach|rocklin|, ca\b|california)/.test(loc))
-    geos.add("california");
+  if (BAY_AREA_RE.test(loc)) geos.add("sf-bay");
+  else if (CALIFORNIA_RE.test(loc)) geos.add("california");
   if (loc.includes("remote")) geos.add("remote-us");
   if (geos.size === 0) geos.add("sf-bay");
   return [...geos];
 }
 
-// Seniority parsed from the title.
+// Seniority parsed from the title. Management titles get their own bucket so
+// a Head of Engineering is not filed as Mid-level.
 export function parseLevel(title = "") {
   const t = title.toLowerCase();
+  if (/\bhead of\b|\bengineering manager\b|\bmanager\b|\bdirector\b|\bvp\b|\bvice president\b|\bcto\b/.test(t))
+    return "manager";
   if (t.includes("principal") || t.includes("staff")) return "staff+";
   if (t.includes("senior") || t.includes("sr.") || t.includes("founding") || t.includes("lead"))
     return "senior";
@@ -80,7 +87,10 @@ export function parseSalary(salary) {
     else if (!unit && n > 1000) n /= 1000; // $200000 -> 200K
     return n;
   });
-  return { min: Math.min(...nums), max: Math.max(...nums) };
+  // "From $140K", "$150K+" and "$120K and up" have no ceiling; give them an
+  // unbounded max so a min-salary filter above the floor still shows them.
+  const openEnded = /\bfrom\b|\+|\band up\b|\bor more\b/i.test(salary) && nums.length === 1;
+  return { min: Math.min(...nums), max: openEnded ? Infinity : Math.max(...nums) };
 }
 
 // Editorial: industry + funding stage per company. Stage buckets are
@@ -226,8 +236,9 @@ export const LEVEL_LABELS = {
   mid: "Mid-level",
   senior: "Senior",
   "staff+": "Staff / Principal",
+  manager: "Management",
 };
-export const LEVEL_ORDER = ["junior", "mid", "senior", "staff+"];
+export const LEVEL_ORDER = ["junior", "mid", "senior", "staff+", "manager"];
 
 export const STAGE_ORDER = ["Seed", "Early-stage", "Growth", "Public / Large"];
 
