@@ -195,6 +195,32 @@
     }
   },
   {
+    "id": "0evXG5p0",
+    "title": "The Multiplayer AI Manifesto",
+    "abstract": "Personal productivity gains from AI are not translating to proportional team productivity gains. A large part of the reason is that we have regressed from working together in modern tools like Google Docs and Figma to copy-and-pasting things into and out of private AI chats. Fixing this requires a clear vision for a better way - which we share as five principles, with important considerations.",
+    "track": "general",
+    "speaker": {
+      "name": "Sergey Karayev",
+      "company": "Superconductor",
+      "role": "Co-founder",
+      "bio": "Sergey Karayev is building Superconductor, the multiplayer AI platform for your team and agents. He has been working with Ruby on Rails for over 20 years. He has a PhD in Computer Science from UC Berkeley, and previously built a successful ed tech startup.",
+      "socials": "https://x.com/sergeykarayev"
+    }
+  },
+  {
+    "id": "TDH5Y1uc",
+    "title": "The Multiplayer AI Manifesto (v2)",
+    "abstract": "AI has made individuals faster, but teams are not seeing proportional productivity gains. One reason is that today's AI tools are fundamentally single-player. Drawing on our team's experience, we present five principles for truly multiplayer AI and offer practical guidance for building or choosing a solution.",
+    "track": "general",
+    "speaker": {
+      "name": "Sergey Karayev",
+      "company": "Superconductor",
+      "role": "Co-founder",
+      "bio": "Sergey Karayev is building Superconductor, the multiplayer AI platform for your team and agents. He has been working with Ruby on Rails for over 20 years. He has a PhD in Computer Science from UC Berkeley, and previously built a successful ed tech startup.",
+      "socials": "https://x.com/sergeykarayev"
+    }
+  },
+  {
     "id": "WIQ3Szn-",
     "title": "The System Nobody Understood (Including AI)",
     "abstract": "Every scaled Rails app has a stretch of backcountry nobody dares hike into: the part no one fully understands, so you patch it for years, until you can't. Ours had a critical bridge out there. The map showed it, the report said passable; I hiked in and it was all but gone. Our dashboards, our tenured engineers, and our AI were all confidently wrong. This is how we learned to trust only the ground.",
