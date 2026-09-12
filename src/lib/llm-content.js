@@ -41,6 +41,7 @@ import {
   sponsorTiers2026,
   sponsorStats2026,
   whySponsor2026,
+  SPONSOR_CONTACT,
 } from "../data/sponsor-tiers-2026.js";
 import { emailSubject, emailBody } from "../data/manager-email-2026.js";
 import {
@@ -64,7 +65,6 @@ const SLACK_INVITE =
   "https://join.slack.com/t/sf-ruby/shared_invite/zt-3mi22dwb9-MGN_s0j_jNrt7hb4rvqkHg";
 const NEWSLETTER = "https://sfruby.substack.com/";
 const CONTACT_EMAIL = "conference@sfruby.com";
-const SPONSOR_EMAIL = "vicamelnikova@evilmartians.com";
 const PIER_URL = "https://clouds.sfruby.com";
 
 // Strip the light HTML that sometimes appears in prose fields (<br>, <a>, entities).
@@ -91,6 +91,16 @@ function fmtDate(iso) {
   });
 }
 
+// Speaker-written prose (CFP abstracts and bios) keeps its paragraphs: the
+// same split SpeakerProfile renders, as blank-line separated Markdown.
+const prose = (text) =>
+  String(text ?? "")
+    .replace(/\r\n/g, "\n")
+    .split(/\n{2,}/)
+    .map((p) => plain(p))
+    .filter(Boolean)
+    .join("\n\n");
+
 // "Tuesday, November 10, 2026" for a schedule day.
 const fmtDay = (day) => `${day.weekday}, ${fmtDate(day.date)}`;
 
@@ -116,9 +126,10 @@ function upcomingMeetupsSection() {
 // --- Conference (the homepage) ----------------------------------------------
 const price = (t) => `$${t.price}`;
 const note = (t) => String(t.note ?? "").replace(/\.+$/, "");
-const fromPrice = Math.min(
-  ...ticketTiers.filter((t) => t.state === "live").map((t) => t.price),
-);
+const livePrices = ticketTiers
+  .filter((t) => t.state === "live")
+  .map((t) => t.price);
+const fromPrice = livePrices.length ? Math.min(...livePrices) : null;
 
 function ticketsSection(placement) {
   const live = ticketTiers.filter((t) => t.state === "live");
@@ -214,8 +225,8 @@ function speakersSection() {
         `### ${p.name}${p.keynote ? " (keynote)" : ""}`,
         meta,
         p.title ? `Talk: **${p.title}**` : "",
-        p.abstract ? plain(p.abstract) : "",
-        p.bio ? plain(p.bio) : "",
+        p.abstract ? prose(p.abstract) : "",
+        p.bio ? prose(p.bio) : "",
         socials ? `Links: ${socials}` : "",
       ]
         .filter(Boolean)
@@ -278,9 +289,9 @@ const crewSection = () =>
 export function homeMarkdown() {
   return `# San Francisco Ruby Conference 2026
 
-> Nov 10-12, 2026 at SFJAZZ Center, San Francisco. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Tickets from $${fromPrice}. Organized by [Evil Martians](https://evilmartians.com).
+> Nov 10-12, 2026 at SFJAZZ Center, San Francisco. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. ${fromPrice ? `Tickets from ${fromPrice}. ` : ""}Organized by [Evil Martians](https://evilmartians.com).
 
-Year two of the conference, and the second year of SF Ruby (${SITE}), the community for Ruby developers and founders in San Francisco. One stage, two audiences: while Small teams are in a talk, Big teams are in a conversation group, then they swap. Keynotes are for everyone.
+Year two of the conference, run by SF Ruby (${SITE}), the community for Ruby developers and founders in San Francisco. While Small teams are in a talk, Big teams are in a conversation group, then they swap. Keynotes are for everyone.
 
 - Tickets: ${ticketLink("index-md")}
 - The schedule on the site: ${SITE}/#schedule
@@ -411,7 +422,7 @@ Year one had ${Object.keys(sponsors2025).length} sponsors, Chime, Bolt.new, Cisc
 
 ## Contact
 
-Questions, or a custom package: ${SPONSOR_EMAIL}. The conference program, speakers and venue: ${SITE}/index.md.
+Questions, or a custom package: ${SPONSOR_CONTACT.email}. The conference program, speakers and venue: ${SITE}/index.md.
 `;
 }
 

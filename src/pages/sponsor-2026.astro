@@ -6,7 +6,7 @@ import HashScroll from "../components/HashScroll.astro";
 import EmailModal from "../components/EmailModal.astro";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { sponsors as sponsors2025 } from "../data/sponsors.js";
-import { sponsorTiers2026, sponsorStats2026, whySponsor2026 } from "../data/sponsor-tiers-2026.js";
+import { sponsorTiers2026, sponsorStats2026, whySponsor2026, SPONSOR_CONTACT } from "../data/sponsor-tiers-2026.js";
 import attending from "../content/attending-companies.json";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
@@ -344,8 +344,8 @@ const attendingCompanies = (attending.companies ?? []).map((c) => c.name);
 
         <EmailModal
             id="sponsor-2026"
-            email="vicamelnikova@evilmartians.com"
-            subject="SF Ruby 2026 Sponsorship"
+            email={SPONSOR_CONTACT.email}
+            subject={SPONSOR_CONTACT.subject}
             title="Sponsor SF Ruby 2026"
         />
 

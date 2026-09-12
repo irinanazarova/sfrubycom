@@ -65,6 +65,12 @@ export const sponsorTiers2026 = [
   },
 ];
 
+// Where a sponsor writes: the page's email modal and the twin both use it.
+export const SPONSOR_CONTACT = {
+  email: "vicamelnikova@evilmartians.com",
+  subject: "SF Ruby 2026 Sponsorship",
+};
+
 // The headline numbers on the sponsor page.
 export const sponsorStats2026 = [
   { value: "450+", label: "Conference Attendees" },
