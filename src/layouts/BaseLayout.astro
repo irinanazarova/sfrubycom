@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import HashScroll from "../components/HashScroll.astro";
+import { markdownTwinFor } from "../lib/markdown-twins.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
@@ -29,6 +30,8 @@ const {
 } = Astro.props;
 
 const ogPlusPath = Astro.url.pathname === "/" ? "/" : Astro.url.pathname.replace(/\/$/, "");
+// The page's Markdown twin, for agents that look for one (see src/lib/markdown-twins.js).
+const markdownTwin = markdownTwinFor(Astro.url.pathname);
 const ogPlusImage = ogImage
     ? new URL(ogImage, Astro.site ?? "https://sfruby.com").href
     : `https://iqtfijxk.ogplus.net${ogPlusPath}`;
@@ -54,6 +57,7 @@ const ogPlusImage = ogImage
         <meta name="description" content={description} />
         <meta name="theme-color" content={palette.ruby[600]} />
         <title>{title}</title>
+        {markdownTwin && <link rel="alternate" type="text/markdown" href={markdownTwin} />}
 
         <link
             rel="preload"

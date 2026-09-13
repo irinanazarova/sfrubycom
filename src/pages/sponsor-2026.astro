@@ -6,79 +6,22 @@ import HashScroll from "../components/HashScroll.astro";
 import EmailModal from "../components/EmailModal.astro";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { sponsors as sponsors2025 } from "../data/sponsors.js";
-import { conferenceSpeakers } from "../data/conference-2026.js";
-import attending from "../content/attending-companies.json";
+import { sponsorTiers2026, sponsorStats2026, whySponsor2026, SPONSOR_CONTACT } from "../data/sponsor-tiers-2026.js";
+import { companies as attending, displayName } from "../data/attending.js";
+import { markdownTwinFor } from "../lib/markdown-twins.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
-// What a 2026 sponsorship costs. Hardcoded here because data/sponsors.js carries
-// the tiers as they were priced in 2025, for the /sponsors-2025 archive. Who has
-// actually signed does live in that file: SponsorTiers reads the 2026 roster from
-// it, and sponsors2025Count below counts the 2025 one.
+// Who has signed lives in data/sponsors.js: SponsorTiers reads the 2026 roster
+// from it, and sponsors2025Count below counts the 2025 one. What a sponsorship
+// costs is in data/sponsor-tiers-2026.js.
 const sponsors2025Count = Object.keys(sponsors2025).length;
 
 // Who has already bought tickets, from the same snapshot the homepage renders
 // (companies with two or more ticket holders). For a sponsor deciding whether
 // their hiring managers will meet anyone, this is the list that answers it.
-const attendingCompanies = (attending.companies ?? []).map((c) => c.name);
+const attendingCompanies = attending.map((c) => displayName(c.name));
 
-const tiers2026 = [
-    {
-        name: "Pickaxe ⛏️",
-        price: "$20,000",
-        paymentLink: "https://buy.stripe.com/5kQ6oH8bi25Tacg4Ude7m07",
-        description: "Premier sponsorship with maximum visibility and branding.",
-        featured: true,
-        benefits: [
-            "Prominent logo placement on all conference materials",
-            "Featured acknowledgment during opening and closing remarks",
-            "Dedicated sponsor spotlight on social media",
-            "Premium exhibition space",
-            "Unlimited job postings on the SF Ruby job board for 12 months",
-            "Bring up to 10 of your team to the conference",
-        ],
-    },
-    {
-        name: "Ruby",
-        price: "$10,000",
-        paymentLink: "https://buy.stripe.com/6oU5kD4Z68uhfwA5Yhe7m06",
-        description:
-            "High-visibility sponsorship with excellent branding opportunities.",
-        benefits: [
-            "Logo on conference website and printed materials",
-            "Sponsor acknowledgment during opening remarks",
-            "Social media recognition",
-            "Exhibition space or branded gifts for attendees",
-            "3 job postings on the SF Ruby job board",
-            "Bring up to 5 of your team to the conference",
-        ],
-    },
-    {
-        name: "Emerald",
-        price: "$4,000",
-        paymentLink: "https://buy.stripe.com/cNi9AT3V24e10BG2M5e7m05",
-        description: "Strong presence with quality branding and networking.",
-        benefits: [
-            "Logo on conference website and printed materials",
-            "Sponsor acknowledgment during opening remarks",
-            "Social media recognition",
-            "1 job posting on the SF Ruby job board",
-            "Bring up to 2 of your team to the conference",
-        ],
-    },
-    {
-        name: "Afterparty",
-        price: null,
-        description: "Exclusive sponsorship of the conference afterparty.",
-        benefits: [
-            "Exclusive branding at the afterparty",
-            "Logo on conference website and printed materials",
-            "Special acknowledgment during the afterparty",
-            "Social media recognition",
-            "Bring up to 10 of your team to the conference",
-        ],
-    },
-];
 ---
 
 <!doctype html>
@@ -103,6 +46,7 @@ const tiers2026 = [
         />
         <meta name="theme-color" content={palette.ruby[600]} />
         <title>Sponsor the San Francisco Ruby Conference 2026 - SF Ruby</title>
+        <link rel="alternate" type="text/markdown" href={markdownTwinFor(Astro.url.pathname)} />
 
         <link
             rel="preload"
@@ -178,7 +122,7 @@ const tiers2026 = [
             <!-- Content Section -->
             <section class="py-16 bg-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <!-- 2025 Stats -->
+                    <!-- 2026 in numbers -->
                     <div
                         class="px-card bg-white p-8 mb-12"
                     >
@@ -190,46 +134,16 @@ const tiers2026 = [
                         <div
                             class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
                         >
-                            <div>
-                                <div
-                                    class="px-font text-xl md:text-2xl text-ruby-600"
-                                >
-                                    450+
+                            {sponsorStats2026.map((s) => (
+                                <div>
+                                    <div class="px-font text-xl md:text-2xl text-ruby-600">
+                                        {s.value}
+                                    </div>
+                                    <div class="text-gray-600 text-sm mt-1">
+                                        {s.label}
+                                    </div>
                                 </div>
-                                <div class="text-gray-600 text-sm mt-1">
-                                    Conference Attendees
-                                </div>
-                            </div>
-                            <div>
-                                <div
-                                    class="px-font text-xl md:text-2xl text-ruby-600"
-                                >
-                                    {conferenceSpeakers.length}
-                                </div>
-                                <div class="text-gray-600 text-sm mt-1">
-                                    Speakers
-                                </div>
-                            </div>
-                            <div>
-                                <div
-                                    class="px-font text-xl md:text-2xl text-ruby-600"
-                                >
-                                    2,400+
-                                </div>
-                                <div class="text-gray-600 text-sm mt-1">
-                                    Subscribers
-                                </div>
-                            </div>
-                            <div>
-                                <div
-                                    class="px-font text-xl md:text-2xl text-ruby-600"
-                                >
-                                    650+
-                                </div>
-                                <div class="text-gray-600 text-sm mt-1">
-                                    Slack Members
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
 
@@ -258,95 +172,35 @@ const tiers2026 = [
                             Why Sponsor?
                         </h2>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-ruby-600"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
+                            {whySponsor2026.map((r) => (
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
                                     >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-                                        ></path>
-                                    </svg>
+                                        <svg
+                                            class="w-5 h-5 text-ruby-600"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d={r.icon}
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">
+                                            {r.title}
+                                        </h3>
+                                        <p class="text-gray-600 text-sm">
+                                            {r.text}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900">
-                                        Two audiences, on purpose
-                                    </h3>
-                                    <p class="text-gray-600 text-sm">
-                                        Senior engineers from startups and from
-                                        household names. Gusto, Shopify, Persona
-                                        and 37signals are on stage; the schedule
-                                        has talks and conversation groups for
-                                        each audience.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-ruby-600"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900">
-                                        Hiring Pipeline
-                                    </h3>
-                                    <p class="text-gray-600 text-sm">
-                                        Your hiring managers get the mic in
-                                        organized networking groups of 70 to
-                                        100 engineers, and a listing on the
-                                        jobs board the rest of the year.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0"
-                                >
-                                    <svg
-                                        class="w-5 h-5 text-ruby-600"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                        ></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-900">
-                                        Community Support
-                                    </h3>
-                                    <p class="text-gray-600 text-sm">
-                                        Support the Ruby ecosystem and show your
-                                        commitment to the community.
-                                    </p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
 
@@ -359,7 +213,7 @@ const tiers2026 = [
                         </h2>
                         <div class="grid sm:grid-cols-2 gap-6">
                             {
-                                tiers2026.map((tier) => (
+                                sponsorTiers2026.map((tier) => (
                                     <div
                                         class={`relative flex flex-col px-card p-8 ${tier.featured ? "bg-ruby-50" : "bg-white"}`}
                                     >
@@ -369,7 +223,7 @@ const tiers2026 = [
                                             </span>
                                         )}
                                         <h3 class="text-lg font-bold text-gray-900">
-                                            {tier.name}
+                                            {tier.name}{tier.emoji && ` ${tier.emoji}`}
                                         </h3>
                                         {tier.price && (
                                             <div class="px-font mt-2 text-lg md:text-xl text-ruby-600">
@@ -491,8 +345,8 @@ const tiers2026 = [
 
         <EmailModal
             id="sponsor-2026"
-            email="vicamelnikova@evilmartians.com"
-            subject="SF Ruby 2026 Sponsorship"
+            email={SPONSOR_CONTACT.email}
+            subject={SPONSOR_CONTACT.subject}
             title="Sponsor SF Ruby 2026"
         />
 
