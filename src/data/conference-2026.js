@@ -141,6 +141,12 @@ export const conferenceSpeakers = [
     pixel: "/speaker_jp_camara_pixel_256.png",
   },
   {
+    name: "Sergey Karayev",
+    bio: "Building Superconductor, the multiplayer AI workspace for teams and their coding agents. Twenty years on Rails and a Berkeley CS PhD.",
+    orgs: [{ name: "Superconductor", url: "https://www.superconductor.com/" }],
+    pixel: "/speaker_sergey_karayev_pixel_256.png",
+  },
+  {
     name: "Irina Nazarova",
     bio: "CEO, and co-founder of AnyCable, the WebSocket server for Ruby.",
     orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
