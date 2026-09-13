@@ -128,7 +128,13 @@ export const days = [
             title: "Assign to Claude: Making an Agent a First-Class Teammate in Your SaaS",
             cfpTitle: "Assign to Claude: Making an Agent a First‑Class Teammate in Your SaaS",
           },
-          { start: "15:35", tba: true },
+          {
+            start: "15:35",
+            speaker: "Sergey Karayev",
+            org: "Superconductor",
+            title: "The Multiplayer AI Manifesto",
+            cfpTitle: "The Multiplayer AI Manifesto",
+          },
         ],
         group: {
           audience: "startups",

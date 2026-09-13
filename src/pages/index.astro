@@ -22,7 +22,7 @@ import "../styles/global.css";
 // mixed in: the game is the whole community, stage slot or not. With the
 // visitor's own "You" cell the grid holds 21 on desktop (7 x 3) and 20 on
 // phones (5 x 4), where the last cameo sits out.
-const offTheGrid = ["Alex Coomans", "Cole Robertson", "Jason Thomas"];
+const offTheGrid = ["Alex Coomans", "Cole Robertson", "Jason Thomas", "Sergey Karayev"];
 const fighters = conferenceSpeakers
     .filter((s) => s.pixel && !offTheGrid.includes(s.name))
     .map((s) => ({ name: s.name, org: s.orgs[0].name, pixel: s.pixel }));
