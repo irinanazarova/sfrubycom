@@ -1,33 +1,30 @@
-name: Daily Build & Deploy
+name: Daily Data Refresh
 
 on:
   schedule:
-    - cron: '0 13 * * *' # Daily, 13:00 UTC (6am PT). Keeps the homepage
-      # "Ruby companies attending" snapshot at most a day behind ticket sales.
+    # 13:07 UTC (6am PT). An off-the-hour minute on purpose: :00 is the
+    # busiest slot on GitHub's scheduler and runs there queue the longest.
+    - cron: '7 13 * * *'
   workflow_dispatch: {}
 
 jobs:
-  build:
-    runs-on: ubicloud-standard-2
+  refresh:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
+      # Ask Netlify to rebuild, rather than building here and uploading the
+      # result. The build needs LUMA_API_KEY and LUMA_CALENDAR_ID, and those
+      # already live in the Netlify project; keeping one copy of them is the
+      # whole point. The previous version of this job built and deployed from
+      # the runner using GitHub secrets that were never set, so every run from
+      # at least 2026-07-12 to 2026-09-30 fetched nothing, kept the committed
+      # snapshot, and then failed waiting on an interactive Netlify login.
+      #
+      # What this refreshes: the Luma meetup events, the CFP talks, and the
+      # "Ruby companies attending" snapshot on the homepage, none of which
+      # update in the browser (see CLAUDE.md).
+      - name: Trigger a Netlify production build
+        run: |
+          curl --fail --silent --show-error --max-time 30 \
+            -X POST -d '{}' "$BUILD_HOOK"
         env:
-          LUMA_API_KEY: ${{ secrets.LUMA_API_KEY }}
-          LUMA_CALENDAR_ID: ${{ secrets.LUMA_CALENDAR_ID }}
-        run: npm run build
-
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: npx netlify-cli deploy --prod --dir=dist
+          BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
