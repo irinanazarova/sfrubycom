@@ -111,6 +111,20 @@ export const conference2026SponsorTiers = [
         logoHeight: 172,
         url: "https://www.chatwoot.com/",
       },
+      {
+        name: "Chime",
+        logo: "/sponsor_chime.svg",
+        logoWidth: 834,
+        logoHeight: 256,
+        url: "https://www.chime.com/",
+      },
+      {
+        name: "FastRuby.io",
+        logo: "/sponsor_fastruby.png",
+        logoWidth: 335,
+        logoHeight: 63,
+        url: "https://www.fastruby.io/",
+      },
     ],
   },
   {
