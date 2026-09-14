@@ -27,8 +27,9 @@ const profileByKey = new Map(profiles.map((p) => [p.key, p]));
 // lacks (a withdrawn talk still on the sheet, say) renders as plain text.
 const profileFor = (name) => profileByKey.get(speakerKey(name)) ?? null;
 
-// One dialog per scheduled speaker. The card's title comes from the profile,
-// where the schedule-versus-CFP rule has already been applied.
+// One dialog per scheduled speaker. Both the row and the card read the title
+// off the profile, where the CFP feed has already won over the placeholder,
+// so a slot and the card it opens can never print different names.
 const dialogs = new Map();
 for (const d of days)
     for (const b of d.blocks)
@@ -130,6 +131,7 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                                             <ul class="mt-5 flex flex-col gap-5 list-none p-0">
                                                 {b.sessions.map((s) => {
                                                     const profile = s.tba ? null : profileFor(s.speaker);
+                                                    const title = profile?.title || s.title;
                                                     return (
                                                         <li class="flex gap-4">
                                                             {s.start && (
@@ -150,7 +152,7 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                                                                     aria-controls={`speaker-${profile.key}`}
                                                                 >
                                                                     <span class="block font-display font-semibold text-base md:text-lg text-gray-900 leading-snug group-hover:text-ruby-600 transition-colors">
-                                                                        {s.title}
+                                                                        {title}
                                                                     </span>
                                                                     {/* one line on purpose: a line break before the comma renders as a space */}
                                                                     <span class="block text-sm text-gray-600 mt-1.5"><span class="font-medium text-ruby-600 underline-offset-2 group-hover:underline">{s.speaker}</span>, {s.org}</span>
@@ -158,7 +160,7 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                                                             ) : (
                                                                 <div class="min-w-0">
                                                                     <p class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug">
-                                                                        {s.title}
+                                                                        {title}
                                                                     </p>
                                                                     <p class="text-sm text-gray-600 mt-1.5"><span class="font-medium text-gray-900">{s.speaker}</span>, {s.org}</p>
                                                                 </div>

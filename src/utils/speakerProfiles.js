@@ -17,30 +17,24 @@ import {
 import { socialMetaList } from "./socialLinks.js";
 import { days } from "../data/schedule-2026.js";
 
-// The organizers' schedule is the latest word on what a talk is called: the
-// sheet gets edited as titles settle, and several CFP entries still say TBD.
-// So the schedule title shows, on every surface and in the client-side
-// refresh too, and a CFP title replaces it only when it is a new version: a
-// real title that differs from the one the CFP carried when the schedule was
-// set (`cfpTitle` in src/data/schedule-2026.js). Speakers the schedule has
-// not placed fall back to the CFP title.
+// The CFP app is the source of truth for what a talk is called. Speakers edit
+// their entry there up to the conference, and a title we typed by hand can
+// only go stale. So a real CFP title always wins, on every surface and in the
+// client-side refresh too. The schedule file's title is the placeholder that
+// holds the slot while a speaker's entry still says TBD, and it stops showing
+// the moment they publish the real one.
 const scheduled = new Map(
   days.flatMap((d) =>
     d.blocks.flatMap((b) =>
       (b.sessions ?? [])
         .filter((sess) => !sess.tba && sess.title)
-        .map((sess) => [
-          speakerKey(sess.speaker),
-          { title: sess.title, cfpTitle: sess.cfpTitle ?? "" },
-        ]),
+        .map((sess) => [speakerKey(sess.speaker), sess.title]),
     ),
   ),
 );
 
 function resolveTitle(key, cfpTitle) {
-  const slot = scheduled.get(key);
-  if (!slot) return cfpTitle;
-  return cfpTitle && cfpTitle !== slot.cfpTitle ? cfpTitle : slot.title;
+  return cfpTitle || scheduled.get(key) || "";
 }
 
 export function buildProfiles(talks, speakers, aliases = {}) {

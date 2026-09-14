@@ -6,15 +6,13 @@
 // are for everyone. Day 1 is AI-heavy; Day 2 is AI-light, the rest of the stack:
 // queues, concurrency, real-time, open source.
 //
-// Talk titles live here rather than in the CFP feed on purpose: several
-// speakers' CFP entries still read "TBD" while the sheet has a working title,
-// and the sheet is the organizers' latest word. `cfpTitle` is the title the
-// CFP feed carried when the sheet's title was set. The rule, applied in
-// src/utils/speakerProfiles.js on every surface: the schedule title shows,
-// and only a CFP title that differs from `cfpTitle` (a new version the
-// speaker published since) replaces it. A session without `cfpTitle` had no
-// real CFP title yet, so the first real one the speaker enters wins. Times
-// are 24h strings; `formatTime` renders them.
+// A `title` here is a placeholder, not the talk's name. The CFP app is where
+// speakers write and edit that, so a real CFP title always wins (the rule
+// lives in src/utils/speakerProfiles.js and applies on every surface). These
+// strings come from the organizers' sheet and hold the slot while an entry
+// still reads "TBD", which several do. Editing one here changes nothing for a
+// speaker who has already published a title: fix it in the CFP app instead.
+// Times are 24h strings; `formatTime` renders them.
 export const AUDIENCES = {
   all: { id: "all", label: "Everyone" },
   // Labels renamed in September 2026 (were "Startups" and "Household names");
@@ -42,7 +40,6 @@ export const days = [
             speaker: "Irina Nazarova",
             org: "Evil Martians",
             title: "Why start a new company on Rails (and AI) today",
-            cfpTitle: "Startups on Rails in 2026",
           },
         ],
       },
@@ -64,14 +61,12 @@ export const days = [
             speaker: "Madison Sites",
             org: "Order.co",
             title: "The System Nobody Understood (Including AI)",
-            cfpTitle: "The System Nobody Understood (Including AI)",
           },
           {
             start: "11:05",
             speaker: "JP Camara",
             org: "Wealthbox",
             title: "Multiplayer Rails: collaborative editing, no Node required",
-            cfpTitle: "Multiplayer Rails: collaborative editing, no Node required",
           },
         ],
         group: {
@@ -92,21 +87,18 @@ export const days = [
             speaker: "Ben Sheldon",
             org: "Frontdoor Benefits",
             title: "Building the same app twice: same problems, different decade",
-            cfpTitle: "Building the same app twice: same problems, different decade",
           },
           {
             start: "13:45",
             speaker: "Svyatoslav Kryukov",
             org: "Evil Martians",
             title: "Agents Scale, Humans Don't: Hiring Without Slowing Down",
-            cfpTitle: "Agents Scale, Humans Don't: Hiring Without Slowing Down",
           },
           {
             start: "14:15",
             speaker: "Carmine Paolino",
             org: "RubyLLM",
             title: "RubyLLM 2.0: The AI Framework Ruby Deserves",
-            cfpTitle: "RubyLLM 2.0: The AI Framework Ruby Deserves",
           },
         ],
         group: {
@@ -127,14 +119,12 @@ export const days = [
             speaker: "CJ Avilla",
             org: "Anthropic",
             title: "Assign to Claude: Making an Agent a First-Class Teammate in Your SaaS",
-            cfpTitle: "Assign to Claude: Making an Agent a First‑Class Teammate in Your SaaS",
           },
           {
             start: "15:35",
             speaker: "Sergey Karayev",
             org: "Superconductor",
             title: "The Multiplayer AI Manifesto",
-            cfpTitle: "The Multiplayer AI Manifesto",
           },
         ],
         group: {
@@ -154,7 +144,6 @@ export const days = [
             speaker: "Ryan Sherlock",
             org: "Fin",
             title: "Who Watches the Agents? Closing the Rails Loop from Code to Customers",
-            cfpTitle: "Who Watches the Agents? Closing the Rails Loop from Code to Customers",
           },
         ],
       },
@@ -178,7 +167,6 @@ export const days = [
             speaker: "Rosa Gutiérrez",
             org: "37signals",
             title: "Solid Queue: two years on Rails",
-            cfpTitle: "Solid Queue: two years on Rails",
           },
         ],
       },
@@ -201,14 +189,12 @@ export const days = [
             org: "Typesense",
             title:
               "How We Bootstrapped an Open Source Search Engine to $10M+ ARR with 15 People and Ruby on Rails",
-            cfpTitle: "How We Bootstrapped an Open Source Search Engine to $10M+ ARR with 15 People and Ruby on Rails",
           },
           {
             start: "10:50",
             speaker: "Marco Roth",
             org: "Herb",
             title: "Reactive Rails Views, No Rewrite Required",
-            cfpTitle: "Reactive Rails Views, No Rewrite Required",
           },
         ],
         group: {
@@ -229,21 +215,18 @@ export const days = [
             speaker: "Alex Coomans",
             org: "Persona",
             title: "Keeping Your Head on Straight in Concurrent & Complex Ruby Applications",
-            cfpTitle: "Keeping Your Head on Straight in Concurrent & Complex Ruby Applications",
           },
           {
             start: "13:30",
             speaker: "Phillip Campbell",
             org: "Gusto",
             title: "Background processing at Gusto: The Parts Where People Look Puzzled",
-            cfpTitle: "Background processing at Gusto: The Parts Where People Look Puzzled",
           },
           {
             start: "14:00",
             speaker: "Peter Zhu",
             org: "Shopify",
             title: "Open Source is the Most Fragile and Most Resilient Ecosystem",
-            cfpTitle: "Open Source is the Most Fragile and Most Resilient Ecosystem",
           },
         ],
         // Host still to be confirmed on the sheet; `hosts` lands when it is.
@@ -271,7 +254,6 @@ export const days = [
             speaker: "Jason Thomas",
             org: "OpenC3",
             title: "Satellite command and control with Ruby and COSMOS",
-            cfpTitle: "Satellite command and control with Ruby and COSMOS",
           },
         ],
         group: {
