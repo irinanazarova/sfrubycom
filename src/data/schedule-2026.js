@@ -70,7 +70,8 @@ export const days = [
             start: "11:05",
             speaker: "JP Camara",
             org: "Wealthbox",
-            title: "Realtime collaboration on Rails with yrby and Lexxy",
+            title: "Multiplayer Rails: collaborative editing, no Node required",
+            cfpTitle: "Multiplayer Rails: collaborative editing, no Node required",
           },
         ],
         group: {

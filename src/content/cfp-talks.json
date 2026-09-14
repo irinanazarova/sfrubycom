@@ -78,6 +78,19 @@
     }
   },
   {
+    "id": "aGRJ9qNW",
+    "title": "Multiplayer Rails: collaborative editing, no Node required",
+    "abstract": "Your Rails app can be multiplayer! Last year I showed how to build real-time collaboration into Rails from scratch with Yjs. That work became yrby-rails and lexxy-realtime, which give Rails and Lexxy first-class Yjs support. Learn how to make your Rails app collaborative for humans and AI agents alike.",
+    "track": "general",
+    "speaker": {
+      "name": "JP Camara",
+      "company": "Wealthbox",
+      "role": "Principal Engineer",
+      "bio": "JP Camara is a Principal Engineer at Wealthbox. He contributes to Ruby and Rails open source, including Ruby itself, Solid Queue, yrby, and  lexxy-realtime, and writes about Ruby internals and concurrency at jpcamara.com. ",
+      "socials": "https://jpcamara.com https://bsky.app/profile/jpcamara.com"
+    }
+  },
+  {
     "id": "ZnCvY9ix",
     "title": "Open Source is the Most Fragile and Most Resilient Ecosystem",
     "abstract": "The open source software that powers our businesses is maintained primarily by volunteers but funded by too few companies. This talk reframes open source support as not charity, but rather a critical part of the business’ infrastructure. We will be discussing why your company needs a team to manage your open source stack, how to manage this team, and the benefits they could provide.",
