@@ -170,7 +170,20 @@ Buy on Luma: ${ticketLink(placement)}
 Teams of five and more get 10% off and a segment on stage: ${SITE}/team. Need company sign-off to attend? The email to send is at ${SITE}/manager.md.`;
 }
 
+// The same merge the speaker cards render, keyed by speaker. The schedule and
+// the speaker list below it both read titles from here, so the twin cannot
+// name a talk two ways in one file.
+function profilesByKey() {
+  const { profiles } = buildProfiles(
+    cfpTalks,
+    conferenceSpeakers,
+    cfpNameAliases,
+  );
+  return new Map(profiles.map((p) => [p.key, p]));
+}
+
 function scheduleSection() {
+  const byKey = profilesByKey();
   const label = (b) =>
     b.kind === "keynote"
       ? "Keynote, everyone"
@@ -194,7 +207,9 @@ ${fmtDay(d)}. ${d.tagline}`;
             .map((s) => {
               const at = s.start ? `${formatTime(s.start)}: ` : "";
               if (s.tba) return `  - ${at}To be announced`;
-              return `  - ${at}**${s.title}**, ${s.speaker} (${s.org})`;
+              const title =
+                byKey.get(speakerKey(s.speaker))?.title || s.title;
+              return `  - ${at}**${title}**, ${s.speaker} (${s.org})`;
             })
             .join("\n");
           const group = b.group
@@ -217,12 +232,7 @@ ${fmtDay(d)}. ${d.tagline}`;
 // Speakers in schedule order, then anyone on the roster the schedule has not
 // placed yet. Each entry is the same merge the speaker cards render.
 function speakersSection() {
-  const { profiles } = buildProfiles(
-    cfpTalks,
-    conferenceSpeakers,
-    cfpNameAliases,
-  );
-  const byKey = new Map(profiles.map((p) => [p.key, p]));
+  const byKey = profilesByKey();
   const ordered = [];
   const seen = new Set();
   const push = (p) => {
@@ -235,7 +245,7 @@ function speakersSection() {
     for (const b of d.blocks)
       for (const s of b.sessions ?? [])
         if (!s.tba) push(byKey.get(speakerKey(s.speaker)));
-  profiles.forEach(push);
+  for (const p of byKey.values()) push(p);
 
   return ordered
     .map((p) => {

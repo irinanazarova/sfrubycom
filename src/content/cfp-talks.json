@@ -117,6 +117,19 @@
     }
   },
   {
+    "id": "TBvEWlLi",
+    "title": "Ruby for AI and AI for Ruby",
+    "abstract": "",
+    "track": "general",
+    "speaker": {
+      "name": "Vladimir Dementyev",
+      "company": "Evil Martians",
+      "role": "Principal Backend Engineer",
+      "bio": "Martian",
+      "socials": "https://x.com/palkan_tula"
+    }
+  },
+  {
     "id": "DdxMTtiT",
     "title": "RubyLLM 2.0: The AI Framework Ruby Deserves",
     "abstract": "RubyLLM made Ruby an AI language: one beautiful API for every provider, 11+ million downloads. 2.0 makes it a full framework: the agentic loop as public API, durable approval-gated agents, the most precise cost ledger in AI, caching, batches, fallbacks, citations, cancellation, server tools, speech, video, OCR, reranking, and a generator that writes provider gems. Ruby is where you ship AI.",
@@ -153,32 +166,6 @@
       "role": "Principal programmer",
       "bio": "Rosa has worked with Ruby for over 13 years. She loves maths, theoretical computer science, learning languages for both humans and computers, and her dog Mochi.",
       "socials": "https://bsky.app/profile/rosa.codes"
-    }
-  },
-  {
-    "id": "JTCW1PPd",
-    "title": "Startups on Rails in 2026",
-    "abstract": "Let's celebrate the new and ambitious companies choosing Ruby and Rails today. We'll hear their stories, learn from their wins, and find out what's missing: what we as the Ruby community need to build to help them grow into the big Ruby success stories of the future. Based on interviews with founders.\r\n\r\nFounded a Ruby startup in the last 2-3 years? Let's talk: https://cal.com/inazarova/feedback",
-    "track": "startup",
-    "speaker": {
-      "name": " Irina Nazarova",
-      "company": "Evil Martians",
-      "role": "CEO",
-      "bio": "CEO at Evil Martians, co-founder at AnyCable, and organizer of the SF Ruby community. Based in Japantown, and supervised by an opinionated calico cat Murka.",
-      "socials": "https://x.com/inazarova, https://github.com/irinanazarova, https://www.linkedin.com/in/nonconstant/, https://irinanazarova.substack.com/"
-    }
-  },
-  {
-    "id": "TBvEWlLi",
-    "title": "TBA",
-    "abstract": "TBD",
-    "track": "general",
-    "speaker": {
-      "name": "Vladimir Dementyev",
-      "company": "Evil Martians",
-      "role": "Principal Backend Engineer",
-      "bio": "Martian",
-      "socials": "https://x.com/palkan_tula"
     }
   },
   {
@@ -244,6 +231,19 @@
       "role": "Senior Director of Engineering",
       "bio": "Ryan Sherlock is Senior Director of Engineering at Fin, leading infrastructure and core technologies. He works on reliability, developer productivity, and the three-million-line Rails monolith that powers Fin at scale.",
       "socials": "https://x.com/ryan_sherlock, https://www.linkedin.com/in/ryansherlock/"
+    }
+  },
+  {
+    "id": "JTCW1PPd",
+    "title": "Why start a new company on Rails, and AI, today",
+    "abstract": "Let's celebrate the new and ambitious companies choosing Ruby and Rails today. We'll hear their stories, learn from their wins, and find out what's missing: what we as the Ruby community need to build to help them grow into the big Ruby success stories of the future. Based on interviews with founders.\r\n\r\nFounded a Ruby startup in the last 2-3 years? Let's talk: https://cal.com/inazarova/feedback",
+    "track": "startup",
+    "speaker": {
+      "name": " Irina Nazarova",
+      "company": "Evil Martians",
+      "role": "CEO",
+      "bio": "CEO at Evil Martians, co-founder at AnyCable, and organizer of the SF Ruby community. Based in Japantown, and supervised by an opinionated calico cat Murka.",
+      "socials": "https://x.com/inazarova, https://github.com/irinanazarova, https://www.linkedin.com/in/nonconstant/, https://irinanazarova.substack.com/"
     }
   }
 ]

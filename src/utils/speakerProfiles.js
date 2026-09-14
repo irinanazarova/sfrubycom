@@ -15,32 +15,60 @@ import {
   speakerKey,
 } from "./cfpTalks.js";
 import { socialMetaList } from "./socialLinks.js";
-import { days } from "../data/schedule-2026.js";
+import { days, formatDay, formatTime } from "../data/schedule-2026.js";
 
-// The organizers' schedule is the latest word on what a talk is called: the
-// sheet gets edited as titles settle, and several CFP entries still say TBD.
-// So the schedule title shows, on every surface and in the client-side
-// refresh too, and a CFP title replaces it only when it is a new version: a
-// real title that differs from the one the CFP carried when the schedule was
-// set (`cfpTitle` in src/data/schedule-2026.js). Speakers the schedule has
-// not placed fall back to the CFP title.
-const scheduled = new Map(
-  days.flatMap((d) =>
-    d.blocks.flatMap((b) =>
-      (b.sessions ?? [])
-        .filter((sess) => !sess.tba && sess.title)
-        .map((sess) => [
-          speakerKey(sess.speaker),
-          { title: sess.title, cfpTitle: sess.cfpTitle ?? "" },
-        ]),
-    ),
+// The CFP app is the source of truth for what a talk is called. Speakers edit
+// their entry there up to the conference, and a title we typed by hand can
+// only go stale. So a real CFP title always wins, on every surface and in the
+// client-side refresh too. The schedule file's title is the placeholder that
+// holds the slot while a speaker's entry still says TBD, and it stops showing
+// the moment they publish the real one.
+// Each scheduled session with the day it sits on, so a profile can say when
+// the talk is as well as what it is called. A session carries its own start
+// inside a talks block; a keynote is the only session in its block and takes
+// the block's.
+const slots = days.flatMap((d) =>
+  d.blocks.flatMap((b) =>
+    (b.sessions ?? [])
+      .filter((sess) => !sess.tba && sess.title)
+      .map((sess) => ({ sess, day: d, start: sess.start || b.start })),
   ),
 );
 
+// A speaker has one CFP entry, so the model below gives them one title, which
+// every row bearing their name would print. Two slots for one speaker (a talk
+// and a panel, say) would silently put the same title on both. Fail the build
+// instead: whoever adds the second slot has to decide what it is called.
+const duplicate = slots
+  .map(({ sess }) => speakerKey(sess.speaker))
+  .find((key, i, keys) => keys.indexOf(key) !== i);
+if (duplicate) {
+  throw new Error(
+    `schedule-2026.js: ${duplicate} has more than one session. One speaker, one CFP entry, one title. Split the speaker, or teach resolveTitle which slot is which.`,
+  );
+}
+
+const scheduled = new Map(
+  slots.map(({ sess }) => [speakerKey(sess.speaker), sess.title]),
+);
+
+// When the talk is. The schedule already prints its own times per row; this is
+// for the surfaces that show one speaker on their own and have no column to
+// read the time from: the card a slot opens, and the shareable speaker card.
+const slotTimes = new Map(
+  slots.map(({ sess, day, start }) => [
+    speakerKey(sess.speaker),
+    {
+      day: day.n,
+      weekday: day.weekday,
+      date: formatDay(day),
+      time: formatTime(start),
+    },
+  ]),
+);
+
 function resolveTitle(key, cfpTitle) {
-  const slot = scheduled.get(key);
-  if (!slot) return cfpTitle;
-  return cfpTitle && cfpTitle !== slot.cfpTitle ? cfpTitle : slot.title;
+  return cfpTitle || scheduled.get(key) || "";
 }
 
 export function buildProfiles(talks, speakers, aliases = {}) {
@@ -64,6 +92,7 @@ export function buildProfiles(talks, speakers, aliases = {}) {
       role: talk?.speaker?.role || s.role || "",
       bio: cfpBio || s.bio || "",
       socials: socialMetaList(talk?.speaker?.socials),
+      slot: slotTimes.get(key) || null,
     };
   });
   return { profiles, unmatched };
