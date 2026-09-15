@@ -210,8 +210,12 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                 {/* tabindex + autofocus: showModal() would otherwise focus the
                     close button and paint its focus ring the moment the card
                     opens. Focus lands on the panel, and Tab reaches the X. */}
-                <div class="px-card bg-white relative overflow-hidden flex flex-col md:grid md:grid-cols-[18rem_1fr] outline-none" tabindex="-1" autofocus>
-                    <form method="dialog" class="absolute top-3 left-3 z-20 m-0">
+                <div class="px-card bg-white relative overflow-hidden flex flex-col outline-none" tabindex="-1" autofocus>
+                    {/* A bar of its own rather than a button floating over the
+                        card: the share card's title starts in its top-left
+                        corner and its Keynote plate sits in the top-right, so
+                        there is no empty corner left to close from. */}
+                    <form method="dialog" class="flex p-2 m-0 bg-white">
                         <button
                             type="submit"
                             class="px-btn px-btn--white px-font text-px8 w-11 h-11 tap-press"
@@ -232,7 +236,8 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
        sheet without joining the z-index ladder. The panel is a px-card; the
        dialog itself is just the frame that positions it and scrolls.
        Phones get a full-width sheet rising from the bottom; from md up it is
-       a wide centered card with the sprite beside the text. */
+       a wide centered card. The speaker's animated share card runs across the
+       top of it, with the text underneath. */
     .speaker-dialog {
         padding: 0;
         border: 0;
@@ -260,8 +265,7 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
             max-height: min(90svh, 100% - 3rem);
             margin: auto;
         }
-        /* the card's hard shadow needs room inside the scroll box; the
-           two-column layout itself is SpeakerProfile's `side` layout */
+        /* the card's hard shadow needs room inside the scroll box */
         .speaker-dialog > .px-card {
             box-shadow: 8px 8px 0 0 var(--px-ink);
             border: 4px solid var(--px-ink);
@@ -313,9 +317,20 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
         history.replaceState(history.state, "", url);
     }
 
+    // The speaker's share card is a ~400KB GIF and every scheduled speaker has
+    // a dialog in the page, so the src is held back until the card is asked
+    // for. Once set it stays set, and the browser caches it from there.
+    function loadCard(dialog: HTMLDialogElement) {
+        const img = dialog.querySelector<HTMLImageElement>("img[data-card-gif][data-src]");
+        if (!img?.dataset.src) return;
+        img.src = img.dataset.src;
+        img.removeAttribute("data-src");
+    }
+
     function open(key: string) {
         const dialog = dialogFor(key);
         if (!dialog || dialog.open) return;
+        loadCard(dialog);
         dialog.showModal();
         dialog.scrollTop = 0;
         setParam(key);
