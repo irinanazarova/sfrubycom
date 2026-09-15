@@ -211,14 +211,17 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                     close button and paint its focus ring the moment the card
                     opens. Focus lands on the panel, and Tab reaches the X. */}
                 <div class="px-card bg-white relative overflow-hidden flex flex-col outline-none" tabindex="-1" autofocus>
-                    {/* A bar of its own rather than a button floating over the
-                        card: the share card's title starts in its top-left
-                        corner and its Keynote plate sits in the top-right, so
-                        there is no empty corner left to close from. */}
-                    <form method="dialog" class="flex p-2 m-0 bg-white">
+                    {/* Floats over the share card's top-right corner, which
+                        the card keeps empty for it: the title runs down the
+                        left and the Keynote plate sits in the text column, so
+                        this corner is sky on every card. Top-left cannot work,
+                        because the poster scales with the dialog and at phone
+                        width the title reaches the corner. Small on purpose,
+                        with the tap area restored in .close-x below. */}
+                    <form method="dialog" class="absolute top-2 right-2 z-20 m-0">
                         <button
                             type="submit"
-                            class="px-btn px-btn--white px-font text-px8 w-11 h-11 tap-press"
+                            class="px-btn px-btn--white px-font text-px8 close-x w-8 h-8 tap-press"
                             aria-label="Close"
                         >
                             X
@@ -286,6 +289,31 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
             box-shadow: 8px 8px 0 0 var(--px-ink);
         }
     }
+    /* The close button is drawn at 32px so it clears the share card's title,
+       and its chrome is scaled to match: the standard 4px border and 5px
+       shadow are built for a button twice this size. The ::after gives back
+       the touch target the drawn size gives up, measuring 50px square against
+       the 44px minimum. Without it this would be a 32px tap target on a
+       phone. Measure it by hit-testing, not by adding up the inset: the two
+       do not agree here. */
+    .close-x {
+        position: relative;
+        border-width: 3px;
+        box-shadow: 3px 3px 0 0 var(--px-ink);
+    }
+    .close-x::after {
+        content: "";
+        position: absolute;
+        inset: -14px;
+    }
+    .close-x:hover {
+        box-shadow: 4px 4px 0 0 var(--px-ink);
+    }
+    .close-x:active {
+        transform: translate(3px, 3px);
+        box-shadow: 0 0 0 0 var(--px-ink);
+    }
+
     .slot-btn {
         background: none;
         border: 0;

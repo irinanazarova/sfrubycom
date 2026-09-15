@@ -158,18 +158,26 @@
         opacity: 0;
       }
 
+      /* In the text column, above the conference line it qualifies, rather
+         than floating in the top-right corner. The corner is left empty on
+         purpose: the card is shown inside the speaker dialog with a close
+         button over it, and that button needs one region that is sky on every
+         card and at every width. Anything in a corner here is in its way. */
       .keynote {
-        position: absolute;
-        top: 34px;
-        right: 34px;
+        align-self: flex-start;
+        margin-top: 30px;
         font-family: "Press Start 2P";
-        font-size: 14px;
+        font-size: 15px;
         color: var(--ink);
         background: var(--gold);
         border: 4px solid var(--ink);
         box-shadow: 5px 5px 0 0 var(--ink);
-        padding: 11px 13px;
+        padding: 10px 12px;
         text-transform: uppercase;
+      }
+      /* It replaces the meta block's own top gap when present. */
+      .keynote + .meta {
+        margin-top: 18px;
       }
     </style>
   </head>
@@ -180,6 +188,7 @@
       <div class="text">
         <div class="title" id="title"></div>
         <div class="subtitle" id="subtitle"></div>
+        <div class="keynote" id="keynote" style="display: none">Keynote</div>
         <div class="meta" id="meta"></div>
         <div class="abstract" id="abstract"></div>
         <div class="spacer"></div>
@@ -193,7 +202,6 @@
         </div>
       </div>
 
-      <div class="keynote" id="keynote" style="display: none">Keynote</div>
     </div>
 
     <script>
