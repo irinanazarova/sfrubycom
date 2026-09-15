@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-12T19:35:06.994Z",
+  "fetchedAt": "2026-09-15T23:18:08.262Z",
   "organizers": [
     {
       "name": "Aleksandr Berdiugin",
@@ -17,7 +17,9 @@
       "image": "/attending/amanda-kinney.webp"
     },
     {
-      "name": "Anton Lovchikov"
+      "name": "Anton Lovchikov",
+      "url": "https://clouds.sfruby.com/e/2026-bits/anton-lovchikov-e4b8b7fe-deef-456f-b4c8-e301648efb92",
+      "image": "/attending/anton-lovchikov-e4b8b7fe-deef-456f-b4c8-e301648efb92.webp"
     },
     {
       "name": "Anton Senkovskiy",
@@ -52,10 +54,14 @@
       "image": "/attending/aurelie-verrot.webp"
     },
     {
-      "name": "Gary Tou"
+      "name": "Gary Tou",
+      "url": "https://clouds.sfruby.com/e/2026-bits/gary-tou",
+      "image": "/attending/gary-tou.webp"
     },
     {
-      "name": "Hector Miramontes"
+      "name": "Hector Miramontes",
+      "url": "https://clouds.sfruby.com/e/2026-bits/hector-miramontes",
+      "image": "/attending/hector-miramontes.webp"
     },
     {
       "name": "Joshue Osuna"

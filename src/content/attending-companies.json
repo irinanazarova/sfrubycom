@@ -1,10 +1,10 @@
 {
-  "fetchedAt": "2026-09-12T19:35:06.993Z",
+  "fetchedAt": "2026-09-15T23:18:08.261Z",
   "minAttendees": 2,
   "companies": [
     {
       "name": "Evil Martians",
-      "count": 12,
+      "count": 13,
       "characters": [
         {
           "name": "Victoria Melnikova",
@@ -15,6 +15,11 @@
           "name": "Amanda Kinney",
           "url": "https://clouds.sfruby.com/e/2026-bits/amanda-kinney",
           "image": "/attending/amanda-kinney.webp"
+        },
+        {
+          "name": "Anton Lovchikov",
+          "url": "https://clouds.sfruby.com/e/2026-bits/anton-lovchikov-e4b8b7fe-deef-456f-b4c8-e301648efb92",
+          "image": "/attending/anton-lovchikov-e4b8b7fe-deef-456f-b4c8-e301648efb92.webp"
         },
         {
           "name": "Anton Senkovskiy",
@@ -94,6 +99,11 @@
       "count": 3,
       "characters": [
         {
+          "name": "Gary Tou",
+          "url": "https://clouds.sfruby.com/e/2026-bits/gary-tou",
+          "image": "/attending/gary-tou.webp"
+        },
+        {
           "name": "Luke Oldenburg",
           "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
           "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
@@ -124,6 +134,22 @@
           "name": "Nate Vick",
           "url": "https://clouds.sfruby.com/e/2026-bits/nate-vick",
           "image": "/attending/nate-vick.webp"
+        }
+      ]
+    },
+    {
+      "name": "Fixate Industries",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Liz Pantalone",
+          "url": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone",
+          "image": "/attending/liz-pantalone.webp"
+        },
+        {
+          "name": "Ben Parisot",
+          "url": "https://clouds.sfruby.com/e/2026-bits/ben-parisot",
+          "image": "/attending/ben-parisot.webp"
         }
       ]
     },
@@ -160,6 +186,22 @@
       ]
     },
     {
+      "name": "Shopify",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Takashi Kokubun",
+          "url": "https://clouds.sfruby.com/e/2026-bits/takashi-kokubun-a75679c4-7635-4fae-bbb1-577557ccd6de",
+          "image": "/attending/takashi-kokubun-a75679c4-7635-4fae-bbb1-577557ccd6de.webp"
+        },
+        {
+          "name": "Peter Zhu",
+          "url": "https://clouds.sfruby.com/e/2026-bits/peter-zhu",
+          "image": "/attending/peter-zhu.webp"
+        }
+      ]
+    },
+    {
       "name": "Typesense",
       "count": 2,
       "characters": [
@@ -187,17 +229,6 @@
       ]
     },
     {
-      "name": "Fixate Industries",
-      "count": 2,
-      "characters": [
-        {
-          "name": "Liz Pantalone",
-          "url": "https://clouds.sfruby.com/e/2026-bits/liz-pantalone",
-          "image": "/attending/liz-pantalone.webp"
-        }
-      ]
-    },
-    {
       "name": "New Leaders",
       "count": 2,
       "characters": [
@@ -209,13 +240,13 @@
       ]
     },
     {
-      "name": "Shopify",
+      "name": "Pinpoint",
       "count": 2,
       "characters": [
         {
-          "name": "Peter Zhu",
-          "url": "https://clouds.sfruby.com/e/2026-bits/peter-zhu",
-          "image": "/attending/peter-zhu.webp"
+          "name": "Tim Krins",
+          "url": "https://clouds.sfruby.com/e/2026-bits/tim-krins",
+          "image": "/attending/tim-krins.webp"
         }
       ]
     },
@@ -237,6 +268,11 @@
     },
     {
       "name": "thoughtbot",
+      "count": 2,
+      "characters": []
+    },
+    {
+      "name": "Ubicloud",
       "count": 2,
       "characters": []
     }
