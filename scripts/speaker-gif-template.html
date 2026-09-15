@@ -1,0 +1,352 @@
+<!doctype html>
+<!-- Shareable speaker card, the frame the animated GIF is made of.
+
+     One speaker per render: the talk title, when it is on, the abstract, and
+     the speaker's pixel character standing on an island under drifting clouds.
+     1280x720, the aspect every social network crops least.
+
+     Not a page. scripts/speaker-gifs.mjs serves this over a static server
+     rooted at public/ (so /fonts, /px-*.png and the sprites resolve), injects
+     one speaker as JSON, then steps window.setFrame(i) and screenshots each
+     frame. Colors arrive as CSS vars from src/design/tokens.mjs, so the card
+     stays on the palette without a second copy of it living here.
+
+     All motion sits in the right third on purpose: the GIF encoder diffs
+     frames as rectangles, so a still left column is a much smaller file. -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: "Press Start 2P";
+        src: url("/fonts/PressStart2P.woff2") format("woff2");
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Martian Grotesk";
+        src: url("/fonts/MartianGroteskVariable.woff2") format("woff2");
+        font-weight: 100 800;
+        font-display: block;
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+      }
+      img {
+        image-rendering: pixelated;
+      }
+
+      .card {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background-color: var(--sky);
+        background-image: url("/px-sky-day.png");
+        background-size: auto 100%;
+        background-repeat: repeat-x;
+        image-rendering: pixelated;
+      }
+
+      /* Sky furniture. The band starts where the text column ends, so a long
+         title never has a cloud drifting through it, and is clipped so a cloud
+         can leave the frame without widening the page. */
+      .sky {
+        position: absolute;
+        inset: 0 0 auto 866px;
+        height: 210px;
+        overflow: hidden;
+      }
+      .cloud {
+        position: absolute;
+        will-change: transform;
+      }
+
+      .text {
+        position: absolute;
+        inset: 0 420px 0 0;
+        padding: 52px 0 52px 46px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      /* Blocks keep their measured height instead of being squeezed by the
+         flex box: fitInColumn reads the overflow they cause. */
+      .text > * {
+        flex-shrink: 0;
+      }
+
+      .title {
+        font-family: "Press Start 2P";
+        color: var(--white);
+        text-transform: uppercase;
+        text-shadow: 5px 5px 0 var(--shadow);
+        line-height: 1.42;
+        letter-spacing: 0.01em;
+      }
+      .subtitle {
+        font-family: "Press Start 2P";
+        color: var(--gold);
+        text-shadow: 4px 4px 0 var(--shadow);
+        line-height: 1.55;
+        margin-top: 22px;
+      }
+      .meta {
+        font-family: "Press Start 2P";
+        color: var(--gold);
+        text-shadow: 3px 3px 0 var(--shadow);
+        font-size: 20px;
+        line-height: 1.95;
+        margin-top: 34px;
+      }
+      .abstract {
+        font-family: "Martian Grotesk", sans-serif;
+        font-weight: 450;
+        color: var(--white);
+        line-height: 1.62;
+        margin-top: 30px;
+        text-shadow: 2px 2px 0 var(--shadow-soft);
+      }
+      /* Pushes the mark to the bottom whatever the abstract's length. */
+      .spacer {
+        flex: 1;
+        min-height: 18px;
+      }
+      .mark {
+        font-family: "Press Start 2P";
+        font-size: 15px;
+        color: var(--white);
+        opacity: 0.82;
+        text-shadow: 3px 3px 0 var(--shadow);
+      }
+
+      /* The character's corner. */
+      .stage {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 420px;
+        height: 720px;
+      }
+      .figure {
+        position: absolute;
+        left: 47%;
+        bottom: 130px;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        will-change: transform;
+      }
+      .sprite {
+        height: 444px;
+        width: auto;
+      }
+      .island {
+        width: 302px;
+        height: auto;
+        margin-top: -20px;
+      }
+      .sparkle {
+        position: absolute;
+        width: 20px;
+        opacity: 0;
+      }
+
+      .keynote {
+        position: absolute;
+        top: 34px;
+        right: 34px;
+        font-family: "Press Start 2P";
+        font-size: 14px;
+        color: var(--ink);
+        background: var(--gold);
+        border: 4px solid var(--ink);
+        box-shadow: 5px 5px 0 0 var(--ink);
+        padding: 11px 13px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="sky" id="sky"></div>
+
+      <div class="text">
+        <div class="title" id="title"></div>
+        <div class="subtitle" id="subtitle"></div>
+        <div class="meta" id="meta"></div>
+        <div class="abstract" id="abstract"></div>
+        <div class="spacer"></div>
+        <div class="mark" id="mark"></div>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="figure" id="figure">
+          <img class="sprite" id="sprite" src="" alt="" />
+          <img class="island" src="/px-island.png" alt="" />
+        </div>
+      </div>
+
+      <div class="keynote" id="keynote" style="display: none">Keynote</div>
+    </div>
+
+    <script>
+      // One speaker, injected by the generator before anything renders.
+      const S = window.__SPEAKER__;
+      const FRAMES = S.frames;
+
+      // A talk title is written as "Hook: what it actually is". The hook is the
+      // poster, the rest is the deck. Without a colon the whole title is the
+      // poster and there is no second line.
+      function splitTitle(raw) {
+        const t = String(raw || "").trim();
+        const at = t.indexOf(":");
+        if (at < 6 || at > t.length - 8) return [t, ""];
+        const tail = t.slice(at + 1).trim();
+        return [t.slice(0, at).trim(), tail.charAt(0).toUpperCase() + tail.slice(1)];
+      }
+
+      // Shrink a block until it fits the height it is allowed, stepping down
+      // one pixel at a time. Titles run from three words to twenty, so the card
+      // never clips one, it just sets it smaller.
+      function fit(el, startPx, minPx, maxHeight) {
+        for (let px = startPx; px >= minPx; px--) {
+          el.style.fontSize = px + "px";
+          if (el.scrollHeight <= maxHeight) return px;
+        }
+        return minPx;
+      }
+
+      // Same, measured against the whole column rather than the block: the
+      // abstract gets whatever the title, the date and the footer left behind,
+      // so no card has to guess that budget as a number.
+      function fitInColumn(el, column, startPx, minPx) {
+        for (let px = startPx; px >= minPx; px--) {
+          el.style.fontSize = px + "px";
+          if (column.scrollHeight <= column.clientHeight) return px;
+        }
+        return minPx;
+      }
+
+      const [head, tail] = splitTitle(S.title);
+      const columnEl = document.querySelector(".text");
+      const titleEl = document.getElementById("title");
+      const subEl = document.getElementById("subtitle");
+      const metaEl = document.getElementById("meta");
+      const absEl = document.getElementById("abstract");
+
+      titleEl.textContent = head;
+      subEl.textContent = tail;
+      if (!tail) subEl.style.display = "none";
+
+      // The year rides on the date line: the conference's full name fills the
+      // line above it, and a card with no year on it anywhere reads as undated
+      // once it has been reposted a few times.
+      const when = S.slot
+        ? S.slot.weekday +
+          ", " +
+          S.slot.date +
+          ", " +
+          S.slot.year +
+          " · " +
+          S.slot.time
+        : "";
+      metaEl.innerHTML = "";
+      for (const line of ["San Francisco Ruby Conference · SFJAZZ", when].filter(Boolean)) {
+        const div = document.createElement("div");
+        div.textContent = line;
+        metaEl.appendChild(div);
+      }
+
+      absEl.textContent = S.abstract || "";
+      if (!S.abstract) absEl.style.display = "none";
+
+      document.getElementById("mark").textContent = S.name + " · sfruby.com";
+      document.getElementById("sprite").src = S.pixel;
+      if (S.keynote) document.getElementById("keynote").style.display = "block";
+
+      // Every size below is measured, and Press Start 2P and Martian Grotesk
+      // measure nothing like the fallback faces, so the whole pass waits for
+      // the real fonts. Laying out first and loading after put nine-line
+      // titles on the long cards.
+      function layout() {
+        // The title owns the top of the card and the abstract takes what is
+        // left, so fit them in that order.
+        const titlePx = fit(titleEl, head.length > 22 ? 46 : 54, 22, 236);
+        if (tail) fit(subEl, Math.min(27, Math.round(titlePx * 0.58)), 14, 118);
+        fitInColumn(absEl, columnEl, 23, 13);
+      }
+
+      // Three clouds at three depths, the near one biggest and fastest. Each
+      // wraps exactly once across the loop, so the last frame meets the first.
+      const CLOUDS = [
+        { src: "/px-cloud-lg.png", w: 186, top: 22, start: 16, drift: 414 },
+        { src: "/px-cloud-md.png", w: 124, top: 96, start: 168, drift: 414 },
+        { src: "/px-cloud.png", w: 92, top: 34, start: 300, drift: 414 },
+      ];
+      const sky = document.getElementById("sky");
+      const clouds = CLOUDS.map((c) => {
+        const img = document.createElement("img");
+        img.className = "cloud";
+        img.src = c.src;
+        img.style.width = c.w + "px";
+        img.style.top = c.top + "px";
+        img.style.left = "0px";
+        sky.appendChild(img);
+        return { img, ...c };
+      });
+
+      // Sparkles around the character. Each lights for a few frames on its own
+      // beat; the beats are whole divisions of the loop so nothing pops at the
+      // seam.
+      const SPARKS = [
+        { x: 36, y: 210, phase: 0 },
+        { x: 352, y: 300, phase: 0.34 },
+        { x: 64, y: 470, phase: 0.62 },
+        { x: 330, y: 132, phase: 0.83 },
+      ];
+      const stage = document.getElementById("stage");
+      const sparks = SPARKS.map((s) => {
+        const img = document.createElement("img");
+        img.className = "sparkle";
+        img.src = "/px-sparkle.png";
+        img.style.left = s.x + "px";
+        img.style.top = s.y + "px";
+        stage.appendChild(img);
+        return { img, ...s };
+      });
+
+      const figure = document.getElementById("figure");
+
+      // The generator drives this; nothing animates on its own, so a frame is
+      // the same every time it is rendered.
+      window.setFrame = function (i) {
+        const t = (i % FRAMES) / FRAMES;
+        for (const c of clouds) {
+          const x = ((c.start - t * c.drift) % c.drift + c.drift) % c.drift;
+          c.img.style.transform = "translateX(" + Math.round(x) + "px)";
+        }
+        // Two bobs per loop, on the pixel grid: a sprite this size reads as
+        // floating if it moves by fractions.
+        const dy = Math.round(3 * Math.sin(2 * Math.PI * t * 2));
+        figure.style.transform = "translateX(-50%) translateY(" + dy + "px)";
+        for (const s of sparks) {
+          const p = (t + s.phase) % 1;
+          s.img.style.opacity = p < 0.16 ? (p < 0.08 ? 1 : 0.45) : 0;
+        }
+      };
+
+      window.setFrame(0);
+      document.fonts.ready.then(() => {
+        layout();
+        document.documentElement.setAttribute("data-ready", "1");
+      });
+    </script>
+  </body>
+</html>

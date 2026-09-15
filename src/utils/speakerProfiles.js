@@ -62,6 +62,7 @@ const slotTimes = new Map(
       day: day.n,
       weekday: day.weekday,
       date: formatDay(day),
+      year: day.date.slice(0, 4),
       time: formatTime(start),
     },
   ]),

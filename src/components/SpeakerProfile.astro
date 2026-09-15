@@ -22,6 +22,7 @@
 //   The lineup page.
 import SocialLink from "./SocialLink.astro";
 import { toParagraphs } from "../utils/abstractText.js";
+import { speakerCardHref } from "../utils/speakerCard.js";
 
 interface Props {
     profile: any;
@@ -35,6 +36,10 @@ const wrap = layout === "wrap";
 const title = titleOverride || s.title;
 const abstract = toParagraphs(s.abstract);
 const bio = toParagraphs(s.bio);
+// The card a schedule slot opens never said when the talk was: the row you
+// tapped had the time and the card replaced it.
+const when = s.slot && `${s.slot.weekday}, ${s.slot.date} · ${s.slot.time}`;
+const cardHref = speakerCardHref(s.key);
 ---
 
 {
@@ -98,12 +103,21 @@ const bio = toParagraphs(s.bio);
     </p>
     {s.role && <p class="text-sm text-gray-500 mt-1">{s.role}</p>}
 
+    {
+        when && (
+            <p class="px-font text-px8 text-ruby-600 mt-5">{when}</p>
+        )
+    }
+
     {/* always in the DOM (hidden when empty) so the client refresh has a node
         to fill when a title or abstract lands */}
     <p
         data-talk-title
         hidden={!title}
-        class="font-display font-semibold text-base text-gray-900 leading-snug mt-5"
+        class:list={[
+            "font-display font-semibold text-base text-gray-900 leading-snug",
+            when ? "mt-2" : "mt-5",
+        ]}
     >
         {title && `“${title}”`}
     </p>
@@ -144,13 +158,25 @@ const bio = toParagraphs(s.bio);
     </div>
 
     {
-        s.socials.length > 0 && (
-            <div class="flex flex-wrap gap-3 pt-6 mt-auto">
+        (s.socials.length > 0 || cardHref) && (
+            <div class="flex flex-wrap items-center gap-3 pt-6 mt-auto">
                 {s.socials.map((link) => (
                     <SocialLink platform={link.platform} href={link.href}>
                         <span class:list={[link.icon && "sr-only"]}>{link.label}</span>
                     </SocialLink>
                 ))}
+                {/* The animated card, for the speaker to post when they
+                    announce the talk. A plain download: the file is built and
+                    committed, so there is nothing to generate on click. */}
+                {cardHref && (
+                    <a
+                        href={cardHref}
+                        download={`sf-ruby-2026-${s.key}.gif`}
+                        class="px-btn px-font text-px10 px-6 py-3.5 bg-sky-500 text-white hover:bg-sky-400"
+                    >
+                        Download GIF
+                    </a>
+                )}
             </div>
         )
     }
