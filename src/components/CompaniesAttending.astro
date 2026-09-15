@@ -119,33 +119,56 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
                         );
                     })}
                 </ul>
-                {organizers.map((c) => (
+                {organizers.map((c) => {
+                    // Cards first, then anyone still without one, so a missing
+                    // card never leaves a hole in the middle of a rank.
+                    const roster = [
+                        ...c.characters,
+                        ...Array.from({ length: Math.max(0, c.count - c.characters.length) }, () => null),
+                    ];
+                    return (
                     <div class="mt-12 lg:mt-0 flex flex-col items-center animate-float [animation-delay:-2.5s] min-w-[8rem] lg:pl-10 lg:border-l-4 lg:border-white/30">
                         <span class="px-plate px-font text-px8 px-2.5 py-1 mb-3">Organizers</span>
-                        {/* One row, never two. The organizers are a single team
-                            on a single island, and a wrapped second line reads
-                            as a second group. They are also the biggest group
-                            here, so the row is sized to hold them at phone
-                            width: at 13 people it is about 320px of the 358px a
-                            390px screen leaves after the padding. Past roughly
-                            15 the figures get too small to recognise and this
-                            wants a rethink rather than another size down. */}
-                        <div class="relative z-10 flex flex-nowrap items-end justify-center gap-0.5 md:gap-1 px-4 -mb-1.5">
-                            {c.characters.map((p) => (
-                                <a href={p.url} target="_blank" rel="noopener noreferrer" class="block shrink-0 tap-press" title={p.name} aria-label={`${p.name}'s Cloud Card`}>
-                                    <img src={p.image} alt={p.name} width="73" height="128" loading="lazy" decoding="async" class="px-pixelated h-10 md:h-14 w-auto" />
-                                </a>
-                            ))}
-                            {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
-                                <img src="/px-human.png" alt="" width="21" height="41" title="Has a ticket, no Cloud Card yet" class="px-pixelated h-10 md:h-14 w-auto shrink-0" />
-                            ))}
-                        </div>
+                        {/* Two ranks, always, split down the middle, like a
+                            team photo: the back row standing behind the front
+                            one. One row meant the figures had to shrink as the
+                            team grew, and at 13 they were 40px on a phone. Half
+                            as many per row buys back the size, and because the
+                            split is fixed the shape is the same on a phone and
+                            a desktop instead of wrapping at some width nobody
+                            chose. The back rank is the larger half and both are
+                            centred, so it offsets by half a figure on its own
+                            and the faces never line up in columns. */}
+                        {[
+                            roster.slice(0, Math.ceil(roster.length / 2)),
+                            roster.slice(Math.ceil(roster.length / 2)),
+                        ].map((rank, rankIndex) => (
+                            <div
+                                class:list={[
+                                    "relative z-10 flex flex-nowrap items-end justify-center gap-0.5 md:gap-1 px-4",
+                                    /* pulls the front rank up over the back one,
+                                       hiding its legs the way a row behind is */
+                                    rankIndex === 0 && "-mb-6 md:-mb-8",
+                                ]}
+                            >
+                                {rank.map((f) =>
+                                    f ? (
+                                        <a href={f.url} target="_blank" rel="noopener noreferrer" class="block shrink-0 tap-press" title={f.name} aria-label={`${f.name}'s Cloud Card`}>
+                                            <img src={f.image} alt={f.name} width="73" height="128" loading="lazy" decoding="async" class="px-pixelated h-16 md:h-20 w-auto" />
+                                        </a>
+                                    ) : (
+                                        <img src="/px-human.png" alt="" width="21" height="41" title="Has a ticket, no Cloud Card yet" class="px-pixelated h-16 md:h-20 w-auto shrink-0" />
+                                    ),
+                                )}
+                            </div>
+                        ))}
                         <div class="w-0 min-w-full">
                             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-full h-auto" />
                         </div>
                         <h3 class="px-font text-white px-shadow-ink text-center leading-relaxed mt-2 text-px10 md:text-sm">{c.name}</h3>
                     </div>
-                ))}
+                    );
+                })}
                 </div>
 
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
