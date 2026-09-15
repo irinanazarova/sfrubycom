@@ -12,9 +12,11 @@
 //
 // Layouts, all of which stack below `md`:
 // - "stack": stage above the text (the default).
-// - "side": the stage is a full-height left column; the parent supplies the
-//   grid (`md:grid md:grid-cols-[18rem_1fr]`) and the stage spans both rows so
-//   a footer under the text leaves no white under the sky. The dialog.
+// - "side": the speaker's animated share card across the top, then the text
+//   under it. The dialog a schedule slot opens. The card already carries the
+//   talk, the time and the abstract, so it is the poster and the text below it
+//   is the readable copy: at phone width the card's own type is far too small
+//   to read. A speaker with no generated card falls back to the sprite on sky.
 // - "wrap": the stage is a fixed tile floated top-left and the text flows
 //   beside it, then under it, so a long abstract widens the card rather than
 //   lengthening a sky stripe. The parent must be a plain block (no flex or
@@ -40,18 +42,40 @@ const bio = toParagraphs(s.bio);
 // tapped had the time and the card replaced it.
 const when = s.slot && `${s.slot.weekday}, ${s.slot.date} · ${s.slot.time}`;
 const cardHref = speakerCardHref(s.key);
+// 20 dialogs sit in the homepage's DOM at once, so 20 cards would be 8MB of
+// GIF on first paint. The src is withheld here and Schedule.astro fills it in
+// when the dialog opens, which is also the only moment the animation matters.
+const poster = side && cardHref;
 ---
 
+{/* The share card paints its own Keynote plate, so the dialog would show two. */}
 {
-    s.keynote && (
+    s.keynote && !poster && (
         <span class="absolute top-3 right-3 z-10 px-plate px-plate--gold px-font text-px8 px-2 py-1">
             Keynote
         </span>
     )
 }
-{/* Portrait stage. The sprite is a transparent PNG, so it needs the dithered
-    sky behind it to read at this size, and a fixed height so every card in a
-    row starts its text on the same line. */}
+{
+    poster && (
+        <div class="px-dither-sky border-b-4 border-ink aspect-[16/9] w-full">
+            <img
+                data-card-gif
+                data-src={cardHref}
+                width="1280"
+                height="720"
+                alt={`${s.name}, animated talk card`}
+                class="px-pixelated block w-full h-full"
+            />
+        </div>
+    )
+}
+
+{/* Portrait stage, for a speaker with no generated card. The sprite is a
+    transparent PNG, so it needs the dithered sky behind it to read at this
+    size, and a fixed height so every card in a row starts its text on the
+    same line. */}
+{!poster && (
 <div
     class:list={[
         "px-dither-sky h-56 flex items-end justify-center border-b-4 border-ink",
@@ -87,6 +111,7 @@ const cardHref = speakerCardHref(s.key);
         )
     }
 </div>
+)}
 
 <div class:list={["p-6", wrap ? "md:pt-7" : "flex flex-col flex-1"]}>
     {/* Grotesk, not the pixel font: Press Start 2P has no accented capitals
