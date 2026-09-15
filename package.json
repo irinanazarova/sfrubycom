@@ -8,6 +8,7 @@
     "fetch-data": "node scripts/fetch-luma-events.js && node scripts/fetch-cfp-talks.js && node scripts/fetch-attending-companies.js",
     "fetch-youtube-dates": "node scripts/fetch-youtube-dates.js",
     "lint:colors": "node scripts/check-colors.mjs",
+    "speaker-cards": "node scripts/speaker-gifs.mjs",
     "build": "npm run lint:colors && npm run fetch-data && astro build",
     "build:dev": "npm run lint:colors && astro build",
     "preview": "astro preview",
