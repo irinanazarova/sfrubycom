@@ -1148,6 +1148,42 @@ const meetupRecordings = [
       },
     ],
   },
+  {
+    id: "meetup-2026-08",
+    title: "SF Bay Area Ruby Meetup - August 2026",
+    date: "2026-08-25",
+    youtubeId: "q0BG_OK6YwE",
+    venue: "Gusto",
+    rubyEventsUrl:
+      "https://www.rubyevents.org/events/sf-bay-area-ruby-meetup",
+    talks: [
+      {
+        title:
+          "Community Announcements (Herb merged into Rails, Agents on Rails, The Pier)",
+        speaker: "Irina Nazarova",
+        company: "Evil Martians",
+        timestamp: 135,
+      },
+      {
+        title: "Gusto CoFounder: An AI That Can Run Your Small Business",
+        speaker: "Edward Kim",
+        company: "Gusto",
+        timestamp: 691,
+      },
+      {
+        title: "Legacy Rails and the AI That Couldn't",
+        speaker: "Madison Sites",
+        company: "Order.co",
+        timestamp: 3160,
+      },
+      {
+        title: "Testing Async Workflows in Rails and Sidekiq",
+        speaker: "Harsh Parekh",
+        company: "VitalSource",
+        timestamp: 5430,
+      },
+    ],
+  },
 ];
 
 // Sort by date descending (newest first)

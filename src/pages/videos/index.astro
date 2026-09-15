@@ -6,6 +6,7 @@ import { slotAssignments, scheduleSlots } from "../../data/schedule.js";
 import { getSpeaker } from "../../data/speakers.js";
 import { getAllMeetupRecordings } from "../../data/meetup-recordings.js";
 import { getAllEmVideos } from "../../data/em-videos.js";
+import { events } from "../../data/events.js";
 import youtubeDates from "../../content/youtube-dates.json";
 import talkSummaries from "../../content/talk-summaries.json";
 
@@ -43,7 +44,15 @@ function clean(desc: string, max = 240) {
 
 // Real YouTube publish dates, scraped into src/content/youtube-dates.json by
 // scripts/fetch-youtube-dates.js (run `npm run fetch-youtube-dates` to refresh).
+//
+// A video of an event is dated by the event, not by the upload. A meetup reaches
+// YouTube weeks later and the conference talks trickled out over months, so
+// publish dates labelled 10 of the 21 meetups with a month they did not happen
+// in and scattered one conference across the calendar. This is the date /meetup
+// and the Markdown twins have always shown. Publish date still dates the studio
+// interviews, where it is the only date there is.
 const pubDate = (id: string) => (youtubeDates as Record<string, string>)[id] || null;
+const CONF_DATE = events["sfruby-conf-2025"].date;
 
 // Filter categories + accent dot. Literal class strings so Tailwind keeps them.
 const CATEGORIES = [
@@ -128,8 +137,6 @@ const items: Item[] = [];
 // Conference talks (keynote/talk/panel/workshop) + startup demos.
 for (const talk of [...conferenceTalks, ...startupDemos]) {
     if (!talk.youtubeId) continue;
-    const date = pubDate(talk.youtubeId);
-    if (!date) continue;
     const sp = getTalkSpeakers(talk);
     const slug = slugForTalkType[talk.type] || "talks";
     items.push({
@@ -142,7 +149,7 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
         speaker: sp.map((s: any) => s.name).join(", "),
         org: sp[0]?.company || "",
         desc: clean(talk.description),
-        date,
+        date: CONF_DATE,
         order: 0,
     });
 }
@@ -150,8 +157,7 @@ for (const talk of [...conferenceTalks, ...startupDemos]) {
 // Meetups: substantial talks (seek to timestamp) + one "full recording" row, last.
 for (const rec of meetupRecordings) {
     if (!rec.youtubeId) continue;
-    const date = pubDate(rec.youtubeId);
-    if (!date) continue;
+    const date = rec.date;
     for (const { talk: t, bucket } of classifiedMeetupTalks(rec)) {
         const openMic = bucket === "openmic";
         items.push({
