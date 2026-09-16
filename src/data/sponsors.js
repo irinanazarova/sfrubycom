@@ -69,6 +69,13 @@ export const conference2026SponsorTiers = [
         logoHeight: 263,
         url: "https://withpersona.com/",
       },
+      {
+        name: "Avo",
+        logo: "/sponsor_avo.png",
+        logoWidth: 485,
+        logoHeight: 200,
+        url: "https://avohq.io/",
+      },
     ],
   },
   {
