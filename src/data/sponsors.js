@@ -160,6 +160,13 @@ export const conference2026SponsorTiers = [
         logoHeight: 172,
         url: "https://rebulk.com/",
       },
+      {
+        name: "Gusto",
+        logo: "/sponsor_gusto.png",
+        logoWidth: 500,
+        logoHeight: 189,
+        url: "https://gusto.com/",
+      },
     ],
   },
   {
