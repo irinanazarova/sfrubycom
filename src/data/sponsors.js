@@ -14,7 +14,7 @@
 // ============================================================
 export const conference2026SponsorTiers = [
   {
-    tier: "Ruby Tier",
+    tier: "Ruby Sponsors",
     size: "lg",
     headingClass: "text-ruby-600",
     sponsors: [
@@ -64,7 +64,7 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Ruby Passport",
+    tier: "Passport Sponsor",
     size: "lg",
     shareRow: true, // sits beside the other single-sponsor tier
     headingClass: "text-ruby-600",
@@ -79,7 +79,7 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Emerald",
+    tier: "Emerald Sponsors",
     size: "md",
     headingClass: "text-grass-500",
     sponsors: [
@@ -135,7 +135,7 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Travel Sponsor",
+    tier: "Travel Sponsors",
     size: "sm",
     headingClass: "text-gray-500",
     sponsors: [
@@ -177,7 +177,7 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Media Sponsor",
+    tier: "Media Sponsors",
     size: "xs",
     headingClass: "text-gray-500",
     sponsors: [

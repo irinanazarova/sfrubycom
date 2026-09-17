@@ -10,6 +10,24 @@
 // shows and the row never shows a broken image.
 import { companies, displayName, organizers, guests } from "../data/attending.js";
 
+// The sponsor page reuses this block but sells it differently, so the lede is
+// a prop. Left out, it keeps the homepage's line.
+interface Props {
+    // null drops the line under the heading.
+    subtitle?: string | null;
+    // null hides the plate above the heading (the sponsor page has its own
+    // framing and does not need it).
+    eyebrow?: string | null;
+    // The closing CTA sells tickets, which is the homepage's ask, not the
+    // sponsor page's.
+    cta?: boolean;
+}
+const {
+    subtitle = "This list is automated: two tickets from one company put it here, and more tickets make the island bigger.",
+    eyebrow = "Who is in the room",
+    cta = true,
+} = Astro.props;
+
 // Name and character size by head count. Four steps is enough: the point is
 // that a group of ten reads as ten and a pair as a pair.
 const sizeOf = (n) =>
@@ -42,16 +60,19 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
             <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[26%] right-[2%] w-32 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="max-w-2xl mx-auto text-center">
-                    <span class="px-plate px-font text-px8 px-3 py-1.5">
-                        Who is in the room
-                    </span>
-                    <h2 class="px-font px-shadow-ink text-lg md:text-2xl text-gold-400 mt-6">
+                    {eyebrow && (
+                        <span class="px-plate px-font text-px8 px-3 py-1.5">
+                            {eyebrow}
+                        </span>
+                    )}
+                    <h2 class={`px-font px-shadow-ink text-lg md:text-2xl text-gold-400 ${eyebrow ? "mt-6" : ""}`}>
                         Ruby companies you'll meet
                     </h2>
-                    <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
-                        This list is automated: two tickets from one company
-                        put it here, and more tickets make the island bigger.
-                    </p>
+                    {subtitle && (
+                        <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
+                            {subtitle}
+                        </p>
+                    )}
                 </div>
 
                 {/* An archipelago: every company is its characters standing
@@ -171,21 +192,23 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
                 })}
                 </div>
 
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a
-                        href="/team"
-                        class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
-                    >
-                        <img
-                            src="/px-ticket.png"
-                            alt=""
-                            width="64"
-                            height="64"
-                            class="px-pixelated h-5 w-auto"
-                        />
-                        Put your company here
-                    </a>
-                </div>
+                {cta && (
+                    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a
+                            href="/team"
+                            class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                        >
+                            <img
+                                src="/px-ticket.png"
+                                alt=""
+                                width="64"
+                                height="64"
+                                class="px-pixelated h-5 w-auto"
+                            />
+                            Put your company here
+                        </a>
+                    </div>
+                )}
             </div>
         </section>
     )

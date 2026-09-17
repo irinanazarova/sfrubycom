@@ -428,8 +428,6 @@ export function sponsorMarkdown() {
   const room = attendingNames.length
     ? `## Who is in the room
 
-Companies with two or more ticket holders so far, organizers and volunteers included.
-
 ${attendingNames.join(" · ")}
 
 `
@@ -437,27 +435,27 @@ ${attendingNames.join(" · ")}
 
   return `# Sponsor the San Francisco Ruby Conference 2026
 
-> Three days in a room of engineers who read and write Ruby, from the startups building on it and the household names running it at scale, plus a monthly meetup the rest of the year. Nov 10-12, 2026 at SFJAZZ.
-
-## 2026 in numbers
-
-${stats}
-
-${room}## Why sponsor
-
-${why}
+> Get in front of 450 Ruby engineers and founders at SFJAZZ on Nov 10-11.
 
 ## 2026 sponsorship tiers
 
 ${tiers}
 
+## Why sponsor
+
+${why}
+
+## 2026 in numbers
+
+${stats}
+
 ## 2026 sponsors so far
 
 ${sponsorsSection()}
 
-Year one had ${Object.keys(sponsors2025).length} sponsors, Chime, Bolt.new, Cisco, Gusto and Temporal among them: ${SITE}/sponsors-2025.
+SF Ruby 2025 was sold out. ${Object.keys(sponsors2025).length} sponsors including Chime, bolt.new, Cisco, Gusto and Temporal made it possible: ${SITE}/sponsors-2025.
 
-## Contact
+${room}## Contact
 
 Questions, or a custom package: ${SPONSOR_CONTACT.email}. The conference program, speakers and venue: ${SITE}/index.md.
 `;
