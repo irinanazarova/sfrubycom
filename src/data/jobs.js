@@ -39,7 +39,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$190K - $240K + equity",
     description:
-      "Persona is hiring a senior engineer for Online Data Stores, the infrastructure team that builds and evolves the data storage behind the whole application stack, owning scalability, reliability, and performance of those core systems and setting storage best practices for other engineering teams. Rails alongside Go and Python. Persona builds the identity layer for the internet and sponsors the Ruby Passport Booth at SF Ruby 2026.",
+      "Persona is hiring a senior engineer for Online Data Stores, the infrastructure team that builds and evolves the data storage behind the whole application stack, owning scalability, reliability, and performance of those core systems and setting storage best practices for other engineering teams. Rails alongside Go and Python. Persona builds the identity layer for the internet and is a Ruby tier sponsor of SF Ruby 2026.",
     chips: ["Infra", "Platform", "PostgreSQL", "Go"],
     url: "https://jobs.ashbyhq.com/persona/4dcc5ffd-2f9c-4f15-8865-a0629fff6b70",
     postedDate: "2026-09-06",
