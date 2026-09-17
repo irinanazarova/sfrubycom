@@ -16,9 +16,22 @@ interface Props {
     email: string;
     subject?: string;
     title?: string;
+    // The line above the address. null drops it, for a title that already
+    // says what the email is for ("Email us about sponsoring").
+    lede?: string | null;
+    // Whether to print the subject under the address. It is prefilled in the
+    // mailto either way.
+    showSubject?: boolean;
 }
 
-const { id, email, subject = "", title = "Get in touch" } = Astro.props;
+const {
+    id,
+    email,
+    subject = "",
+    title = "Get in touch",
+    lede = "Send us an email at:",
+    showSubject = true,
+} = Astro.props;
 ---
 
 <dialog
@@ -39,7 +52,7 @@ const { id, email, subject = "", title = "Get in touch" } = Astro.props;
                 </button>
             </div>
 
-            <p class="text-gray-600 mb-4">Send us an email at:</p>
+            {lede && <p class="text-gray-600 mb-4">{lede}</p>}
 
             <div class="flex items-center gap-2 p-3 bg-gray-50 border-2 border-ink">
                 <span class="flex-1 font-mono text-gray-900 select-all">{email}</span>
@@ -57,7 +70,7 @@ const { id, email, subject = "", title = "Get in touch" } = Astro.props;
                 </button>
             </div>
 
-            {subject && (
+            {showSubject && subject && (
                 <p class="mt-3 text-sm text-gray-500">
                     Subject: <span class="text-gray-700">{subject}</span>
                 </p>
