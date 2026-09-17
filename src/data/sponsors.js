@@ -39,6 +39,13 @@ export const conference2026SponsorTiers = [
         logoHeight: 310,
         url: "https://fin.ai/",
       },
+      {
+        name: "Persona",
+        logo: "/sponsor_persona.png",
+        logoWidth: 1000,
+        logoHeight: 263,
+        url: "https://withpersona.com/",
+      },
     ],
   },
   {
@@ -62,13 +69,6 @@ export const conference2026SponsorTiers = [
     shareRow: true, // sits beside the other single-sponsor tier
     headingClass: "text-ruby-600",
     sponsors: [
-      {
-        name: "Persona",
-        logo: "/sponsor_persona.png",
-        logoWidth: 1000,
-        logoHeight: 263,
-        url: "https://withpersona.com/",
-      },
       {
         name: "Avo",
         logo: "/sponsor_avo.png",
