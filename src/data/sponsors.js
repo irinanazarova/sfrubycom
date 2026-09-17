@@ -188,6 +188,13 @@ export const conference2026SponsorTiers = [
         logoHeight: 172,
         url: "https://devitjobs.com/jobs/Ruby/all/all",
       },
+      {
+        name: "Speedshop",
+        logo: "/sponsor_info_speedshop.png",
+        logoWidth: 1042,
+        logoHeight: 172,
+        url: "https://www.speedshop.co/",
+      },
     ],
   },
 ];
