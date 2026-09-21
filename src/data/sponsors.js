@@ -46,6 +46,13 @@ export const conference2026SponsorTiers = [
         logoHeight: 263,
         url: "https://withpersona.com/",
       },
+      {
+        name: "Laravel",
+        logo: "/sponsor_laravel.svg",
+        logoWidth: 1280,
+        logoHeight: 314,
+        url: "https://laravel.com/",
+      },
     ],
   },
   {
