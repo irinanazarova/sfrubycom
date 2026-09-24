@@ -52,7 +52,19 @@ export const conference2026SponsorTiers = [
         logoWidth: 1974,
         logoHeight: 203,
         wideLockup: true, // long mark+wordmark: capped by width, not height
-        url: "https://laravel.com/",
+        url: "https://laravel.com/cloud",
+      },
+      {
+        // sponsor_superconductor.png is their pre-rebrand wordmark and stays
+        // with the 2025 archive. They publish only a dark-background wordmark,
+        // so this is it with the white ink swapped for their own dark surface
+        // colour, which is what makes it read on a white card.
+        name: "Superconductor",
+        logo: "/sponsor_superconductor.svg",
+        logoWidth: 727,
+        logoHeight: 102,
+        wideLockup: true, // 7.1:1, same trade as Laravel Cloud above
+        url: "https://www.superconductor.com/",
       },
     ],
   },
