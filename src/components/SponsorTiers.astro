@@ -4,6 +4,12 @@ import { conference2026SponsorTiers } from "../data/sponsors.js";
 // Logo cards scale with the tier, so the row a sponsor lands in reads as the
 // thing they paid for. Sizes come from `size` on each tier in data/sponsors.js.
 // Class strings are spelled out in full so Tailwind's scanner sees them.
+// A very wide lockup (mark + two words on one line) comes out twice the width of
+// a one-word logo at the same height, and dwarfs its own tier. `wideLockup` on a
+// sponsor caps that one logo's width instead; it then sits shorter than its row,
+// which is the trade for a row that reads evenly. The class lives here, not in
+// the data file, because the scanner only sees what is spelled out in a template.
+const WIDE_LOCKUP = "max-w-[16rem]";
 // Padding is what decides where a tier stops wrapping, so it stays lean and the
 // logo height carries the hierarchy. At these sizes each tier holds one row from
 // 820px on the homepage and 900px on /sponsor-2026, and stacks below that.
@@ -87,7 +93,7 @@ const groups = conference2026SponsorTiers.reduce((acc, tier) => {
                                 <img
                                     src={sponsor.logo}
                                     alt={sponsor.name}
-                                    class={`${size.logo} w-auto max-w-full object-contain`}
+                                    class={`${size.logo} w-auto object-contain ${sponsor.wideLockup ? WIDE_LOCKUP : "max-w-full"}`}
                                     width={sponsor.logoWidth}
                                     height={sponsor.logoHeight}
                                     loading="lazy"

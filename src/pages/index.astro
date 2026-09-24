@@ -423,7 +423,9 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                         {/* Every ticker img needs intrinsic width/height and eager
                                             loading: a late-loading or 0-width image changes the
                                             group's width mid-animation, and Safari glitches when
-                                            the translateX(-100%) distance is re-resolved. */}
+                                            the translateX(-100%) distance is re-resolved.
+                                            A wideLockup sponsor is capped by width here too, or it
+                                            runs about twice as long as every other logo. */}
                                         {tickerSponsors.map((sponsor) =>
                                             clone ? (
                                                 <img
@@ -431,7 +433,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                     alt=""
                                                     width={sponsor.logoWidth}
                                                     height={sponsor.logoHeight}
-                                                    class="h-6 md:h-7 w-auto shrink-0 brightness-0 invert"
+                                                    class={`h-6 md:h-7 w-auto shrink-0 object-contain brightness-0 invert ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
                                                     loading="eager"
                                                 />
                                             ) : (
@@ -446,7 +448,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                         alt={sponsor.name}
                                                         width={sponsor.logoWidth}
                                                         height={sponsor.logoHeight}
-                                                        class="h-6 md:h-7 w-auto brightness-0 invert"
+                                                        class={`h-6 md:h-7 w-auto object-contain brightness-0 invert ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
                                                         loading="eager"
                                                     />
                                                 </a>
