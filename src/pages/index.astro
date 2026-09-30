@@ -140,7 +140,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                 <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-24 left-[6%] w-48 md:w-72 animate-float pointer-events-none" aria-hidden="true" />
                 <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-40 right-[8%] w-32 md:w-48 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
                 <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-16 left-[44%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden md:block" aria-hidden="true" />
-                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute bottom-52 right-[2%] w-40 md:w-64 animate-float [animation-delay:-6s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute bottom-24 right-[2%] w-40 md:w-64 animate-float [animation-delay:-6s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-60 left-[1%] w-28 md:w-40 animate-float [animation-delay:-4s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-44 left-[3%] w-56 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[30%] right-[3%] w-36 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
@@ -232,7 +232,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                 <span class="flex flex-col gap-1.5">
                                     <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Get your ticket</span>
                                     <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
-                                        <span class="whitespace-nowrap">$450 &#183; until {regularCloses}<span id="days-left"></span></span>
+                                        <span id="regular-price" class="whitespace-nowrap">$450 &#183; until {regularCloses}<span id="days-left"></span></span>
                                         <span class="whitespace-nowrap">One day: $350</span>
                                     </span>
                                 </span>
@@ -257,14 +257,18 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                             </a>
                         </div>
                     </div>
-                    <script define:vars={{ closesOn: regularTier.closesOn }}>
+                    <script define:vars={{ closesOn: regularTier.closesOn, nextPrice: regularTier.nextPrice }}>
                         // Countdown next to the deadline, computed on the client so
                         // the static build never goes stale. Absent if JS fails.
+                        // The daily build runs at 6 am PT, so between midnight and
+                        // then the page still carries the closed price: swap it here.
+                        const line = document.getElementById("regular-price");
                         const el = document.getElementById("days-left");
-                        const days = Math.ceil(
-                            (new Date(closesOn).getTime() - Date.now()) / 86400000,
-                        );
-                        if (el && days > 0 && days < 120)
+                        const left = new Date(closesOn).getTime() - Date.now();
+                        const days = Math.ceil(left / 86400000);
+                        if (left <= 0 && line) line.textContent = `$${nextPrice}`;
+                        else if (left < 86400000 && line) line.textContent = "$450 · last day";
+                        else if (el && days > 0 && days < 120)
                             el.textContent = ` (${days}d)`;
                     </script>
                     <script>

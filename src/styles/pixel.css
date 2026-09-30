@@ -410,13 +410,22 @@
    .px-coinslot__slot. The well clips the coin above and below, so the coin
    appears from above and vanishes "into" the slot. */
 @keyframes px-coin-drop {
+    /* Resting in view most of the loop, so the idle frame reads as a coin
+       over a slot rather than a lone black bar. Drops, then the next coin
+       falls in from above. */
     0%,
-    12% {
+    60% {
+        transform: translateY(10%);
+    }
+    75% {
+        transform: translateY(140%);
+    }
+    76% {
         transform: translateY(-130%);
     }
-    62%,
+    92%,
     100% {
-        transform: translateY(140%);
+        transform: translateY(10%);
     }
 }
 .px-coinslot {
@@ -433,9 +442,10 @@
     justify-content: center;
 }
 .px-coinslot__coin {
-    width: 1.75rem;
-    height: 1.75rem;
-    animation: px-coin-drop 2s cubic-bezier(0.4, 0, 1, 1) infinite;
+    /* 2x the 12px sprite: a fractional scale smears its pixels */
+    width: 1.5rem;
+    height: 1.5rem;
+    animation: px-coin-drop 2.4s cubic-bezier(0.4, 0, 1, 1) infinite;
 }
 .px-coinslot__slot {
     width: 2.75rem;

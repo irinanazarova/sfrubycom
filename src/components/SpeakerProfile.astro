@@ -130,18 +130,21 @@ const poster = side && cardHref;
 
     {
         when && (
-            <p class="px-font text-px8 text-ruby-600 mt-5">{when}</p>
+            <p class:list={["px-font text-px8 text-ruby-600 mt-5", poster && "lg:sr-only"]}>{when}</p>
         )
     }
 
     {/* always in the DOM (hidden when empty) so the client refresh has a node
-        to fill when a title or abstract lands */}
+        to fill when a title or abstract lands. Beside a share card the three
+        lines repeat what the card prints, and from lg up the card is legible,
+        so they stay for screen readers only. */}
     <p
         data-talk-title
         hidden={!title}
         class:list={[
             "font-display font-semibold text-base text-gray-900 leading-snug",
             when ? "mt-2" : "mt-5",
+            poster && "lg:sr-only",
         ]}
     >
         {title && `“${title}”`}
@@ -149,7 +152,7 @@ const poster = side && cardHref;
     <div
         data-talk-abstract
         hidden={abstract.length === 0}
-        class="text-sm text-gray-700 leading-relaxed"
+        class:list={["text-sm text-gray-700 leading-relaxed", poster && "lg:sr-only"]}
     >
         {abstract.map((parts) => (
             <p class="mt-3">
