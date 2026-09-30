@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-29T17:40:20.283Z",
+  "fetchedAt": "2026-09-30T06:55:56.954Z",
   "minAttendees": 2,
   "companies": [
     {
@@ -74,6 +74,43 @@
       ]
     },
     {
+      "name": "Hack Club",
+      "count": 4,
+      "characters": [
+        {
+          "name": "Gary Tou",
+          "url": "https://clouds.sfruby.com/e/2026-bits/gary-tou",
+          "image": "/attending/gary-tou.webp"
+        },
+        {
+          "name": "Luke Oldenburg",
+          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
+          "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
+        },
+        {
+          "name": "Mohamad Mortada",
+          "url": "https://clouds.sfruby.com/e/2026-bits/mohamad-mortada",
+          "image": "/attending/mohamad-mortada.webp"
+        }
+      ]
+    },
+    {
+      "name": "Cisco",
+      "count": 4,
+      "characters": [
+        {
+          "name": "Cameron Dutro",
+          "url": "https://clouds.sfruby.com/e/2026-bits/cameron-dutro",
+          "image": "/attending/cameron-dutro.webp"
+        },
+        {
+          "name": "Fito Von Zastrow",
+          "url": "https://clouds.sfruby.com/e/2026-bits/fito-von-zastrow",
+          "image": "/attending/fito-von-zastrow.webp"
+        }
+      ]
+    },
+    {
       "name": "Laravel",
       "count": 4,
       "characters": [
@@ -123,33 +160,6 @@
           "name": "Todd Sedano",
           "url": "https://clouds.sfruby.com/e/2026-bits/todd-sedano",
           "image": "/attending/todd-sedano.webp"
-        }
-      ]
-    },
-    {
-      "name": "Hack Club",
-      "count": 3,
-      "characters": [
-        {
-          "name": "Gary Tou",
-          "url": "https://clouds.sfruby.com/e/2026-bits/gary-tou",
-          "image": "/attending/gary-tou.webp"
-        },
-        {
-          "name": "Luke Oldenburg",
-          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
-          "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
-        }
-      ]
-    },
-    {
-      "name": "Cisco",
-      "count": 3,
-      "characters": [
-        {
-          "name": "Cameron Dutro",
-          "url": "https://clouds.sfruby.com/e/2026-bits/cameron-dutro",
-          "image": "/attending/cameron-dutro.webp"
         }
       ]
     },

@@ -70,16 +70,23 @@ const NOT_A_COMPANY = new Set([
   "retired", "personal", "me", "myself", "working on my startup", "-", ".",
 ]);
 
+// Divisions and brands the suffix stripper cannot merge on its own: an answer
+// whose key is on the left counts toward the company on the right. Keep it to
+// cases where the two names are the same employer.
+const COMPANY_ALIASES = new Map([["cisco meraki", "cisco"]]);
+
 // "Cisco, Inc." and "cisco" are one company. The key drops case, punctuation
 // and corporate suffixes; the display name is the most common raw spelling.
-const companyKey = (raw) =>
-  raw
+const companyKey = (raw) => {
+  const key = raw
     .toLowerCase()
     .replace(/\(.*?\)/g, " ")
     .replace(/[.,'"&]/g, " ")
     .replace(/\b(inc|llc|ltd|corp|corporation|co|company|io|com|ai)\b/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  return COMPANY_ALIASES.get(key) ?? key;
+};
 
 const nameKey = (raw) =>
   (raw || "")
