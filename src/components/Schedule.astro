@@ -44,6 +44,11 @@ const plateClass = (audience) =>
 const audienceLabel = (audience) => AUDIENCES[audience]?.label ?? "";
 const breakLabel = { break: "Break", lunch: "Lunch" };
 
+// Absolute times for the "now on stage" state. The conference is in
+// November, after the DST switch, so Pacific is -08:00 on every day.
+const PT_OFFSET = "-08:00";
+const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
+
 ---
 
 <section id="schedule" class="py-20 md:py-24 lg:pt-12 bg-sky-50 border-t-4 border-ink">
@@ -60,14 +65,21 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                 <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 mx-1">Big teams</span>
                 are in a conversation group, then they swap.
             </p>
-            {/* One row on phones too: "Day 1 · Nov 10" three times is wider
-                than 390px, so there the date stacks under the day. */}
-            <nav class="mt-8 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3" aria-label="Days">
+        </div>
+        {/* The day tabs switch the day shown (one day at a time halves the
+            section on a phone) and stay pinned under the header while the
+            schedule scrolls, so a reader deep in Day 2 still knows it is
+            Day 2. Without JS every day renders and the tabs are anchors.
+            One row on phones too: "Day 1 · Nov 10" three times is wider than
+            390px, so there the date stacks under the day. */}
+        <div class="sticky top-[5.25rem] z-20 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mt-8 py-3 bg-sky-50">
+            <nav class="max-w-2xl mx-auto grid grid-cols-3 gap-2 sm:flex sm:justify-center sm:gap-3" aria-label="Days" data-day-tabs>
                 {
                     days.map((d) => (
                         <a
                             href={`#day${d.n}`}
-                            class="px-btn px-btn--white px-font text-px8 md:text-px9 px-2 sm:px-4 py-3 tap-press text-center flex-col sm:flex-row"
+                            data-day-tab={d.n}
+                            class="day-tab px-btn px-btn--white px-font text-px8 md:text-px9 px-2 sm:px-4 py-2 sm:py-3 !gap-1.5 sm:!gap-2.5 tap-press text-center flex-col sm:flex-row"
                         >
                             <span class="block sm:inline">Day {d.n}</span><span class="hidden sm:inline">·</span><span class="block sm:inline">{formatDay(d)}</span>
                         </a>
@@ -78,9 +90,9 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
 
     {
         days.map((d) => (
-            <div id={`day${d.n}`} class="mt-14 scroll-mt-28">
+            <div id={`day${d.n}`} data-day={d.n} data-date={d.date} class="schedule-day mt-10 scroll-mt-[11.5rem]">
                 <div>
-                    <p class="px-font text-px8 md:text-px9 text-ruby-600">
+                    <p class="px-font text-px9 md:text-px10 text-ruby-600">
                         Day {d.n} · {d.weekday}, {formatDay(d)}
                     </p>
                     <h3 class="px-font text-base md:text-xl text-gray-900 mt-4">
@@ -106,20 +118,22 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                         <ol class="mt-10 flex flex-col gap-4 list-none p-0">
                             {d.blocks.map((b) =>
                                 b.kind === "break" || b.kind === "lunch" ? (
-                                    <li class="flex items-baseline gap-4 px-1 text-sm text-gray-500">
+                                    <li class="flex items-baseline gap-4 px-1 text-sm text-gray-500" data-start={at(d, b.start)} data-end={at(d, b.end)}>
                                         <span class="font-mono shrink-0 w-32">
                                             {formatTime(b.start)}
                                         </span>
-                                        <span class="px-font text-px8">
+                                        <span class="px-font text-px9">
                                             {breakLabel[b.kind]}
                                         </span>
                                     </li>
                                 ) : (
                                     <li
                                         class:list={[
-                                            "px-card bg-white",
+                                            "schedule-block px-card bg-white",
                                             b.group && "grid md:grid-cols-[1fr_16rem]",
                                         ]}
+                                        data-start={at(d, b.start)}
+                                        data-end={at(d, b.end)}
                                     >
                                         <div class="p-5 md:p-6">
                                             <div class="flex flex-wrap items-center gap-3">
@@ -129,15 +143,44 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                                                 <span class={`px-plate ${plateClass(b.audience)} px-font text-px8 px-2 py-1`}>
                                                     {b.kind === "keynote" ? "Keynote · Everyone" : audienceLabel(b.audience)}
                                                 </span>
+                                                <span class="live-plate px-plate px-plate--ruby px-font text-px8 px-2 py-1" hidden>
+                                                    <span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>On stage now
+                                                </span>
                                             </div>
                                             <ul class="mt-5 flex flex-col gap-5 list-none p-0">
-                                                {b.sessions.map((s) => {
+                                                {b.sessions.map((s, i) => {
                                                     const profile = s.tba ? null : profileFor(s.speaker);
                                                     const title = profile?.title || s.title;
+                                                    const start = s.start ?? b.start;
+                                                    const end = b.sessions[i + 1]?.start ?? b.end;
                                                     return (
-                                                        <li class="flex gap-4">
+                                                        <li class="session flex gap-3 sm:gap-4" data-start={at(d, start)} data-end={at(d, end)}>
+                                                            {/* On phones the time goes above the title: a time
+                                                                column beside the sprite starved the title to
+                                                                200px and wrapped it five lines deep. */}
                                                             {s.start && (
-                                                                <span class="font-mono text-xs text-gray-400 shrink-0 w-16 pt-1">
+                                                                <span class="hidden sm:block font-mono text-xs text-gray-500 shrink-0 w-16 pt-1">
+                                                                    {formatTime(s.start)}
+                                                                </span>
+                                                            )}
+                                                            {/* The speaker's sprite, the same one they have in the
+                                                                hero's fighter grid (already cached by the time the
+                                                                schedule scrolls into view). Sized by height, since
+                                                                sprites share a height but not a width. */}
+                                                            {profile?.pixel && (
+                                                                <button
+                                                                    type="button"
+                                                                    class="shrink-0 w-10 sm:w-12 -mt-1 tap-press"
+                                                                    data-speaker-dialog={profile.key}
+                                                                    aria-hidden="true"
+                                                                    tabindex="-1"
+                                                                >
+                                                                    <img src={profile.pixel} alt="" width="256" height="256" loading="lazy" decoding="async" class="px-pixelated block h-10 sm:h-12 w-auto mx-auto" />
+                                                                </button>
+                                                            )}
+                                                            <div class="min-w-0">
+                                                            {s.start && (
+                                                                <span class="sm:hidden block font-mono text-xs text-gray-500 mb-1">
                                                                     {formatTime(s.start)}
                                                                 </span>
                                                             )}
@@ -167,6 +210,7 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                                                                     <p class="text-sm text-gray-600 mt-1.5"><span class="font-medium text-gray-900">{s.speaker}</span>, {s.org}</p>
                                                                 </div>
                                                             )}
+                                                            </div>
                                                         </li>
                                                     );
                                                 })}
@@ -174,7 +218,7 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                                         </div>
                                         {b.group && (
                                             <aside class="p-5 md:p-6 bg-sky-50 border-t-4 md:border-t-0 md:border-l-4 border-ink">
-                                                <p class="px-font text-px8 text-gray-500">Meanwhile</p>
+                                                <p class="px-font text-px9 text-gray-500">Meanwhile</p>
                                                 <span class={`px-plate ${plateClass(b.group.audience)} px-font text-px8 px-2 py-1 mt-3 inline-block`}>
                                                     {audienceLabel(b.group.audience)}
                                                 </span>
@@ -195,6 +239,17 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                                 ),
                             )}
                         </ol>
+                    )}
+                    {days[d.n] && (
+                        <div class="mt-8 flex justify-center">
+                            <a
+                                href={`#day${days[d.n].n}`}
+                                data-day-next={days[d.n].n}
+                                class="px-btn px-btn--white px-font text-px9 px-5 py-3.5 tap-press"
+                            >
+                                Day {days[d.n].n} · {days[d.n].theme} &rarr;
+                            </a>
+                        </div>
                     )}
                 </div>
             </div>
@@ -326,6 +381,27 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
     body:has(.speaker-dialog[open]) {
         overflow: hidden;
     }
+
+    /* One day at a time once the script runs; without it every day shows. */
+    .js-days .schedule-day:not(.is-active) {
+        display: none;
+    }
+    .day-tab.is-active {
+        background: var(--px-gold);
+    }
+
+    /* On the conference days: the block on stage now, and what is over. */
+    .schedule-block.is-live {
+        border-color: var(--px-ruby);
+        box-shadow: 6px 6px 0 0 var(--px-ruby-dark);
+    }
+    .session.is-live {
+        background: var(--ruby-50);
+        outline: 0.5rem solid var(--ruby-50);
+    }
+    .is-past {
+        opacity: 0.55;
+    }
 </style>
 
 <script>
@@ -384,4 +460,73 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
 
     const initial = new URLSearchParams(location.search).get(PARAM);
     if (initial) open(initial);
+
+    // Days: the tabs show one day at a time and stay pinned while the
+    // schedule scrolls. #day2 selects a day, and so does ?speaker=<key>
+    // (the day of that speaker's slot), and on the conference days the
+    // current day opens by itself.
+    const section = document.getElementById("schedule");
+    const dayEls = [...document.querySelectorAll<HTMLElement>(".schedule-day")];
+    const tabs = [...document.querySelectorAll<HTMLAnchorElement>("[data-day-tab]")];
+
+    function showDay(n: number, scroll = false) {
+        const day = dayEls.find((el) => el.dataset.day === String(n));
+        if (!day) return;
+        for (const el of dayEls) el.classList.toggle("is-active", el === day);
+        for (const t of tabs) {
+            const on = t.dataset.dayTab === String(n);
+            t.classList.toggle("is-active", on);
+            if (on) t.setAttribute("aria-current", "true");
+            else t.removeAttribute("aria-current");
+        }
+        if (scroll) {
+            day.scrollIntoView({ block: "start", behavior: "smooth" });
+            history.replaceState(history.state, "", `${location.pathname}${location.search}#day${n}`);
+        }
+    }
+
+    // "Now" for the live state. ?now=2026-11-10T10:40-08:00 previews it.
+    const nowOverride = new URLSearchParams(location.search).get("now");
+    const now = () => (nowOverride ? new Date(nowOverride).getTime() : Date.now());
+    const ptDate = (t: number) =>
+        new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles" }).format(t);
+
+    function markLive() {
+        const t = now();
+        for (const el of section?.querySelectorAll<HTMLElement>("[data-start][data-end]") ?? []) {
+            const start = Date.parse(el.dataset.start!);
+            const end = Date.parse(el.dataset.end!);
+            el.classList.toggle("is-live", t >= start && t < end);
+            // a block's sessions dim on their own; the block dims when it is over
+            if (!el.classList.contains("session")) el.classList.toggle("is-past", t >= end);
+        }
+        for (const plate of section?.querySelectorAll<HTMLElement>(".live-plate") ?? [])
+            plate.hidden = !plate.closest(".schedule-block")?.classList.contains("is-live");
+    }
+
+    if (section && dayEls.length) {
+        section.classList.add("js-days");
+        const fromHash = location.hash.match(/^#day(\d+)$/)?.[1];
+        const fromSpeaker = initial
+            ? document.querySelector(`[data-speaker-dialog="${CSS.escape(initial)}"]`)
+                  ?.closest<HTMLElement>(".schedule-day")?.dataset.day
+            : undefined;
+        const today = dayEls.find((el) => el.dataset.date === ptDate(now()))?.dataset.day;
+        showDay(Number(fromHash ?? fromSpeaker ?? today ?? 1));
+
+        const pick = (e: Event) => {
+            const a = (e.target as Element).closest<HTMLAnchorElement>("[data-day-tab], [data-day-next]");
+            if (!a) return;
+            e.preventDefault();
+            showDay(Number(a.dataset.dayTab ?? a.dataset.dayNext), true);
+        };
+        section.addEventListener("click", pick);
+        addEventListener("hashchange", () => {
+            const n = location.hash.match(/^#day(\d+)$/)?.[1];
+            if (n) showDay(Number(n), true);
+        });
+
+        markLive();
+        setInterval(markLive, 60_000);
+    }
 </script>

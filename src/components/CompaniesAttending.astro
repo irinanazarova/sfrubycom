@@ -87,15 +87,17 @@ const arranged = guests.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]
                     companies buying tickets. Sorted by size, then dealt to alternating
                     ends so the biggest island floats mid-sky. */}
                 <div class="mt-12 lg:grid lg:grid-cols-[1fr_auto] lg:items-center lg:gap-x-10">
-                <ul class="flex flex-wrap justify-center items-end gap-x-6 gap-y-8 md:gap-x-10 md:gap-y-10 list-none p-0 m-0">
+                {/* Three islands a row on phones (two made the cloud 2.3 screens long):
+                    a narrower minimum and tighter gaps below sm. */}
+                <ul class="flex flex-wrap justify-center items-end gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-8 md:gap-x-10 md:gap-y-10 list-none p-0 m-0">
                     {arranged.map((c, i) => {
                         const size = sizeOf(c.count);
                         return (
                             <li
-                                class="flex flex-col items-center animate-float min-w-[8rem]"
+                                class="flex flex-col items-center animate-float min-w-[6.5rem] sm:min-w-[8rem]"
                                 style={`animation-delay: ${-((i * 1.3) % 6).toFixed(1)}s`}
                             >
-                                <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[24rem] px-4 -mb-1.5">
+                                <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[24rem] px-2 sm:px-4 -mb-1.5">
                                     {c.characters.map((p) => (
                                         <a
                                             href={p.url}

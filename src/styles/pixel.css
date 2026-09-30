@@ -209,6 +209,10 @@
     background: var(--px-orange);
     color: var(--px-cloud);
 }
+.px-plate--ruby {
+    background: var(--px-ruby);
+    color: var(--px-cloud);
+}
 /* diagonal "SOLD OUT" stamp, slapped over the early-bird sign the dragon holds.
    Put it inside a position:relative wrapper around the image and set top/left. */
 .px-sold-stamp {
@@ -601,5 +605,41 @@
     .px-btn:hover,
     .px-btn:active {
         transform: none;
+    }
+}
+
+/* ---------- easter egg ---------- */
+
+/* The Konami code (or five taps on the hero logo) sends every character on
+   the page jumping. `translate`, not `transform`, so it stacks on top of the
+   bob and float animations the sprites already run. */
+@keyframes px-jump {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -45%;
+    }
+}
+.px-konami
+    :is(
+        img[src$="_pixel_256.png"],
+        img[src^="/attending/"],
+        img[src="/px-human.png"]
+    ) {
+    animation: px-jump 0.5s steps(4) 3 var(--px-jump-delay, 0s);
+}
+.px-konami-toast {
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    z-index: 60;
+    translate: -50% 0;
+    pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    .px-konami :is(img) {
+        animation: none;
     }
 }
