@@ -73,18 +73,24 @@ const NOT_A_COMPANY = new Set([
 // Divisions and brands the suffix stripper cannot merge on its own: an answer
 // whose key is on the left counts toward the company on the right. Keep it to
 // cases where the two names are the same employer.
-const COMPANY_ALIASES = new Map([["cisco meraki", "cisco"]]);
+const COMPANY_ALIASES = new Map([
+  ["cisco meraki", "cisco"],
+  ["tern travel", "tern"],
+]);
 
 // "Cisco, Inc." and "cisco" are one company. The key drops case, punctuation
 // and corporate suffixes; the display name is the most common raw spelling.
-const companyKey = (raw) => {
-  const key = raw
+const normalizeCompany = (raw) =>
+  raw
     .toLowerCase()
     .replace(/\(.*?\)/g, " ")
     .replace(/[.,'"&]/g, " ")
     .replace(/\b(inc|llc|ltd|corp|corporation|co|company|io|com|ai)\b/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+
+const companyKey = (raw) => {
+  const key = normalizeCompany(raw);
   return COMPANY_ALIASES.get(key) ?? key;
 };
 
@@ -217,7 +223,15 @@ try {
       add(byName.get(p) ?? (await probeCharacter(c.names.get(p))));
     }
     for (const ch of byCompany.get(c.key) ?? []) add(ch);
-    const name = [...c.spellings.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    // The most common raw spelling. Among equals, the one that is already the
+    // company's own key, so an alias does not put the division's name on the
+    // island: "Tern" over "Tern Travel" when each was typed once.
+    const name = [...c.spellings.entries()].sort(
+      (a, b) =>
+        b[1] - a[1] ||
+        (normalizeCompany(b[0]) === c.key) - (normalizeCompany(a[0]) === c.key) ||
+        a[0].localeCompare(b[0]),
+    )[0][0];
     // Someone who typed this company on their card but a different one on
     // Luma still counts as in the room, so the count never reads below the
     // row of characters under it.

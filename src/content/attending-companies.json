@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-30T06:55:56.954Z",
+  "fetchedAt": "2026-09-30T14:13:15.903Z",
   "minAttendees": 2,
   "companies": [
     {
@@ -75,7 +75,7 @@
     },
     {
       "name": "Hack Club",
-      "count": 4,
+      "count": 5,
       "characters": [
         {
           "name": "Gary Tou",
@@ -283,6 +283,22 @@
           "name": "Peter Zhu",
           "url": "https://clouds.sfruby.com/e/2026-bits/peter-zhu",
           "image": "/attending/peter-zhu.webp"
+        }
+      ]
+    },
+    {
+      "name": "Tern",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Brian Reath",
+          "url": "https://clouds.sfruby.com/e/2026-bits/brian-reath",
+          "image": "/attending/brian-reath.webp"
+        },
+        {
+          "name": "Spencer Miskoviak",
+          "url": "https://clouds.sfruby.com/e/2026-bits/spencer-miskoviak",
+          "image": "/attending/spencer-miskoviak.webp"
         }
       ]
     },
