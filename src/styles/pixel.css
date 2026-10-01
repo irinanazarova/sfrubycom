@@ -79,6 +79,26 @@
     background-repeat: repeat-x;
     image-rendering: pixelated;
 }
+.px-sky-grad-sunset {
+    background-color: var(--ruby-800);
+    background-image: url("/px-sky-sunset.png");
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    image-rendering: pixelated;
+}
+/* The city at dusk, along the top of the footer on every page: evening sky
+   (the bottom of px-sky-grad-dusk) with the skyline tile at 2x, standing on
+   the night navy that .px-night starts from, so the buildings run straight
+   into the footer without a seam. */
+.px-skyline-band {
+    height: 80px;
+    background-color: var(--sky-700);
+    background-image: url("/px-skyline.png");
+    background-size: 384px 80px;
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    image-rendering: pixelated;
+}
 .px-royal-grad {
     background-color: oklch(35.53% 0.1751 262.77);
     background-image: url("/px-royal.png");

@@ -627,31 +627,36 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
             <Crew />
 
             <!-- The community behind the conference -->
-            <section id="community" class="py-16 bg-white">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="px-font text-base md:text-lg text-gray-900 mb-4">
+            <section id="community" class="relative overflow-hidden py-16 px-sky-grad-dusk text-white">
+                {/* evening: the first stars over the strip, the city below it in the footer */}
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-3 top-[18%] left-[12%]" style="--px-twinkle-delay: 0s" aria-hidden="true" />
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2 top-[30%] right-[18%]" style="--px-twinkle-delay: -0.9s" aria-hidden="true" />
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2.5 top-[64%] left-[26%] hidden md:block" style="--px-twinkle-delay: -1.6s" aria-hidden="true" />
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2 top-[70%] right-[9%]" style="--px-twinkle-delay: -0.4s" aria-hidden="true" />
+                <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="px-font px-shadow-ink text-base md:text-lg text-white mb-4">
                         SF Ruby, All Year Round
                     </h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                    <p class="text-white/90 px-shadow-ink-sm max-w-2xl mx-auto mb-8">
                         SF Ruby meets every month: free meetups, a jobs board,
                         and Ruby news.
                     </p>
                     <div class="flex flex-wrap justify-center gap-3">
                         <a
                             href="/meetup"
-                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
+                            class="px-btn px-btn--gold px-font text-px10 gap-2 px-6 py-3.5 tap-press"
                         >
                             The monthly meetup
                         </a>
                         <a
                             href="/jobs"
-                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50 border-2 border-ink"
+                            class="px-btn px-btn--white px-font text-px10 gap-2 px-6 py-3.5 tap-press"
                         >
                             Ruby jobs
                         </a>
                         <a
                             href="/news"
-                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50 border-2 border-ink"
+                            class="px-btn px-btn--white px-font text-px10 gap-2 px-6 py-3.5 tap-press"
                         >
                             News
                         </a>

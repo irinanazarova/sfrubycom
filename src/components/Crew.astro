@@ -1,6 +1,8 @@
 ---
 // Organizers and volunteers: everyone on the Organizer/volunteer ticket on
-// Luma, together on one floating island at dusk, the same way the companies
+// Luma, on floating islands at sunset (the homepage runs morning to night:
+// day sky at the hero, sunset here, evening on the community strip, night
+// in the footer), the same way the companies
 // stand on theirs. The snapshot is src/content/crew-2026.json (see the fetch
 // script). Everyone is named; only those who have drawn their Cloud Card
 // stand on the island, and the rest join it the day they do. No stand-ins,
@@ -27,7 +29,7 @@ const islands = Array.from({ length: islandCount }, (_, i) =>
 
 {
     groups.length > 0 && (
-        <section id="crew" class="relative overflow-hidden pt-20 pb-28 md:pt-24 md:pb-32 px-sky-grad-dusk border-t-4 border-ink text-white">
+        <section id="crew" class="relative overflow-hidden pt-20 pb-28 md:pt-24 md:pb-32 px-sky-grad-sunset border-t-4 border-ink text-white">
             <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-16 left-[5%] w-40 md:w-60 animate-float pointer-events-none" aria-hidden="true" />
             <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-24 right-[7%] w-28 md:w-44 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
             <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute bottom-24 left-[3%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
@@ -66,7 +68,7 @@ const islands = Array.from({ length: islandCount }, (_, i) =>
             </div>
 
             <!-- crenellated step into the community strip -->
-            <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--white)]" aria-hidden="true"></div>
+            <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--sky-800)]" aria-hidden="true"></div>
         </section>
     )
 }

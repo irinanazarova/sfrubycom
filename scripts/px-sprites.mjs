@@ -90,7 +90,63 @@ function balloon(fill, shade, light) {
   );
 }
 
+// San Francisco skyline, the silhouette over the footer's night sky. A
+// 192px tile that repeats horizontally: Coit Tower on Telegraph Hill, the
+// Transamerica Pyramid, Salesforce Tower, and plain blocks between them with
+// a few lit windows. Everything is the night navy (D) with gold windows (G),
+// so it reads as the city at dusk against the evening band above it.
+function skyline() {
+  const w = 192, h = 40, ground = h - 1;
+  const grid = Array.from({ length: h }, () => Array(w).fill("."));
+  const fill = (x0, x1, top) => {
+    for (let x = Math.max(0, x0); x <= Math.min(w - 1, x1); x++)
+      for (let y = Math.max(0, top); y <= ground; y++) grid[y][x] = "D";
+  };
+  // deterministic "random" so the tile is the same on every run
+  const lit = (x, y) => ((x * 73856093) ^ (y * 19349663)) % 7 === 0;
+  const block = (x, bw, bh) => {
+    const top = ground - bh + 1;
+    fill(x, x + bw - 1, top);
+    for (let y = top + 2; y < ground - 1; y += 3)
+      for (let xx = x + 1; xx < x + bw - 1; xx += 2)
+        if (lit(xx, y)) grid[y][xx] = "G";
+  };
+  // Telegraph Hill and Coit Tower
+  for (let x = 2; x <= 30; x++) {
+    const t = (x - 16) / 14;
+    fill(x, x, ground - Math.round(7 * Math.sqrt(Math.max(0, 1 - t * t))));
+  }
+  fill(15, 17, ground - 21); // the column
+  fill(14, 18, ground - 21); // crown
+  grid[ground - 22][16] = "D";
+  // blocks, left to right
+  [[32, 7, 12], [40, 5, 17], [46, 8, 10], [55, 6, 21]].forEach((b) => block(...b));
+  // Transamerica Pyramid: tapers to a spire, with the two small wings
+  const px = 68, base = 6;
+  for (let y = ground; y >= ground - 30; y--) {
+    const half = Math.max(0, Math.round(base * (y - (ground - 30)) / 30));
+    fill(px - half, px + half, y);
+  }
+  fill(px, px, ground - 34);
+  fill(px - 3, px - 2, ground - 20);
+  fill(px + 2, px + 3, ground - 20);
+  [[77, 7, 15], [85, 9, 24], [95, 6, 13], [102, 8, 19]].forEach((b) => block(...b));
+  // Salesforce Tower: the tallest, with a rounded crown
+  const sx = 112, sw = 9, sh = 37;
+  fill(sx, sx + sw - 1, ground - sh + 4);
+  fill(sx + 1, sx + sw - 2, ground - sh + 2);
+  fill(sx + 2, sx + sw - 3, ground - sh + 1);
+  fill(sx + 3, sx + sw - 4, ground - sh);
+  for (let y = ground - sh + 7; y < ground - 1; y += 3)
+    for (let xx = sx + 2; xx < sx + sw - 2; xx += 2) if (lit(xx, y)) grid[y][xx] = "G";
+  [[122, 6, 22], [129, 8, 16], [138, 5, 26], [144, 7, 11], [152, 9, 18], [162, 6, 9], [169, 8, 14], [178, 6, 20], [185, 7, 8]].forEach((b) => block(...b));
+  // an antenna on the 26-high block
+  fill(140, 140, ground - 30);
+  return grid.map((r) => r.join(""));
+}
+
 const SPRITES = {
+  "px-skyline": skyline(),
   "px-balloon-ruby": balloon("R", "r", "L"),
   "px-balloon-gold": balloon("G", "g", "W"),
   "px-balloon-blue": balloon("B", "b", "A"),
