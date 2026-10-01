@@ -374,7 +374,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
 
                 <!-- Organized by + sponsors: running ticker along the hero's bottom
                      edge. Sponsor logos are dark art, so they ride the dark strip
-                     as white silhouettes (brightness-0 invert). The clone group is
+                     as white silhouettes (brightness-0 invert), unless the sponsor
+                     brings its own dark-background tickerLogo. The clone group is
                      aria-hidden and link-free so tab order sees each brand once. -->
                 <!-- the ground the scene stands on, with the sponsor ticker as
                      the strip beneath it -->
@@ -429,11 +430,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                         {tickerSponsors.map((sponsor) =>
                                             clone ? (
                                                 <img
-                                                    src={sponsor.logo}
+                                                    src={sponsor.tickerLogo ?? sponsor.logo}
                                                     alt=""
                                                     width={sponsor.logoWidth}
                                                     height={sponsor.logoHeight}
-                                                    class={`h-6 md:h-7 w-auto shrink-0 object-contain brightness-0 invert ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
+                                                    class={`h-6 md:h-7 w-auto shrink-0 object-contain ${sponsor.tickerLogo ? "" : "brightness-0 invert"} ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
                                                     loading="eager"
                                                 />
                                             ) : (
@@ -444,11 +445,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                     class="shrink-0 hover:opacity-80 transition-opacity"
                                                 >
                                                     <img
-                                                        src={sponsor.logo}
+                                                        src={sponsor.tickerLogo ?? sponsor.logo}
                                                         alt={sponsor.name}
                                                         width={sponsor.logoWidth}
                                                         height={sponsor.logoHeight}
-                                                        class={`h-6 md:h-7 w-auto object-contain brightness-0 invert ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
+                                                        class={`h-6 md:h-7 w-auto object-contain ${sponsor.tickerLogo ? "" : "brightness-0 invert"} ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
                                                         loading="eager"
                                                     />
                                                 </a>
