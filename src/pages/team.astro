@@ -4,6 +4,7 @@
 // longer stage segment, group registration on Luma and invoicing all exist; this
 // page puts them in one place instead of a paragraph under the price ladder.
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
 import { ticketLink, ticketEventClass, ticketTiers } from "../data/conference-2026.js";
 
 const CONTACT_EMAIL = "conference@sfruby.com";
@@ -65,20 +66,15 @@ const steps = [
 ---
 
 <BaseLayout
-    darkHero={false}
     title="Bring your team - SF Ruby Conference 2026"
     description="Register a team for the San Francisco Ruby Conference, Nov 10-12 at SFJAZZ: one order, one invoice, 10% off, and a stage segment for teams of five or more."
 >
-    <section class="pt-28 pb-14 bg-sky-50 border-b-4 border-ink">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="px-plate px-font text-px8 px-3 py-1.5">Nov 10-12, SFJAZZ</span>
-            <h1 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
-                Bring your team
-            </h1>
-            <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
-                Teams of five get 10% off and a segment on stage.
-            </p>
-            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+    <PageHero
+        label="Nov 10-12, SFJAZZ"
+        title="Bring your team"
+        lede="Teams of five get 10% off and a segment on stage."
+    >
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
                     href={ticketLink("team")}
                     target="_blank"
@@ -101,8 +97,7 @@ const steps = [
                     Get approval
                 </a>
             </div>
-        </div>
-    </section>
+    </PageHero>
 
     <section class="py-16 md:py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

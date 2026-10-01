@@ -1,24 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 ---
 
 <BaseLayout
-    darkHero={false}
     title="Post a Ruby Job - SF Ruby"
     description="Post your Ruby and Rails job to reach the SF Ruby community. $1,000 for 3 months of visibility."
 >
-    <section class="pt-28 pb-12 bg-sky-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h1 class="px-font text-lg md:text-2xl text-gray-900 mb-5">
-                    Post a Job at SF Ruby
-                </h1>
-                <p class="text-xl text-gray-600">
-                    <span class="font-semibold text-ruby-500">$1,000</span> for 3
-                    months of visibility
-                </p>
-            </div>
+    <PageHero title="Post a Job at SF Ruby" next="var(--sky-50)">
+        <Fragment slot="lede"><span class="font-semibold text-gold-400">$1,000</span> for 3 months of visibility</Fragment>
+    </PageHero>
 
+    <section class="pt-10 pb-12 bg-sky-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Benefits -->
             <div class="bg-white rounded-2xl border border-gray-200 p-8 mb-12">
                 <h2 class="text-xl font-bold text-gray-900 mb-6">

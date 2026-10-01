@@ -1,0 +1,79 @@
+---
+/**
+ * PageHero: the one page header for the inner pages (/jobs, /meetup, /news,
+ * /videos, /about, /startups, /sponsor-2026, /manager, ...).
+ *
+ * It is the homepage's day sky (px-sky-grad-day) with pixel clouds at two
+ * depths, an optional px-plate label, the title in the pixel font with the
+ * ink extrusion (gold, like the homepage section headings), a one-line lede,
+ * and a default slot for page-specific content: stats, buttons, a search box.
+ *
+ * The sky is dark enough for the white header logo, so a page using it keeps
+ * BaseLayout's default darkHero={true}.
+ *
+ * Compact on phones on purpose: list pages (/jobs, /news) must start their
+ * content near the top at 390x844. Measure the hero before making it taller.
+ *
+ * Props:
+ *   title    the h1 (or a "title" named slot when it needs markup)
+ *   label    optional plate above the title (a noun, never a sentence)
+ *   lede     optional one-line lede; or pass a "lede" named slot for markup
+ *   next     CSS color of the section below, for the crenellated step into
+ *            it (default white). Pass false to end on a flat ink rule.
+ *   width    content width: "narrow" (max-w-3xl, default) or "wide" (max-w-4xl)
+ *   compact  less bottom room on phones, for pages whose content must start
+ *            high (/videos, where the player is the page)
+ */
+interface Props {
+    title?: string;
+    label?: string;
+    lede?: string;
+    next?: string | false;
+    width?: "narrow" | "wide";
+    id?: string;
+    compact?: boolean;
+}
+
+const { title, label, lede, next = "var(--white)", width = "narrow", id, compact = false } = Astro.props;
+const hasLedeSlot = Astro.slots.has("lede");
+const maxW = width === "wide" ? "max-w-4xl" : "max-w-3xl";
+---
+
+<section
+    id={id}
+    class:list={[
+        "page-hero relative overflow-hidden px-sky-grad-day text-white",
+        next === false && "border-b-4 border-ink",
+    ]}
+>
+    <!-- clouds at two depths: large in front, small and faded behind. On
+         phones they keep to the corners the text leaves free: top right,
+         beside the header logo, and bottom left. -->
+    <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-6 -right-10 sm:top-20 sm:right-auto sm:left-[4%] w-28 sm:w-40 md:w-52 animate-float pointer-events-none" aria-hidden="true" />
+    <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-4 -left-10 sm:left-auto sm:bottom-8 sm:-right-6 md:right-[5%] w-20 sm:w-28 md:w-36 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+    <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-28 right-[16%] w-14 md:w-20 opacity-80 animate-float [animation-delay:-1.5s] pointer-events-none hidden sm:block" aria-hidden="true" />
+    <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute bottom-16 left-[10%] w-12 md:w-16 opacity-70 animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
+
+    <div class:list={["relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center pt-[5.75rem] sm:pt-28 lg:pt-32", maxW, compact ? "pb-6 sm:pb-12" : next === false ? "pb-8 sm:pb-12" : "pb-9 sm:pb-14"]}>
+        {label && (
+            <span class="px-plate px-font text-px8 md:text-px10 px-3 py-1.5 mb-5 md:mb-6">{label}</span>
+        )}
+        <h1 class="px-font px-shadow-ink text-lg md:text-2xl text-gold-400 leading-normal">
+            {Astro.slots.has("title") ? <slot name="title" /> : title}
+        </h1>
+        {(lede || hasLedeSlot) && (
+            <p class="text-sm sm:text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-3 md:mt-4 max-w-2xl mx-auto">
+                {hasLedeSlot ? <slot name="lede" /> : lede}
+            </p>
+        )}
+        {Astro.slots.has("default") && (
+            <div class="mt-5 md:mt-7">
+                <slot />
+            </div>
+        )}
+    </div>
+
+    {next !== false && (
+        <div class="px-crenel absolute bottom-0 left-0 w-full" style={`--px-crenel-color:${next}`} aria-hidden="true"></div>
+    )}
+</section>

@@ -1,6 +1,7 @@
 ---
 import IslandNav from "../../components/IslandNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 import StartupCard from "../../components/StartupCard.astro";
 import StartupModal from "../../components/StartupModal.astro";
 import {
@@ -69,79 +70,30 @@ for (const [id, startup] of Object.entries(startupsData)) {
 
 <BaseLayout
     ogImage="/og/startups.png"
-    darkHero={false}
     title="Ruby Startups - SF Ruby"
     description="From seed-stage to unicorns, discover the startups building the future with Ruby and Rails."
 >
     <!-- Hero Section -->
-    <section
-        class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden"
+    <PageHero
+        lede="From seed-stage to unicorns, discover the startups building the future with Ruby and Rails."
+        next="var(--dark-50)"
     >
-        <!-- Background pattern -->
-        <div class="absolute inset-0 opacity-10">
-            <div
-                class="absolute inset-0"
-                style="background-image: url('data:image/svg+xml,%3Csvg width=\"
-                60\"
-                height='\"60\"'
-                viewBox='\"0'
-                0
-                60
-                60\"
-                xmlns='\"http://www.w3.org/2000/svg\"%3E%3Cg'
-                fill='\"none\"'
-                fill-rule='\"evenodd\"%3E%3Cg'
-                fill='\"%23ffffff\"'
-                fill-opacity='\"0.4\"%3E%3Cpath'
-                d='\"M36'
-                34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6
-                34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6
-                4V0H4v4H0v2h4v4h2V6h4V4H6z\"%3E%3C
-                path%3E%3C
-                g%3E%3C
-                g%3E%3C
-                svg%3E')"
-            >
+        <Fragment slot="title">Ruby Startups <span class="block text-white mt-1">new generation</span></Fragment>
+        <div class="flex flex-wrap justify-center gap-x-10 gap-y-5">
+            <div>
+                <div class="px-font px-shadow-ink text-base md:text-lg text-white">{startups.length}</div>
+                <div class="text-sm text-white px-shadow-ink-sm mt-1.5">Startups</div>
+            </div>
+            <div>
+                <div class="px-font px-shadow-ink text-base md:text-lg text-gold-400">{ycBacked}</div>
+                <div class="text-sm text-white px-shadow-ink-sm mt-1.5">YC Backed</div>
+            </div>
+            <div>
+                <div class="px-font px-shadow-ink text-base md:text-lg text-sky-100">{unicorns}</div>
+                <div class="text-sm text-white px-shadow-ink-sm mt-1.5">Unicorns</div>
             </div>
         </div>
-
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <h1
-                    class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-6"
-                >
-                    Ruby Startups
-                    <span class="block text-ruby-400">new generation</span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300 mb-8">
-                    From seed-stage to unicorns, discover the startups building
-                    the future with Ruby and Rails.
-                </p>
-
-                <!-- Stats -->
-                <div class="flex flex-wrap gap-8">
-                    <div>
-                        <div class="text-3xl font-bold text-white">
-                            {startups.length}
-                        </div>
-                        <div class="text-sm text-gray-400">Startups</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-amber-400">
-                            {ycBacked}
-                        </div>
-                        <div class="text-sm text-gray-400">YC Backed</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-emerald-400">
-                            {unicorns}
-                        </div>
-                        <div class="text-sm text-gray-400">Unicorns</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </PageHero>
 
     <!-- Startups Grid -->
     <section class="py-12 bg-gray-50">
