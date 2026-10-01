@@ -16,10 +16,17 @@ const tiers = [
 // of the row, so the deadline on the main card has a visible consequence. None
 // is published after Late bird, so this is empty until one is.
 const late = ticketTiers.find((t) => t.state === "soon");
-// Two cards would stretch to a third of the row each under grid-cols-3.
+// One column per live tier, plus a narrower one for the muted card when a next
+// tier is published. Both counts are spelled out as whole class strings so
+// Tailwind sees them, and the count is clamped: two cards would stretch to a
+// third of the row each under grid-cols-3, and a single card would be an
+// orphan in a column of its own.
+const columns = Math.min(Math.max(tiers.length, 2), 3);
 const cols = late
-    ? "md:grid-cols-[1fr_1fr_1fr_0.7fr]"
-    : tiers.length >= 3
+    ? columns === 3
+        ? "md:grid-cols-[1fr_1fr_1fr_0.7fr]"
+        : "md:grid-cols-[1fr_1fr_0.7fr]"
+    : columns === 3
       ? "md:grid-cols-3"
       : "md:grid-cols-2 md:max-w-3xl md:mx-auto";
 ---
