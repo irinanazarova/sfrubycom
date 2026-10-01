@@ -1,20 +1,27 @@
 ---
-// Tickets, right after the schedule: the three live tiers as cards, and the
+// Tickets, right after the schedule: every live tier as a card, and the
 // manager page given the same weight as a tier, since for most readers the
 // step between reading the program and buying is getting a yes at work.
 // Company-sponsored comes first: it is the ticket a manager approves, and
-// it is what keeps Regular at its price. Regular is the main CTA.
+// it is what keeps the individual ticket at its price. Late bird is the main CTA.
 import { ticketLink, ticketEventClass, ticketTiers } from "../data/conference-2026.js";
 
 const tier = (name) => ticketTiers.find((t) => t.name === name && t.state === "live");
 const tiers = [
     { ...tier("Company-sponsored"), label: "Company-sponsored", placement: "tickets-company", main: false },
-    { ...tier("Regular"), label: "Both days", placement: "tickets", main: true },
+    { ...tier("Late bird"), label: "Both days", placement: "tickets", main: true },
     { ...tier("Single day"), label: "One day", placement: "tickets-day", main: false },
 ].filter((t) => t.price);
-// The tier after Regular: shown small and muted at the end of the row, so the
-// deadline on the Regular card has a visible consequence.
-const late = ticketTiers.find((t) => t.name === "Late bird" && t.state === "soon");
+// A tier that opens when the main one closes: shown small and muted at the end
+// of the row, so the deadline on the main card has a visible consequence. None
+// is published after Late bird, so this is empty until one is.
+const late = ticketTiers.find((t) => t.state === "soon");
+// Two cards would stretch to a third of the row each under grid-cols-3.
+const cols = late
+    ? "md:grid-cols-[1fr_1fr_1fr_0.7fr]"
+    : tiers.length >= 3
+      ? "md:grid-cols-3"
+      : "md:grid-cols-2 md:max-w-3xl md:mx-auto";
 ---
 
 <section id="tickets" class="relative overflow-hidden py-16 md:py-20 px-royal-grad text-white border-t-4 border-ink">
@@ -26,7 +33,7 @@ const late = ticketTiers.find((t) => t.name === "Late bird" && t.state === "soon
             </h2>
         </div>
 
-        <ul class:list={["mt-10 grid gap-5 list-none p-0 m-0 items-stretch", late ? "md:grid-cols-[1fr_1fr_1fr_0.7fr]" : "md:grid-cols-3"]}>
+        <ul class:list={["mt-10 grid gap-5 list-none p-0 m-0 items-stretch", cols]}>
             {
                 tiers.map((t) => (
                     <li class:list={["px-card bg-white text-gray-900 p-5 md:p-6 flex flex-col", t.main && "px-card--gold"]}>
