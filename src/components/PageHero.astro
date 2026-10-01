@@ -50,7 +50,9 @@ const maxW = width === "wide" ? "max-w-4xl" : "max-w-3xl";
          phones they keep to the corners the text leaves free: top right,
          beside the header logo, and bottom left. -->
     <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-6 -right-10 sm:top-20 sm:right-auto sm:left-[4%] w-28 sm:w-40 md:w-52 animate-float pointer-events-none" aria-hidden="true" />
-    <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-4 -left-10 sm:left-auto sm:bottom-8 sm:-right-6 md:right-[5%] w-20 sm:w-28 md:w-36 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
+    {/* A compact hero leaves no room under the lede on phones; the cloud
+        sat on it there, so it shows from sm up only. */}
+    <img src="/px-cloud-md.png" alt="" width="48" height="20" class:list={["px-pixelated absolute bottom-4 -left-10 sm:left-auto sm:bottom-8 sm:-right-6 md:right-[5%] w-20 sm:w-28 md:w-36 animate-float [animation-delay:-3s] pointer-events-none", compact && "max-sm:hidden"]} aria-hidden="true" />
     <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-28 right-[16%] w-14 md:w-20 opacity-80 animate-float [animation-delay:-1.5s] pointer-events-none hidden sm:block" aria-hidden="true" />
     <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute bottom-16 left-[10%] w-12 md:w-16 opacity-70 animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
 
