@@ -4,7 +4,7 @@
 // Tier order here is display order; headingClass colors the tier heading.
 // size drives how big the logo cards render (SponsorTiers.astro): "xl" for
 // Pickaxe, "lg" for the Ruby-priced tiers (Ruby, Coffee, Passport, Speaker
-// Dinner), "md" for Emerald, "sm" for Travel, "xs" for Media. The size hierarchy is the visual part of
+// Dinner), "md" for Emerald, "sm" for Community and Travel, "xs" for Media. The size hierarchy is the visual part of
 // what a sponsor pays for, so keep it in step with the prices on /sponsor-2026.
 // logoWidth/logoHeight are the file's intrinsic pixel dimensions (sips -g
 // pixelWidth -g pixelHeight public/<logo>). They must be present and correct:
@@ -186,6 +186,21 @@ export const conference2026SponsorTiers = [
         logoWidth: 335,
         logoHeight: 63,
         url: "https://www.fastruby.io/",
+      },
+    ],
+  },
+  {
+    tier: "Community Sponsor",
+    size: "sm",
+    headingClass: "text-gray-500",
+    sponsors: [
+      {
+        // Charcoal, medium cut (21-45px tall) from the Mux press kit.
+        name: "Mux",
+        logo: "/sponsor_mux.svg",
+        logoWidth: 154,
+        logoHeight: 48,
+        url: "https://www.mux.com/",
       },
     ],
   },
