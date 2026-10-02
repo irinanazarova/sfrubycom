@@ -10,7 +10,9 @@ import GettingThere from "../components/GettingThere.astro";
 import Schedule from "../components/Schedule.astro";
 import TicketsBlock from "../components/TicketsBlock.astro";
 import Crew from "../components/Crew.astro";
-import { ticketLink, ticketEventClass, headlineTier, lowestLivePrice, conferenceSpeakers, ticketTiers } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, headlineTier, lowestLivePrice, conferenceSpeakers, ticketTiers, cfpNameAliases } from "../data/conference-2026.js";
+import { buildProfiles } from "../utils/speakerProfiles.js";
+import cfpTalks from "../content/cfp-talks.json";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { markdownTwinFor } from "../lib/markdown-twins.js";
@@ -23,9 +25,13 @@ import "../styles/global.css";
 // visitor's own "You" cell the grid holds 21 on desktop (7 x 3) and 20 on
 // phones (5 x 4), where the last cameo sits out.
 const offTheGrid = ["Alex Coomans", "Cole Robertson", "Jason Thomas", "Sergey Karayev"];
-const fighters = conferenceSpeakers
+// A speaker's cell carries their talk (the same resolved title the schedule
+// prints) and the key of the dialog the schedule renders for them, so picking
+// a fighter leads to the talk.
+const { profiles } = buildProfiles(cfpTalks, conferenceSpeakers, cfpNameAliases);
+const fighters = profiles
     .filter((s) => s.pixel && !offTheGrid.includes(s.name))
-    .map((s) => ({ name: s.name, org: s.orgs[0].name, pixel: s.pixel }));
+    .map((s) => ({ name: s.name, org: s.orgs[0].name, pixel: s.pixel, key: s.key, talk: s.title }));
 
 // Cameos carry their real affiliation, same as the speakers: everyone on the
 // roster reads as a peer, stage slot or not.
@@ -174,7 +180,20 @@ const headlineCloses = headline?.closesOn
                                 </div>
                                 <div class="text-center mb-3 md:mb-4 lg:mb-3 min-h-[3.5rem] lg:min-h-[3rem]">
                                     <p id="fighter-name" class="px-font text-px10 md:text-sm text-white">{fighters[0].name}</p>
-                                    <p id="fighter-org" class="px-font text-px8 text-gold-500 mt-1.5 opacity-90">{fighters[0].org}</p>
+                                    <p id="fighter-org" class="px-font text-px8 text-gold-500 mt-1.5 opacity-90" hidden={Boolean(fighters[0].talk)}>{fighters[0].org}</p>
+                                    {/* A speaker's talk, opening the card the schedule renders
+                                        for them. Replaces the org line: the card has the org. */}
+                                    <button
+                                        type="button"
+                                        id="fighter-talk"
+                                        class="fighter-talk mt-1.5 mx-auto max-w-[22rem] font-display font-semibold text-xs md:text-sm leading-snug text-gold-400 hover:text-gold-300 underline decoration-gold-500/50 underline-offset-2 tap-press"
+                                        data-speaker-dialog={fighters[0].key}
+                                        hidden={!fighters[0].talk}
+                                    >
+                                        {/* the clamp sits on a span: on the button its display
+                                            would override the hidden attribute */}
+                                        <span class="line-clamp-2"><span aria-hidden="true">&#9654;&#xFE0E; </span><span id="fighter-talk-title">{fighters[0].talk}</span></span>
+                                    </button>
                                 </div>
                                 <div id="fighter-grid" class="grid grid-cols-5 lg:grid-cols-7 gap-1.5" role="list" aria-label="Conference speakers">
                                     {fighters.map((f, i) => (
@@ -185,7 +204,9 @@ const headlineCloses = headline?.closesOn
                                             data-name={f.name}
                                             data-org={f.org}
                                             data-pixel={f.pixel}
-                                            aria-label={`${f.name}, ${f.org}`}
+                                            data-key={f.key}
+                                            data-talk={f.talk}
+                                            aria-label={f.talk ? `${f.name}, ${f.org}: ${f.talk}` : `${f.name}, ${f.org}`}
                                         >
                                             <img src={f.pixel} alt="" width="256" height="256" class="px-pixelated w-full h-auto" style={`--px-bob-delay: ${(i * -0.4).toFixed(1)}s`} loading="eager" />
                                         </button>
@@ -211,7 +232,7 @@ const headlineCloses = headline?.closesOn
 
                         <!-- Title stack: art, date, statement, insert-coin CTA -->
                         <div class="order-1 lg:order-2 text-center">
-                            <img src="/logo8bit-transparent.png" alt="San Francisco Ruby Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] lg:max-w-[10rem] h-auto mb-4 md:mb-6 lg:mb-4 mx-auto" />
+                            <img id="hero-logo" src="/logo8bit-transparent.png" alt="San Francisco Ruby Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] lg:max-w-[10rem] h-auto mb-4 md:mb-6 lg:mb-4 mx-auto" />
                             <div class="mb-4 md:mb-5 lg:mb-4">
                                 <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
                                     <span class="text-gold-500">Year Two</span>
@@ -249,25 +270,26 @@ const headlineCloses = headline?.closesOn
                                     )}
                                 </span>
                             </a>
-                            <!-- The herald: the early-bird dragon, its sign
-                                 repainted to announce the program, linking to
-                                 the schedule. In the title stack on phones; on
-                                 desktop it hovers top-right of the title art,
-                                 positioned against the content column. -->
-                            <a
-                                href="#schedule"
-                                class="inline-block mt-7 lg:mt-0 lg:absolute lg:top-20 lg:right-0 xl:-right-6 tap-press"
-                                aria-label="The schedule is live. Jump to the schedule"
-                            >
-                                <img
-                                    src="/schedule_live_dragon.png"
-                                    alt="A pixel dragon holding a sign that reads Schedule is live"
-                                    width="1064"
-                                    height="696"
-                                    class="px-pixelated animate-float w-full max-w-[12rem] lg:max-w-[11rem] xl:max-w-[13rem] h-auto"
-                                />
-                            </a>
                         </div>
+                        <!-- The herald: the early-bird dragon, its sign
+                             repainted to announce the program, linking to
+                             the schedule. On phones it follows the fighter
+                             panel, so the panel starts on the first screen;
+                             on desktop it hovers top-right of the title art,
+                             positioned against the content column. -->
+                        <a
+                            href="#schedule"
+                            class="order-3 justify-self-center inline-block mt-2 lg:mt-0 lg:absolute lg:top-20 lg:right-0 xl:-right-6 tap-press"
+                            aria-label="The schedule is live. Jump to the schedule"
+                        >
+                            <img
+                                src="/schedule_live_dragon.png"
+                                alt="A pixel dragon holding a sign that reads Schedule is live"
+                                width="1064"
+                                height="696"
+                                class="px-pixelated animate-float w-full max-w-[12rem] lg:max-w-[11rem] xl:max-w-[13rem] h-auto"
+                            />
+                        </a>
                     </div>
                     <script define:vars={{ closesOn: headline?.closesOn ?? null }}>
                         // Countdown next to the deadline, computed on the client so
@@ -305,6 +327,8 @@ const headlineCloses = headline?.closesOn
                             const mystery = document.getElementById("fighter-mystery");
                             const nameEl = document.getElementById("fighter-name");
                             const orgEl = document.getElementById("fighter-org");
+                            const talkEl = document.getElementById("fighter-talk");
+                            const talkTitle = document.getElementById("fighter-talk-title");
                             const panel = document.getElementById("fighter-select");
                             let index = 0;
                             let timer = null;
@@ -318,6 +342,14 @@ const headlineCloses = headline?.closesOn
                                 const d = cells[i].dataset;
                                 nameEl.textContent = d.name;
                                 orgEl.textContent = d.org;
+                                // speakers show their talk, cameos their org
+                                const talk = d.talk && d.key;
+                                orgEl.hidden = Boolean(talk);
+                                talkEl.hidden = !talk;
+                                if (talk) {
+                                    talkTitle.textContent = d.talk;
+                                    talkEl.dataset.speakerDialog = d.key;
+                                }
                                 if (d.pixel) {
                                     portrait.src = d.pixel;
                                     portrait.classList.remove("hidden");
@@ -347,11 +379,16 @@ const headlineCloses = headline?.closesOn
                                 timer = null;
                             };
 
+                            // First press picks, a second press on the picked
+                            // fighter confirms: it opens their talk, through the
+                            // schedule's dialog handler.
                             cells.forEach((c, i) =>
                                 c.addEventListener("click", () => {
+                                    const confirm = locked && index === i;
                                     locked = true;
                                     stop();
-                                    show(i);
+                                    if (confirm && !talkEl.hidden) talkEl.click();
+                                    else show(i);
                                 }),
                             );
                             let hovering = false;
@@ -388,6 +425,53 @@ const headlineCloses = headline?.closesOn
                                 show((((index + delta) % n) + n) % n);
                             });
                             start();
+                        }
+                    </script>
+                    <script>
+                        // Easter egg: the Konami code, or five quick taps on the
+                        // hero logo on a phone, and every character on the page
+                        // jumps. Thirty extra lives, as in Contra.
+                        {
+                            const CODE = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+                            let recent = [];
+                            let busy = false;
+                            const party = () => {
+                                if (busy) return;
+                                busy = true;
+                                for (const img of document.querySelectorAll("img"))
+                                    img.style.setProperty("--px-jump-delay", `${(Math.random() * 0.35).toFixed(2)}s`);
+                                document.body.classList.add("px-konami");
+                                const toast = document.createElement("div");
+                                toast.className = "px-konami-toast px-plate px-plate--gold px-font text-sm md:text-lg px-5 py-3";
+                                toast.setAttribute("role", "status");
+                                toast.textContent = "+30 lives";
+                                document.body.append(toast);
+                                setTimeout(() => {
+                                    document.body.classList.remove("px-konami");
+                                    toast.remove();
+                                    busy = false;
+                                }, 2200);
+                            };
+                            // The last ten keys against the code: a position
+                            // counter missed "Up Up Up Down ...", where a third
+                            // Up has to restart the match one step in.
+                            document.addEventListener("keydown", (e) => {
+                                const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+                                recent = [...recent, key].slice(-CODE.length);
+                                if (recent.join() === CODE.join()) {
+                                    recent = [];
+                                    party();
+                                }
+                            });
+                            let taps = [];
+                            document.getElementById("hero-logo")?.addEventListener("click", () => {
+                                const t = Date.now();
+                                taps = [...taps.filter((x) => t - x < 2000), t];
+                                if (taps.length >= 5) {
+                                    taps = [];
+                                    party();
+                                }
+                            });
                         }
                     </script>
                 </div>
@@ -563,31 +647,36 @@ const headlineCloses = headline?.closesOn
             <Crew />
 
             <!-- The community behind the conference -->
-            <section id="community" class="py-16 bg-white">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="px-font text-base md:text-lg text-gray-900 mb-4">
+            <section id="community" class="relative overflow-hidden py-16 px-sky-grad-dusk text-white">
+                {/* evening: the first stars over the strip, the city below it in the footer */}
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-3 top-[18%] left-[12%]" style="--px-twinkle-delay: 0s" aria-hidden="true" />
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2 top-[30%] right-[18%]" style="--px-twinkle-delay: -0.9s" aria-hidden="true" />
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2.5 top-[64%] left-[26%] hidden md:block" style="--px-twinkle-delay: -1.6s" aria-hidden="true" />
+                <img src="/px-sparkle.png" alt="" width="7" height="7" class="px-sparkle w-2 top-[70%] right-[9%]" style="--px-twinkle-delay: -0.4s" aria-hidden="true" />
+                <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="px-font px-shadow-ink text-base md:text-lg text-white mb-4">
                         SF Ruby, All Year Round
                     </h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                    <p class="text-white/90 px-shadow-ink-sm max-w-2xl mx-auto mb-8">
                         SF Ruby meets every month: free meetups, a jobs board,
                         and Ruby news.
                     </p>
                     <div class="flex flex-wrap justify-center gap-3">
                         <a
                             href="/meetup"
-                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-ink text-white hover:bg-gray-800"
+                            class="px-btn px-btn--gold px-font text-px10 gap-2 px-6 py-3.5 tap-press"
                         >
                             The monthly meetup
                         </a>
                         <a
                             href="/jobs"
-                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50 border-2 border-ink"
+                            class="px-btn px-btn--white px-font text-px10 gap-2 px-6 py-3.5 tap-press"
                         >
                             Ruby jobs
                         </a>
                         <a
                             href="/news"
-                            class="px-btn px-font text-px10 gap-2 px-6 py-3.5 bg-white text-gray-900 hover:bg-gray-50 border-2 border-ink"
+                            class="px-btn px-btn--white px-font text-px10 gap-2 px-6 py-3.5 tap-press"
                         >
                             News
                         </a>

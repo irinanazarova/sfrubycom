@@ -236,6 +236,13 @@ export const skyRamps = {
     height: 256,
     stops: [palette.sky[800], palette.sky[700]],
   },
+  // Sunset for the crew section, the evening end of the homepage's day:
+  // night blue up top where the heading and lede sit (white text keeps its
+  // contrast), then ruby and pumpkin toward the horizon.
+  "px-sky-sunset": {
+    height: 384,
+    stops: [palette.sky[900], palette.indigo[800], palette.ruby[800], palette.ruby[600], palette.pumpkin[500]],
+  },
   "px-royal": {
     height: 192,
     stops: [palette.indigo[500], palette.indigo[700]],
@@ -262,4 +269,5 @@ export const spriteColors = {
   B: palette.indigo[500], // royal blue
   b: palette.indigo[700], // royal blue shade
   A: palette.sky[300], // sky-blue highlight
+  D: palette.indigo[900], // night navy (the footer's sky, skyline silhouette)
 };
