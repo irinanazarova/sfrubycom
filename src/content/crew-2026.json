@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-15T23:18:08.262Z",
+  "fetchedAt": "2026-10-02T18:21:47.087Z",
   "organizers": [
     {
       "name": "Aleksandr Berdiugin",
@@ -52,6 +52,9 @@
       "name": "Aurelie Verrot",
       "url": "https://clouds.sfruby.com/e/2026-bits/aurelie-verrot",
       "image": "/attending/aurelie-verrot.webp"
+    },
+    {
+      "name": "Chris Houhoulis"
     },
     {
       "name": "Gary Tou",

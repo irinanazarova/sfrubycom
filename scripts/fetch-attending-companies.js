@@ -70,9 +70,18 @@ const NOT_A_COMPANY = new Set([
   "retired", "personal", "me", "myself", "working on my startup", "-", ".",
 ]);
 
+// Divisions and brands the suffix stripper cannot merge on its own: an answer
+// whose key is on the left counts toward the company on the right. Keep it to
+// cases where the two names are the same employer.
+const COMPANY_ALIASES = new Map([
+  ["cisco meraki", "cisco"],
+  ["persona identities", "persona"],
+  ["tern travel", "tern"],
+]);
+
 // "Cisco, Inc." and "cisco" are one company. The key drops case, punctuation
 // and corporate suffixes; the display name is the most common raw spelling.
-const companyKey = (raw) =>
+const normalizeCompany = (raw) =>
   raw
     .toLowerCase()
     .replace(/\(.*?\)/g, " ")
@@ -80,6 +89,26 @@ const companyKey = (raw) =>
     .replace(/\b(inc|llc|ltd|corp|corporation|co|company|io|com|ai)\b/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+
+const companyKey = (raw) => {
+  const key = normalizeCompany(raw);
+  return COMPANY_ALIASES.get(key) ?? key;
+};
+
+// A hand-maintained table that fails silently is worse than no table, and
+// both ways of getting a row wrong are invisible on the next refresh: the
+// map is consulted with an already-normalized key, so a key the normalizer
+// would have rewritten ("persona ai" becomes "persona") can never match,
+// and values are not re-normalized, so an alias pointing at another alias
+// leaves two islands for one company. Loud at load, before any fetch.
+for (const [from, to] of COMPANY_ALIASES) {
+  if (from !== normalizeCompany(from))
+    throw new Error(
+      `COMPANY_ALIASES: the key "${from}" never matches; write it as "${normalizeCompany(from)}"`,
+    );
+  if (COMPANY_ALIASES.has(to))
+    throw new Error(`COMPANY_ALIASES: "${from}" points at "${to}", which is itself a key; aliases do not chain`);
+}
 
 const nameKey = (raw) =>
   (raw || "")
@@ -210,7 +239,15 @@ try {
       add(byName.get(p) ?? (await probeCharacter(c.names.get(p))));
     }
     for (const ch of byCompany.get(c.key) ?? []) add(ch);
-    const name = [...c.spellings.entries()].sort((a, b) => b[1] - a[1])[0][0];
+    // The most common raw spelling. Among equals, the one that is already the
+    // company's own key, so an alias does not put the division's name on the
+    // island: "Tern" over "Tern Travel" when each was typed once.
+    const name = [...c.spellings.entries()].sort(
+      (a, b) =>
+        b[1] - a[1] ||
+        (normalizeCompany(b[0]) === c.key) - (normalizeCompany(a[0]) === c.key) ||
+        a[0].localeCompare(b[0]),
+    )[0][0];
     // Someone who typed this company on their card but a different one on
     // Luma still counts as in the room, so the count never reads below the
     // row of characters under it.

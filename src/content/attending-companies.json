@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-15T23:18:08.261Z",
+  "fetchedAt": "2026-10-02T18:21:47.085Z",
   "minAttendees": 2,
   "companies": [
     {
@@ -74,6 +74,85 @@
       ]
     },
     {
+      "name": "Hack Club",
+      "count": 6,
+      "characters": [
+        {
+          "name": "Gary Tou",
+          "url": "https://clouds.sfruby.com/e/2026-bits/gary-tou",
+          "image": "/attending/gary-tou.webp"
+        },
+        {
+          "name": "Luke Oldenburg",
+          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
+          "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
+        },
+        {
+          "name": "Mohamad Mortada",
+          "url": "https://clouds.sfruby.com/e/2026-bits/mohamad-mortada",
+          "image": "/attending/mohamad-mortada.webp"
+        },
+        {
+          "name": "Samuel Fernandez",
+          "url": "https://clouds.sfruby.com/e/2026-bits/samuel-fernandez-c3ee20c4-b5e8-4946-895b-292220b34ca3",
+          "image": "/attending/samuel-fernandez-c3ee20c4-b5e8-4946-895b-292220b34ca3.webp"
+        }
+      ]
+    },
+    {
+      "name": "Persona",
+      "count": 6,
+      "characters": []
+    },
+    {
+      "name": "Gusto",
+      "count": 5,
+      "characters": [
+        {
+          "name": "Chris Fung",
+          "url": "https://clouds.sfruby.com/e/2026-bits/chris-fung",
+          "image": "/attending/chris-fung.webp"
+        },
+        {
+          "name": "Todd Sedano",
+          "url": "https://clouds.sfruby.com/e/2026-bits/todd-sedano",
+          "image": "/attending/todd-sedano.webp"
+        }
+      ]
+    },
+    {
+      "name": "Cisco",
+      "count": 4,
+      "characters": [
+        {
+          "name": "Cameron Dutro",
+          "url": "https://clouds.sfruby.com/e/2026-bits/cameron-dutro",
+          "image": "/attending/cameron-dutro.webp"
+        },
+        {
+          "name": "Fito Von Zastrow",
+          "url": "https://clouds.sfruby.com/e/2026-bits/fito-von-zastrow",
+          "image": "/attending/fito-von-zastrow.webp"
+        }
+      ]
+    },
+    {
+      "name": "Laravel",
+      "count": 4,
+      "characters": [
+        {
+          "name": "Ben Tumbleson",
+          "url": "https://clouds.sfruby.com/e/2026-bits/ben-tumbleson",
+          "image": "/attending/ben-tumbleson.webp"
+        },
+        {
+          "name": "Haley Madsen",
+          "url": "https://clouds.sfruby.com/e/2026-bits/haley-madsen",
+          "image": "/attending/haley-madsen.webp"
+        }
+      ]
+    },
+    {
       "name": "Handshake",
       "count": 3,
       "characters": [
@@ -91,22 +170,6 @@
           "name": "Trista Mueller",
           "url": "https://clouds.sfruby.com/e/2026-bits/trista-mueller",
           "image": "/attending/trista-mueller.webp"
-        }
-      ]
-    },
-    {
-      "name": "Hack Club",
-      "count": 3,
-      "characters": [
-        {
-          "name": "Gary Tou",
-          "url": "https://clouds.sfruby.com/e/2026-bits/gary-tou",
-          "image": "/attending/gary-tou.webp"
-        },
-        {
-          "name": "Luke Oldenburg",
-          "url": "https://clouds.sfruby.com/e/2026-bits/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33",
-          "image": "/attending/luke-oldenburg-32a1fb76-b4c5-47e4-a19b-6c5832920e33.webp"
         }
       ]
     },
@@ -154,18 +217,34 @@
       ]
     },
     {
-      "name": "Gusto",
+      "name": "Honeybadger",
       "count": 2,
       "characters": [
         {
-          "name": "Chris Fung",
-          "url": "https://clouds.sfruby.com/e/2026-bits/chris-fung",
-          "image": "/attending/chris-fung.webp"
+          "name": "Ben Curtis",
+          "url": "https://clouds.sfruby.com/e/2026-bits/ben-curtis",
+          "image": "/attending/ben-curtis.webp"
         },
         {
-          "name": "Todd Sedano",
-          "url": "https://clouds.sfruby.com/e/2026-bits/todd-sedano",
-          "image": "/attending/todd-sedano.webp"
+          "name": "Josh Wood",
+          "url": "https://clouds.sfruby.com/e/2026-bits/josh-wood",
+          "image": "/attending/josh-wood.webp"
+        }
+      ]
+    },
+    {
+      "name": "HopSkipDrive",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Sarah Young",
+          "url": "https://clouds.sfruby.com/e/2026-bits/sarah-young",
+          "image": "/attending/sarah-young.webp"
+        },
+        {
+          "name": "Nancy Correa",
+          "url": "https://clouds.sfruby.com/e/2026-bits/nancy-correa",
+          "image": "/attending/nancy-correa.webp"
         }
       ]
     },
@@ -186,6 +265,38 @@
       ]
     },
     {
+      "name": "Order.co",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Madison Sites",
+          "url": "https://clouds.sfruby.com/e/2026-bits/madison-sites",
+          "image": "/attending/madison-sites.webp"
+        },
+        {
+          "name": "Ambreen Hasan",
+          "url": "https://clouds.sfruby.com/e/2026-bits/ambreen-hasan",
+          "image": "/attending/ambreen-hasan.webp"
+        }
+      ]
+    },
+    {
+      "name": "Pinpoint",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Tim Krins",
+          "url": "https://clouds.sfruby.com/e/2026-bits/tim-krins",
+          "image": "/attending/tim-krins.webp"
+        },
+        {
+          "name": "Dominic Samphier",
+          "url": "https://clouds.sfruby.com/e/2026-bits/dominic-samphier",
+          "image": "/attending/dominic-samphier.webp"
+        }
+      ]
+    },
+    {
       "name": "Shopify",
       "count": 2,
       "characters": [
@@ -202,6 +313,22 @@
       ]
     },
     {
+      "name": "Tern",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Brian Reath",
+          "url": "https://clouds.sfruby.com/e/2026-bits/brian-reath",
+          "image": "/attending/brian-reath.webp"
+        },
+        {
+          "name": "Spencer Miskoviak",
+          "url": "https://clouds.sfruby.com/e/2026-bits/spencer-miskoviak",
+          "image": "/attending/spencer-miskoviak.webp"
+        }
+      ]
+    },
+    {
       "name": "Typesense",
       "count": 2,
       "characters": [
@@ -214,6 +341,17 @@
           "name": "Steph Farid",
           "url": "https://clouds.sfruby.com/e/2026-bits/steph-farid",
           "image": "/attending/steph-farid.webp"
+        }
+      ]
+    },
+    {
+      "name": "Binti",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Gideon",
+          "url": "https://clouds.sfruby.com/e/2026-bits/gideon",
+          "image": "/attending/gideon.webp"
         }
       ]
     },
@@ -240,13 +378,24 @@
       ]
     },
     {
-      "name": "Pinpoint",
+      "name": "TRMNL",
       "count": 2,
       "characters": [
         {
-          "name": "Tim Krins",
-          "url": "https://clouds.sfruby.com/e/2026-bits/tim-krins",
-          "image": "/attending/tim-krins.webp"
+          "name": "Ryan Kulp",
+          "url": "https://clouds.sfruby.com/e/2026-bits/ryan-kulp",
+          "image": "/attending/ryan-kulp.webp"
+        }
+      ]
+    },
+    {
+      "name": "Ubicloud",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Jeremy Evans",
+          "url": "https://clouds.sfruby.com/e/2026-bits/jeremy-evans",
+          "image": "/attending/jeremy-evans.webp"
         }
       ]
     },
@@ -262,7 +411,7 @@
       ]
     },
     {
-      "name": "HopSkipDrive",
+      "name": "Numero",
       "count": 2,
       "characters": []
     },
@@ -272,7 +421,7 @@
       "characters": []
     },
     {
-      "name": "Ubicloud",
+      "name": "UC Berkeley",
       "count": 2,
       "characters": []
     }
