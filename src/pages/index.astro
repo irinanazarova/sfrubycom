@@ -10,7 +10,7 @@ import GettingThere from "../components/GettingThere.astro";
 import Schedule from "../components/Schedule.astro";
 import TicketsBlock from "../components/TicketsBlock.astro";
 import Crew from "../components/Crew.astro";
-import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers, ticketTiers } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, headlineTier, lowestLivePrice, conferenceSpeakers, ticketTiers } from "../data/conference-2026.js";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import { markdownTwinFor } from "../lib/markdown-twins.js";
@@ -44,16 +44,22 @@ const cameos = [
 const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);
 
 // One description for the meta tag, Open Graph and Twitter, from the same
-// data the page renders, so a price change never leaves a stale preview.
-const fromPrice = Math.min(...ticketTiers.filter((t) => t.state === "live").map((t) => t.price));
-const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live, tickets from $${fromPrice}.`;
+// data the page renders, so a price change never leaves a stale preview. The
+// price phrase drops when nothing is on sale.
+const fromPrice = lowestLivePrice();
+const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live${fromPrice ? `, tickets from $${fromPrice}` : ""}.`;
 
-// Deadline text for the hero CTA.
-const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    timeZone: "America/Los_Angeles",
-});
+// Price and deadline for the hero CTA, read from the ladder so the button can
+// never quote a tier that has closed. The deadline is optional: Company-sponsored
+// is invoiced and has none, and it becomes the headline the day Late bird closes.
+const headline = headlineTier();
+const headlineCloses = headline?.closesOn
+    ? new Date(headline.closesOn).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          timeZone: "America/Los_Angeles",
+      })
+    : null;
 ---
 
 <!doctype html>
@@ -231,10 +237,16 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                 </span>
                                 <span class="flex flex-col gap-1.5">
                                     <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Get your ticket</span>
-                                    <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
-                                        <span class="whitespace-nowrap">$450 &#183; until {regularCloses}<span id="days-left"></span></span>
-                                        <span class="whitespace-nowrap">One day: $350</span>
-                                    </span>
+                                    {headline && (
+                                        <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
+                                            <span class="whitespace-nowrap">
+                                                ${headline.price}
+                                                {headlineCloses && (
+                                                    <Fragment> &#183; until {headlineCloses}<span id="days-left" /></Fragment>
+                                                )}
+                                            </span>
+                                        </span>
+                                    )}
                                 </span>
                             </a>
                             <!-- The herald: the early-bird dragon, its sign
@@ -257,7 +269,7 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                             </a>
                         </div>
                     </div>
-                    <script define:vars={{ closesOn: regularTier.closesOn }}>
+                    <script define:vars={{ closesOn: headline?.closesOn ?? null }}>
                         // Countdown next to the deadline, computed on the client so
                         // the static build never goes stale. Absent if JS fails.
                         const el = document.getElementById("days-left");
