@@ -146,7 +146,7 @@ const headlineCloses = headline?.closesOn
                 <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-24 left-[6%] w-48 md:w-72 animate-float pointer-events-none" aria-hidden="true" />
                 <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute top-40 right-[8%] w-32 md:w-48 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
                 <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-16 left-[44%] w-20 md:w-28 animate-float [animation-delay:-1.5s] pointer-events-none hidden md:block" aria-hidden="true" />
-                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute bottom-52 right-[2%] w-40 md:w-64 animate-float [animation-delay:-6s] pointer-events-none hidden lg:block" aria-hidden="true" />
+                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute bottom-24 right-[2%] w-40 md:w-64 animate-float [animation-delay:-6s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-60 left-[1%] w-28 md:w-40 animate-float [animation-delay:-4s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute bottom-44 left-[3%] w-56 h-auto animate-float [animation-delay:-4.5s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[30%] right-[3%] w-36 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
@@ -242,7 +242,7 @@ const headlineCloses = headline?.closesOn
                                             <span class="whitespace-nowrap">
                                                 ${headline.price}
                                                 {headlineCloses && (
-                                                    <Fragment> &#183; until {headlineCloses}<span id="days-left" /></Fragment>
+                                                    <span id="headline-deadline"> &#183; until {headlineCloses}<span id="days-left" /></span>
                                                 )}
                                             </span>
                                         </span>
@@ -272,12 +272,20 @@ const headlineCloses = headline?.closesOn
                     <script define:vars={{ closesOn: headline?.closesOn ?? null }}>
                         // Countdown next to the deadline, computed on the client so
                         // the static build never goes stale. Absent if JS fails.
-                        const el = document.getElementById("days-left");
-                        const days = Math.ceil(
-                            (new Date(closesOn).getTime() - Date.now()) / 86400000,
-                        );
-                        if (el && days > 0 && days < 120)
-                            el.textContent = ` (${days}d)`;
+                        // The last day says so. Once the deadline passes the page
+                        // still carries the closed tier until the ladder is edited
+                        // and the site rebuilds, so the deadline is dropped rather
+                        // than quoting a date that is gone.
+                        if (closesOn) {
+                            const deadline = document.getElementById("headline-deadline");
+                            const el = document.getElementById("days-left");
+                            const left = new Date(closesOn).getTime() - Date.now();
+                            const days = Math.ceil(left / 86400000);
+                            if (left <= 0 && deadline) deadline.hidden = true;
+                            else if (left < 86400000 && deadline) deadline.textContent = " · last day";
+                            else if (el && days > 0 && days < 120)
+                                el.textContent = ` (${days}d)`;
+                        }
                     </script>
                     <script>
                         // Character select: cycle the highlight through the

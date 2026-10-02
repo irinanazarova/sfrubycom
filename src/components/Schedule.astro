@@ -60,14 +60,16 @@ const breakLabel = { break: "Break", lunch: "Lunch" };
                 <span class="px-plate px-plate--gold px-font text-px8 px-2 py-1 mx-1">Big teams</span>
                 are in a conversation group, then they swap.
             </p>
-            <nav class="mt-8 flex flex-wrap justify-center gap-3" aria-label="Days">
+            {/* One row on phones too: "Day 1 · Nov 10" three times is wider
+                than 390px, so there the date stacks under the day. */}
+            <nav class="mt-8 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3" aria-label="Days">
                 {
                     days.map((d) => (
                         <a
                             href={`#day${d.n}`}
-                            class="px-btn px-btn--white px-font text-px8 md:text-px9 px-4 py-3 tap-press"
+                            class="px-btn px-btn--white px-font text-px8 md:text-px9 px-2 sm:px-4 py-3 tap-press text-center flex-col sm:flex-row"
                         >
-                            Day {d.n} · {formatDay(d)}
+                            <span class="block sm:inline">Day {d.n}</span><span class="hidden sm:inline">·</span><span class="block sm:inline">{formatDay(d)}</span>
                         </a>
                     ))
                 }

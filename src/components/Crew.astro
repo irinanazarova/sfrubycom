@@ -11,6 +11,18 @@ const people = [...(crew.organizers ?? []), ...(crew.volunteers ?? [])].sort((a,
     a.name.localeCompare(b.name),
 );
 const groups = people.length ? [{ label: "Organizers and volunteers", people }] : [];
+
+// One island stretched under everyone blew the island sprite up to several
+// times the characters' pixel size. An archipelago of small islands keeps
+// both at the scale the companies section uses. Groups are balanced, so 13
+// people stand 5, 5 and 3 rather than 6, 6 and one alone.
+const PER_ISLAND = 6;
+const drawn = people.filter((p) => p.image);
+const islandCount = Math.ceil(drawn.length / PER_ISLAND);
+const perIsland = Math.ceil(drawn.length / Math.max(islandCount, 1));
+const islands = Array.from({ length: islandCount }, (_, i) =>
+    drawn.slice(i * perIsland, (i + 1) * perIsland),
+).filter((isle) => isle.length);
 ---
 
 {
@@ -30,11 +42,11 @@ const groups = people.length ? [{ label: "Organizers and volunteers", people }] 
                     </p>
                 </div>
 
-                <ul class="mt-12 flex flex-wrap justify-center items-end list-none p-0 m-0">
-                    {groups.map((g) => (
-                        <li class="flex flex-col items-center animate-float min-w-[10rem]">
-                            <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[44rem] px-4 -mb-1.5">
-                                {g.people.filter((p) => p.image).map((p) => (
+                <ul class="mt-12 flex flex-wrap justify-center items-end gap-x-8 gap-y-10 md:gap-x-12 list-none p-0 m-0">
+                    {islands.map((isle, i) => (
+                        <li class="flex flex-col items-center animate-float" style={`animation-delay: ${(i * -1.3).toFixed(1)}s`}>
+                            <div class="relative z-10 flex items-end justify-center gap-1 px-3 -mb-1.5">
+                                {isle.map((p) => (
                                     <a href={p.url} target="_blank" rel="noopener noreferrer" class="block tap-press" title={p.name} aria-label={`${p.name}'s Cloud Card`}>
                                         <img src={p.image} alt={p.name} width="73" height="128" loading="lazy" decoding="async" class="px-pixelated h-14 md:h-16 w-auto" />
                                     </a>
@@ -43,12 +55,14 @@ const groups = people.length ? [{ label: "Organizers and volunteers", people }] 
                             <div class="w-0 min-w-full">
                                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated w-full h-auto" />
                             </div>
-                            <p class="font-mono text-xs text-white/90 px-shadow-ink-sm text-center leading-relaxed mt-3 max-w-[44rem]">
-                                {g.people.map((p) => p.name).join(" · ")}
-                            </p>
                         </li>
                     ))}
                 </ul>
+                {groups.map((g) => (
+                    <p class="font-mono text-xs text-white/90 px-shadow-ink-sm text-center leading-relaxed mt-8 max-w-[44rem] mx-auto">
+                        {g.people.map((p) => p.name).join(" · ")}
+                    </p>
+                ))}
             </div>
 
             <!-- crenellated step into the community strip -->

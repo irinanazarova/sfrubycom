@@ -37,10 +37,21 @@
         min-width: 2.75rem;
         min-height: 2.75rem;
     }
+    .px-share-tail {
+        white-space: nowrap;
+    }
     .px-share svg {
         width: 100%;
         height: 100%;
         display: block;
+    }
+    /* On a sky band the heading stands out through its ink extrusion; the
+       icon gets the same one, or gold on blue all but disappears. */
+    .px-shadow-ink .px-share svg {
+        filter: drop-shadow(2px 2px 0 var(--px-ink));
+    }
+    .px-shadow-ink .px-share {
+        opacity: 0.8;
     }
     .px-share:hover,
     .px-share:focus-visible,
@@ -107,8 +118,22 @@
             }, 1600);
         });
 
-        // A word joiner glues the icon to the last word, so a centered
-        // heading never wraps the icon onto a line of its own.
-        heading.append("\u2060", button);
+        // Glue the icon to the heading's last word, so a centered heading
+        // never wraps the icon onto a line of its own. A word joiner is not
+        // enough: Chrome still breaks before an inline-block after one.
+        const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+        let last: Text | null = null;
+        for (let n = walker.nextNode(); n; n = walker.nextNode())
+            if (n.textContent?.trim()) last = n as Text;
+        const tail = document.createElement("span");
+        tail.className = "px-share-tail";
+        if (last) {
+            const text = last.textContent!.replace(/\s+$/, "");
+            const cut = text.search(/\S+$/);
+            last.textContent = text.slice(0, cut);
+            tail.append(text.slice(cut));
+            last.after(tail);
+        } else heading.append(tail);
+        tail.append(button);
     }
 </script>
