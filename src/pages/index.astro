@@ -433,7 +433,7 @@ const headlineCloses = headline?.closesOn
                         // jumps. Thirty extra lives, as in Contra.
                         {
                             const CODE = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
-                            let pos = 0;
+                            let recent = [];
                             let busy = false;
                             const party = () => {
                                 if (busy) return;
@@ -452,11 +452,14 @@ const headlineCloses = headline?.closesOn
                                     busy = false;
                                 }, 2200);
                             };
+                            // The last ten keys against the code: a position
+                            // counter missed "Up Up Up Down ...", where a third
+                            // Up has to restart the match one step in.
                             document.addEventListener("keydown", (e) => {
                                 const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
-                                pos = key === CODE[pos] ? pos + 1 : key === CODE[0] ? 1 : 0;
-                                if (pos === CODE.length) {
-                                    pos = 0;
+                                recent = [...recent, key].slice(-CODE.length);
+                                if (recent.join() === CODE.join()) {
+                                    recent = [];
                                     party();
                                 }
                             });

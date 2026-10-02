@@ -507,8 +507,10 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
     if (section && dayEls.length) {
         section.classList.add("js-days");
         const fromHash = location.hash.match(/^#day(\d+)$/)?.[1];
+        // Searched within the schedule: the hero's fighter panel carries the
+        // same data-speaker-dialog attribute, and comes first in the page.
         const fromSpeaker = initial
-            ? document.querySelector(`[data-speaker-dialog="${CSS.escape(initial)}"]`)
+            ? section.querySelector(`.schedule-day [data-speaker-dialog="${CSS.escape(initial)}"]`)
                   ?.closest<HTMLElement>(".schedule-day")?.dataset.day
             : undefined;
         const today = dayEls.find((el) => el.dataset.date === ptDate(now()))?.dataset.day;
