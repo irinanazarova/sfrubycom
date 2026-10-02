@@ -10,7 +10,7 @@ import GettingThere from "../components/GettingThere.astro";
 import Schedule from "../components/Schedule.astro";
 import TicketsBlock from "../components/TicketsBlock.astro";
 import Crew from "../components/Crew.astro";
-import { ticketLink, ticketEventClass, regularTier, conferenceSpeakers, ticketTiers, cfpNameAliases } from "../data/conference-2026.js";
+import { ticketLink, ticketEventClass, headlineTier, lowestLivePrice, conferenceSpeakers, ticketTiers, cfpNameAliases } from "../data/conference-2026.js";
 import { buildProfiles } from "../utils/speakerProfiles.js";
 import cfpTalks from "../content/cfp-talks.json";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
@@ -50,16 +50,22 @@ const cameos = [
 const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);
 
 // One description for the meta tag, Open Graph and Twitter, from the same
-// data the page renders, so a price change never leaves a stale preview.
-const fromPrice = Math.min(...ticketTiers.filter((t) => t.state === "live").map((t) => t.price));
-const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live, tickets from $${fromPrice}.`;
+// data the page renders, so a price change never leaves a stale preview. The
+// price phrase drops when nothing is on sale.
+const fromPrice = lowestLivePrice();
+const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live${fromPrice ? `, tickets from $${fromPrice}` : ""}.`;
 
-// Deadline text for the hero CTA.
-const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    timeZone: "America/Los_Angeles",
-});
+// Price and deadline for the hero CTA, read from the ladder so the button can
+// never quote a tier that has closed. The deadline is optional: Company-sponsored
+// is invoiced and has none, and it becomes the headline the day Late bird closes.
+const headline = headlineTier();
+const headlineCloses = headline?.closesOn
+    ? new Date(headline.closesOn).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          timeZone: "America/Los_Angeles",
+      })
+    : null;
 ---
 
 <!doctype html>
@@ -252,10 +258,16 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                 </span>
                                 <span class="flex flex-col gap-1.5">
                                     <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Get your ticket</span>
-                                    <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
-                                        <span id="regular-price" class="whitespace-nowrap">$450 &#183; until {regularCloses}<span id="days-left"></span></span>
-                                        <span class="whitespace-nowrap">One day: $350</span>
-                                    </span>
+                                    {headline && (
+                                        <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
+                                            <span class="whitespace-nowrap">
+                                                ${headline.price}
+                                                {headlineCloses && (
+                                                    <span id="headline-deadline"> &#183; until {headlineCloses}<span id="days-left" /></span>
+                                                )}
+                                            </span>
+                                        </span>
+                                    )}
                                 </span>
                             </a>
                         </div>
@@ -279,19 +291,23 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                             />
                         </a>
                     </div>
-                    <script define:vars={{ closesOn: regularTier.closesOn, nextPrice: regularTier.nextPrice }}>
+                    <script define:vars={{ closesOn: headline?.closesOn ?? null }}>
                         // Countdown next to the deadline, computed on the client so
                         // the static build never goes stale. Absent if JS fails.
-                        // The daily build runs at 6 am PT, so between midnight and
-                        // then the page still carries the closed price: swap it here.
-                        const line = document.getElementById("regular-price");
-                        const el = document.getElementById("days-left");
-                        const left = new Date(closesOn).getTime() - Date.now();
-                        const days = Math.ceil(left / 86400000);
-                        if (left <= 0 && line) line.textContent = `$${nextPrice}`;
-                        else if (left < 86400000 && line) line.textContent = "$450 · last day";
-                        else if (el && days > 0 && days < 120)
-                            el.textContent = ` (${days}d)`;
+                        // The last day says so. Once the deadline passes the page
+                        // still carries the closed tier until the ladder is edited
+                        // and the site rebuilds, so the deadline is dropped rather
+                        // than quoting a date that is gone.
+                        if (closesOn) {
+                            const deadline = document.getElementById("headline-deadline");
+                            const el = document.getElementById("days-left");
+                            const left = new Date(closesOn).getTime() - Date.now();
+                            const days = Math.ceil(left / 86400000);
+                            if (left <= 0 && deadline) deadline.hidden = true;
+                            else if (left < 86400000 && deadline) deadline.textContent = " · last day";
+                            else if (el && days > 0 && days < 120)
+                                el.textContent = ` (${days}d)`;
+                        }
                     </script>
                     <script>
                         // Character select: cycle the highlight through the
@@ -459,7 +475,8 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
 
                 <!-- Organized by + sponsors: running ticker along the hero's bottom
                      edge. Sponsor logos are dark art, so they ride the dark strip
-                     as white silhouettes (brightness-0 invert). The clone group is
+                     as white silhouettes (brightness-0 invert), unless the sponsor
+                     brings its own dark-background tickerLogo. The clone group is
                      aria-hidden and link-free so tab order sees each brand once. -->
                 <!-- the ground the scene stands on, with the sponsor ticker as
                      the strip beneath it -->
@@ -514,11 +531,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                         {tickerSponsors.map((sponsor) =>
                                             clone ? (
                                                 <img
-                                                    src={sponsor.logo}
+                                                    src={sponsor.tickerLogo ?? sponsor.logo}
                                                     alt=""
                                                     width={sponsor.logoWidth}
                                                     height={sponsor.logoHeight}
-                                                    class={`h-6 md:h-7 w-auto shrink-0 object-contain brightness-0 invert ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
+                                                    class={`h-6 md:h-7 w-auto shrink-0 object-contain ${sponsor.tickerLogo ? "" : "brightness-0 invert"} ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
                                                     loading="eager"
                                                 />
                                             ) : (
@@ -529,11 +546,11 @@ const regularCloses = new Date(regularTier.closesOn).toLocaleDateString("en-US",
                                                     class="shrink-0 hover:opacity-80 transition-opacity"
                                                 >
                                                     <img
-                                                        src={sponsor.logo}
+                                                        src={sponsor.tickerLogo ?? sponsor.logo}
                                                         alt={sponsor.name}
                                                         width={sponsor.logoWidth}
                                                         height={sponsor.logoHeight}
-                                                        class={`h-6 md:h-7 w-auto object-contain brightness-0 invert ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
+                                                        class={`h-6 md:h-7 w-auto object-contain ${sponsor.tickerLogo ? "" : "brightness-0 invert"} ${sponsor.wideLockup ? "max-w-[10rem]" : ""}`}
                                                         loading="eager"
                                                     />
                                                 </a>

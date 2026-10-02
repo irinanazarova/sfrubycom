@@ -4,8 +4,9 @@
 // The remaining count appears only once it is genuinely small, where it is
 // information rather than pressure.
 import {
-    regularTier,
-    regularRemaining,
+    headlineTier,
+    salesCounter,
+    ticketsRemaining,
     ticketLink,
     ticketEventClass,
 } from "../data/conference-2026.js";
@@ -17,13 +18,19 @@ interface Props {
 
 const { variant = "dark", withCta = false } = Astro.props;
 
-const remaining = regularRemaining();
-const closes = new Date(regularTier.closesOn).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    timeZone: "America/Los_Angeles",
-});
-const showCount = remaining <= regularTier.showCountBelow;
+// Price and deadline from the ladder, so the strip cannot quote a tier that has
+// closed. Both the deadline and the count are optional: the company-sponsored
+// tier has no deadline, and an uncapped tier has no count.
+const tier = headlineTier();
+const remaining = ticketsRemaining();
+const closes = tier?.closesOn
+    ? new Date(tier.closesOn).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          timeZone: "America/Los_Angeles",
+      })
+    : null;
+const showCount = remaining !== null && remaining <= salesCounter.showCountBelow;
 ---
 
 <div
@@ -32,13 +39,21 @@ const showCount = remaining <= regularTier.showCountBelow;
         variant === "dark" ? "bg-white/95" : "bg-white",
     ]}
 >
-    <span class="px-font text-px10 md:text-xs text-gray-900">$450</span>
+    <span class="px-font text-px10 md:text-xs text-gray-900">${tier?.price}</span>
 
-    <span class="hidden sm:block w-px h-6 bg-gray-200" aria-hidden="true"></span>
-
-    <span class="text-xs md:text-sm text-gray-600 text-center sm:text-left">
-        Until {closes}
-    </span>
+    {
+        closes && (
+            <>
+                <span
+                    class="hidden sm:block w-px h-6 bg-gray-200"
+                    aria-hidden="true"
+                />
+                <span class="text-xs md:text-sm text-gray-600 text-center sm:text-left">
+                    Until {closes}
+                </span>
+            </>
+        )
+    }
 
     {
         showCount && (
