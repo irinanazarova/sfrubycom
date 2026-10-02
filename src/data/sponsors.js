@@ -187,6 +187,14 @@ export const conference2026SponsorTiers = [
         logoHeight: 63,
         url: "https://www.fastruby.io/",
       },
+      {
+        // Full-color logo for light backgrounds, from neon.com/brand.
+        name: "Neon",
+        logo: "/sponsor_neon.svg",
+        logoWidth: 157,
+        logoHeight: 45,
+        url: "https://neon.com/",
+      },
     ],
   },
   {
