@@ -3,16 +3,34 @@
 // Rendered on the homepage (#sponsors-2026 section + hero ticker).
 // Tier order here is display order; headingClass colors the tier heading.
 // size drives how big the logo cards render (SponsorTiers.astro): "xl" for
-// Pickaxe when we sell one, "lg" for the Ruby-priced tiers (Ruby, Coffee,
-// Passport), "md" for Emerald, "sm" for Travel, "xs" for Media. The size hierarchy is the visual part of
+// Pickaxe, "lg" for the Ruby-priced tiers (Ruby, Coffee, Passport, Speaker
+// Dinner), "md" for Emerald, "sm" for Community and Travel, "xs" for Media. The size hierarchy is the visual part of
 // what a sponsor pays for, so keep it in step with the prices on /sponsor-2026.
 // logoWidth/logoHeight are the file's intrinsic pixel dimensions (sips -g
 // pixelWidth -g pixelHeight public/<logo>). They must be present and correct:
 // the hero ticker animates translateX(-100%), which resolves against content
 // width, so a logo without a reserved aspect ratio renders 0px wide until it
 // loads and the strip's width jumps mid-animation (Safari glitches on that).
+// The hero ticker draws logos as white silhouettes. A logo with art cut out of
+// a filled shape (CodeRabbit's rabbit in its circle) turns into a solid blob
+// that way, so it sets tickerLogo to the brand's own dark-background file,
+// which the ticker shows as it is, without the filter.
 // ============================================================
 export const conference2026SponsorTiers = [
+  {
+    tier: "Pickaxe Sponsor",
+    size: "xl",
+    headingClass: "text-ruby-600",
+    sponsors: [
+      {
+        name: "Buildkite",
+        logo: "/sponsor_buildkite.svg",
+        logoWidth: 962,
+        logoHeight: 160,
+        url: "https://buildkite.com/",
+      },
+    ],
+  },
   {
     tier: "Ruby Sponsors",
     size: "lg",
@@ -99,6 +117,23 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
+    tier: "Speaker Dinner Sponsor",
+    size: "lg",
+    shareRow: true, // sits beside the other single-sponsor tiers
+    headingClass: "text-ruby-600",
+    sponsors: [
+      {
+        name: "CodeRabbit",
+        logo: "/sponsor_coderabbit.svg",
+        logoWidth: 2152,
+        logoHeight: 314,
+        tickerLogo: "/sponsor_coderabbit_white.svg", // 2152x313, same box
+        wideLockup: true, // 6.9:1, same trade as Laravel Cloud above
+        url: "https://www.coderabbit.ai/",
+      },
+    ],
+  },
+  {
     tier: "Emerald Sponsors",
     size: "md",
     headingClass: "text-grass-500",
@@ -151,6 +186,21 @@ export const conference2026SponsorTiers = [
         logoWidth: 335,
         logoHeight: 63,
         url: "https://www.fastruby.io/",
+      },
+    ],
+  },
+  {
+    tier: "Community Sponsor",
+    size: "sm",
+    headingClass: "text-gray-500",
+    sponsors: [
+      {
+        // Charcoal, medium cut (21-45px tall) from the Mux press kit.
+        name: "Mux",
+        logo: "/sponsor_mux.svg",
+        logoWidth: 154,
+        logoHeight: 48,
+        url: "https://www.mux.com/",
       },
     ],
   },

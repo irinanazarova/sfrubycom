@@ -164,56 +164,87 @@ export const conferenceSpeakers = [
 // Empty right now: the 2026 feed's names were fixed in the CFP app itself.
 export const cfpNameAliases = {};
 
-// The ladder is the argument for buying today. Keep it in sync with Luma.
+// The ladder is the argument for buying today. Keep it in sync with Luma: each
+// ticket type there carries the dates, and a tier whose window has passed is
+// `gone` here. Regular and the two single-day tickets closed on Sep 30, 2026.
 //
-// No late-bird tier is published on purpose: pricing after Regular is undecided,
-// and announcing a tier that may not exist is worse than announcing none. Until
-// one is set, Corporate is the only ticket on sale once Regular closes or sells
-// out, so the copy promises a rise without naming a number.
+// Late bird is the last ticket an individual can buy, and nothing is published
+// after it: once it closes on Nov 8, Company-sponsored is the only one left,
+// which is why that card quotes no deadline. One tier carries `headline: true`,
+// the price and countdown the hero quotes.
 export const ticketTiers = [
   { name: "Early bird", price: 350, note: "Sold out", state: "gone" },
   {
     name: "Regular",
     price: 450,
-    note: "Both days and the community day. Until Sep 30",
-    state: "live",
+    note: "Closed Sep 30",
+    state: "gone",
   },
   // Two tickets on Luma, "Day 1 ONLY" and "Day 2 ONLY", one row here: the
-  // choice is the day, and the price is the same.
+  // choice was the day, and the price was the same.
   {
     name: "Single day",
     price: 350,
-    note: "Day 1 AI-heavy OR Day 2 AI-light. Until Sep 30",
+    note: "Closed Sep 30",
+    state: "gone",
+  },
+  {
+    name: "Late bird",
+    price: 500,
+    note: "Both days and the community day. Until Nov 8",
+    closesOn: "2026-11-08T23:59:00-08:00",
     state: "live",
+    headline: true,
   },
   {
     name: "Company-sponsored",
     price: 650,
-    note: "Invoiced, expensable, no deadline. Buying this tier is what keeps Regular at $450.",
+    note: "Invoiced, expensable, no deadline. Buying this tier is what keeps Late bird at $500.",
     state: "live",
   },
-  // Opens when Regular closes. `soon` renders muted and without a button.
-  { name: "Late bird", price: 500, note: "From Oct 1", state: "soon" },
 ];
 
-// Regular-tier sales counter. Update from Luma (Registration tab shows sold/total),
-// or wire `sold` to the Luma API in scripts/fetch-luma-events.js and read it from
-// src/content/. Deliberately a plain number so a non-engineer can bump it.
-export const regularTier = {
-  sold: 20, // Luma, 2026-09-06
-  total: 174,
-  closesOn: "2026-09-30T23:59:00-07:00",
-  // Set once the post-Regular tier is decided; until then the strip says prices
-  // rise without quoting a figure we might not honour.
-  nextPrice: 500,
+// The tier the hero quotes: its price and, when it has one, its deadline.
+// Falls back to any live tier, so a ladder with no headline flag still renders
+// a price, and to undefined once nothing is on sale. A caller must handle both
+// a missing tier and a tier without `closesOn`: Company-sponsored is invoiced
+// and has no deadline, so it is the fallback the day Late bird closes.
+export const headlineTier = () =>
+  ticketTiers.find((t) => t.state === "live" && t.headline) ??
+  ticketTiers.find((t) => t.state === "live");
+
+// Lowest price on sale, for "tickets from $N". Null when nothing is on sale,
+// so a caller drops the phrase rather than printing Infinity.
+export const lowestLivePrice = () => {
+  const live = ticketTiers.filter((t) => t.state === "live").map((t) => t.price);
+  return live.length ? Math.min(...live) : null;
+};
+
+// Sales counter for the tier on sale, read by the scarcity strip. Price and
+// deadline come from `headlineTier()`, so only the count lives here. Update
+// from Luma (Registration tab shows sold/total), or wire `sold` to the Luma API
+// in scripts/fetch-luma-events.js and read it from src/content/. Deliberately
+// plain numbers so a non-engineer can bump them.
+//
+// `total` is the tier's capacity on Luma, and null when the tier has none: Late
+// bird is uncapped, so there is no count to show and the strip shows only the
+// deadline. Regular, which closed on Sep 30, sold 51 of 175.
+export const salesCounter = {
+  tier: "Late bird",
+  sold: 0, // Luma, 2026-10-01
+  total: null,
   // A remaining-count only reads as scarcity once it is small. Above this it reads
   // as "nobody is buying", so the strip shows the deadline instead. Raise it as the
   // tier fills; below it the live count and the sold meter appear on their own.
   showCountBelow: 60,
 };
 
-export const regularRemaining = () =>
-  Math.max(0, regularTier.total - regularTier.sold);
+// Null when the tier is uncapped, so the caller hides the count instead of
+// printing a number it cannot know.
+export const ticketsRemaining = () =>
+  salesCounter.total === null
+    ? null
+    : Math.max(0, salesCounter.total - salesCounter.sold);
 
 export const LUMA_URL = "https://luma.com/sfrubyconf2026";
 
