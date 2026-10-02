@@ -75,6 +75,7 @@ const NOT_A_COMPANY = new Set([
 // cases where the two names are the same employer.
 const COMPANY_ALIASES = new Map([
   ["cisco meraki", "cisco"],
+  ["persona identities", "persona"],
   ["tern travel", "tern"],
 ]);
 

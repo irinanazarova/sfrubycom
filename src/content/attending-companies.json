@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-30T14:13:15.903Z",
+  "fetchedAt": "2026-10-02T12:25:45.957Z",
   "minAttendees": 2,
   "companies": [
     {
@@ -75,7 +75,7 @@
     },
     {
       "name": "Hack Club",
-      "count": 5,
+      "count": 6,
       "characters": [
         {
           "name": "Gary Tou",
@@ -91,6 +91,32 @@
           "name": "Mohamad Mortada",
           "url": "https://clouds.sfruby.com/e/2026-bits/mohamad-mortada",
           "image": "/attending/mohamad-mortada.webp"
+        },
+        {
+          "name": "Samuel Fernandez",
+          "url": "https://clouds.sfruby.com/e/2026-bits/samuel-fernandez-c3ee20c4-b5e8-4946-895b-292220b34ca3",
+          "image": "/attending/samuel-fernandez-c3ee20c4-b5e8-4946-895b-292220b34ca3.webp"
+        }
+      ]
+    },
+    {
+      "name": "Persona",
+      "count": 6,
+      "characters": []
+    },
+    {
+      "name": "Gusto",
+      "count": 5,
+      "characters": [
+        {
+          "name": "Chris Fung",
+          "url": "https://clouds.sfruby.com/e/2026-bits/chris-fung",
+          "image": "/attending/chris-fung.webp"
+        },
+        {
+          "name": "Todd Sedano",
+          "url": "https://clouds.sfruby.com/e/2026-bits/todd-sedano",
+          "image": "/attending/todd-sedano.webp"
         }
       ]
     },
@@ -148,22 +174,6 @@
       ]
     },
     {
-      "name": "Gusto",
-      "count": 3,
-      "characters": [
-        {
-          "name": "Chris Fung",
-          "url": "https://clouds.sfruby.com/e/2026-bits/chris-fung",
-          "image": "/attending/chris-fung.webp"
-        },
-        {
-          "name": "Todd Sedano",
-          "url": "https://clouds.sfruby.com/e/2026-bits/todd-sedano",
-          "image": "/attending/todd-sedano.webp"
-        }
-      ]
-    },
-    {
       "name": "IFTTT",
       "count": 3,
       "characters": [
@@ -203,6 +213,22 @@
           "name": "Ben Parisot",
           "url": "https://clouds.sfruby.com/e/2026-bits/ben-parisot",
           "image": "/attending/ben-parisot.webp"
+        }
+      ]
+    },
+    {
+      "name": "Honeybadger",
+      "count": 2,
+      "characters": [
+        {
+          "name": "Ben Curtis",
+          "url": "https://clouds.sfruby.com/e/2026-bits/ben-curtis",
+          "image": "/attending/ben-curtis.webp"
+        },
+        {
+          "name": "Josh Wood",
+          "url": "https://clouds.sfruby.com/e/2026-bits/josh-wood",
+          "image": "/attending/josh-wood.webp"
         }
       ]
     },
@@ -383,6 +409,11 @@
           "image": "/attending/zachary-roland.webp"
         }
       ]
+    },
+    {
+      "name": "Numero",
+      "count": 2,
+      "characters": []
     },
     {
       "name": "thoughtbot",
