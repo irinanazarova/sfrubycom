@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 import EmailModal from "../../components/EmailModal.astro";
 import PostingRulesModal from "../../components/PostingRulesModal.astro";
 import { getSortedJobs, jobCompanyId } from "../../data/jobs.js";
@@ -23,13 +24,6 @@ import {
     chipKind,
     orderChips,
 } from "../../utils/jobFacets.js";
-
-// Chip pill styling per kind (focus / stack / signal).
-const CHIP_CLASS = {
-    focus: "border-ruby-200 text-ruby-700 bg-ruby-50/60",
-    stack: "border-indigo-200 text-indigo-700 bg-indigo-50/60",
-    signal: "border-amber-200 text-amber-800 bg-amber-50/60",
-};
 
 // Full-text haystack per job for the search box: title, company, location,
 // chips, industry/stage, and the description. Lowercased once at build time.
@@ -152,66 +146,56 @@ const facetGroups = [
     title="Ruby Jobs - SF Ruby"
     description="Find your next Ruby opportunity. Filter Ruby and Rails roles by location, work arrangement, seniority, industry, and salary."
 >
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-12 px-sky-grad-dusk overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
-        </div>
-
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <h1 class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-5">
-                    Ruby Jobs
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300 mb-6">
-                    Ruby and Rails roles, from new grad to staff, in the Bay Area, elsewhere in California, and remote across the US. Filter to what fits you.
-                </p>
-
-                <div class="flex flex-wrap items-center gap-8">
-                    <div>
-                        <div class="text-3xl font-bold text-white">{jobs.length}</div>
-                        <div class="text-sm text-gray-400">Open Positions</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-bold text-emerald-400">{uniqueCompanies.size}</div>
-                        <div class="text-sm text-gray-400">Companies Hiring</div>
-                    </div>
-                    <button
-                        data-email-modal="post-job"
-                        class="tap-press px-btn px-font text-px9 gap-2 px-5 py-3 bg-white text-ruby-600 hover:bg-gray-50"
-                    >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Post a Job
-                    </button>
-                    <button
-                        type="button"
-                        data-posting-rules-open
-                        class="tap-press tap-hit px-font text-px9 text-white/80 hover:text-white underline decoration-white/40 hover:decoration-white transition-colors"
-                    >
-                        Posting rules
-                    </button>
-                </div>
+    <PageHero
+        title="Ruby Jobs"
+        lede="Ruby and Rails roles, from new grad to staff, in the Bay Area, elsewhere in California, and remote across the US. Filter to what fits you."
+        next="var(--white)"
+    >
+        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+            <div class="flex items-baseline gap-2">
+                <span class="px-font px-shadow-ink text-base md:text-lg text-white">{jobs.length}</span>
+                <span class="text-sm md:text-base text-white px-shadow-ink-sm">Open Positions</span>
+            </div>
+            <div class="flex items-baseline gap-2">
+                <span class="px-font px-shadow-ink text-base md:text-lg text-gold-400">{uniqueCompanies.size}</span>
+                <span class="text-sm md:text-base text-white px-shadow-ink-sm">Companies Hiring</span>
             </div>
         </div>
-    </section>
+        <div class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            <button
+                data-email-modal="post-job"
+                class="tap-press px-btn px-btn--white px-font text-px9 gap-2 px-5 py-3"
+            >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="square" stroke-width="3" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Post a Job
+            </button>
+            <button
+                type="button"
+                data-posting-rules-open
+                class="tap-press tap-hit px-font text-px9 text-white px-shadow-ink-sm underline decoration-white/60 underline-offset-4 hover:decoration-white"
+            >
+                Posting rules
+            </button>
+        </div>
+    </PageHero>
 
     <!-- Jobs: filters (left) + results (right) -->
-    <section class="bg-gradient-to-b from-white to-cloud-50">
+    <section class="bg-white">
         <div id="jobs-app" data-filters="closed" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Mobile filter toggle bar -->
-            <div class="lg:hidden sticky top-20 z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 bg-cloud-50/95 backdrop-blur-md border-b border-gray-200 flex items-center justify-between gap-3">
-                <button id="filter-open" type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-300 text-sm font-semibold text-gray-800 shadow-sm active:scale-[0.98] transition-transform">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L14 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 018 21v-7.586L3.293 6.707A1 1 0 013 6V4z"></path></svg>
+            <div class="lg:hidden sticky top-20 z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2.5 bg-white/95 backdrop-blur-md border-b-2 border-ink flex items-center justify-between gap-3">
+                <button id="filter-open" type="button" class="tap-press px-btn px-btn--white px-font text-px9 gap-2 px-3.5 py-2.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2.5" d="M3 4h18v2.5l-7 7.5v6l-4 2v-8L3 6.5z"></path></svg>
                     Filters
-                    <span class="active-badge hidden inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-ruby-500 text-white text-[11px] font-bold">0</span>
+                    <span class="active-badge hidden inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 bg-gold-500 text-ink border-2 border-ink text-px9">0</span>
                 </button>
-                <span class="text-sm text-gray-600"><span class="result-count font-semibold text-gray-900">{jobs.length}</span> roles</span>
+                <span class="text-sm text-dark-700"><span class="result-count font-semibold text-ink">{jobs.length}</span> roles</span>
             </div>
 
-            <div class="lg:grid lg:grid-cols-[15rem_1fr] xl:grid-cols-[16rem_1fr] lg:gap-8 lg:py-10">
+            <div class="lg:grid lg:grid-cols-[15rem_1fr] xl:grid-cols-[16rem_1fr] lg:gap-10 lg:py-10">
 
                 <!-- Dim backdrop behind the mobile filter sheet -->
                 <div id="filter-backdrop" class="lg:hidden" aria-hidden="true"></div>
@@ -222,16 +206,16 @@ const facetGroups = [
                     <div class="filter-grabber lg:hidden" aria-hidden="true"></div>
                     <div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-1 lg:-mr-1">
                         <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-sm font-bold uppercase tracking-wider text-gray-900">Filters</h2>
-                            <button id="clear-filters" type="button" class="hidden text-xs font-semibold text-ruby-600 hover:text-ruby-700">
+                            <h2 class="px-font text-px10 text-ink">Filters</h2>
+                            <button id="clear-filters" type="button" class="tap-hit hidden text-sm font-semibold text-ruby-700 underline underline-offset-4 hover:text-ruby-800">
                                 Clear all
                             </button>
                         </div>
 
                         {facetGroups.map((group) => (
                             <div class="facet-group">
-                                <h3 class="facet-label">{group.label}</h3>
-                                <div class="flex flex-wrap gap-1.5">
+                                <h3 class="facet-label px-font">{group.label}</h3>
+                                <div class="flex flex-wrap gap-2">
                                     {group.options.map((opt) => (
                                         <button
                                             type="button"
@@ -249,11 +233,11 @@ const facetGroups = [
                         ))}
 
                         <!-- Mobile-only: apply / clear -->
-                        <div class="lg:hidden sticky bottom-0 -mx-4 sm:-mx-6 mt-6 px-4 sm:px-6 py-3 bg-white/95 backdrop-blur-md border-t border-gray-200 flex items-center gap-3">
-                            <button id="filter-done" type="button" class="flex-1 inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-sm hover:shadow-md hover:from-ruby-400 hover:to-pink-400 transition-all">
-                                Show <span class="result-count mx-1">{jobs.length}</span> results
+                        <div class="lg:hidden sticky bottom-0 -mx-4 sm:-mx-6 mt-6 px-4 sm:px-6 py-3 bg-white border-t-2 border-ink flex items-center gap-4">
+                            <button id="filter-done" type="button" class="tap-press flex-1 px-btn px-btn--gold px-font text-px10 px-5 py-3">
+                                Show <span class="result-count">{jobs.length}</span> results
                             </button>
-                            <button id="clear-filters-mobile" type="button" class="px-4 py-2.5 text-sm font-semibold text-gray-600 hover:text-ruby-600">
+                            <button id="clear-filters-mobile" type="button" class="tap-hit px-2 py-2.5 text-sm font-semibold text-dark-700 underline underline-offset-4 hover:text-ruby-700">
                                 Clear
                             </button>
                         </div>
@@ -261,10 +245,10 @@ const facetGroups = [
                 </aside>
 
                 <!-- Results -->
-                <div class="min-w-0 pb-12 lg:pb-0">
+                <div class="min-w-0 pt-4 pb-12 lg:pt-0 lg:pb-0">
                     <!-- Text search -->
                     <div class="relative mb-4">
-                        <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <svg class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="square" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         <input
                             id="job-search"
                             type="search"
@@ -272,24 +256,24 @@ const facetGroups = [
                             enterkeyhint="search"
                             placeholder="Search roles, companies, stack…"
                             aria-label="Search jobs by role, company, or stack"
-                            class="w-full h-11 pl-10 pr-10 rounded-lg border border-gray-300 bg-white text-sm text-gray-900 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-ruby-300 focus:border-ruby-300"
+                            class="job-search w-full h-11 pl-10 pr-10 bg-white text-base text-ink placeholder:text-dark-500 focus:outline-none"
                         />
-                        <button id="job-search-clear" type="button" aria-label="Clear search" class="hidden absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 inline-flex items-center justify-center rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        <button id="job-search-clear" type="button" aria-label="Clear search" class="hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 inline-flex items-center justify-center text-dark-500 hover:text-ink hover:bg-dark-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="square" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </button>
                     </div>
 
                     <div class="hidden lg:flex items-center justify-between mb-4">
-                        <p class="text-sm text-gray-500">
-                            Showing <span class="result-count font-semibold text-gray-900">{jobs.length}</span> of {jobs.length} roles
+                        <p class="text-sm text-dark-600">
+                            Showing <span class="result-count font-semibold text-ink">{jobs.length}</span> of {jobs.length} roles
                         </p>
                     </div>
 
-                    <div id="jobs-list" class="space-y-3">
+                    <div id="jobs-list" class="space-y-3 sm:space-y-4">
                         {jobs.map((job) => (
                             <article
                                 id={job.id}
-                                class="job-row scroll-mt-28 bg-white rounded-xl border border-gray-200 hover:border-ruby-200 hover:shadow-md transition-all"
+                                class="job-row scroll-mt-28 bg-white"
                                 data-worktype={job.workType.join(" ")}
                                 data-geo={job.geo.join(" ")}
                                 data-level={job.level}
@@ -298,103 +282,100 @@ const facetGroups = [
                                 data-salmax={job.salaryRange ? job.salaryRange.max : ""}
                                 data-search={searchText(job)}
                             >
-                                <div class="flex flex-wrap sm:flex-nowrap items-start gap-x-4 gap-y-3 p-4 sm:p-5">
-                                    {job.companyLogo ? (
-                                        <div class="shrink-0 w-12 h-12 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
-                                            <img src={job.companyLogo} alt={job.companyName} class="w-full h-full object-contain p-1" loading="lazy" />
-                                        </div>
-                                    ) : (
-                                        <div class="shrink-0 w-12 h-12 rounded-lg bg-ruby-50 flex items-center justify-center text-ruby-500 font-bold">
-                                            {job.companyName?.[0] ?? "?"}
-                                        </div>
-                                    )}
-
-                                    <div class="flex-1 min-w-0">
-                                        <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
-                                            <h3 class="font-semibold text-gray-900 text-base sm:text-lg leading-snug">
-                                                {job.title}
-                                            </h3>
-                                            <a
-                                                href={`#${job.id}`}
-                                                class="copy-link tap-hit"
-                                                data-job-id={job.id}
-                                                aria-label="Copy link to this role"
-                                                title="Copy link to this role"
-                                            >
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"></path></svg>
-                                            </a>
-                                            {job.isFeatured && (
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-ruby-100 text-ruby-700">
-                                                    Featured
-                                                </span>
-                                            )}
-                                            {job.isYC && (
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-orange-100 text-orange-700">
-                                                    YC
-                                                </span>
-                                            )}
-                                        </div>
-                                        <p class="text-sm text-gray-600 mb-2">{job.companyName}</p>
-
-                                        <div class="flex flex-wrap items-center gap-1.5 text-xs">
-                                            <span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-gray-100 text-gray-700">
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                                {job.location}
-                                            </span>
-                                            <span class="px-2 py-1 rounded bg-gray-100 text-gray-700">{LEVEL_LABELS[job.level]}</span>
-                                            {job.industry && (
-                                                <span class="px-2 py-1 rounded bg-gray-100 text-gray-700">{job.industry}</span>
-                                            )}
-                                            {job.stage && (
-                                                <span class="px-2 py-1 rounded bg-gray-100 text-gray-500">{job.stage}</span>
-                                            )}
-                                            {job.salary && (
-                                                <span class="px-2 py-1 rounded bg-emerald-50 text-emerald-700 font-medium">{job.salary}</span>
-                                            )}
-                                        </div>
-
-                                        {job.chips && job.chips.length > 0 && (
-                                            <div class="flex flex-wrap items-center gap-1.5 mt-2" data-chips={job.chips.join(" ")}>
-                                                {orderChips(job.chips).map((chip) => (
-                                                    <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium border ${CHIP_CLASS[chipKind(chip)]}`}>
-                                                        {chip}
-                                                    </span>
-                                                ))}
+                                <div class="p-3 sm:p-4">
+                                    <!-- logo, title, company -->
+                                    <div class="flex items-start gap-3 sm:gap-4">
+                                        {job.companyLogo ? (
+                                            <div class="shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-white border-2 border-dark-200 flex items-center justify-center overflow-hidden">
+                                                <img src={job.companyLogo} alt={job.companyName} class="w-full h-full object-contain p-0.5 sm:p-1" loading="lazy" />
+                                            </div>
+                                        ) : (
+                                            <div class="shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-ruby-50 border-2 border-ruby-200 flex items-center justify-center px-font text-sm text-ruby-700">
+                                                {job.companyName?.[0] ?? "?"}
                                             </div>
                                         )}
+
+                                        <div class="flex-1 min-w-0">
+                                            <h3 class="font-display font-semibold text-base sm:text-lg leading-tight sm:leading-snug text-ink">
+                                                {job.title}
+                                            </h3>
+                                            <p class="mt-1 flex items-center gap-2 min-w-0 font-display text-sm text-dark-700">
+                                                <span class="truncate">
+                                                    <span class="font-semibold text-ink">{job.companyName}</span>
+                                                    {job.industry && <span class="hidden sm:inline"><span class="text-dark-400" aria-hidden="true"> · </span>{job.industry}</span>}
+                                                    {job.stage && <span class="hidden sm:inline"><span class="text-dark-400" aria-hidden="true"> · </span>{job.stage}</span>}
+                                                </span>
+                                                {job.isFeatured && <span class="job-badge job-badge--featured">Featured</span>}
+                                                {job.isYC && <span class="job-badge job-badge--yc">YC</span>}
+                                            </p>
+                                        </div>
+
+                                        <a
+                                            href={`#${job.id}`}
+                                            class="copy-link tap-hit shrink-0 mt-1"
+                                            data-job-id={job.id}
+                                            aria-label="Copy link to this role"
+                                            title="Copy link to this role"
+                                        >
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"></path></svg>
+                                        </a>
                                     </div>
 
-                                    <div class="order-last sm:order-none w-full sm:w-auto shrink-0 flex items-center gap-2 sm:flex-col sm:items-end">
+                                    <!-- where, level, pay + Apply -->
+                                    <div class="mt-2 flex items-center gap-3 sm:gap-4 sm:pl-16">
+                                        <p class="job-meta flex-1 min-w-0 font-display text-sm leading-snug text-dark-700">
+                                            <span>
+                                                <svg class="inline-block w-3.5 h-3.5 mr-0.5 align-[-2px] text-dark-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                                {job.location}
+                                            </span><span class="hidden sm:inline"><span class="text-dark-400" aria-hidden="true"> · </span>{LEVEL_LABELS[job.level]}</span>{job.salary && (
+                                                <span class="block sm:inline"><span class="hidden sm:inline text-dark-400" aria-hidden="true"> · </span><span class="font-semibold text-grass-700">{job.salary}</span></span>
+                                            )}
+                                        </p>
                                         <a
                                             href={job.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            class="tap-press flex-1 sm:flex-none justify-center inline-flex items-center gap-1 px-4 py-2 bg-gradient-to-r from-ruby-500 to-pink-500 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow-md hover:from-ruby-400 hover:to-pink-400 transition-all"
+                                            class="tap-press shrink-0 px-btn px-btn--gold job-apply px-font text-px9 sm:text-px10 gap-1.5 px-3.5 py-2.5 sm:px-4"
                                         >
                                             Apply
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="square" stroke-width="3" d="M14 5l7 7-7 7M21 12H3"></path></svg>
                                         </a>
+                                    </div>
+
+                                    <!-- chips + details -->
+                                    <div class="mt-2 flex items-center gap-3 sm:pl-16">
+                                        {job.chips && job.chips.length > 0 ? (
+                                            <div class="job-chips flex-1 min-w-0" data-chips={job.chips.join(" ")}>
+                                                <div class="job-chips-track flex gap-1.5 sm:flex-wrap">
+                                                    {orderChips(job.chips).map((chip) => (
+                                                        <span class={`job-chip job-chip--${chipKind(chip)}`}>{chip}</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div class="flex-1" />
+                                        )}
                                         <button
                                             type="button"
-                                            class="more-btn tap-hit inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-ruby-600"
+                                            class="more-btn tap-hit shrink-0 inline-flex items-center gap-1 text-sm font-medium text-dark-700 hover:text-ruby-700"
                                             aria-expanded="false"
                                         >
                                             <span class="more-label">Details</span>
-                                            <svg class="more-chevron w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                            <svg class="more-chevron w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="square" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                                         </button>
                                     </div>
                                 </div>
 
-                                <div class="more-panel hidden border-t border-gray-100 px-4 sm:px-5 py-4">
-                                    <p class="text-sm text-gray-700 leading-relaxed">{job.description}</p>
+                                <div class="more-panel hidden border-t-2 border-dark-100 px-3 sm:px-5 py-4 sm:pl-[5.25rem]">
+                                    <p class="font-display text-sm sm:text-base text-dark-800 leading-relaxed">{job.description}</p>
                                     <a
                                         href={job.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        class="inline-flex items-center gap-1 mt-3 text-sm font-medium text-ruby-600 hover:text-ruby-700"
+                                        class="inline-flex items-center gap-1 mt-3 text-sm font-semibold text-ruby-700 underline underline-offset-4 hover:text-ruby-800"
                                     >
                                         View full posting
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                     </a>
                                 </div>
                             </article>
@@ -403,9 +384,9 @@ const facetGroups = [
 
                     <!-- Empty State (filtered to nothing) -->
                     <div id="no-results" class="hidden text-center py-16">
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">No roles match these filters</h3>
-                        <p class="text-gray-600 mb-4">Try removing a filter to widen your search.</p>
-                        <button id="clear-filters-empty" type="button" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-ruby-500 to-pink-500 text-white rounded-lg font-semibold shadow-sm hover:shadow-md hover:from-ruby-400 hover:to-pink-400 transition-all">
+                        <h3 class="px-font text-px10 md:text-xs text-ink mb-3">No roles match these filters</h3>
+                        <p class="text-dark-700 mb-6">Try removing a filter to widen your search.</p>
+                        <button id="clear-filters-empty" type="button" class="tap-press px-btn px-btn--gold px-font text-px10 px-5 py-3">
                             Clear all filters
                         </button>
                     </div>
@@ -415,28 +396,26 @@ const facetGroups = [
     </section>
 
     <!-- Why Post / Host CTA -->
-    <section class="py-16 bg-white border-t border-gray-100">
+    <section class="py-16 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="p-6 md:p-8 bg-gradient-to-br from-gray-900 to-ruby-900 rounded-2xl text-white flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
+            <div class="px-card px-sky-grad-dusk p-6 md:p-8 text-white flex flex-col md:flex-row items-start md:items-center gap-6 justify-between">
                 <div>
-                    <div class="text-xs font-semibold text-ruby-200 uppercase tracking-wider mb-2">
+                    <div class="px-font text-px9 text-gold-400 mb-3">
                         For companies serious about hiring
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-2">
+                    <h3 class="font-display text-xl md:text-2xl font-bold mb-2 px-shadow-ink-sm">
                         Host a meetup, meet 60–100 Bay Area Ruby engineers in one night
                     </h3>
-                    <p class="text-gray-300 text-sm md:text-base max-w-2xl">
+                    <p class="text-white text-sm md:text-base max-w-2xl">
                         Hosting reaches the same audience as a job post, in person, with your engineers on stage and your team meeting candidates face-to-face.
                     </p>
                 </div>
                 <a
                     href="/host"
-                    class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ruby-700 rounded-lg font-semibold whitespace-nowrap hover:bg-gray-50 transition-colors shrink-0"
+                    class="tap-press px-btn px-btn--gold px-font text-px10 gap-2 px-5 py-3.5 whitespace-nowrap shrink-0"
                 >
                     See how to host
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="square" stroke-width="3" d="M14 5l7 7-7 7M21 12H3"></path></svg>
                 </a>
             </div>
         </div>
@@ -460,43 +439,43 @@ const facetGroups = [
             margin-bottom: 1.5rem;
         }
         .facet-label {
-            font-size: 0.6875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--dark-400);
-            margin-bottom: 0.5rem;
+            font-size: 0.5625rem;
+            color: var(--dark-600);
+            margin-bottom: 0.625rem;
         }
+        /* Filter options: square, ink-lined, gold when on (the site's primary
+           accent), like a pressed px-btn. */
         .chip {
             display: inline-flex;
             align-items: center;
             gap: 0.375rem;
-            padding: 0.25rem 0.625rem;
-            border-radius: 9999px;
-            font-size: 0.8125rem;
+            padding: 0.3125rem 0.625rem;
+            border-radius: 0;
+            font-size: 0.875rem;
             font-weight: 500;
             line-height: 1.25rem;
-            color: var(--dark-700);
+            color: var(--dark-800);
             background: var(--white);
-            border: 1px solid var(--dark-300);
+            border: 2px solid var(--dark-300);
             cursor: pointer;
-            transition: all 0.15s;
+            transition: border-color 0.12s, background-color 0.12s;
             white-space: nowrap;
         }
         .chip:hover {
-            border-color: var(--ruby-400);
+            border-color: var(--px-ink);
         }
         .chip-active {
-            color: var(--white);
-            background: var(--ruby-600);
-            border-color: var(--ruby-600);
+            color: var(--px-ink);
+            background: var(--px-gold);
+            border-color: var(--px-ink);
+            box-shadow: 2px 2px 0 0 var(--px-ink);
         }
         .chip-count {
-            font-size: 0.6875rem;
-            opacity: 0.6;
+            font-size: 0.75rem;
+            color: var(--dark-500);
         }
         .chip-active .chip-count {
-            opacity: 0.85;
+            color: var(--px-ink);
         }
         /* Options that would narrow results to zero, and facets with no options
            left, are removed from the panel until the selection changes. */
@@ -505,11 +484,97 @@ const facetGroups = [
             display: none;
         }
 
-        /* Per-card anchor: highlight when linked, copy-link affordance. */
-        .job-row:target {
-            border-color: var(--ruby-400);
-            box-shadow: 0 0 0 2px color-mix(in oklch, var(--ruby-600) 25%, transparent);
+        /* Job row: a lighter px-card (3px ink line, 4px hard shadow) so three
+           rows still fit a phone screen. */
+        .job-row {
+            border: 3px solid var(--px-ink);
+            border-radius: 0;
+            box-shadow: 4px 4px 0 0 var(--px-ink);
         }
+        .job-row:target {
+            outline: 4px solid var(--px-gold);
+            outline-offset: 2px;
+        }
+        .job-search {
+            border: 3px solid var(--px-ink);
+            border-radius: 0;
+            box-shadow: 3px 3px 0 0 var(--px-ink);
+        }
+        .job-search:focus {
+            outline: 3px solid var(--px-gold);
+            outline-offset: 2px;
+        }
+
+        /* Matching chips: three kinds (focus / stack / signal), square, told
+           apart by palette. Labels are the one place under 14px (12px). */
+        .job-chip {
+            display: inline-flex;
+            align-items: center;
+            flex: none;
+            padding: 0.125rem 0.4375rem;
+            border: 2px solid;
+            border-radius: 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1rem;
+            white-space: nowrap;
+        }
+        .job-chip--focus {
+            color: var(--ruby-800);
+            background: var(--ruby-50);
+            border-color: var(--ruby-300);
+        }
+        .job-chip--stack {
+            color: var(--sky-900);
+            background: var(--sky-50);
+            border-color: var(--sky-300);
+        }
+        .job-chip--signal {
+            color: var(--px-ink);
+            background: var(--gold-100);
+            border-color: var(--gold-600);
+        }
+        .job-badge {
+            flex: none;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.375rem;
+            border: 2px solid var(--px-ink);
+            font-family: "Press Start 2P", "Martian Mono", monospace;
+            font-size: 0.5rem;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        .job-badge--featured {
+            background: var(--px-gold);
+            color: var(--px-ink);
+        }
+        .job-badge--yc {
+            background: var(--pumpkin-500);
+            color: var(--px-ink);
+        }
+        .job-apply {
+            box-shadow: 4px 4px 0 0 var(--px-ink);
+        }
+
+        /* Phones: the chips stay one row that scrolls sideways and fades at
+           the edge while more are hidden (is-clipped, set by the script), so a
+           long chip list never adds height to the row. */
+        @media (max-width: 639px) {
+            .job-chips {
+                overflow-x: auto;
+                overscroll-behavior-x: contain;
+                scrollbar-width: none;
+            }
+            .job-chips::-webkit-scrollbar {
+                display: none;
+            }
+            .job-chips.is-clipped {
+                -webkit-mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent);
+                mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent);
+            }
+        }
+
         .copy-link {
             position: relative;
             display: inline-flex;
@@ -538,10 +603,10 @@ const facetGroups = [
             white-space: nowrap;
             background: var(--dark-900);
             color: var(--white);
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 600;
             padding: 0.2rem 0.45rem;
-            border-radius: 0.35rem;
+            border-radius: 0;
             pointer-events: none;
         }
         @media (max-width: 1023px) {
@@ -584,8 +649,8 @@ const facetGroups = [
                 overflow-y: auto;
                 overscroll-behavior: contain;
                 background: var(--white);
-                border-radius: 1.25rem 1.25rem 0 0;
-                box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
+                border-radius: 0;
+                border-top: 4px solid var(--px-ink);
                 padding: 0 1rem env(safe-area-inset-bottom);
                 animation: filter-sheet-up 0.32s cubic-bezier(0.32, 0.72, 0, 1);
                 will-change: transform;
@@ -600,7 +665,7 @@ const facetGroups = [
                 padding: 0.625rem 0 0.5rem;
                 margin: 0 -1rem;
                 background: var(--white);
-                border-radius: 1.25rem 1.25rem 0 0;
+                border-radius: 0;
                 cursor: grab;
                 touch-action: none;
                 z-index: 2;
@@ -608,9 +673,9 @@ const facetGroups = [
             .filter-grabber::before {
                 content: "";
                 width: 2.25rem;
-                height: 0.3125rem;
-                border-radius: 9999px;
-                background: var(--dark-300);
+                height: 0.375rem;
+                border-radius: 0;
+                background: var(--px-ink);
             }
         }
         @keyframes filter-sheet-up {
@@ -1026,6 +1091,20 @@ const facetGroups = [
                 if (chevron) chevron.style.transform = open ? "" : "rotate(180deg)";
             });
         }
+
+        // Phones: fade the chip row's right edge only while chips are hidden
+        // past it; scrolled to the end (or nothing hidden), no fade.
+        const chipRows = Array.from(document.querySelectorAll<HTMLElement>(".job-chips"));
+        const markClipped = (el: HTMLElement) =>
+            el.classList.toggle(
+                "is-clipped",
+                el.scrollWidth - el.clientWidth - el.scrollLeft > 2,
+            );
+        for (const el of chipRows) {
+            markClipped(el);
+            el.addEventListener("scroll", () => markClipped(el), { passive: true });
+        }
+        window.addEventListener("resize", () => chipRows.forEach(markClipped), { passive: true });
     </script>
 <PostingRulesModal />
 </BaseLayout>

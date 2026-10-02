@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
 import UpcomingMeetups from "../components/UpcomingMeetups.astro";
 import HostCard from "../components/HostCard.astro";
 import HostModal from "../components/HostModal.astro";
@@ -27,22 +28,13 @@ for (const h of getAllHosts()) {
     description="The monthly SF Ruby meetup: talks, startup demos, and networking with founders and engineers building with Ruby. Free, every month, in San Francisco."
 >
     <!-- Meetup hero: day sky, same overworld as the rest of the site -->
-    <section class="relative text-white overflow-hidden px-sky-grad-day">
-        <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-16 left-[6%] w-24 md:w-40 md:top-24 animate-float pointer-events-none" aria-hidden="true" />
-        <img src="/px-cloud.png" alt="" width="34" height="14" class="px-pixelated absolute top-32 right-[8%] w-32 animate-float [animation-delay:-3s] pointer-events-none hidden md:block" aria-hidden="true" />
-
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-32 pb-16 sm:pt-36 sm:pb-20 text-center">
-            <span class="px-plate px-font text-px8 md:text-px10 px-3 py-2">
-                Monthly Meetup
-            </span>
-            <h1 class="px-font px-shadow-ink text-lg md:text-2xl text-white mt-6 mb-4">
-                Join the Next SF Ruby Meetup
-            </h1>
-            <p class="text-lg text-white/90 max-w-2xl mx-auto mb-10">
-                Connect with founders and engineers building with Ruby.
-                Learn, share, and make friends for life!
-            </p>
-
+    <PageHero
+        label="Monthly Meetup"
+        title="Join the Next SF Ruby Meetup"
+        lede="Connect with founders and engineers building with Ruby. Learn, share, and make friends for life!"
+        next="var(--dark-50)"
+        width="wide"
+    >
             <!-- Next meetup, synced from Luma at build time -->
             <div class="text-left">
                 <UpcomingMeetups />
@@ -84,11 +76,7 @@ for (const h of getAllHosts()) {
                     Demo your startup
                 </a>
             </div>
-        </div>
-
-        <!-- crenellated step into the recordings section -->
-        <div class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--dark-50)]" aria-hidden="true"></div>
-    </section>
+    </PageHero>
 
     <!-- Latest recordings -->
     <section id="recordings" class="py-20 bg-gray-50">

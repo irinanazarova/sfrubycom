@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 
 import { getAllStartups } from "../../data/startups.js";
 import { getSortedJobs } from "../../data/jobs.js";
@@ -21,48 +22,28 @@ const slackMembers = 650; // Approximate
     title="About SF Ruby - SF Ruby"
     description="Learn about SF Ruby, the community for Ruby developers, founders, and enthusiasts in San Francisco."
 >
-    <!-- Hero: dusk sky with HUD stats -->
-    <section class="relative pt-32 pb-16 px-sky-grad-dusk overflow-hidden">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl">
-                <h1 class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-6">
-                    About SF Ruby
-                </h1>
-                <p class="text-lg md:text-xl text-white/90 mb-10">
-                    The community for Ruby developers and founders in
-                    San&nbsp;Francisco.
-                </p>
-
-                <!-- Stats: HUD counters -->
-                <div class="flex flex-wrap gap-x-10 gap-y-6">
-                    <div>
-                        <div class="px-font text-base md:text-lg text-white">
-                            {startupCount}
-                        </div>
-                        <div class="text-sm text-white/60 mt-1.5">Ruby Startups</div>
-                    </div>
-                    <div>
-                        <div class="px-font text-base md:text-lg text-ruby-400">
-                            {talkCount}
-                        </div>
-                        <div class="text-sm text-white/60 mt-1.5">Conference Videos</div>
-                    </div>
-                    <div>
-                        <div class="px-font text-base md:text-lg text-gold-400">
-                            {jobCount}
-                        </div>
-                        <div class="text-sm text-white/60 mt-1.5">Open Jobs</div>
-                    </div>
-                    <div>
-                        <div class="px-font text-base md:text-lg text-sky-300">
-                            {slackMembers}+
-                        </div>
-                        <div class="text-sm text-white/60 mt-1.5">Slack Members</div>
-                    </div>
-                </div>
+    <!-- Hero: day sky with HUD stats -->
+    <PageHero title="About SF Ruby">
+        <Fragment slot="lede">The community for Ruby developers and founders in San&nbsp;Francisco.</Fragment>
+        <div class="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-x-10 gap-y-5">
+            <div>
+                <div class="px-font px-shadow-ink text-base md:text-lg text-white">{startupCount}</div>
+                <div class="text-sm text-white px-shadow-ink-sm mt-1.5">Ruby Startups</div>
+            </div>
+            <div>
+                <div class="px-font px-shadow-ink text-base md:text-lg text-ruby-300">{talkCount}</div>
+                <div class="text-sm text-white px-shadow-ink-sm mt-1.5">Conference Videos</div>
+            </div>
+            <div>
+                <div class="px-font px-shadow-ink text-base md:text-lg text-gold-400">{jobCount}</div>
+                <div class="text-sm text-white px-shadow-ink-sm mt-1.5">Open Jobs</div>
+            </div>
+            <div>
+                <div class="px-font px-shadow-ink text-base md:text-lg text-sky-100">{slackMembers}+</div>
+                <div class="text-sm text-white px-shadow-ink-sm mt-1.5">Slack Members</div>
             </div>
         </div>
-    </section>
+    </PageHero>
 
     <section class="py-12 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import BottomNav from "../components/BottomNav.astro";
 import HashScroll from "../components/HashScroll.astro";
 import EmailModal from "../components/EmailModal.astro";
+import PageHero from "../components/PageHero.astro";
 import SponsorTiers from "../components/SponsorTiers.astro";
 import CompaniesAttending from "../components/CompaniesAttending.astro";
 import { sponsors as sponsors2025 } from "../data/sponsors.js";
@@ -81,50 +82,25 @@ const sponsors2025Count = Object.keys(sponsors2025).length;
 
         <main class="flex-grow">
             <!-- Hero -->
-            <section
-                class="relative pt-32 pb-28 px-sky-grad-day text-white overflow-hidden"
+            <PageHero
+                title="Sponsor SF Ruby 2026"
+                lede="Get in front of 450 Ruby engineers and founders at SFJAZZ on Nov 10-11"
             >
-                <!-- blocky retro clouds -->
-                <img src="/px-cloud-lg.png" alt="" width="72" height="28" class="px-pixelated absolute top-20 -left-6 sm:left-0 w-28 sm:w-36 md:w-48 animate-float pointer-events-none" aria-hidden="true" />
-                <img src="/px-cloud-md.png" alt="" width="48" height="20" class="px-pixelated absolute bottom-16 -right-6 sm:right-0 w-20 sm:w-24 md:w-32 animate-float [animation-delay:-3s] pointer-events-none" aria-hidden="true" />
-
-                <div
-                    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
-                >
-                    <div class="text-center">
-                        <h1
-                            class="px-font px-shadow-ink text-xl md:text-3xl text-white mb-6"
-                        >
-                            Sponsor SF Ruby 2026
-                        </h1>
-                        <p class="max-w-2xl mx-auto text-xl text-white">
-                            Get in front of 450 Ruby engineers and founders
-                            at SFJAZZ on Nov 10-11
-                        </p>
-                        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a
-                                href="#tiers"
-                                class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
-                            >
-                                Become a sponsor
-                            </a>
-                            <button
-                                data-email-modal="sponsor-2026"
-                                class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
-                            >
-                                Get in touch
-                            </button>
-                        </div>
-                    </div>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a
+                        href="#tiers"
+                        class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                    >
+                        Become a sponsor
+                    </a>
+                    <button
+                        data-email-modal="sponsor-2026"
+                        class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                    >
+                        Get in touch
+                    </button>
                 </div>
-
-                <!-- crenellated step into the white content below -->
-                <div
-                    class="px-crenel absolute bottom-0 left-0 w-full [--px-crenel-color:var(--white)]"
-                    aria-hidden="true"
-                >
-                </div>
-            </section>
+            </PageHero>
 
             <!-- Content Section -->
             <section class="py-16 bg-white">

@@ -5,28 +5,23 @@
 // and the reasons itself.
 import { Icon } from "astro-icon/components";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
 import { ticketLink, ticketEventClass } from "../data/conference-2026.js";
 import { emailSubject, emailBody } from "../data/manager-email-2026.js";
 ---
 
 <BaseLayout
-    darkHero={false}
     title="Convince your manager - SF Ruby Conference 2026"
     description="An email to send your manager, what the San Francisco Ruby Conference costs a Bay Area engineer (the ticket and one day off), and what they bring back."
 >
-    <section class="pt-28 pb-14 bg-sky-50 border-b-4 border-ink">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="px-plate px-font text-px8 px-3 py-1.5">Nov 10-12, SFJAZZ</span>
-            <h1 class="px-font text-lg md:text-2xl text-gray-900 mt-6">
-                Convince your manager
-            </h1>
-            <p class="text-base md:text-lg text-gray-600 leading-relaxed mt-5">
-                Advance your company to the cusp of what's possible with Ruby
-                today. Copy, paste, fill in the gaps and send it to your boss.
-            </p>
+    <PageHero
+        label="Nov 10-12, SFJAZZ"
+        title="Convince your manager"
+        lede="Advance your company to the cusp of what's possible with Ruby today. Copy, paste, fill in the gaps and send it to your boss."
+    >
             <!-- Same pair as the /team hero, so the two pages offer the same
                  next step. -->
-            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
                     href={ticketLink("manager")}
                     target="_blank"
@@ -49,8 +44,7 @@ import { emailSubject, emailBody } from "../data/manager-email-2026.js";
                     Bring your team
                 </a>
             </div>
-        </div>
-    </section>
+    </PageHero>
 
     <section class="py-16 md:py-20 bg-white">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

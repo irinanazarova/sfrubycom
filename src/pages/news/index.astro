@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 import IslandNav from "../../components/IslandNav.astro";
 import { formatDate } from "../../utils/helpers";
 
@@ -61,25 +62,20 @@ function leadSentence(text: string): string {
 
 <BaseLayout
     ogImage="/og/news.png"
-    darkHero={false}
     title="Ruby Startup News - SF Ruby"
     description="A running feed of Ruby startup news: funding rounds, IPOs, acquisitions, releases, and community events."
 >
-    <section class="pt-24 pb-16 bg-sky-50 min-h-screen">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
-            <div class="mb-8">
-                <h1 class="px-font text-lg md:text-2xl text-gray-900">
-                    SF Ruby News Feed
-                </h1>
-                <p class="mt-3 flex items-center gap-2 text-sm text-gray-500">
-                    <svg class="w-3.5 h-3.5 flex-shrink-0 text-gray-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M4 11a9 9 0 019 9h2.5A11.5 11.5 0 004 8.5V11zm0 5a3 3 0 013 3H4v-3zm0-9a15 15 0 0115 15h2.5A17.5 17.5 0 004 4.5V7z"/>
-                    </svg>
-                    Follow along in your reader over
-                    <a href="/news/rss.xml" class="underline decoration-gray-300 underline-offset-2 hover:text-ruby-600 hover:decoration-ruby-400">RSS</a>.
-                </p>
-            </div>
+    <PageHero title="SF Ruby News Feed" next="var(--sky-50)" compact>
+        <Fragment slot="lede">
+            <svg class="inline-block w-3.5 h-3.5 mr-1 align-[-1px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4 11a9 9 0 019 9h2.5A11.5 11.5 0 004 8.5V11zm0 5a3 3 0 013 3H4v-3zm0-9a15 15 0 0115 15h2.5A17.5 17.5 0 004 4.5V7z"/>
+            </svg>Follow along in your reader over
+            <a href="/news/rss.xml" class="underline decoration-white/60 underline-offset-2 hover:decoration-white">RSS</a>.
+        </Fragment>
+    </PageHero>
 
+    <section class="pt-5 sm:pt-8 pb-16 bg-sky-50 min-h-screen">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
             <div class="mb-5 space-y-3">
                 <div class="relative">
                     <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
