@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-02T12:25:45.957Z",
+  "fetchedAt": "2026-10-02T18:21:47.085Z",
   "minAttendees": 2,
   "companies": [
     {
@@ -417,6 +417,11 @@
     },
     {
       "name": "thoughtbot",
+      "count": 2,
+      "characters": []
+    },
+    {
+      "name": "UC Berkeley",
       "count": 2,
       "characters": []
     }

@@ -95,6 +95,21 @@ const companyKey = (raw) => {
   return COMPANY_ALIASES.get(key) ?? key;
 };
 
+// A hand-maintained table that fails silently is worse than no table, and
+// both ways of getting a row wrong are invisible on the next refresh: the
+// map is consulted with an already-normalized key, so a key the normalizer
+// would have rewritten ("persona ai" becomes "persona") can never match,
+// and values are not re-normalized, so an alias pointing at another alias
+// leaves two islands for one company. Loud at load, before any fetch.
+for (const [from, to] of COMPANY_ALIASES) {
+  if (from !== normalizeCompany(from))
+    throw new Error(
+      `COMPANY_ALIASES: the key "${from}" never matches; write it as "${normalizeCompany(from)}"`,
+    );
+  if (COMPANY_ALIASES.has(to))
+    throw new Error(`COMPANY_ALIASES: "${from}" points at "${to}", which is itself a key; aliases do not chain`);
+}
+
 const nameKey = (raw) =>
   (raw || "")
     .normalize("NFD")
