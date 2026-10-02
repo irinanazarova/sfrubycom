@@ -81,18 +81,22 @@ body {
 
 /* A 44px tap area (iOS HIG) around a control that is smaller on screen,
    without moving anything: the hit box is a ::before centered on the
-   control. ::before because some of these use ::after for a tooltip. */
+   control. ::before because some of these use ::after for a tooltip.
+   Touch only: with a mouse the invisible box would catch clicks meant for
+   the text beside it (the /jobs copy link sits at the end of the title). */
 .tap-hit {
     position: relative;
 }
-.tap-hit::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: max(100%, 2.75rem);
-    height: max(100%, 2.75rem);
-    transform: translate(-50%, -50%);
+@media (pointer: coarse) {
+    .tap-hit::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: max(100%, 2.75rem);
+        height: max(100%, 2.75rem);
+        transform: translate(-50%, -50%);
+    }
 }
 
 /* Safe-area helpers for fixed bars on notched / home-indicator devices. */
