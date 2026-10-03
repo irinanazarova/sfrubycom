@@ -1104,53 +1104,6 @@ export const jobs = {
     url: "https://builtin.com/job/full-stack-software-engineer/8898000",
     postedDate: "2026-09-07",
   },
-  // Promoted October 2, 2026 from PENDING SPONSORSHIP: Shopify became a Travel
-  // sponsor of SF Ruby 2026 on September 8, which puts it on path 1.
-  "software-engineers-shopify": {
-    id: "software-engineers-shopify",
-    title: "Software Engineers",
-    companyId: "shopify",
-    companyName: "Shopify",
-    companyLogo: "/shopify.png",
-    location: "Remote (Americas, US-eligible)",
-    type: "Full-time",
-    salary: "Not disclosed",
-    description:
-      "Shopify runs the largest Rails application in the world, and this standing opening hires engineers to build and maintain scalable Rails applications across the commerce stack, from checkout to financial products to developer tools. They ship weekly, take on-call shifts, and finish the interview loop, including a pair-programming session in your own IDE, within 30 days. Shopify is a Travel sponsor of SF Ruby 2026.",
-    chips: ["Fullstack", "Backend"],
-    url: "https://www.shopify.com/careers/software-engineers_ea5811c0-0353-4468-a1a5-0ef776748b31",
-    postedDate: "2026-10-02",
-  },
-  "engineering-manager-ruby-rails-infrastructure-shopify": {
-    id: "engineering-manager-ruby-rails-infrastructure-shopify",
-    title: "Engineering Manager, Ruby and Rails Infrastructure",
-    companyId: "shopify",
-    companyName: "Shopify",
-    companyLogo: "/shopify.png",
-    location: "Remote (Americas, US-eligible)",
-    type: "Full-time",
-    salary: "Not disclosed",
-    description:
-      "Shopify's Ruby and Rails Infrastructure team works on the language and the framework themselves: Ruby performance and its JIT, Rails internals, type checking, and the developer experience, upstream as well as inside Shopify. Teammates include Ruby core committers and Rails core members. The manager leads 6 to 12 engineers alongside three peer managers.",
-    chips: ["Platform", "Open source", "Mentorship"],
-    url: "https://www.shopify.com/careers/engineering-manager-ruby-and-rails-infrastructure_0536bba4-c326-4416-935e-9401c9ea4482",
-    postedDate: "2026-10-02",
-  },
-  "senior-engineer-privacy-engineering-shopify": {
-    id: "senior-engineer-privacy-engineering-shopify",
-    title: "Senior Engineer, Privacy Engineering",
-    companyId: "shopify",
-    companyName: "Shopify",
-    companyLogo: "/shopify.png",
-    location: "Remote (Americas, US-eligible)",
-    type: "Full-time",
-    salary: "Not disclosed",
-    description:
-      "Shopify's Privacy Engineering team builds the systems that process erasure requests, opt-outs, and access requests across the platform, where correctness has legal consequences. The work is in Ruby and Rails with BigQuery, Bigtable, Kafka, and Terraform, and the team uses Claude Code daily for code generation, reviews, and investigation.",
-    chips: ["Backend", "Security", "Kafka", "High compliance", "AI-native"],
-    url: "https://www.shopify.com/careers/senior-engineer-privacy-engineering_6387b485-f57b-42b7-859a-702e56bfb12c",
-    postedDate: "2026-10-02",
-  },
   // FastRuby.io (OmbuLabs) is an Emerald sponsor of SF Ruby 2026 (path 1).
   "rails-engineer-contractor-fastruby": {
     id: "rails-engineer-contractor-fastruby",
@@ -1211,8 +1164,9 @@ export const jobs = {
    * SimplePractice, The RealReal, KnowBe4, PAR, Kalkomey, SRS Acquiom, HST
    * Pathways and Mode Mobile have nothing left here; Scribd, brightwheel,
    * Strava, Calendly, Fleetio, GitLab, Huntress, PrizePicks, Upstart and
-   * Atlassian lost one or more roles). Shopify's three roles moved to the
-   * active board after Shopify became a Travel sponsor. The Workday links
+   * Atlassian lost one or more roles). Shopify became a Travel sponsor on
+   * Sep 8, but Travel and Community tiers do not qualify a company for the
+   * board, so its roles stay here. The Workday links
    * (FuzeRx, Triumph) could not be re-verified by API and were kept.
    *
    * Of the June 19 list: Block Product Platform, Fleetio Integrations, both
@@ -1282,6 +1236,10 @@ export const jobs = {
    *     Staff SWE, Growth — remote US — https://builtin.com/job/staff-software-engineer-growth/9956198 (aggregator link)
    *
    * US-remote, headquartered elsewhere
+   *   Shopify (NYSE: SHOP; Travel sponsor 2026, which does not qualify) — Remote Americas
+   *     Software Engineers — https://www.shopify.com/careers/software-engineers_ea5811c0-0353-4468-a1a5-0ef776748b31
+   *     EM, Ruby and Rails Infrastructure — https://www.shopify.com/careers/engineering-manager-ruby-and-rails-infrastructure_0536bba4-c326-4416-935e-9401c9ea4482
+   *     Senior Engineer, Privacy Engineering — https://www.shopify.com/careers/senior-engineer-privacy-engineering_6387b485-f57b-42b7-859a-702e56bfb12c
    *   GitLab (NASDAQ: GTLB) — remote US, $139K–$282K by level
    *     Senior SWE (Ruby), Security Platform: Authorization — https://job-boards.greenhouse.io/gitlab/jobs/8738225002
    *     Senior SWE (RoR/Go), Authentication — https://job-boards.greenhouse.io/gitlab/jobs/8614945002
