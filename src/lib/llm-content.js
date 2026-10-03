@@ -618,7 +618,9 @@ export function newsMarkdown() {
       return `### ${plain(n.headline)}
 ${fmtDate(n.date)} · ${n.category}${co}
 ${plain(n.summary)}
-Source${src}: ${n.link}`;
+Source${src}: ${n.link}${(n.reactions ?? [])
+        .map((r) => `\nReaction: ${plain(r.author)}, "${plain(r.title)}": ${r.link}`)
+        .join("")}`;
     })
     .join("\n\n");
 

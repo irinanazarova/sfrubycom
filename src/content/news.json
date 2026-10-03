@@ -87,7 +87,24 @@
     "link": "https://www.youtube.com/watch?v=vDjW_dRyKXY",
     "category": "Community",
     "startupName": "37signals",
-    "source": "YouTube"
+    "source": "YouTube",
+    "reactions": [
+      {
+        "title": "Look at all the things he's not doing",
+        "author": "Andy Croll",
+        "link": "https://andycroll.com/ruby/look-at-all-the-things-he-is-not-doing/"
+      },
+      {
+        "title": "The Future of Rails",
+        "author": "Matt Solt, Ruby AI News",
+        "link": "https://rubyai.beehiiv.com/p/ruby-ai-news-october-2nd-2026"
+      },
+      {
+        "title": "Pencils Down: My Take on DHH's Rails World 2026 Keynote",
+        "author": "Dewayne VanHoozer",
+        "link": "https://madbomber.github.io/blog/engineering/pencils-down/"
+      }
+    ]
   },
   {
     "id": "agents-on-rails-stage-2-max-effort",
