@@ -30,16 +30,16 @@ const {
 
 // Name and character size by head count. Four steps is enough: the point is
 // that a group of ten reads as ten and a pair as a pair. Sponsors at the Ruby
-// tier and above stand half again as tall (the boosted column), and their name
+// tier and above stand a fifth taller (the boosted column), and their name
 // goes up a step.
 const sizeOf = (n, boosted) => {
     const step = n >= 8 ? 0 : n >= 4 ? 1 : n >= 3 ? 2 : 3;
     return boosted
         ? [
-              { name: "text-lg md:text-3xl", chibi: "h-24 md:h-[7.5rem]" },
-              { name: "text-base md:text-2xl", chibi: "h-[5.25rem] md:h-24" },
-              { name: "text-sm md:text-lg", chibi: "h-[4.5rem] md:h-[5.25rem]" },
-              { name: "text-px10 md:text-sm", chibi: "h-[3.75rem] md:h-[4.5rem]" },
+              { name: "text-lg md:text-3xl", chibi: "h-[4.8rem] md:h-24" },
+              { name: "text-base md:text-2xl", chibi: "h-[4.2rem] md:h-[4.8rem]" },
+              { name: "text-sm md:text-lg", chibi: "h-[3.6rem] md:h-[4.2rem]" },
+              { name: "text-px10 md:text-sm", chibi: "h-12 md:h-[3.6rem]" },
           ][step]
         : [
               { name: "text-base md:text-2xl", chibi: "h-16 md:h-20" },
@@ -51,10 +51,10 @@ const sizeOf = (n, boosted) => {
 
 // Everyone shares one cloud, the organizers included (their island carries
 // an "Organizers" plate). Biggest in the middle: the sorted list is dealt to
-// alternating ends. A boosted sponsor weighs half again as much, so it sits
+// alternating ends. A boosted sponsor weighs a fifth more, so it sits
 // closer to the middle too (the sort is stable, so ties keep the snapshot's
 // order, which already ranks published Cloud Cards).
-const weight = (c) => c.count * (isBoostedSponsor(c.name) ? 1.5 : 1);
+const weight = (c) => c.count * (isBoostedSponsor(c.name) ? 1.2 : 1);
 const arranged = [...companies].sort((a, b) => weight(b) - weight(a)).reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]), []);
 ---
 
