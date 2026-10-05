@@ -4,6 +4,7 @@
 // surface that shows it: the homepage islands, the sponsor page, and the
 // Markdown twins.
 import snapshot from "../content/attending-companies.json";
+import { conference2026SponsorTiers } from "./sponsors.js";
 
 export const companies = snapshot.companies ?? [];
 
@@ -17,3 +18,16 @@ export const displayName = (name) =>
 export const ORGANIZER = "Evil Martians";
 export const organizers = companies.filter((c) => c.name === ORGANIZER);
 export const guests = companies.filter((c) => c.name !== ORGANIZER);
+
+// Sponsors at the Ruby tier and above get a bigger island, as a thank-you.
+// Sponsor names can be longer than the company answer on a ticket ("Laravel
+// Cloud" is Laravel), so a sponsor matches a company whose name it starts with.
+const BOOSTED_TIERS = conference2026SponsorTiers.slice(
+  0,
+  conference2026SponsorTiers.findIndex((t) => t.tier === "Ruby Sponsors") + 1,
+);
+const boostedNames = BOOSTED_TIERS.flatMap((t) => t.sponsors.map((s) => s.name.toLowerCase()));
+export const isBoostedSponsor = (name) => {
+  const n = displayName(name).toLowerCase();
+  return boostedNames.some((s) => s === n || s.startsWith(`${n} `));
+};

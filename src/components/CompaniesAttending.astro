@@ -8,7 +8,7 @@
 // serves on each person's card. A character someone has since deleted 404s,
 // and the img swaps itself for the "?" placeholder so the head count still
 // shows and the row never shows a broken image.
-import { companies, displayName, ORGANIZER } from "../data/attending.js";
+import { companies, displayName, ORGANIZER, isBoostedSponsor } from "../data/attending.js";
 
 // The sponsor page reuses this block but sells it differently, so the lede is
 // a prop. Left out, it keeps the homepage's line.
@@ -29,20 +29,33 @@ const {
 } = Astro.props;
 
 // Name and character size by head count. Four steps is enough: the point is
-// that a group of ten reads as ten and a pair as a pair.
-const sizeOf = (n) =>
-    n >= 8
-        ? { name: "text-base md:text-2xl", chibi: "h-16 md:h-20" }
-        : n >= 4
-          ? { name: "text-sm md:text-lg", chibi: "h-14 md:h-16" }
-          : n >= 3
-            ? { name: "text-px10 md:text-sm", chibi: "h-12 md:h-14" }
-            : { name: "text-px8 md:text-px10", chibi: "h-10 md:h-12" };
+// that a group of ten reads as ten and a pair as a pair. Sponsors at the Ruby
+// tier and above stand half again as tall (the boosted column), and their name
+// goes up a step.
+const sizeOf = (n, boosted) => {
+    const step = n >= 8 ? 0 : n >= 4 ? 1 : n >= 3 ? 2 : 3;
+    return boosted
+        ? [
+              { name: "text-lg md:text-3xl", chibi: "h-24 md:h-[7.5rem]" },
+              { name: "text-base md:text-2xl", chibi: "h-[5.25rem] md:h-24" },
+              { name: "text-sm md:text-lg", chibi: "h-[4.5rem] md:h-[5.25rem]" },
+              { name: "text-px10 md:text-sm", chibi: "h-[3.75rem] md:h-[4.5rem]" },
+          ][step]
+        : [
+              { name: "text-base md:text-2xl", chibi: "h-16 md:h-20" },
+              { name: "text-sm md:text-lg", chibi: "h-14 md:h-16" },
+              { name: "text-px10 md:text-sm", chibi: "h-12 md:h-14" },
+              { name: "text-px8 md:text-px10", chibi: "h-10 md:h-12" },
+          ][step];
+};
 
 // Everyone shares one cloud, the organizers included (their island carries
 // an "Organizers" plate). Biggest in the middle: the sorted list is dealt to
-// alternating ends.
-const arranged = companies.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]), []);
+// alternating ends. A boosted sponsor weighs half again as much, so it sits
+// closer to the middle too (the sort is stable, so ties keep the snapshot's
+// order, which already ranks published Cloud Cards).
+const weight = (c) => c.count * (isBoostedSponsor(c.name) ? 1.5 : 1);
+const arranged = [...companies].sort((a, b) => weight(b) - weight(a)).reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]), []);
 ---
 
 {
@@ -90,7 +103,8 @@ const arranged = companies.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc,
                     a narrower minimum and tighter gaps below sm. */}
                 <ul class="flex flex-wrap justify-center items-end gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-8 md:gap-x-10 md:gap-y-10 list-none p-0 m-0">
                     {arranged.map((c, i) => {
-                        const size = sizeOf(c.count);
+                        const boosted = isBoostedSponsor(c.name);
+                        const size = sizeOf(c.count, boosted);
                         return (
                             <li
                                 class="flex flex-col items-center animate-float min-w-[6.5rem] sm:min-w-[8rem]"
