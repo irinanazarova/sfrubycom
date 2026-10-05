@@ -22,10 +22,10 @@ export const guests = companies.filter((c) => c.name !== ORGANIZER);
 // Sponsors at the Ruby tier and above get a bigger island, as a thank-you.
 // Sponsor names can be longer than the company answer on a ticket ("Laravel
 // Cloud" is Laravel), so a sponsor matches a company whose name it starts with.
-const BOOSTED_TIERS = conference2026SponsorTiers.slice(
-  0,
-  conference2026SponsorTiers.findIndex((t) => t.tier === "Ruby Sponsors") + 1,
-);
+const RUBY_TIER = conference2026SponsorTiers.findIndex((t) => t.tier === "Ruby Sponsors");
+// A renamed tier would otherwise boost nobody, silently.
+if (RUBY_TIER < 0) throw new Error('attending.js: no "Ruby Sponsors" tier in conference2026SponsorTiers');
+const BOOSTED_TIERS = conference2026SponsorTiers.slice(0, RUBY_TIER + 1);
 const boostedNames = BOOSTED_TIERS.flatMap((t) => t.sponsors.map((s) => s.name.toLowerCase()));
 export const isBoostedSponsor = (name) => {
   const n = displayName(name).toLowerCase();
