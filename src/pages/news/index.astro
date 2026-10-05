@@ -132,6 +132,24 @@ function leadSentence(text: string): string {
                                         <p class="mt-2.5 text-xs text-gray-400">{item.source}</p>
                                     )}
                                 </a>
+                                {item.reactions?.length > 0 && (
+                                    <p class="px-1 pb-5 -mt-2 text-xs leading-relaxed text-gray-500">
+                                        <span class="text-gray-400">Reactions:</span>{" "}
+                                        {item.reactions.map((r, i) => (
+                                            <>
+                                                {i > 0 && <span class="text-gray-300"> · </span>}
+                                                <a
+                                                    href={r.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="text-gray-600 underline decoration-gray-300 underline-offset-2 hover:text-ruby-600"
+                                                >
+                                                    {r.author}, “{r.title}”
+                                                </a>
+                                            </>
+                                        ))}
+                                    </p>
+                                )}
                             </li>
                         );
                     })

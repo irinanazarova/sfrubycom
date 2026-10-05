@@ -49,6 +49,8 @@ export interface NewsItem {
   category: 'Funding' | 'Acquisition' | 'Product' | 'Traction' | 'Community' | string;
   startupName: string;
   source: string;
+  /** Opinion pieces responding to the story, shown as links under it. */
+  reactions?: { title: string; author: string; link: string }[];
 }
 
 export interface Talk {

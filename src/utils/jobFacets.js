@@ -182,6 +182,10 @@ export const COMPANY_META = {
   quantic: { industry: "Edtech", stage: "Early-stage" },
   kariashealth: { industry: "Healthtech", stage: "Seed" },
   goodbill: { industry: "Healthtech", stage: "Seed" },
+
+  // Added October 2, 2026 (2026 conference sponsors, path 1)
+  shopify: { industry: "E-commerce", stage: "Public / Large" },
+  fastruby: { industry: "AI / Dev Tools", stage: "Early-stage" },
 };
 
 // ── Matching chips ──────────────────────────────────────────────────────────

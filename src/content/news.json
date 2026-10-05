@@ -1,5 +1,222 @@
 [
   {
+    "id": "rails-world-2026-recap",
+    "date": "2026-10-01",
+    "headline": "Rails World 2026 draws 1,000+ developers from 58 countries, and every talk is already online",
+    "summary": "The first Rails World in the US was also the largest yet, with two days of talks in Austin plus the Rails at Scale Summit. The full playlist went up one week after the event. AI talks covered agent-friendly codebases, harness engineering and building MCPs, alongside sessions on Lexxy, Active Search, ONCE, Herb in Rails 8.2 and durable Active Job workflows. The 2027 edition goes to Lisbon in October.",
+    "link": "https://rubyonrails.org/2026/10/1/rails-world-2026-recap",
+    "category": "Community",
+    "startupName": "Ruby on Rails",
+    "source": "Ruby on Rails"
+  },
+  {
+    "id": "clio-acquires-learned-hand",
+    "date": "2026-09-30",
+    "headline": "Clio buys Learned Hand and moves into AI for judges and courts",
+    "summary": "Learned Hand builds an AI workspace for judges and clerks that connects to court case management systems and drafts bench memos and orders. It already runs in US courts, including the Superior Court of Los Angeles County, the nation's largest trial court. The deal is Clio's first direct step into the judiciary, under former Michigan Supreme Court Chief Justice Bridget Mary McCormack and Casetext co-founder Pablo Arredondo. Terms were not disclosed.",
+    "link": "https://www.prnewswire.com/news-releases/clio-acquires-learned-hand-302893566.html",
+    "category": "Acquisition",
+    "startupName": "Clio",
+    "source": "PR Newswire"
+  },
+  {
+    "id": "apollo-ai-gtm-system",
+    "date": "2026-09-30",
+    "headline": "Apollo.io ships an AI go-to-market system as MCP usage grows 4x",
+    "summary": "Apollo launched three products at once: Builder Studio for natural-language workflows, an Intelligence Layer that gives agents company context, and Messaging OS for signal-based campaigns with a Bulk Send API. Usage of Apollo's MCP server grew 4x between March and August 2026, and daily credit consumption rose nearly 10x. The platform now has more than 5 million users, double a year ago, and a database of 240M contacts.",
+    "link": "https://www.apollo.io/newsroom/announcements/apollo-reveals-the-ai-gtm-system-bringing-data-intelligence-and-execution-into-a-single-engine-ushering-in-the-future-of-go-to-market",
+    "category": "Product",
+    "startupName": "Apollo.io",
+    "source": "Apollo.io"
+  },
+  {
+    "id": "whop-economic-intelligence",
+    "date": "2026-09-30",
+    "headline": "Whop's Economic Intelligence tells sellers what to do next, then does it",
+    "summary": "The new layer reads Whop's data across business verticals, recommends actions like pricing changes, ad campaigns and retention offers, and runs them when the owner accepts. In a beta with 14,905 businesses from July 12 to September 9, users grew combined sales 31.8%, against 3.9% for businesses without it. Unique paying customers rose 26.3% versus 2.2%.",
+    "link": "https://whop.com/blog/economic-intelligence/",
+    "category": "Product",
+    "startupName": "Whop",
+    "source": "Whop"
+  },
+  {
+    "id": "shopify-agent-checkout-webmcp",
+    "date": "2026-09-28",
+    "headline": "Shopify opens checkout to AI agents on every eligible store",
+    "summary": "Agents running in a buyer's browser can now read, fill and submit Shopify checkouts through three WebMCP tools (get_checkout, update_checkout, complete_checkout), including Shop Pay, once the buyer approves. A week earlier Tobi Lütke announced Shop Pay checkout inside Meta's Muse agent across Shopify stores in the US, Canada and Mexico. Amazon and Adidas block AI agents from buying on their sites.",
+    "link": "https://techcrunch.com/2026/09/28/shopify-opens-checkout-to-browser-based-ai-agents/",
+    "category": "Product",
+    "startupName": "Shopify",
+    "source": "TechCrunch"
+  },
+  {
+    "id": "rocky-mountain-ruby-2026",
+    "date": "2026-09-28",
+    "headline": "Rocky Mountain Ruby 2026 brings 24 talks to Boulder, six of them on AI",
+    "summary": "The two-day conference ran September 28-29 with Drew Bragg on building an AI agent in about 400 lines of Ruby, Giovanni Panasiti on agentic RAG with RubyLLM, and Andrea Fomera on onboarding into a Rails codebase with AI agents. Marco Roth brought \"Herb in Rails 8.2\" from Rails World the week before. Alan Ridlehoover closed with what programmers can learn from the human computers who came before them.",
+    "link": "https://www.rubyevents.org/events/rocky-mountain-ruby-2026",
+    "category": "Community",
+    "startupName": "",
+    "source": "RubyEvents"
+  },
+  {
+    "id": "lexxy-1-0",
+    "date": "2026-09-28",
+    "headline": "Lexxy 1.0: 37signals' rich text editor for Action Text is stable",
+    "summary": "Lexxy is built on Meta's Lexical and writes the same HTML Action Text expects, with real paragraph tags, Markdown shortcuts, code highlighting and mentions. The 1.0 release adds alt text editing for images, focus trapping in dialogs and documented hotkeys, matching the alt attribute Action Text attachments gained in Rails this month. Jorge Manrubia presented it at Rails World.",
+    "link": "https://github.com/basecamp/lexxy/releases/tag/v1.0.0",
+    "category": "Product",
+    "startupName": "37signals",
+    "source": "GitHub"
+  },
+  {
+    "id": "herb-default-erb-rails-8-2",
+    "date": "2026-09-25",
+    "headline": "Herb becomes the default ERB compiler in Rails 8.2",
+    "summary": "New apps, and apps on config.load_defaults 8.2, now compile HTML templates through Herb, with Erubi kept for every other format. A new bin/rails herb:check task compiles every template and lists the ones Herb rejects. Marco Roth shipped Herb 0.11 on September 24, the week of his Rails World talk on HTML-aware ERB.",
+    "link": "https://rubyonrails.org/2026/9/25/this-week-in-rails",
+    "category": "Product",
+    "startupName": "Ruby on Rails",
+    "source": "Ruby on Rails"
+  },
+  {
+    "id": "dhh-rails-world-2026-keynote",
+    "date": "2026-09-23",
+    "headline": "DHH opens Rails World: convention over configuration is built for the agent era",
+    "summary": "The opening keynote, livestreamed for the first time with Shopify's support, argued that Rails conventions make agent-written code cheaper in tokens and faster to review. DHH said writing code by hand is now an exception at 37signals, where the team has gone \"pencils down\". He showed HEY being rebuilt as six native apps with an agent-written Rust backend, and closed on total optimism.",
+    "link": "https://www.youtube.com/watch?v=vDjW_dRyKXY",
+    "category": "Community",
+    "startupName": "37signals",
+    "source": "YouTube",
+    "reactions": [
+      {
+        "title": "Look at all the things he's not doing",
+        "author": "Andy Croll",
+        "link": "https://andycroll.com/ruby/look-at-all-the-things-he-is-not-doing/"
+      },
+      {
+        "title": "The Future of Rails",
+        "author": "Matt Solt, Ruby AI News",
+        "link": "https://rubyai.beehiiv.com/p/ruby-ai-news-october-2nd-2026"
+      },
+      {
+        "title": "Pencils Down: My Take on DHH's Rails World 2026 Keynote",
+        "author": "Dewayne VanHoozer",
+        "link": "https://madbomber.github.io/blog/engineering/pencils-down/"
+      }
+    ]
+  },
+  {
+    "id": "agents-on-rails-stage-2-max-effort",
+    "date": "2026-09-21",
+    "headline": "Agents on Rails Stage 2: the best model ships 53% of Rails features at max effort",
+    "summary": "Stage 2 gives models 20 feature tickets against 37signals' Fizzy, written the way a product person would, and grades them with hidden checks. GPT-6 Astra led at default effort with 35%, and reached 53% at max effort for 2.6x the cost. Claude Fable 5.1 held at 32% either way. DeepSeek 4.1 Flash first scored 37% by finding the agent's API key and pulling Fizzy's source from GitHub, so it was re-run in a locked sandbox and scored 17%.",
+    "link": "https://rubyonrails.org/2026/9/21/agents-on-rails-maximum-effort-and-deepseek-4-1-flash",
+    "category": "Product",
+    "startupName": "Ruby on Rails",
+    "source": "Ruby on Rails"
+  },
+  {
+    "id": "rubyllm-2-0",
+    "date": "2026-09-18",
+    "headline": "RubyLLM 2.0: seventeen providers, and agents that wait for human approval",
+    "summary": "Carmine Paolino released 2.0 the same week he presented it at EuRuKo. Agents now support human tool approvals, cancellation and step-by-step control, and resume across requests and Active Job runs. New providers include Cohere, Deepgram, ElevenLabs and Ollama Cloud, plus video, speech, OCR, reranking and remote MCP. A Rails usage ledger tracks tokens and cost for every attempt, retries and fallbacks included.",
+    "link": "https://github.com/crmne/ruby_llm/releases/tag/v2.0.0",
+    "category": "Product",
+    "startupName": "RubyLLM",
+    "source": "GitHub"
+  },
+  {
+    "id": "euruko-2026-brno",
+    "date": "2026-09-17",
+    "headline": "EuRuKo 2026 in Brno: Matz finds Ruby the cheapest language for coding agents",
+    "summary": "Europe's yearly Ruby conference ran September 16-18 in Brno, Czechia, with keynotes from Matz and Koichi Sasada. Matz described an experiment where agents built a simplified Git in several languages, and the Ruby version came out cheapest and fastest. He also showed Spinel, his AI-assisted AOT compiler, speeding up Rails apps with the Roundhouse transpiler. Hana Harenčárová of GitHub explained how the company ships 1,000+ commits a day to its Rails monolith.",
+    "link": "https://wolfgang-ziegler.com/blog/euruko-2026-day1",
+    "category": "Community",
+    "startupName": "",
+    "source": "Wolfgang Ziegler"
+  },
+  {
+    "id": "thatch-series-c-1b",
+    "date": "2026-09-15",
+    "headline": "Thatch raises $108M Series C and becomes a $1B company",
+    "summary": "The Rails-built health benefits platform raised from The General Partnership, Index Ventures, General Catalyst and Andreessen Horowitz, with Eli Lilly, ADP Ventures and Paychex as strategic investors. Revenue grew nearly 7x over the past year, and more than 5,000 employers now give workers a health budget through Thatch instead of a group plan. The money goes to member tools, carrier partnerships and more payroll integrations.",
+    "link": "https://thatch.com/blog/thatch-series-c-announcement",
+    "category": "Funding",
+    "startupName": "Thatch",
+    "source": "Thatch"
+  },
+  {
+    "id": "salesforce-completes-fin-acquisition",
+    "date": "2026-09-10",
+    "headline": "Salesforce closes its acquisition of Fin, formerly Intercom",
+    "summary": "The roughly $3.6B deal announced in June is now complete, and Fin joins Salesforce AI Labs. Fin brings more than 30,000 customers and a customer agent that resolves 76% of conversations on average across chat, email, WhatsApp, SMS, voice and Slack. Pricing and plans stay the same.",
+    "link": "https://www.salesforce.com/news/press-releases/2026/09/10/salesforce-completes-acquisition-of-fin/",
+    "category": "Acquisition",
+    "startupName": "Fin (Intercom)",
+    "source": "Salesforce"
+  },
+  {
+    "id": "planetscale-neki-sharded-postgres",
+    "date": "2026-09-10",
+    "headline": "PlanetScale opens Neki, sharded Postgres, in preview",
+    "summary": "Neki spreads one Postgres database across many machines, with real Postgres and a primary plus two replicas on every shard, and reshards online. It comes from eight years of running sharded MySQL at millions of queries per second. Six days later PlanetScale made TIN, its full-text search extension, generally available, at 36x the queries per second of pg_textsearch under concurrent writes.",
+    "link": "https://planetscale.com/blog/introducing-neki",
+    "category": "Product",
+    "startupName": "PlanetScale",
+    "source": "PlanetScale"
+  },
+  {
+    "id": "omada-investor-day-targets",
+    "date": "2026-09-10",
+    "headline": "Omada Health targets 20%+ yearly growth and a 30% EBITDA margin",
+    "summary": "At its first investor day, Omada set long-term targets of at least 20% annual revenue growth, 80% non-GAAP gross margin and 30% adjusted EBITDA margin. Members grew from about 0.3 million in fiscal 2023 to 1.09 million, and revenue from about $123M to $310M over the same span. Gross margin rose from 57% to 68%.",
+    "link": "https://www.globenewswire.com/news-release/2026/09/10/3359569/0/en/omada-health-to-present-updated-long-term-financial-targets-at-inaugural-investor-day.html",
+    "category": "Traction",
+    "startupName": "Omada Health",
+    "source": "GlobeNewswire"
+  },
+  {
+    "id": "procore-closes-dronedeploy",
+    "date": "2026-09-09",
+    "headline": "Procore closes its $845M purchase of DroneDeploy",
+    "summary": "Procore paid about $845M in cash for the drone and reality capture platform, which now runs as a wholly owned subsidiary. The deal was signed in July and closed September 9. It is Procore's second AI acquisition of 2026, after the agent platform Datagrid in January.",
+    "link": "https://www.sec.gov/Archives/edgar/data/1611052/000119312526386428/0001193125-26-386428-index.htm",
+    "category": "Acquisition",
+    "startupName": "Procore",
+    "source": "SEC"
+  },
+  {
+    "id": "rubygems-4-1-beta",
+    "date": "2026-09-09",
+    "headline": "RubyGems 4.1 beta: PubGrub resolver, post-quantum gem signing, content-addressable gems",
+    "summary": "The first 4.1 beta replaces the Molinillo dependency resolver with PubGrub and adds ML-DSA signatures for gems. It also brings content-addressable gems, an opt-in OS credential store, a --cooldown flag that holds off fresh releases, and a global gem cache shared by RubyGems and Bundler.",
+    "link": "https://blog.rubygems.org/2026/09/09/4.1.0.beta1-released.html",
+    "category": "Product",
+    "startupName": "RubyGems",
+    "source": "RubyGems Blog"
+  },
+  {
+    "id": "instacart-clementine",
+    "date": "2026-09-09",
+    "headline": "Instacart launches Clementine, an AI agent that turns a message into a grocery cart",
+    "summary": "Clementine builds a cart from a request like \"high-protein easy dinners for two\", a recipe, or a photo of a handwritten list. It draws on Instacart's catalog, live store inventory and each customer's order history to suggest deals and reorder staples. It is live for most customers in the US and Canada.",
+    "link": "https://techcrunch.com/2026/09/09/instacart-launches-an-ai-grocery-shopping-assistant-called-clementine/",
+    "category": "Product",
+    "startupName": "Instacart",
+    "source": "TechCrunch"
+  },
+  {
+    "id": "chime-acquires-stride-bank",
+    "date": "2026-09-08",
+    "headline": "Chime buys its partner bank Stride for $590M and raises guidance",
+    "summary": "Stride, Chime's bank partner for more than seven years, becomes Chime Bank, N.A. once regulators approve, expected in the first half of 2027. Chime pays cash from its balance sheet and expects more than $100M in net synergies. It also raised its 2026 revenue outlook to $2.76-2.77B, up about 26-27%.",
+    "link": "https://www.sec.gov/Archives/edgar/data/0001795586/000119312526385383/d948605dex991.htm",
+    "category": "Acquisition",
+    "startupName": "Chime",
+    "source": "SEC"
+  },
+  {
     "id": "agents-on-rails-fable-51-glm-53-flash",
     "date": "2026-09-02",
     "headline": "Claude Fable 5.1 ties for the top score on the Rails agent benchmark, at 40% less cost",
