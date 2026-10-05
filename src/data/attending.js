@@ -12,7 +12,8 @@ export const companies = snapshot.companies ?? [];
 export const displayName = (name) =>
   name.replace(/[,\s]+(inc|llc|ltd|corp|co|gmbh|plc)\.?$/i, "");
 
-// The organizers stand aside; the cloud is the companies buying tickets.
+// The organizers share the cloud with everyone (their island carries a plate);
+// the Markdown twins still name them on a line of their own.
 export const ORGANIZER = "Evil Martians";
 export const organizers = companies.filter((c) => c.name === ORGANIZER);
 export const guests = companies.filter((c) => c.name !== ORGANIZER);
