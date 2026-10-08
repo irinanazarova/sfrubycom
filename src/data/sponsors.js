@@ -84,6 +84,13 @@ export const conference2026SponsorTiers = [
         wideLockup: true, // 7.1:1, same trade as Laravel Cloud above
         url: "https://www.superconductor.com/",
       },
+      {
+        name: "Gusto",
+        logo: "/sponsor_gusto.svg",
+        logoWidth: 147,
+        logoHeight: 56,
+        url: "https://gusto.com/",
+      },
     ],
   },
   {
@@ -244,13 +251,6 @@ export const conference2026SponsorTiers = [
         logoWidth: 687,
         logoHeight: 172,
         url: "https://rebulk.com/",
-      },
-      {
-        name: "Gusto",
-        logo: "/sponsor_gusto.png",
-        logoWidth: 500,
-        logoHeight: 189,
-        url: "https://gusto.com/",
       },
     ],
   },
