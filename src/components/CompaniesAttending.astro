@@ -45,17 +45,46 @@ const sizeOf = (n, boosted) => {
               { name: "text-base md:text-2xl", chibi: "h-16 md:h-20" },
               { name: "text-sm md:text-lg", chibi: "h-14 md:h-16" },
               { name: "text-px10 md:text-sm", chibi: "h-12 md:h-14" },
-              { name: "text-px8 md:text-px10", chibi: "h-10 md:h-12" },
+              { name: "text-px9 md:text-xs", chibi: "h-10 md:h-12" },
           ][step];
 };
 
 // Everyone shares one cloud, the organizers included (their island carries
-// an "Organizers" plate). Biggest in the middle: the sorted list is dealt to
-// alternating ends. A boosted sponsor weighs a fifth more, so it sits
-// closer to the middle too (the sort is stable, so ties keep the snapshot's
-// order, which already ranks published Cloud Cards).
+// an "Organizers" plate). The islands of four or more people float in rows
+// of three in the middle, the biggest in the middle of the lowest of them,
+// with the pairs and threes above and below; a single wrapping list put the
+// big ones wherever a row happened to break. Inside each row the sorted list
+// is dealt to alternating ends, so the biggest sits mid-row. A boosted sponsor weighs a fifth more, so it
+// sits closer to the middle too (the sort is stable, so ties keep the
+// snapshot's order, which already ranks published Cloud Cards).
+const BIG = 4;
 const weight = (c) => c.count * (isBoostedSponsor(c.name) ? 1.2 : 1);
-const arranged = [...companies].sort((a, b) => weight(b) - weight(a)).reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]), []);
+const centerOut = (list) => list.reduce((acc, c, i) => (i % 2 ? [c, ...acc] : [...acc, c]), []);
+const sorted = [...companies].sort((a, b) => weight(b) - weight(a));
+const small = sorted.filter((c) => c.count < BIG);
+const big = sorted.filter((c) => c.count >= BIG);
+const bigRows = [];
+for (let i = 0; i < big.length; i += 3) bigRows.unshift(big.slice(i, i + 3));
+const bands = [
+    small.filter((_, i) => i % 2 === 0),
+    ...bigRows,
+    small.filter((_, i) => i % 2 === 1),
+]
+    .filter((band) => band.length > 0)
+    .map(centerOut);
+
+// The people on an island, in rows of at most seven, evened out so thirteen
+// stand 6 over 7 rather than 7, 5 and one alone on top. The fuller row
+// stands on the grass. A ticket holder without a Cloud Card is a pale
+// silhouette at the end, which reads as an empty seat.
+const MAX_PER_ROW = 7;
+const rowsOf = (c) => {
+    const people = [...c.characters, ...Array.from({ length: Math.max(0, c.count - c.characters.length) }, () => null)];
+    const per = Math.ceil(people.length / Math.ceil(people.length / MAX_PER_ROW));
+    const rows = [];
+    for (let i = 0; i < people.length; i += per) rows.push(people.slice(i, i + per));
+    return rows.reverse();
+};
 ---
 
 {
@@ -93,56 +122,64 @@ const arranged = [...companies].sort((a, b) => weight(b) - weight(a)).reduce((ac
                     island is as wide as the group, so its height follows
                     (the sprite keeps its aspect), and name and characters
                     grow with the head count too. A ticket holder without a
-                    Cloud Card yet stands in as the human from the CFP poster
-                    (px-human.png, cut from 8bit_cfp.png at its native 21x41). The organizers
-                    stand in the cloud like everyone else, marked by a plate
-                    over their island. Sorted by size, then dealt to alternating
-                    ends so the biggest island floats mid-sky. */}
+                    Cloud Card yet stands in as the silhouette of the human
+                    from the CFP poster (px-human.png, cut from 8bit_cfp.png
+                    at its native 21x41). The organizers stand in the cloud
+                    like everyone else, marked by a plate over their island.
+                    Three bands, the big islands in the middle one (`bands`
+                    above). */}
                 <div class="mt-12">
                 {/* Three islands a row on phones (two made the cloud 2.3 screens long):
                     a narrower minimum and tighter gaps below sm. */}
+                <div class="flex flex-col gap-y-6 sm:gap-y-8 md:gap-y-10">
+                {bands.map((band) => (
                 <ul class="flex flex-wrap justify-center items-end gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-8 md:gap-x-10 md:gap-y-10 list-none p-0 m-0">
-                    {arranged.map((c, i) => {
+                    {band.map((c) => {
                         const boosted = isBoostedSponsor(c.name);
                         const size = sizeOf(c.count, boosted);
                         return (
                             <li
                                 class="flex flex-col items-center animate-float min-w-[6.5rem] sm:min-w-[8rem]"
-                                style={`animation-delay: ${-((i * 1.3) % 6).toFixed(1)}s`}
+                                style={`animation-delay: ${-((c.name.length * 1.3) % 6).toFixed(1)}s`}
                             >
                                 {c.name === ORGANIZER && (
                                     <span class="px-plate px-font text-px8 px-2.5 py-1 mb-3">Organizers</span>
                                 )}
-                                <div class="relative z-10 flex flex-wrap items-end justify-center gap-1 max-w-[24rem] px-2 sm:px-4 -mb-1.5">
-                                    {c.characters.map((p) => (
-                                        <a
-                                            href={p.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="block tap-press"
-                                            title={p.name}
-                                            aria-label={`${p.name}'s Cloud Card`}
-                                        >
-                                            <img
-                                                src={p.image}
-                                                alt={p.name}
-                                                width="73"
-                                                height="128"
-                                                loading="lazy"
-                                                decoding="async"
-                                                class={`px-pixelated ${size.chibi} w-auto`}
-                                            />
-                                        </a>
-                                    ))}
-                                    {Array.from({ length: Math.max(0, c.count - c.characters.length) }).map(() => (
-                                        <img
-                                            src="/px-human.png"
-                                            alt=""
-                                            width="21"
-                                            height="41"
-                                            title="Has a ticket, no Cloud Card yet"
-                                            class={`px-pixelated ${size.chibi} w-auto`}
-                                        />
+                                <div class="relative z-10 flex flex-col items-center gap-1 px-2 sm:px-4 -mb-1.5">
+                                    {rowsOf(c).map((row) => (
+                                        <div class="flex items-end justify-center gap-1">
+                                            {row.map((p) =>
+                                                p ? (
+                                                    <a
+                                                        href={p.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="block tap-press"
+                                                        title={p.name}
+                                                        aria-label={`${p.name}'s Cloud Card`}
+                                                    >
+                                                        <img
+                                                            src={p.image}
+                                                            alt={p.name}
+                                                            width="73"
+                                                            height="128"
+                                                            loading="lazy"
+                                                            decoding="async"
+                                                            class={`px-pixelated ${size.chibi} w-auto`}
+                                                        />
+                                                    </a>
+                                                ) : (
+                                                    <img
+                                                        src="/px-human.png"
+                                                        alt=""
+                                                        width="21"
+                                                        height="41"
+                                                        title="Has a ticket, no Cloud Card yet"
+                                                        class={`px-pixelated ${size.chibi} w-auto brightness-0 invert opacity-40`}
+                                                    />
+                                                ),
+                                            )}
+                                        </div>
                                     ))}
                                 </div>
                                 {/* w-0 + min-w-full: the island fills the
@@ -158,6 +195,8 @@ const arranged = [...companies].sort((a, b) => weight(b) - weight(a)).reduce((ac
                         );
                     })}
                 </ul>
+                ))}
+                </div>
                 </div>
 
                 {cta && (
