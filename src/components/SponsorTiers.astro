@@ -10,40 +10,50 @@ import { conference2026SponsorTiers } from "../data/sponsors.js";
 // which is the trade for a row that reads evenly. The class lives here, not in
 // the data file, because the scanner only sees what is spelled out in a template.
 const WIDE_LOCKUP = "max-w-[16rem]";
+
+// Every tier heading is the same size. The logo and card sizes carry the
+// hierarchy; a heading a pixel smaller than the one beside it in a shared
+// row just read as sloppy. Colour still marks the tier.
+const HEADING = "text-px9 md:text-px10";
+
+// Box height is set per tier, not by the logo size: Pickaxe 128, Ruby 92,
+// Emerald 72, every other tier 60. Phones step down so the boxes keep their
+// proportion to the smaller logos there.
+const BOX = {
+    xl: "h-[84px] md:h-[128px]",
+    ruby: "h-[72px] md:h-[92px]",
+    emerald: "h-[56px] md:h-[72px]",
+    rest: "h-[48px] md:h-[60px]",
+};
 // Padding is what decides where a tier stops wrapping, so it stays lean and the
 // logo height carries the hierarchy. At these sizes each tier holds one row from
 // 820px on the homepage and 900px on /sponsor-2026, and stacks below that.
 const SIZES = {
     xl: {
-        card: "px-8 py-6 md:px-8 md:py-8",
+        card: "px-8",
         logo: "h-9 md:h-14",
-        heading: "text-px10 md:text-xs",
     },
     lg: {
-        card: "px-6 py-4 md:py-5",
+        card: "px-6",
         logo: "h-8 md:h-11",
-        heading: "text-px10",
     },
     md: {
         // Two-up on phones. Letting these size to their logos leaves cards of
         // 141-163px against a ~318px row, so they wrap one per screen; a
         // half-width basis (minus half the 1rem gap) fits two whatever the
         // next logo's aspect ratio turns out to be.
-        card: "basis-[calc(50%-0.5rem)] grow-0 justify-center sm:basis-auto px-4 py-3 sm:px-5 sm:py-4",
+        card: "basis-[calc(50%-0.5rem)] grow-0 justify-center sm:basis-auto px-4 sm:px-5",
         logo: "h-6 md:h-8",
-        heading: "text-px9 md:text-px10",
     },
     // The two smallest tiers (Travel, Media) sit under Emerald and are priced
     // under it, so each step down is a step down in logo height as well.
     sm: {
-        card: "px-4 py-3 sm:px-5",
+        card: "px-4 sm:px-5",
         logo: "h-5 md:h-7",
-        heading: "text-px8 md:text-px9",
     },
     xs: {
-        card: "px-3 py-2.5 sm:px-4",
+        card: "px-3 sm:px-4",
         logo: "h-5 md:h-6",
-        heading: "text-px8",
     },
 };
 
@@ -75,20 +85,30 @@ const groups = conference2026SponsorTiers.reduce((acc, tier) => {
             <div class:list={[group.shared && "flex flex-wrap justify-center gap-x-12 gap-y-10"]}>
         {group.tiers.map((tier) => {
             const size = SIZES[tier.size];
+            const box = BOX[tier.box ?? "rest"];
             return (
-                <div>
+                <div class:list={[group.shared && "flex flex-col"]}>
                     <h3
-                        class={`px-font ${size.heading} ${tier.headingClass} text-center mb-5`}
+                        class={`px-font ${HEADING} ${tier.headingClass} text-center mb-5`}
                     >
                         {tier.tier}
                     </h3>
-                    <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+                    <div
+                        class:list={[
+                            "flex flex-wrap justify-center gap-4 md:gap-6",
+                            // Tiers sharing a row are stretched to a common
+                            // height by the group, so the cards fill it and
+                            // their boxes line up. The logos keep their own
+                            // tier size, which is what carries the hierarchy.
+                            "items-center",
+                        ]}
+                    >
                         {tier.sponsors.map((sponsor) => (
                             <a
                                 href={sponsor.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class={`px-card bg-white ${size.card} inline-flex items-center hover:-translate-y-0.5 transition-transform`}
+                                class={`px-card bg-white ${size.card} ${box} inline-flex items-center justify-center hover:-translate-y-0.5 transition-transform`}
                             >
                                 <img
                                     src={sponsor.logo}

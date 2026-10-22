@@ -19,6 +19,7 @@
 export const conference2026SponsorTiers = [
   {
     tier: "Pickaxe Sponsor",
+    box: "xl",
     size: "xl",
     headingClass: "text-ruby-600",
     sponsors: [
@@ -33,6 +34,7 @@ export const conference2026SponsorTiers = [
   },
   {
     tier: "Ruby Sponsors",
+    box: "ruby",
     size: "lg",
     headingClass: "text-ruby-600",
     sponsors: [
@@ -91,11 +93,24 @@ export const conference2026SponsorTiers = [
         logoHeight: 56,
         url: "https://gusto.com/",
       },
+      {
+        // Figma's own lockup and white wordmark, cropped to the art (their
+        // files centre it on a 1024x640 canvas). Their guidelines forbid
+        // modifying the mark, so the ticker gets the white wordmark rather
+        // than the five-colour mark flattened by brightness-0 invert.
+        name: "Figma",
+        logo: "/sponsor_figma.svg",
+        logoWidth: 640,
+        logoHeight: 179,
+        tickerLogo: "/sponsor_figma_white.svg", // 600x223, shown unfiltered
+        url: "https://www.figma.com/",
+      },
     ],
   },
   {
     tier: "Coffee Sponsor",
-    size: "lg",
+    box: "emerald",
+    size: "md",
     shareRow: true, // sits beside the other single-sponsor tier
     headingClass: "text-ruby-600",
     sponsors: [
@@ -109,23 +124,9 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Passport Sponsor",
-    size: "lg",
-    shareRow: true, // sits beside the other single-sponsor tier
-    headingClass: "text-ruby-600",
-    sponsors: [
-      {
-        name: "Avo",
-        logo: "/sponsor_avo.png",
-        logoWidth: 485,
-        logoHeight: 200,
-        url: "https://avohq.io/",
-      },
-    ],
-  },
-  {
     tier: "Speaker Dinner Sponsor",
-    size: "lg",
+    box: "emerald",
+    size: "md",
     shareRow: true, // sits beside the other single-sponsor tiers
     headingClass: "text-ruby-600",
     sponsors: [
@@ -141,7 +142,25 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
+    tier: "Community Sponsor",
+    box: "emerald",
+    size: "md",
+    shareRow: true, // shares the row with Coffee and Speaker Dinner
+    headingClass: "text-indigo-500", // the logo royal blue
+    sponsors: [
+      {
+        // Charcoal, medium cut (21-45px tall) from the Mux press kit.
+        name: "Mux",
+        logo: "/sponsor_mux.svg",
+        logoWidth: 154,
+        logoHeight: 48,
+        url: "https://www.mux.com/",
+      },
+    ],
+  },
+  {
     tier: "Emerald Sponsors",
+    box: "emerald",
     size: "md",
     headingClass: "text-grass-500",
     sponsors: [
@@ -205,23 +224,24 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Community Sponsor",
+    tier: "Passport Sponsor",
     size: "sm",
-    headingClass: "text-gray-500",
+    shareRow: true, // sits beside the other single-sponsor tier
+    headingClass: "text-ruby-600",
     sponsors: [
       {
-        // Charcoal, medium cut (21-45px tall) from the Mux press kit.
-        name: "Mux",
-        logo: "/sponsor_mux.svg",
-        logoWidth: 154,
-        logoHeight: 48,
-        url: "https://www.mux.com/",
+        name: "Avo",
+        logo: "/sponsor_avo.png",
+        logoWidth: 485,
+        logoHeight: 200,
+        url: "https://avohq.io/",
       },
     ],
   },
   {
     tier: "Travel Sponsors",
     size: "sm",
+    shareRow: true, // shares the row with the Passport sponsor
     headingClass: "text-gray-500",
     sponsors: [
       {
