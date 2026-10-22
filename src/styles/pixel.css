@@ -422,7 +422,10 @@
     align-items: center;
     flex-shrink: 0;
     min-width: 100%;
-    animation: px-ticker-scroll 28s linear infinite;
+    /* One cycle travels the whole group, so the duration sets the speed and
+       every sponsor added makes the strip faster. 95s over the current ~9500px
+       group is ~100px/s; retune it when the roster grows a lot. */
+    animation: px-ticker-scroll var(--px-ticker-duration, 95s) linear infinite;
 }
 /* Freeze on hover so the logos inside stay clickable. */
 .px-ticker:hover .px-ticker__group {
