@@ -17,6 +17,14 @@ on:
     - cron: '23 14 * * *'
   workflow_dispatch: {}
 
+# One run at a time: two reviews would take the same oldest candidates and
+# race to push the same jobs-review-<date> branch. A run that starts while
+# another is going waits for it (a third replaces the waiting one, which is
+# fine: the scan finds the same roles either way).
+concurrency:
+  group: job-board-scan
+  cancel-in-progress: false
+
 permissions:
   contents: read
   issues: write
