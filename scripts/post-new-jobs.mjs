@@ -14,9 +14,7 @@
 // With --post it first waits for the deploy, so nobody clicks through to a
 // card that is not on the site yet.
 import { execFileSync } from "node:child_process";
-import { jobs } from "../src/data/jobs.js";
-import { getSponsor } from "../src/data/sponsors.js";
-import { getStartup } from "../src/data/startups.js";
+import { jobs, jobCompanyName } from "../src/data/jobs.js";
 
 const SITE = "https://sfruby.com";
 const DEPLOY_WAIT_MS = 15 * 60 * 1000;
@@ -49,16 +47,15 @@ if (added.length === 0) {
   process.exit(0);
 }
 
-const companyOf = (job) =>
-  job.companyName || getSponsor(job.sponsorId)?.name || getStartup(job.startupId)?.name || job.sponsorId || job.startupId;
-
-// Slack mrkdwn: & < > are the only characters to escape.
+// Slack mrkdwn escapes & < >. Link text also ends at a "|", which has no
+// escape, so it becomes a slash.
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const escLink = (s) => esc(s).replace(/\|/g, "/");
 
 const line = (job) => {
   const salary = /\d/.test(job.salary ?? "") ? job.salary : null;
   const details = [job.location, salary].filter(Boolean).map(esc).join(" · ");
-  return `• *${esc(companyOf(job))}*: <${SITE}/jobs#${job.id}|${esc(job.title)}>${details ? `\n   ${details}` : ""}`;
+  return `• *${esc(jobCompanyName(job))}*: <${SITE}/jobs#${job.id}|${escLink(job.title)}>${details ? `\n   ${details}` : ""}`;
 };
 
 const shown = added.slice(0, MAX_LINES);

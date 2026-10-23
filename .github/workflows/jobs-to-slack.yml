@@ -10,9 +10,12 @@ on:
     branches: [main]
     paths: [src/data/jobs.js]
 
-concurrency:
-  group: jobs-to-slack
-  cancel-in-progress: false
+# No concurrency group on purpose: GitHub keeps one pending run per group,
+# so a third push would cancel the second's and its listings would never post.
+# Each run compares its own push, so parallel runs post disjoint lists.
+
+permissions:
+  contents: read
 
 jobs:
   post:

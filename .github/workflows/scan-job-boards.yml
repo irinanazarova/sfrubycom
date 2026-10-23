@@ -37,20 +37,22 @@ jobs:
             --description "Ruby roles found by the daily job board scan" 2>/dev/null || true
           issue=$(gh issue list --label job-candidates --state open --limit 1 --json number --jq '.[0].number // empty')
           if [ -n "$issue" ]; then
-            gh issue view "$issue" --comments > seen.txt
+            gh issue view "$issue" --json body,comments --jq '.body, .comments[].body' > seen.txt
           else
             : > seen.txt
           fi
-          node scripts/scan-job-boards.mjs --seen seen.txt > found.md
+          node scripts/scan-job-boards.mjs --seen seen.txt > found.md 2> failed.txt
+          # Boards that did not answer go to the run summary, not the issue.
+          cat failed.txt >> "$GITHUB_STEP_SUMMARY"
           if [ ! -s found.md ]; then
             echo "No new roles."
             exit 0
           fi
           cat found.md
           if [ -z "$issue" ]; then
-            gh issue create --label job-candidates \
+            issue=$(gh issue create --label job-candidates \
               --title "Job board candidates" \
-              --body "Ruby and Rails roles at companies the jobs board already links to, found by the daily scan (.github/workflows/scan-job-boards.yml). Check the inclusion policy before adding one: sponsor or meetup host, junior role, or pre-Series C startup; California or US-remote. Tick a box once it is added or ruled out."
-            issue=$(gh issue list --label job-candidates --state open --limit 1 --json number --jq '.[0].number')
+              --body "Ruby and Rails roles at companies the jobs board already links to, found by the daily scan (.github/workflows/scan-job-boards.yml). Check the inclusion policy before adding one: sponsor or meetup host, junior role, or pre-Series C startup; California or US-remote. Tick a box once it is added or ruled out." \
+              | grep -o '[0-9]*$')
           fi
           gh issue comment "$issue" --body-file found.md

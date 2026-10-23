@@ -1713,6 +1713,14 @@ export function jobCompanyId(job) {
   return job.sponsorId || job.startupId || job.companyId || null;
 }
 
+// The company name a listing shows, resolved the way /jobs resolves it: the
+// sponsor or startup record wins over an inline companyName.
+export function jobCompanyName(job) {
+  if (job.sponsorId) return getSponsor(job.sponsorId)?.name || job.sponsorId;
+  if (job.startupId) return getStartup(job.startupId)?.name || job.startupId;
+  return job.companyName;
+}
+
 export function getAllJobs() {
   return Object.values(jobs);
 }
