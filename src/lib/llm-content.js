@@ -45,6 +45,12 @@ import {
 } from "../data/sponsor-tiers-2026.js";
 import { emailSubject, emailBody } from "../data/manager-email-2026.js";
 import {
+  SCHOLARSHIP_APPLICATION_URL,
+  SCHOLARSHIP_EMAIL,
+  DEADLINE_DISPLAY,
+  FAQ_ITEMS,
+} from "../data/scholarship-2026.js";
+import {
   ADDRESS,
   MAPS,
   transit,
@@ -646,6 +652,7 @@ SF Ruby exists to promote Ruby as the language of choice for new startups, showc
 - **Annual conference.** The San Francisco Ruby Conference brings 450+ Rubyists together every November: two days of talks and a community day. 2026 is Nov 10-12 at SFJAZZ: ${SITE}/index.md.
 - **Startup directory.** Ruby startups in the Bay Area, from pre-seed to public companies: ${SITE}/startups.md.
 - **Jobs board.** Ruby and Rails roles, audited monthly: ${SITE}/jobs.md. Companies post at ${SITE}/jobs/post.
+- **Scholarship program.** Free conference tickets for students and early-career Rubyists new to the community: ${SITE}/scholarship.md.
 - **Videos and news.** ${SITE}/videos.md and ${SITE}/news.md.
 
 ## Organized by
@@ -660,6 +667,36 @@ SF Ruby is organized by [Evil Martians](https://evilmartians.com), a product dev
 `;
 }
 
+// --- Scholarship ------------------------------------------------------------
+
+export function scholarshipMarkdown() {
+  return `# Scholarship Program
+
+> A free ticket to the San Francisco Ruby Conference 2026 (Nov 10-12 at SFJAZZ) for students learning Ruby. Recent grads, career changers, and self-taught developers are welcome to apply too. No Ruby experience needed. Apply by ${DEADLINE_DISPLAY}.
+
+## What it includes
+- A full conference ticket: all three days, every talk, workshop, and networking session.
+- A Slack channel with the other scholars, before, during, and after the conference.
+- A scholars' meet-up early on the first day.
+
+Travel, lodging, and meals are not covered. We're unable to support the visa process.
+
+## Who can apply
+- Students come first: high school, college, or bootcamp.
+- Recent grads, career changers, and self-taught developers are welcome to apply too.
+- No Ruby experience needed, from day one to already writing code.
+- People from groups underrepresented in tech are especially welcome.
+
+You can apply from anywhere, as long as you can be in San Francisco on November 10-12.
+
+## How to apply
+The form takes a few minutes: ${SCHOLARSHIP_APPLICATION_URL}. Apply by ${DEADLINE_DISPLAY}. We review applications as they come in and reply to everyone within a few days of the deadline. Questions: ${SCHOLARSHIP_EMAIL}.
+
+## FAQ
+${FAQ_ITEMS.map((item) => `### ${item.question}\n${plain(item.answer)}`).join("\n\n")}
+`;
+}
+
 // --- Page registry (drives the .md endpoint, llms.txt and llms-full.txt) ----
 const RENDERERS = {
   index: homeMarkdown,
@@ -671,6 +708,7 @@ const RENDERERS = {
   videos: videosMarkdown,
   news: newsMarkdown,
   about: aboutMarkdown,
+  scholarship: scholarshipMarkdown,
 };
 
 export const PAGES = TWINS.map((t) => {
@@ -682,7 +720,7 @@ export const PAGES = TWINS.map((t) => {
   return { ...t, render };
 });
 
-const CONFERENCE_SLUGS = ["index", "manager", "sponsor-2026"];
+const CONFERENCE_SLUGS = ["index", "manager", "sponsor-2026", "scholarship"];
 
 export function llmsTxt() {
   const link = (p) => `- [${p.title}](${SITE}/${p.slug}.md): ${p.description}`;

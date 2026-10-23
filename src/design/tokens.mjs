@@ -93,6 +93,12 @@ export const palette = {
     500: "#7c8da1",
     700: "#678098",
   },
+  // Warm skin for pixel faces (px-matz): base and shadow, hue-shifted like
+  // the ruby ramp so a face sits warm among the coral icons.
+  skin: {
+    500: "#eeb188",
+    700: "#bd7748",
+  },
   // Neutral grays (UI text and surfaces)
   dark: {
     50: "#f9fafb",
@@ -270,4 +276,6 @@ export const spriteColors = {
   b: palette.indigo[700], // royal blue shade
   A: palette.sky[300], // sky-blue highlight
   D: palette.indigo[900], // night navy (the footer's sky, skyline silhouette)
+  P: palette.skin[500], // warm skin (faces)
+  p: palette.skin[700], // skin shadow
 };
