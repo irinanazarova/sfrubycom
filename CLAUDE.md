@@ -153,6 +153,18 @@ Audit URLs monthly alongside the News refresh. Stale listings erode site credibi
 - **Replace, don't just remove.** When a listing closes, check the same company's careers page for an equivalent Ruby/Rails opening and swap in-place. Drop entirely only if no equivalent exists.
 - **Keep a paper trail.** Move closed listings to commented-out blocks at the bottom of `jobs.js` under the `ARCHIVED` header.
 - After deploying, re-content-check every outbound job URL on prod.
+- **New listings post to #jobs in the SF Ruby Slack by themselves.** `.github/workflows/jobs-to-slack.yml` runs `scripts/post-new-jobs.mjs` on every push to main that touches `jobs.js`: it posts each id that was not there before the push, one line per job linking to `/jobs#<id>`, after waiting for the card to be on the live site. Edits to an existing listing post nothing; a replacement with a new id posts. The webhook is the `SLACK_JOBS_WEBHOOK` repo secret; dry-run with `node scripts/post-new-jobs.mjs <base-sha>`.
+- **A daily scan shortlists new roles, a review job drafts them, a person merges.** `.github/workflows/scan-job-boards.yml` runs `scripts/scan-job-boards.mjs` against every Greenhouse, Ashby and Lever board `jobs.js` links to (archived and waitlisted ones too) and comments the Ruby/Rails roles it has not reported before on the open `job-candidates` issue. Its `review` job (claude-code-action, `CLAUDE_CODE_OAUTH_TOKEN` secret) then takes up to 15 unticked candidates a day, applies the inclusion policy below, writes the listings into a `jobs-review-<date>` PR (one PR accumulates until merged), ticks the candidates and comments ADD / HOLD / SKIP with a reason. Nothing reaches the board until that PR is merged. A company outside those three ATSs, or not yet in `jobs.js`, is invisible to the scan.
+
+### Inclusion policy (who gets on /jobs)
+
+A Ruby/Rails role qualifies when it passes **one** of these, and is in California (in-person) or US-remote. The public version is `src/components/PostingRulesModal.astro`; keep the two in sync.
+
+1. **The company supports the community:** a 2026 conference sponsor at Emerald tier or above (`conference2026SponsorTiers`), or an SF Ruby meetup host (`src/data/hosts.js`). Travel, Community and Media sponsorships do not qualify. Late-stage companies get on only this way.
+2. **The role is entry-level or junior,** at any company.
+3. **The company is early-stage,** primarily Bay Area: before Series C, under a $1B valuation, and not PE-owned, acquired or public. Hitting any of those makes it late-stage.
+
+A real Ruby/Rails role that fails only this policy goes in the `PENDING SPONSORSHIP` comment block in `jobs.js` (no personal names), so it can go live if the company sponsors or hosts. Ruby must be the job's main stack: a "nice to have", or one language among several, is not enough.
 
 ### Job matching chips (`chips` on each job record)
 

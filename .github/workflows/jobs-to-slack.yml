@@ -1,0 +1,35 @@
+name: New jobs to Slack
+
+# Posts every listing a push adds to src/data/jobs.js to #jobs in the SF Ruby
+# Slack (scripts/post-new-jobs.mjs). The webhook is the repo secret
+# SLACK_JOBS_WEBHOOK, a Slack incoming webhook bound to #jobs; without it the
+# run prints the message and posts nothing.
+
+on:
+  push:
+    branches: [main]
+    paths: [src/data/jobs.js]
+
+# No concurrency group on purpose: GitHub keeps one pending run per group,
+# so a third push would cancel the second's and its listings would never post.
+# Each run compares its own push, so parallel runs post disjoint lists.
+
+permissions:
+  contents: read
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # The data files import nothing from node_modules, so no install.
+      - name: Post new listings
+        run: node scripts/post-new-jobs.mjs "${{ github.event.before }}" --post
+        env:
+          SLACK_JOBS_WEBHOOK: ${{ secrets.SLACK_JOBS_WEBHOOK }}
