@@ -1,0 +1,56 @@
+name: Job board scan
+
+# Daily: checks the Greenhouse, Ashby and Lever boards of every company
+# src/data/jobs.js links to for Ruby/Rails roles the board does not list, and
+# adds the new ones as a comment on the open "job-candidates" issue
+# (scripts/scan-job-boards.mjs). Everything already in that issue counts as
+# reported, so each comment holds only roles that appeared since the last one.
+# Close the issue to start a fresh one with the full backlog.
+#
+# Listings still go on the board by hand: the inclusion policy, description
+# and chips need someone to read the posting.
+
+on:
+  schedule:
+    # 14:23 UTC (7:23am PT), off the hour and after the 13:07 data refresh.
+    - cron: '23 14 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Scan and report
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create job-candidates --color 9b1c31 \
+            --description "Ruby roles found by the daily job board scan" 2>/dev/null || true
+          issue=$(gh issue list --label job-candidates --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$issue" ]; then
+            gh issue view "$issue" --comments > seen.txt
+          else
+            : > seen.txt
+          fi
+          node scripts/scan-job-boards.mjs --seen seen.txt > found.md
+          if [ ! -s found.md ]; then
+            echo "No new roles."
+            exit 0
+          fi
+          cat found.md
+          if [ -z "$issue" ]; then
+            gh issue create --label job-candidates \
+              --title "Job board candidates" \
+              --body "Ruby and Rails roles at companies the jobs board already links to, found by the daily scan (.github/workflows/scan-job-boards.yml). Check the inclusion policy before adding one: sponsor or meetup host, junior role, or pre-Series C startup; California or US-remote. Tick a box once it is added or ruled out."
+            issue=$(gh issue list --label job-candidates --state open --limit 1 --json number --jq '.[0].number')
+          fi
+          gh issue comment "$issue" --body-file found.md

@@ -153,6 +153,8 @@ Audit URLs monthly alongside the News refresh. Stale listings erode site credibi
 - **Replace, don't just remove.** When a listing closes, check the same company's careers page for an equivalent Ruby/Rails opening and swap in-place. Drop entirely only if no equivalent exists.
 - **Keep a paper trail.** Move closed listings to commented-out blocks at the bottom of `jobs.js` under the `ARCHIVED` header.
 - After deploying, re-content-check every outbound job URL on prod.
+- **New listings post to #jobs in the SF Ruby Slack by themselves.** `.github/workflows/jobs-to-slack.yml` runs `scripts/post-new-jobs.mjs` on every push to main that touches `jobs.js`: it posts each id that was not there before the push, one line per job linking to `/jobs#<id>`, after waiting for the card to be on the live site. Edits to an existing listing post nothing; a replacement with a new id posts. The webhook is the `SLACK_JOBS_WEBHOOK` repo secret; dry-run with `node scripts/post-new-jobs.mjs <base-sha>`.
+- **A daily scan shortlists new roles; a person adds them.** `.github/workflows/scan-job-boards.yml` runs `scripts/scan-job-boards.mjs` against every Greenhouse, Ashby and Lever board `jobs.js` links to (archived and waitlisted ones too) and comments the Ruby/Rails roles it has not reported before on the open `job-candidates` issue. It cannot apply the inclusion policy or write chips, so nothing reaches the board without a hand edit. A company outside those three ATSs, or not yet in `jobs.js`, is invisible to it.
 
 ### Job matching chips (`chips` on each job record)
 
