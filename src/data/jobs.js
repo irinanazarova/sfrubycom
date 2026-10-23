@@ -935,20 +935,20 @@ export const jobs = {
     url: "https://www.corporatetools.com/job-postings/engineering-and-development/senior-software-engineer-ruby-on-rails/",
     postedDate: "2026-09-07",
   },
-  "senior-software-engineer-payments-order-co": {
-    id: "senior-software-engineer-payments-order-co",
-    title: "Senior Software Engineer, Payments",
+  "senior-site-reliability-engineer-order-co": {
+    id: "senior-site-reliability-engineer-order-co",
+    title: "Senior Site Reliability Engineer",
     companyId: "orderco",
     companyName: "Order.co",
     companyLogo: "/sponsor_orderco.png",
     location: "Remote (US)",
     type: "Full-time",
-    salary: "$175K - $195K",
+    salary: "$175K - $200K",
     description:
-      "Order.co is a B2B purchasing and payments platform that manages about half a billion dollars in annual customer spend, founded in 2016 in New York with $75M raised. The Payments team owns the software that moves real money: virtual-card issuance and authorization, bank connections, accounting integrations, invoicing, and ACH and RTP. Production Ruby and Ruby on Rails, PostgreSQL, and AI tooling in the workflow; you also mentor junior and mid-level engineers. Order.co engineers are speaking at SF Ruby 2026 about agentic Rails in production.",
-    chips: ["Backend", "Payments", "PostgreSQL", "Mentorship"],
-    url: "https://ats.rippling.com/orderco/jobs/6f76c6d1-1133-4a01-b836-df832888daa9",
-    postedDate: "2026-10-02",
+      "Order.co is a B2B purchasing and payments platform that manages about half a billion dollars in annual customer spend, founded in 2016 in New York with $75M raised. This role sits on the Platform team and owns reliability for the systems the product runs on: SLOs and error budgets, incident response and root-cause analysis, Kubernetes and AWS, Terraform, CI/CD, and Datadog or OpenTelemetry for observability. The services you keep up are Ruby and Ruby on Rails; the automation around them is written in Python, Go, Bash or Ruby. You also mentor junior and mid-level engineers. Order.co engineers are speaking at SF Ruby 2026 about agentic Rails in production.",
+    chips: ["Platform", "DevOps", "Terraform", "Polyglot"],
+    url: "https://ats.rippling.com/orderco/jobs/16354b9c-297b-4d3d-9cc1-c1d05989254e",
+    postedDate: "2026-10-23",
   },
   "staff-software-engineer-quantic": {
     id: "staff-software-engineer-quantic",
@@ -1667,6 +1667,9 @@ export const jobs = {
   //   Omada Senior SWE, Core Systems (GH 8051562) -> Senior SWE, Solutions Engineering (GH 8202172)
   //   Reveal Full Stack (Lever 73687bbb) -> re-posted as Lever b84a511d
   //   Order.co Senior SWE (Rippling 1dd35919) -> Senior SWE, Payments (Rippling 6f76c6d1)
+  //   Order.co Senior SWE, Payments (Rippling 6f76c6d1) -> Senior SRE (Rippling 16354b9c),
+  //     swapped October 23, 2026 at the company's request; the Payments posting was
+  //     still open and content-checked that day, so it can come back if they ask.
   //   Quantic Senior SWE (LinkedIn 4463625394, expired) -> Staff SWE (LinkedIn 4465578261)
   //   Healthie (LinkedIn 4429604551, closed) -> same role on Greenhouse (4410573009)
   //   Persona Senior Product Security Engineer (a9d3cd2c): still open but names no Ruby or Rails ->
