@@ -32,6 +32,13 @@ export const TWINS = [
       "2026 sponsorship tiers with prices and benefits, who is in the room, and the sponsors so far.",
   },
   {
+    path: "/scholarship",
+    slug: "scholarship",
+    title: "Scholarship Program",
+    description:
+      "Free conference tickets for students learning Ruby, with recent grads and career changers welcome too: who can apply, what it covers, the deadline, and the FAQ.",
+  },
+  {
     path: "/meetup",
     slug: "meetup",
     title: "Meetup",

@@ -4,7 +4,12 @@
 // step between reading the program and buying is getting a yes at work.
 // Company-sponsored comes first: it is the ticket a manager approves, and
 // it is what keeps the individual ticket at its price. Late bird is the main CTA.
+// A one-line pointer to /scholarship closes the block, for readers no tier fits.
 import { ticketLink, ticketEventClass, ticketTiers } from "../data/conference-2026.js";
+import { DEADLINE, DEADLINE_SHORT } from "../data/scholarship-2026.js";
+
+// Built daily (the scheduled build), so the line drops the day after applications close.
+const scholarshipOpen = Date.now() < new Date(DEADLINE).getTime();
 
 const tier = (name) => ticketTiers.find((t) => t.name === name && t.state === "live");
 const tiers = [
@@ -91,5 +96,13 @@ const cols = late
                 Convince your manager
             </a>
         </div>
+
+        {scholarshipOpen && (
+            <p class="text-center text-sm md:text-base text-white px-shadow-ink-sm mt-6">
+                Student learning Ruby?
+                <a href="/scholarship" class="underline underline-offset-4 decoration-2 hover:text-gold-400 whitespace-nowrap">Apply for a free scholarship ticket</a>
+                by {DEADLINE_SHORT}.
+            </p>
+        )}
     </div>
 </section>
