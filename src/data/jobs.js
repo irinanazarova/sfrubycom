@@ -321,6 +321,45 @@ export const jobs = {
     url: "https://boards.greenhouse.io/chime/jobs/8875820002",
     postedDate: "2026-10-23",
   },
+  "software-engineer-infrastructure-chime": {
+    id: "software-engineer-infrastructure-chime",
+    title: "Software Engineer, Infrastructure",
+    sponsorId: "chime",
+    location: "San Francisco, CA, New York, NY or Chicago, IL",
+    type: "Full-time",
+    salary: "$133K - $184K",
+    description:
+      "Chime's Infrastructure team runs the AWS, networking, Kubernetes, Terraform and observability systems the company runs on, and builds the self-service tools the rest of engineering uses. Those tools are written in Ruby on Rails and Go, and the posting asks for strong experience in both. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Infra", "Platform", "Go", "Terraform", "Polyglot"],
+    url: "https://boards.greenhouse.io/chime/jobs/8616359002",
+    postedDate: "2026-10-24",
+  },
+  "software-engineer-infrastructure-platform-chime": {
+    id: "software-engineer-infrastructure-platform-chime",
+    title: "Software Engineer, Infrastructure Platform",
+    sponsorId: "chime",
+    location: "San Francisco, CA, New York, NY or Chicago, IL",
+    type: "Full-time",
+    salary: "$133K - $184K",
+    description:
+      "Chime's Infrastructure Platform team owns how engineers work with Terraform, ArgoCD, AWS and the Kubernetes Helm charts behind continuous deployment. You build the self-service tooling, written in Ruby on Rails and Go, and the posting asks for strong experience in both. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Platform", "DevOps", "Go", "Terraform", "Polyglot"],
+    url: "https://boards.greenhouse.io/chime/jobs/8859182002",
+    postedDate: "2026-10-24",
+  },
+  "tech-lead-manager-human-agent-tooling-chime": {
+    id: "tech-lead-manager-human-agent-tooling-chime",
+    title: "Tech Lead Manager, Human Agent Tooling",
+    sponsorId: "chime",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$199K - $275K",
+    description:
+      "Chime is hiring a tech lead manager for Human Agent Tooling in Trust & Safety: the agent workspace, case management and member context its support agents work in. You lead a squad of 3 to 5 engineers and still ship production code, and the posting asks for proven experience with Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Fullstack", "Product Eng", "Mentorship"],
+    url: "https://boards.greenhouse.io/chime/jobs/8525743002",
+    postedDate: "2026-10-24",
+  },
   "senior-staff-engineer-tax-platform-gusto": {
     id: "senior-staff-engineer-tax-platform-gusto",
     title: "Senior Staff Engineer, Tax Platform Engineering",
@@ -536,6 +575,21 @@ export const jobs = {
     chips: ["Fullstack", "Payments", "Next.js", "TypeScript"],
     url: "https://job-boards.greenhouse.io/ascend21/jobs/5351565008",
     postedDate: "2026-10-23",
+  },
+  "forward-deployed-engineer-ascend": {
+    id: "forward-deployed-engineer-ascend",
+    title: "Forward Deployed Engineer",
+    companyId: "ascend",
+    companyName: "Ascend",
+    companyLogo: "/company_ascend.png",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$170K - $210K",
+    description:
+      "Ascend builds payments and financial-automation software for insurance, on a Ruby on Rails API with a Next.js and TypeScript frontend. This engineer works with customers, sales and engineering to scope integrations and ship the production code, API integrations and custom features that take each new account live. The posting asks for 3+ years of experience and welcomes engineers new to Rails, and Ascend is a Series B startup.",
+    chips: ["Fullstack", "Payments", "TypeScript"],
+    url: "https://job-boards.greenhouse.io/ascend21/jobs/5445856008",
+    postedDate: "2026-10-24",
   },
   "rails-engineer-decile": {
     id: "rails-engineer-decile",
@@ -1169,6 +1223,7 @@ export const jobs = {
    *   Apollo.io (Series D 2023, $1.6B)
    *     Staff SWE (was Principal SWE) — SF hybrid, $315K–$473K — https://job-boards.greenhouse.io/apolloio/jobs/6134562004
    *     Senior SWE — SF hybrid, $195K–$358K — https://job-boards.greenhouse.io/apolloio/jobs/6118319004
+   *     Senior SWE, Builder Studio — remote US, Rails + Node backend, TypeScript/React — https://job-boards.greenhouse.io/apolloio/jobs/6226635004
    *   Motive (S-1 filed Dec 2025; $2.85B)
    *     Staff Platform Engineer — SF hybrid, $189K–$236K, "Golang, Ruby on Rails, and Python services"
    *     https://job-boards.greenhouse.io/gomotive/jobs/8504954002
@@ -1217,6 +1272,7 @@ export const jobs = {
    *     Staff SWE, ISPM Platform — https://job-boards.greenhouse.io/huntress/jobs/7774957003
    *   Calendly (~$3B) — remote US, $187K–$272K
    *     Senior Full Stack Engineer, AI Scheduling (Node or Rails) — https://job-boards.greenhouse.io/calendly/jobs/8464846002
+   *     Full Stack Engineer, Trust and Safety (Rails, Node or Go) — $172K–$227K — https://job-boards.greenhouse.io/calendly/jobs/8895903002
    *   Kin Insurance (unicorn) — remote US
    *     Staff SWE — $165K–$200K — https://jobs.ashbyhq.com/kin/4b5dfc81-2f36-42d5-8ce1-7efc1d330f9f
    *     Senior SWE, Back-End — $122K–$153K (posted Oct 2025) — https://jobs.ashbyhq.com/kin/2b57a949-a4bb-440f-a170-eda3ccf49b6c
