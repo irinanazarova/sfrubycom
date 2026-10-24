@@ -153,6 +153,110 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
     postedDate: "2026-05-15",
   },
+  "senior-staff-engineer-expansion-experiences-gusto": {
+    id: "senior-staff-engineer-expansion-experiences-gusto",
+    title: "Senior Staff Engineer, Expansion Experiences",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$225K - $275K in SF and NYC, $191K - $240K elsewhere",
+    description:
+      "Gusto's Expansion Experiences team owns the path from a customer's need to the product they adopt. This senior staff role shapes the technical approach for recommendations and conversion, runs experiments and mentors engineers. Ruby on Rails, React, GraphQL and TypeScript are the stack.",
+    chips: ["Fullstack", "Product Eng", "GraphQL", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8244981",
+    postedDate: "2026-10-24",
+  },
+  "staff-software-engineer-expansion-experiences-gusto": {
+    id: "staff-software-engineer-expansion-experiences-gusto",
+    title: "Staff Software Engineer, Expansion Experiences",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$199K - $247K",
+    description:
+      "On Expansion Experiences you build recommendations, nurture campaigns, booking flows and plan upgrade features for Gusto customers. You design the backend APIs and data models behind them and test changes with A/B experiments. The stack is Ruby on Rails, React, GraphQL and TypeScript.",
+    chips: ["Fullstack", "Product Eng", "GraphQL", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8244957",
+    postedDate: "2026-10-24",
+  },
+  "senior-staff-software-engineer-agent-partner-experiences-gusto": {
+    id: "senior-staff-software-engineer-agent-partner-experiences-gusto",
+    title: "Senior Staff Software Engineer, Gusto Agent & Partner Experiences (API)",
+    sponsorId: "gusto",
+    location: "San Francisco, Denver, or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "$251K - $278K in SF and NYC, $213K - $236K elsewhere",
+    description:
+      "This role designs the API contracts and agent-facing tools that AI models and partners use to reach Gusto. You work directly in its Ruby on Rails codebase, set reliability practices and mentor engineers. The posting asks for a Ruby and Rails expert.",
+    chips: ["Backend", "Platform", "GraphQL", "AI-native"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8168216",
+    postedDate: "2026-10-24",
+  },
+  "software-engineer-financial-data-payments-gusto": {
+    id: "software-engineer-financial-data-payments-gusto",
+    title: "Software Engineer, Financial Data & Payments",
+    sponsorId: "gusto",
+    location: "San Francisco or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "You build the ledger, subledger and reconciliation systems that record every payment at Gusto, and own the payment profile behind employer and employee payouts. The team works in one of the largest Rails and React applications in the world. Rails experience is a bonus.",
+    chips: ["Payments", "Backend", "High compliance"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8104213",
+    postedDate: "2026-10-24",
+  },
+  "staff-software-engineer-core-products-gusto": {
+    id: "staff-software-engineer-core-products-gusto",
+    title: "Staff Software Engineer, Core Products",
+    sponsorId: "gusto",
+    location: "San Francisco or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "Core Products covers Payroll, Benefits, HR, Retirement, Gusto Money, Solo and Pro. This staff role owns features from spec to launch and mentors engineers on large-scale problems. The work scales one of the largest Ruby on Rails and React applications in the world.",
+    chips: ["Fullstack", "Product Eng", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8008696",
+    postedDate: "2026-10-24",
+  },
+  "staff-software-engineer-gustie-assist-gusto": {
+    id: "staff-software-engineer-gustie-assist-gusto",
+    title: "Staff Software Engineer, Gustie Assist",
+    sponsorId: "gusto",
+    location: "San Francisco, Denver, or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Gustie Assist is the AI agent platform behind Gusto support. You build the agent runtime, tool layer, backend and frontend, with human approval and an auditable permissions model, plus evaluation and monitoring. The backend is Rails and GraphQL.",
+    chips: ["Fullstack", "AI/ML", "GraphQL", "AI-native"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8095028",
+    postedDate: "2026-10-24",
+  },
+  "staff-software-engineer-gusto-pro-integrations-gusto": {
+    id: "staff-software-engineer-gusto-pro-integrations-gusto",
+    title: "Staff Software Engineer, Gusto Pro Integrations",
+    sponsorId: "gusto",
+    location: "San Francisco, Denver, or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
+    description:
+      "You own and extend Gusto's integrations with accounting and partner platforms. The backend services are Ruby on Rails and Sidekiq, and the team is adding AI agent protocols such as MCP. Rails experience is strongly preferred.",
+    chips: ["Backend", "Platform", "Sidekiq", "AI-native"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8208432",
+    postedDate: "2026-10-24",
+  },
+  "staff-software-engineer-invoicing-billing-gusto": {
+    id: "staff-software-engineer-invoicing-billing-gusto",
+    title: "Staff Software Engineer, Invoicing and Billing",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "You build the billing platform behind Gusto: usage jobs, subscriptions, invoices, payments and accounting integrations, including multi-entity and multi-currency billing. The work scales one of the largest Ruby on Rails and React applications in the world. Rails experience or interest is expected.",
+    chips: ["Payments", "Backend", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8204403",
+    postedDate: "2026-10-24",
+  },
   "principal-web-developer-superconductor": {
     id: "principal-web-developer-superconductor",
     title: "Principal Web Developer (Rails)",
@@ -711,6 +815,21 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/fathom.video/50323c12-96b2-4e6a-b8ea-98f21ea6e960",
     postedDate: "2026-07-14",
   },
+  "full-stack-engineer-fathom": {
+    id: "full-stack-engineer-fathom",
+    title: "Full Stack Engineer",
+    companyId: "fathom",
+    companyName: "Fathom",
+    companyLogo: "/company_fathom.png",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$180K - $230K + equity",
+    description:
+      "Fathom is the AI meeting assistant that captures and summarizes calls. This full-stack role ships customer-facing features across the web app, the Electron desktop app, a Chrome extension, search and chat, the public API and the MCP server. The stack is Rails with Sidekiq, TypeScript, MySQL and Redis on GKE.",
+    chips: ["Fullstack", "Sidekiq", "TypeScript", "MySQL", "AI-native"],
+    url: "https://jobs.ashbyhq.com/fathom.video/01619869-e031-464c-b3b3-7674f10a77f6",
+    postedDate: "2026-10-24",
+  },
 
   "software-engineer-recent-grad-kikoff": {
     id: "software-engineer-recent-grad-kikoff",
@@ -937,6 +1056,21 @@ export const jobs = {
     chips: ["Backend", "TypeScript", "PostgreSQL"],
     url: "https://jobs.ashbyhq.com/folio/ec3a9689-27fc-418c-8834-e29708798dfd",
     postedDate: "2026-09-07",
+  },
+  "software-engineer-forward-deployed-folio": {
+    id: "software-engineer-forward-deployed-folio",
+    title: "Software Engineer, Forward Deployed",
+    companyId: "folio",
+    companyName: "Folio",
+    companyLogo: "/company_folio.png",
+    location: "Remote (US, Eastern-adjacent preferred)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Folio's forward-deployed engineer leads implementations with hotel partners, integrating with their ERP and property management tools. The codebase is a Ruby on Rails app with TypeScript Node automations on AWS. You build reusable integration patterns that shorten hotel onboarding.",
+    chips: ["Fullstack", "Product Eng", "Hotwire", "TypeScript"],
+    url: "https://jobs.ashbyhq.com/folio/ebdaec3d-721e-4420-aa76-a00c61512630",
+    postedDate: "2026-10-24",
   },
   "software-engineer-product-fullstack-folio": {
     id: "software-engineer-product-fullstack-folio",
@@ -1253,6 +1387,7 @@ export const jobs = {
    *     Staff Fullstack (Ruby/Vue), Monetization — https://job-boards.greenhouse.io/gitlab/jobs/8739391002
    *     Staff Backend, Developer Experience — https://job-boards.greenhouse.io/gitlab/jobs/8490477002
    *     Intermediate Backend, AMER — https://job-boards.greenhouse.io/gitlab/jobs/8773006002
+   *     Staff Forward Deployed Engineer (Rails or Go) — $220K–$270K — https://job-boards.greenhouse.io/gitlab/jobs/8512432002
    *   Huntress (Series D 2024, $1.55B) — remote US
    *     Principal SWE, SIEM — $215K–$240K — https://job-boards.greenhouse.io/huntress/jobs/7776837003
    *     Staff SWE, ESPM Platform — $200K–$220K — https://job-boards.greenhouse.io/huntress/jobs/7774959003
