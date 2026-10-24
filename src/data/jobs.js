@@ -101,19 +101,6 @@ export const jobs = {
     url: "https://www.ycombinator.com/companies/finta/jobs/vg5fXEw-founding-engineer",
     postedDate: "2026-04-27",
   },
-  "senior-software-engineer-solutions-engineering-omada": {
-    id: "senior-software-engineer-solutions-engineering-omada",
-    title: "Senior Software Engineer, Solutions Engineering",
-    sponsorId: "omada",
-    location: "Remote (US Only)",
-    type: "Full-time",
-    salary: "$179K - $224K",
-    description:
-      "Omada Health's Solutions Engineering team designs the partner and alliance integrations that fit Omada's care programs into customers' systems. This senior role shapes cross-system integration APIs, finds the root cause behind recurring toil, and mentors teammates who write code without a software background. Omada primarily uses Ruby on Rails and wants strong Rails experience; five to eight years. $179K to $224K base in CA, NY, and WA, plus bonus and equity.",
-    chips: ["Backend", "Data", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/8202172",
-    postedDate: "2026-10-02",
-  },
   "software-engineer-fullstack-thatch": {
     id: "software-engineer-fullstack-thatch",
     title: "Software Engineer: Full Stack",
@@ -1273,6 +1260,8 @@ export const jobs = {
    *   Calendly (~$3B) — remote US, $187K–$272K
    *     Senior Full Stack Engineer, AI Scheduling (Node or Rails) — https://job-boards.greenhouse.io/calendly/jobs/8464846002
    *     Full Stack Engineer, Trust and Safety (Rails, Node or Go) — $172K–$227K — https://job-boards.greenhouse.io/calendly/jobs/8895903002
+   *   Omada Health (NASDAQ: OMDA since Jun 2025; a 2025 sponsor, not 2026) — remote US
+   *     Senior SWE, Solutions Engineering — $179K–$224K — https://job-boards.greenhouse.io/omadahealth/jobs/8202172
    *   Kin Insurance (unicorn) — remote US
    *     Staff SWE — $165K–$200K — https://jobs.ashbyhq.com/kin/4b5dfc81-2f36-42d5-8ce1-7efc1d330f9f
    *     Senior SWE, Back-End — $122K–$153K (posted Oct 2025) — https://jobs.ashbyhq.com/kin/2b57a949-a4bb-440f-a170-eda3ccf49b6c
