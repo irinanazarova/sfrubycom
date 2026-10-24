@@ -164,7 +164,11 @@ A Ruby/Rails role qualifies when it passes **one** of these, and is in Californi
 2. **The role is entry-level or junior,** at any company.
 3. **The company is early-stage,** primarily Bay Area: before Series C, under a $1B valuation, and not PE-owned, acquired or public. Hitting any of those makes it late-stage.
 
-A real Ruby/Rails role that fails only this policy goes in the `PENDING SPONSORSHIP` comment block in `jobs.js` (no personal names), so it can go live if the company sponsors or hosts. Ruby must be the job's main stack: a "nice to have", or one language among several, is not enough.
+A real Ruby/Rails role that fails only this policy goes in the `PENDING SPONSORSHIP` comment block in `jobs.js` (no personal names), so it can go live if the company sponsors or hosts.
+
+**A Rails role is one that works in a Ruby or Rails codebase the company's product runs on.** Rails named beside Go or Node, or "Ruby on Rails or a comparable framework" at a Rails company, counts (chip `Polyglot` when the role splits its time). Ruby as a nice-to-have on work outside that codebase (a Python data pipeline, a React Native app) does not. The first automated review skipped Chime's Rails-and-Go infrastructure roles and Apollo.io's Rails-and-Node backend role under a stricter "main stack" reading; that reading was wrong.
+
+**/jobs pins this year's sponsors, Emerald and up** (`isJobBoardSponsor` in `src/data/sponsors.js`, read from `conference2026SponsorTiers`). A job's `sponsorId` only names its company record, which lives in the 2025 `sponsors` archive, so it no longer decides pinning.
 
 ### Job matching chips (`chips` on each job record)
 

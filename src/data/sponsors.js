@@ -672,6 +672,20 @@ export function getAllSponsors() {
   return Object.values(sponsors);
 }
 
+// The 2026 sponsors whose jobs /jobs pins to the top: Emerald and up, which
+// counts the Ruby-priced Coffee, Passport and Speaker Dinner tiers. Community,
+// Travel and Media do not qualify a company for the board (CLAUDE.md,
+// "Inclusion policy"). Read from the 2026 tiers on purpose: a job's sponsorId
+// points into the 2025 `sponsors` archive, so it says nothing about this year.
+const NOT_JOB_BOARD_TIERS = ["Community Sponsor", "Travel Sponsors", "Media Sponsors"];
+const jobBoardSponsorNames = conference2026SponsorTiers
+  .filter((t) => !NOT_JOB_BOARD_TIERS.includes(t.tier))
+  .flatMap((t) => t.sponsors.map((s) => s.name.toLowerCase()));
+export function isJobBoardSponsor(companyName) {
+  const n = (companyName ?? "").toLowerCase();
+  return jobBoardSponsorNames.some((s) => n === s || n.startsWith(`${s} `));
+}
+
 export function getSponsor(sponsorId) {
   return sponsors[sponsorId];
 }
