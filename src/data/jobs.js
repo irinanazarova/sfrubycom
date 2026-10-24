@@ -225,7 +225,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$133K - $184K",
     description:
-      "Chime is hiring a full-stack Growth Engineer to build product experiences that move business metrics: React and TypeScript on the front end, Rails and Go services behind it. You work closely with product, design, and data science on features that drive member growth. Chime is a Pickaxe sponsor of the SF Ruby Conference.",
+      "Chime is hiring a full-stack Growth Engineer to build product experiences that move business metrics: React and TypeScript on the front end, Rails and Go services behind it. You work closely with product, design, and data science on features that drive member growth. Chime is an Emerald sponsor of the SF Ruby Conference.",
     chips: ["Fullstack", "React", "TypeScript", "Go"],
     url: "https://job-boards.greenhouse.io/chime/jobs/8782503002",
     postedDate: "2026-09-04",
@@ -277,7 +277,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$164K - $227K",
     description:
-      "Chime's Cards org is hiring a backend engineer to help scale its Cards portfolio. You design low-latency APIs and services for the Trust and Safety platforms, improve reliability, and mentor other engineers. The posting asks for Ruby on Rails or a comparable framework. Chime is a Pickaxe sponsor of the SF Ruby Conference.",
+      "Chime's Cards org is hiring a backend engineer to help scale its Cards portfolio. You design low-latency APIs and services for the Trust and Safety platforms, improve reliability, and mentor other engineers. The posting asks for Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
     chips: ["Backend", "Payments", "Security", "Mentorship"],
     url: "https://boards.greenhouse.io/chime/jobs/8770314002",
     postedDate: "2026-10-23",
@@ -290,7 +290,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$164K - $227K",
     description:
-      "Chime's Growth team is hiring a senior full-stack engineer to own consumer features end to end, from member-facing interfaces to Rails services and APIs, and the A/B experiments that measure their impact. The front end is React and TypeScript, with APIs behind a React Native app. Chime is a Pickaxe sponsor of the SF Ruby Conference.",
+      "Chime's Growth team is hiring a senior full-stack engineer to own consumer features end to end, from member-facing interfaces to Rails services and APIs, and the A/B experiments that measure their impact. The front end is React and TypeScript, with APIs behind a React Native app. Chime is an Emerald sponsor of the SF Ruby Conference.",
     chips: ["Fullstack", "React", "TypeScript", "React Native"],
     url: "https://boards.greenhouse.io/chime/jobs/8627466002",
     postedDate: "2026-10-23",
@@ -303,7 +303,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$164K - $259K",
     description:
-      "Chime's Lending org builds credit, liquidity, and money-movement products and the backend platforms behind them. This senior engineer leads cross-team backend architecture and delivery with Product, Risk, and Finance, and shapes engineering practices. The posting prefers Ruby on Rails or a comparable framework. Chime is a Pickaxe sponsor of the SF Ruby Conference.",
+      "Chime's Lending org builds credit, liquidity, and money-movement products and the backend platforms behind them. This senior engineer leads cross-team backend architecture and delivery with Product, Risk, and Finance, and shapes engineering practices. The posting prefers Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
     chips: ["Backend", "Payments", "High compliance", "Mentorship"],
     url: "https://boards.greenhouse.io/chime/jobs/8656937002",
     postedDate: "2026-10-23",
@@ -316,7 +316,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$164K - $259K",
     description:
-      "Chime's Trust & Safety team is modernizing its risk platform, and this senior engineer sets technical direction, builds low-latency APIs and backend services, and mentors others. The posting requires Ruby on Rails or a comparable framework and includes an on-call rotation. Chime is a Pickaxe sponsor of the SF Ruby Conference.",
+      "Chime's Trust & Safety team is modernizing its risk platform, and this senior engineer sets technical direction, builds low-latency APIs and backend services, and mentors others. The posting requires Ruby on Rails or a comparable framework and includes an on-call rotation. Chime is an Emerald sponsor of the SF Ruby Conference.",
     chips: ["Backend", "Security", "Mentorship"],
     url: "https://boards.greenhouse.io/chime/jobs/8875820002",
     postedDate: "2026-10-23",
@@ -532,7 +532,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$160K - $200K",
     description:
-      "Ascend builds payments and financial-automation software for insurance. This engineer expands the core product, including features, dashboards, and checkout flows, with some customer-facing work. The backend is a Ruby on Rails API on Heroku, with a Next.js and TypeScript frontend. The posting asks for 1 to 3 years of experience. (Series B.)",
+      "Ascend builds payments and financial-automation software for insurance. This engineer expands the core product, including features, dashboards, and checkout flows, with some customer-facing work. The backend is a Ruby on Rails API on Heroku, with a Next.js and TypeScript frontend. The posting asks for 1 to 3 years of experience, and Ascend is a Series B startup.",
     chips: ["Fullstack", "Payments", "Next.js", "TypeScript"],
     url: "https://job-boards.greenhouse.io/ascend21/jobs/5351565008",
     postedDate: "2026-10-23",
