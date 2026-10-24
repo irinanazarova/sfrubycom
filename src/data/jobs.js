@@ -18,6 +18,21 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/checkr/jobs/8163203",
     postedDate: "2026-09-06",
   },
+  "senior-software-engineer-mvr-checkr": {
+    id: "senior-software-engineer-mvr-checkr",
+    title: "Senior Software Engineer (Ruby/Rails), MVR",
+    companyId: "checkr",
+    companyName: "Checkr",
+    companyLogo: "/host_checkr.png",
+    location: "San Francisco, CA (3+ days in office)",
+    type: "Full-time",
+    salary: "$185K - $218K",
+    description:
+      "Checkr is hiring a senior backend engineer for motor vehicle record screenings, from ordering and retrieving records to delivering them in reports. You own features from design to release, improve reliability and turnaround time, and mentor engineers. The posting asks for 5+ years on scalable backend systems. Checkr has hosted the SF Ruby meetup.",
+    chips: ["Backend", "Mentorship", "High compliance"],
+    url: "https://job-boards.greenhouse.io/checkr/jobs/8301231",
+    postedDate: "2026-10-23",
+  },
   "software-engineer-early-career-koah": {
     id: "software-engineer-early-career-koah",
     title: "Software Engineer, Early Career",
@@ -85,19 +100,6 @@ export const jobs = {
     chips: ["Fullstack", "Hotwire", "Founding role", "AI-native"],
     url: "https://www.ycombinator.com/companies/finta/jobs/vg5fXEw-founding-engineer",
     postedDate: "2026-04-27",
-  },
-  "senior-software-engineer-solutions-engineering-omada": {
-    id: "senior-software-engineer-solutions-engineering-omada",
-    title: "Senior Software Engineer, Solutions Engineering",
-    sponsorId: "omada",
-    location: "Remote (US Only)",
-    type: "Full-time",
-    salary: "$179K - $224K",
-    description:
-      "Omada Health's Solutions Engineering team designs the partner and alliance integrations that fit Omada's care programs into customers' systems. This senior role shapes cross-system integration APIs, finds the root cause behind recurring toil, and mentors teammates who write code without a software background. Omada primarily uses Ruby on Rails and wants strong Rails experience; five to eight years. $179K to $224K base in CA, NY, and WA, plus bonus and equity.",
-    chips: ["Backend", "Data", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/omadahealth/jobs/8202172",
-    postedDate: "2026-10-02",
   },
   "software-engineer-fullstack-thatch": {
     id: "software-engineer-fullstack-thatch",
@@ -210,7 +212,7 @@ export const jobs = {
     type: "Full-time",
     salary: "$133K - $184K",
     description:
-      "Chime is hiring a full-stack Growth Engineer to build product experiences that move business metrics: React and TypeScript on the front end, Rails and Go services behind it. You work closely with product, design, and data science on features that drive member growth. Chime is a Pickaxe sponsor of the SF Ruby Conference.",
+      "Chime is hiring a full-stack Growth Engineer to build product experiences that move business metrics: React and TypeScript on the front end, Rails and Go services behind it. You work closely with product, design, and data science on features that drive member growth. Chime is an Emerald sponsor of the SF Ruby Conference.",
     chips: ["Fullstack", "React", "TypeScript", "Go"],
     url: "https://job-boards.greenhouse.io/chime/jobs/8782503002",
     postedDate: "2026-09-04",
@@ -253,6 +255,97 @@ export const jobs = {
     chips: ["Backend", "Security", "Mentorship"],
     url: "https://job-boards.greenhouse.io/chime/jobs/8875663002",
     postedDate: "2026-10-19",
+  },
+  "senior-software-engineer-cards-chime": {
+    id: "senior-software-engineer-cards-chime",
+    title: "Senior Software Engineer, Cards",
+    sponsorId: "chime",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$164K - $227K",
+    description:
+      "Chime's Cards org is hiring a backend engineer to help scale its Cards portfolio. You design low-latency APIs and services for the Trust and Safety platforms, improve reliability, and mentor other engineers. The posting asks for Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Backend", "Payments", "Security", "Mentorship"],
+    url: "https://boards.greenhouse.io/chime/jobs/8770314002",
+    postedDate: "2026-10-23",
+  },
+  "senior-software-engineer-growth-chime": {
+    id: "senior-software-engineer-growth-chime",
+    title: "Senior Software Engineer, Growth",
+    sponsorId: "chime",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$164K - $227K",
+    description:
+      "Chime's Growth team is hiring a senior full-stack engineer to own consumer features end to end, from member-facing interfaces to Rails services and APIs, and the A/B experiments that measure their impact. The front end is React and TypeScript, with APIs behind a React Native app. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Fullstack", "React", "TypeScript", "React Native"],
+    url: "https://boards.greenhouse.io/chime/jobs/8627466002",
+    postedDate: "2026-10-23",
+  },
+  "senior-software-engineer-lending-chime": {
+    id: "senior-software-engineer-lending-chime",
+    title: "Senior Software Engineer, Lending",
+    sponsorId: "chime",
+    location: "San Francisco, CA or New York, NY (Hybrid)",
+    type: "Full-time",
+    salary: "$164K - $259K",
+    description:
+      "Chime's Lending org builds credit, liquidity, and money-movement products and the backend platforms behind them. This senior engineer leads cross-team backend architecture and delivery with Product, Risk, and Finance, and shapes engineering practices. The posting prefers Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Backend", "Payments", "High compliance", "Mentorship"],
+    url: "https://boards.greenhouse.io/chime/jobs/8656937002",
+    postedDate: "2026-10-23",
+  },
+  "senior-software-engineer-trust-safety-chime": {
+    id: "senior-software-engineer-trust-safety-chime",
+    title: "Senior Software Engineer, Trust & Safety",
+    sponsorId: "chime",
+    location: "San Francisco, CA or Chicago, IL (Hybrid)",
+    type: "Full-time",
+    salary: "$164K - $259K",
+    description:
+      "Chime's Trust & Safety team is modernizing its risk platform, and this senior engineer sets technical direction, builds low-latency APIs and backend services, and mentors others. The posting requires Ruby on Rails or a comparable framework and includes an on-call rotation. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Backend", "Security", "Mentorship"],
+    url: "https://boards.greenhouse.io/chime/jobs/8875820002",
+    postedDate: "2026-10-23",
+  },
+  "software-engineer-infrastructure-chime": {
+    id: "software-engineer-infrastructure-chime",
+    title: "Software Engineer, Infrastructure",
+    sponsorId: "chime",
+    location: "San Francisco, CA, New York, NY or Chicago, IL",
+    type: "Full-time",
+    salary: "$133K - $184K",
+    description:
+      "Chime's Infrastructure team runs the AWS, networking, Kubernetes, Terraform and observability systems the company runs on, and builds the self-service tools the rest of engineering uses. Those tools are written in Ruby on Rails and Go, and the posting asks for strong experience in both. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Infra", "Platform", "Go", "Terraform", "Polyglot"],
+    url: "https://boards.greenhouse.io/chime/jobs/8616359002",
+    postedDate: "2026-10-24",
+  },
+  "software-engineer-infrastructure-platform-chime": {
+    id: "software-engineer-infrastructure-platform-chime",
+    title: "Software Engineer, Infrastructure Platform",
+    sponsorId: "chime",
+    location: "San Francisco, CA, New York, NY or Chicago, IL",
+    type: "Full-time",
+    salary: "$133K - $184K",
+    description:
+      "Chime's Infrastructure Platform team owns how engineers work with Terraform, ArgoCD, AWS and the Kubernetes Helm charts behind continuous deployment. You build the self-service tooling, written in Ruby on Rails and Go, and the posting asks for strong experience in both. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Platform", "DevOps", "Go", "Terraform", "Polyglot"],
+    url: "https://boards.greenhouse.io/chime/jobs/8859182002",
+    postedDate: "2026-10-24",
+  },
+  "tech-lead-manager-human-agent-tooling-chime": {
+    id: "tech-lead-manager-human-agent-tooling-chime",
+    title: "Tech Lead Manager, Human Agent Tooling",
+    sponsorId: "chime",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$199K - $275K",
+    description:
+      "Chime is hiring a tech lead manager for Human Agent Tooling in Trust & Safety: the agent workspace, case management and member context its support agents work in. You lead a squad of 3 to 5 engineers and still ship production code, and the posting asks for proven experience with Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Fullstack", "Product Eng", "Mentorship"],
+    url: "https://boards.greenhouse.io/chime/jobs/8525743002",
+    postedDate: "2026-10-24",
   },
   "senior-staff-engineer-tax-platform-gusto": {
     id: "senior-staff-engineer-tax-platform-gusto",
@@ -454,6 +547,36 @@ export const jobs = {
     chips: ["Backend", "Payments", "Next.js"],
     url: "https://job-boards.greenhouse.io/ascend21/jobs/4460281008",
     postedDate: "2026-06-19",
+  },
+  "software-engineer-ascend": {
+    id: "software-engineer-ascend",
+    title: "Software Engineer",
+    companyId: "ascend",
+    companyName: "Ascend",
+    companyLogo: "/company_ascend.png",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$160K - $200K",
+    description:
+      "Ascend builds payments and financial-automation software for insurance. This engineer expands the core product, including features, dashboards, and checkout flows, with some customer-facing work. The backend is a Ruby on Rails API on Heroku, with a Next.js and TypeScript frontend. The posting asks for 1 to 3 years of experience, and Ascend is a Series B startup.",
+    chips: ["Fullstack", "Payments", "Next.js", "TypeScript"],
+    url: "https://job-boards.greenhouse.io/ascend21/jobs/5351565008",
+    postedDate: "2026-10-23",
+  },
+  "forward-deployed-engineer-ascend": {
+    id: "forward-deployed-engineer-ascend",
+    title: "Forward Deployed Engineer",
+    companyId: "ascend",
+    companyName: "Ascend",
+    companyLogo: "/company_ascend.png",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$170K - $210K",
+    description:
+      "Ascend builds payments and financial-automation software for insurance, on a Ruby on Rails API with a Next.js and TypeScript frontend. This engineer works with customers, sales and engineering to scope integrations and ship the production code, API integrations and custom features that take each new account live. The posting asks for 3+ years of experience and welcomes engineers new to Rails, and Ascend is a Series B startup.",
+    chips: ["Fullstack", "Payments", "TypeScript"],
+    url: "https://job-boards.greenhouse.io/ascend21/jobs/5445856008",
+    postedDate: "2026-10-24",
   },
   "rails-engineer-decile": {
     id: "rails-engineer-decile",
@@ -1087,6 +1210,7 @@ export const jobs = {
    *   Apollo.io (Series D 2023, $1.6B)
    *     Staff SWE (was Principal SWE) — SF hybrid, $315K–$473K — https://job-boards.greenhouse.io/apolloio/jobs/6134562004
    *     Senior SWE — SF hybrid, $195K–$358K — https://job-boards.greenhouse.io/apolloio/jobs/6118319004
+   *     Senior SWE, Builder Studio — remote US, Rails + Node backend, TypeScript/React — https://job-boards.greenhouse.io/apolloio/jobs/6226635004
    *   Motive (S-1 filed Dec 2025; $2.85B)
    *     Staff Platform Engineer — SF hybrid, $189K–$236K, "Golang, Ruby on Rails, and Python services"
    *     https://job-boards.greenhouse.io/gomotive/jobs/8504954002
@@ -1135,6 +1259,9 @@ export const jobs = {
    *     Staff SWE, ISPM Platform — https://job-boards.greenhouse.io/huntress/jobs/7774957003
    *   Calendly (~$3B) — remote US, $187K–$272K
    *     Senior Full Stack Engineer, AI Scheduling (Node or Rails) — https://job-boards.greenhouse.io/calendly/jobs/8464846002
+   *     Full Stack Engineer, Trust and Safety (Rails, Node or Go) — $172K–$227K — https://job-boards.greenhouse.io/calendly/jobs/8895903002
+   *   Omada Health (NASDAQ: OMDA since Jun 2025; a 2025 sponsor, not 2026) — remote US
+   *     Senior SWE, Solutions Engineering — $179K–$224K — https://job-boards.greenhouse.io/omadahealth/jobs/8202172
    *   Kin Insurance (unicorn) — remote US
    *     Staff SWE — $165K–$200K — https://jobs.ashbyhq.com/kin/4b5dfc81-2f36-42d5-8ce1-7efc1d330f9f
    *     Senior SWE, Back-End — $122K–$153K (posted Oct 2025) — https://jobs.ashbyhq.com/kin/2b57a949-a4bb-440f-a170-eda3ccf49b6c
