@@ -954,6 +954,20 @@ export const jobs = {
     url: "https://stripe.com/jobs/search?gh_jid=8128744",
     postedDate: "2026-09-07",
   },
+  "software-engineer-intern-neuralink": {
+    id: "software-engineer-intern-neuralink",
+    title: "Software Engineer Intern, Internal Apps",
+    companyId: "neuralink",
+    companyName: "Neuralink",
+    location: "South San Francisco, CA (also Austin, TX)",
+    type: "Internship",
+    salary: "Not disclosed",
+    description:
+      "Neuralink interns build the internal software the company runs on: data platforms for neural recordings and device telemetry, the Lab Systems hub and ERP tooling for brain-computer interface design. Ruby on Rails and React with TypeScript are the preferred stack.",
+    chips: ["Fullstack", "Data", "React", "TypeScript"],
+    url: "https://boards.greenhouse.io/neuralink/jobs/6083322003",
+    postedDate: "2026-10-26",
+  },
   "junior-software-engineer-corporate-tools": {
     id: "junior-software-engineer-corporate-tools",
     title: "Junior Software Engineer",
@@ -1518,7 +1532,11 @@ export const jobs = {
    *     Full Stack Engineer, Trust and Safety (Rails, Node or Go) — $172K–$227K — https://job-boards.greenhouse.io/calendly/jobs/8895903002
    *   Omada Health (NASDAQ: OMDA since Jun 2025; a 2025 sponsor, not 2026) — remote US
    *     Senior SWE, Solutions Engineering — $179K–$224K — https://job-boards.greenhouse.io/omadahealth/jobs/8202172
+   *     Staff SWE — $176K–$253K by zone, Rails + React — https://job-boards.greenhouse.io/omadahealth/jobs/8257928
+   *   Kikoff (unicorn, profitable) — SF, $244K–$292K
+   *     Senior Fullstack Engineer, User Retention and App Ecosystem (Rails, React, Flutter) — https://job-boards.greenhouse.io/kikoff/jobs/4429802009
    *   Kin Insurance (unicorn) — remote US
+   *     SWE, Back-End Focus — $110K–$127K, Rails + TypeScript — https://jobs.ashbyhq.com/kin/56db2161-84b4-42ab-b1c6-adae6c1f325c
    *     Staff SWE — $165K–$200K — https://jobs.ashbyhq.com/kin/4b5dfc81-2f36-42d5-8ce1-7efc1d330f9f
    *     Senior SWE, Back-End — $122K–$153K (posted Oct 2025) — https://jobs.ashbyhq.com/kin/2b57a949-a4bb-440f-a170-eda3ccf49b6c
    *   CentralReach (Roper Technologies, 2025)
