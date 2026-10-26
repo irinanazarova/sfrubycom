@@ -168,6 +168,8 @@ A real Ruby/Rails role that fails only this policy goes in the `PENDING SPONSORS
 
 **A Rails role is one that works in a Ruby or Rails codebase the company's product runs on.** Rails named beside Go or Node, or "Ruby on Rails or a comparable framework" at a Rails company, counts (chip `Polyglot` when the role splits its time). Ruby as a nice-to-have on work outside that codebase (a Python data pipeline, a React Native app) does not. The first automated review skipped Chime's Rails-and-Go infrastructure roles and Apollo.io's Rails-and-Node backend role under a stricter "main stack" reading; that reading was wrong.
 
+**Entry-level roles are highlighted everywhere a job appears.** `isEntryLevel` (`src/utils/jobFacets.js`) reads the title (intern, new grad, junior, early career) or an explicit `entryLevel: true` on the record, for a role whose title does not say it (Ascend's "Software Engineer" asking 1 to 3 years); `entryLevel: false` overrides the title. /jobs gives them a green "Entry level" badge, sorts them right after sponsors, and puts an "N entry-level roles" button in the hero; `/jobs?level=entry` opens the board filtered to them. The #jobs Slack post lists them first, tagged, with that link. The review job sets the flag.
+
 **/jobs pins this year's sponsors, Emerald and up** (`isJobBoardSponsor` in `src/data/sponsors.js`, read from `conference2026SponsorTiers`). A job's `sponsorId` only names its company record, which lives in the 2025 `sponsors` archive, so it no longer decides pinning.
 
 ### Job matching chips (`chips` on each job record)

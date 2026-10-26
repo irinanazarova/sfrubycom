@@ -15,6 +15,7 @@
 // card that is not on the site yet.
 import { execFileSync } from "node:child_process";
 import { jobs, jobCompanyName } from "../src/data/jobs.js";
+import { isEntryLevel } from "../src/utils/jobFacets.js";
 
 const SITE = "https://sfruby.com";
 const DEPLOY_WAIT_MS = 15 * 60 * 1000;
@@ -41,7 +42,10 @@ try {
   process.exit(0);
 }
 
-const added = Object.values(jobs).filter((job) => !before.has(job.id));
+// Entry-level roles first: they are the listing applicants look for hardest.
+const added = Object.values(jobs)
+  .filter((job) => !before.has(job.id))
+  .sort((a, b) => isEntryLevel(b) - isEntryLevel(a));
 if (added.length === 0) {
   console.log("No new listings.");
   process.exit(0);
@@ -55,7 +59,8 @@ const escLink = (s) => esc(s).replace(/\|/g, "/");
 const line = (job) => {
   const salary = /\d/.test(job.salary ?? "") ? job.salary : null;
   const details = [job.location, salary].filter(Boolean).map(esc).join(" · ");
-  return `• *${esc(jobCompanyName(job))}*: <${SITE}/jobs#${job.id}|${escLink(job.title)}>${details ? `\n   ${details}` : ""}`;
+  const tag = isEntryLevel(job) ? " · *Entry level*" : "";
+  return `• *${esc(jobCompanyName(job))}*: <${SITE}/jobs#${job.id}|${escLink(job.title)}>${tag}${details ? `\n   ${details}` : ""}`;
 };
 
 const shown = added.slice(0, MAX_LINES);
@@ -64,6 +69,7 @@ const text = [
   added.length === 1 ? "New on the SF Ruby jobs board:" : `${added.length} new on the SF Ruby jobs board:`,
   ...shown.map(line),
   more > 0 ? `…and ${more} more at <${SITE}/jobs|sfruby.com/jobs>` : null,
+  added.some(isEntryLevel) ? `All entry-level roles: <${SITE}/jobs?level=entry|sfruby.com/jobs?level=entry>` : null,
 ]
   .filter(Boolean)
   .join("\n");

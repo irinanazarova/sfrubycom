@@ -149,6 +149,8 @@ jobs:
             - HOLD: a real Ruby/Rails role that fails only the inclusion policy (a late-stage company that does not sponsor or host). Add one line for it to the PENDING SPONSORSHIP comment block in jobs.js, in that block's format, with no personal names.
             - SKIP: closed, the role does not work in a Ruby codebase, wrong location, or the same role is already on the board.
 
+            For every ADD, set `entryLevel: true` when the role is an internship, new-grad, apprentice or junior role, or asks for 0 to 2 years (or a range starting at 1), and the title does not already say intern, new grad, junior or early career. Entry-level roles are highlighted on the board, so get this right.
+
             Edit only src/data/jobs.js and src/utils/jobFacets.js; edits anywhere else are discarded. Keep both files valid JavaScript.
             Finally write .review/decisions.json: a JSON array with one object per candidate, {"url": <the candidate's url exactly>, "decision": "ADD" | "HOLD" | "SKIP", "company": <name>, "title": <role title>, "reason": <a few words>}.
             Never mention Claude, an AI or an assistant in anything you write. No em dashes.
