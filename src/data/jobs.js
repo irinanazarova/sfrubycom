@@ -257,6 +257,97 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/8204403",
     postedDate: "2026-10-24",
   },
+  "staff-software-engineer-peo-gusto": {
+    id: "staff-software-engineer-peo-gusto",
+    title: "Staff Software Engineer, PEO",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "The PEO Growth pod owns the path for businesses adopting Gusto's PEO. This staff role owns onboarding, sets technical direction in a regulated domain and runs experiments on the funnel. The stack is Ruby on Rails with React and TypeScript.",
+    chips: ["Fullstack", "Product Eng", "TypeScript", "High compliance"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8244969",
+    postedDate: "2026-10-25",
+  },
+  "staff-software-engineer-peo-benefits-gusto": {
+    id: "staff-software-engineer-peo-benefits-gusto",
+    title: "Staff Software Engineer, PEO Benefits",
+    sponsorId: "gusto",
+    location: "San Francisco, Denver, or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
+    description:
+      "You build the PEO Benefits systems: benefits shopping, plan recommendations, carrier integrations and AI agents. The backend is a very large Ruby on Rails app with a React frontend and MCP tools. The role mentors engineers across the group.",
+    chips: ["Fullstack", "Backend", "AI/ML", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7982781",
+    postedDate: "2026-10-25",
+  },
+  "staff-software-engineer-retirement-ai-gusto": {
+    id: "staff-software-engineer-retirement-ai-gusto",
+    title: "Staff Software Engineer, Retirement AI",
+    sponsorId: "gusto",
+    location: "San Francisco, Denver, or New York City",
+    type: "Full-time",
+    salary: "$227K - $284K in SF and NYC, $187K - $234K in Denver",
+    description:
+      "A small senior team builds production LLM features for Gusto Retirement: RAG flows, agents and tool loops. They sit on services and APIs with a Rails backend and a React frontend. The posting asks for Rails or a comparable language.",
+    chips: ["AI/ML", "Fullstack", "AI-native", "Product Eng"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7986047",
+    postedDate: "2026-10-25",
+  },
+  "staff-software-engineer-retirement-money-planning-gusto": {
+    id: "staff-software-engineer-retirement-money-planning-gusto",
+    title: "Staff Software Engineer, Retirement Money Planning",
+    sponsorId: "gusto",
+    location: "San Francisco, Burlingame, Denver, or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
+    description:
+      "You own backend services and the interfaces savers use to manage 401(k)s, IRAs and related accounts. Rails experience is a must, alongside Sidekiq or Kafka, React and GraphQL. The team works closely with Product, Design and Compliance.",
+    chips: ["Fullstack", "Payments", "Sidekiq", "GraphQL", "High compliance"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8205624",
+    postedDate: "2026-10-25",
+  },
+  "staff-software-engineer-solo-gusto": {
+    id: "staff-software-engineer-solo-gusto",
+    title: "Staff Software Engineer, Solo",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "Solo is Gusto's product for one-person businesses. A small team under one engineering manager builds it with data science, design and go-to-market partners. The stack is Ruby on Rails, React, TypeScript and GraphQL, with MCP tools in the product.",
+    chips: ["Fullstack", "Product Eng", "GraphQL", "TypeScript", "AI-native"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8208422",
+    postedDate: "2026-10-25",
+  },
+  "staff-software-engineer-tax-accounts-gusto": {
+    id: "staff-software-engineer-tax-accounts-gusto",
+    title: "Staff Software Engineer, Tax Accounts",
+    sponsorId: "gusto",
+    location: "San Francisco, Denver, or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
+    description:
+      "The Tax Accounts team keeps employer and employee tax account data in sync with hundreds of tax agencies. The work spans frontend, backend APIs, data models and automation, in Gusto's Rails codebase. Rails experience or interest is expected.",
+    chips: ["Fullstack", "Backend", "High compliance", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8039516",
+    postedDate: "2026-10-25",
+  },
+  "staff-software-engineer-tax-experiences-gusto": {
+    id: "staff-software-engineer-tax-experiences-gusto",
+    title: "Staff Software Engineer, Tax Experiences",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "The Tax Experiences team owns what customers see around taxes, from onboarding through payments and filings. You work across the full stack with React and TypeScript on the front and Ruby on Rails, SQL or another backend language behind it.",
+    chips: ["Fullstack", "Product Eng", "TypeScript", "High compliance"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7918214",
+    postedDate: "2026-10-25",
+  },
   "principal-web-developer-superconductor": {
     id: "principal-web-developer-superconductor",
     title: "Principal Web Developer (Rails)",
@@ -865,6 +956,20 @@ export const jobs = {
     url: "https://stripe.com/jobs/search?gh_jid=8128744",
     postedDate: "2026-09-07",
   },
+  "software-engineer-intern-neuralink": {
+    id: "software-engineer-intern-neuralink",
+    title: "Software Engineer Intern, Internal Apps",
+    companyId: "neuralink",
+    companyName: "Neuralink",
+    location: "South San Francisco, CA (also Austin, TX)",
+    type: "Internship",
+    salary: "Not disclosed",
+    description:
+      "Neuralink interns build the internal software the company runs on: data platforms for neural recordings and device telemetry, the Lab Systems hub and ERP tooling for brain-computer interface design. Ruby on Rails and React with TypeScript are the preferred stack.",
+    chips: ["Fullstack", "Data", "React", "TypeScript"],
+    url: "https://boards.greenhouse.io/neuralink/jobs/6083322003",
+    postedDate: "2026-10-26",
+  },
   "junior-software-engineer-corporate-tools": {
     id: "junior-software-engineer-corporate-tools",
     title: "Junior Software Engineer",
@@ -969,6 +1074,36 @@ export const jobs = {
     chips: ["Fullstack", "React", "TypeScript", "GraphQL", "High compliance"],
     url: "https://job-boards.greenhouse.io/healthie/jobs/4410573009",
     postedDate: "2026-10-02",
+  },
+  "staff-engineer-healthie": {
+    id: "staff-engineer-healthie",
+    title: "Staff Engineer (Full-Stack)",
+    companyId: "healthie",
+    companyName: "Healthie",
+    companyLogo: "/company_healthie.png",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$205K - $235K",
+    description:
+      "Healthie is the API-first EHR and practice-management platform behind more than 40,000 providers. This staff role works across the stack in Rails, React, TypeScript and GraphQL. Postgres, Redis and Sidekiq sit underneath, with RSpec and Capybara for tests.",
+    chips: ["Fullstack", "Sidekiq", "GraphQL", "TypeScript", "High compliance"],
+    url: "https://job-boards.greenhouse.io/healthie/jobs/4439276009",
+    postedDate: "2026-10-25",
+  },
+  "staff-engineer-new-products-healthie": {
+    id: "staff-engineer-new-products-healthie",
+    title: "Staff Engineer, New Products",
+    companyId: "healthie",
+    companyName: "Healthie",
+    companyLogo: "/company_healthie.png",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$205K - $235K",
+    description:
+      "You build Healthie's new products from the first version. The stack is Rails, React, TypeScript and GraphQL, with Postgres, Redis and Sidekiq behind it.",
+    chips: ["Fullstack", "Product Eng", "Sidekiq", "GraphQL", "High compliance"],
+    url: "https://job-boards.greenhouse.io/healthie/jobs/4411077009",
+    postedDate: "2026-10-25",
   },
   "senior-software-engineer-ledger-frame": {
     id: "senior-software-engineer-ledger-frame",
@@ -1358,6 +1493,11 @@ export const jobs = {
    *   Scribd (Spectrum Equity growth round)
    *     SWE II (Fullstack), Growth Platform — SF, $132.5K–$184K in CA, Rails + React/TypeScript
    *     https://jobs.ashbyhq.com/ScribdInc/15d3b241-e147-4d20-a1a2-ed28f2c75fae
+   *     Staff Backend Engineer (Payments and Billing) — SF, Ruby preferred — https://jobs.ashbyhq.com/ScribdInc/469270ab-5517-400a-884d-afc85a3821b3
+   *     Staff SWE, Core Everand — SF, Ruby preferred — https://jobs.ashbyhq.com/ScribdInc/22bd49ee-9857-4c62-baf6-f1f05b0f2522
+   *   Handshake (Series F, $3.5B)
+   *     Senior SWE, Employer — SF, $220K–$250K, Rails, Go or Python — https://jobs.ashbyhq.com/Handshake/6c051742-6154-440c-81ac-67b3adbac79e
+   *     Senior SWE, Growth — SF, $225K–$250K, Rails, GraphQL, React — https://jobs.ashbyhq.com/Handshake/b99dd0a6-11f9-4d42-b8f7-970c32d4cd75
    *   Taskrabbit (IKEA/Ingka since 2017)
    *     Senior SWE — SF hybrid, $130K–$180K, Rails + Sorbet — https://job-boards.greenhouse.io/taskrabbit/jobs/8122383
    *   Omnissa (KKR since 2024; ex-VMware EUC)
@@ -1399,7 +1539,11 @@ export const jobs = {
    *     Full Stack Engineer, Trust and Safety (Rails, Node or Go) — $172K–$227K — https://job-boards.greenhouse.io/calendly/jobs/8895903002
    *   Omada Health (NASDAQ: OMDA since Jun 2025; a 2025 sponsor, not 2026) — remote US
    *     Senior SWE, Solutions Engineering — $179K–$224K — https://job-boards.greenhouse.io/omadahealth/jobs/8202172
+   *     Staff SWE — $176K–$253K by zone, Rails + React — https://job-boards.greenhouse.io/omadahealth/jobs/8257928
+   *   Kikoff (unicorn, profitable) — SF, $244K–$292K
+   *     Senior Fullstack Engineer, User Retention and App Ecosystem (Rails, React, Flutter) — https://job-boards.greenhouse.io/kikoff/jobs/4429802009
    *   Kin Insurance (unicorn) — remote US
+   *     SWE, Back-End Focus — $110K–$127K, Rails + TypeScript — https://jobs.ashbyhq.com/kin/56db2161-84b4-42ab-b1c6-adae6c1f325c
    *     Staff SWE — $165K–$200K — https://jobs.ashbyhq.com/kin/4b5dfc81-2f36-42d5-8ce1-7efc1d330f9f
    *     Senior SWE, Back-End — $122K–$153K (posted Oct 2025) — https://jobs.ashbyhq.com/kin/2b57a949-a4bb-440f-a170-eda3ccf49b6c
    *   CentralReach (Roper Technologies, 2025)
