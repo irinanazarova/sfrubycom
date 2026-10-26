@@ -4,7 +4,8 @@
 // files and writes .review/decisions.json. Everything that talks to GitHub is
 // here, run by the workflow before and after it.
 //
-//   node scripts/job-review.mjs prepare <issue>   # .review/candidates.json
+//   node scripts/job-review.mjs prepare <issue>   # .review/candidates.json,
+//                                                  # with each posting's text
 //   node scripts/job-review.mjs body              # .review/pr-body.md
 //   node scripts/job-review.mjs report <issue> [pr-url]
 //                                                  # tick the boxes, comment
@@ -29,6 +30,43 @@ const urlOf = (line) => line.match(/\]\((https?:\/\/[^)\s]+)\)/)?.[1];
 
 const [cmd, issue, prUrl] = process.argv.slice(2);
 
+// The posting's text, fetched here through the ATS APIs so the model reads
+// it directly: Ashby's job pages are rendered in the browser, and WebFetch on
+// them comes back empty (four Rails roles were skipped as "unreadable" on
+// Oct 25-26, 2026). Empty when the posting is gone, which means it closed.
+const strip = (html) =>
+  html
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+const getJson = async (url) => {
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(20_000) });
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+};
+const ashbyBoards = new Map();
+async function postingText(url) {
+  let m;
+  if ((m = url.match(/greenhouse\.io\/([^/]+)\/jobs\/(\d+)/))) {
+    const j = await getJson(`https://boards-api.greenhouse.io/v1/boards/${m[1]}/jobs/${m[2]}`);
+    return j ? strip(j.content ?? "") : "";
+  }
+  if ((m = url.match(/jobs\.ashbyhq\.com\/([^/]+)\/([0-9a-f-]{36})/i))) {
+    if (!ashbyBoards.has(m[1])) ashbyBoards.set(m[1], getJson(`https://api.ashbyhq.com/posting-api/job-board/${m[1]}?includeCompensation=true`));
+    const j = (await ashbyBoards.get(m[1]))?.jobs?.find((x) => x.id === m[2]);
+    return j ? [j.descriptionPlain, j.compensation?.compensationTierSummary && `Compensation: ${j.compensation.compensationTierSummary}`].filter(Boolean).join("\n") : "";
+  }
+  if ((m = url.match(/jobs\.lever\.co\/([^/]+)\/([0-9a-f-]{36})/i))) {
+    const j = await getJson(`https://api.lever.co/v0/postings/${m[1]}/${m[2]}`);
+    return j ? [j.descriptionPlain, ...(j.lists ?? []).map((l) => `${l.text}: ${strip(l.content ?? "")}`), j.additionalPlain].filter(Boolean).join("\n") : "";
+  }
+  return "";
+}
+
 if (cmd === "prepare") {
   // The oldest unticked items first, so the backlog clears in order.
   const items = [];
@@ -39,8 +77,10 @@ if (cmd === "prepare") {
       if (url) items.push({ comment_id: c.id, url, line: line.trim(), detail: (lines[i + 1] ?? "").trim() });
     });
   }
+  const picked = items.slice(0, PER_DAY);
+  for (const item of picked) item.text = (await postingText(item.url)).slice(0, 15_000);
   mkdirSync(DIR, { recursive: true });
-  writeFileSync(`${DIR}/candidates.json`, JSON.stringify(items.slice(0, PER_DAY), null, 2));
+  writeFileSync(`${DIR}/candidates.json`, JSON.stringify(picked, null, 2));
   console.log(`${Math.min(items.length, PER_DAY)} of ${items.length} unticked candidates to review.`);
   process.exit(0);
 }
