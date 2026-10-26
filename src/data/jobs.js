@@ -1491,6 +1491,11 @@ export const jobs = {
    *   Scribd (Spectrum Equity growth round)
    *     SWE II (Fullstack), Growth Platform — SF, $132.5K–$184K in CA, Rails + React/TypeScript
    *     https://jobs.ashbyhq.com/ScribdInc/15d3b241-e147-4d20-a1a2-ed28f2c75fae
+   *     Staff Backend Engineer (Payments and Billing) — SF, Ruby preferred — https://jobs.ashbyhq.com/ScribdInc/469270ab-5517-400a-884d-afc85a3821b3
+   *     Staff SWE, Core Everand — SF, Ruby preferred — https://jobs.ashbyhq.com/ScribdInc/22bd49ee-9857-4c62-baf6-f1f05b0f2522
+   *   Handshake (Series F, $3.5B)
+   *     Senior SWE, Employer — SF, $220K–$250K, Rails, Go or Python — https://jobs.ashbyhq.com/Handshake/6c051742-6154-440c-81ac-67b3adbac79e
+   *     Senior SWE, Growth — SF, $225K–$250K, Rails, GraphQL, React — https://jobs.ashbyhq.com/Handshake/b99dd0a6-11f9-4d42-b8f7-970c32d4cd75
    *   Taskrabbit (IKEA/Ingka since 2017)
    *     Senior SWE — SF hybrid, $130K–$180K, Rails + Sorbet — https://job-boards.greenhouse.io/taskrabbit/jobs/8122383
    *   Omnissa (KKR since 2024; ex-VMware EUC)
