@@ -74,6 +74,22 @@ export function parseLevel(title = "") {
   return "mid";
 }
 
+// Entry-level roles are the hardest listing for the board to find and the one
+// applicants ask for most, so /jobs and the #jobs Slack post put them first.
+// The title catches most (intern, new grad, junior, early career); a role whose
+// title does not say it (an open "Software Engineer" asking 1 to 3 years) sets
+// entryLevel: true on its record, and entryLevel: false overrides the title.
+export function isEntryLevel(job) {
+  return job.entryLevel ?? parseLevel(job.title) === "junior";
+}
+
+// The Level facet, with the entryLevel flag folded in.
+export function jobLevel(job) {
+  if (isEntryLevel(job)) return "junior";
+  const level = parseLevel(job.title);
+  return level === "junior" ? "mid" : level;
+}
+
 // Numeric salary range (in $K) parsed from the freeform salary string.
 // Returns { min, max } or null when no salary is listed.
 export function parseSalary(salary) {
@@ -236,7 +252,7 @@ export const GEO_LABELS = { "sf-bay": "SF Bay Area", california: "Elsewhere in C
 export const GEO_ORDER = ["sf-bay", "california", "remote-us"];
 
 export const LEVEL_LABELS = {
-  junior: "Junior",
+  junior: "Entry level",
   mid: "Mid-level",
   senior: "Senior",
   "staff+": "Staff / Principal",

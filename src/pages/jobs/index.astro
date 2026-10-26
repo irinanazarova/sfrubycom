@@ -10,7 +10,8 @@ import {
     slugify,
     parseWorkType,
     parseGeo,
-    parseLevel,
+    jobLevel,
+    isEntryLevel,
     parseSalary,
     COMPANY_META,
     WORK_TYPE_LABELS,
@@ -70,19 +71,22 @@ const jobs = getSortedJobs().map((job) => {
         companyId,
         isYC,
         sponsored: isJobBoardSponsor(companyName),
+        entryLevel: isEntryLevel(job),
         isFeatured: isJobBoardSponsor(companyName) || !!job.featured,
         workType: parseWorkType(job.location),
         geo: parseGeo(job.location),
-        level: parseLevel(job.title),
+        level: jobLevel(job),
         industry: meta.industry || null,
         stage: meta.stage || null,
         salaryRange: salary,
     };
 });
 
-// This year's sponsors pinned first, then editorially featured listings, then
-// the rest; the stable sort keeps recency within each group.
-const pinRank = (j) => (j.sponsored ? 2 : j.featured ? 1 : 0);
+// This year's sponsors pinned first, then entry-level roles (the listing
+// applicants look for hardest), then editorially featured ones, then the rest;
+// the stable sort keeps recency within each group.
+const pinRank = (j) => (j.sponsored ? 3 : j.entryLevel ? 2 : j.featured ? 1 : 0);
+const entryCount = jobs.filter((j) => j.entryLevel).length;
 jobs.sort((a, b) => pinRank(b) - pinRank(a));
 
 const uniqueCompanies = new Set(jobs.map((j) => j.companyId).filter(Boolean));
@@ -163,6 +167,15 @@ const facetGroups = [
             </div>
         </div>
         <div class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            {entryCount > 0 && (
+                <a
+                    href="/jobs?level=entry"
+                    data-entry-filter
+                    class="tap-press px-btn px-btn--gold px-font text-px9 gap-2 px-5 py-3"
+                >
+                    {entryCount} entry-level {entryCount === 1 ? "role" : "roles"}
+                </a>
+            )}
             <button
                 data-email-modal="post-job"
                 class="tap-press px-btn px-btn--white px-font text-px9 gap-2 px-5 py-3"
@@ -306,7 +319,11 @@ const facetGroups = [
                                                     {job.industry && <span class="hidden sm:inline"><span class="text-dark-400" aria-hidden="true"> · </span>{job.industry}</span>}
                                                     {job.stage && <span class="hidden sm:inline"><span class="text-dark-400" aria-hidden="true"> · </span>{job.stage}</span>}
                                                 </span>
-                                                {job.isFeatured && <span class="job-badge job-badge--featured">Featured</span>}
+                                                {job.entryLevel ? (
+                                                    <span class="job-badge job-badge--entry">Entry level</span>
+                                                ) : (
+                                                    job.isFeatured && <span class="job-badge job-badge--featured">Featured</span>
+                                                )}
                                                 {job.isYC && <span class="job-badge job-badge--yc">YC</span>}
                                             </p>
                                         </div>
@@ -548,6 +565,10 @@ const facetGroups = [
         }
         .job-badge--featured {
             background: var(--px-gold);
+            color: var(--px-ink);
+        }
+        .job-badge--entry {
+            background: var(--grass-300);
             color: var(--px-ink);
         }
         .job-badge--yc {
@@ -921,6 +942,20 @@ const facetGroups = [
                 scrollToListTop();
             });
         }
+
+        // /jobs?level=entry opens the board on the entry-level roles (the #jobs
+        // Slack post links there), and the hero button applies the same filter
+        // without a reload.
+        const entryChip = chips.find((c) => c.dataset.facet === "level" && c.dataset.value === "junior");
+        function showEntryLevel() {
+            if (entryChip && !state.level.has("junior")) entryChip.click();
+        }
+        if (new URLSearchParams(location.search).get("level") === "entry") showEntryLevel();
+        document.querySelector("[data-entry-filter]")?.addEventListener("click", (e) => {
+            if (!entryChip) return;
+            e.preventDefault();
+            showEntryLevel();
+        });
 
         function clearAll() {
             for (const f of multiFacets) state[f].clear();

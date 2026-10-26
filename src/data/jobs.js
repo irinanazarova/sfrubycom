@@ -664,6 +664,8 @@ export const jobs = {
     description:
       "Ascend builds payments and financial-automation software for insurance. This engineer expands the core product, including features, dashboards, and checkout flows, with some customer-facing work. The backend is a Ruby on Rails API on Heroku, with a Next.js and TypeScript frontend. The posting asks for 1 to 3 years of experience, and Ascend is a Series B startup.",
     chips: ["Fullstack", "Payments", "Next.js", "TypeScript"],
+    // The posting asks for 1 to 3 years; the title does not say so.
+    entryLevel: true,
     url: "https://job-boards.greenhouse.io/ascend21/jobs/5351565008",
     postedDate: "2026-10-23",
   },
