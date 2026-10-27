@@ -300,6 +300,16 @@ export const days = [
     ],
     blocks: [
       {
+        start: "10:00",
+        end: "16:00",
+        kind: "event",
+        audience: "all",
+        title: "Rails Girls: Build your first app with a coding agent",
+        where: "Mux HQ, Financial District",
+        note: "For women in non-technical roles at Ruby companies. Small groups, each with a Ruby engineer as mentor.",
+        href: "https://luma.com/sfruby2026-hackathon",
+      },
+      {
         start: "18:00",
         end: "21:00",
         kind: "event",
