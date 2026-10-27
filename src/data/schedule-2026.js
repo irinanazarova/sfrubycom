@@ -285,7 +285,8 @@ export const days = [
     theme: "Community day",
     tagline:
       "Bring your own event: a walk, a bike ride, an ocean swim, a hackathon or anything else you want to do together with Ruby friends!",
-    // A day with no blocks asks for ideas instead: these render as buttons.
+    // Community events are `event` blocks, each a link to its own Luma page.
+    // The links under them ask for more ideas and render as buttons.
     links: [
       {
         label: "Send an email",
@@ -297,7 +298,18 @@ export const days = [
         external: true,
       },
     ],
-    blocks: [],
+    blocks: [
+      {
+        start: "18:00",
+        end: "21:00",
+        kind: "event",
+        audience: "all",
+        title: "SF Ruby 2026 Wrapped",
+        where: "Mux HQ, Financial District",
+        note: "One more evening together before SF Ruby 2027.",
+        href: "https://luma.com/sfruby2026-wrapped",
+      },
+    ],
   },
 ];
 

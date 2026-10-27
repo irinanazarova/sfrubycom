@@ -198,16 +198,17 @@ function scheduleSection() {
     .map((d) => {
       const head = `### Day ${d.n}: ${d.theme}
 ${fmtDay(d)}. ${d.tagline}`;
-      if (!d.blocks.length) {
-        const links = (d.links ?? [])
-          .map((l) => `- ${l.label}: ${l.href}`)
-          .join("\n");
-        return `${head}\n${links}`;
-      }
+      const links = (d.links ?? [])
+        .map((l) => `- ${l.label}: ${l.href}`)
+        .join("\n");
+      if (!d.blocks.length) return `${head}\n${links}`;
       const blocks = d.blocks
         .map((b) => {
           if (b.kind === "break" || b.kind === "lunch") {
             return `- ${formatTime(b.start)}: ${b.kind === "lunch" ? "Lunch" : "Break"}`;
+          }
+          if (b.kind === "event") {
+            return `- ${formatRange(b.start, b.end)}: **${b.title}**, ${b.where}. ${b.note} RSVP: ${b.href}`;
           }
           const sessions = b.sessions
             .map((s) => {
@@ -230,7 +231,7 @@ ${fmtDay(d)}. ${d.tagline}`;
           return `- ${formatRange(b.start, b.end)}, ${label(b)}\n${sessions}${group}`;
         })
         .join("\n");
-      return `${head}\n\n${blocks}`;
+      return `${head}\n\n${blocks}${links ? `\n\n${links}` : ""}`;
     })
     .join("\n\n");
 }

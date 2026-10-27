@@ -99,20 +99,6 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                         {d.theme}
                     </h3>
                     <p class="text-gray-600 mt-3 max-w-2xl">{d.tagline}</p>
-                    {d.links && (
-                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                            {d.links.map((l) => (
-                                <a
-                                    href={l.href}
-                                    target={l.external ? "_blank" : undefined}
-                                    rel={l.external ? "noopener noreferrer" : undefined}
-                                    class="px-btn px-btn--sky px-font text-px8 md:text-px9 px-5 py-3 tap-press"
-                                >
-                                    {l.label}
-                                </a>
-                            ))}
-                        </div>
-                    )}
 
                     {d.blocks.length > 0 && (
                         <ol class="mt-10 flex flex-col gap-4 list-none p-0">
@@ -125,6 +111,29 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                                         <span class="px-font text-px9">
                                             {breakLabel[b.kind]}
                                         </span>
+                                    </li>
+                                ) : b.kind === "event" ? (
+                                    <li class="schedule-block px-card bg-white p-5 md:p-6" data-start={at(d, b.start)} data-end={at(d, b.end)}>
+                                        <div class="flex flex-wrap items-center gap-3">
+                                            <span class="font-mono text-sm text-gray-500">
+                                                {formatRange(b.start, b.end)}
+                                            </span>
+                                            <span class={`px-plate ${plateClass(b.audience)} px-font text-px8 px-2 py-1`}>
+                                                {audienceLabel(b.audience)}
+                                            </span>
+                                        </div>
+                                        <p class="font-display font-semibold text-base md:text-lg text-gray-900 leading-snug mt-5">
+                                            {b.title}
+                                        </p>
+                                        <p class="text-sm text-gray-600 mt-1.5">{b.where}. {b.note}</p>
+                                        <a
+                                            href={b.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="px-btn px-btn--gold px-font text-px8 md:text-px9 px-5 py-3 mt-5 tap-press"
+                                        >
+                                            RSVP on Luma
+                                        </a>
                                     </li>
                                 ) : (
                                     <li
@@ -239,6 +248,20 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                                 ),
                             )}
                         </ol>
+                    )}
+                    {d.links && (
+                        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                            {d.links.map((l) => (
+                                <a
+                                    href={l.href}
+                                    target={l.external ? "_blank" : undefined}
+                                    rel={l.external ? "noopener noreferrer" : undefined}
+                                    class="px-btn px-btn--sky px-font text-px8 md:text-px9 px-5 py-3 tap-press"
+                                >
+                                    {l.label}
+                                </a>
+                            ))}
+                        </div>
                     )}
                     {days[d.n] && (
                         <div class="mt-8 flex justify-center">
