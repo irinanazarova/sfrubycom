@@ -81,11 +81,12 @@ export const SPONSOR_CONTACT_2027 = {
   subject: "SF Ruby 2027 Sponsorship",
 };
 
-// The headline numbers. Every one of them is a 2026 figure, which is the
-// point: a 2027 prospectus sells on what the last two years did.
+// The headline numbers. 2026 runs Nov 10-12, 2026, so its 450 is the room
+// we are filling and not a result: keep it in the future tense until the
+// conference is over. 2025 is the only year that has sold out.
 export const sponsorStats2027 = [
-  { value: "450+", label: "Attendees in 2026" },
-  { value: "2", label: "Sold-out years" },
+  { value: "450+", label: "Expected in 2026" },
+  { value: "Sold out", label: "2025 conference" },
   { value: "2,400+", label: "Newsletter subscribers" },
   { value: "650+", label: "Slack members" },
 ];
@@ -131,6 +132,6 @@ export const format2027 = [
   },
   {
     label: "The same venue",
-    text: "SFJAZZ in Hayes Valley, which held 450 people in 2026.",
+    text: "SFJAZZ in Hayes Valley, the same room as the 2026 conference.",
   },
 ];
