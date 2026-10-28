@@ -307,7 +307,7 @@ export const days = [
         title: "Rails Girls: Build your first app with a coding agent",
         where: "Mux HQ, Financial District",
         note: "For women in non-technical roles at Ruby companies. Small groups, each with a Ruby engineer as mentor.",
-        href: "https://luma.com/sfruby2026-hackathon",
+        href: "https://luma.com/railsgirls2026",
       },
       {
         start: "18:00",
