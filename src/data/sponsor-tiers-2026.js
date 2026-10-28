@@ -74,22 +74,22 @@ export const SPONSOR_CONTACT = {
 
 // The headline numbers on the sponsor page.
 export const sponsorStats2026 = [
-  { value: "450+", label: "Conference Attendees" },
+  { value: "400", label: "2026 attendance target" },
   { value: String(conferenceSpeakers.length), label: "Speakers" },
-  { value: "2,400+", label: "Subscribers" },
-  { value: "650+", label: "Slack Members" },
+  { value: "3,000+", label: "Luma subscribers" },
+  { value: "800", label: "Slack Members" },
 ];
 
 // The three reasons on the sponsor page. `icon` is a Heroicons outline path.
 export const whySponsor2026 = [
   {
     title: "Get customers",
-    text: "Present your product to 450 engineers and founders who ship Ruby code today",
+    text: "Present your product to an expected 400 engineers and founders who ship Ruby code today",
     icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z",
   },
   {
     title: "Hire talent",
-    text: "Promote job opportunities at SF Ruby community of 2,400 engineers and in networking sessions of 70 to 100 people at the conference",
+    text: "Promote job opportunities to the SF Ruby community of 3,000+ Luma subscribers and 800 Slack members, and in networking sessions of 70 to 100 people at the conference",
     icon: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
   },
   {

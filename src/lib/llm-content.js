@@ -442,7 +442,7 @@ ${attendingNames.join(" · ")}
 
   return `# Sponsor the San Francisco Ruby Conference 2026
 
-> Get in front of 450 Ruby engineers and founders at SFJAZZ on Nov 10-11.
+> Meet an expected 400 Ruby engineers and founders at SFJAZZ on Nov 10-11.
 
 ## 2026 sponsorship tiers
 
@@ -650,7 +650,7 @@ SF Ruby exists to promote Ruby as the language of choice for new startups, showc
 
 ## What we do
 - **Monthly meetups** with talks, demos, and networking: ${SITE}/meetup.md. RSVP on [Luma](${LUMA_CALENDAR}).
-- **Annual conference.** The San Francisco Ruby Conference brings 450+ Rubyists together every November: two days of talks and a community day. 2026 is Nov 10-12 at SFJAZZ: ${SITE}/index.md.
+- **Annual conference.** The 2026 San Francisco Ruby Conference aims to bring 400 Rubyists together: two days of talks and a community day, November 10–12 at SFJAZZ: ${SITE}/index.md.
 - **Startup directory.** Ruby startups in the Bay Area, from pre-seed to public companies: ${SITE}/startups.md.
 - **Jobs board.** Ruby and Rails roles, audited monthly: ${SITE}/jobs.md. Companies post at ${SITE}/jobs/post.
 - **Scholarship program.** Free conference tickets for students and early-career Rubyists new to the community: ${SITE}/scholarship.md.

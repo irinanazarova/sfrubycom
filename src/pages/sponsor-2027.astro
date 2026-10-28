@@ -30,12 +30,17 @@ import {
     format2027,
     SPONSOR_CONTACT_2027,
     CONFERENCE_2027,
+    PROSPECTUS_2027_PDF,
+    prospectus2027,
+    sponsorFaq2027,
+    sponsorInquiry2027,
 } from "../data/sponsor-tiers-2027.js";
 import { palette } from "../design/tokens.mjs";
 import "../styles/global.css";
 
+const generalInquiry = sponsorInquiry2027();
 const sponsors2025Count = Object.keys(sponsors2025).length;
-const description = `Sponsor the San Francisco Ruby Conference 2027: one day of talks at SFJAZZ on ${CONFERENCE_2027.date} and a community day, in front of 450 Ruby engineers from household names and the startups building on Ruby.`;
+const description = `Sponsor the San Francisco Ruby Conference 2027: one day of talks at SFJAZZ on ${CONFERENCE_2027.date} and a community day, with an attendance target of 450 Ruby engineers from household names and the startups building on Ruby.`;
 ---
 
 <!doctype html>
@@ -101,11 +106,12 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
 
         <main class="flex-grow">
             <PageHero
-                label="2027 prospectus"
-                title="Sponsor SF Ruby 2027"
-                lede={`One day of talks at ${CONFERENCE_2027.venue} on ${CONFERENCE_2027.date}, and a community day after it. 450 Ruby engineers, from household names to the startups building on Ruby.`}
+                label="SF Ruby 2027 · Sponsorship"
+                title={prospectus2027.headline}
+                lede={prospectus2027.audience}
                 width="wide"
             >
+                <p class="text-sm text-white mb-5">{CONFERENCE_2027.date} · {CONFERENCE_2027.venue}, San Francisco<br />One day of talks, followed by a community day.</p>
                 <!-- The numbers come first: a sponsorship lead reads the room
                      size before the copy. -->
                 <div
@@ -132,30 +138,43 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                         href="#tiers"
                         class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
                     >
-                        See the tiers
+                        Explore packages
                     </a>
                     <button
                         data-email-modal="sponsor-2027"
                         class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
                     >
-                        Get in touch
+                        Discuss your hiring goals
                     </button>
                 </div>
+                <a href={PROSPECTUS_2027_PDF} download class="inline-block mt-5 text-sm text-white underline underline-offset-4 plausible-event-name=Prospectus+download plausible-event-year=2027">Download the PDF prospectus</a>
             </PageHero>
 
             <section class="py-14 sm:py-16 bg-white">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <!-- Why sponsor: four reasons, written for a company that
+                    <div class="px-card bg-ruby-50 p-6 sm:p-8 mb-10">
+                        <h2 class="font-semibold text-xl mb-3">{prospectus2027.earlyTitle}</h2>
+                        <p class="text-gray-700 leading-relaxed">{prospectus2027.earlyText}</p>
+                        <a href="#tiers" class="inline-block mt-4 text-ruby-700 font-semibold underline underline-offset-4">Packages from $4,000 USD</a>
+                    </div>
+                    <div id="audience" class="mb-10 scroll-mt-24">
+                        <h2 class="px-font text-sm md:text-base mb-5">People who build with Ruby</h2>
+                        <p class="text-lg font-semibold mb-3">{prospectus2027.founders}</p>
+                        <p class="text-gray-700 leading-relaxed mb-4">Senior and staff engineers, open-source authors, and founders come together here. Meet people who build and maintain production systems, lead teams, and take ownership of new products.</p>
+                        <p class="text-sm text-gray-600 mb-4">The 2026 program includes Rosa Gutiérrez (Solid Queue), Chris Oliver (GoRails), and Carmine Paolino (RubyLLM). These are examples from the 2026 program; the 2027 lineup is still to come.</p>
+                        <p class="text-xs text-gray-500">{prospectus2027.foundersSource} Attendance targets: 400 in 2026; 450 in 2027.</p>
+                    </div>
+                    <!-- Why sponsor: hiring and engineering reputation, written for a company that
                          already runs Ruby at scale. -->
                     <div id="why-sponsor" class="mb-12 scroll-mt-24">
                         <h2
                             class="px-font text-sm md:text-base text-gray-900 mb-7"
                         >
-                            Why sponsor
+                            Meet your future teammates
                         </h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             {
-                                whySponsor2027.map((r) => (
+                                whySponsor2027.slice(0, 2).map((r) => (
                                     <div class="px-card bg-white p-6 flex items-start gap-4">
                                         <div class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0">
                                             <svg
@@ -186,6 +205,12 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                         </div>
                     </div>
 
+                    <div class="border-l-4 border-ruby-500 pl-5 mb-10">
+                        <p class="text-sm font-semibold text-ruby-700 mb-2">For developer tools &amp; infrastructure sponsors</p>
+                        <h2 class="font-semibold text-xl mb-3">{prospectus2027.productTitle}</h2>
+                        <p class="text-gray-700 leading-relaxed">{prospectus2027.productText}</p>
+                        <p class="text-sm text-gray-600 mt-3">WorkOS, Typesense, and Laravel Cloud are among our 2026 sponsors.</p>
+                    </div>
                     <!-- The day itself, so a sponsor knows what they are
                          buying a place at. -->
                     <div id="the-day" class="px-card bg-dark-50 p-6 sm:p-8 mb-12 scroll-mt-24">
@@ -218,9 +243,13 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                         <h2
                             class="px-font text-sm md:text-base text-gray-900 mb-8 text-center"
                         >
-                            Who sponsored in 2026
+                            Companies supporting SF Ruby in 2026
                         </h2>
-                        <SponsorTiers />
+                        <p class="text-center text-gray-700 mb-5">Buildkite, Figma, Gusto, Persona, Chime, WorkOS, Typesense, Laravel Cloud, and more.</p>
+                        <details>
+                            <summary class="cursor-pointer text-center text-ruby-700 underline underline-offset-4 mb-6">See all 2026 sponsors</summary>
+                            <SponsorTiers />
+                        </details>
                         <p class="text-center text-sm text-gray-500 mt-8">
                             SF Ruby 2025 sold out.<br />
                             <a
@@ -234,12 +263,15 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                 </div>
             </section>
 
+            <details class="max-w-7xl mx-auto px-4 mb-6">
+                <summary class="cursor-pointer text-center text-ruby-700 underline underline-offset-4 mb-6">Explore companies bringing teams to the 2026 conference</summary>
             <CompaniesAttending
                 eyebrow="The 2026 room"
                 title="Ruby companies in the room"
                 subtitle="Every company bringing two or more people to the 2026 conference."
                 cta={false}
             />
+            </details>
 
             <!-- Tiers. Email only: the 2026 Stripe links belong to 2026
                  records, so a 2027 sponsor must not pay through one. -->
@@ -249,21 +281,20 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                         <h2
                             class="px-font text-sm md:text-base text-gray-900 mb-3"
                         >
-                            2027 tiers
+                            Choose your 2027 package
                         </h2>
                         <p class="text-sm text-gray-600 mb-7 max-w-2xl">
-                            Held at 2026 prices. Name the tier and we
-                            reserve it. We invoice on the schedule your finance
-                            team needs.
+                            All prices are in USD, held at 2026 rates. We agree availability,
+                            reservation terms, and invoicing with you before confirmation.
                         </p>
                         <div class="grid sm:grid-cols-2 gap-6">
                             {
-                                sponsorTiers2027.map((tier) => (
+                                sponsorTiers2027.map((tier, index) => (
                                     <div
                                         class={`relative flex flex-col px-card p-8 ${tier.featured ? "bg-ruby-50" : "bg-white"}`}
                                     >
                                         {tier.label && (
-                                            <span class="absolute top-5 right-5 text-[11px] font-semibold uppercase tracking-wider text-ruby-600 bg-ruby-100 rounded-full px-2.5 py-1">
+                                            <span class="self-start mb-3 text-[11px] font-semibold uppercase tracking-wider text-ruby-600 bg-ruby-100 rounded-full px-2.5 py-1">
                                                 {tier.label}
                                             </span>
                                         )}
@@ -271,6 +302,7 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                                             {tier.name}
                                             {tier.emoji && ` ${tier.emoji}`}
                                         </h3>
+                                        {!tier.price && <p class="mt-2 font-semibold text-ruby-700">Custom quote</p>}
                                         {tier.price && (
                                             <div class="px-font mt-2 text-lg md:text-xl text-ruby-600">
                                                 {tier.price}
@@ -301,10 +333,10 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                                         </ul>
                                         <div class="mt-6">
                                             <button
-                                                data-email-modal="sponsor-2027"
+                                                data-email-modal={`sponsor-2027-tier-${index}`}
                                                 class="w-full px-btn px-btn--white px-font text-px9 gap-2 px-5 py-3 justify-center tap-press"
                                             >
-                                                Hold this tier
+                                                {tier.price ? `Ask about ${tier.name.replace(" tier", "")}` : "Request an afterparty quote"}
                                             </button>
                                         </div>
                                     </div>
@@ -313,6 +345,16 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                         </div>
                     </div>
 
+                    <section class="mt-12" aria-labelledby="planning-heading">
+                        <h2 id="planning-heading" class="px-font text-sm mb-6">Planning &amp; approval</h2>
+                        {sponsorFaq2027.map((item) => (
+                            <details class="border-b border-gray-200 py-4">
+                                <summary class="cursor-pointer font-semibold text-gray-900">{item.question}</summary>
+                                <p class="mt-3 text-sm text-gray-600 leading-relaxed">{item.answer}</p>
+                            </details>
+                        ))}
+                    </section>
+                    <p class="mt-8 text-gray-700 leading-relaxed">{prospectus2027.nextStep}</p>
                     <!-- Closing ask: the tiers are the menu, this is for
                          anything that is not on it. -->
                     <div class="mt-10 flex flex-col items-center gap-4">
@@ -320,12 +362,11 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
                             data-email-modal="sponsor-2027"
                             class="px-btn px-btn--gold px-font text-px8 sm:text-px10 md:text-xs px-6 py-5 sm:px-10 tap-press text-center leading-relaxed [text-wrap:balance] max-w-full"
                         >
-                            Have a sponsorship idea? Get in touch
+                            Plan your 2027 sponsorship
                         </button>
                         <p class="text-sm text-gray-500 text-center max-w-xl">
                             Write to {SPONSOR_CONTACT_2027.email}.<br />
-                            Numbers are for the 2026 conference, November 10
-                            to 12, 2026.
+                            Attendance targets: 400 in 2026 and 450 in 2027.
                         </p>
                     </div>
                 </div>
@@ -335,12 +376,25 @@ const description = `Sponsor the San Francisco Ruby Conference 2027: one day of 
         <EmailModal
             id="sponsor-2027"
             email={SPONSOR_CONTACT_2027.email}
-            subject={SPONSOR_CONTACT_2027.subject}
+            subject={generalInquiry.subject}
+            body={generalInquiry.body}
             title="Email us about sponsoring 2027"
             lede={null}
             showSubject={false}
         />
 
+        {sponsorTiers2027.map((tier, index) => {
+            const inquiry = sponsorInquiry2027(tier);
+            return <EmailModal
+                id={`sponsor-2027-tier-${index}`}
+                email={SPONSOR_CONTACT_2027.email}
+                subject={inquiry.subject}
+                body={inquiry.body}
+                title={tier.price ? `Ask about ${tier.name.replace(" tier", "")}` : "Afterparty sponsorship"}
+                lede={`${tier.name}: ${tier.price ? `${tier.price} USD` : "custom quote"}. Email Vica to discuss availability and terms.`}
+                showSubject={false}
+            />;
+        })}
         <Footer />
         <BottomNav />
         <HashScroll />
