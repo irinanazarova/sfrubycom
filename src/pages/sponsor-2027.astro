@@ -1,0 +1,347 @@
+---
+/**
+ * /sponsor-2027 — the sponsorship prospectus for the 2027 conference.
+ *
+ * Unlisted on purpose. The 2027 Luma page is private until the 2026
+ * conference opens on Nov 10, 2026, so this page carries noindex, has no
+ * Markdown twin, and is linked from no nav, footer or sitemap. It exists to
+ * be emailed to a named company. Remove the robots meta and add the route to
+ * src/lib/markdown-twins.js (with a renderer in src/lib/llm-content.js) when
+ * 2027 goes public.
+ *
+ * It is aimed at large engineering companies, not startups: the reasons in
+ * whySponsor2027 lead with hiring and engineering brand, and the proof above
+ * the prices is who sponsored and who sat in the room in 2026. Do not link
+ * the Luma page from here while it is private.
+ */
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BottomNav from "../components/BottomNav.astro";
+import HashScroll from "../components/HashScroll.astro";
+import EmailModal from "../components/EmailModal.astro";
+import PageHero from "../components/PageHero.astro";
+import SponsorTiers from "../components/SponsorTiers.astro";
+import CompaniesAttending from "../components/CompaniesAttending.astro";
+import { sponsors as sponsors2025 } from "../data/sponsors.js";
+import {
+    sponsorTiers2027,
+    whySponsor2027,
+    sponsorStats2027,
+    format2027,
+    SPONSOR_CONTACT_2027,
+    CONFERENCE_2027,
+} from "../data/sponsor-tiers-2027.js";
+import { palette } from "../design/tokens.mjs";
+import "../styles/global.css";
+
+const sponsors2025Count = Object.keys(sponsors2025).length;
+const description = `Sponsor the San Francisco Ruby Conference 2027: one day of talks at SFJAZZ on ${CONFERENCE_2027.date} and a community day, in front of 450 Ruby engineers from household names and the startups building on Ruby.`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        <!-- Unlisted until 2027 is announced. See the note at the top. -->
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link
+            rel="icon"
+            type="image/png"
+            href="/favicon-96x96.png"
+            sizes="96x96"
+        />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="description" content={description} />
+        <meta name="theme-color" content={palette.ruby[600]} />
+        <title>Sponsor the San Francisco Ruby Conference 2027 - SF Ruby</title>
+
+        <link
+            rel="preload"
+            href="/fonts/MartianGrotesk.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            href="/fonts/MartianMono.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:title"
+            content="Sponsor the San Francisco Ruby Conference 2027 - SF Ruby"
+        />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content="https://sfruby.com/og/sponsor.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:image"
+            content="https://sfruby.com/og/sponsor.png"
+        />
+
+        <script
+            defer
+            data-domain="sfruby.com"
+            src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
+        ></script>
+    </head>
+    <body
+        class="bg-white text-gray-900 font-sans font-light min-h-screen flex flex-col pb-tabbar"
+    >
+        <Header />
+
+        <main class="flex-grow">
+            <PageHero
+                label="2027 prospectus"
+                title="Sponsor SF Ruby 2027"
+                lede={`One day of talks at ${CONFERENCE_2027.venue} on ${CONFERENCE_2027.date}, and a community day after it. 450 Ruby engineers, from household names to the startups building on Ruby.`}
+                width="wide"
+            >
+                <!-- The numbers come first: a sponsorship lead reads the room
+                     size before the copy. -->
+                <div
+                    class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-7"
+                >
+                    {
+                        sponsorStats2027.map((s) => (
+                            <div class="px-plate flex flex-col items-center justify-center gap-1 px-3 py-3">
+                                <span class="px-font text-px10 md:text-sm text-gold-400">
+                                    {s.value}
+                                </span>
+                                <span class="text-[11px] md:text-xs text-white/90 leading-tight text-center">
+                                    {s.label}
+                                </span>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <div
+                    class="flex flex-col sm:flex-row items-center justify-center gap-4"
+                >
+                    <a
+                        href="#tiers"
+                        class="px-btn px-btn--gold px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                    >
+                        See the tiers
+                    </a>
+                    <button
+                        data-email-modal="sponsor-2027"
+                        class="px-btn px-btn--white px-font text-px10 md:text-xs px-6 py-4 tap-press"
+                    >
+                        Get in touch
+                    </button>
+                </div>
+            </PageHero>
+
+            <section class="py-14 sm:py-16 bg-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Why sponsor: four reasons, written for a company that
+                         already runs Ruby at scale. -->
+                    <div id="why-sponsor" class="mb-12 scroll-mt-24">
+                        <h2
+                            class="px-font text-sm md:text-base text-gray-900 mb-7"
+                        >
+                            Why sponsor
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            {
+                                whySponsor2027.map((r) => (
+                                    <div class="px-card bg-white p-6 flex items-start gap-4">
+                                        <div class="w-10 h-10 rounded-lg bg-ruby-100 flex items-center justify-center flex-shrink-0">
+                                            <svg
+                                                class="w-5 h-5 text-ruby-600"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d={r.icon}
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold text-gray-900">
+                                                {r.title}
+                                            </h3>
+                                            <p class="text-gray-600 text-sm mt-1 leading-relaxed">
+                                                {r.text}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- The day itself, so a sponsor knows what they are
+                         buying a place at. -->
+                    <div id="the-day" class="px-card bg-dark-50 p-6 sm:p-8 mb-12 scroll-mt-24">
+                        <h2 class="px-font text-sm md:text-base text-gray-900 mb-6">
+                            The 2027 conference
+                        </h2>
+                        <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+                            {
+                                format2027.map((f) => (
+                                    <div>
+                                        <dt class="px-font text-px9 text-ruby-600">
+                                            {f.label}
+                                        </dt>
+                                        <dd class="text-sm text-gray-700 mt-2 leading-relaxed">
+                                            {f.text}
+                                        </dd>
+                                    </div>
+                                ))
+                            }
+                        </dl>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Proof, before the prices. The sponsor wall gets the wider
+                 column so a tier's logos stay on one row. -->
+            <section class="pb-4 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="px-card bg-white p-4 sm:p-8 mb-12">
+                        <h2
+                            class="px-font text-sm md:text-base text-gray-900 mb-8 text-center"
+                        >
+                            Who sponsored in 2026
+                        </h2>
+                        <SponsorTiers />
+                        <p class="text-center text-sm text-gray-500 mt-8">
+                            2025 and 2026 both sold out.<br />
+                            In 2025, <a
+                                href="/sponsors-2025"
+                                class="text-ruby-600 underline underline-offset-2 hover:text-ruby-500"
+                                >{sponsors2025Count} sponsors</a
+                            > including Chime, bolt.new, Cisco, Gusto and Temporal
+                            made it possible.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <CompaniesAttending
+                eyebrow="The 2026 room"
+                title="Ruby companies that came"
+                subtitle="Every company that sent two or more people to the 2026 conference."
+                cta={false}
+            />
+
+            <!-- Tiers. Email only: the 2026 Stripe links belong to 2026
+                 records, so a 2027 sponsor must not pay through one. -->
+            <section class="py-14 sm:py-16 bg-white">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div id="tiers" class="scroll-mt-24">
+                        <h2
+                            class="px-font text-sm md:text-base text-gray-900 mb-3"
+                        >
+                            2027 tiers
+                        </h2>
+                        <p class="text-sm text-gray-600 mb-7 max-w-2xl">
+                            Held at 2026 prices. Name the tier and we
+                            reserve it. We invoice on the schedule your finance
+                            team needs.
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            {
+                                sponsorTiers2027.map((tier) => (
+                                    <div
+                                        class={`relative flex flex-col px-card p-8 ${tier.featured ? "bg-ruby-50" : "bg-white"}`}
+                                    >
+                                        {tier.label && (
+                                            <span class="absolute top-5 right-5 text-[11px] font-semibold uppercase tracking-wider text-ruby-600 bg-ruby-100 rounded-full px-2.5 py-1">
+                                                {tier.label}
+                                            </span>
+                                        )}
+                                        <h3 class="text-lg font-bold text-gray-900">
+                                            {tier.name}
+                                            {tier.emoji && ` ${tier.emoji}`}
+                                        </h3>
+                                        {tier.price && (
+                                            <div class="px-font mt-2 text-lg md:text-xl text-ruby-600">
+                                                {tier.price}
+                                            </div>
+                                        )}
+                                        <p class="mt-3 text-sm text-gray-600">
+                                            {tier.description}
+                                        </p>
+                                        <ul class="mt-5 space-y-2.5 flex-1">
+                                            {tier.benefits.map((benefit) => (
+                                                <li class="flex items-start gap-2.5 text-sm text-gray-700">
+                                                    <svg
+                                                        class="w-4 h-4 text-ruby-500 mt-0.5 flex-shrink-0"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M5 13l4 4L19 7"
+                                                        />
+                                                    </svg>
+                                                    <span>{benefit}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <div class="mt-6">
+                                            <button
+                                                data-email-modal="sponsor-2027"
+                                                class="w-full px-btn px-btn--white px-font text-px9 gap-2 px-5 py-3 justify-center tap-press"
+                                            >
+                                                Hold this tier
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Closing ask: the tiers are the menu, this is for
+                         anything that is not on it. -->
+                    <div class="mt-10 flex flex-col items-center gap-4">
+                        <button
+                            data-email-modal="sponsor-2027"
+                            class="px-btn px-btn--gold px-font text-px8 sm:text-px10 md:text-xs px-6 py-5 sm:px-10 tap-press text-center leading-relaxed [text-wrap:balance] max-w-full"
+                        >
+                            Have a sponsorship idea? Get in touch
+                        </button>
+                        <p class="text-sm text-gray-500 text-center max-w-xl">
+                            Write to {SPONSOR_CONTACT_2027.email}.<br />
+                            Figures on this page are from the 2026 conference.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <EmailModal
+            id="sponsor-2027"
+            email={SPONSOR_CONTACT_2027.email}
+            subject={SPONSOR_CONTACT_2027.subject}
+            title="Email us about sponsoring 2027"
+            lede={null}
+            showSubject={false}
+        />
+
+        <Footer />
+        <BottomNav />
+        <HashScroll />
+    </body>
+</html>

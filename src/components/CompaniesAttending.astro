@@ -21,11 +21,15 @@ interface Props {
     // The closing CTA sells tickets, which is the homepage's ask, not the
     // sponsor page's.
     cta?: boolean;
+    // The heading. /sponsor-2027 shows the same snapshot as proof of who
+    // came, in the past tense, so it cannot keep the homepage's promise.
+    title?: string;
 }
 const {
     subtitle = "This list is automated: two tickets from one company put it here, and more tickets make the island bigger.",
     eyebrow = "Who is in the room",
     cta = true,
+    title = "Ruby companies you'll meet",
 } = Astro.props;
 
 // Name and character size by head count. Four steps is enough: the point is
@@ -109,7 +113,7 @@ const rowsOf = (c) => {
                         </span>
                     )}
                     <h2 class={`px-font px-shadow-ink text-lg md:text-2xl text-gold-400 ${eyebrow ? "mt-6" : ""}`}>
-                        Ruby companies you'll meet
+                        {title}
                     </h2>
                     {subtitle && (
                         <p class="text-base md:text-lg text-white px-shadow-ink-sm leading-relaxed mt-5">
