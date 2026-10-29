@@ -15,6 +15,7 @@ interface Props {
     id: string;
     email: string;
     subject?: string;
+    body?: string;
     title?: string;
     // The line above the address. null drops it, for a title that already
     // says what the email is for ("Email us about sponsoring").
@@ -28,10 +29,15 @@ const {
     id,
     email,
     subject = "",
+    body = "",
     title = "Get in touch",
     lede = "Send us an email at:",
     showSubject = true,
 } = Astro.props;
+const emailParams = new URLSearchParams();
+if (subject) emailParams.set("subject", subject);
+if (body) emailParams.set("body", body);
+const emailHref = `mailto:${email}${emailParams.size ? `?${emailParams.toString().replace(/\+/g, "%20")}` : ""}`;
 ---
 
 <dialog
@@ -78,7 +84,7 @@ const {
 
             <div class="mt-6 flex gap-3">
                 <a
-                    href={`mailto:${email}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`}
+                    href={emailHref}
                     class="flex-1 px-btn px-font text-px9 gap-2 px-4 py-3 bg-ink text-white hover:bg-gray-800"
                 >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

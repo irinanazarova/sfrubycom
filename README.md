@@ -29,8 +29,11 @@ npm run dev        # dev server at localhost:4321
 | `npm run preview`   | Preview the production build locally                |
 | `npm run fetch-data`| Fetch Luma events data                              |
 | `npm run qa`        | Mobile/desktop QA sweep of all routes (Playwright)  |
+| `npm run prospectus:2027` | Generate the five-page 2027 sponsorship PDF |
 
 Use `npm run build:dev` for local work: it skips the external fetches and builds from the JSON already committed in `src/content/`.
+
+The unlisted `/sponsor-2027` page and its PDF use `src/data/sponsor-tiers-2027.js` for the offer, pricing, audience figures, and inquiry text. After editing that data, run `npm run prospectus:2027` and include the updated `public/sfruby-2027-prospectus.pdf` with the change, then build the site. PDF generation uses local assets and Playwright Chromium (`npx playwright install chromium` if needed); it checks page margins and writes preview images to `.qa-shots/prospectus-2027/`. The PDF stays out of search indexes through its Netlify `X-Robots-Tag` header.
 
 ## How content flows
 

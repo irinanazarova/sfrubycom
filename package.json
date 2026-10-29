@@ -12,6 +12,7 @@
     "build": "npm run lint:colors && npm run fetch-data && astro build",
     "build:dev": "npm run lint:colors && astro build",
     "preview": "astro preview",
+    "prospectus:2027": "node scripts/prospectus-2027.mjs",
     "qa": "npm run build:dev && node scripts/qa-mobile.mjs",
     "astro": "astro"
   },

@@ -8,6 +8,12 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# The 2027 prospectus is shared directly until the event is announced.
+[[headers]]
+  for = "/sfruby-2027-prospectus.pdf"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 [[redirects]]
   from = "/conference-2025"
   to = "/"
