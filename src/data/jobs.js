@@ -804,6 +804,21 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/middesk/e1c6af86-dce1-495f-a710-ad369fd1308c",
     postedDate: "2026-06-19",
   },
+  "growth-engineer-middesk": {
+    id: "growth-engineer-middesk",
+    title: "Growth Engineer",
+    companyId: "middesk",
+    companyName: "Middesk",
+    companyLogo: "/company_middesk.png",
+    location: "San Francisco, CA or New York, NY (Hybrid)",
+    type: "Full-time",
+    salary: "$150K - $230K + equity",
+    description:
+      "Middesk is hiring its first Growth Engineer, in a small pod that works with Marketing and GTM. You ship in-product trials, self-service onboarding and the middesk.com rebuild on Rails and React, and every project has a number attached.",
+    chips: ["Fullstack", "Product Eng", "React", "AI-native"],
+    url: "https://jobs.ashbyhq.com/middesk/73212294-da1e-4b58-8e2f-bd807f1b8eff",
+    postedDate: "2026-10-28",
+  },
   "senior-fullstack-engineer-found": {
     id: "senior-fullstack-engineer-found",
     title: "Staff Software Engineer (Full-Stack)",
