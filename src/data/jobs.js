@@ -810,7 +810,7 @@ export const jobs = {
     companyId: "middesk",
     companyName: "Middesk",
     companyLogo: "/company_middesk.png",
-    location: "San Francisco, CA or Remote (US)",
+    location: "San Francisco, CA or New York, NY (Hybrid)",
     type: "Full-time",
     salary: "$150K - $230K + equity",
     description:
