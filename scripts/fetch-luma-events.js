@@ -169,8 +169,10 @@ async function main() {
     const entries = await fetchAllEvents(LUMA_API_KEY, LUMA_CALENDAR_ID);
     const now = Date.now();
 
-    // Keep only events that haven't ended yet (soonest first).
+    // Keep only public events that haven't ended yet (soonest first).
+    // Private events (speaker dinners, unannounced dates) stay off the site.
     const upcoming = entries
+      .filter((entry) => (entry.event || entry).visibility === 'public')
       .map(transformEvent)
       .filter((m) => {
         const ends = new Date(m.endAt || m.startAt).getTime();
