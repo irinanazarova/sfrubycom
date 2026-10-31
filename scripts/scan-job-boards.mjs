@@ -75,8 +75,11 @@ const BOARDS = {
 
 const ENGINEERING = /engineer|developer|\bswe\b|architect|programmer|tech(nical)? lead|\bcto\b/i;
 // Titles that mention engineering but are not the board's kind of role. Their
-// postings list Ruby among the languages they audit, support or test.
-const NOT_BUILDING = /security|director|\bvp\b|head of|(?<!lead )manager|support|\bqa\b|quality|\btest|sales|solutions|machine learning|\bml\b|data scien|recruit/i;
+// postings list Ruby among the languages they audit, support or test. An
+// engineering manager of a Rails team is the board's kind of role (a sponsor's
+// Software Engineering Manager was missed in October 2026); product, program
+// and account managers are not.
+const NOT_BUILDING = /security|director|\bvp\b|head of|product manager|(?<!lead |engineering )manager(?!,? (software )?engineering)|support|\bqa\b|quality|\btest|sales|solutions|machine learning|\bml\b|data scien|recruit/i;
 const RUBY = /\bruby\b|\brails\b|\bror\b/i;
 // A posting about a Rails codebase names Rails, or Ruby more than once; a
 // single "Ruby" is usually one entry in a list of languages.

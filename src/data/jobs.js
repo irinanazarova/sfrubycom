@@ -3,6 +3,19 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "software-engineering-manager-beyondfinance": {
+    id: "software-engineering-manager-beyondfinance",
+    title: "Software Engineering Manager",
+    sponsorId: "beyondfinance",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$170K - $210K",
+    description:
+      "Beyond Finance helps people get out of debt and has served over a million clients. This manager owns the technical direction and backend architecture for the pod that supports creditor negotiations, still reviews code and prototypes new patterns, and leads and mentors the team. Base pay comes with an annual bonus. The posting asks for Ruby on Rails, 5+ years building cloud applications, and care for data integrity across external integrations and sensitive financial data. Beyond Finance is a 2026 conference sponsor.",
+    chips: ["Backend", "Mentorship", "High compliance"],
+    url: "https://job-boards.greenhouse.io/beyondfinance/jobs/8256527",
+    postedDate: "2026-10-05",
+  },
   "senior-software-engineer-trust-checkr": {
     id: "senior-software-engineer-trust-checkr",
     title: "Senior Software Engineer, Trust",
