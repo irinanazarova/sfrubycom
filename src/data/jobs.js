@@ -555,6 +555,46 @@ export const jobs = {
     url: "https://boards.greenhouse.io/chime/jobs/8525743002",
     postedDate: "2026-10-24",
   },
+  "senior-software-engineer-membership-experience-chime": {
+    id: "senior-software-engineer-membership-experience-chime",
+    title: "Senior Software Engineer, Membership Experience",
+    sponsorId: "chime",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$164K - $227K",
+    description:
+      "Chime's Membership team builds the features that deepen member engagement and retention. This senior engineer owns projects end to end, from APIs to the front-end surfaces in Chime's mobile app, and mentors others. The posting asks for proven experience with Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Fullstack", "Product Eng", "React", "TypeScript"],
+    url: "https://boards.greenhouse.io/chime/jobs/8900232002?gh_jid=8900232002",
+    postedDate: "2026-10-31",
+  },
+  "software-engineer-membership-experience-chime": {
+    id: "software-engineer-membership-experience-chime",
+    title: "Software Engineer, Membership Experience",
+    sponsorId: "chime",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$133K - $184K",
+    description:
+      "Chime's Membership team builds the features that deepen member engagement and retention. This engineer works across the stack, from APIs to the front-end surfaces in Chime's mobile app, and ships experiments with product, design, and data science. The posting asks for 2+ years and Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Fullstack", "Product Eng", "React", "TypeScript"],
+    url: "https://boards.greenhouse.io/chime/jobs/8922481002?gh_jid=8922481002",
+    postedDate: "2026-10-31",
+  },
+  "software-engineer-i-promotions-handshake": {
+    id: "software-engineer-i-promotions-handshake",
+    title: "Software Engineer I, Promotions",
+    companyName: "Handshake",
+    location: "San Francisco, CA (On-site)",
+    type: "Full-time",
+    salary: "$140K - $170K",
+    entryLevel: true,
+    description:
+      "Handshake's Promotions team builds promoted content across job search, the feed, digest, and inbox: auctions, content delivery, event tracking, and applicant attribution. This full-stack role asks for 1 to 3 years and proficiency in Ruby on Rails, Go, or Python. Five days a week in the San Francisco office.",
+    chips: ["Fullstack", "Backend", "Data", "Polyglot"],
+    url: "https://jobs.ashbyhq.com/Handshake/c2cea12b-4dba-4782-ac2d-279c6865a4b7",
+    postedDate: "2026-10-31",
+  },
   "senior-staff-engineer-tax-platform-gusto": {
     id: "senior-staff-engineer-tax-platform-gusto",
     title: "Senior Staff Engineer, Tax Platform Engineering",
@@ -1628,6 +1668,8 @@ export const jobs = {
    *   Omada Health (NASDAQ: OMDA since Jun 2025; a 2025 sponsor, not 2026) — remote US
    *     Senior SWE, Solutions Engineering — $179K–$224K — https://job-boards.greenhouse.io/omadahealth/jobs/8202172
    *     Staff SWE — $176K–$253K by zone, Rails + React — https://job-boards.greenhouse.io/omadahealth/jobs/8257928
+   *     EM, Member Experience — $156K–$224K by zone — https://job-boards.greenhouse.io/omadahealth/jobs/8246941
+   *     Senior EM, Member Experience — $176K–$253K by zone — https://job-boards.greenhouse.io/omadahealth/jobs/8211130
    *   Kikoff (unicorn, profitable) — SF, $244K–$292K
    *     Senior Fullstack Engineer, User Retention and App Ecosystem (Rails, React, Flutter) — https://job-boards.greenhouse.io/kikoff/jobs/4429802009
    *   Kin Insurance (unicorn) — remote US
@@ -1658,6 +1700,7 @@ export const jobs = {
    *   brightwheel (Series C 2021, ~$600M) — remote US, Rails + Sidekiq backend
    *     Senior AI SWE, Product — $133K–$189K — https://jobs.ashbyhq.com/brightwheel/96f73905-30e4-4921-a71d-09360237ebb4
    *     Staff AI SWE, Product — https://jobs.ashbyhq.com/brightwheel/1e5afc7d-5a4d-437e-bade-1e4a14ba4c24
+   *     Senior EM, Product — $194K–$263K — https://jobs.ashbyhq.com/brightwheel/b8543eb2-9f6e-4955-94fd-f02e013bf618
    *
    * Borderline, not held (Ruby is one of several primary languages, or the
    * role is migrating off Rails): Envoy MTS Fullstack, Poshmark Sr SWE Cloud
