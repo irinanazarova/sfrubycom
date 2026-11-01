@@ -1,7 +1,7 @@
 // Finds open Ruby/Rails roles the jobs board does not list yet, at the
 // companies it already knows: every Greenhouse, Ashby and Lever board that
-// src/data/jobs.js links to, including the archived and waitlisted listings
-// in its comments. Run daily by .github/workflows/scan-job-boards.yml, which
+// src/data/jobs.js links to, directly or through OWN_DOMAIN, including the
+// archived and waitlisted listings in its comments. Run daily by .github/workflows/scan-job-boards.yml, which
 // adds what it finds to the "job-candidates" issue.
 //
 //   node scripts/scan-job-boards.mjs [--seen <file>]
@@ -110,23 +110,44 @@ async function get(url) {
   }
 }
 
+// Careers pages on a company's own domain that are a Greenhouse board
+// underneath. Their links name no board, so without this the board is never
+// scanned (Thatch's reopened Backend role went unreported in October 2026).
+const OWN_DOMAIN = [
+  { url: /https:\/\/thatch\.com\/jobs\//, kind: "greenhouse", org: "thatch" },
+];
+const boardOf = (url) => {
+  for (const [kind, board] of Object.entries(BOARDS)) {
+    const org = [...url.matchAll(board.url)][0]?.[1];
+    if (org) return { kind, org };
+  }
+  return OWN_DOMAIN.find((d) => d.url.test(url));
+};
+
 // Every board the file links to, named after a live listing on it when there
 // is one. Otherwise Greenhouse's own company name, or the board's slug.
 const boards = new Map();
 for (const [kind, board] of Object.entries(BOARDS)) {
   for (const [, org] of source.matchAll(board.url)) boards.set(`${kind}:${org.toLowerCase()}`, { kind, org, name: org });
 }
+for (const d of OWN_DOMAIN) {
+  if (d.url.test(source)) boards.set(`${d.kind}:${d.org}`, { kind: d.kind, org: d.org, name: d.org });
+}
 for (const job of Object.values(jobs)) {
-  for (const [kind, board] of Object.entries(BOARDS)) {
-    const org = [...(job.url ?? "").matchAll(board.url)][0]?.[1];
-    if (org) boards.get(`${kind}:${org.toLowerCase()}`).name = jobCompanyName(job);
-  }
+  const b = boardOf(job.url ?? "");
+  if (b) boards.get(`${b.kind}:${b.org.toLowerCase()}`).name = jobCompanyName(job);
 }
 
 // A posting is known when its id appears anywhere in jobs.js (live, archived
-// or waitlisted) or in what was already reported. Greenhouse ids are plain
-// numbers, so the match is a whole token, never part of a longer number.
-const mentions = (text, id) => new RegExp(`(^|[^0-9A-Za-z-])${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}($|[^0-9A-Za-z-])`).test(text);
+// or waitlisted) or in what was already reported. The match is a whole token,
+// never part of a longer id. Greenhouse ids are plain numbers, which careers
+// pages on a company's own domain put at the end of a slug
+// (thatch.com/jobs/software-engineer-backend-5113759008), so for them only a
+// digit is a neighbour.
+const mentions = (text, id) => {
+  const edge = /^[0-9]+$/.test(id) ? "[^0-9]" : "[^0-9A-Za-z-]";
+  return new RegExp(`(^|${edge})${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}($|${edge})`).test(text);
+};
 const known = (p) => mentions(source, p.id) || mentions(seen, p.id);
 
 const found = [];
