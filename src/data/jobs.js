@@ -634,6 +634,19 @@ export const jobs = {
     url: "https://thatch.com/jobs/software-engineer-infrastructure-5161129008",
     postedDate: "2026-06-19",
   },
+  "software-engineer-backend-thatch": {
+    id: "software-engineer-backend-thatch",
+    title: "Software Engineer: Backend",
+    sponsorId: "thatch",
+    location: "Remote (US) / San Francisco, CA",
+    type: "Full-time",
+    salary: "$161K - $230K",
+    description:
+      "Thatch gives employees a healthcare budget in place of a one-size-fits-all plan. This engineer designs the Rails backend behind enrollments, payments and payroll: the data models and fund flows that move real money, and the integrations with payroll providers, banks and insurance carriers. The posting asks for production backend experience and some mentoring or technical direction. Prior Ruby helps but is not required. Hiring across levels.",
+    chips: ["Backend", "Payments", "High compliance"],
+    url: "https://thatch.com/jobs/software-engineer-backend-5113759008",
+    postedDate: "2026-10-23",
+  },
   "software-engineer-simple-ai": {
     id: "software-engineer-simple-ai",
     title: "Software Engineer",
@@ -1981,15 +1994,6 @@ export const jobs = {
    *   companyId: "natural",
    *   url: "https://www.natural.com/careers/core-payments-engineer",
    *   postedDate: "2026-06-19",
-   * },
-   *
-   * Thatch — "Software Engineer: Backend" (GH 5113759008) closed; Thatch's
-   * Greenhouse board (org "thatch") has no Backend replacement (only Analytics
-   * Engineer, non-Rails). Removed; three other Thatch roles remain on the board.
-   * "software-engineer-backend-thatch": {
-   *   sponsorId: "thatch",
-   *   url: "https://thatch.com/jobs/software-engineer-backend-5113759008",
-   *   postedDate: "2026-04-27",
    * },
    *
    * Levelpath — "Software Engineer, Ruby on Rails (Backend)" (Ashby 140eb34a)
