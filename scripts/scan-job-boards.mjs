@@ -82,8 +82,10 @@ const ENGINEERING = /engineer|developer|\bswe\b|architect|programmer|tech(nical)
 const NOT_BUILDING = /security|director|\bvp\b|head of|product manager|(?<!lead |engineering )manager(?!,? (software )?engineering)|support|\bqa\b|quality|\btest|sales|solutions|machine learning|\bml\b|data scien|recruit/i;
 const RUBY = /\bruby\b|\brails\b|\bror\b/i;
 // A posting about a Rails codebase names Rails, or Ruby more than once; a
-// single "Ruby" is usually one entry in a list of languages.
-const rubyShop = (text) => /\brails\b|\bror\b/i.test(text) || (text.match(/\bruby\b/gi) ?? []).length > 1;
+// single "Ruby" is usually one entry in a list of languages. Payments
+// postings say "payment rails" and "stablecoin rails", which are not Rails.
+const rubyShop = (text) =>
+  /(?<!(payment|payments|stablecoin|fiat-only|banking|money) )\brails\b|\bror\b/i.test(text) || (text.match(/\bruby\b/gi) ?? []).length > 1;
 const CALIFORNIA = /\b(CA|California|San Francisco|SF|Bay Area|Oakland|Berkeley|Palo Alto|Mountain View|San Jose|Sunnyvale|Menlo Park|Redwood City|San Mateo|Los Angeles|San Diego|Santa Monica|Irvine)\b/i;
 const US = /\b(US|USA|U\.S\.|United States|North America|Americas)\b/i;
 const ABROAD = /canada|mexico|brazil|argentina|colombia|latam|united kingdom|\buk\b|london|europe|emea|apac|india|germany|berlin|ireland|dublin|poland|spain|portugal|netherlands|amsterdam|france|paris|australia|singapore|japan|philippines|toronto|vancouver|montr[eé]al|israel/i;
@@ -110,11 +112,22 @@ async function get(url) {
   }
 }
 
-// Careers pages on a company's own domain that are a Greenhouse board
-// underneath. Their links name no board, so without this the board is never
-// scanned (Thatch's reopened Backend role went unreported in October 2026).
+// Careers pages on a company's own domain that are an ATS board underneath.
+// Their links name no board, so without this the board is never scanned
+// (Thatch's reopened Backend role and an AngelList role at a meetup host went
+// unreported in October 2026). Whop links still carry Greenhouse ids, but
+// Whop has moved to Ashby. Add a line when a listing links a new domain.
 const OWN_DOMAIN = [
   { url: /https:\/\/thatch\.com\/jobs\//, kind: "greenhouse", org: "thatch" },
+  { url: /https:\/\/(www\.)?angellist\.com\/careers\//, kind: "lever", org: "angellist" },
+  { url: /https:\/\/stripe\.com\/jobs\//, kind: "greenhouse", org: "stripe" },
+  { url: /https:\/\/prizepicks\.com\/position/, kind: "greenhouse", org: "prizepicks" },
+  { url: /https:\/\/careers\.upstart\.com\//, kind: "greenhouse", org: "upstart" },
+  { url: /https:\/\/(www\.)?stitchfix\.com\/careers\//, kind: "greenhouse", org: "stitchfix" },
+  { url: /https:\/\/(www\.)?nexhealth\.com\/careers\//, kind: "greenhouse", org: "nexhealth" },
+  { url: /https:\/\/(www\.)?chronograph\.pe\/jobs\//, kind: "greenhouse", org: "chronograph" },
+  { url: /https:\/\/(www\.)?opendate\.io\/careers\//, kind: "greenhouse", org: "opendate" },
+  { url: /https:\/\/careers\.whop\.com\//, kind: "ashby", org: "whop" },
 ];
 const boardOf = (url) => {
   for (const [kind, board] of Object.entries(BOARDS)) {

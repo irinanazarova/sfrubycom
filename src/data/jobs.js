@@ -399,6 +399,19 @@ export const jobs = {
     url: "https://www.angellist.com/careers/9870a63b-ac75-436b-b1a6-a2fb006afd1c",
     postedDate: "2026-06-19",
   },
+  "senior-software-engineer-payments-angellist": {
+    id: "senior-software-engineer-payments-angellist",
+    title: "Senior Software Engineer, Payments",
+    sponsorId: "angellist",
+    location: "San Francisco, CA / New York, NY (Hybrid)",
+    type: "Full-time",
+    salary: "$200K+ base + equity",
+    description:
+      "AngelList's Nova is the banking and payments network for private markets: $1.2B+ in deposits and $100M+ a week moving between funds and investors. This engineer owns core systems end to end, including the ledger, ACH and wire integrations, KYC and PII handling, and their on-call. The posting asks for 5+ years of backend work, payments or ledger experience, and comfort in a Ruby on Rails codebase. Hybrid, two days a week in SF or NYC.",
+    chips: ["Backend", "Payments", "High compliance"],
+    url: "https://www.angellist.com/careers/715b6b72-3ea8-40c5-afc0-3870a301b224",
+    postedDate: "2026-11-01",
+  },
   "senior-software-engineer-angellist": {
     id: "senior-software-engineer-angellist",
     title: "Senior Software Engineer",
@@ -1656,6 +1669,7 @@ export const jobs = {
    *   Upstart (NASDAQ: UPST; San Mateo) — remote US, $167K–$231K
    *     Senior SWE, White Label Platform — https://careers.upstart.com/jobs?gh_jid=8039664
    *     Senior SWE, Marketplace Optimization — https://careers.upstart.com/jobs?gh_jid=8056243
+   *     SWE, Distribution Platform (Ruby or Kotlin) — $142K–$196K — https://careers.upstart.com/jobs?gh_jid=7917372
    *   Stitch Fix (NASDAQ: SFIX; SF) — remote US
    *     Lead Engineer, Order Management — $112K–$186K — https://www.stitchfix.com/careers/jobs?gh_jid=8165244
    *   Alto Pharmacy → FuzeRx (Fuze Health roll-up, 2025)
@@ -1685,6 +1699,8 @@ export const jobs = {
    *     Senior EM, Member Experience — $176K–$253K by zone — https://job-boards.greenhouse.io/omadahealth/jobs/8211130
    *   Kikoff (unicorn, profitable) — SF, $244K–$292K
    *     Senior Fullstack Engineer, User Retention and App Ecosystem (Rails, React, Flutter) — https://job-boards.greenhouse.io/kikoff/jobs/4429802009
+   *   CompanyCam (Lincoln, NE; a 2025 sponsor, not 2026) — remote US
+   *     Senior SWE (Ruby on Rails), reopened Oct 23 — https://jobs.ashbyhq.com/companycam/76838979-40c4-4d4c-81e6-976ed7b6ee78
    *   Kin Insurance (unicorn) — remote US
    *     SWE, Back-End Focus — $110K–$127K, Rails + TypeScript — https://jobs.ashbyhq.com/kin/56db2161-84b4-42ab-b1c6-adae6c1f325c
    *     Staff SWE — $165K–$200K — https://jobs.ashbyhq.com/kin/4b5dfc81-2f36-42d5-8ce1-7efc1d330f9f
@@ -1694,6 +1710,7 @@ export const jobs = {
    *   PrizePicks (Allwyn majority, Jan 2026) — remote
    *     Senior Back End Engineer (Rails & Go) — $175K–$185K — https://prizepicks.com/position?gh_jid=7768364003
    *     Gamification Senior SWE (Rails) — https://prizepicks.com/position?gh_jid=7984095003
+   *     Gamification SWE III (Rails) — $145K–$155K — https://prizepicks.com/position?gh_jid=7984091003
    *   Triumph Financial / TriumphPay (NASDAQ: TFIN) — remote US
    *     Lead/Staff SWE, Ruby on Rails — $173K–$281K — https://tbkbank.wd1.myworkdayjobs.com/tfin/job/Remote---United-States/Lead-Staff-Software-Engineer--Remote----Ruby-on-Rails_REQ-4921
    *     Lead or Staff SWE (Ruby, C# or F#) — https://tbkbank.wd1.myworkdayjobs.com/tfin/job/Remote---United-States/Staff-Software-Engineer_REQ-4581
@@ -2187,8 +2204,6 @@ export const jobs = {
   //   url: "https://jobs.ashbyhq.com/Handshake/9a93ec72-d396-4971-8d4c-222094f9c5a3", postedDate: "2026-09-07"
   // senior-fullstack-engineer-ai-core-circle: Circle - Ashby closed; the AI Platform lead roles that replaced it are outside the US (CMS role stays)
   //   url: "https://jobs.ashbyhq.com/circle/77d16455-292a-4926-a182-58a9e2950c9c", postedDate: "2026-09-07"
-  // senior-software-engineer-rails-companycam: CompanyCam - Ashby closed; the only eng opening (Engineering Manager) names no Ruby or Rails
-  //   url: "https://jobs.ashbyhq.com/companycam/76838979-40c4-4d4c-81e6-976ed7b6ee78", postedDate: "2026-09-06"
   // software-engineer-platforms-integrations-salma: Salma Health - Ashby closed; board is all clinical roles
   //   url: "https://jobs.ashbyhq.com/salma-health/91df7bfc-b8a0-4ac6-a5f4-e1fc3e896c9d", postedDate: "2026-07-01"
   // senior-fullstack-engineer-arkestro: Arkestro - GH 404; only an SDET role lists Ruby among several languages
