@@ -135,7 +135,6 @@ export const COMPANY_META = {
   // Off-roster companies (inline companyId)
   ycombinator: { industry: "Fintech", stage: "Growth" },
   codepath: { industry: "Edtech", stage: "Early-stage" },
-  avochato: { industry: "Enterprise SaaS", stage: "Early-stage" },
   duler: { industry: "Hospitality / Workforce", stage: "Early-stage" },
   monami: { industry: "GovTech", stage: "Early-stage" },
   levelpath: { industry: "Enterprise SaaS", stage: "Growth" },
