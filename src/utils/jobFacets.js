@@ -160,6 +160,7 @@ export const COMPANY_META = {
   betterstack: { industry: "Infrastructure / Data", stage: "Early-stage" },
   nomad: { industry: "Fintech", stage: "Early-stage" },
   relevanthealthcare: { industry: "Healthtech", stage: "Seed" },
+  boon: { industry: "AI / Dev Tools", stage: "Early-stage" },
   backerkit: { industry: "Enterprise SaaS", stage: "Early-stage" },
   windborne: { industry: "Climate", stage: "Early-stage" },
   salmahealth: { industry: "Healthtech", stage: "Early-stage" },

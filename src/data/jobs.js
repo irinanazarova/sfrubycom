@@ -929,6 +929,74 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/found/20795864-e7c3-4836-b5bc-26190f79bed3",
     postedDate: "2026-06-19",
   },
+  "staff-software-developer-backerkit": {
+    id: "staff-software-developer-backerkit",
+    title: "Staff Software Developer",
+    companyId: "backerkit",
+    companyName: "BackerKit",
+    companyLogo: "/company_backerkit.png",
+    location: "San Francisco, CA / Remote (US)",
+    type: "Full-time",
+    salary: "$184K - $235K",
+    description:
+      "BackerKit runs crowdfunding campaigns on a Rails monolith deployed on Heroku, in place since 2012. This staff role leads frontend patterns inside Rails views, with Hotwire, Turbo and Stimulus. The team pairs, ships several times a day and works 9 to 5 Pacific.",
+    chips: ["Fullstack", "Frontend", "Hotwire", "Mentorship"],
+    url: "https://jobs.lever.co/backerkit/5b2795ea-d464-4c45-ab2f-fe6bc441d8f1",
+    postedDate: "2026-11-02",
+  },
+  "forward-deployed-engineer-binti": {
+    id: "forward-deployed-engineer-binti",
+    title: "Forward-Deployed Engineer",
+    sponsorId: "binti",
+    location: "San Francisco, CA / Seattle, WA / Remote (US)",
+    type: "Full-time",
+    salary: "$200K - $300K",
+    description:
+      "Binti builds software for child welfare and social services agencies on Rails. This role designs and ships integrations with agency teams, on site and remote, and fixes the Binti APIs and connectors behind them. Up to 50% travel.",
+    chips: ["Backend", "Product Eng", "High compliance"],
+    url: "https://jobs.ashbyhq.com/binti/e24659de-2946-4a0e-aef0-7bb5da3bef20",
+    postedDate: "2026-11-02",
+  },
+  "integrations-engineer-binti": {
+    id: "integrations-engineer-binti",
+    title: "Integrations Engineer",
+    sponsorId: "binti",
+    location: "San Francisco, CA / Seattle, WA / Remote (US)",
+    type: "Full-time",
+    salary: "$160K - $300K",
+    description:
+      "Binti builds software for child welfare and social services agencies on Rails. This role builds integration pipelines and APIs, mostly backend, and works with agency developers on launch. Occasional customer travel.",
+    chips: ["Backend", "Data", "High compliance"],
+    url: "https://jobs.ashbyhq.com/binti/546ee34b-a6ff-479b-972b-350c94c26426",
+    postedDate: "2026-11-02",
+  },
+  "senior-staff-devops-engineer-binti": {
+    id: "senior-staff-devops-engineer-binti",
+    title: "Senior/Staff DevOps Engineer",
+    sponsorId: "binti",
+    location: "San Francisco, CA / Seattle, WA / Remote (US)",
+    type: "Full-time",
+    salary: "$200K - $300K",
+    description:
+      "Binti builds software for child welfare and social services agencies on Rails. This role runs and scales the infrastructure under that app, with security and compliance across it. Scripting is in Ruby, Python and Bash.",
+    chips: ["DevOps", "Infra", "High compliance"],
+    url: "https://jobs.ashbyhq.com/binti/7dccd274-9e61-47f1-af9d-20017a0f51b9",
+    postedDate: "2026-11-02",
+  },
+  "senior-software-engineer-boon": {
+    id: "senior-software-engineer-boon",
+    title: "Senior Software Engineer",
+    companyId: "boon",
+    companyName: "Boon AI",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$140K - $190K + equity",
+    description:
+      "Boon builds AI agents that do preconstruction estimating from blueprints and bid documents. This role owns features across a Rails product monolith, Python vision services and the LLM agent runtime. Sidekiq and PostgreSQL are in the stack.",
+    chips: ["Fullstack", "AI/ML", "Sidekiq", "PostgreSQL", "Polyglot"],
+    url: "https://jobs.ashbyhq.com/boon/6cbeff98-b1a6-4d10-ad23-eb0d7a4b4e55",
+    postedDate: "2026-11-02",
+  },
   "senior-fullstack-engineer-edo": {
     id: "senior-fullstack-engineer-edo",
     title: "Senior Full Stack Engineer",
@@ -1645,8 +1713,15 @@ export const jobs = {
    *     Lead Engineer, Order Management — $112K–$186K — https://www.stitchfix.com/careers/jobs?gh_jid=8165244
    *   Alto Pharmacy → FuzeRx (Fuze Health roll-up, 2025)
    *     Senior SWE — remote, CA eligible, $148K–$185K — https://alto.wd1.myworkdayjobs.com/en-US/FuzeHealthCareerSite/job/Remote---Florida/Senior-Software-Engineer_R201094
+   *   AppFolio (NASDAQ: APPF; Goleta; Remote Hub - San Francisco) — $138.4K–$190.3K
+   *     Sr. SWE, Accounting Payables — https://jobs.ashbyhq.com/appfolio/9e164e69-c496-4b38-a347-c47e44125fbb
+   *     Sr. SWE, Affordable Housing — https://jobs.ashbyhq.com/appfolio/318fc041-82ff-4a53-8594-be6fca1a391d
+   *     Sr. SWE, Platform Permissions (Rails, Go or React) — https://jobs.ashbyhq.com/appfolio/bc5f616c-a213-47c2-8d9d-9f3b37c38338
+   *     Sr. SWE, Resident Onboarding (Rails or Go) — https://jobs.ashbyhq.com/appfolio/9dc3275e-7140-4f09-a327-3c783077f65c
    *
    * US-remote, headquartered elsewhere
+   *   1Password / Kolide (Series A+ Forbes Cloud 100, $6.8B) — Remote US/Canada, $123K–$172K
+   *     Developer, Device Trust Reliability — https://jobs.ashbyhq.com/1password/443f9ef6-13a7-4edb-ace5-16be7e630041
    *   Shopify (NYSE: SHOP; Travel sponsor 2026, which does not qualify) — Remote Americas
    *     Software Engineers — https://www.shopify.com/careers/software-engineers_ea5811c0-0353-4468-a1a5-0ef776748b31
    *     EM, Ruby and Rails Infrastructure — https://www.shopify.com/careers/engineering-manager-ruby-and-rails-infrastructure_0536bba4-c326-4416-935e-9401c9ea4482
