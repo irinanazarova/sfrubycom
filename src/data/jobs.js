@@ -47,20 +47,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/codepath/jobs/5212924007",
     postedDate: "2026-11-01",
   },
-  "frontend-developer-avochato": {
-    id: "frontend-developer-avochato",
-    title: "Frontend Developer (React/TypeScript)",
-    companyId: "avochato",
-    companyName: "Avochato",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "About $150K",
-    description:
-      "Avochato is a profitable messaging platform with one inbox for SMS, RCS, live chat and voice. This React and TypeScript specialist ships customer features on a Rails-backed product, works with WebSockets and sets frontend practice through code review and mentoring. The posting asks for 4+ years of React, and Rails experience is a plus.",
-    chips: ["Frontend", "React", "TypeScript", "Profitable", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/avochato/jobs/4500844003",
-    postedDate: "2026-11-01",
-  },
   "software-engineering-manager-beyondfinance": {
     id: "software-engineering-manager-beyondfinance",
     title: "Software Engineering Manager",
@@ -1810,6 +1796,9 @@ export const jobs = {
    * Greenhouse id 8011089003. Entry-level, but the backend is mainly Java with
    * legacy Ruby services. The scan skips any id in this file, so it stays out
    * of the candidates issue.
+   * Avochato — Frontend Developer (React/TypeScript), Greenhouse id 4500844003.
+   * A React role where Rails experience is only a plus. It was listed on
+   * November 2, 2026 and taken down the same day.
    *
    * ── August 2026 audit ──
    * Stepful — 4 of 6 listings closed (absent from the Ashby open-jobs API).
