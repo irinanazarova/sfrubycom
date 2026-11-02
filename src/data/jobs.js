@@ -87,7 +87,7 @@ export const jobs = {
     description:
       "Checkr is hiring a senior backend engineer for motor vehicle record screenings, from ordering and retrieving records to delivering them in reports. You own features from design to release, improve reliability and turnaround time, and mentor engineers. The posting asks for 5+ years on scalable backend systems. Checkr has hosted the SF Ruby meetup.",
     chips: ["Backend", "Mentorship", "High compliance"],
-    url: "https://job-boards.greenhouse.io/checkr/jobs/8301231",
+    url: "https://job-boards.greenhouse.io/checkr/jobs/8324959",
     postedDate: "2026-10-23",
   },
   "software-engineer-early-career-koah": {
@@ -288,18 +288,18 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/8095028",
     postedDate: "2026-10-24",
   },
-  "staff-software-engineer-gusto-pro-integrations-gusto": {
-    id: "staff-software-engineer-gusto-pro-integrations-gusto",
-    title: "Staff Software Engineer, Gusto Pro Integrations",
+  "staff-software-engineer-payroll-platform-gusto": {
+    id: "staff-software-engineer-payroll-platform-gusto",
+    title: "Staff Software Engineer, Payroll Platform",
     sponsorId: "gusto",
-    location: "San Francisco, Denver, or New York City (Hybrid)",
+    location: "San Francisco, CA (Hybrid)",
     type: "Full-time",
-    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
+    salary: "$197K - $247K",
     description:
-      "You own and extend Gusto's integrations with accounting and partner platforms. The backend services are Ruby on Rails and Sidekiq, and the team is adding AI agent protocols such as MCP. Rails experience is strongly preferred.",
-    chips: ["Backend", "Platform", "Sidekiq", "AI-native"],
-    url: "https://job-boards.greenhouse.io/gusto/jobs/8208432",
-    postedDate: "2026-10-24",
+      "You build the backend services and internal APIs that Gusto's product teams and Embedded Payroll partners use to run payroll. This is a fully backend role in a regulated domain, and Ruby experience is strongly preferred. The posting asks for 8+ years, and onboarding includes travel to Denver.",
+    chips: ["Backend", "Platform", "High compliance", "AI-native"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/7441084",
+    postedDate: "2026-11-01",
   },
   "staff-software-engineer-invoicing-billing-gusto": {
     id: "staff-software-engineer-invoicing-billing-gusto",
@@ -456,19 +456,6 @@ export const jobs = {
     url: "https://www.angellist.com/careers/715b6b72-3ea8-40c5-afc0-3870a301b224",
     postedDate: "2026-11-01",
   },
-  "senior-software-engineer-angellist": {
-    id: "senior-software-engineer-angellist",
-    title: "Senior Software Engineer",
-    sponsorId: "angellist",
-    location: "San Francisco, CA / New York, NY (Hybrid)",
-    type: "Full-time",
-    salary: "$200K+ base + equity",
-    description:
-      "AngelList is hiring a full-stack Senior Software Engineer to build the financial infrastructure powering private markets. The two primary languages at AngelList are Ruby and TypeScript, and this is a generalist role (or a back-end specialist comfortable across the stack) with 4+ years building large-scale web applications. A single application is considered for all open team-specific roles. Hybrid, two days per week in SF or NYC.",
-    chips: ["Fullstack", "TypeScript"],
-    url: "https://www.angellist.com/careers/9adf9ccb-61c1-4a75-bf00-03f39fea8f09",
-    postedDate: "2026-06-19",
-  },
   "software-engineer-growth-chime": {
     id: "software-engineer-growth-chime",
     title: "Software Engineer, Growth",
@@ -521,18 +508,18 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/chime/jobs/8875663002",
     postedDate: "2026-10-19",
   },
-  "senior-software-engineer-cards-chime": {
-    id: "senior-software-engineer-cards-chime",
-    title: "Senior Software Engineer, Cards",
+  "tech-lead-manager-cards-chime": {
+    id: "tech-lead-manager-cards-chime",
+    title: "Tech Lead Manager, Cards",
     sponsorId: "chime",
     location: "San Francisco, CA (On-site)",
     type: "Full-time",
-    salary: "$164K - $227K",
+    salary: "$199K - $275K",
     description:
-      "Chime's Cards org is hiring a backend engineer to help scale its Cards portfolio. You design low-latency APIs and services for the Trust and Safety platforms, improve reliability, and mentor other engineers. The posting asks for Ruby on Rails or a comparable framework. Chime is an Emerald sponsor of the SF Ruby Conference.",
-    chips: ["Backend", "Payments", "Security", "Mentorship"],
-    url: "https://boards.greenhouse.io/chime/jobs/8770314002",
-    postedDate: "2026-10-23",
+      "Chime's Cards org is hiring a tech lead manager for one of its squads. You manage four or five engineers, own the squad's delivery and still ship production code. The posting names Ruby, React Native and distributed systems. Chime is an Emerald sponsor of the SF Ruby Conference.",
+    chips: ["Backend", "Payments", "Mentorship"],
+    url: "https://boards.greenhouse.io/chime/jobs/8609159002",
+    postedDate: "2026-11-01",
   },
   "senior-software-engineer-growth-chime": {
     id: "senior-software-engineer-growth-chime",
@@ -806,21 +793,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/prevail/jobs/4553411008",
     postedDate: "2026-06-19",
   },
-  "senior-fullstack-instrumentl": {
-    id: "senior-fullstack-instrumentl",
-    title: "Senior Full Stack Software Engineer",
-    companyId: "instrumentl",
-    companyLogo: "/company_instrumentl.png",
-    companyName: "Instrumentl",
-    location: "Remote (US) / Oakland, CA",
-    type: "Full-time",
-    salary: "$160K - $190K",
-    description:
-      "Instrumentl is a profitable, YC-backed SaaS automating grant discovery and management for 1,500+ nonprofits. This full-stack generalist role builds and scales the product end-to-end on a Ruby on Rails stack; 7+ years of experience. Stack: Ruby on Rails, Python, JavaScript, PostgreSQL, Redis. Distributed team with an Oakland office.",
-    chips: ["Fullstack", "PostgreSQL", "Profitable"],
-    url: "https://jobs.lever.co/Instrumentl/6fa7b6d7-7e64-429a-80ea-4f70469d7584",
-    postedDate: "2026-06-19",
-  },
   "staff-software-engineer-planning-tracking-github": {
     id: "staff-software-engineer-planning-tracking-github",
     title: "Staff Software Engineer, Issues and Projects",
@@ -1030,36 +1002,6 @@ export const jobs = {
     chips: ["Fullstack", "Profitable"],
     url: "https://serpapi.com/careers/junior-fullstack-engineer",
     postedDate: "2026-07-07",
-  },
-  "backend-engineer-fathom": {
-    id: "backend-engineer-fathom",
-    title: "Backend Engineer",
-    companyId: "fathom",
-    companyName: "Fathom",
-    companyLogo: "/company_fathom.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$180K - $240K + equity",
-    description:
-      "Fathom is the AI meeting assistant that captures, summarizes, and organizes calls so teams stay present without losing context — a fast-growing, YC-born consumer AI product. This backend role builds the core platform on Ruby on Rails and Sidekiq alongside Go services, running on GKE with MySQL, Redis, and Kafka. Remote (US). $180K-$240K plus equity.",
-    chips: ["Backend", "Sidekiq", "Go", "AI-native"],
-    url: "https://jobs.ashbyhq.com/fathom.video/50323c12-96b2-4e6a-b8ea-98f21ea6e960",
-    postedDate: "2026-07-14",
-  },
-  "full-stack-engineer-fathom": {
-    id: "full-stack-engineer-fathom",
-    title: "Full Stack Engineer",
-    companyId: "fathom",
-    companyName: "Fathom",
-    companyLogo: "/company_fathom.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$180K - $230K + equity",
-    description:
-      "Fathom is the AI meeting assistant that captures and summarizes calls. This full-stack role ships customer-facing features across the web app, the Electron desktop app, a Chrome extension, search and chat, the public API and the MCP server. The stack is Rails with Sidekiq, TypeScript, MySQL and Redis on GKE.",
-    chips: ["Fullstack", "Sidekiq", "TypeScript", "MySQL", "AI-native"],
-    url: "https://jobs.ashbyhq.com/fathom.video/01619869-e031-464c-b3b3-7674f10a77f6",
-    postedDate: "2026-10-24",
   },
 
   "software-engineer-recent-grad-kikoff": {
@@ -1370,11 +1312,11 @@ export const jobs = {
     companyLogo: "/company_circle.png",
     location: "Remote (US, and worldwide)",
     type: "Full-time",
-    salary: "Not disclosed",
+    salary: "$170K + equity",
     description:
       "Circle's AI Quality team builds the evaluation pipelines, observability, and diagnostics that show whether the platform's AI agents work and where they break. This lead is hands-on in the code and manages the team. Ruby on Rails is the production system the agents are built on, with Python for the evaluation side. Seven-plus years shipping production software, ideally LLM agents that take real actions. U.S.-benchmarked pay globally, 35 days of paid time off, two company retreats a year.",
     chips: ["AI/ML", "Platform", "Polyglot", "Mentorship"],
-    url: "https://jobs.ashbyhq.com/circle/cb085d54-568c-46b3-829f-b18885c6cda2",
+    url: "https://jobs.ashbyhq.com/circle/19c93928-5816-4056-bac6-513fe64ef55f",
     postedDate: "2026-10-19",
   },
   "software-engineer-backend-folio": {
@@ -1421,21 +1363,6 @@ export const jobs = {
     chips: ["Fullstack", "Product Eng", "Hotwire", "React"],
     url: "https://jobs.ashbyhq.com/folio/4e0d63c1-1ec8-4e67-9ec3-b07b2ddcfd61",
     postedDate: "2026-09-07",
-  },
-  "software-engineer-feature-team-smartleaf": {
-    id: "software-engineer-feature-team-smartleaf",
-    title: "Software Engineer, Feature Team",
-    companyId: "smartleaf",
-    companyName: "Smartleaf",
-    companyLogo: "/company_smartleaf.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "$135K - $150K",
-    description:
-      "Smartleaf is a founder-led Boston company whose portfolio rebalancing service handles over $90 billion in assets. The feature team works across the UI, JavaScript, and back end to make portfolio management clear for financial advisors. Stack is Ruby on Rails, Stimulus, React, PostgreSQL, and Debian, with open-source coding agents and local LLMs. Two to six years of experience. Remote candidates travel to Boston a few times a year.",
-    chips: ["Fullstack", "Product Eng", "Hotwire", "React"],
-    url: "https://jobs.ashbyhq.com/smartleaf/56df975e-5099-4f28-b7aa-d43c7f553e85",
-    postedDate: "2026-10-02",
   },
   "principal-software-engineer-koala-health": {
     id: "principal-software-engineer-koala-health",
@@ -1790,6 +1717,26 @@ export const jobs = {
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
    * ─────────────────────────────────────────────────────────────────
+   *
+   * ── November 2026 audit ──
+   * Found by the job archive: on /jobs, gone from the board. All nine confirmed
+   * against the ATS APIs.
+   * Replaced: Checkr MVR and Circle AI Platform were reposted under new ids, so
+   * their listings only changed URL. Gusto Pro Integrations became Payroll
+   * Platform, and Chime Senior SWE, Cards became Tech Lead Manager, Cards.
+   * "senior-software-engineer-mvr-checkr": { url: "https://job-boards.greenhouse.io/checkr/jobs/8301231", postedDate: "2026-10-23" },
+   * "lead-engineer-ai-platform-circle": { url: "https://jobs.ashbyhq.com/circle/cb085d54-568c-46b3-829f-b18885c6cda2", postedDate: "2026-10-19" },
+   * "staff-software-engineer-gusto-pro-integrations-gusto": { url: "https://job-boards.greenhouse.io/gusto/jobs/8208432", postedDate: "2026-10-24" },
+   * "senior-software-engineer-cards-chime": { url: "https://boards.greenhouse.io/chime/jobs/8770314002", postedDate: "2026-10-23" },
+   * Removed with no equivalent: AngelList's generalist role (its Accounting and
+   * Payments roles stay listed; Nova Product asks for TypeScript and names no
+   * Ruby). Instrumentl and Smartleaf have no engineering openings. Fathom's Ashby
+   * board, which fathom.ai links to, is empty.
+   * "senior-software-engineer-angellist": { url: "https://www.angellist.com/careers/9adf9ccb-61c1-4a75-bf00-03f39fea8f09", postedDate: "2026-06-19" },
+   * "senior-fullstack-instrumentl": { url: "https://jobs.lever.co/Instrumentl/6fa7b6d7-7e64-429a-80ea-4f70469d7584", postedDate: "2026-06-19" },
+   * "backend-engineer-fathom": { url: "https://jobs.ashbyhq.com/fathom.video/50323c12-96b2-4e6a-b8ea-98f21ea6e960", postedDate: "2026-07-14" },
+   * "full-stack-engineer-fathom": { url: "https://jobs.ashbyhq.com/fathom.video/01619869-e031-464c-b3b3-7674f10a77f6", postedDate: "2026-10-24" },
+   * "software-engineer-feature-team-smartleaf": { url: "https://jobs.ashbyhq.com/smartleaf/56df975e-5099-4f28-b7aa-d43c7f553e85", postedDate: "2026-10-02" },
    *
    * ── Ruled out by hand, November 2026 ──
    * ID.me — Software Engineer II, Developer Portal (New Grad / Early Career),
