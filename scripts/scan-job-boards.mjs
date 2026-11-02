@@ -92,7 +92,7 @@ const rubyShop = (text) =>
   /(?<!(payment|payments|stablecoin|fiat-only|banking|money) )\brails\b|\bror\b/i.test(text) || (text.match(/\bruby\b/gi) ?? []).length > 1;
 const CALIFORNIA = /\b(CA|California|San Francisco|SF|Bay Area|Oakland|Berkeley|Palo Alto|Mountain View|San Jose|Sunnyvale|Menlo Park|Redwood City|San Mateo|Los Angeles|San Diego|Santa Monica|Irvine)\b/i;
 const US = /\b(US|USA|U\.S\.|United States|North America|Americas)\b/i;
-const ABROAD = /canada|mexico|brazil|argentina|colombia|latam|united kingdom|\buk\b|london|europe|emea|apac|india|germany|berlin|ireland|dublin|poland|spain|portugal|netherlands|amsterdam|france|paris|australia|singapore|japan|philippines|toronto|vancouver|montr[eé]al|israel/i;
+const ABROAD = /canada|mexico|brazil|argentina|colombia|latam|latin america|united kingdom|\buk\b|london|europe|emea|apac|india|germany|berlin|ireland|dublin|poland|spain|portugal|netherlands|amsterdam|france|paris|australia|singapore|japan|philippines|toronto|vancouver|montr[eé]al|israel|hungary|budapest|estonia|tallinn/i;
 
 // California anywhere in the locations counts. Otherwise remote counts when
 // it names the US, or names no other country either.

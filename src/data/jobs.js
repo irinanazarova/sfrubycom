@@ -3,6 +3,64 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "product-engineer-applications-operations-ycombinator": {
+    id: "product-engineer-applications-operations-ycombinator",
+    title: "Product Engineer, Applications Operations",
+    companyId: "ycombinator",
+    companyName: "Y Combinator",
+    companyLogo: "/host_ycombinator.png",
+    location: "San Francisco Bay Area",
+    type: "Full-time",
+    salary: "$250K - $500K",
+    description:
+      "Y Combinator runs its products on Rails, React and Postgres. This engineer builds the admissions pipeline, the events platform behind Demo Day and office hours, and LLM tools that automate admissions work, and makes the product and UI decisions without PMs or designers. Base pay comes with profit-sharing. Y Combinator hosts SF Ruby meetups.",
+    chips: ["Fullstack", "Product Eng", "AI/ML", "React", "PostgreSQL"],
+    url: "https://jobs.ashbyhq.com/ycombinator/b3ca026e-aae8-45dc-a621-df1d7eb1945d",
+    postedDate: "2026-11-01",
+  },
+  "investment-associate-product-engineer-ycombinator": {
+    id: "investment-associate-product-engineer-ycombinator",
+    title: "Investment Associate & Product Engineer",
+    companyId: "ycombinator",
+    companyName: "Y Combinator",
+    companyLogo: "/host_ycombinator.png",
+    location: "San Francisco Bay Area",
+    type: "Full-time",
+    salary: "$250K - $500K",
+    description:
+      "This engineer writes production code for much of the week, building internal and founder-facing tools at Y Combinator, and also evaluates post-batch companies, reviews data rooms and writes memos for partners. YC's products run on Rails, React and Postgres, and Rails experience helps without being required. Base pay comes with profit-sharing. Y Combinator hosts SF Ruby meetups.",
+    chips: ["Fullstack", "Product Eng", "React", "PostgreSQL"],
+    url: "https://jobs.ashbyhq.com/ycombinator/d8181870-1652-4436-b7c7-b3b44115fd70",
+    postedDate: "2026-11-01",
+  },
+  "staff-software-engineer-codepath": {
+    id: "staff-software-engineer-codepath",
+    title: "Staff Software Engineer",
+    companyId: "codepath",
+    companyName: "CodePath",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$170K - $190K",
+    description:
+      "CodePath is a nonprofit that teaches computer science to college students, and its learning platform is a set of Ruby applications. This staff engineer builds new features in Rails, moves core components from Sinatra to Rails, brings AI into adaptive learning and helps decide what gets built. The posting asks for 10+ years of experience, at least 5 of them with Rails.",
+    chips: ["Fullstack", "PostgreSQL", "Mentorship", "Public benefit"],
+    url: "https://job-boards.greenhouse.io/codepath/jobs/5212924007",
+    postedDate: "2026-11-01",
+  },
+  "frontend-developer-avochato": {
+    id: "frontend-developer-avochato",
+    title: "Frontend Developer (React/TypeScript)",
+    companyId: "avochato",
+    companyName: "Avochato",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "About $150K",
+    description:
+      "Avochato is a profitable messaging platform with one inbox for SMS, RCS, live chat and voice. This React and TypeScript specialist ships customer features on a Rails-backed product, works with WebSockets and sets frontend practice through code review and mentoring. The posting asks for 4+ years of React, and Rails experience is a plus.",
+    chips: ["Frontend", "React", "TypeScript", "Profitable", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/avochato/jobs/4500844003",
+    postedDate: "2026-11-01",
+  },
   "software-engineering-manager-beyondfinance": {
     id: "software-engineering-manager-beyondfinance",
     title: "Software Engineering Manager",
@@ -1746,6 +1804,12 @@ export const jobs = {
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
    * ─────────────────────────────────────────────────────────────────
+   *
+   * ── Ruled out by hand, November 2026 ──
+   * ID.me — Software Engineer II, Developer Portal (New Grad / Early Career),
+   * Greenhouse id 8011089003. Entry-level, but the backend is mainly Java with
+   * legacy Ruby services. The scan skips any id in this file, so it stays out
+   * of the candidates issue.
    *
    * ── August 2026 audit ──
    * Stepful — 4 of 6 listings closed (absent from the Ashby open-jobs API).
