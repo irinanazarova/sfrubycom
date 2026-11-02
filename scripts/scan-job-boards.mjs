@@ -1,8 +1,10 @@
 // Finds open Ruby/Rails roles the jobs board does not list yet, at the
 // companies it already knows: every Greenhouse, Ashby and Lever board that
 // src/data/jobs.js links to, directly or through OWN_DOMAIN, including the
-// archived and waitlisted listings in its comments. Run daily by .github/workflows/scan-job-boards.yml, which
-// adds what it finds to the "job-candidates" issue.
+// archived and waitlisted listings in its comments, plus the boards in
+// src/data/job-watchlist.js (Ruby companies the board has never listed). Run
+// daily by .github/workflows/scan-job-boards.yml, which adds what it finds to
+// the "job-candidates" issue.
 //
 //   node scripts/scan-job-boards.mjs [--seen <file>]
 //
@@ -19,8 +21,10 @@
 // matches here too.
 import { readFileSync } from "node:fs";
 import { jobs, jobCompanyName } from "../src/data/jobs.js";
+import { jobWatchlist } from "../src/data/job-watchlist.js";
 
 const source = readFileSync(new URL("../src/data/jobs.js", import.meta.url), "utf8");
+const watchlist = jobWatchlist.map((w) => w.board).join("\n");
 const seenArg = process.argv.indexOf("--seen");
 const seen = seenArg > 0 ? readFileSync(process.argv[seenArg + 1], "utf8") : "";
 
@@ -141,7 +145,13 @@ const boardOf = (url) => {
 // is one. Otherwise Greenhouse's own company name, or the board's slug.
 const boards = new Map();
 for (const [kind, board] of Object.entries(BOARDS)) {
-  for (const [, org] of source.matchAll(board.url)) boards.set(`${kind}:${org.toLowerCase()}`, { kind, org, name: org });
+  for (const [, org] of `${source}\n${watchlist}`.matchAll(board.url)) boards.set(`${kind}:${org.toLowerCase()}`, { kind, org, name: org });
+}
+for (const w of jobWatchlist) {
+  for (const [kind, board] of Object.entries(BOARDS)) {
+    const org = [...w.board.matchAll(board.url)][0]?.[1];
+    if (org) boards.get(`${kind}:${org.toLowerCase()}`).name = w.company;
+  }
 }
 for (const d of OWN_DOMAIN) {
   if (d.url.test(source)) boards.set(`${d.kind}:${d.org}`, { kind: d.kind, org: d.org, name: d.org });
