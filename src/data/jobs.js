@@ -1177,17 +1177,17 @@ export const jobs = {
   },
   "fullstack-engineer-agent-platform-crewai": {
     id: "fullstack-engineer-agent-platform-crewai",
-    title: "Full-Stack Engineer, Agent Management Platform",
+    title: "Senior Full-Stack Engineer, Agent Management Platform",
     companyId: "crewai",
     companyName: "CrewAI",
     companyLogo: "/company_crewai.svg",
-    location: "San Francisco, CA",
+    location: "San Francisco, CA (Hybrid)",
     type: "Full-time",
     salary: "Not disclosed",
     description:
-      "CrewAI, the multi-agent framework and enterprise platform behind 300M+ agent executions a month, is hiring a frontend-leaning full-stack engineer for its Agent Management Platform: the Rails web product where teams deploy, monitor, and govern agents in production. Rails, Hotwire, ViewComponent, and Tailwind alongside React, TypeScript, and Vite; tests in Minitest/RSpec and Vitest. Seven-plus years of product engineering.",
-    chips: ["Fullstack", "Hotwire", "ViewComponent", "React"],
-    url: "https://apply.workable.com/crewai/j/0AB5665160/",
+      "CrewAI, the multi-agent framework and enterprise platform behind 300M+ agent executions a month, is hiring a frontend-leaning senior engineer for its Agent Management Platform, where teams deploy, monitor and govern agents in production. The stack is React and TypeScript with Rails, Hotwire and PostgreSQL. You also build the Rails models, APIs and background jobs your features need.",
+    chips: ["Fullstack", "Frontend", "Hotwire", "React", "TypeScript"],
+    url: "https://apply.workable.com/crewai/j/8399D12DB8/",
     postedDate: "2026-09-07",
   },
   "senior-software-engineer-hireart": {
@@ -1474,21 +1474,6 @@ export const jobs = {
     url: "https://jobs.lever.co/koalahealth/542a9701-b4f9-4440-97f9-f6a7679e6aa0",
     postedDate: "2026-09-07",
   },
-  "senior-software-engineer-virtual-care-fabric": {
-    id: "senior-software-engineer-virtual-care-fabric",
-    title: "Senior Software Engineer, Virtual Care Platform",
-    companyId: "fabric",
-    companyName: "Fabric",
-    companyLogo: "/company_fabric.png",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "From $140K",
-    description:
-      "Fabric (formerly Florence), the healthcare automation company that raised a $60M Series A from General Catalyst in 2024, is hiring a senior engineer for its virtual care platform. The work is in Ruby on Rails: fixing complex production bugs, performing precise live-data corrections, and hardening the platform clinicians depend on.",
-    chips: ["Backend", "Fullstack", "High compliance"],
-    url: "https://jobs.gem.com/fabrichealth/am9icG9zdDqV7PZiNlESJ_NyY6XaHrfH",
-    postedDate: "2026-09-07",
-  },
   "full-stack-engineer-ruby-react-reveal": {
     id: "full-stack-engineer-ruby-react-reveal",
     title: "Full Stack Engineer (Ruby / React)",
@@ -1578,21 +1563,6 @@ export const jobs = {
     chips: ["Fullstack", "Backend", "React", "PostgreSQL"],
     url: "https://www.linkedin.com/jobs/view/4465578261",
     postedDate: "2026-10-02",
-  },
-  "senior-software-engineer-karias-health": {
-    id: "senior-software-engineer-karias-health",
-    title: "Senior Software Engineer (Python & Ruby on Rails)",
-    companyId: "kariashealth",
-    companyName: "Karias Health",
-    companyLogo: "/company_kariashealth.svg",
-    location: "Remote (US)",
-    type: "Full-time",
-    salary: "Not disclosed",
-    description:
-      "Karias is a seed-stage health-benefits platform combining self-funded plans with an AI-enabled navigation layer. The stack is Ruby on Rails and Python on AWS (RDS, S3, Redshift, Glue, OpenSearch) with RAG pipelines on HIPAA-eligible LLMs, and the team expects AI-assisted development across the lifecycle. Seven-plus years, comfortable making structural decisions inside a mature Rails codebase.",
-    chips: ["Backend", "AI/ML", "Polyglot", "High compliance", "AI-native"],
-    url: "https://www.linkedin.com/jobs/view/4454299285",
-    postedDate: "2026-09-07",
   },
   "full-stack-software-engineer-goodbill": {
     id: "full-stack-software-engineer-goodbill",
@@ -1841,6 +1811,15 @@ export const jobs = {
    * "backend-engineer-fathom": { url: "https://jobs.ashbyhq.com/fathom.video/50323c12-96b2-4e6a-b8ea-98f21ea6e960", postedDate: "2026-07-14" },
    * "full-stack-engineer-fathom": { url: "https://jobs.ashbyhq.com/fathom.video/01619869-e031-464c-b3b3-7674f10a77f6", postedDate: "2026-10-24" },
    * "software-engineer-feature-team-smartleaf": { url: "https://jobs.ashbyhq.com/smartleaf/56df975e-5099-4f28-b7aa-d43c7f553e85", postedDate: "2026-10-02" },
+   * Browser check of the 22 listings on sites the archive cannot read. CrewAI's
+   * role closed and its Senior role replaced it in place. Fabric's posting is
+   * gone, and its similar open role is Canada, Python/Django. Karias Health's
+   * LinkedIn posting no longer accepts applications, and we found no careers page.
+   * Goodbill stays for now: Built In still offers Apply, but the page's job data
+   * expired September 1, so recheck it next audit.
+   * "fullstack-engineer-agent-platform-crewai": { url: "https://apply.workable.com/crewai/j/0AB5665160/", postedDate: "2026-09-07" },
+   * "senior-software-engineer-virtual-care-fabric": { url: "https://jobs.gem.com/fabrichealth/am9icG9zdDqV7PZiNlESJ_NyY6XaHrfH", postedDate: "2026-09-07" },
+   * "senior-software-engineer-karias-health": { url: "https://www.linkedin.com/jobs/view/4454299285", postedDate: "2026-09-07" },
    *
    * ── Ruled out by hand, November 2026 ──
    * ID.me — Software Engineer II, Developer Portal (New Grad / Early Career),
