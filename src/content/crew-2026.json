@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-15T05:18:37.970Z",
+  "fetchedAt": "2026-11-03T18:23:36.465Z",
   "organizers": [
     {
       "name": "Aleksandr Berdiugin",
@@ -79,6 +79,11 @@
       "image": "/attending/chris-houhoulis.webp"
     },
     {
+      "name": "Dan Heintzelman",
+      "url": "https://clouds.sfruby.com/e/2026-bits/dan-heintzelman",
+      "image": "/attending/dan-heintzelman.webp"
+    },
+    {
       "name": "Gary Tou",
       "url": "https://clouds.sfruby.com/e/2026-bits/gary-tou",
       "image": "/attending/gary-tou.webp"
@@ -110,6 +115,11 @@
       "name": "Madeline Hou",
       "url": "https://clouds.sfruby.com/e/2026-bits/madeline-hou",
       "image": "/attending/madeline-hou.webp"
+    },
+    {
+      "name": "Raymond Sapida",
+      "url": "https://clouds.sfruby.com/e/2026-bits/raymond-sapida",
+      "image": "/attending/raymond-sapida.webp"
     },
     {
       "name": "Steven T Ancheta"
