@@ -1710,7 +1710,7 @@ export const jobs = {
    * Browser check of the 22 listings on sites the archive cannot read. CrewAI's
    * role closed and its Senior role replaced it in place. Fabric's posting is
    * gone, and its similar open role is Canada, Python/Django. Karias Health's
-   * LinkedIn posting no longer accepts applications, and it has no careers page.
+   * LinkedIn posting no longer accepts applications, and we found no careers page.
    * Goodbill stays for now: Built In still offers Apply, but the page's job data
    * expired September 1, so recheck it next audit.
    * "fullstack-engineer-agent-platform-crewai": { url: "https://apply.workable.com/crewai/j/0AB5665160/", postedDate: "2026-09-07" },
