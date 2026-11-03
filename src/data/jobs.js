@@ -950,7 +950,7 @@ export const jobs = {
     sponsorId: "binti",
     location: "San Francisco, CA / Seattle, WA / Remote (US)",
     type: "Full-time",
-    salary: "$200K - $300K",
+    salary: "$200K - $300K + equity",
     description:
       "Binti builds software for child welfare and social services agencies on Rails. This role designs and ships integrations with agency teams, on site and remote, and fixes the Binti APIs and connectors behind them. Up to 50% travel.",
     chips: ["Backend", "Product Eng", "High compliance"],
@@ -963,7 +963,7 @@ export const jobs = {
     sponsorId: "binti",
     location: "San Francisco, CA / Seattle, WA / Remote (US)",
     type: "Full-time",
-    salary: "$160K - $300K",
+    salary: "$160K - $300K + equity",
     description:
       "Binti builds software for child welfare and social services agencies on Rails. This role builds integration pipelines and APIs, mostly backend, and works with agency developers on launch. Occasional customer travel.",
     chips: ["Backend", "Data", "High compliance"],
@@ -974,13 +974,39 @@ export const jobs = {
     id: "senior-staff-devops-engineer-binti",
     title: "Senior/Staff DevOps Engineer",
     sponsorId: "binti",
-    location: "San Francisco, CA / Seattle, WA / Remote (US)",
+    location: "San Francisco or Seattle (Hybrid)",
     type: "Full-time",
-    salary: "$200K - $300K",
+    salary: "$200K - $300K + equity",
     description:
-      "Binti builds software for child welfare and social services agencies on Rails. This role runs and scales the infrastructure under that app, with security and compliance across it. Scripting is in Ruby, Python and Bash.",
-    chips: ["DevOps", "Infra", "High compliance"],
+      "Binti builds software for child welfare and social services agencies on Rails. This role runs and scales the infrastructure under that app, with Pulumi and TypeScript on Google Kubernetes Engine. Experience scaling Rails is preferred.",
+    chips: ["DevOps", "Infra", "TypeScript", "High compliance"],
     url: "https://jobs.ashbyhq.com/binti/7dccd274-9e61-47f1-af9d-20017a0f51b9",
+    postedDate: "2026-11-02",
+  },
+  "senior-full-stack-software-engineer-binti": {
+    id: "senior-full-stack-software-engineer-binti",
+    title: "Senior Full Stack Software Engineer",
+    sponsorId: "binti",
+    location: "San Francisco or Seattle (Hybrid)",
+    type: "Full-time",
+    salary: "$200K - $270K + equity",
+    description:
+      "Binti builds software for child welfare and social services agencies on Rails. This role owns product work end to end, about 60% backend and 40% frontend, on new areas like child intake and community crisis response. The team expects AI tooling in the workflow.",
+    chips: ["Fullstack", "Product Eng", "AI-native", "High compliance"],
+    url: "https://jobs.ashbyhq.com/binti/6f90e9cd-f38d-4ffd-a677-21d4e1c49b7a",
+    postedDate: "2026-11-02",
+  },
+  "staff-full-stack-software-engineer-binti": {
+    id: "staff-full-stack-software-engineer-binti",
+    title: "Staff Full Stack Software Engineer",
+    sponsorId: "binti",
+    location: "San Francisco or Seattle (Hybrid)",
+    type: "Full-time",
+    salary: "$240K - $300K + equity",
+    description:
+      "Binti builds software for child welfare and social services agencies on Rails. This role sets technical direction across teams, from a configurable platform layer for scheduling to moving applications between agencies. HIPAA compliance and AI tooling are part of the work.",
+    chips: ["Fullstack", "Platform", "AI-native", "High compliance", "Mentorship"],
+    url: "https://jobs.ashbyhq.com/binti/99b2d113-1a2f-4aa2-987d-60e83074b6c8",
     postedDate: "2026-11-02",
   },
   "senior-software-engineer-boon": {
@@ -988,12 +1014,13 @@ export const jobs = {
     title: "Senior Software Engineer",
     companyId: "boon",
     companyName: "Boon AI",
+    companyLogo: "/company_boon.svg",
     location: "Remote (US)",
     type: "Full-time",
     salary: "$140K - $190K + equity",
     description:
       "Boon builds AI agents that do preconstruction estimating from blueprints and bid documents. This role owns features across a Rails product monolith, Python vision services and the LLM agent runtime. Sidekiq and PostgreSQL are in the stack.",
-    chips: ["Fullstack", "AI/ML", "Sidekiq", "PostgreSQL", "Polyglot"],
+    chips: ["Fullstack", "AI/ML", "Sidekiq", "Polyglot"],
     url: "https://jobs.ashbyhq.com/boon/6cbeff98-b1a6-4d10-ad23-eb0d7a4b4e55",
     postedDate: "2026-11-02",
   },
@@ -1053,7 +1080,7 @@ export const jobs = {
     description:
       "WindBorne flies the world's largest smart weather-balloon constellation and builds WeatherMesh, the AI forecast model that has beaten DeepMind's GraphCast. The Gov Platforms team builds government-compliant versions of WindBorne's core platforms (FedRAMP, ITAR, NIST 800-53), adapting the data pipelines, APIs, and analysis tools for federal customers. Full-stack across Ruby on Rails (frontend), Python and Rust (backend), and Postgres; 5+ years. Khosla-backed (~$25M raised, Series A). Redwood City or remote (US).",
     chips: ["Backend", "Polyglot", "High compliance", "Mentorship"],
-    url: "https://windbornesystems.com/careers/lead-software-engineer---gov-platforms",
+    url: "https://jobs.ashbyhq.com/windborne-systems/c461fe44-524c-4f3b-b7dc-2ea3047d11e0",
     postedDate: "2026-07-07",
   },
   "junior-fullstack-engineer-serpapi": {
@@ -1718,6 +1745,8 @@ export const jobs = {
    *     Sr. SWE, Affordable Housing — https://jobs.ashbyhq.com/appfolio/318fc041-82ff-4a53-8594-be6fca1a391d
    *     Sr. SWE, Platform Permissions (Rails, Go or React) — https://jobs.ashbyhq.com/appfolio/bc5f616c-a213-47c2-8d9d-9f3b37c38338
    *     Sr. SWE, Resident Onboarding (Rails or Go) — https://jobs.ashbyhq.com/appfolio/9dc3275e-7140-4f09-a327-3c783077f65c
+   *     Sr. SWE, Leasing — https://jobs.ashbyhq.com/appfolio/2d0c874a-a67b-4f82-9096-11d7ee5200cd
+   *     Staff SWE, Leasing ($167.2K–$229.9K) — https://jobs.ashbyhq.com/appfolio/6185a879-4761-4331-beb6-99fac5300847
    *
    * US-remote, headquartered elsewhere
    *   1Password / Kolide (Series A+ Forbes Cloud 100, $6.8B) — Remote US/Canada, $123K–$172K
