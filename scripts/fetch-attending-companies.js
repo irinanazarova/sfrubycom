@@ -77,6 +77,7 @@ const COMPANY_ALIASES = new Map([
   ["cisco meraki", "cisco"],
   ["persona identities", "persona"],
   ["tern travel", "tern"],
+  ["university of california berkeley", "uc berkeley"],
 ]);
 
 // "Cisco, Inc." and "cisco" are one company. The key drops case, punctuation
@@ -256,13 +257,14 @@ try {
       const n = nameKey(ch.name);
       if (!cancelled.has(NAME_ALIASES[n] ?? n)) add(ch);
     }
-    // The most common raw spelling. Among equals, the one that is already the
-    // company's own key, so an alias does not put the division's name on the
-    // island: "Tern" over "Tern Travel" when each was typed once.
+    // A spelling that is already the company's own key beats any count, so an
+    // alias never puts the other name on the island: "Tern" over "Tern Travel",
+    // "UC Berkeley" over "University of California, Berkeley". Then the most
+    // common raw spelling.
     const name = [...c.spellings.entries()].sort(
       (a, b) =>
-        b[1] - a[1] ||
         (normalizeCompany(b[0]) === c.key) - (normalizeCompany(a[0]) === c.key) ||
+        b[1] - a[1] ||
         a[0].localeCompare(b[0]),
     )[0][0];
     // Someone who typed this company on their card but a different one on
