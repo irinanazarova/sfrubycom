@@ -652,19 +652,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/8013480",
     postedDate: "2026-09-04",
   },
-  "staff-software-engineer-ai-voice-gusto": {
-    id: "staff-software-engineer-ai-voice-gusto",
-    title: "Staff Software Engineer, AI Voice and Content",
-    sponsorId: "gusto",
-    location: "San Francisco, CA",
-    type: "Full-time",
-    salary: "$163K - $247K",
-    description:
-      "Gusto is hiring a Staff Software Engineer on AI Voice and Content, working in a collaborative, test-driven environment where experience with Ruby on Rails is listed among the things they look for. Gusto runs one of the largest Ruby on Rails and TypeScript/React applications in the world, powering payroll, benefits, and HR for more than 500,000 small businesses.",
-    chips: ["AI/ML", "Backend"],
-    url: "https://job-boards.greenhouse.io/gusto/jobs/7673999",
-    postedDate: "2026-09-04",
-  },
   "software-engineer-infrastructure-thatch": {
     id: "software-engineer-infrastructure-thatch",
     title: "Software Engineer: Infrastructure",
@@ -1068,21 +1055,6 @@ export const jobs = {
     url: "https://relevant.healthcare/jobs/lead-engineer/",
     postedDate: "2026-06-20",
   },
-  "lead-software-engineer-gov-platforms-windborne": {
-    id: "lead-software-engineer-gov-platforms-windborne",
-    title: "Lead Software Engineer, Gov Platforms",
-    companyId: "windborne",
-    companyName: "WindBorne Systems",
-    companyLogo: "/company_windborne.png",
-    location: "Redwood City, CA / Remote (US)",
-    type: "Full-time",
-    salary: "$150K - $220K + equity",
-    description:
-      "WindBorne flies the world's largest smart weather-balloon constellation and builds WeatherMesh, the AI forecast model that has beaten DeepMind's GraphCast. The Gov Platforms team builds government-compliant versions of WindBorne's core platforms (FedRAMP, ITAR, NIST 800-53), adapting the data pipelines, APIs, and analysis tools for federal customers. Full-stack across Ruby on Rails (frontend), Python and Rust (backend), and Postgres; 5+ years. Khosla-backed (~$25M raised, Series A). Redwood City or remote (US).",
-    chips: ["Backend", "Polyglot", "High compliance", "Mentorship"],
-    url: "https://jobs.ashbyhq.com/windborne-systems/c461fe44-524c-4f3b-b7dc-2ea3047d11e0",
-    postedDate: "2026-07-07",
-  },
   "junior-fullstack-engineer-serpapi": {
     id: "junior-fullstack-engineer-serpapi",
     title: "Junior Fullstack Engineer",
@@ -1226,13 +1198,13 @@ export const jobs = {
     companyId: "numero",
     companyName: "Numero",
     companyLogo: "/company_numero.svg",
-    location: "Remote (US) / San Francisco, CA",
+    location: "Remote (US)",
     type: "Full-time",
     salary: "$160K - $200K",
     description:
       "Numero builds fundraising software for political campaigns, from city council races to the US Senate, and has helped them raise more than $10B since 2019. The platform is a Ruby on Rails monolith serving TypeScript and React frontends over a GraphQL API, with Sidekiq and RSpec, and the team is now building agents on its own Ruby LLM tooling. Around six years of experience running production systems with real traffic; continental US, with one or two retreats a year in California.",
     chips: ["Backend", "GraphQL", "Sidekiq", "AI-native"],
-    url: "https://wellfound.com/jobs/4299483-senior-software-engineer-backend",
+    url: "https://numeroai.notion.site/senior-software-engineer-backend",
     postedDate: "2026-09-07",
   },
   "senior-software-engineer-ruby-healthie": {
@@ -1655,6 +1627,13 @@ export const jobs = {
    * lists Backend, Senior Backend and Fullstack SWE roles naming Ruby (not
    * added here).
    *
+   * Rechecked November 3, 2026 by ATS API and page content: 17 closed roles
+   * dropped. Motive, Stitch Fix and GiveCampus were replaced by their reposted
+   * roles. Taskrabbit, Equinix, Internet Brands, FuzeRx, Triumph, Fluxx and
+   * Chronograph have nothing left here. FuzeRx's new Principal role lists no
+   * California location. Babylist, GitLab, Calendly, Shopify and brightwheel each
+   * lost roles and keep others.
+   *
    * Of the June 19 list: Block Product Platform, Fleetio Integrations, both
    * Tines roles, Scribd SWE II and Instacart Customers Back End have closed
    * (Tines now has no Rails eng role; Instacart US roles list Ruby only as
@@ -1672,9 +1651,9 @@ export const jobs = {
    *     Staff SWE (was Principal SWE) — SF hybrid, $315K–$473K — https://job-boards.greenhouse.io/apolloio/jobs/6134562004
    *     Senior SWE — SF hybrid, $195K–$358K — https://job-boards.greenhouse.io/apolloio/jobs/6118319004
    *     Senior SWE, Builder Studio — remote US, Rails + Node backend, TypeScript/React — https://job-boards.greenhouse.io/apolloio/jobs/6226635004
-   *   Motive (S-1 filed Dec 2025; $2.85B)
-   *     Staff Platform Engineer — SF hybrid, $189K–$236K, "Golang, Ruby on Rails, and Python services"
-   *     https://job-boards.greenhouse.io/gomotive/jobs/8504954002
+   *   Motive (S-1 withdrawn Sep 2026 after $1.3B+ General Catalyst financing)
+   *     Staff Platform Engineer, AI — SF hybrid, "Golang, Ruby on Rails, and Python services"
+   *     https://job-boards.greenhouse.io/gomotive/jobs/8371597002
    *   Strava ($2.2B, May 2025; Ruby/Scala/Go backend)
    *     Staff Engineer, Core Services Platform — SF/remote — https://jobs.ashbyhq.com/strava/daf4c971-6a2b-48e0-aafe-afc6af47e3a1
    *   Modern Treasury (Series C 2021, $2B+)
@@ -1688,28 +1667,18 @@ export const jobs = {
    *   Handshake (Series F, $3.5B)
    *     Senior SWE, Employer — SF, $220K–$250K, Rails, Go or Python — https://jobs.ashbyhq.com/Handshake/6c051742-6154-440c-81ac-67b3adbac79e
    *     Senior SWE, Growth — SF, $225K–$250K, Rails, GraphQL, React — https://jobs.ashbyhq.com/Handshake/b99dd0a6-11f9-4d42-b8f7-970c32d4cd75
-   *   Taskrabbit (IKEA/Ingka since 2017)
-   *     Senior SWE — SF hybrid, $130K–$180K, Rails + Sorbet — https://job-boards.greenhouse.io/taskrabbit/jobs/8122383
    *   Omnissa (KKR since 2024; ex-VMware EUC)
    *     Senior Full Stack Developer, Java or Ruby on Rails — Mountain View hybrid, $176K–$270K
    *     https://www.omnissa.com/careers/jobs/usa-senior-full-stack-developer-java-or-ruby-rails/
-   *   Equinix (NASDAQ: EQIX)
-   *     Staff Engineer, Product Software — Redwood City, $142K–$212K, "core APIs using Ruby on Rails and Go"
-   *     https://www.linkedin.com/jobs/view/4427870203 (LinkedIn only; no public ATS page found)
-   *   Internet Brands (KKR / Warburg Pincus)
-   *     Senior Ruby on Rails Software Developer — El Segundo — https://jobs.jobvite.com/internetbrands/job/oCGVzfww
    *   Babylist (Series C 2021; Emeryville; $750M revenue)
    *     Senior SWE — remote US, $202K–$252K — https://job-boards.greenhouse.io/babylist/jobs/5987289004
    *     Staff SWE — $234K–$291K — https://job-boards.greenhouse.io/babylist/jobs/6103791004
-   *     Staff Engineer, SRE — $227K–$272K — https://job-boards.greenhouse.io/babylist/jobs/6015140004
    *   Upstart (NASDAQ: UPST; San Mateo) — remote US, $167K–$231K
    *     Senior SWE, White Label Platform — https://careers.upstart.com/jobs?gh_jid=8039664
    *     Senior SWE, Marketplace Optimization — https://careers.upstart.com/jobs?gh_jid=8056243
    *     SWE, Distribution Platform (Ruby or Kotlin) — $142K–$196K — https://careers.upstart.com/jobs?gh_jid=7917372
    *   Stitch Fix (NASDAQ: SFIX; SF) — remote US
-   *     Lead Engineer, Order Management — $112K–$186K — https://www.stitchfix.com/careers/jobs?gh_jid=8165244
-   *   Alto Pharmacy → FuzeRx (Fuze Health roll-up, 2025)
-   *     Senior SWE — remote, CA eligible, $148K–$185K — https://alto.wd1.myworkdayjobs.com/en-US/FuzeHealthCareerSite/job/Remote---Florida/Senior-Software-Engineer_R201094
+   *     Lead Engineer, Order Management — https://www.stitchfix.com/careers/jobs?gh_jid=8346421
    *   AppFolio (NASDAQ: APPF; Goleta; Remote Hub - San Francisco) — $138.4K–$190.3K
    *     Sr. SWE, Accounting Payables — https://jobs.ashbyhq.com/appfolio/9e164e69-c496-4b38-a347-c47e44125fbb
    *     Sr. SWE, Affordable Housing — https://jobs.ashbyhq.com/appfolio/318fc041-82ff-4a53-8594-be6fca1a391d
@@ -1724,18 +1693,14 @@ export const jobs = {
    *   Shopify (NYSE: SHOP; Travel sponsor 2026, which does not qualify) — Remote Americas
    *     Software Engineers — https://www.shopify.com/careers/software-engineers_ea5811c0-0353-4468-a1a5-0ef776748b31
    *     EM, Ruby and Rails Infrastructure — https://www.shopify.com/careers/engineering-manager-ruby-and-rails-infrastructure_0536bba4-c326-4416-935e-9401c9ea4482
-   *     Senior Engineer, Privacy Engineering — https://www.shopify.com/careers/senior-engineer-privacy-engineering_6387b485-f57b-42b7-859a-702e56bfb12c
    *   GitLab (NASDAQ: GTLB) — remote US, $139K–$282K by level
    *     Staff Fullstack (Ruby/Vue), Monetization — https://job-boards.greenhouse.io/gitlab/jobs/8739391002
    *     Staff Backend, Developer Experience — https://job-boards.greenhouse.io/gitlab/jobs/8490477002
-   *     Intermediate Backend, AMER — https://job-boards.greenhouse.io/gitlab/jobs/8773006002
-   *     Staff Forward Deployed Engineer (Rails or Go) — $220K–$270K — https://job-boards.greenhouse.io/gitlab/jobs/8512432002
    *   Huntress (Series D 2024, $1.55B) — remote US
    *     Principal SWE, SIEM — $215K–$240K — https://job-boards.greenhouse.io/huntress/jobs/7776837003
    *     Staff SWE, ESPM Platform — $200K–$220K — https://job-boards.greenhouse.io/huntress/jobs/7774959003
    *     Staff SWE, ISPM Platform — https://job-boards.greenhouse.io/huntress/jobs/7774957003
    *   Calendly (~$3B) — remote US, $187K–$272K
-   *     Senior Full Stack Engineer, AI Scheduling (Node or Rails) — https://job-boards.greenhouse.io/calendly/jobs/8464846002
    *     Full Stack Engineer, Trust and Safety (Rails, Node or Go) — $172K–$227K — https://job-boards.greenhouse.io/calendly/jobs/8895903002
    *   Omada Health (NASDAQ: OMDA since Jun 2025; a 2025 sponsor, not 2026) — remote US
    *     Senior SWE, Solutions Engineering — $179K–$224K — https://job-boards.greenhouse.io/omadahealth/jobs/8202172
@@ -1756,25 +1721,17 @@ export const jobs = {
    *     Senior Back End Engineer (Rails & Go) — $175K–$185K — https://prizepicks.com/position?gh_jid=7768364003
    *     Gamification Senior SWE (Rails) — https://prizepicks.com/position?gh_jid=7984095003
    *     Gamification SWE III (Rails) — $145K–$155K — https://prizepicks.com/position?gh_jid=7984091003
-   *   Triumph Financial / TriumphPay (NASDAQ: TFIN) — remote US
-   *     Lead/Staff SWE, Ruby on Rails — $173K–$281K — https://tbkbank.wd1.myworkdayjobs.com/tfin/job/Remote---United-States/Lead-Staff-Software-Engineer--Remote----Ruby-on-Rails_REQ-4921
-   *     Lead or Staff SWE (Ruby, C# or F#) — https://tbkbank.wd1.myworkdayjobs.com/tfin/job/Remote---United-States/Staff-Software-Engineer_REQ-4581
    *   HHAeXchange (Hg, 2021)
    *     Sr. SWE, ROR — remote US, $110K–$125K — https://jobs.lever.co/hhaexchange/e56acb41-8b08-4541-9fa8-025faed5b7a5
-   *   Fluxx (Metamorph / ABS Capital, 2021)
-   *     Principal Engineer — remote, $164K–$210K, Rails + Node — https://job-boards.greenhouse.io/fluxx/jobs/4688509006
    *   Andela (Series E 2021, $1.5B)
    *     Staff Fullstack Engineer — North America remote, "proprietary Ruby on Rails ecosystem" — https://jobs.ashbyhq.com/andela/9829c4f1-548f-4ef9-b4a2-c0ba2e11b90c
-   *   Chronograph (Sixth Street growth equity, Jun 2026)
-   *     Sr. SWE, Platform Engineering — remote, $175K–$215K, Rails + Node — https://www.chronograph.pe/jobs/?gh_jid=5187048007
    *   ApartmentIQ (Susquehanna Growth Equity round, $25M, Aug 2026; profitable, $30M+ raised)
    *     Senior SWE, Applications — remote US, Rails API + React — https://job-boards.greenhouse.io/apartmentiq/jobs/8069494
    *     Staff SWE — remote US, Ruby + Python + Terraform — https://job-boards.greenhouse.io/apartmentiq/jobs/8116176
    *   GiveCampus (Silversmith growth equity 2022)
-   *     Senior SWE, Online Giving — remote US — https://job-boards.greenhouse.io/givecampus/jobs/4374577009
+   *     Senior SWE, Online Giving (General Interest) — remote US — https://job-boards.greenhouse.io/givecampus/jobs/4409577009
    *   brightwheel (Series C 2021, ~$600M) — remote US, Rails + Sidekiq backend
    *     Senior AI SWE, Product — $133K–$189K — https://jobs.ashbyhq.com/brightwheel/96f73905-30e4-4921-a71d-09360237ebb4
-   *     Staff AI SWE, Product — https://jobs.ashbyhq.com/brightwheel/1e5afc7d-5a4d-437e-bade-1e4a14ba4c24
    *     Senior EM, Product — $194K–$263K — https://jobs.ashbyhq.com/brightwheel/b8543eb2-9f6e-4955-94fd-f02e013bf618
    *
    * Borderline, not held (Ruby is one of several primary languages, or the
@@ -1791,6 +1748,13 @@ export const jobs = {
   /* ─────────────────────────────────────────────────────────────────
    * ARCHIVED — closed listings without active Ruby/Rails replacements
    * ─────────────────────────────────────────────────────────────────
+   *
+   * ── November 3, 2026 audit ──
+   * Gusto's role is a 404 on Greenhouse and WindBorne's is off its Ashby board.
+   * Neither company has an equivalent open Rails role in scope. Numero's Wellfound
+   * link died, so that listing now points at Numero's own careers page.
+   * "staff-software-engineer-ai-voice-gusto": { url: "https://job-boards.greenhouse.io/gusto/jobs/7673999", postedDate: "2026-09-04" },
+   * "lead-software-engineer-gov-platforms-windborne": { url: "https://jobs.ashbyhq.com/windborne-systems/c461fe44-524c-4f3b-b7dc-2ea3047d11e0", postedDate: "2026-07-07" },
    *
    * ── November 2026 audit ──
    * Found by the job archive: on /jobs, gone from the board. All nine confirmed
