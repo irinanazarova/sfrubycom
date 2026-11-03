@@ -29,6 +29,12 @@ const seen = seenArg > 0 ? readFileSync(process.argv[seenArg + 1], "utf8") : "";
 // or waitlisted) or in what was already reported.
 const known = (p) => mentions(jobsSource, p.id) || mentions(seen, p.id);
 
+// Greenhouse often gives the company's own careers page as a posting's URL,
+// which names no board, so neither the review nor the archive can read it. The
+// board's own URL redirects to that page.
+const postingUrl = (b, p) =>
+  b.kind === "greenhouse" && !/greenhouse\.io/.test(p.url) ? `https://job-boards.greenhouse.io/${b.org}/jobs/${p.id}` : p.url;
+
 const found = [];
 const failed = [];
 const queue = trackedBoards();
@@ -44,7 +50,7 @@ await Promise.all(
         if (!ENGINEERING.test(p.title) || NOT_BUILDING.test(p.title) || !inScope(p.location) || known(p)) continue;
         const inTitle = RUBY.test(p.title);
         if (!inTitle && !rubyShop(p.text)) continue;
-        found.push({ ...p, company: b.name === b.org ? p.company || b.org : b.name, inTitle });
+        found.push({ ...p, url: postingUrl(b, p), company: b.name === b.org ? p.company || b.org : b.name, inTitle });
       }
     }
   }),

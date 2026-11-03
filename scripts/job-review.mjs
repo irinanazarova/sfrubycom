@@ -33,7 +33,10 @@ const [cmd, issue, prUrl] = process.argv.slice(2);
 // The posting's text, fetched here through the ATS APIs so the model reads
 // it directly: Ashby's job pages are rendered in the browser, and WebFetch on
 // them comes back empty (four Rails roles were skipped as "unreadable" on
-// Oct 25-26, 2026). Empty when the posting is gone, which means it closed.
+// Oct 25-26, 2026). "" means the ATS answered that the posting is gone. null
+// means we could not read it, which says nothing about whether it is open: a
+// link naming no board was read as closed and six live roles were skipped on
+// Nov 1-2, 2026.
 const strip = (html) =>
   html
     .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&")
@@ -43,6 +46,7 @@ const strip = (html) =>
 const getJson = async (url) => {
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(20_000) });
+    if (res.status === 404) return { gone: true };
     return res.ok ? await res.json() : null;
   } catch {
     return null;
@@ -53,18 +57,24 @@ async function postingText(url) {
   let m;
   if ((m = url.match(/greenhouse\.io\/([^/]+)\/jobs\/(\d+)/))) {
     const j = await getJson(`https://boards-api.greenhouse.io/v1/boards/${m[1]}/jobs/${m[2]}`);
-    return j ? strip(j.content ?? "") : "";
+    if (!j) return null;
+    return j.gone ? "" : strip(j.content ?? "") || null;
   }
   if ((m = url.match(/jobs\.ashbyhq\.com\/([^/]+)\/([0-9a-f-]{36})/i))) {
     if (!ashbyBoards.has(m[1])) ashbyBoards.set(m[1], getJson(`https://api.ashbyhq.com/posting-api/job-board/${m[1]}?includeCompensation=true`));
-    const j = (await ashbyBoards.get(m[1]))?.jobs?.find((x) => x.id === m[2]);
-    return j ? [j.descriptionPlain, j.compensation?.compensationTierSummary && `Compensation: ${j.compensation.compensationTierSummary}`].filter(Boolean).join("\n") : "";
+    const board = await ashbyBoards.get(m[1]);
+    if (!board?.jobs) return null;
+    const j = board.jobs.find((x) => x.id === m[2]);
+    if (!j) return "";
+    return [j.descriptionPlain, j.compensation?.compensationTierSummary && `Compensation: ${j.compensation.compensationTierSummary}`].filter(Boolean).join("\n") || null;
   }
   if ((m = url.match(/jobs\.lever\.co\/([^/]+)\/([0-9a-f-]{36})/i))) {
     const j = await getJson(`https://api.lever.co/v0/postings/${m[1]}/${m[2]}`);
-    return j ? [j.descriptionPlain, ...(j.lists ?? []).map((l) => `${l.text}: ${strip(l.content ?? "")}`), j.additionalPlain].filter(Boolean).join("\n") : "";
+    if (!j) return null;
+    if (j.gone) return "";
+    return [j.descriptionPlain, ...(j.lists ?? []).map((l) => `${l.text}: ${strip(l.content ?? "")}`), j.additionalPlain].filter(Boolean).join("\n") || null;
   }
-  return "";
+  return null;
 }
 
 if (cmd === "prepare") {
@@ -77,11 +87,20 @@ if (cmd === "prepare") {
       if (url) items.push({ comment_id: c.id, url, line: line.trim(), detail: (lines[i + 1] ?? "").trim() });
     });
   }
-  const picked = items.slice(0, PER_DAY);
-  for (const item of picked) item.text = (await postingText(item.url)).slice(0, 15_000);
+  // A posting we could not read stays unticked for tomorrow, and the model
+  // never sees it, so it cannot be mistaken for a closed one.
+  const picked = [];
+  const unreadable = [];
+  for (const item of items) {
+    if (picked.length === PER_DAY) break;
+    const text = await postingText(item.url);
+    if (text === null) unreadable.push(item.url);
+    else picked.push({ ...item, text: text.slice(0, 15_000) });
+  }
+  if (unreadable.length) console.error(`Left unticked, text unreadable:\n${unreadable.join("\n")}`);
   mkdirSync(DIR, { recursive: true });
   writeFileSync(`${DIR}/candidates.json`, JSON.stringify(picked, null, 2));
-  console.log(`${Math.min(items.length, PER_DAY)} of ${items.length} unticked candidates to review.`);
+  console.log(`${picked.length} of ${items.length} unticked candidates to review.`);
   process.exit(0);
 }
 
