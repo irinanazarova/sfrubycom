@@ -6,6 +6,21 @@
 export const CFP_API_PATH = "/api/talks?cfp_id=primary-2026";
 export const CFP_API_ORIGIN = "https://cfp.sfruby.com";
 
+// Why a fetched feed must not replace the snapshot, or null when it may. An empty
+// feed would strip every abstract from the site, and a truncated one would strip
+// most of them, while still answering 200. A speaker or two withdrawing is normal,
+// so only losing more than a quarter of the talks counts.
+export function feedProblem(talks, previous = []) {
+  if (!Array.isArray(talks)) return "response is not an array";
+  const named = (list) => list.filter((t) => t?.speaker?.name?.trim()).length;
+  const count = named(talks);
+  if (count === 0) return "feed has no talks";
+  const before = Array.isArray(previous) ? named(previous) : 0;
+  if (count < before * 0.75)
+    return `feed has ${count} talks and the snapshot has ${before}`;
+  return null;
+}
+
 // A title renders only when it looks like a real, confirmed talk title.
 // Placeholder titles ("TBD", "Keynote", "My talk (wip)") stay hidden until the
 // speaker fills in the real one. Validated against the live 2026 feed: every

@@ -1,0 +1,96 @@
+name: Speaker cards
+
+# Keeps the committed talk data and share cards in step with the CFP app. Every
+# hour it refreshes src/content/cfp-talks.json, renders the cards whose content
+# changed and pushes both to main, and that push deploys the site. A speaker's
+# edit reaches the site and their card within about an hour, with no review:
+# CFP text already goes live unreviewed at every build.
+#
+# Most runs find nothing and take seconds, because nothing is installed until a
+# card needs drawing. See "Speaker share cards" in CLAUDE.md.
+
+on:
+  schedule:
+    # An off-the-hour minute: :00 is the busiest slot on GitHub's scheduler.
+    - cron: '17 * * * *'
+  workflow_dispatch: {}
+
+# Queue instead of overlapping, so two runs never push the same card.
+concurrency:
+  group: speaker-cards
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # --strict stops here on an outage, an empty feed or a truncated one, before
+      # anything is rendered or committed.
+      - name: Refresh the CFP snapshot
+        run: node scripts/fetch-cfp-talks.js --strict
+
+      - name: List the cards that changed
+        id: changed
+        run: |
+          keys=$(node scripts/speaker-gifs.mjs --list-changed | tr '\n' ' ' | sed 's/ *$//')
+          echo "keys=$keys" >> "$GITHUB_OUTPUT"
+          echo "Changed: ${keys:-none}"
+
+      - name: Install the renderer
+        if: steps.changed.outputs.keys != ''
+        run: |
+          npm ci
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          npx playwright install --with-deps chromium
+
+      # A card that fails to render keeps its old hash and stays hidden on the
+      # site. The cards that worked still get committed below, and the run is
+      # marked failed after that.
+      - name: Render them
+        id: render
+        if: steps.changed.outputs.keys != ''
+        continue-on-error: true
+        run: node scripts/speaker-gifs.mjs --changed
+
+      - name: Commit to main
+        env:
+          KEYS: ${{ steps.changed.outputs.keys }}
+        run: |
+          git add src/content/cfp-talks.json src/content/speaker-card-hashes.json public/speaker-card
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$KEYS" ]; then
+            git commit -q -m "Speaker cards: $KEYS" -m "Rendered from the CFP feed by the Speaker cards workflow."
+          else
+            git commit -q -m "CFP snapshot: refresh from the feed"
+          fi
+          for attempt in 1 2 3; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          echo "::error::Could not push to main after three attempts"
+          exit 1
+
+      - name: Fail if a card did not render
+        if: steps.render.outcome == 'failure'
+        run: |
+          echo "::error::A speaker card failed to render. See the Render them step."
+          exit 1
+
+      - name: Check for feed entries the site is dropping
+        if: always()
+        run: node scripts/check-cfp-feed.mjs

@@ -1,9 +1,11 @@
 // Shareable speaker GIFs: one animated card per speaker, for the speaker to
 // post when they announce their talk.
 //
-//   node scripts/speaker-gifs.mjs              # everyone
-//   node scripts/speaker-gifs.mjs jp-camara    # one, or several, by key
-//   node scripts/speaker-gifs.mjs --png        # also keep a still frame
+//   node scripts/speaker-gifs.mjs                 # everyone
+//   node scripts/speaker-gifs.mjs jp-camara       # one, or several, by key
+//   node scripts/speaker-gifs.mjs --changed       # only cards the content has outrun
+//   node scripts/speaker-gifs.mjs --list-changed  # print those keys, render nothing
+//   node scripts/speaker-gifs.mjs --png           # also keep a still frame
 //
 // Writes public/speaker-card/<key>.gif (1280x720, ~3s, loops). The still is
 // public/speaker-card/<key>.png, the frame a network shows before the GIF
@@ -11,31 +13,45 @@
 // point at a file that is already there.
 //
 // Content is buildProfiles(), the same merge /speakers and the schedule card
-// read, so a card can never name a talk differently from the site. That also
-// means the CFP app owns the titles here: when a speaker publishes or edits
-// one, refresh the snapshot (npm run fetch-data) and re-run this.
+// read from the same snapshot, and the CFP app owns the titles here too. Each
+// card's content hash goes in src/content/speaker-card-hashes.json, and the site
+// shows a card only while that hash matches (src/utils/speakerCard.js).
+// .github/workflows/speaker-cards.yml refreshes the snapshot and runs --changed
+// every hour. By hand, refresh first (node scripts/fetch-cfp-talks.js) or this
+// redraws the old text.
 //
 // How a frame is made: scripts/speaker-gif-template.html is served over a
 // static server rooted at public/, so its font and sprite URLs resolve exactly
 // as they do in production. Playwright steps window.setFrame(i) and
 // screenshots each frame; ffmpeg builds one shared palette and encodes the
-// GIF. Nothing animates on a timer, so a rebuild of an unchanged speaker
-// produces the same bytes.
+// GIF. Nothing animates on a timer, so two renders with the same tools match,
+// and a new ffmpeg or browser changes the bytes without changing the pixels.
+// That is why a template change needs a full run: the hash covers the content,
+// so --changed will not notice.
 //
 // Needs: the chromium Playwright downloads (npx playwright install chromium)
-// and ffmpeg on PATH.
+// and ffmpeg on PATH. --list-changed needs neither, nor an npm install.
 import { createServer } from "node:http";
 import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
 import { spawn } from "node:child_process";
-import { chromium } from "playwright";
 
 import { conferenceSpeakers, cfpNameAliases } from "../src/data/conference-2026.js";
 import { buildProfiles } from "../src/utils/speakerProfiles.js";
+import {
+  CARD_DIR,
+  CARD_HASHES,
+  cardContent,
+  cardFile,
+  cardHash,
+  hasCard,
+  isCardCurrent,
+  readCardHashes,
+} from "../src/utils/speakerCard.js";
 import { palette, shadowInk } from "../src/design/tokens.mjs";
 
-const OUT_DIR = "public/speaker-card";
+const OUT_DIR = CARD_DIR;
 const TEMPLATE = "scripts/speaker-gif-template.html";
 const WIDTH = 1280;
 const HEIGHT = 720;
@@ -44,6 +60,8 @@ const FPS = 10;
 
 const args = process.argv.slice(2);
 const keepPng = args.includes("--png");
+const listChanged = args.includes("--list-changed");
+const changedOnly = listChanged || args.includes("--changed");
 const only = new Set(args.filter((a) => !a.startsWith("--")));
 
 // ---------------------------------------------------------------- content
@@ -51,46 +69,36 @@ const only = new Set(args.filter((a) => !a.startsWith("--")));
 const cfpTalks = JSON.parse(readFileSync("src/content/cfp-talks.json", "utf8"));
 const { profiles } = buildProfiles(cfpTalks, conferenceSpeakers, cfpNameAliases);
 
-// An abstract is written for a page, not a poster. The card sets whatever it
-// is given smaller until it fits, so this is only the backstop for an abstract
-// far longer than the CFP form allows (400 characters today). It cuts at the
-// last sentence that fits, never mid-clause.
-//
-// A sentence ends at punctuation followed by a space. Requiring the space is
-// the whole trick: without it "Solid Queue 1.0 was released" ends a sentence
-// at "1." and everything before it is dropped on the floor.
-function posterAbstract(text, budget = 420) {
-  const clean = String(text ?? "").replace(/\s+/g, " ").trim();
-  if (clean.length <= budget) return clean;
-  let cut = 0;
-  for (const m of clean.matchAll(/[.!?]["')\]]?(?=\s)/g)) {
-    const end = m.index + m[0].length;
-    if (end > budget) break;
-    cut = end;
-  }
-  if (cut > 0) return clean.slice(0, cut);
-  // No sentence ends inside the budget: fall back to a word boundary.
-  const head = clean.slice(0, budget);
-  return head.slice(0, head.lastIndexOf(" ")).replace(/[,;:\s]+$/, "") + "…";
+const everyone = profiles.filter(hasCard).map(cardContent);
+const hashes = readCardHashes();
+
+const cards = everyone
+  .filter((c) => only.size === 0 || only.has(c.key))
+  .filter((c) => !changedOnly || !isCardCurrent(c, hashes))
+  .map((c) => ({ ...c, frames: FRAMES }));
+
+// Sorted, so a run that changes one card changes one line of the file. A speaker
+// who no longer has a card loses their entry.
+async function saveHashes() {
+  const keys = new Set(everyone.map((c) => c.key));
+  const kept = Object.keys(hashes)
+    .filter((key) => keys.has(key))
+    .sort()
+    .map((key) => [key, hashes[key]]);
+  await writeFile(CARD_HASHES, JSON.stringify(Object.fromEntries(kept), null, 2) + "\n");
 }
 
-const cards = profiles
-  .filter((p) => p.pixel && p.title)
-  .filter((p) => only.size === 0 || only.has(p.key))
-  .map((p) => ({
-    key: p.key,
-    name: p.name,
-    title: p.title,
-    // The CFP abstract is the talk in the speaker's own words. A speaker whose
-    // entry is still a stub gets their roster line, which is never empty.
-    abstract: posterAbstract(p.abstract || p.bio),
-    slot: p.slot,
-    pixel: p.pixel,
-    keynote: Boolean(p.keynote),
-    frames: FRAMES,
-  }));
+if (listChanged) {
+  for (const card of cards) console.log(card.key);
+  process.exit(0);
+}
 
 if (cards.length === 0) {
+  if (changedOnly) {
+    await saveHashes();
+    console.log("Every card is current.");
+    process.exit(0);
+  }
   console.error(
     only.size > 0
       ? `No speaker matched: ${[...only].join(", ")}`
@@ -148,6 +156,8 @@ const { server, port } = await serve();
 const base = `http://127.0.0.1:${port}`;
 await mkdir(OUT_DIR, { recursive: true });
 
+// Imported here so --list-changed runs before anything is installed.
+const { chromium } = await import("playwright");
 const browser = await chromium.launch();
 const page = await browser.newPage({
   viewport: { width: WIDTH, height: HEIGHT },
@@ -196,7 +206,7 @@ for (const card of cards) {
       });
     }
 
-    const gif = join(OUT_DIR, `${card.key}.gif`);
+    const gif = cardFile(card.key);
     // One palette for the whole loop (stats_mode=full): a per-frame palette
     // makes the static left column shimmer between frames. diff_mode=rectangle
     // then stores only the box that changed, which is why the card keeps its
@@ -224,6 +234,10 @@ for (const card of cards) {
       const { statSync } = await import("node:fs");
       return statSync(gif);
     });
+    // Only after the file is written, so a card that fails keeps its old hash
+    // and stays hidden until a run renders it.
+    const { frames: _frames, ...content } = card;
+    hashes[card.key] = cardHash(content);
     console.log(`  ${card.key.padEnd(20)} ${(size / 1024).toFixed(0).padStart(5)} KB`);
   } catch (error) {
     failed++;
@@ -234,6 +248,7 @@ for (const card of cards) {
 await rm(tmp, { recursive: true, force: true });
 await browser.close();
 server.close();
+await saveHashes();
 
 console.log(`\n${cards.length - failed}/${cards.length} cards written to ${OUT_DIR}/`);
 if (failed) process.exit(1);

@@ -41,7 +41,7 @@ const bio = toParagraphs(s.bio);
 // The card a schedule slot opens never said when the talk was: the row you
 // tapped had the time and the card replaced it.
 const when = s.slot && `${s.slot.weekday}, ${s.slot.date} · ${s.slot.time}`;
-const cardHref = speakerCardHref(s.key);
+const cardHref = speakerCardHref(s);
 // 20 dialogs sit in the homepage's DOM at once, so 20 cards would be 8MB of
 // GIF on first paint. The src is withheld here and Schedule.astro fills it in
 // when the dialog opens, which is also the only moment the animation matters.
