@@ -104,7 +104,7 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                         <ol class="mt-10 flex flex-col gap-4 list-none p-0">
                             {d.blocks.map((b) =>
                                 b.kind === "break" || b.kind === "lunch" ? (
-                                    <li class="flex items-baseline gap-4 px-1 text-sm text-gray-500" data-start={at(d, b.start)} data-end={at(d, b.end)}>
+                                    <li class="flex flex-wrap items-baseline gap-x-4 gap-y-2 px-1 text-sm text-gray-500" data-start={at(d, b.start)} data-end={at(d, b.end)}>
                                         <span class="font-mono shrink-0 w-32">
                                             {formatTime(b.start)}
                                         </span>
@@ -116,6 +116,11 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                                             <span class="px-font text-px9">
                                                 {breakLabel[b.kind]}
                                             </span>
+                                        )}
+                                        {b.extra && (
+                                            <p class="basis-full sm:pl-36 text-gray-600">
+                                                <span class="font-semibold text-gray-900">{b.extra.title}</span>, {b.extra.where}. {b.extra.note}
+                                            </p>
                                         )}
                                     </li>
                                 ) : b.kind === "event" ? (

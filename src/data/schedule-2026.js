@@ -203,7 +203,18 @@ export const days = [
           hosts: ["Amanda Kinney"],
         },
       },
-      { start: "11:20", end: "13:00", kind: "lunch" },
+      {
+        start: "11:20",
+        end: "13:00",
+        kind: "lunch",
+        // A community gathering at the start of the break, printed under its
+        // row. It has no end time of its own: everyone leaves for lunch after.
+        extra: {
+          title: "Coffee bean swap",
+          where: "Joe Henderson Lab (Networking Track)",
+          note: "Bring a bag of beans to trade, because coffee is life! Then we all go out to lunch together.",
+        },
+      },
       {
         start: "13:00",
         end: "14:30",
