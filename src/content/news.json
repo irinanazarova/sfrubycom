@@ -1,5 +1,270 @@
 [
   {
+    "id": "shopify-q3-2026",
+    "date": "2026-11-03",
+    "headline": "Shopify Q3: revenue up 32% to $3.74B, GMV up 29% to $119B",
+    "summary": "Operating income rose 66% to $568M and free cash flow reached $816M, a 22% margin. Shopify guides Q4 revenue growth in the low thirties.",
+    "link": "https://www.sec.gov/Archives/edgar/data/0001594805/000159480526000067/exhibit991pressreleaseq320.htm",
+    "category": "Traction",
+    "startupName": "Shopify",
+    "source": "Shopify"
+  },
+  {
+    "id": "hinge-health-q3-2026",
+    "date": "2026-11-02",
+    "headline": "Hinge Health Q3: revenue up 52% to $235M, with $57M in net income",
+    "summary": "Free cash flow was $113M, a 48% margin, and clients grew 28% to 3,270. The San Francisco company lost $1.8M a year ago. Full-year revenue guidance rose to between $879M and $881M.",
+    "link": "https://www.sec.gov/Archives/edgar/data/0001673743/000162828026068872/hnge-q32026112xex991.htm",
+    "category": "Traction",
+    "startupName": "Hinge Health",
+    "source": "Hinge Health"
+  },
+  {
+    "id": "flexport-volumes-up-40",
+    "date": "2026-11-02",
+    "headline": "Flexport volumes are up 40% in a year while headcount is up 5%",
+    "summary": "CEO Ryan Petersen credits AI tools in customs, routing and engineering. In September Flexport opened an MCP server, so Claude, ChatGPT and other agents can track shipments, search rates and book freight. Rails runs alongside Kotlin and TypeScript in its stack.",
+    "link": "https://www.freightwaves.com/news/flexport-volumes-up-40-ai-headcount",
+    "category": "Traction",
+    "startupName": "Flexport",
+    "source": "FreightWaves"
+  },
+  {
+    "id": "doordash-acquires-instacart",
+    "date": "2026-10-29",
+    "headline": "DoorDash agrees to buy Instacart for about $17 billion",
+    "summary": "The price is $65 a share, at least 75% of it in cash, with closing expected at the end of 2027 or in the first half of 2028. Instacart's Q3 came out the same day: GTV up 15%, revenue up 17%, 91.4M orders and $147M in net income. Its engineering postings name Ruby on Rails alongside Go.",
+    "link": "https://www.sec.gov/Archives/edgar/data/0001579091/000179278926000065/dashform425combined.htm",
+    "category": "Acquisition",
+    "startupName": "Instacart",
+    "source": "DoorDash"
+  },
+  {
+    "id": "persona-ai-suite",
+    "date": "2026-10-29",
+    "headline": "Persona launches Persona AI, agents for identity teams",
+    "summary": "More than 30 early-access customers tested the suite, including Zillow and Etsy, and it already powers hundreds of thousands of identity decisions in production. Its parts are Assistant, Agents and Extend.",
+    "link": "https://www.businesswire.com/news/home/20261029099788/en/Persona-Introduces-Persona-AI-Advancing-Its-Vision-for-the-Next-Era-of-Identity",
+    "category": "Product",
+    "startupName": "Persona",
+    "source": "Persona"
+  },
+  {
+    "id": "realreal-q3-2026",
+    "date": "2026-10-29",
+    "headline": "The RealReal Q3: GMV up 23% to $642M, guidance raised",
+    "summary": "Revenue rose 19% to $206M, adjusted EBITDA was $17M and active buyers grew 13% to 1.15M. Full-year revenue guidance is now $806M to $810M.",
+    "link": "https://www.sec.gov/Archives/edgar/data/0001573221/000157322126000064/real-20261029xex991pressre.htm",
+    "category": "Traction",
+    "startupName": "The RealReal",
+    "source": "The RealReal"
+  },
+  {
+    "id": "gitlab-orbit-ga",
+    "date": "2026-10-29",
+    "headline": "GitLab Orbit gives AI agents a context graph of the software lifecycle",
+    "summary": "Now generally available, Orbit connects code, merge requests, work items, pipelines and vulnerabilities. More than 3,500 organizations have used it, and their agents have run over 280,000 queries. In GitLab's own testing, agents made up to 45x fewer hallucinations and used up to 4.5x fewer tokens.",
+    "link": "https://about.gitlab.com/press/releases/2026-10-29-gitlab-announces-orbit-general-availability/",
+    "category": "Product",
+    "startupName": "GitLab",
+    "source": "GitLab"
+  },
+  {
+    "id": "github-universe-2026",
+    "date": "2026-10-28",
+    "headline": "GitHub Universe: a Copilot app, multi-model routing and a new Git architecture",
+    "summary": "GitHub added 4 million CPU cores, 160 PB of fast storage and 50 Tb/s of network this year, and expects to finish moving to multi-region Azure early next year. Copilot Fusion routes a task across one or more models.",
+    "link": "https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/",
+    "category": "Product",
+    "startupName": "GitHub",
+    "source": "GitHub"
+  },
+  {
+    "id": "ruby-central-ai-gem-scan",
+    "date": "2026-10-28",
+    "headline": "Ruby Central scans top gems with AI and rejects 90% of the findings",
+    "summary": "Reviewers rejected 120 of 134 findings, and six advisories were opened, including a critical auth bypass in rubyntlm. About 317 of 619 listed gems have been scanned, and the rubyntlm fix is in 0.6.6. RubyGems.org now serves over 1 billion requests a day.",
+    "link": "https://rubycentral.org/news/ruby-centrals-oss-changelog-october-2026/",
+    "category": "Community",
+    "startupName": "Ruby Central",
+    "source": "Ruby Central"
+  },
+  {
+    "id": "spree-6-0",
+    "date": "2026-10-27",
+    "headline": "Spree 6.0 rewrites the Rails e-commerce platform and adds marketplaces and B2B",
+    "summary": "The release lists multi-vendor selling with commissions and Stripe Connect, B2B catalogs and order minimums, a new React dashboard, and an Admin MCP server for Claude, ChatGPT and Cursor.",
+    "link": "https://github.com/spree/spree/releases/tag/v6.0.0",
+    "category": "Product",
+    "startupName": "Spree",
+    "source": "GitHub"
+  },
+  {
+    "id": "general-medicine-walmart",
+    "date": "2026-10-26",
+    "headline": "Walmart's new healthcare store is built with General Medicine, a Rails startup",
+    "summary": "Shoppers compare more than 10 care providers, with insurance and cash prices. The San Francisco company, founded by PillPack's TJ Parker, raised a $120M Series B led by a16z on Oct 6. Its stack is AWS, Ruby on Rails and Next.js.",
+    "link": "https://theshelbyreport.com/2026/10/26/walmart-expands-better-care-services-with-general-medicines-healthcare-store/",
+    "category": "Traction",
+    "startupName": "General Medicine",
+    "source": "The Shelby Report"
+  },
+  {
+    "id": "spinel-2026-10-25",
+    "date": "2026-10-25",
+    "headline": "Matz's Spinel compiler adds WebAssembly and passes 5,507 ruby/spec examples",
+    "summary": "The release checks 8,615 test programs against CRuby 4.0.7, up from 3,596 in September. Benchmarks use 27% fewer cycles by geometric mean, though some tight loops got slower. 67 authors merged 2,729 pull requests in six weeks.",
+    "link": "https://github.com/matz/spinel/releases/tag/2026.10.25",
+    "category": "Product",
+    "startupName": "Spinel",
+    "source": "GitHub"
+  },
+  {
+    "id": "sam-ruby-campfire-action-cable",
+    "date": "2026-10-25",
+    "headline": "Load-testing Campfire exposes an Action Cable bug, and Rails merges the fix",
+    "summary": "Sam Ruby found that Action Cable could run a connection's commands out of order, which made about one room visit in a hundred half a second slower. His fix merged on Oct 27. On one 8-core machine, Campfire on Rails served under 250 people and his Roundhouse build on Falcon served 1,000.",
+    "link": "https://intertwingly.net/blog/2026/10/25/Benchmarking-Campfire-with-Many-Users.html",
+    "category": "Product",
+    "source": "intertwingly"
+  },
+  {
+    "id": "ruby-regexp-fixes-gitlab",
+    "date": "2026-10-23",
+    "headline": "Ruby 4.0.9 fixes the regex engine bugs behind a critical GitLab flaw",
+    "summary": "Only apps that compile a regex from an attacker-controlled string are affected, and 3.4.12 and 3.3.13 carry the same fixes. GitLab rated one of the Onigmo bugs CVSS 10.0, and Regexp.timeout does not protect against them. Dennis Paagman timed the patch: 8 minutes to the rubylang/ruby image, 16 hours to the official Docker image Rails generates, over 4 days to AWS Lambda.",
+    "link": "https://www.ruby-lang.org/en/news/2026/10/23/regexp-fixes-for-gitlab-cves/",
+    "category": "Product",
+    "startupName": "Ruby",
+    "source": "ruby-lang.org",
+    "reactions": [
+      {
+        "title": "How fast can you actually patch Ruby?",
+        "author": "Dennis Paagman",
+        "link": "https://paagman.dev/how-fast-can-you-patch-ruby/"
+      }
+    ]
+  },
+  {
+    "id": "copilot-triage-rubyllm",
+    "date": "2026-10-23",
+    "headline": "Carmine Paolino's Copilot Triage handles maintainer notifications with RubyLLM",
+    "summary": "The open source bot reads issues and pull requests with six read-only tools, replies when it can help and sorts each item on a board. Paolino gets about 215 GitHub notifications a day. Its default model passed 29 of 30 eval runs at about $0.004 per assessment.",
+    "link": "https://paolino.me/copilot-triage/",
+    "category": "Product",
+    "source": "paolino.me"
+  },
+  {
+    "id": "kin-webmcp",
+    "date": "2026-10-23",
+    "headline": "Kin lets ChatGPT shop its home insurance through WebMCP",
+    "summary": "A homeowner can go from a prompt to a quote ready to buy in minutes. Kin's engineers build its insurance platform in Ruby and TypeScript.",
+    "link": "https://www.morningstar.com/news/pr-newswire/20261023cg79512/kin-becomes-first-us-home-insurer-to-enable-webmcp-for-ai-shopping",
+    "category": "Product",
+    "startupName": "Kin",
+    "source": "Kin"
+  },
+  {
+    "id": "1password-500m-arr",
+    "date": "2026-10-22",
+    "headline": "1Password passes $500M in ARR",
+    "summary": "More than 200,000 businesses use it, including 85% of the Forbes AI 50. Net new ARR grew about 60% over the first three quarters of FY26. The same day it launched 1Password for Agents, which lets agents use credentials without seeing them.",
+    "link": "https://1password.com/press/2026/october/1password-surpasses-500-million-arr",
+    "category": "Traction",
+    "startupName": "1Password",
+    "source": "1Password"
+  },
+  {
+    "id": "tern-hotel-booking",
+    "date": "2026-10-22",
+    "headline": "Tern, a Rails and Hotwire startup, adds hotel booking with guaranteed commissions",
+    "summary": "Travel advisors book hotels inside the platform and get fast-tracked commission payouts. It is the first time Tern is the merchant of record.",
+    "link": "https://www.travelmarketreport.com/training-resources/articles/tern-moves-into-hotel-booking-with-guaranteed-commissions-but-consortia-perks-will-wait",
+    "category": "Product",
+    "startupName": "Tern",
+    "source": "Travel Market Report"
+  },
+  {
+    "id": "whop-series-d",
+    "date": "2026-10-21",
+    "headline": "Whop raises a $200M Series D at $5.1B, led by Sequoia and Shopify Ventures",
+    "summary": "Roughly 25,000 operators generate $550M on Whop each month, and the valuation is about triple February's $1.6B. Its stack includes TypeScript, React and Ruby on Rails.",
+    "link": "https://finance.yahoo.com/technology/articles/whop-announces-funding-round-5-162500068.html",
+    "category": "Funding",
+    "startupName": "Whop",
+    "source": "Whop"
+  },
+  {
+    "id": "rails-enum-jit",
+    "date": "2026-10-21",
+    "headline": "A Rails enum change makes readers 4.6x faster on YJIT and 4.9x on ZJIT",
+    "summary": "Max Bernstein's \"Rails is a JIT compiler\" argues that generated static methods beat dynamic lookups. Aaron Patterson's pull request gives enums real methods and merged on Oct 21. Rails also merged config.zjit, which turns on ZJIT after boot.",
+    "link": "https://railsatscale.com/2026-10-21-rails-is-a-jit-compiler/",
+    "category": "Product",
+    "startupName": "Ruby on Rails",
+    "source": "Rails at Scale"
+  },
+  {
+    "id": "procore-ai-go",
+    "date": "2026-10-21",
+    "headline": "Procore launches AI Go, a voice-first app for the jobsite",
+    "summary": "Crews ask out loud and hear answers from their drawings, specs, RFIs and daily logs. It came out at Groundbreak in Orlando, in open beta for North American customers, with a Meta AI glasses version in closed beta.",
+    "link": "https://www.procore.com/press/procore-launches-voice-first-ai-mobile-app-built-for-the-jobsite",
+    "category": "Product",
+    "startupName": "Procore",
+    "source": "Procore"
+  },
+  {
+    "id": "sentry-1m-open-source",
+    "date": "2026-10-21",
+    "headline": "Sentry gives $1M to open source maintainers, $40,000 of it to Ruby Central",
+    "summary": "The budget is up from $750,000 last year.",
+    "link": "https://blog.sentry.io/another-year-another-1-000-000-to-open-source-maintainers/",
+    "category": "Community",
+    "startupName": "Sentry",
+    "source": "Sentry"
+  },
+  {
+    "id": "salesforce-acquires-braze",
+    "date": "2026-10-20",
+    "headline": "Salesforce agrees to buy Braze for $5.66 billion",
+    "summary": "Braze's job postings describe a stack rooted in Ruby on Rails, with Sidekiq-based frameworks running trillions of jobs a day. The price is $47.50 a share in cash, with closing expected in Salesforce's fiscal 2028. Braze has about 2,770 customers. Salesforce closed its purchase of Fin in September.",
+    "link": "https://www.salesforce.com/news/press-releases/2026/10/20/salesforce-signs-definitive-agreement-to-acquire-braze/",
+    "category": "Acquisition",
+    "startupName": "Braze",
+    "source": "Salesforce"
+  },
+  {
+    "id": "homebase-assistant",
+    "date": "2026-10-20",
+    "headline": "Homebase Assistant finds cover for missed shifts at small businesses",
+    "summary": "It contacts available workers, builds schedules, screens candidates and flags timecard errors before payroll, under rules the owner sets. Access is limited for now. More than 150,000 businesses use Homebase, which runs on Rails and React.",
+    "link": "https://thenextweb.com/news/homebase-ai-assistant-fills-shifts",
+    "category": "Product",
+    "startupName": "Homebase",
+    "source": "The Next Web"
+  },
+  {
+    "id": "motive-agents",
+    "date": "2026-10-19",
+    "headline": "Motive launches AI agents for fleets, weeks after securing $1.3B",
+    "summary": "Motive's engineering spans a Rails monolith and Go services, and its new agents act on safety and maintenance alerts under rules a fleet sets. In September it withdrew its S-1 after over $1.3B in growth financing from General Catalyst's Customer Value Fund, with ARR above $600M, up 30%.",
+    "link": "https://www.freightwaves.com/news/motive-launches-ai-agents-fleets",
+    "category": "Product",
+    "startupName": "Motive",
+    "source": "FreightWaves"
+  },
+  {
+    "id": "rails-community-survey-2026",
+    "date": "2026-10-15",
+    "headline": "Rails Community Survey 2026: 70% use Claude Code and 49% are on Ruby 4",
+    "summary": "Nearly 1,800 developers in 80 countries answered Planet Argon's ninth survey, and 80.7% work mainly on monoliths. Kamal reached 23.8%, up from 2.4% in 2024. Turbo is at 65%, Stimulus 59% and React 40%.",
+    "link": "https://railsdeveloper.com/survey/2026",
+    "category": "Traction",
+    "startupName": "Planet Argon",
+    "source": "Planet Argon"
+  },
+  {
     "id": "kaigi-on-rails-2026",
     "date": "2026-10-16",
     "headline": "Kaigi on Rails brings DHH and Matz to Tokyo for 34 talks",
