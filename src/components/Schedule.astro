@@ -108,9 +108,15 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                                         <span class="font-mono shrink-0 w-32">
                                             {formatTime(b.start)}
                                         </span>
-                                        <span class="px-font text-px9">
-                                            {breakLabel[b.kind]}
-                                        </span>
+                                        {b.kind === "lunch" ? (
+                                            <a href="/lunch" class="px-font text-px9 underline underline-offset-4 tap-hit">
+                                                {breakLabel[b.kind]}
+                                            </a>
+                                        ) : (
+                                            <span class="px-font text-px9">
+                                                {breakLabel[b.kind]}
+                                            </span>
+                                        )}
                                     </li>
                                 ) : b.kind === "event" ? (
                                     <li class="schedule-block px-card bg-white p-5 md:p-6" data-start={at(d, b.start)} data-end={at(d, b.end)}>

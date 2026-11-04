@@ -18,6 +18,13 @@ export const TWINS = [
       "Nov 10-12, 2026 at SFJAZZ: the schedule with every talk and conversation group, the speakers with abstracts and bios, tickets, sponsors, the companies attending, the venue and how to get there.",
   },
   {
+    path: "/lunch",
+    slug: "lunch",
+    title: "Lunch plans",
+    description:
+      "Where to eat near SFJAZZ during the conference's lunch breaks and where to go after the talks: walk, seats, Yelp rating, price, signature, vegetarian and fish dishes, and each menu.",
+  },
+  {
     path: "/manager",
     slug: "manager",
     title: "Convince your manager",

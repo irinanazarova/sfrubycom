@@ -63,6 +63,14 @@ import cfpTalks from "../content/cfp-talks.json";
 import crew from "../content/crew-2026.json";
 import news from "../content/news.json";
 import { getAllUpcoming } from "../data/meetups.js";
+import {
+  places as lunchPlaces,
+  afterTalks,
+  SLACK_CHANNEL,
+  SLACK_URL,
+  SOURCE_NOTE as LUNCH_NOTE,
+  MAP_CREDIT,
+} from "../data/lunch-2026.js";
 import { displayName, guests, organizers } from "../data/attending.js";
 
 export const SITE = "https://sfruby.com";
@@ -698,9 +706,39 @@ ${FAQ_ITEMS.map((item) => `### ${item.question}\n${plain(item.answer)}`).join("\
 `;
 }
 
+export function lunchMarkdown() {
+  const row = (p) =>
+    `| ${p.name}${p.days ? ` (${p.days})` : ""} | ${p.kitchen} | ${p.walk} min | ~${p.seats} | ${p.yelp} (${p.reviews}) | $${p.lunch} | ${p.signature} | ${p.veg} | ${p.fish ?? "None on the menu"} | ${p.hours} | [Menu](${p.menu}) |`;
+  const evening = (p) =>
+    `- **${p.name}**, ${p.address}: ${p.kitchen}. ${p.walk} min walk. ${p.hours}. ${p.note}${p.capacity ? ` ${p.capacity}.` : ""}${p.yelp ? ` Yelp ${p.yelp} (${p.reviews}).` : ""} [${p.linkLabel}](${p.link})`;
+  const breaks = days
+    .slice(0, 2)
+    .map((d) => {
+      const b = d.blocks.find((x) => x.kind === "lunch");
+      return `- ${d.weekday}: ${formatTime(b.start)} to ${formatTime(b.end)}`;
+    })
+    .join("\n");
+  return `# Lunch plans
+
+> Where to eat near SFJAZZ during the San Francisco Ruby Conference. Make plans with other attendees in ${SLACK_CHANNEL} on [Slack](${SLACK_URL}).
+
+${breaks}
+
+| Place | Kitchen | Walk | Seats (est.) | Yelp | Lunch | Signature | Vegetarian | Fish | Hours | Menu |
+|---|---|---|---|---|---|---|---|---|---|---|
+${lunchPlaces.map(row).join("\n")}
+
+## After the talks
+${afterTalks.map(evening).join("\n")}
+
+${LUNCH_NOTE} ${MAP_CREDIT}.
+`;
+}
+
 // --- Page registry (drives the .md endpoint, llms.txt and llms-full.txt) ----
 const RENDERERS = {
   index: homeMarkdown,
+  lunch: lunchMarkdown,
   manager: managerMarkdown,
   "sponsor-2026": sponsorMarkdown,
   meetup: meetupMarkdown,
@@ -721,7 +759,7 @@ export const PAGES = TWINS.map((t) => {
   return { ...t, render };
 });
 
-const CONFERENCE_SLUGS = ["index", "manager", "sponsor-2026", "scholarship"];
+const CONFERENCE_SLUGS = ["index", "lunch", "manager", "sponsor-2026", "scholarship"];
 
 export function llmsTxt() {
   const link = (p) => `- [${p.title}](${SITE}/${p.slug}.md): ${p.description}`;
