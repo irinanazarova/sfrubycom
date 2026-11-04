@@ -13,19 +13,6 @@
     }
   },
   {
-    "id": "FtseR90T",
-    "title": "Assign to Claude: Making an Agent a First‑Class Teammate in Your SaaS",
-    "abstract": "Most AI features are a chat box bolted onto the product. The good ones are woven through it: an agent you assign a card to, that triages the ticket before you read it, that spots a bad deploy and opens the incident itself. We'll build all three live in one Rails app on Claude Managed Agents (MCP, custom tools, memory, human approvals) and leave you a map of the agent-shaped holes in your product.",
-    "track": "general",
-    "speaker": {
-      "name": "CJ Avilla",
-      "company": "Anthropic",
-      "role": "Member of Technical Staff",
-      "bio": "CJ Avilla is a Member of Technical Staff at Anthropic and former Stripe Developer Advocate.",
-      "socials": "https://x.com/cjav_dev https://www.youtube.com/@cjav_dev "
-    }
-  },
-  {
     "id": "QRYjVXDt",
     "title": "Background processing at Gusto: The Parts Where People Look Puzzled",
     "abstract": "An update/extension/reformulation of my talk from Rocky Mountain Ruby https://www.youtube.com/watch?v=aY_yKeZYzko",
@@ -75,6 +62,19 @@
       "role": "Software Engineer at Persona - Infrastructure Team",
       "bio": "Alex is a long time Rubyist with a love for intricate and mind-boggling puzzles. At Persona, he's focused on enabling product teams by developing & maintaining robust, scalable infrastructure - ranging across Rails, Kubernetes, Cloud IaC - and everything in between.",
       "socials": "https://github.com/drcapulet https://www.linkedin.com/in/alexcoomans/"
+    }
+  },
+  {
+    "id": "FtseR90T",
+    "title": "Machine trust",
+    "abstract": "Most AI features are a chat box bolted onto the product. The good ones are woven through it: an agent you assign a card to, that triages the ticket before you read it, that spots a bad deploy and opens the incident itself. We'll build all three live in one Rails app on Claude Managed Agents (MCP, custom tools, memory, human approvals) and leave you a map of the agent-shaped holes in your product.",
+    "track": "general",
+    "speaker": {
+      "name": "CJ Avilla",
+      "company": "Anthropic",
+      "role": "Member of Technical Staff",
+      "bio": "CJ Avilla is a Member of Technical Staff at Anthropic and former Stripe Developer Advocate.",
+      "socials": "https://x.com/cjav_dev https://www.youtube.com/@cjav_dev "
     }
   },
   {
