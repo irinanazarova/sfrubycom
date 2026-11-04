@@ -1643,6 +1643,14 @@ export const jobs = {
    * Calendly are still open; Flexport is dropped because Rails is only "a
    * plus" behind Java/Spring.
    *
+   * Added November 4, 2026
+   *   Fleetio (Series D, $450M, Mar 2025)
+   *     Senior Forward Deployed Engineer — remote US/CA/MX, 5+ yrs Rails and React — https://job-boards.greenhouse.io/fleetio/jobs/5217902007
+   *     Senior Platform Engineer — remote US, scaling the Rails stack — https://job-boards.greenhouse.io/fleetio/jobs/5257520007
+   *     Senior SWE, Marketplace — remote US/CA/MX, Rails and React — https://job-boards.greenhouse.io/fleetio/jobs/5253664007
+   *   Homebase (Series C+)
+   *     Principal Engineer, Core Product — SF hybrid, Ruby/Rails background — https://jobs.ashbyhq.com/homebase/d1e4d213-868d-45bf-827a-98ee351b8957
+   *
    * Added November 3, 2026
    *   Stripe (private; $90B+ valuation)
    *     Staff Full Stack SWE, Link Consumer Preference — SF, Ruby APIs beside React/GraphQL — https://job-boards.greenhouse.io/stripe/jobs/8257354
