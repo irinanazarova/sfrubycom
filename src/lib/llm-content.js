@@ -67,7 +67,6 @@ import {
   places as lunchPlaces,
   afterTalks,
   SLACK_CHANNEL,
-  SLACK_URL,
   SOURCE_NOTE as LUNCH_NOTE,
   MAP_CREDIT,
 } from "../data/lunch-2026.js";
@@ -708,9 +707,9 @@ ${FAQ_ITEMS.map((item) => `### ${item.question}\n${plain(item.answer)}`).join("\
 
 export function lunchMarkdown() {
   const row = (p) =>
-    `| ${p.name}${p.days ? ` (${p.days})` : ""} | ${p.kitchen} | ${p.walk} min | ~${p.seats} | ${p.yelp} (${p.reviews}) | $${p.lunch} | ${p.signature} | ${p.veg} | ${p.fish ?? "None on the menu"} | ${p.hours} | [Menu](${p.menu}) |`;
+    `| ${p.name}${p.days ? ` (${p.days})` : ""} | ${p.kitchen} | ${p.address} | ${p.walk} min | ~${p.seats} | ${p.yelp.toFixed(1)} (${p.reviews}) | $${p.lunch}${p.lunchNote ? ` (${p.lunchNote})` : ""} | ${p.signature} | ${p.veg} | ${p.fish ?? "None on the menu"} | ${p.hours} | [Menu](${p.menu}) |`;
   const evening = (p) =>
-    `- **${p.name}**, ${p.address}: ${p.kitchen}. ${p.walk} min walk. ${p.hours}. ${p.note}${p.capacity ? ` ${p.capacity}.` : ""}${p.yelp ? ` Yelp ${p.yelp} (${p.reviews}).` : ""} [${p.linkLabel}](${p.link})`;
+    `- **${p.name}**, ${p.address}: ${p.kitchen}. ${p.walk} min walk. ${p.hours}. ${p.note}${p.capacity ? ` ${p.capacity}.` : ""}${p.yelp ? ` Yelp ${p.yelp.toFixed(1)} (${p.reviews}).` : ""} [${p.linkLabel}](${p.link})`;
   const breaks = days
     .slice(0, 2)
     .map((d) => {
@@ -720,12 +719,12 @@ export function lunchMarkdown() {
     .join("\n");
   return `# Lunch plans
 
-> Where to eat near SFJAZZ during the San Francisco Ruby Conference. Make plans with other attendees in ${SLACK_CHANNEL} on [Slack](${SLACK_URL}).
+> Where to eat near SFJAZZ during the San Francisco Ruby Conference. Make plans with other attendees in ${SLACK_CHANNEL} on [Slack](${SLACK_INVITE}).
 
 ${breaks}
 
-| Place | Kitchen | Walk | Seats (est.) | Yelp | Lunch | Signature | Vegetarian | Fish | Hours | Menu |
-|---|---|---|---|---|---|---|---|---|---|---|
+| Place | Kitchen | Address | Walk | Seats (est.) | Yelp | Lunch | Signature | Vegetarian | Fish | Hours | Menu |
+|---|---|---|---|---|---|---|---|---|---|---|---|
 ${lunchPlaces.map(row).join("\n")}
 
 ## After the talks

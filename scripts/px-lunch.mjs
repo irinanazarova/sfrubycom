@@ -35,7 +35,7 @@ const toEN = (lat, lon) => {
   const dy = (lat - VENUE.lat) * 110950;
   return [dx * COS + dy * SIN, -dx * SIN + dy * COS];
 };
-const BOUNDS = { e0: -425, e1: 92, n0: -200, n1: 172 };
+const BOUNDS = { e0: -425, e1: 175, n0: -200, n1: 172 };
 const K = 0.8; // screen pixels per metre along the ground
 const Z = 0.62; // screen pixels per metre of building height
 const TOP = 46; // sky above the island's back corner, for the tall buildings
@@ -314,23 +314,25 @@ order.forEach((o) => o.draw());
 // The poles are drawn over the image in the page, so a set can be hidden with its
 // pins. Each set is spread by hand, so plates never cover each other at 390 wide.
 const SPREAD = {
-  "lers-ros": [25, -47],
-  nojo: [72, -20],
-  "dumpling-home": [8, -41],
-  "rt-rotisserie": [0, -26],
-  arbor: [30, -42],
-  "the-bird": [17, -51],
-  "a-mano": [0, -34],
-  sforno: [57, -64],
-  "double-decker": [12, -60],
-  "la-boulangerie": [19, -52],
-  souvla: [3, -34],
-  patxis: [-61, -39],
-  gioia: [-74, -26],
+  pacifico: [0, 54],
+  pokebola: [42, -46],
+  "lers-ros": [78, -87],
+  nojo: [88, -15],
+  "dumpling-home": [0, -51],
+  "rt-rotisserie": [0, -41],
+  arbor: [76, -108],
+  "the-bird": [42, -86],
+  "a-mano": [-1, -59],
+  sforno: [89, -92],
+  "double-decker": [67, -95],
+  "la-boulangerie": [43, -87],
+  souvla: [18, -90],
+  patxis: [-54, -90],
+  gioia: [-71, -62],
   "linden-room": [-16, -37],
   absinthe: [38, -40],
   "afterwork-bar": [-28, -52],
-  "ebb-and-flow": [27, -69],
+  "ebb-and-flow": [50, -83],
   "happy-crane": [-14, -59],
   biergarten: [0, -28],
 };

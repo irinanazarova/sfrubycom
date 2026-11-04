@@ -42,7 +42,7 @@ const poles = [
         <div class="flex flex-wrap items-center justify-center gap-3">
             <a href={SLACK_URL} target="_blank" rel="noopener noreferrer" class="px-btn px-btn--gold px-font text-px9 md:text-px10 px-5 py-3.5 tap-press">Open Slack</a>
         </div>
-        <div id="map-switch" class="hidden items-center justify-center gap-2 mt-4" role="group" aria-label="Places on the map">
+        <div id="map-switch" class="invisible flex items-center justify-center gap-2 mt-4" role="group" aria-label="Places on the map">
             <button type="button" data-set="lunch" aria-pressed="true" class="lunch-sort px-font">Lunch</button>
             <button type="button" data-set="after" aria-pressed="false" class="lunch-sort px-font">After the talks</button>
         </div>
@@ -51,7 +51,7 @@ const poles = [
                 src="/px-lunch-map.png"
                 width={map.width}
                 height={map.height}
-                alt="Map of Hayes Valley around SFJAZZ, with lunch places marked in red and evening places in blue."
+                alt="Map of Hayes Valley around SFJAZZ."
                 class="px-pixelated block w-full h-auto"
             />
             <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox={`0 0 ${map.width} ${map.height}`} aria-hidden="true">
@@ -107,7 +107,7 @@ const poles = [
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
                 <h2 class="px-font text-sm md:text-lg text-gray-900 leading-normal">Compare</h2>
-                <div id="lunch-sort" class="hidden flex-wrap gap-2" role="group" aria-label="Sort places">
+                <div id="lunch-sort" class="invisible flex flex-wrap gap-2" role="group" aria-label="Sort places">
                     <button type="button" data-key="walk" data-dir="1" aria-pressed="true" class="lunch-sort px-font">Closest</button>
                     <button type="button" data-key="seats" data-dir="-1" aria-pressed="false" class="lunch-sort px-font">Seats</button>
                     <button type="button" data-key="yelp" data-dir="-1" aria-pressed="false" class="lunch-sort px-font">Rating</button>
@@ -152,7 +152,7 @@ const poles = [
                         </div>
 
                         <div class="lunch-stat">
-                            <span class="lunch-stat__label px-font lg:hidden">Seats, est.</span>
+                            <span class="lunch-stat__label px-font lg:sr-only">Seats, est.</span>
                             <span class="font-mono text-sm text-gray-900">{p.seats}</span>
                             <span class="lunch-meter" aria-hidden="true">
                                 <span style={`width:${(p.seats / SEATS_MAX) * 100}%`}></span>
@@ -160,7 +160,7 @@ const poles = [
                         </div>
 
                         <div class="lunch-stat">
-                            <span class="lunch-stat__label px-font lg:hidden">Yelp</span>
+                            <span class="lunch-stat__label px-font lg:sr-only">Yelp</span>
                             <span class="font-mono text-sm text-gray-900">
                                 {p.yelp.toFixed(1)} <span class="text-gray-500 text-xs">({p.reviews})</span>
                             </span>
@@ -170,7 +170,7 @@ const poles = [
                         </div>
 
                         <div class="lunch-stat">
-                            <span class="lunch-stat__label px-font lg:hidden">Lunch</span>
+                            <span class="lunch-stat__label px-font lg:sr-only">Lunch</span>
                             <span class="font-mono text-sm text-gray-900">${p.lunch}</span>
                             <span class="flex gap-0.5" aria-hidden="true">
                                 {Array.from({ length: coins(p.lunch) }).map(() => (
@@ -275,7 +275,6 @@ const poles = [
         position: absolute;
         transform: translate(-50%, -50%) rotate(var(--turn));
         color: var(--white);
-        font-family: var(--font-mono, monospace);
         font-size: clamp(7px, 1.25vw, 11px);
         line-height: 1;
         white-space: nowrap;
@@ -449,8 +448,7 @@ const poles = [
     const sort = document.getElementById("lunch-sort");
     const list = document.getElementById("lunch-list");
     if (sort && list) {
-        sort.classList.remove("hidden");
-        sort.classList.add("flex");
+        sort.classList.remove("invisible");
         const buttons = sort.querySelectorAll("button");
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
@@ -470,8 +468,7 @@ const poles = [
     const mapSwitch = document.getElementById("map-switch");
     const lunchMap = document.getElementById("lunch-map");
     if (mapSwitch && lunchMap) {
-        mapSwitch.classList.remove("hidden");
-        mapSwitch.classList.add("flex");
+        mapSwitch.classList.remove("invisible");
         const toggles = mapSwitch.querySelectorAll("button");
         const show = (set) => {
             lunchMap.dataset.show = set;
@@ -479,12 +476,6 @@ const poles = [
         };
         toggles.forEach((t) => t.addEventListener("click", () => show(t.dataset.set)));
         // A shared link to an evening place opens the map on that set.
-        if (lunchMap.querySelector(`a[data-set="after"][href="${location.hash}"]`)) show("after");
-    }
-
-    // The button rows above appear only now, which moves a linked card after the
-    // browser has scrolled to it, so a card can end up under the frozen header.
-    if (location.hash) {
-        document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "instant", block: "start" });
+        if (lunchMap.querySelector(`a[data-set="after"][href="${CSS.escape(location.hash)}"]`)) show("after");
     }
 </script>

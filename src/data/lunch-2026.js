@@ -17,10 +17,14 @@
 //   tables) have a published count. The rest are guesses from the room.
 // - `walk` is minutes from the SFJAZZ door along the street grid at 75 m a minute.
 //   scripts/px-lunch.mjs prints these from `lat`/`lon`.
+// - Pacifico runs lunch in b-side, the bar inside SFJAZZ. Its own site is the
+//   source for hours (closed Tuesday, Wednesday 11:30 am to 2:30 pm); Yelp says
+//   2 pm and SFJAZZ's b-side page lists evenings only. `seats` is BizBash's 110
+//   seated for the b-side room, which may not all be open at lunch.
+//   Yelp's /biz/pacifico-san-francisco is a different place, at the Ferry Building.
 // Not listed for lunch: Absinthe (OpenTable still shows a weekday lunch, but its
-// own site opens at 4 pm on Tuesday and Wednesday), Suppenküche and Zuni (dinner
-// only on these days, per listings), and b-side inside SFJAZZ (its page lists
-// Thursday to Sunday evenings and show days).
+// own site opens at 4 pm on Tuesday and Wednesday), and Suppenküche and Zuni
+// (dinner only on these days, per listings).
 
 export const VENUE = { name: "SFJAZZ", lat: 37.7763779, lon: -122.4215694 };
 export const SLACK_CHANNEL = "#conference-2026-lunch-plans";
@@ -31,6 +35,27 @@ const directions = (address) =>
   `https://www.google.com/maps/dir/?api=1&origin=SFJAZZ+Center,+201+Franklin+St,+San+Francisco&destination=${encodeURIComponent(`${address}, San Francisco, CA`)}&travelmode=walking`;
 
 const lunchPlaces = [
+  {
+    id: "pacifico",
+    name: "Pacifico",
+    kitchen: "Colombian and Peruvian, inside SFJAZZ",
+    address: "201 Franklin St",
+    lat: VENUE.lat,
+    lon: VENUE.lon,
+    walk: 1,
+    seats: 110,
+    yelp: 4.5,
+    reviews: "27",
+    lunch: 15,
+    lunchNote: "Bowl, protein extra. Ceviche $20+",
+    signature: "Steak arepa, grilled steak or chicken bowl",
+    veg: "Smokey veggie bowl, hearts of palm ceviche",
+    fish: "Halibut ceviche with fried calamari",
+    hours: "Wednesday 11:30 am to 2:30 pm",
+    menu: "https://www.pacificosf.com/lunch-menu",
+    sprite: "fish",
+    days: "Wed only",
+  },
   {
     id: "lers-ros",
     name: "Lers Ros",
@@ -145,6 +170,25 @@ const lunchPlaces = [
     hours: "10:30 am to 11:30 pm",
     menu: "https://www.thebirdsf.com/menu/",
     sprite: "chick",
+  },
+  {
+    id: "pokebola",
+    name: "Pokebola",
+    kitchen: "Build-your-own poke bowls",
+    address: "77 Van Ness Ave",
+    lat: 37.7760682,
+    lon: -122.4198648,
+    walk: 3,
+    seats: 15,
+    yelp: 4.1,
+    reviews: "111",
+    lunch: 17,
+    signature: "Chicken teriyaki bowl",
+    veg: "Yasai tofu bowl",
+    fish: "Rainbow Love, salmon bowl",
+    hours: "11 am to 9 pm",
+    menu: "https://order.online/business/11458538",
+    sprite: "bowl",
   },
   {
     id: "a-mano",
