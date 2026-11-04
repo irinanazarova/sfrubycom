@@ -327,19 +327,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/8244969",
     postedDate: "2026-10-25",
   },
-  "staff-software-engineer-peo-benefits-gusto": {
-    id: "staff-software-engineer-peo-benefits-gusto",
-    title: "Staff Software Engineer, PEO Benefits",
-    sponsorId: "gusto",
-    location: "San Francisco, Denver, or New York City (Hybrid)",
-    type: "Full-time",
-    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
-    description:
-      "You build the PEO Benefits systems: benefits shopping, plan recommendations, carrier integrations and AI agents. The backend is a very large Ruby on Rails app with a React frontend and MCP tools. The role mentors engineers across the group.",
-    chips: ["Fullstack", "Backend", "AI/ML", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/gusto/jobs/7982781",
-    postedDate: "2026-10-25",
-  },
   "staff-software-engineer-retirement-ai-gusto": {
     id: "staff-software-engineer-retirement-ai-gusto",
     title: "Staff Software Engineer, Retirement AI",
@@ -1778,10 +1765,12 @@ export const jobs = {
    * ─────────────────────────────────────────────────────────────────
    *
    * ── November 3, 2026 audit ──
-   * Gusto's role is a 404 on Greenhouse and WindBorne's is off its Ashby board.
-   * Neither company has an equivalent open Rails role in scope. Numero's Wellfound
+   * Gusto's two roles are 404s on Greenhouse and WindBorne's is off its Ashby board.
+   * Neither company has an equivalent open Rails role in scope. PEO Benefits closed
+   * between the audit and the production recheck the same day. Numero's Wellfound
    * link died, so that listing now points at Numero's own careers page.
    * "staff-software-engineer-ai-voice-gusto": { url: "https://job-boards.greenhouse.io/gusto/jobs/7673999", postedDate: "2026-09-04" },
+   * "staff-software-engineer-peo-benefits-gusto": { url: "https://job-boards.greenhouse.io/gusto/jobs/7982781", postedDate: "2026-10-25" },
    * "lead-software-engineer-gov-platforms-windborne": { url: "https://jobs.ashbyhq.com/windborne-systems/c461fe44-524c-4f3b-b7dc-2ea3047d11e0", postedDate: "2026-07-07" },
    *
    * ── November 2026 audit ──
