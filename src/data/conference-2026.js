@@ -31,7 +31,7 @@ export const conferenceSpeakers = [
     name: "Carmine Paolino",
     bio: "Creator of RubyLLM, the Ruby framework for every major AI provider.",
     orgs: [
-      { name: "Chat with Work", url: "https://chatwithwork.com/" },
+      { name: "Plenty", url: "https://plenty.is/" },
       { name: "RubyLLM", url: "https://rubyllm.com/" },
     ],
     track: "startups",

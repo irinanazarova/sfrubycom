@@ -98,7 +98,7 @@ export const days = [
             start: "14:15",
             speaker: "Carmine Paolino",
             org: "RubyLLM",
-            title: "RubyLLM 2.0: The AI Framework Ruby Deserves",
+            title: "RubyLLM 2.2: The AI Framework Python Should Envy",
           },
         ],
         group: {
