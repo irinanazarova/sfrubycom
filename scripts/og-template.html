@@ -9,6 +9,7 @@
        /og-template/?icon=/px-play.png&title=Videos&sub=sfruby.com/videos&gold=1 -> videos.png
        /og-template/?icon=/px-quest.png&title=Our Startups&sub=sfruby.com/startups&gold=1 -> startups.png
        /og-template/?icon=/px-coin.png&title=Sponsor SF Ruby 2026&sub=sfruby.com/sponsor-2026&gold=1 -> sponsor.png
+       /og-template/?icon=/lunch/drumstick.png&title=Lunch Plans&sub=sfruby.com/lunch&gold=1 -> lunch.png
 -->
 <html>
 <head>
@@ -22,9 +23,15 @@ body { width:1200px; height:630px; overflow:hidden; font-family:"Martian Mono",m
   position:relative; width:1200px; height:630px;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   background-color:#3ea3dd;
+  isolation:isolate;
+  image-rendering:pixelated;
+}
+/* The cards run light at the top; px-sky-day.png runs dark at the top. */
+.card:not(.night)::before {
+  content:""; position:absolute; inset:0; z-index:-1;
   background-image:url("/px-sky-day.png");
   background-size:auto 100%; background-repeat:repeat-x;
-  image-rendering:pixelated;
+  transform:scaleY(-1);
 }
 .card.night {
   background-color:#020617;
