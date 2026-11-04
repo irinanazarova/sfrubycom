@@ -212,7 +212,10 @@ ${fmtDay(d)}. ${d.tagline}`;
       const blocks = d.blocks
         .map((b) => {
           if (b.kind === "break" || b.kind === "lunch") {
-            return `- ${formatTime(b.start)}: ${b.kind === "lunch" ? "Lunch" : "Break"}`;
+            const extra = b.extra
+              ? `\n  - **${b.extra.title}**, ${b.extra.where}. ${b.extra.note}`
+              : "";
+            return `- ${formatTime(b.start)}: ${b.kind === "lunch" ? "Lunch" : "Break"}${extra}`;
           }
           if (b.kind === "event") {
             return `- ${formatRange(b.start, b.end)}: **${b.title}**, ${b.where}. ${b.note} RSVP: ${b.href}`;
