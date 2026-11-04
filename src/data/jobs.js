@@ -327,19 +327,6 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/8244969",
     postedDate: "2026-10-25",
   },
-  "staff-software-engineer-peo-benefits-gusto": {
-    id: "staff-software-engineer-peo-benefits-gusto",
-    title: "Staff Software Engineer, PEO Benefits",
-    sponsorId: "gusto",
-    location: "San Francisco, Denver, or New York City (Hybrid)",
-    type: "Full-time",
-    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
-    description:
-      "You build the PEO Benefits systems: benefits shopping, plan recommendations, carrier integrations and AI agents. The backend is a very large Ruby on Rails app with a React frontend and MCP tools. The role mentors engineers across the group.",
-    chips: ["Fullstack", "Backend", "AI/ML", "Mentorship"],
-    url: "https://job-boards.greenhouse.io/gusto/jobs/7982781",
-    postedDate: "2026-10-25",
-  },
   "staff-software-engineer-retirement-ai-gusto": {
     id: "staff-software-engineer-retirement-ai-gusto",
     title: "Staff Software Engineer, Retirement AI",
@@ -1011,6 +998,21 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/boon/6cbeff98-b1a6-4d10-ad23-eb0d7a4b4e55",
     postedDate: "2026-11-02",
   },
+  "staff-software-engineer-boon": {
+    id: "staff-software-engineer-boon",
+    title: "Staff Software Engineer",
+    companyId: "boon",
+    companyName: "Boon AI",
+    companyLogo: "/company_boon.svg",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$190K - $250K + equity",
+    description:
+      "Boon builds AI agents that do preconstruction estimating from blueprints and bid documents. This working architect role sets technical direction across a Rails product monolith, Python vision services and the LLM agent runtime. Sidekiq and PostgreSQL are in the stack.",
+    chips: ["Platform", "AI/ML", "Sidekiq", "Polyglot", "Mentorship"],
+    url: "https://jobs.ashbyhq.com/boon/98f6a0e3-4bbc-4d58-9701-190de643acbb",
+    postedDate: "2026-11-03",
+  },
   "senior-fullstack-engineer-edo": {
     id: "senior-fullstack-engineer-edo",
     title: "Senior Full Stack Engineer",
@@ -1641,6 +1643,19 @@ export const jobs = {
    * Calendly are still open; Flexport is dropped because Rails is only "a
    * plus" behind Java/Spring.
    *
+   * Added November 3, 2026
+   *   Stripe (private; $90B+ valuation)
+   *     Staff Full Stack SWE, Link Consumer Preference — SF, Ruby APIs beside React/GraphQL — https://job-boards.greenhouse.io/stripe/jobs/8257354
+   *     Staff SWE, Link Consumer Identity — SF, Java, Ruby and TypeScript — https://job-boards.greenhouse.io/stripe/jobs/8304788
+   *   Block (NYSE: XYZ)
+   *     Engineering Manager, Finance & Supply Chain — Bay Area, Rails and Go — https://job-boards.greenhouse.io/block/jobs/5451225008
+   *     Senior SWE, Employee Experience Engineering — Bay Area, React or Rails — https://job-boards.greenhouse.io/block/jobs/5453088008
+   *     SWE, Program Engineering — Bay Area, Rails and Sidekiq beside Java/Kotlin — https://job-boards.greenhouse.io/block/jobs/5427880008
+   *   Braze (NASDAQ: BRZE)
+   *     Staff SWE, User Targeting — SF hybrid, large Ruby monolith — https://job-boards.greenhouse.io/braze/jobs/8238548
+   *   ButterflyMX (Series D 2021, FTV Capital growth round 2025)
+   *     Principal AI-Native SWE — remote US, Rails, TypeScript, MongoDB — https://jobs.ashbyhq.com/butterflymx/7810fd75-c722-4596-8b43-b2db3da4f490
+   *
    * California, onsite or hybrid
    *   Neuralink (Series E, ~$9B, Jun 2025)
    *     SWE, Robot Manufacturing — South SF, $135K–$216K, "Our stack is Ruby on Rails and React/TypeScript"
@@ -1750,10 +1765,12 @@ export const jobs = {
    * ─────────────────────────────────────────────────────────────────
    *
    * ── November 3, 2026 audit ──
-   * Gusto's role is a 404 on Greenhouse and WindBorne's is off its Ashby board.
-   * Neither company has an equivalent open Rails role in scope. Numero's Wellfound
+   * Gusto's two roles are 404s on Greenhouse and WindBorne's is off its Ashby board.
+   * Neither company has an equivalent open Rails role in scope. PEO Benefits closed
+   * between the audit and the production recheck the same day. Numero's Wellfound
    * link died, so that listing now points at Numero's own careers page.
    * "staff-software-engineer-ai-voice-gusto": { url: "https://job-boards.greenhouse.io/gusto/jobs/7673999", postedDate: "2026-09-04" },
+   * "staff-software-engineer-peo-benefits-gusto": { url: "https://job-boards.greenhouse.io/gusto/jobs/7982781", postedDate: "2026-10-25" },
    * "lead-software-engineer-gov-platforms-windborne": { url: "https://jobs.ashbyhq.com/windborne-systems/c461fe44-524c-4f3b-b7dc-2ea3047d11e0", postedDate: "2026-07-07" },
    *
    * ── November 2026 audit ──
