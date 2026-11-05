@@ -317,7 +317,7 @@ export const days = [
         audience: "all",
         title: "Rails Girls: Build your first app with a coding agent",
         where: "Mux HQ, Financial District",
-        note: "For women in non-technical roles at Ruby companies. Small groups, each with a Ruby engineer as mentor.",
+        note: "Open for all, with a focus on women and nonbinary people, especially those in non-technical roles at Ruby companies. No coding experience needed. Small groups, each with a Ruby engineer as mentor.",
         href: "https://luma.com/railsgirls2026",
       },
       {
