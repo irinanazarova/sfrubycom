@@ -1569,6 +1569,34 @@ export const jobs = {
     url: "https://www.ombulabs.ai/jobs/software-engineer-contractor",
     postedDate: "2026-10-02",
   },
+  "senior-backend-engineer-mode-mobile": {
+    id: "senior-backend-engineer-mode-mobile",
+    title: "Sr. Backend Engineer",
+    companyId: "mode-mobile",
+    companyName: "Mode Mobile",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "Not disclosed",
+    description:
+      "Mode builds mobile apps and data products that reach over 100M monthly users. This senior engineer takes ownership of production Rails backends, with Sidekiq jobs, PostgreSQL and third-party integrations. The team is remote-first and expects AI coding tools in daily work.",
+    chips: ["Backend", "Sidekiq", "PostgreSQL", "Mobile", "AI-native"],
+    url: "https://job-boards.greenhouse.io/modemobile/jobs/8811988002",
+    postedDate: "2026-11-05",
+  },
+  "staff-software-engineer-secureframe": {
+    id: "staff-software-engineer-secureframe",
+    title: "Staff Software Engineer",
+    companyId: "secureframe",
+    companyName: "Secureframe",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$260K – $320K",
+    description:
+      "Secureframe automates security and compliance for thousands of businesses. This staff engineer leads design and architecture for core parts of the Ruby application, including large-scale integrations and public APIs, and mentors other engineers. The posting asks for six-plus years of Ruby.",
+    chips: ["Backend", "Platform", "Mentorship", "High compliance"],
+    url: "https://jobs.ashbyhq.com/secureframe/81ccedff-6453-4e1e-bfe8-d25550cfbc78",
+    postedDate: "2026-11-05",
+  },
 
   /* ─────────────────────────────────────────────────────────────────
    * OUT OF ICP SCOPE — verified-open Ruby/Rails roles removed because they
@@ -1679,6 +1707,9 @@ export const jobs = {
    *     https://job-boards.greenhouse.io/gomotive/jobs/8371597002
    *   Strava ($2.2B, May 2025; Ruby/Scala/Go backend)
    *     Staff Engineer, Core Services Platform — SF/remote — https://jobs.ashbyhq.com/strava/daf4c971-6a2b-48e0-aafe-afc6af47e3a1
+   *   Roadie (UPS-owned; Go and Rails backend)
+   *     Full Stack Engineer — remote US, React + Go/Rails — https://job-boards.greenhouse.io/roadie/jobs/8757433002
+   *     Senior SWE, Backend — remote US, Go or Rails — https://job-boards.greenhouse.io/roadie/jobs/8786983002
    *   Modern Treasury (Series C 2021, $2B+)
    *     Software Engineer — SF, $120K–$240K (2+ yrs; borderline junior) — https://jobs.ashbyhq.com/moderntreasury/f2ff4c9c-0c2f-4bb8-b446-77cab281126a
    *     SWE, Infrastructure — remote US, $150K–$250K — https://jobs.ashbyhq.com/moderntreasury/bac5287c-66a1-4954-ab55-1c4c545a8ede
