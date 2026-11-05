@@ -148,6 +148,16 @@ export const days = [
           },
         ],
       },
+      {
+        start: "18:00",
+        end: "20:00",
+        kind: "event",
+        audience: "all",
+        title: "Manhunt: Martians vs Humans",
+        where: "Alamo Square Park, the stairs at Fulton and Steiner",
+        note: "Hide-and-seek meets tag, after dark. Humans try to reach base untagged. A tagged team turns martian and starts hunting. Glowsticks and rules at 6 pm, the game starts at 6:30 pm sharp. Teams of up to three, one person registers.",
+        href: "https://luma.com/26lzmix8",
+      },
     ],
   },
   {
