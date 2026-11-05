@@ -211,6 +211,7 @@ ${fmtDay(d)}. ${d.tagline}`;
       if (!d.blocks.length) return `${head}\n${links}`;
       const blocks = d.blocks
         .map((b) => {
+          if (b.kind === "doors") return `- ${formatTime(b.start)}: Doors open`;
           if (b.kind === "break" || b.kind === "lunch") {
             const extra = b.extra
               ? `\n  - **${b.extra.title}**, ${b.extra.where}. ${b.extra.note}`
