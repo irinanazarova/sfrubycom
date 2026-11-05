@@ -124,6 +124,8 @@ export const COMPANY_META = {
   finta: { industry: "Fintech", stage: "Seed" },
   omada: { industry: "Healthtech", stage: "Public / Large" },
   thatch: { industry: "Healthtech", stage: "Growth" },
+  "mode-mobile": { industry: "Consumer / Mobile", stage: "Growth" },
+  secureframe: { industry: "Security / Compliance", stage: "Growth" },
   chime: { industry: "Fintech", stage: "Public / Large" },
   gusto: { industry: "HR / Payroll", stage: "Public / Large" },
   persona: { industry: "Security / Identity", stage: "Growth" },
