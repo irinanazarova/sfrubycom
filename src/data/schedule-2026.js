@@ -321,6 +321,16 @@ export const days = [
         href: "https://luma.com/railsgirls2026",
       },
       {
+        start: "10:30",
+        end: "14:30",
+        kind: "event",
+        audience: "all",
+        title: "No Rails, Just Trails: a hike and picnic on Angel Island",
+        where: "Ferry Building, Gate B",
+        note: "Ferry over at 10:55 am, an easy 2-mile walk to Camp Reynolds, then a picnic. Back by 3:05 pm, or stay for the longer hike and come straight to Wrapped. The ferry is $20 round trip, paid at the gate.",
+        href: "https://luma.com/sfruby-cxxr",
+      },
+      {
         start: "18:00",
         end: "21:00",
         kind: "event",
