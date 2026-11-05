@@ -30,6 +30,7 @@ export const days = [
     tagline:
       "Agents in production, AI in legacy codebases, and the Ruby tooling for both.",
     blocks: [
+      { start: "8:00", end: "9:15", kind: "doors" },
       {
         start: "9:15",
         end: "9:45",
@@ -157,6 +158,7 @@ export const days = [
     tagline:
       "Queues, concurrency, real-time, open source, and the businesses built on them.",
     blocks: [
+      { start: "8:00", end: "9:00", kind: "doors" },
       {
         start: "9:00",
         end: "9:30",
