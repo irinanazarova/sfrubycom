@@ -174,6 +174,7 @@ export const COMPANY_META = {
   checkr: { industry: "Security / Identity", stage: "Growth" },
   edfinity: { industry: "Edtech", stage: "Early-stage" },
   serpapi: { industry: "AI / Dev Tools", stage: "Early-stage" },
+  wrapbook: { industry: "Fintech", stage: "Early-stage" },
 
   // Added September 7, 2026 (junior roles and early-stage companies)
   kikoff: { industry: "Fintech", stage: "Growth" },

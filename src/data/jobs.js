@@ -33,6 +33,49 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/ycombinator/d8181870-1652-4436-b7c7-b3b44115fd70",
     postedDate: "2026-11-01",
   },
+  "product-engineer-bookface-ycombinator": {
+    id: "product-engineer-bookface-ycombinator",
+    title: "Product Engineer, Bookface",
+    companyId: "ycombinator",
+    companyName: "Y Combinator",
+    companyLogo: "/host_ycombinator.png",
+    location: "San Francisco Bay Area",
+    type: "Full-time",
+    salary: "$250K - $500K",
+    description:
+      "This engineer builds Bookface, the software every YC company uses through the batch, along with forums, the alumni directory, the Demo Day investor portal and Launch YC. The stack is Rails, React and Postgres, and enjoying front-end work is close to a requirement. The role is in person in Dogpatch. Base pay comes with profit-sharing. Y Combinator hosts SF Ruby meetups.",
+    chips: ["Fullstack", "Product Eng", "React", "PostgreSQL"],
+    url: "https://jobs.ashbyhq.com/ycombinator/00c6950f-341f-4924-a456-ea32c9d5601d",
+    postedDate: "2026-11-06",
+  },
+  "product-engineer-internal-tools-ycombinator": {
+    id: "product-engineer-internal-tools-ycombinator",
+    title: "Product Engineer, Internal Tools",
+    companyId: "ycombinator",
+    companyName: "Y Combinator",
+    companyLogo: "/host_ycombinator.png",
+    location: "San Francisco Bay Area",
+    type: "Full-time",
+    salary: "$250K - $500K",
+    description:
+      "This engineer builds software for YC's own partners, finance and legal teams, including Gmail plugins, company dashboards and the event and engagement tools that keep YC in touch with companies after the batch. The stack is Rails, React and Postgres. The role is in person in Dogpatch. Base pay comes with profit-sharing. Y Combinator hosts SF Ruby meetups.",
+    chips: ["Fullstack", "Product Eng", "React", "PostgreSQL"],
+    url: "https://jobs.ashbyhq.com/ycombinator/bbf8f36d-60bf-4168-b2b8-fac91bc4534c",
+    postedDate: "2026-11-06",
+  },
+  "engineering-manager-frontend-wrapbook": {
+    id: "engineering-manager-frontend-wrapbook",
+    title: "Manager, Engineering - Frontend",
+    companyName: "Wrapbook",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$183K - $283.5K",
+    description:
+      "Wrapbook builds payroll, spend and accounting software for film and TV productions on a full-stack Rails app. This manager leads the Frontend Platform team, which owns the shared component system, data grids and reporting frameworks built with Hotwire and Stimulus. The posting asks for 4+ years of engineering management.",
+    chips: ["Frontend", "Platform", "Hotwire", "PostgreSQL", "Mentorship"],
+    url: "https://jobs.ashbyhq.com/wrapbook/20ae44c3-dc45-4289-a4c6-3c270191f52f",
+    postedDate: "2026-11-06",
+  },
   "staff-software-engineer-codepath": {
     id: "staff-software-engineer-codepath",
     title: "Staff Software Engineer",
@@ -1670,6 +1713,18 @@ export const jobs = {
    * one of "Java, Ruby, Python, or similar"). Handshake, Flexport and
    * Calendly are still open; Flexport is dropped because Rails is only "a
    * plus" behind Java/Spring.
+   *
+   * Added November 6, 2026
+   *   Wealthbox (Sixth Street majority investment, 2025)
+   *     Senior SWE — remote US, 5+ yrs, Rails and React — https://jobs.ashbyhq.com/wealthbox/5bcced88-d658-427d-9434-4d0313fbc17e
+   *     SWE — remote US, 2+ yrs, Rails and React, Ruby can be learned on the job — https://jobs.ashbyhq.com/wealthbox/90ff39fb-c6de-4b6f-bef5-9012f0453daf
+   *   Fleetio (Series D, $450M, Mar 2025)
+   *     Senior SWE, Developer Enablement — remote US/CA/MX, 5+ yrs Rails, public API — https://job-boards.greenhouse.io/fleetio/jobs/5282141007
+   *     Senior Platform Engineer (Infrastructure) — remote US, scaling the Rails stack (repost) — https://job-boards.greenhouse.io/fleetio/jobs/5283554007
+   *   Braze (NASDAQ: BRZE)
+   *     Staff SWE, Messaging Experience — SF hybrid, Rails and React — https://job-boards.greenhouse.io/braze/jobs/8350523
+   *   GitLab (NASDAQ: GTLB)
+   *     Intermediate Fullstack Engineer, Subscription Lifecycle — remote US, Rails required, $115.2K–$194.4K — https://job-boards.greenhouse.io/gitlab/jobs/8922249002
    *
    * Added November 4, 2026
    *   Fleetio (Series D, $450M, Mar 2025)
