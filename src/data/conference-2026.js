@@ -96,10 +96,15 @@ export const conferenceSpeakers = [
     pixel: "/speaker_peter_zhu_pixel_256.png",
   },
   {
-    name: "Ben Sheldon",
-    bio: "Author of GoodJob, the Postgres-backed Active Job backend.",
-    orgs: [{ name: "Frontdoor Benefits", url: "https://www.openfrontdoor.com/" }],
-    pixel: "/speaker_ben_sheldon_pixel_256.png",
+    // Took Ben Sheldon's Day 1 slot in November 2026 with his Rocky Mountain
+    // Ruby 2026 talk. No CFP entry, so `pitch` carries the abstract.
+    name: "Travis Turner",
+    bio: "Editor in chief at Evil Martians.",
+    pitch:
+      "What does it mean to be a programmer? I've talked to colleagues, family, industry peers, friends, and strangers. This has inspired a talk on integrating AI into programming life in a productive, happier way. We do so by naming our shared psychological experience, identifying the blocks to coping with it, and creating frameworks for personal integration. Ontological shock is the psychological and intellectual experience when something new fundamentally disturbs our sense of being or reality. I argue that programmers, the tech industry, and society are feeling that shock now.",
+    orgs: [{ name: "Evil Martians", url: "https://evilmartians.com/" }],
+    track: "startups",
+    pixel: "/speaker_travis_turner_pixel_256.png",
   },
   {
     name: "Alex Coomans",
