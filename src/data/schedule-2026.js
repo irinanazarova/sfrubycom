@@ -30,9 +30,12 @@ export const days = [
     tagline:
       "Agents in production, AI in legacy codebases, and the Ruby tooling for both.",
     blocks: [
-      { start: "8:00", end: "9:15", kind: "doors" },
+      { start: "8:00", end: "9:00", kind: "doors" },
+      // Opening words from the stage: a plain row like doors, not a session,
+      // so the keynote stays the only session in its block.
+      { start: "9:00", end: "9:10", kind: "welcome", host: "Amanda Kinney" },
       {
-        start: "9:15",
+        start: "9:10",
         end: "9:45",
         kind: "keynote",
         audience: "all",
