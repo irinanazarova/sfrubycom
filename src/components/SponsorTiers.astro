@@ -1,5 +1,9 @@
 ---
-import { conference2026SponsorTiers } from "../data/sponsors.js";
+import { conference2026OrganizerTier, conference2026SponsorTiers } from "../data/sponsors.js";
+
+// The organizers stand to the left of Pickaxe, at its size, under their own
+// heading. They are not a sponsor tier, so they join only here.
+const tiers = [conference2026OrganizerTier, ...conference2026SponsorTiers];
 
 // Logo cards scale with the tier, so the row a sponsor lands in reads as the
 // thing they paid for. Sizes come from `size` on each tier in data/sponsors.js.
@@ -10,6 +14,11 @@ import { conference2026SponsorTiers } from "../data/sponsors.js";
 // which is the trade for a row that reads evenly. The class lives here, not in
 // the data file, because the scanner only sees what is spelled out in a template.
 const WIDE_LOCKUP = "max-w-[16rem]";
+// The opposite case: a lockup whose characters stand twice as tall as its
+// wordmark (Evil Martians) reads half the size of its row at the tier's height.
+// `tallLockup` draws it taller, so it comes out as wide as Pickaxe beside it.
+// Only the Organizers card has it.
+const TALL_LOCKUP = "h-12 md:h-20";
 
 // Every tier heading is the same size. The logo and card sizes carry the
 // hierarchy; a heading a pixel smaller than the one beside it in a shared
@@ -57,7 +66,7 @@ const SIZES = {
     },
 };
 
-const unsized = conference2026SponsorTiers.filter((t) => !SIZES[t.size]);
+const unsized = tiers.filter((t) => !SIZES[t.size]);
 if (unsized.length) {
     // Falling back to a default would render a new Pickaxe tier at Emerald size:
     // the top of the paid hierarchy drawn as the bottom, with nothing to notice it.
@@ -68,10 +77,11 @@ if (unsized.length) {
     );
 }
 
-// Consecutive tiers marked `shareRow` (the single-sponsor Coffee, Passport and Speaker Dinner
-// tiers) render side by side in one row, each under its own heading, instead
-// of one lonely card per band. They stack again on phones.
-const groups = conference2026SponsorTiers.reduce((acc, tier) => {
+// Consecutive tiers marked `shareRow` (Organizers and Pickaxe; the
+// single-sponsor Coffee, Speaker Dinner, Community and Passport; Travel and
+// Media) render side by side in one row, each under its own heading, instead
+// of one band per tier. A shared row wraps when it runs out of width.
+const groups = tiers.reduce((acc, tier) => {
     const last = acc.at(-1);
     if (tier.shareRow && last?.shared) last.tiers.push(tier);
     else acc.push({ shared: !!tier.shareRow, tiers: [tier] });
@@ -113,7 +123,7 @@ const groups = conference2026SponsorTiers.reduce((acc, tier) => {
                                 <img
                                     src={sponsor.logo}
                                     alt={sponsor.name}
-                                    class={`${size.logo} w-auto object-contain ${sponsor.wideLockup ? WIDE_LOCKUP : "max-w-full"}`}
+                                    class={`${sponsor.tallLockup ? TALL_LOCKUP : size.logo} w-auto object-contain ${sponsor.wideLockup ? WIDE_LOCKUP : "max-w-full"}`}
                                     width={sponsor.logoWidth}
                                     height={sponsor.logoHeight}
                                     loading="lazy"

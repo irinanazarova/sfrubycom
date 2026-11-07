@@ -3,9 +3,11 @@
 // Rendered on the homepage (#sponsors-2026 section + hero ticker).
 // Tier order here is display order; headingClass colors the tier heading.
 // size drives how big the logo cards render (SponsorTiers.astro): "xl" for
-// Pickaxe, "lg" for the Ruby-priced tiers (Ruby, Coffee, Passport, Speaker
-// Dinner), "md" for Emerald, "sm" for Community and Travel, "xs" for Media. The size hierarchy is the visual part of
-// what a sponsor pays for, so keep it in step with the prices on /sponsor-2026.
+// Pickaxe, "lg" for Ruby, "md" for Emerald and the single-sponsor tiers
+// (Coffee, Speaker Dinner, Community, Passport) that share one row, "sm" for
+// Travel, "xs" for Media; Travel and Media share the last row. The size
+// hierarchy is the visual part of what a sponsor pays for, so keep it in step
+// with the prices on /sponsor-2026.
 // logoWidth/logoHeight are the file's intrinsic pixel dimensions (sips -g
 // pixelWidth -g pixelHeight public/<logo>). They must be present and correct:
 // the hero ticker animates translateX(-100%), which resolves against content
@@ -16,11 +18,38 @@
 // that way, so it sets tickerLogo to the brand's own dark-background file,
 // which the ticker shows as it is, without the filter.
 // ============================================================
+
+// The organizers' card, drawn in the sponsor section to the left of Pickaxe
+// and at its size. It is kept out of conference2026SponsorTiers on purpose:
+// that list feeds the hero ticker, the boosted islands in "Ruby companies
+// you'll meet", /jobs pinning and the Markdown twin, all of which mean
+// companies that paid. SponsorTiers.astro puts the two together for display.
+export const conference2026OrganizerTier = {
+  tier: "Organizers",
+  box: "xl",
+  size: "xl",
+  shareRow: true, // shares the row with Pickaxe
+  headingClass: "text-ruby-600",
+  sponsors: [
+    {
+      // public/images/logo_evilmartians_horizontal.png with the white
+      // wordmark recolored to the plum of the stacked logo, for a white card.
+      name: "Evil Martians",
+      logo: "/sponsor_evilmartians.png",
+      logoWidth: 1856,
+      logoHeight: 432,
+      tallLockup: true, // the characters are twice the wordmark's height
+      url: "https://evilmartians.com/",
+    },
+  ],
+};
+
 export const conference2026SponsorTiers = [
   {
     tier: "Pickaxe Sponsor",
     box: "xl",
     size: "xl",
+    shareRow: true, // shares the row with the Organizers card on its left
     headingClass: "text-ruby-600",
     sponsors: [
       {
@@ -159,6 +188,24 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
+    // Ruby-priced like Coffee and Speaker Dinner, so it sits in their row
+    // at their size.
+    tier: "Passport Sponsor",
+    box: "emerald",
+    size: "md",
+    shareRow: true, // shares the row with Coffee, Speaker Dinner and Community
+    headingClass: "text-ruby-600",
+    sponsors: [
+      {
+        name: "Avo",
+        logo: "/sponsor_avo.png",
+        logoWidth: 485,
+        logoHeight: 200,
+        url: "https://avohq.io/",
+      },
+    ],
+  },
+  {
     tier: "Emerald Sponsors",
     box: "emerald",
     size: "md",
@@ -224,24 +271,9 @@ export const conference2026SponsorTiers = [
     ],
   },
   {
-    tier: "Passport Sponsor",
-    size: "sm",
-    shareRow: true, // sits beside the other single-sponsor tier
-    headingClass: "text-ruby-600",
-    sponsors: [
-      {
-        name: "Avo",
-        logo: "/sponsor_avo.png",
-        logoWidth: 485,
-        logoHeight: 200,
-        url: "https://avohq.io/",
-      },
-    ],
-  },
-  {
     tier: "Travel Sponsors",
     size: "sm",
-    shareRow: true, // shares the row with the Passport sponsor
+    shareRow: true, // shares the row with Media
     headingClass: "text-gray-500",
     sponsors: [
       {
@@ -277,6 +309,7 @@ export const conference2026SponsorTiers = [
   {
     tier: "Media Sponsors",
     size: "xs",
+    shareRow: true, // shares the row with Travel
     headingClass: "text-gray-500",
     sponsors: [
       {
