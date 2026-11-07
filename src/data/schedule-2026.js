@@ -88,9 +88,10 @@ export const days = [
         sessions: [
           {
             start: "13:15",
-            speaker: "Ben Sheldon",
-            org: "Frontdoor Benefits",
-            title: "Building the same app twice: same problems, different decade",
+            speaker: "Travis Turner",
+            org: "Evil Martians",
+            title:
+              "Got AI ontological shock? No worries: UFOs, Theology, and Psychedelics with Ruby-Colored Reverence",
           },
           {
             start: "13:45",

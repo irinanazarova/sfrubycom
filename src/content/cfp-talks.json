@@ -26,19 +26,6 @@
     }
   },
   {
-    "id": "5w3EdzkG",
-    "title": "Building the same app twice: same problems, different decade",
-    "abstract": "Ten years ago I helped build and scale a welfare benefits app to aid more than 1 million people a year. Now, I'm doing it all again from the beginning. I'll compare the original 2016 product roadmap to what's possible in 2026, including feature appetites, team composition and enablement, and very, very different build-vs-buy decisions for an even more monolithic product.",
-    "track": "startup",
-    "speaker": {
-      "name": "Ben Sheldon",
-      "company": "Frontdoor Benefits",
-      "role": "Co-Founder and CTO",
-      "bio": "Ben Sheldon is the author of GoodJob, an Active Job backend. A Rails developer for over 10 years, he has worked at GitHub, OkCupid Labs, and Code for America. Ben is currently co-founder and CTO of Frontdoor Benefits.",
-      "socials": "https://www.linkedin.com/in/bensheldon/"
-    }
-  },
-  {
     "id": "r8bh4cUV",
     "title": "How We Bootstrapped an Open Source Search Engine to $10M+ ARR with 15 People and Ruby on Rails",
     "abstract": "TBD",
