@@ -209,6 +209,9 @@ export const COMPANY_META = {
   // Added October 2, 2026 (2026 conference sponsors, path 1)
   shopify: { industry: "E-commerce", stage: "Public / Large" },
   fastruby: { industry: "AI / Dev Tools", stage: "Early-stage" },
+
+  // Added November 7, 2026 (SF Ruby meetup host, path 1)
+  figma: { industry: "AI / Dev Tools", stage: "Public / Large" },
 };
 
 // ── Matching chips ──────────────────────────────────────────────────────────

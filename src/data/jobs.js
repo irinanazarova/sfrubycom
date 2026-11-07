@@ -1431,6 +1431,36 @@ export const jobs = {
     url: "https://jobs.ashbyhq.com/circle/19c93928-5816-4056-bac6-513fe64ef55f",
     postedDate: "2026-10-19",
   },
+  "lead-engineer-member-growth-circle": {
+    id: "lead-engineer-member-growth-circle",
+    title: "Lead Engineer, Member Growth",
+    companyId: "circle",
+    companyName: "Circle",
+    companyLogo: "/company_circle.png",
+    location: "Remote (US, and worldwide)",
+    type: "Full-time",
+    salary: "$162K + equity",
+    description:
+      "Circle's Growth team owns analytics and member onboarding. This lead stays hands-on in the Rails code and manages a small team of tenured engineers. The work covers ClickHouse analytics, LLM-powered answers about a business's data, and the path from sign-up to an active member. Seven-plus years on Rails, React and TypeScript.",
+    chips: ["Fullstack", "Data", "ClickHouse", "React", "Mentorship"],
+    url: "https://jobs.ashbyhq.com/circle/194a7b5d-df8d-4bb2-936d-7344d4501e11",
+    postedDate: "2026-11-07",
+  },
+  "software-engineer-application-platform-figma": {
+    id: "software-engineer-application-platform-figma",
+    title: "Software Engineer, Application Platform",
+    companyId: "figma",
+    companyName: "Figma",
+    companyLogo: "/host_figma.png",
+    location: "San Francisco, CA or Remote (US)",
+    type: "Full-time",
+    salary: "$235K - $376K",
+    description:
+      "Figma's Application Platform team owns the large Ruby application behind its REST APIs, async jobs and workflow orchestration. You build shared frameworks for other backend engineers, move REST APIs from Sinatra toward Rails and improve the job platform. Five-plus years of engineering, three-plus of them in Ruby.",
+    chips: ["Platform", "Backend", "Sidekiq", "Mentorship"],
+    url: "https://boards.greenhouse.io/figma/jobs/6242561004?gh_jid=6242561004",
+    postedDate: "2026-11-07",
+  },
   "software-engineer-backend-folio": {
     id: "software-engineer-backend-folio",
     title: "Software Engineer, Backend",
@@ -1713,6 +1743,12 @@ export const jobs = {
    * one of "Java, Ruby, Python, or similar"). Handshake, Flexport and
    * Calendly are still open; Flexport is dropped because Rails is only "a
    * plus" behind Java/Spring.
+   *
+   * Added November 7, 2026
+   *   Omada Health (NASDAQ: OMDA; a 2025 sponsor, not 2026)
+   *     Senior Engineering Manager, Co-Intelligent Coaching — remote US, hands-on, Rails and Python, $176K–$253K by zone — https://job-boards.greenhouse.io/omadahealth/jobs/8318929
+   *   Braze (NASDAQ: BRZE)
+   *     Senior SWE I, Core Objects — SF, large Ruby monolith, $128.8K–$232.2K — https://job-boards.greenhouse.io/braze/jobs/8249744
    *
    * Added November 6, 2026
    *   Wealthbox (Sixth Street majority investment, 2025)
