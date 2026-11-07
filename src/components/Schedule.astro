@@ -42,7 +42,7 @@ for (const d of days)
 const plateClass = (audience) =>
     audience === "household" ? "px-plate--gold" : audience === "all" ? "px-plate--orange" : "";
 const audienceLabel = (audience) => AUDIENCES[audience]?.label ?? "";
-const breakLabel = { doors: "Doors open", break: "Break", lunch: "Lunch" };
+const breakLabel = { doors: "Doors open", welcome: "Welcome words", break: "Break", lunch: "Lunch" };
 
 // Absolute times for the "now on stage" state. The conference is in
 // November, after the DST switch, so Pacific is -08:00 on every day.
@@ -103,7 +103,7 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                     {d.blocks.length > 0 && (
                         <ol class="mt-10 flex flex-col gap-4 list-none p-0">
                             {d.blocks.map((b) =>
-                                b.kind === "doors" || b.kind === "break" || b.kind === "lunch" ? (
+                                b.kind in breakLabel ? (
                                     <li class="flex flex-wrap items-baseline gap-x-4 gap-y-2 px-1 text-sm text-gray-500" data-start={at(d, b.start)} data-end={at(d, b.end)}>
                                         <span class="font-mono shrink-0 w-32">
                                             {formatTime(b.start)}
@@ -117,6 +117,7 @@ const at = (d, hm) => `${d.date}T${hm.padStart(5, "0")}:00${PT_OFFSET}`;
                                                 {breakLabel[b.kind]}
                                             </span>
                                         )}
+                                        {b.host && <span class="text-gray-600">{b.host}</span>}
                                         {b.extra && (
                                             <p class="basis-full sm:pl-36 text-gray-600">
                                                 <span class="font-semibold text-gray-900">{b.extra.title}</span>, {b.extra.where}. {b.extra.note}

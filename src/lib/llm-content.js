@@ -212,6 +212,8 @@ ${fmtDay(d)}. ${d.tagline}`;
       const blocks = d.blocks
         .map((b) => {
           if (b.kind === "doors") return `- ${formatTime(b.start)}: Doors open`;
+          if (b.kind === "welcome")
+            return `- ${formatTime(b.start)}: Welcome words, ${b.host}`;
           if (b.kind === "break" || b.kind === "lunch") {
             const extra = b.extra
               ? `\n  - **${b.extra.title}**, ${b.extra.where}. ${b.extra.note}`
