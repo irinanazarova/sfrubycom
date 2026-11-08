@@ -303,6 +303,16 @@ export const days = [
           },
         ],
       },
+      {
+        start: "17:00",
+        end: "20:00",
+        kind: "event",
+        audience: "all",
+        title: "thoughtbot Happy Hour",
+        where: "Hayes Valley, the address comes with your RSVP",
+        note: "Drinks and light bites after Day 2, for thoughtbot alumni, past clients and Ruby friends. The hosts approve each RSVP.",
+        href: "https://luma.com/y7nbtbs3",
+      },
     ],
   },
   {
