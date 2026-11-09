@@ -118,8 +118,8 @@
   },
   {
     "id": "DdxMTtiT",
-    "title": "RubyLLM 2.2: The AI Framework Python Should Envy",
-    "abstract": "RubyLLM brought one beautiful AI API to Ruby and passed 14 million downloads. 2.2 puts agents to work: running code in sandboxes on your servers, learning workflows from skills, using MCP tools, and turning files into finished work. Durable jobs, human approvals, evaluations, tracing, and a ledger for every billable attempt. Live demos, plain Ruby, native Rails. Ruby is where you ship AI.",
+    "title": "RubyLLM 2.2: Frameworks Matter",
+    "abstract": "\"You don't need frameworks anymore. Just let the agent write it.\"\r\n\r\nI tested that.\r\n\r\nThe same coding agent built the same app with RubyLLM on Rails, LangChain, the Vercel AI SDK, and no framework at all. With RubyLLM it wrote a third of the code or less.\r\n\r\nFrameworks matter if agents can use them. Here's how I made RubyLLM one they can, what's new in 2.2, and the product it comes from.",
     "track": "general",
     "speaker": {
       "name": "Carmine Paolino",
