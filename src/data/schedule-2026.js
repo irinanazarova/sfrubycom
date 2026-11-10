@@ -30,13 +30,13 @@ export const days = [
     tagline:
       "Agents in production, AI in legacy codebases, and the Ruby tooling for both.",
     blocks: [
-      { start: "8:00", end: "9:20", kind: "doors" },
+      { start: "8:00", end: "9:00", kind: "doors" },
       // Opening words from the stage: a plain row like doors, not a session,
       // so the keynote stays the only session in its block.
-      { start: "9:20", end: "9:30", kind: "welcome", host: "Amanda Kinney" },
+      { start: "9:00", end: "9:10", kind: "welcome", host: "Amanda Kinney" },
       {
-        start: "9:30",
-        end: "10:05",
+        start: "9:10",
+        end: "9:45",
         kind: "keynote",
         audience: "all",
         sessions: [
@@ -47,21 +47,21 @@ export const days = [
           },
         ],
       },
-      { start: "10:05", end: "10:25", kind: "break" },
+      { start: "9:45", end: "10:05", kind: "break" },
       {
-        start: "10:25",
+        start: "10:05",
         end: "11:55",
         kind: "talks",
         audience: "household",
         sessions: [
           {
-            start: "10:25",
+            start: "10:05",
             speaker: "Vladimir Dementyev",
             org: "Evil Martians",
             title: "Ruby for AI and AI for Ruby",
           },
           {
-            start: "10:55",
+            start: "10:45",
             speaker: "Madison Sites",
             org: "Order.co",
             title: "The System Nobody Understood (Including AI)",
