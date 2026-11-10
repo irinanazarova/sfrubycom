@@ -79,28 +79,28 @@ export const days = [
           hosts: ["Amanda Kinney"],
         },
       },
-      { start: "11:55", end: "13:35", kind: "lunch" },
+      { start: "11:55", end: "13:15", kind: "lunch" },
       {
-        start: "13:35",
-        end: "15:05",
+        start: "13:15",
+        end: "14:45",
         kind: "talks",
         audience: "startups",
         sessions: [
           {
-            start: "13:35",
+            start: "13:15",
             speaker: "Travis Turner",
             org: "Evil Martians",
             title:
               "Got AI ontological shock? No worries: UFOs, Theology, and Psychedelics with Ruby-Colored Reverence",
           },
           {
-            start: "14:05",
+            start: "13:45",
             speaker: "Svyatoslav Kryukov",
             org: "Evil Martians",
             title: "Agents Scale, Humans Don't: Hiring Without Slowing Down",
           },
           {
-            start: "14:35",
+            start: "14:15",
             speaker: "Carmine Paolino",
             org: "RubyLLM",
             title: "RubyLLM 2.2: The AI Framework Python Should Envy",
@@ -112,21 +112,21 @@ export const days = [
           hosts: ["Mike Dalton"],
         },
       },
-      { start: "15:05", end: "15:25", kind: "break" },
+      { start: "14:45", end: "15:05", kind: "break" },
       {
-        start: "15:25",
-        end: "16:25",
+        start: "15:05",
+        end: "16:05",
         kind: "talks",
         audience: "household",
         sessions: [
           {
-            start: "15:25",
+            start: "15:05",
             speaker: "CJ Avilla",
             org: "Anthropic",
             title: "Assign to Claude: Making an Agent a First-Class Teammate in Your SaaS",
           },
           {
-            start: "15:55",
+            start: "15:35",
             speaker: "Sergey Karayev",
             org: "Superconductor",
             title: "The Multiplayer AI Manifesto",
@@ -138,10 +138,10 @@ export const days = [
           hosts: ["Amanda Kinney"],
         },
       },
-      { start: "16:25", end: "16:35", kind: "break" },
+      { start: "16:05", end: "16:15", kind: "break" },
       {
-        start: "16:35",
-        end: "17:05",
+        start: "16:15",
+        end: "16:45",
         kind: "keynote",
         audience: "all",
         sessions: [
