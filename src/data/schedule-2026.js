@@ -50,7 +50,7 @@ export const days = [
       { start: "9:45", end: "10:05", kind: "break" },
       {
         start: "10:05",
-        end: "11:35",
+        end: "11:55",
         kind: "talks",
         audience: "household",
         sessions: [
@@ -61,13 +61,13 @@ export const days = [
             title: "Ruby for AI and AI for Ruby",
           },
           {
-            start: "10:35",
+            start: "10:45",
             speaker: "Madison Sites",
             org: "Order.co",
             title: "The System Nobody Understood (Including AI)",
           },
           {
-            start: "11:05",
+            start: "11:25",
             speaker: "JP Camara",
             org: "Wealthbox",
             title: "Multiplayer Rails: collaborative editing, no Node required",
@@ -79,7 +79,7 @@ export const days = [
           hosts: ["Amanda Kinney"],
         },
       },
-      { start: "11:35", end: "13:15", kind: "lunch" },
+      { start: "11:55", end: "13:15", kind: "lunch" },
       {
         start: "13:15",
         end: "14:45",
