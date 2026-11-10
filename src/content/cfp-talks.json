@@ -14,7 +14,7 @@
   },
   {
     "id": "QRYjVXDt",
-    "title": "Background processing at Gusto: The Parts Where People Look Puzzled",
+    "title": "Background processing at Gusto",
     "abstract": "Last time I talked about background processing, I shared real stories of how many things can go wrong managing background jobs. This time: how we stabilized Sidekiq, the major mindset shift that got us there, and where we’re headed. We’ll go over a little bit of Karafka and the outbox pattern, and maybe you can bring back a few tidbits on maturing your own async stack.",
     "track": "scale",
     "speaker": {
