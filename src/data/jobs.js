@@ -130,7 +130,7 @@ export const jobs = {
     description:
       "Checkr is hiring a senior backend engineer for motor vehicle record screenings, from ordering and retrieving records to delivering them in reports. You own features from design to release, improve reliability and turnaround time, and mentor engineers. The posting asks for 5+ years on scalable backend systems. Checkr has hosted the SF Ruby meetup.",
     chips: ["Backend", "Mentorship", "High compliance"],
-    url: "https://job-boards.greenhouse.io/checkr/jobs/8324959",
+    url: "https://job-boards.greenhouse.io/checkr/jobs/8369174",
     postedDate: "2026-10-23",
   },
   "software-engineer-early-career-koah": {
@@ -302,7 +302,7 @@ export const jobs = {
     description:
       "You build the ledger, subledger and reconciliation systems that record every payment at Gusto, and own the payment profile behind employer and employee payouts. The team works in one of the largest Rails and React applications in the world. Rails experience is a bonus.",
     chips: ["Payments", "Backend", "High compliance"],
-    url: "https://job-boards.greenhouse.io/gusto/jobs/8104213",
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8360497",
     postedDate: "2026-10-24",
   },
   "staff-software-engineer-core-products-gusto": {
@@ -1025,6 +1025,19 @@ export const jobs = {
     chips: ["Fullstack", "Platform", "AI-native", "High compliance", "Mentorship"],
     url: "https://jobs.ashbyhq.com/binti/99b2d113-1a2f-4aa2-987d-60e83074b6c8",
     postedDate: "2026-11-02",
+  },
+  "engineering-manager-binti": {
+    id: "engineering-manager-binti",
+    title: "Engineering Manager / Senior Engineering Manager",
+    sponsorId: "binti",
+    location: "San Francisco (Hybrid) or Seattle",
+    type: "Full-time",
+    salary: "$240K - $330K + equity",
+    description:
+      "Binti builds software for child welfare and social services agencies on Rails. This role leads an engineering team, sets the technical roadmap with product and design, and pushes AI-native development across the platform. The posting asks for 5 to 7 years of management experience.",
+    chips: ["Fullstack", "Mentorship", "AI-native", "React", "GraphQL"],
+    url: "https://jobs.ashbyhq.com/binti/f7619f00-eea7-4cd8-aa62-d098befb62ce",
+    postedDate: "2026-11-10",
   },
   "senior-software-engineer-boon": {
     id: "senior-software-engineer-boon",
