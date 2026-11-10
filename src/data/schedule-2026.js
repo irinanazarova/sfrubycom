@@ -30,13 +30,13 @@ export const days = [
     tagline:
       "Agents in production, AI in legacy codebases, and the Ruby tooling for both.",
     blocks: [
-      { start: "8:00", end: "9:00", kind: "doors" },
+      { start: "8:00", end: "9:20", kind: "doors" },
       // Opening words from the stage: a plain row like doors, not a session,
       // so the keynote stays the only session in its block.
-      { start: "9:00", end: "9:10", kind: "welcome", host: "Amanda Kinney" },
+      { start: "9:20", end: "9:30", kind: "welcome", host: "Amanda Kinney" },
       {
-        start: "9:10",
-        end: "9:45",
+        start: "9:30",
+        end: "10:05",
         kind: "keynote",
         audience: "all",
         sessions: [
@@ -47,27 +47,27 @@ export const days = [
           },
         ],
       },
-      { start: "9:45", end: "10:05", kind: "break" },
+      { start: "10:05", end: "10:25", kind: "break" },
       {
-        start: "10:05",
-        end: "11:35",
+        start: "10:25",
+        end: "11:55",
         kind: "talks",
         audience: "household",
         sessions: [
           {
-            start: "10:05",
+            start: "10:25",
             speaker: "Vladimir Dementyev",
             org: "Evil Martians",
             title: "Ruby for AI and AI for Ruby",
           },
           {
-            start: "10:35",
+            start: "10:55",
             speaker: "Madison Sites",
             org: "Order.co",
             title: "The System Nobody Understood (Including AI)",
           },
           {
-            start: "11:05",
+            start: "11:25",
             speaker: "JP Camara",
             org: "Wealthbox",
             title: "Multiplayer Rails: collaborative editing, no Node required",
@@ -79,28 +79,28 @@ export const days = [
           hosts: ["Amanda Kinney"],
         },
       },
-      { start: "11:35", end: "13:15", kind: "lunch" },
+      { start: "11:55", end: "13:35", kind: "lunch" },
       {
-        start: "13:15",
-        end: "14:45",
+        start: "13:35",
+        end: "15:05",
         kind: "talks",
         audience: "startups",
         sessions: [
           {
-            start: "13:15",
+            start: "13:35",
             speaker: "Travis Turner",
             org: "Evil Martians",
             title:
               "Got AI ontological shock? No worries: UFOs, Theology, and Psychedelics with Ruby-Colored Reverence",
           },
           {
-            start: "13:45",
+            start: "14:05",
             speaker: "Svyatoslav Kryukov",
             org: "Evil Martians",
             title: "Agents Scale, Humans Don't: Hiring Without Slowing Down",
           },
           {
-            start: "14:15",
+            start: "14:35",
             speaker: "Carmine Paolino",
             org: "RubyLLM",
             title: "RubyLLM 2.2: The AI Framework Python Should Envy",
@@ -112,21 +112,21 @@ export const days = [
           hosts: ["Mike Dalton"],
         },
       },
-      { start: "14:45", end: "15:05", kind: "break" },
+      { start: "15:05", end: "15:25", kind: "break" },
       {
-        start: "15:05",
-        end: "16:05",
+        start: "15:25",
+        end: "16:25",
         kind: "talks",
         audience: "household",
         sessions: [
           {
-            start: "15:05",
+            start: "15:25",
             speaker: "CJ Avilla",
             org: "Anthropic",
             title: "Assign to Claude: Making an Agent a First-Class Teammate in Your SaaS",
           },
           {
-            start: "15:35",
+            start: "15:55",
             speaker: "Sergey Karayev",
             org: "Superconductor",
             title: "The Multiplayer AI Manifesto",
@@ -138,10 +138,10 @@ export const days = [
           hosts: ["Amanda Kinney"],
         },
       },
-      { start: "16:05", end: "16:15", kind: "break" },
+      { start: "16:25", end: "16:35", kind: "break" },
       {
-        start: "16:15",
-        end: "16:45",
+        start: "16:35",
+        end: "17:05",
         kind: "keynote",
         audience: "all",
         sessions: [
