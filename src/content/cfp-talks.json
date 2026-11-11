@@ -28,7 +28,7 @@
   {
     "id": "r8bh4cUV",
     "title": "How We Bootstrapped an Open Source Search Engine to $10M+ ARR with 15 People and Ruby on Rails",
-    "abstract": "TBD",
+    "abstract": "A collection of stories and lessons from our journey building Typesense from a nights-and-weekends project to a $10M ARR company over a decade, without raising venture capital.",
     "track": "startup",
     "speaker": {
       "name": "Jason Bosco",
