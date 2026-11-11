@@ -357,6 +357,16 @@ export const days = [
         href: "https://luma.com/sfruby-cxxr",
       },
       {
+        start: "15:30",
+        end: "17:30",
+        kind: "event",
+        audience: "all",
+        title: "AI and Writing in the Park",
+        where: "Salesforce Park",
+        note: "Travis, editor of the Evil Martians blog, leads a lowkey conversation about writing and AI. Wrapped at Mux HQ is a short walk away.",
+        href: "https://luma.com/sfruby-b9wq",
+      },
+      {
         start: "18:00",
         end: "21:00",
         kind: "event",
