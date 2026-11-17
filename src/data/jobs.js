@@ -130,7 +130,7 @@ export const jobs = {
     description:
       "Checkr is hiring a senior backend engineer for motor vehicle record screenings, from ordering and retrieving records to delivering them in reports. You own features from design to release, improve reliability and turnaround time, and mentor engineers. The posting asks for 5+ years on scalable backend systems. Checkr has hosted the SF Ruby meetup.",
     chips: ["Backend", "Mentorship", "High compliance"],
-    url: "https://job-boards.greenhouse.io/checkr/jobs/8369174",
+    url: "https://job-boards.greenhouse.io/checkr/jobs/8393424",
     postedDate: "2026-10-23",
   },
   "software-engineer-early-career-koah": {
@@ -434,6 +434,19 @@ export const jobs = {
     chips: ["Fullstack", "Product Eng", "TypeScript", "High compliance"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7918214",
     postedDate: "2026-10-25",
+  },
+  "staff-product-software-engineer-consumer-money-gusto": {
+    id: "staff-product-software-engineer-consumer-money-gusto",
+    title: "Staff Product Software Engineer, Consumer Money",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "The Consumer Money team builds on-demand pay, high-yield cash accounts and automated savings anchored to the paycheck. This staff role builds and scales those products and incubates new financial platform pieces. The posting lists Ruby on Rails, GraphQL, React and TypeScript as the stack and asks for 8+ years.",
+    chips: ["Fullstack", "Product Eng", "Payments", "GraphQL", "High compliance"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8168064",
+    postedDate: "2026-11-17",
   },
   "principal-web-developer-superconductor": {
     id: "principal-web-developer-superconductor",
@@ -1867,6 +1880,9 @@ export const jobs = {
    *     Senior EM, Member Experience — $176K–$253K by zone — https://job-boards.greenhouse.io/omadahealth/jobs/8211130
    *   Kikoff (unicorn, profitable) — SF, $244K–$292K
    *     Senior Fullstack Engineer, User Retention and App Ecosystem (Rails, React, Flutter) — https://job-boards.greenhouse.io/kikoff/jobs/4429802009
+   *     Senior Software Engineer (Rails, React, Flutter) — $244K–$292K — https://job-boards.greenhouse.io/kikoff/jobs/4508874009
+   *   ID.me (late-stage, Series E) — Mountain View, CA onsite, $194K–$253K
+   *     Staff Engineer, Wallet Authentication (Rails and Java, Sidekiq) — https://job-boards.greenhouse.io/idme/jobs/8180762003
    *   CompanyCam (Lincoln, NE; a 2025 sponsor, not 2026) — remote US
    *     Senior SWE (Ruby on Rails), reopened Oct 23 — https://jobs.ashbyhq.com/companycam/76838979-40c4-4d4c-81e6-976ed7b6ee78
    *   Kin Insurance (unicorn) — remote US
