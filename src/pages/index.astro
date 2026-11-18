@@ -10,7 +10,8 @@ import GettingThere from "../components/GettingThere.astro";
 import Schedule from "../components/Schedule.astro";
 import TicketsBlock from "../components/TicketsBlock.astro";
 import Crew from "../components/Crew.astro";
-import { ticketLink, ticketEventClass, headlineTier, lowestLivePrice, conferenceSpeakers, ticketTiers, cfpNameAliases } from "../data/conference-2026.js";
+import { ticketEventClass, conferenceSpeakers, cfpNameAliases } from "../data/conference-2026.js";
+import { CONFERENCE_2027, SHORT_DATE_2027, EARLY_BIRD_2027, ticketLink2027 } from "../data/conference-2027.js";
 import { buildProfiles } from "../utils/speakerProfiles.js";
 import cfpTalks from "../content/cfp-talks.json";
 import { conference2026SponsorTiers } from "../data/sponsors.js";
@@ -49,23 +50,9 @@ const cameos = [
 // Flat sponsor list for the hero ticker, tier order preserved.
 const tickerSponsors = conference2026SponsorTiers.flatMap((t) => t.sponsors);
 
-// One description for the meta tag, Open Graph and Twitter, from the same
-// data the page renders, so a price change never leaves a stale preview. The
-// price phrase drops when nothing is on sale.
-const fromPrice = lowestLivePrice();
-const DESCRIPTION = `Nov 10-12, 2026 at SFJAZZ. Two days of Ruby talks for small teams and big teams, Day 1 AI-heavy and Day 2 AI-light, then a community day. Schedule is live${fromPrice ? `, tickets from $${fromPrice}` : ""}.`;
-
-// Price and deadline for the hero CTA, read from the ladder so the button can
-// never quote a tier that has closed. The deadline is optional: Company-sponsored
-// is invoiced and has none, and it becomes the headline the day Late bird closes.
-const headline = headlineTier();
-const headlineCloses = headline?.closesOn
-    ? new Date(headline.closesOn).toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          timeZone: "America/Los_Angeles",
-      })
-    : null;
+// One description for the meta tag, Open Graph and Twitter. 2026 is over:
+// the first screen thanks everyone and sells 2027, so the preview does too.
+const DESCRIPTION = `Thank you to everyone who made the San Francisco Ruby Conference 2026. Next: ${CONFERENCE_2027.date} at SFJAZZ, early bird tickets $${EARLY_BIRD_2027.price} until ${EARLY_BIRD_2027.closes}.`;
 ---
 
 <!doctype html>
@@ -158,7 +145,7 @@ const headlineCloses = headline?.closesOn
                 <img src="/px-island.png" alt="" width="598" height="104" class="px-pixelated absolute top-[30%] right-[3%] w-36 h-auto animate-float [animation-delay:-2s] pointer-events-none hidden lg:block" aria-hidden="true" />
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-20 lg:pt-[5.5rem] pb-36 md:pb-40 lg:pb-[8.5rem]">
                     <h1 class="sr-only">
-                        San Francisco Ruby Conference 2026
+                        San Francisco Ruby Conference: thank you for 2026, see you in 2027
                     </h1>
                     <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
                         <!-- Fighter select: the speakers as a character-select
@@ -214,15 +201,15 @@ const headlineCloses = headline?.closesOn
                                     <!-- The last slot is the visitor: choosing
                                          yourself means claiming a ticket. -->
                                     <a
-                                        href={ticketLink("hero-you")}
+                                        href={ticketLink2027("hero-you")}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         role="listitem"
                                         class={`px-fighter-cell ${ticketEventClass("hero-you")}`}
                                         data-name="You"
-                                        data-org="Claim your slot"
+                                        data-org="Claim your 2027 slot"
                                         data-pixel=""
-                                        aria-label="You: claim your slot, buy a ticket"
+                                        aria-label="You: claim your 2027 slot, buy a ticket"
                                     >
                                         <span class="px-font text-px8 text-white" aria-hidden="true">You</span>
                                     </a>
@@ -235,17 +222,17 @@ const headlineCloses = headline?.closesOn
                             <img id="hero-logo" src="/logo8bit-transparent.png" alt="San Francisco Ruby Conference '26" width="520" height="830" class="px-pixelated w-full max-w-[9rem] md:max-w-[13rem] lg:max-w-[10rem] h-auto mb-4 md:mb-6 lg:mb-4 mx-auto" />
                             <div class="mb-4 md:mb-5 lg:mb-4">
                                 <span class="px-plate px-font text-px8 md:text-px10 px-4 py-2">
-                                    <span class="text-gold-500">Year Two</span>
-                                    <span class="text-white"> &#183; Nov 10-12, 2026 &#183; SFJAZZ</span>
+                                    <span class="text-gold-500">Year Three</span>
+                                    <span class="text-white"> &#183; {SHORT_DATE_2027} &#183; {CONFERENCE_2027.venue}</span>
                                 </span>
                             </div>
                             <p class="font-display font-semibold text-base md:text-xl leading-snug text-gold-400 px-shadow-ink max-w-md lg:max-w-lg mx-auto mb-5 md:mb-7 lg:mb-5">
-                                Let's bring programmer delight and Ruby into the future.
+                                Thank you to every speaker, sponsor, volunteer and attendee of 2026.
                             </p>
                             <!-- Insert coin: one gold block carrying the ask, the price
                                  and the deadline, the whole thing the link -->
                             <a
-                                href={ticketLink("hero")}
+                                href={ticketLink2027("hero")}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class={`px-btn px-btn--gold tap-press inline-flex items-center gap-4 px-7 py-4 text-left ${ticketEventClass("hero")}`}
@@ -257,58 +244,35 @@ const headlineCloses = headline?.closesOn
                                     <span class="px-coinslot__slot"></span>
                                 </span>
                                 <span class="flex flex-col gap-1.5">
-                                    <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Get your ticket</span>
-                                    {headline && (
-                                        <span class="px-font text-px8 opacity-80 flex flex-wrap gap-x-2 gap-y-1">
-                                            <span class="whitespace-nowrap">
-                                                ${headline.price}
-                                                {headlineCloses && (
-                                                    <span id="headline-deadline"> &#183; until {headlineCloses}<span id="days-left" /></span>
-                                                )}
-                                            </span>
-                                        </span>
-                                    )}
+                                    <span class="px-font text-xs md:text-sm"><span class="px-blink" aria-hidden="true">&#9654;&#xFE0E; </span>Get 2027 tickets</span>
+                                    <span class="px-font text-px8 opacity-80 whitespace-nowrap">
+                                        ${EARLY_BIRD_2027.price} early bird &#183; until {EARLY_BIRD_2027.closes}
+                                    </span>
                                 </span>
                             </a>
                         </div>
                         <!-- The herald: the early-bird dragon, its sign
-                             repainted to announce the program, linking to
-                             the schedule. On phones it follows the fighter
+                             repainted to "See you in 2027!", linking to the
+                             2027 tickets. On phones it follows the fighter
                              panel, so the panel starts on the first screen;
                              on desktop it hovers top-right of the title art,
                              positioned against the content column. -->
                         <a
-                            href="#schedule"
-                            class="order-3 justify-self-center inline-block mt-2 lg:mt-0 lg:absolute lg:top-20 lg:right-0 xl:-right-6 tap-press"
-                            aria-label="The schedule is live. Jump to the schedule"
+                            href={ticketLink2027("hero-dragon")}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class={`order-3 justify-self-center inline-block mt-2 lg:mt-0 lg:absolute lg:top-20 lg:right-0 xl:-right-6 tap-press ${ticketEventClass("hero-dragon")}`}
+                            aria-label="See you in 2027. Get a 2027 ticket"
                         >
                             <img
-                                src="/schedule_live_dragon.png"
-                                alt="A pixel dragon holding a sign that reads Schedule is live"
+                                src="/see_you_2027_dragon.png"
+                                alt="A pixel dragon holding a sign that reads See you in 2027"
                                 width="1064"
                                 height="696"
                                 class="px-pixelated animate-float w-full max-w-[12rem] lg:max-w-[11rem] xl:max-w-[13rem] h-auto"
                             />
                         </a>
                     </div>
-                    <script define:vars={{ closesOn: headline?.closesOn ?? null }}>
-                        // Countdown next to the deadline, computed on the client so
-                        // the static build never goes stale. Absent if JS fails.
-                        // The last day says so. Once the deadline passes the page
-                        // still carries the closed tier until the ladder is edited
-                        // and the site rebuilds, so the deadline is dropped rather
-                        // than quoting a date that is gone.
-                        if (closesOn) {
-                            const deadline = document.getElementById("headline-deadline");
-                            const el = document.getElementById("days-left");
-                            const left = new Date(closesOn).getTime() - Date.now();
-                            const days = Math.ceil(left / 86400000);
-                            if (left <= 0 && deadline) deadline.hidden = true;
-                            else if (left < 86400000 && deadline) deadline.textContent = " · last day";
-                            else if (el && days > 0 && days < 120)
-                                el.textContent = ` (${days}d)`;
-                        }
-                    </script>
                     <script>
                         // Character select: cycle the highlight through the
                         // roster; hover pauses, a click or the arrow keys take

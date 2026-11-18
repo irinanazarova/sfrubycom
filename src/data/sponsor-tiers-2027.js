@@ -14,7 +14,7 @@ export const CONFERENCE_2027 = {
   venue: "SFJAZZ",
   city: "San Francisco",
   attendanceTarget: 450,
-  // The Luma page is private until the 2026 conference opens on Nov 10, 2026.
+  // Public since the 2026 conference; the homepage sells it.
   lumaUrl: "https://luma.com/sfrubyconf2027",
 };
 
