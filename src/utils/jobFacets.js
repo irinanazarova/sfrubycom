@@ -164,6 +164,7 @@ export const COMPANY_META = {
   relevanthealthcare: { industry: "Healthtech", stage: "Seed" },
   boon: { industry: "AI / Dev Tools", stage: "Early-stage" },
   backerkit: { industry: "Enterprise SaaS", stage: "Early-stage" },
+  hudu: { industry: "Enterprise SaaS", stage: "Early-stage" },
   windborne: { industry: "Climate", stage: "Early-stage" },
   salmahealth: { industry: "Healthtech", stage: "Early-stage" },
   opendate: { industry: "Enterprise SaaS", stage: "Early-stage" },

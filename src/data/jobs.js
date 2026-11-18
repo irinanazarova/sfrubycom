@@ -3,6 +3,20 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "full-stack-rails-engineer-hudu": {
+    id: "full-stack-rails-engineer-hudu",
+    title: "Full Stack Rails Engineer",
+    companyId: "hudu",
+    companyName: "Hudu",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$100K - $120K",
+    description:
+      "Hudu builds documentation software for IT teams and managed service providers, on Rails and Hotwire. This engineer lays the foundations for new capabilities, from data model and background jobs to the Turbo interface. Asks for 4+ years of Rails.",
+    chips: ["Fullstack", "Hotwire", "Founding role"],
+    url: "https://jobs.ashbyhq.com/hudu/d7176ac7-6324-4ad9-8c17-f37f6b4484fe",
+    postedDate: "2026-11-18",
+  },
   "product-engineer-applications-operations-ycombinator": {
     id: "product-engineer-applications-operations-ycombinator",
     title: "Product Engineer, Applications Operations",
@@ -1857,6 +1871,7 @@ export const jobs = {
    *     Sr. SWE, Resident Onboarding (Rails or Go) — https://jobs.ashbyhq.com/appfolio/9dc3275e-7140-4f09-a327-3c783077f65c
    *     Sr. SWE, Leasing — https://jobs.ashbyhq.com/appfolio/2d0c874a-a67b-4f82-9096-11d7ee5200cd
    *     Staff SWE, Leasing ($167.2K–$229.9K) — https://jobs.ashbyhq.com/appfolio/6185a879-4761-4331-beb6-99fac5300847
+   *     Staff SWE, Owner / Investor (Rails or Go; $167.2K–$229.9K) — https://jobs.ashbyhq.com/appfolio/25fa3475-ae8f-4d0f-8292-84ba8757fe2c
    *
    * US-remote, headquartered elsewhere
    *   1Password / Kolide (Series A+ Forbes Cloud 100, $6.8B) — Remote US/Canada, $123K–$172K
