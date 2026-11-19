@@ -267,6 +267,19 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
     postedDate: "2026-05-15",
   },
+  "staff-software-engineer-onboarding-platform-gusto": {
+    id: "staff-software-engineer-onboarding-platform-gusto",
+    title: "Staff Software Engineer, Onboarding Platform",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "The Onboarding Platform team builds the models, orchestration and reusable components behind new ways to start on Gusto, on the web and inside LLM assistants. This staff role works full stack, sets technical direction and drives adoption across product teams. The stack is Ruby on Rails with React and TypeScript.",
+    chips: ["Fullstack", "Platform", "TypeScript", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8244949",
+    postedDate: "2026-11-19",
+  },
   "senior-staff-engineer-expansion-experiences-gusto": {
     id: "senior-staff-engineer-expansion-experiences-gusto",
     title: "Senior Staff Engineer, Expansion Experiences",
@@ -1910,6 +1923,7 @@ export const jobs = {
    *     Senior Back End Engineer (Rails & Go) — $175K–$185K — https://prizepicks.com/position?gh_jid=7768364003
    *     Gamification Senior SWE (Rails) — https://prizepicks.com/position?gh_jid=7984095003
    *     Gamification SWE III (Rails) — $145K–$155K — https://prizepicks.com/position?gh_jid=7984091003
+   *     Senior SWE (Ruby on Rails), Social — $175K–$185K — https://job-boards.greenhouse.io/prizepicks/jobs/7990264003
    *   HHAeXchange (Hg, 2021)
    *     Sr. SWE, ROR — remote US, $110K–$125K — https://jobs.lever.co/hhaexchange/e56acb41-8b08-4541-9fa8-025faed5b7a5
    *   Andela (Series E 2021, $1.5B)
@@ -1922,6 +1936,7 @@ export const jobs = {
    *   brightwheel (Series C 2021, ~$600M) — remote US, Rails + Sidekiq backend
    *     Senior AI SWE, Product — $133K–$189K — https://jobs.ashbyhq.com/brightwheel/96f73905-30e4-4921-a71d-09360237ebb4
    *     Senior EM, Product — $194K–$263K — https://jobs.ashbyhq.com/brightwheel/b8543eb2-9f6e-4955-94fd-f02e013bf618
+   *     Principal AI SWE, Platform — $194K–$263K — https://jobs.ashbyhq.com/brightwheel/7ef0532b-77fd-4f79-a6d5-360cc4273f41
    *
    * Borderline, not held (Ruby is one of several primary languages, or the
    * role is migrating off Rails): Envoy MTS Fullstack, Poshmark Sr SWE Cloud
