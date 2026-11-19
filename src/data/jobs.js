@@ -3,6 +3,20 @@ import { getSponsor } from "./sponsors.js";
 import { getStartup } from "./startups.js";
 
 export const jobs = {
+  "full-stack-rails-engineer-hudu": {
+    id: "full-stack-rails-engineer-hudu",
+    title: "Full Stack Rails Engineer",
+    companyId: "hudu",
+    companyName: "Hudu",
+    location: "Remote (US)",
+    type: "Full-time",
+    salary: "$100K - $120K",
+    description:
+      "Hudu builds documentation software for IT teams and managed service providers, on Rails and Hotwire. This engineer lays the foundations for new capabilities, from data model and background jobs to the Turbo interface. Asks for 4+ years of Rails.",
+    chips: ["Fullstack", "Hotwire", "Founding role"],
+    url: "https://jobs.ashbyhq.com/hudu/d7176ac7-6324-4ad9-8c17-f37f6b4484fe",
+    postedDate: "2026-11-18",
+  },
   "product-engineer-applications-operations-ycombinator": {
     id: "product-engineer-applications-operations-ycombinator",
     title: "Product Engineer, Applications Operations",
@@ -252,6 +266,19 @@ export const jobs = {
     chips: ["Platform", "Backend", "AI-native"],
     url: "https://job-boards.greenhouse.io/gusto/jobs/7760341",
     postedDate: "2026-05-15",
+  },
+  "staff-software-engineer-onboarding-platform-gusto": {
+    id: "staff-software-engineer-onboarding-platform-gusto",
+    title: "Staff Software Engineer, Onboarding Platform",
+    sponsorId: "gusto",
+    location: "San Francisco, CA (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K",
+    description:
+      "The Onboarding Platform team builds the models, orchestration and reusable components behind new ways to start on Gusto, on the web and inside LLM assistants. This staff role works full stack, sets technical direction and drives adoption across product teams. The stack is Ruby on Rails with React and TypeScript.",
+    chips: ["Fullstack", "Platform", "TypeScript", "Mentorship"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8244949",
+    postedDate: "2026-11-19",
   },
   "senior-staff-engineer-expansion-experiences-gusto": {
     id: "senior-staff-engineer-expansion-experiences-gusto",
@@ -1857,6 +1884,7 @@ export const jobs = {
    *     Sr. SWE, Resident Onboarding (Rails or Go) — https://jobs.ashbyhq.com/appfolio/9dc3275e-7140-4f09-a327-3c783077f65c
    *     Sr. SWE, Leasing — https://jobs.ashbyhq.com/appfolio/2d0c874a-a67b-4f82-9096-11d7ee5200cd
    *     Staff SWE, Leasing ($167.2K–$229.9K) — https://jobs.ashbyhq.com/appfolio/6185a879-4761-4331-beb6-99fac5300847
+   *     Staff SWE, Owner / Investor (Rails or Go; $167.2K–$229.9K) — https://jobs.ashbyhq.com/appfolio/25fa3475-ae8f-4d0f-8292-84ba8757fe2c
    *
    * US-remote, headquartered elsewhere
    *   1Password / Kolide (Series A+ Forbes Cloud 100, $6.8B) — Remote US/Canada, $123K–$172K
@@ -1895,6 +1923,7 @@ export const jobs = {
    *     Senior Back End Engineer (Rails & Go) — $175K–$185K — https://prizepicks.com/position?gh_jid=7768364003
    *     Gamification Senior SWE (Rails) — https://prizepicks.com/position?gh_jid=7984095003
    *     Gamification SWE III (Rails) — $145K–$155K — https://prizepicks.com/position?gh_jid=7984091003
+   *     Senior SWE (Ruby on Rails), Social — $175K–$185K — https://job-boards.greenhouse.io/prizepicks/jobs/7990264003
    *   HHAeXchange (Hg, 2021)
    *     Sr. SWE, ROR — remote US, $110K–$125K — https://jobs.lever.co/hhaexchange/e56acb41-8b08-4541-9fa8-025faed5b7a5
    *   Andela (Series E 2021, $1.5B)
@@ -1907,6 +1936,7 @@ export const jobs = {
    *   brightwheel (Series C 2021, ~$600M) — remote US, Rails + Sidekiq backend
    *     Senior AI SWE, Product — $133K–$189K — https://jobs.ashbyhq.com/brightwheel/96f73905-30e4-4921-a71d-09360237ebb4
    *     Senior EM, Product — $194K–$263K — https://jobs.ashbyhq.com/brightwheel/b8543eb2-9f6e-4955-94fd-f02e013bf618
+   *     Principal AI SWE, Platform — $194K–$263K — https://jobs.ashbyhq.com/brightwheel/7ef0532b-77fd-4f79-a6d5-360cc4273f41
    *
    * Borderline, not held (Ruby is one of several primary languages, or the
    * role is migrating off Rails): Envoy MTS Fullstack, Poshmark Sr SWE Cloud
