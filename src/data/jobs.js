@@ -1849,6 +1849,7 @@ export const jobs = {
    *   Motive (S-1 withdrawn Sep 2026 after $1.3B+ General Catalyst financing)
    *     Staff Platform Engineer, AI — SF hybrid, "Golang, Ruby on Rails, and Python services"
    *     https://job-boards.greenhouse.io/gomotive/jobs/8371597002
+   *     Software Engineer, Platform IOT — SF hybrid, $135K–$185K, services in Go and Ruby — https://job-boards.greenhouse.io/gomotive/jobs/8950900002
    *   Strava ($2.2B, May 2025; Ruby/Scala/Go backend)
    *     Staff Engineer, Core Services Platform — SF/remote — https://jobs.ashbyhq.com/strava/daf4c971-6a2b-48e0-aafe-afc6af47e3a1
    *   Roadie (UPS-owned; Go and Rails backend)
