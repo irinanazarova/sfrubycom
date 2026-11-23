@@ -423,6 +423,19 @@ export const jobs = {
     url: "https://job-boards.greenhouse.io/gusto/jobs/8205624",
     postedDate: "2026-10-25",
   },
+  "staff-software-engineer-retirement-engineering-gusto": {
+    id: "staff-software-engineer-retirement-engineering-gusto",
+    title: "Staff Software Engineer, Retirement Engineering",
+    sponsorId: "gusto",
+    location: "San Francisco, Denver, or New York City (Hybrid)",
+    type: "Full-time",
+    salary: "$197K - $247K in SF and NYC, $163K - $204K in Denver",
+    description:
+      "The Core 401(k) team builds the services and APIs that let tens of thousands of businesses offer retirement plans. You own full stack systems end to end and work with product, compliance and operations. The posting asks for 8+ years, message-based systems like Sidekiq, GraphQL, React, and Rails or a comparable framework.",
+    chips: ["Fullstack", "Payments", "Sidekiq", "GraphQL", "High compliance"],
+    url: "https://job-boards.greenhouse.io/gusto/jobs/8247588",
+    postedDate: "2026-11-23",
+  },
   "staff-software-engineer-solo-gusto": {
     id: "staff-software-engineer-solo-gusto",
     title: "Staff Software Engineer, Solo",
