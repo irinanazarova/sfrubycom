@@ -1810,6 +1810,10 @@ export const jobs = {
    * Calendly are still open; Flexport is dropped because Rails is only "a
    * plus" behind Java/Spring.
    *
+   * Added November 26, 2026
+   *   Affinity (Series C+)
+   *     Senior Engineering Manager, Core — SF hybrid or US remote, hands-on, Ruby and PostgreSQL back end, $190K–$275K — https://jobs.ashbyhq.com/affinity.co/e21e7884-1325-4d08-8739-dd89ff273c2a
+   *
    * Added November 7, 2026
    *   Omada Health (NASDAQ: OMDA; a 2025 sponsor, not 2026)
    *     Senior Engineering Manager, Co-Intelligent Coaching — remote US, hands-on, Rails and Python, $176K–$253K by zone — https://job-boards.greenhouse.io/omadahealth/jobs/8318929
